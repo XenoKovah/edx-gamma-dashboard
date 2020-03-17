@@ -1,0 +1,14 @@
+# Python
+*.pyc
+__pycache__
+*.egg-info
+.tox
+
+# Virtual environments
+env/
+venv/
+.env/
+.venv/
+
+# IDE
+.vscode/
