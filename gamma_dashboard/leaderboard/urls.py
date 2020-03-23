@@ -3,7 +3,7 @@ Gamification leaderboard URLs.
 """
 from django.conf.urls import include, url
 
-from .views import LeaderboardView
+from gamma_dashboard.leaderboard.page.views import LeaderboardView
 
 
 urlpatterns = [
