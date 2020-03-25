@@ -13,7 +13,7 @@ PROJECT_BASE_DIR = dirname(abspath(__file__))
 
 def _absolute_path_to(path):
     """
-    Return an absolute path of a `path` project subpath.
+    Return an absolute path of a project's subpath `path`.
     """
     return join(PROJECT_BASE_DIR, path)
 
