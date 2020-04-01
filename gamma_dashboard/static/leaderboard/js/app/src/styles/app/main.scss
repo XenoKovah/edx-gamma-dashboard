@@ -1,0 +1,12 @@
+$backgorundColor: #232323;
+$mainFontColor: #BCBCBC;
+
+* {
+    font-family: "Exo2", "Roboto", "Helvetica", "Arial", sans-serif !important;
+    font-weight: 400;
+}
+
+body {
+    background-color: $backgorundColor;
+    color: $mainFontColor;
+}

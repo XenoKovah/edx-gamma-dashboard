@@ -1,0 +1,89 @@
+$headerFontColor: #3CAADA;
+$headerBackgroundColor: #495860;
+$headerBorderColor: #6d89a3;
+
+$tableCellColor: #383838;
+
+.leaderboard-table {
+    width: 100%;
+    display: block;
+}
+
+.leaderboard-header, .leaderboard-row {
+    // width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
+}
+
+.leaderboard-header {
+    color: $headerFontColor;
+    background-color: $headerBackgroundColor;
+    border-radius: 20px 20px 0 0;
+    text-transform: uppercase;
+    text-align: center;
+    padding: 10px;
+    margin: 0 0 2px 0;
+    font-weight: 900;
+}
+
+.table-cell {
+    padding: 0.5rem;
+}
+
+.leaderboard-header-cell {
+    padding: 10px;
+}
+
+.leaderboard-table-cell {
+    margin: 0;
+}
+
+.leaderboard-header {
+    .progress-cell {
+        border-left: 2px solid $headerBorderColor;
+        border-right: 2px solid $headerBorderColor;
+    }
+}
+
+.students-cell {
+    // flex-grow: 2;
+    width: calc((100% - 185px) / 2);
+}
+
+.progress-cell {
+    // flex-grow: 1;
+    width: 185px;
+}
+
+.badges-cell {
+    // flex-grow: 3;
+    width: calc((100% - 185px) / 2);
+}
+
+.leaderboard-row {
+    .table-cell {
+        background-color: $tableCellColor;
+        // color: #BCBCBC;
+        margin: 2px;
+    }
+
+    .students-cell, .progress-cell, .badges-cell {
+        display: flex;
+        align-items: center;
+    }
+
+    .students-cell {
+        margin-left: 0;
+        font-weight: 700;
+    }
+
+    .progress-cell {
+        color: $headerFontColor;
+        justify-content: center;
+    }
+
+    .badges-cell {
+        margin-right: 0px;
+    }
+}

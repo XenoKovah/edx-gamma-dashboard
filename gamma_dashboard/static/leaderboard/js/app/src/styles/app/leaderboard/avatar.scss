@@ -1,0 +1,18 @@
+.avatar {
+    width: 3rem;
+    height: 3rem;
+    margin-right: 0.8rem;
+    background-color: skyblue;
+    border-radius: 50%;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .avatar-letter {
+        font-size: 26pt;
+        display: inline-block;
+        text-align: center;
+        vertical-align: middle;
+    }
+}
