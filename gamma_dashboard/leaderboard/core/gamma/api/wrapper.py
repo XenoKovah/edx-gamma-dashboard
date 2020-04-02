@@ -23,15 +23,21 @@ class GammaApiWrapper:
         settings = settings or gamma_settings.bridge
 
         self._api_settings = GammaApiSettings(settings)
+
+        self._authentication_headers = {
+            'App-Key': self._api_settings.key,
+            'App-Secret': self._api_settings.secret
+        }
+
         self._root_endpoint = self._api_settings.get_root_endpoint(version)
 
-    def _authenticate(self):
+    def _inject_authentication_headers(self, request_kwargs):
         """
         Authenticated using the credentials. (Should be called inside constructor)
         """
-        pass
+        request_kwargs.setdefault('headers', {}).update(self._authentication_headers)
 
-    def _get_absolute_endpiont_url(self, path):
+    def _get_absolute_endpoint_url(self, path):
         """
         Generate an absolute endpoint path from a relative path.
 
@@ -50,6 +56,8 @@ class GammaApiWrapper:
         result = None
         request_executor = getattr(requests, method.lower())
 
+        self._inject_authentication_headers(kwargs)
+
         if callable(request_executor):
             response = request_executor(url, **kwargs)
 
@@ -62,6 +70,14 @@ class GammaApiWrapper:
 
         return result
 
+    def request_api_endpoint(self, endpoint, **kwargs):
+        """
+        Perform request to an `endpoint` of gamma API.
+        """
+        absolute_url = self._get_absolute_endpoint_url(endpoint)
+
+        return self._send_request(absolute_url, **kwargs)
+
     def get_leaderboard_info(self):
         """
         Return leaderboard data.
@@ -69,9 +85,7 @@ class GammaApiWrapper:
         Returns:
             dict: parsed leaderboard infromation.
         """
-        absolute_url = self._get_absolute_endpiont_url('leaderboard')
-
-        return self._send_request(absolute_url)
+        return self.request_api_endpoint('leaderboard')
 
 
 gamma_api = GammaApiWrapper()

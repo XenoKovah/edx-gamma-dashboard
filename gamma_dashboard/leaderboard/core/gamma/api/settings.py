@@ -5,6 +5,8 @@ from urlparse import urljoin
 
 GAMMA_ENDPOINT_KEY = 'RG_GAMIFICATION_ENDPOINT'
 GAMMA_DASHBOARD_API_VERSION_KEY = 'GAMMA_DASHBOARD_API_VERSION_KEY'
+AUTHORIZATION_KEY_KEY = 'KEY'
+AUTHORIZATION_SECRET_KEY = 'SECRET'
 
 DEFAULT_API_VERSION = 0
 DEFAULT_API_PREFIX = 'v0'
@@ -68,3 +70,17 @@ class GammaApiSettings:
         api_root = 'api/{}/'.format(version_prefix)
 
         return urljoin(self._host, api_root)
+
+    @property
+    def key(self):
+        """
+        Return authorization key.
+        """
+        return self._settings.get(AUTHORIZATION_KEY_KEY)
+
+    @property
+    def secret(self):
+        """
+        Return authorization secret.
+        """
+        return self._settings.get(AUTHORIZATION_SECRET_KEY)

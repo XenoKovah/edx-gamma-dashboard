@@ -7,5 +7,5 @@ from gamma_dashboard.leaderboard.page.views import LeaderboardView
 
 
 urlpatterns = [
-    url(r'^$', LeaderboardView.as_view(), name="gamification-leaderboar"),
+    url(r'^$', LeaderboardView.as_view(), name="leaderboard-page"),
 ]
