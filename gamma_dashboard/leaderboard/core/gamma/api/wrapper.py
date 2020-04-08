@@ -35,7 +35,8 @@ class GammaApiWrapper:
         """
         Authenticated using the credentials. (Should be called inside constructor)
         """
-        request_kwargs.setdefault('headers', {}).update(self._authentication_headers)
+        if type(request_kwargs) == dict:
+            request_kwargs.setdefault('headers', {}).update(self._authentication_headers)
 
     def _get_absolute_endpoint_url(self, path):
         """
@@ -44,7 +45,7 @@ class GammaApiWrapper:
         Returns:
             str: an absolute endpoint path produced from API root endpoint and provided path.
         """
-        return urljoin(self._root_endpoint, path)
+        return urljoin(self._root_endpoint, path.strip().lower())
 
     def _send_request(self, url, method='GET', **kwargs):
         """
@@ -54,19 +55,21 @@ class GammaApiWrapper:
             dict, list, None: a parsed JSON response of a request or None.
         """
         result = None
-        request_executor = getattr(requests, method.lower())
+        method_ = method.lower()
 
-        self._inject_authentication_headers(kwargs)
+        if hasattr(requests, method_):
+            request_executor = getattr(requests, method_)
 
-        if callable(request_executor):
-            response = request_executor(url, **kwargs)
+            if callable(request_executor):
+                self._inject_authentication_headers(kwargs)
+                response = request_executor(url, **kwargs)
 
-            if response.ok:
-                try:
-                    result = loads(response.content)
+                if response.ok:
+                    try:
+                        result = loads(response.content)
 
-                except ValueError:
-                    pass
+                    except ValueError:
+                        pass
 
         return result
 

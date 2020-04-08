@@ -1,6 +1,7 @@
 """
 General Gamma settings wrapper.
 """
+
 GAMMA_SETTINGS_KEY = 'FEATURES'
 BRIDGE_SETTINGS_KEY = 'RG_GAMIFICATION'
 

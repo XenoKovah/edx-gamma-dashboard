@@ -1,3 +1,6 @@
 Django==1.11.15
-requests==2.23.0
-ipython==5.9.0
+requests>=2.22.0
+ipython>=5.9.0
+pytest>=4.6.9
+pytest-django>=3.9.0
+pytest-mock>=2.0.0

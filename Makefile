@@ -13,3 +13,9 @@ build-watch: # build & watch for rebuild on changes
 
 build-prod: # build a production bundle
 	npm run build-prod --prefix ${REACT_APP_PATH}
+
+test:	# run tests
+	python -m "pytest"
+
+test-v:	# run tests in verbose mode (for debuging)
+	python -m "pytest" -sv

@@ -21,7 +21,7 @@ class GammaApiSettings:
     Gamma API settings wrapper.
     """
 
-    def __init__(self, gamma_settings, version=None):
+    def __init__(self, gamma_settings=None, version=None):
         """
         args:
             settings: a dictionary containing gamification settings read from settings.FEATURES["RG_GAMIFICATION"].

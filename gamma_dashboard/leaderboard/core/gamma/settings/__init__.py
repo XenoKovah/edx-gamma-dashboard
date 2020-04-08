@@ -2,6 +2,7 @@
 Provides gamma settings interface.
 """
 from django.conf import settings
+
 from gamma_dashboard.leaderboard.core.gamma.settings.wrapper import GammaSettingsWrapper
 
 

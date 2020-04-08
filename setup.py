@@ -46,7 +46,6 @@ setup(
     include_package_data=True,
     install_requires=[
         'requests==2.23.0',
-        'urlparse2==1.1.1'
     ],
     license="Apache Software License 2.0",
     zip_safe=False,

@@ -1,0 +1,39 @@
+stages:
+    - build
+    - test
+    - cleanup
+
+variables:
+    BUILD_BOX_NAME: build-box-gamma
+
+
+Build:
+    stage: build
+    tags:
+      - dind
+    only:
+      - master
+      - merge_requests
+
+    script:
+        - docker build -t $BUILD_BOX_NAME/app:$CI_COMMIT_SHORT_SHA .
+
+Units:
+    stage: test
+    tags:
+      - dind
+    only:
+      - master
+      - merge_requests
+    script:
+      - docker run $BUILD_BOX_NAME/app:$CI_COMMIT_SHORT_SHA sh -c 'python -m "pytest" -m unittests'
+
+CleanUp:
+    stage: cleanup
+    tags:
+      - dind
+    only:
+      - master
+      - merge_requests
+    script:
+      - docker rmi -f $BUILD_BOX_NAME/app:$CI_COMMIT_SHORT_SHA || true
