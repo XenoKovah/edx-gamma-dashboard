@@ -1,0 +1,29 @@
+@import 'table-colors.scss';
+
+.leaderboard-table-row {
+    display: flex;
+
+    .table-cell {
+        background-color: $tableCellColor;
+        margin: 2px;
+    }
+
+    .students-cell, .progress-cell, .badges-cell {
+        display: flex;
+        align-items: center;
+    }
+
+    .students-cell {
+        margin-left: 0;
+        font-weight: 700;
+    }
+
+    .progress-cell {
+        color: $headerFontColor;
+        justify-content: center;
+    }
+
+    .badges-cell {
+        margin-right: 0px;
+    }
+}

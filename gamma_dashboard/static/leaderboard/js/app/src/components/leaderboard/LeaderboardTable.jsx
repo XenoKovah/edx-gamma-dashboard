@@ -1,8 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import Avatar from './Avatar';
-import Badge from './Badge';
+import LeaderboardTableRow from './LeadeboardTableRow';
 import Loader from '../utility/Loader';
 
 import './../../styles/app/leaderboard/table.scss';
@@ -12,37 +11,25 @@ function LeaderboardTable(props) {
     const { profiles } = props;
 
     return (
-        <div className="leaderboard-table">
+        <div className="leaderboard-table" data-testid="leaderboard-table">
             <div className="leaderboard-header">
-                <div className="leaderboard-header-cell table-cell students-cell">
+                <div className="leaderboard-header-cell table-cell students-cell" data-testid="students-header">
                     Students
                 </div>
-                <div className="leaderboard-header-cell table-cell  progress-cell">
+                <div className="leaderboard-header-cell table-cell  progress-cell" data-testid="progress-header">
                     Progress
                 </div>
-                <div className="leaderboard-header-cell table-cell  badges-cell">
+                <div className="leaderboard-header-cell table-cell  badges-cell" data-testid="badges-header">
                     Badges
                 </div>
             </div>
             <div className="leaderboard-table-body">
-                {profiles.length === 0 ?
+                {!profiles ?
                     <Loader />
                 :
-                    profiles.map(profile => (
-                        <div className="leaderboard-row">
-                            <div className="leaderboard-table-cell table-cell  students-cell">
-                                <Avatar username={profile.user.username} />{profile.user.username}
-                            </div>
-                            <div className="leaderboard-table-cell table-cell  progress-cell">
-                                <div>{profile.points}/{profile.goal}</div>
-                            </div>
-                            <div className="leaderboard-table-cell table-cell  badges-cell">
-                                {profile.badges.map(badge => (
-                                    <Badge url={badge}>
-                                    </Badge>
-                                ))}
-                            </div>
-                        </div>
+                    profiles.map((profile, index) => (
+                        <LeaderboardTableRow key={index} profile={profile}>
+                        </LeaderboardTableRow>
                     ))
                 }
             </div>

@@ -14,7 +14,6 @@ Build:
     only:
       - master
       - merge_requests
-
     script:
         - docker build -t $BUILD_BOX_NAME/app:$CI_COMMIT_SHORT_SHA .
 

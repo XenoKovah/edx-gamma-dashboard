@@ -9,6 +9,7 @@ function Badge(props) {
     return (
         <div
             className="leaderboard-badge"
+            data-testid="leaderboard-badge"
             style={{backgroundImage: `url("${url}")`}}
         >
         </div>

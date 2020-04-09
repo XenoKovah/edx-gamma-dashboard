@@ -1,8 +1,4 @@
-$headerFontColor: #3CAADA;
-$headerBackgroundColor: #495860;
-$headerBorderColor: #6d89a3;
-
-$tableCellColor: #383838;
+@import 'table-colors.scss';
 
 .leaderboard-table {
     width: 100%;
@@ -59,31 +55,4 @@ $tableCellColor: #383838;
 .badges-cell {
     // flex-grow: 3;
     width: calc((100% - 185px) / 2);
-}
-
-.leaderboard-row {
-    .table-cell {
-        background-color: $tableCellColor;
-        // color: #BCBCBC;
-        margin: 2px;
-    }
-
-    .students-cell, .progress-cell, .badges-cell {
-        display: flex;
-        align-items: center;
-    }
-
-    .students-cell {
-        margin-left: 0;
-        font-weight: 700;
-    }
-
-    .progress-cell {
-        color: $headerFontColor;
-        justify-content: center;
-    }
-
-    .badges-cell {
-        margin-right: 0px;
-    }
 }

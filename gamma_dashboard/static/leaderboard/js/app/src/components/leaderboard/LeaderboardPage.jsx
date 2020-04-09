@@ -20,8 +20,6 @@ class LeaderboardPage extends React.Component {
         gammaApi.leaderboard.getInfo((data) => {
             const { gameprofiles } = data;
 
-            console.log('gameprofiles: ', gameprofiles);
-
             if (gameprofiles) {
                 this.setState({
                     profiles: gameprofiles
@@ -35,10 +33,10 @@ class LeaderboardPage extends React.Component {
 
         return (
             <React.Fragment>
-                <div className="leaderboard-page-title">
+                <div className="leaderboard-page-title" data-testid="leaderboard-page-title">
                     Leaderboard
                 </div>
-                <div className="leaderboard-table-container">
+                <div className="leaderboard-table-container" data-testid="leaderboard-table-container">
                     <LeaderboardTable profiles={profiles} />
                 </div>
             </React.Fragment>
