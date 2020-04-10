@@ -25,7 +25,17 @@ Units:
       - master
       - merge_requests
     script:
-      - docker run $BUILD_BOX_NAME/app:$CI_COMMIT_SHORT_SHA sh -c 'python -m "pytest" -m unittests'
+      - docker run $BUILD_BOX_NAME/app:$CI_COMMIT_SHORT_SHA sh -c 'make test'
+
+ReactUnits:
+    stage: test
+    tags:
+      - dind
+    only:
+      - master
+      - merge_requests
+    script:
+      - docker run $BUILD_BOX_NAME/app:$CI_COMMIT_SHORT_SHA sh -c 'make jest'
 
 CleanUp:
     stage: cleanup
