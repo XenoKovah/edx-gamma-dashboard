@@ -15,8 +15,7 @@ const correctProfileData = {
         'https://badge.two.url/',
         'https://badge.tree.url/',
     ],
-    points: 30,
-    goal: 100
+    points: 30
 };
 
 afterAll(cleanup);
@@ -40,12 +39,12 @@ describe('<LeaderboardTableRow>', () => {
         expect(usernames[0].textContent).toBe(correctProfileData.user.username);
     });
 
-    it('renders with correct `points` & `goal` values', () => {
+    it('renders with correct `points` value', () => {
         const { getByTestId } = render(<LeaderboardTableRow profile={correctProfileData} />);
 
         const progressCell = getByTestId('progress-cell');
 
-        const expectedProgressText = `${correctProfileData.points}/${correctProfileData.goal}`
+        const expectedProgressText = `${correctProfileData.points}`
         expect(progressCell.textContent).toBe(expectedProgressText)
     });
 
@@ -70,16 +69,15 @@ describe('<LeaderboardTableRow>', () => {
         expect(username.textContent).toBe('');
     });
 
-    it('renders without `points` & `goal` data', () => {
+    it('renders without `points` data', () => {
         const profileWithoutPointsData = {...correctProfileData};
 
         delete profileWithoutPointsData.points;
-        delete profileWithoutPointsData.goal;
 
         const { getByTestId } = render(<LeaderboardTableRow profile={profileWithoutPointsData} />);
         const progress = getByTestId('progress-cell');
 
-        const expectedProgress = '0/0';
+        const expectedProgress = '0';
 
         expect(progress.textContent).toBe(expectedProgress);
     });

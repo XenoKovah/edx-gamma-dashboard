@@ -16,8 +16,7 @@ const correctProfilesData = [
         badges: [
             'https://badge.one.url/',
         ],
-        points: 30,
-        goal: 100
+        points: 30
     },
     {
         user: {
@@ -28,8 +27,7 @@ const correctProfilesData = [
             'https://badge.two.url/',
             'https://badge.three.url/',
         ],
-        points: 50,
-        goal: 100
+        points: 50
     }
 ];
 

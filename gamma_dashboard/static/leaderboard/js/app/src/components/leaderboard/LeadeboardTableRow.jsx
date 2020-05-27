@@ -13,7 +13,6 @@ function LeaderboardTableRow(props) {
 
     const username = profile.user && profile.user.username || '';
     const points = profile.points || '0';
-    const goal = profile.goal || '0';
     const badges = profile.badges || [];
 
     return (
@@ -23,7 +22,7 @@ function LeaderboardTableRow(props) {
                 <span data-testid="username">{username}</span>
             </div>
             <div className="leaderboard-table-cell table-cell progress-cell" data-testid="progress-cell">
-                <div>{points}/{goal}</div>
+                <div>{points}</div>
             </div>
             <div className="leaderboard-table-cell table-cell badges-cell">
                 {badges.map((badge, index) => (
