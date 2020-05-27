@@ -7,9 +7,8 @@ import LeaderboardTableRow from '../LeadeboardTableRow';
 
 
 const correctProfileData = {
-    user: {
-        username: 'Bi-Han'
-    },
+    username: 'Bi-Han',
+    user_uid: 'Bi-Han',
     badges: [
         'https://badge.one.url/',
         'https://badge.two.url/',
@@ -36,7 +35,7 @@ describe('<LeaderboardTableRow>', () => {
 
         expect(avatars.length).toBe(1);
         expect(usernames.length).toBe(1);
-        expect(usernames[0].textContent).toBe(correctProfileData.user.username);
+        expect(usernames[0].textContent).toBe(correctProfileData.username);
     });
 
     it('renders with correct `points` value', () => {
@@ -58,10 +57,22 @@ describe('<LeaderboardTableRow>', () => {
         expect(badges.length).toBe(correctProfileData.badges.length);
     });
 
-    it('renders without `user` data', () => {
+    it('renders without `username` data but with `user_uid`', () => {
         const profileWithoutUserData = {...correctProfileData};
 
-        delete profileWithoutUserData.user;
+        delete profileWithoutUserData.username;
+
+        const { getByTestId } = render(<LeaderboardTableRow profile={profileWithoutUserData} />);
+        const username = getByTestId('username');
+
+        expect(username.textContent).toBe(correctProfileData.user_uid);
+    });
+
+    it('renders without `username` and `user_uid` data', () => {
+        const profileWithoutUserData = {...correctProfileData};
+
+        delete profileWithoutUserData.username;
+        delete profileWithoutUserData.user_uid;
 
         const { getByTestId } = render(<LeaderboardTableRow profile={profileWithoutUserData} />);
         const username = getByTestId('username');

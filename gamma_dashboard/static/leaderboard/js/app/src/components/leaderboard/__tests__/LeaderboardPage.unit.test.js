@@ -10,18 +10,16 @@ import LeaderboardPage from '../LeaderboardPage';
 
 const correctProfilesData = [
     {
-        user: {
-            username: 'Bi-Han'
-        },
+        username: 'Bi-Han',
+        user_uid: 'Bi-Han',
         badges: [
             'https://badge.one.url/',
         ],
         points: 30
     },
     {
-        user: {
-            username: 'Kuai Liang'
-        },
+        username: 'Kuai Liang',
+        user_uid: 'Kuai Liang',
         badges: [
             'https://badge.one.url/',
             'https://badge.two.url/',
