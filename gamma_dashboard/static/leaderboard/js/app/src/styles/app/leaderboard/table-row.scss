@@ -11,6 +11,7 @@
     .students-cell, .progress-cell, .badges-cell {
         display: flex;
         align-items: center;
+        flex-wrap: wrap;
     }
 
     .students-cell {
@@ -22,7 +23,7 @@
         color: $headerFontColor;
         justify-content: center;
     }
-
+    
     .badges-cell {
         margin-right: 0px;
     }

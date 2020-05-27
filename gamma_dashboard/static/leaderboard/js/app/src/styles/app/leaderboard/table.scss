@@ -6,7 +6,6 @@
 }
 
 .leaderboard-header, .leaderboard-row {
-    // width: 100%;
     display: flex;
     flex-direction: row;
     align-items: stretch;
@@ -25,6 +24,10 @@
 
 .table-cell {
     padding: 0.5rem;
+
+    &.badges-cell {
+        padding-bottom: 0;
+    }
 }
 
 .leaderboard-header-cell {
