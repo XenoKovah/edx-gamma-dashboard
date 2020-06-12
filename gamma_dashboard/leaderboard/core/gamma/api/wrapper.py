@@ -90,5 +90,14 @@ class GammaApiWrapper:
         """
         return self.request_api_endpoint('leaderboard')
 
+    def get_game_profile(self, username, **kwargs):
+        """
+        Return game profile data for user.
+
+        Returns:
+            dict: parsed game profile information.
+        """
+        return self.request_api_endpoint('gamma-profile', params={'username': username}, **kwargs)
+
 
 gamma_api = GammaApiWrapper()

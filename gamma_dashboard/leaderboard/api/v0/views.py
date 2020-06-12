@@ -28,3 +28,25 @@ class LeaderboardApiView(APIView):
             )
 
         return response
+
+
+class GameProfileApiView(APIView):
+    """
+    Game Profile API view.
+    """
+
+    def get(self, request):
+        """
+        Get Game Profile of current logged user.
+        """
+        user_info = gamma_api.get_game_profile(request.user.username)
+
+        if user_info:
+            response = Response(user_info)
+        else:
+            response = Response(
+                {'error': 'No data recieved from Gamma server.'},
+                status=status.HTTP_422_UNPROCESSABLE_ENTITY
+            )
+
+        return response
