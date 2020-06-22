@@ -57,6 +57,16 @@ describe('<LeaderboardTableRow>', () => {
         expect(badges.length).toBe(correctProfileData.badges.length);
     });
 
+    it('renders with status', () => {
+        const testStatus = 'Test User Status';
+        const { getAllByTestId } = render(<LeaderboardTableRow profile={correctProfileData} status={testStatus}/>);
+
+        const userstatuses = getAllByTestId('userstatus');
+
+        expect(userstatuses.length).toBe(1);
+        expect(userstatuses[0].textContent).toBe(testStatus);
+    });
+
     it('renders without `username` data but with `user_uid`', () => {
         const profileWithoutUserData = {...correctProfileData};
 
@@ -103,4 +113,5 @@ describe('<LeaderboardTableRow>', () => {
 
         expect(badges.length).toBe(0);
     });
+
 });

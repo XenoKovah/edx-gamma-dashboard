@@ -26,7 +26,11 @@ function LeaderboardTableRow(props) {
         <div className="leaderboard-table-row" data-testid="leaderboard-table-row">
             <div className="leaderboard-table-cell table-cell students-cell">
                 <Avatar username={username} />
-                <span data-testid="username">{username}</span>
+                <span>
+                    <span data-testid="username">{username}</span>
+                    <div className="break-flex"></div>
+                    <div data-testid="userstatus">{props.status}</div>
+                </span>
             </div>
             <div className="leaderboard-table-cell table-cell progress-cell" data-testid="progress-cell">
                 <div>{points}</div>

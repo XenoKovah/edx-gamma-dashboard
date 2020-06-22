@@ -18,18 +18,18 @@ class LeaderboardPage extends React.Component {
 
     componentDidMount() {
         gammaApi.leaderboard.getInfo((data) => {
-            const { gameprofiles } = data;
-
+            const { gameprofiles, system_statuses } = data;
             if (gameprofiles) {
                 this.setState({
-                    profiles: gameprofiles
+                    profiles: gameprofiles,
+                    system_statuses: system_statuses || []
                 });
             }
         });
     }
 
     render() {
-        const { profiles } = this.state;
+        const { profiles,  system_statuses } = this.state;
 
         return (
             <React.Fragment>
@@ -37,7 +37,7 @@ class LeaderboardPage extends React.Component {
                     Leaderboard
                 </div>
                 <div className="leaderboard-table-container" data-testid="leaderboard-table-container">
-                    <LeaderboardTable profiles={profiles} />
+                    <LeaderboardTable profiles={profiles} system_statuses={system_statuses}/>
                 </div>
             </React.Fragment>
         )

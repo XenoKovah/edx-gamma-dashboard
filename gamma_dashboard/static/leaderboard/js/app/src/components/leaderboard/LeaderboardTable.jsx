@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 
 import LeaderboardTableRow from './LeadeboardTableRow';
 import Loader from '../utility/Loader';
+import { getUserStatus } from '../../utility/statusTools';
 
 import './../../styles/app/leaderboard/table.scss';
 
@@ -28,7 +29,8 @@ function LeaderboardTable(props) {
                     <Loader />
                 :
                     profiles.map((profile, index) => (
-                        <LeaderboardTableRow key={index} profile={profile}>
+                        <LeaderboardTableRow key={index} profile={profile}
+                                             status={getUserStatus(props.system_statuses, profile.points)}>
                         </LeaderboardTableRow>
                     ))
                 }
@@ -38,7 +40,8 @@ function LeaderboardTable(props) {
 }
 
 LeaderboardTable.propTypes = {
-    profiles: PropTypes.array
+    profiles: PropTypes.array,
+    system_statuses: PropTypes.array
 };
 
 export default LeaderboardTable;
