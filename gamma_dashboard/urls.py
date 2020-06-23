@@ -9,6 +9,6 @@ urlpatterns = []
 
 if gamma_settings.bridge.get('ENABLED'):
     urlpatterns.extend([
-        url(r'api/', include('gamma_dashboard.leaderboard.api.urls', namespace='gamma-api')),
-        url(r'leaderboard/',  include('gamma_dashboard.leaderboard.urls', namespace='gamma-leaderboard'))
+        url(r'api/', include(('gamma_dashboard.leaderboard.api.urls', 'gamma.leaderboard.api'), namespace='gamma-api')),
+        url(r'leaderboard/',  include(('gamma_dashboard.leaderboard.urls', 'gamma.leaderboard'), namespace='gamma-leaderboard'))
     ])

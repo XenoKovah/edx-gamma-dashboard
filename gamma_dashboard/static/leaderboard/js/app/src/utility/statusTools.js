@@ -1,17 +1,16 @@
 export const getUserStatus = (systemStatuses, userPoints) => {
+    const noStatusTitle = "No status so far";
     // systemStatuses should be ordered ascending on backend side
-    if (!systemStatuses || systemStatuses.length == 0){
-        return "No status so far";
-    }
-    for (var i = 0; i < systemStatuses.length; i++){
-        if (userPoints < systemStatuses[i].points){
-            if (i === 0){
-                return "No status so far";
-            }
-            else {
-                return systemStatuses[i - 1].title;
-            }
-        }
-    }
-    return systemStatuses[i - 1].title;
+
+    // Empty systemStatuses
+    if (!systemStatuses || systemStatuses.length == 0) return noStatusTitle;
+    // Check for obvious noStatusTitle
+    if (userPoints < systemStatuses[0].points) return noStatusTitle;
+
+    let i = 0;
+    try {
+        while(systemStatuses[++i].points <= userPoints);
+    } catch {}
+
+    return systemStatuses[--i].title;
 };

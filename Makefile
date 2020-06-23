@@ -5,6 +5,8 @@ REACT_APP_PATH = "${CURRENT_DIR}/gamma_dashboard/static/leaderboard/js/app"
 # React application
 #
 
+.PHONY: build
+
 build:	# build development bundle
 	npm run build --prefix ${REACT_APP_PATH}
 
