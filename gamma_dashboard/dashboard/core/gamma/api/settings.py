@@ -1,7 +1,7 @@
 """
 Gamma API Wrapper settings.
 """
-from urlparse import urljoin
+from urllib.parse import urljoin
 
 GAMMA_ENDPOINT_KEY = 'RG_GAMIFICATION_ENDPOINT'
 GAMMA_DASHBOARD_API_VERSION_KEY = 'GAMMA_DASHBOARD_API_VERSION_KEY'

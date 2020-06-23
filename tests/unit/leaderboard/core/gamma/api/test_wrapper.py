@@ -111,7 +111,7 @@ class TestGammaApiWrapper:
 
         mocked_get = mocker.patch('requests.get')
         mocked_get.return_value.ok = True
-        mocked_get.return_value.content = '[]'
+        mocked_get.return_value.json = mocker.Mock(return_value=[])
 
         api_wrapper = GammaApiWrapper(settings=gamma_settings)
         request_result = api_wrapper._send_request(test_url)
@@ -142,7 +142,7 @@ class TestGammaApiWrapper:
 
         mocked_get = mocker.patch('requests.get')
         mocked_get.return_value.ok = True
-        mocked_get.return_value.content = '<h1>Hello there!</h1>'
+        mocked_get.return_value.json = mocker.Mock(side_effect=ValueError)
 
         api_wrapper = GammaApiWrapper(settings=gamma_settings)
         request_result = api_wrapper._send_request(test_url)
@@ -160,7 +160,7 @@ class TestGammaApiWrapper:
 
         mocked_get = mocker.patch('requests.get')
         mocked_get.return_value.ok = True
-        mocked_get.return_value.content = '{}'
+        mocked_get.return_value.json = mocker.Mock(return_value={})
 
         api_wrapper = GammaApiWrapper(settings=gamma_settings)
         api_wrapper_spy = mocker.spy(api_wrapper, '_send_request')

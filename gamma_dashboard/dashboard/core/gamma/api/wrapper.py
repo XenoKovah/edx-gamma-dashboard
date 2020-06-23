@@ -1,10 +1,9 @@
 """
 Gamma Api Wrapper.
 """
-from json import loads
 
 import requests
-from urlparse import urljoin
+from urllib.parse import urljoin
 
 from gamma_dashboard.dashboard.core.gamma.api.settings import GammaApiSettings
 from gamma_dashboard.dashboard.core.gamma.settings import gamma_settings
@@ -66,7 +65,7 @@ class GammaApiWrapper:
 
                 if response.ok:
                     try:
-                        result = loads(response.content)
+                        result = response.json()
 
                     except ValueError:
                         pass
