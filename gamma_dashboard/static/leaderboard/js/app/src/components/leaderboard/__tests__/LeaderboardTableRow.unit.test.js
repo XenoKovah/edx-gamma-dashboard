@@ -10,9 +10,24 @@ const correctProfileData = {
     username: 'Bi-Han',
     user_uid: 'Bi-Han',
     badges: [
-        'https://badge.one.url/',
-        'https://badge.two.url/',
-        'https://badge.tree.url/',
+        'https://badge.1.url/',
+        'https://badge.2.url/',
+        'https://badge.3.url/',
+        'https://badge.4.url/',
+        'https://badge.5.url/',
+        'https://badge.6.url/',
+        'https://badge.7.url/',
+        'https://badge.8.url/',
+        'https://badge.9.url/',
+        'https://badge.10.url/',
+        'https://badge.11.url/',
+        'https://badge.12.url/',
+        'https://badge.13.url/',
+        'https://badge.14.url/',
+        'https://badge.15.url/',
+        'https://badge.16.url/',
+        'https://badge.17.url/',
+        'https://badge.18.url/',
     ],
     points: 30
 };
@@ -50,11 +65,26 @@ describe('<LeaderboardTableRow>', () => {
     it('renders with correct number of badges', () => {
         const { getAllByTestId } = render(<LeaderboardTableRow profile={correctProfileData} />);
 
-        const avatars = getAllByTestId('avatar');
-        const badges = getAllByTestId('leaderboard-badge');
+        const badge = getAllByTestId('leaderboard-badge');
+        const badgeCounter = getAllByTestId('badge-counter');
+        const badgeFullLine = 17; //we need only 17 badges in row
+        const counterText = "+" + (correctProfileData.badges.length - badgeFullLine);
 
-        expect(avatars.length).toBe(1);
-        expect(badges.length).toBe(correctProfileData.badges.length);
+        expect(badgeCounter[0].textContent).toBe(counterText);
+        expect(badge.length).toBe(badgeFullLine); 
+        expect(badgeCounter[0].classList.contains('badge-counter__hide')).toBe(false); //when we have more then 17 bages counter is visible
+    });
+
+    it('renders with small number of badges', () => {
+        const profileWithoutOneBadge = {...correctProfileData};
+
+        profileWithoutOneBadge.badges.shift();
+
+        const { getAllByTestId } = render(<LeaderboardTableRow profile={profileWithoutOneBadge} />);
+
+        const badgeCounter = getAllByTestId('badge-counter');
+
+        expect(badgeCounter[0].classList.contains('badge-counter__hide')).toBe(true); //when we have less then 18 bages counter is hidden
     });
 
     it('renders with status', () => {
