@@ -1,9 +1,13 @@
+@import 'table-colors.scss';
+
 .leaderboard-page-title {
-    font-size: x-large;
-    font-weight: 900;
+    font-size: 18px;
+    font-weight: 700;
     text-transform: uppercase;
-    text-align: center;
-    justify-content: center;
+    color: $headerFontColor;
+    border-bottom: 2px solid rgba($headerFontColor, .3);
+    padding-bottom: 5px;
+    margin: 0 2rem .6rem;
 }
 
 .leaderboard-table-container {

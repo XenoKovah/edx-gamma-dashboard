@@ -1,5 +1,6 @@
 $headerFontColor: #3CAADA;
 $headerBackgroundColor: #495860;
-$headerBorderColor: #6d89a3;
+$headerFontDark: #232323;
+$headerBorderColor: rgba($headerFontDark, .5);
 
 $tableCellColor: rgba(56, 56, 56, 0.7);

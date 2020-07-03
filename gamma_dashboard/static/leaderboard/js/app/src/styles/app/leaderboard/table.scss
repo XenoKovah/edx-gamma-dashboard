@@ -32,6 +32,8 @@
 
 .leaderboard-header-cell {
     padding: 10px;
+    color: $headerFontDark;
+    font-weight: 700;
 }
 
 .leaderboard-table-cell {
@@ -40,8 +42,8 @@
 
 .leaderboard-header {
     .progress-cell {
-        border-left: 2px solid $headerBorderColor;
-        border-right: 2px solid $headerBorderColor;
+        border-left: 1px solid $headerBorderColor;
+        border-right: 1px solid $headerBorderColor;
     }
 }
 
