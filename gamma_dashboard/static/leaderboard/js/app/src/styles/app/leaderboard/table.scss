@@ -17,7 +17,7 @@
     border-radius: 20px 20px 0 0;
     text-transform: uppercase;
     text-align: center;
-    padding: 10px;
+    padding: 10px 1px;
     margin: 0 0 2px 0;
     font-weight: 900;
 }
@@ -28,12 +28,20 @@
     &.badges-cell {
         padding-bottom: 0;
     }
+
+    span[data-testid="username"] {
+        overflow: hidden;
+        display: block;
+        text-overflow: ellipsis;
+        max-width: 245px;
+    }
 }
 
 .leaderboard-header-cell {
     padding: 10px;
     color: $headerFontDark;
     font-weight: 700;
+    box-sizing: border-box;
 }
 
 .leaderboard-table-cell {
@@ -42,22 +50,41 @@
 
 .leaderboard-header {
     .progress-cell {
-        border-left: 1px solid $headerBorderColor;
-        border-right: 1px solid $headerBorderColor;
+        position: relative;
+        &:before,
+        &:after {
+            content: "";
+            position: absolute;
+            top: 0;
+            width: 1px;
+            height: 100%;
+        }
+
+        &:before {
+            left: -1px;
+            border-left: 1px solid $headerBorderColor;
+        }
+
+        &:after {
+            right: -1px;
+            border-right: 1px solid $headerBorderColor;
+        }
     }
 }
 
 .students-cell {
     // flex-grow: 2;
-    width: calc((100% - 185px) / 2);
+    width: 327px;
+    flex: none;
 }
 
 .progress-cell {
     // flex-grow: 1;
-    width: 185px;
+    width: 142px;
+    flex: none;
 }
 
 .badges-cell {
     // flex-grow: 3;
-    width: calc((100% - 185px) / 2);
+    width: 100%;
 }
