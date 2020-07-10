@@ -6,12 +6,11 @@
     text-transform: uppercase;
     color: $headerFontColor;
     border-bottom: 2px solid rgba($headerFontColor, .3);
-    padding-bottom: 5px;
-    margin: 0 2rem .6rem;
+    padding-bottom: 4px;
+    margin: 0 32px 8px;
 }
 
 .leaderboard-table-container {
     padding: 2rem;
     border-radius: 2rem;
-    // background-color: rgba(255, 255, 255, 0.1);
 }

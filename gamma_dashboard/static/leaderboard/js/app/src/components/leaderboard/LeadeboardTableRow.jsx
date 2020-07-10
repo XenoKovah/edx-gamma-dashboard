@@ -15,7 +15,7 @@ function LeaderboardTableRow(props) {
     const points = profile.points || '0';
     const badges = profile.badges || {};
     const badgeInLine = 13; // 13 is number of badges which can be placed in one row in cell with margin
-    const badgeFullLine = 17; // 17 is number of badges which can be placed in one row in cell with negative margin
+    const badgeFullLine = 16; // 16 is number of badges which can be placed in one row in cell with negative margin
     const badgesNumb = Object.keys(badges).length;
     let isShowBadgeCounter = false;
     let isBadgesFull = false;
@@ -26,7 +26,7 @@ function LeaderboardTableRow(props) {
     for (let slug in badges) {
         badges_list.push(badges[slug].url);
 
-        if (badges_list.length == badgeFullLine) { // we show first 17 bages 
+        if (badges_list.length == badgeFullLine) { // we show first 16 bages 
             break;
         }
     }
@@ -43,10 +43,9 @@ function LeaderboardTableRow(props) {
         <div className="leaderboard-table-row" data-testid="leaderboard-table-row">
             <div className="leaderboard-table-cell table-cell students-cell">
                 <Avatar username={username} />
-                <span>
-                    <span data-testid="username">{username}</span>
-                    <div className="break-flex"></div>
-                    <div data-testid="userstatus">{props.status}</div>
+                <span className="Avatar-Holder">
+                    <span data-testid="username" className="Avatar-Username">{username}</span>
+                    <div data-testid="userstatus" className="Avatar-Status">{props.status}</div>
                 </span>
             </div>
             <div className="leaderboard-table-cell table-cell progress-cell " data-testid="progress-cell">

@@ -26,8 +26,7 @@ const correctProfileData = {
         'https://badge.14.url/',
         'https://badge.15.url/',
         'https://badge.16.url/',
-        'https://badge.17.url/',
-        'https://badge.18.url/',
+        'https://badge.17.url/'
     ],
     points: 30
 };
@@ -67,12 +66,12 @@ describe('<LeaderboardTableRow>', () => {
 
         const badge = getAllByTestId('leaderboard-badge');
         const badgeCounter = getAllByTestId('badge-counter');
-        const badgeFullLine = 17; //we need only 17 badges in row
+        const badgeFullLine = 16; //we need only 16 badges in row
         const counterText = "+" + (correctProfileData.badges.length - badgeFullLine);
 
         expect(badgeCounter[0].textContent).toBe(counterText);
         expect(badge.length).toBe(badgeFullLine); 
-        expect(badgeCounter[0].classList.contains('badge-counter__hide')).toBe(false); //when we have more then 17 bages counter is visible
+        expect(badgeCounter[0].classList.contains('badge-counter__hide')).toBe(false); //when we have more then 16 bages counter is visible
     });
 
     it('renders with small number of badges', () => {
@@ -84,7 +83,7 @@ describe('<LeaderboardTableRow>', () => {
 
         const badgeCounter = getAllByTestId('badge-counter');
 
-        expect(badgeCounter[0].classList.contains('badge-counter__hide')).toBe(true); //when we have less then 18 bages counter is hidden
+        expect(badgeCounter[0].classList.contains('badge-counter__hide')).toBe(true); //when we have less then 16 bages counter is hidden
     });
 
     it('renders with status', () => {
