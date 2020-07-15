@@ -1,11 +1,13 @@
 CURRENT_DIR = $(shell pwd)
-REACT_APP_PATH = "${CURRENT_DIR}/gamma_dashboard/static/leaderboard/js/app"
+REACT_APP_PATH = "${CURRENT_DIR}/gamma_dashboard/static/dashboard/js/app"
 
 #
 # React application
 #
 
-.PHONY: build
+.PHONY: build build-watch build-prod install-react-deps \
+		jest jest-v jest-watch jest-watch-v \
+		test test-v
 
 build:	# build development bundle
 	npm run build --prefix ${REACT_APP_PATH}
@@ -15,12 +17,6 @@ build-watch: # build & watch for rebuild on changes
 
 build-prod: # build production bundle
 	npm run build-prod --prefix ${REACT_APP_PATH}
-
-test:	# run tests
-	python -m "pytest"
-
-test-v:	# run tests in verbose mode (for debuging)
-	python -m "pytest" -sv
 
 install-react-deps:
 	npm install --prefix ${REACT_APP_PATH}
@@ -36,3 +32,14 @@ jest-watch: # run react tets and watch for rerun on changes
 
 jest-watch-v: # run react tets and watch for rerun on changes (verbose mode)
 	npm run test-watch-v --prefix ${REACT_APP_PATH}
+
+
+#
+# Django backend
+#
+
+test:	# run tests
+	python -m "pytest"
+
+test-v:	# run tests in verbose mode (for debuging)
+	python -m "pytest" -sv

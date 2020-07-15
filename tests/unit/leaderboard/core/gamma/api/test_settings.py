@@ -3,7 +3,7 @@ Provide tests for gamma.api.settings module.
 """
 import pytest
 
-from gamma_dashboard.leaderboard.core.gamma.api.settings import GammaApiSettings
+from gamma_dashboard.dashboard.core.gamma.api.settings import GammaApiSettings
 from tests.fixtures.constants import (
     GAMIFICATION_ENDPOINT,
     GAMIFICATION_KEY,
@@ -122,7 +122,7 @@ class TestGammaApiSettngs:
         Expect: root endpoint host and api version are correct.
         """
         mocker.patch.dict(
-            'gamma_dashboard.leaderboard.core.gamma.api.settings.API_VERSION_PREFIX',
+            'gamma_dashboard.dashboard.core.gamma.api.settings.API_VERSION_PREFIX',
             {
                 0: 'v0',
                 1: 'v1',

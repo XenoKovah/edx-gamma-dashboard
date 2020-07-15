@@ -1,0 +1,23 @@
+.btn {
+    color: #3caada;
+    padding-left: 20px;
+    padding-right: 20px;
+    background: transparent;
+    border: 2px solid #3caada !important;
+    display: inline-block;
+    min-width: 84px;
+    font-size: 12px;
+    text-transform: uppercase;
+    font-weight: 600;
+    box-shadow: none;
+    line-height: normal;
+    padding: 7px 5px 6px;
+    transition: all .15s linear;
+    border-radius: 15px;
+    text-align: center;
+}
+
+.btn:hover {
+    background: #3caada !important;
+    color: #fff !important;
+}

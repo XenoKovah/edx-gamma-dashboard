@@ -4,7 +4,7 @@ Provide tests for gamma.api.wrapper module.
 import pytest
 
 
-from gamma_dashboard.leaderboard.core.gamma.api.wrapper import GammaApiWrapper
+from gamma_dashboard.dashboard.core.gamma.api.wrapper import GammaApiWrapper
 from tests.fixtures.constants import (
     GAMIFICATION_ENDPOINT,
     GAMIFICATION_KEY,
@@ -52,7 +52,7 @@ class TestGammaApiWrapper:
         Expect: 'kwargs' dictionary is populated with correct App-Key & App-Secret header values.
         """
         mocker.patch(
-            'gamma_dashboard.leaderboard.core.gamma.settings.wrapper.GammaSettingsWrapper.bridge',
+            'gamma_dashboard.dashboard.core.gamma.settings.wrapper.GammaSettingsWrapper.bridge',
             new_callable=mocker.PropertyMock(return_value=gamma_settings)
         )
 
@@ -71,7 +71,7 @@ class TestGammaApiWrapper:
         incorrect_kwargs = []
 
         mocker.patch(
-            'gamma_dashboard.leaderboard.core.gamma.settings.wrapper.GammaSettingsWrapper.bridge',
+            'gamma_dashboard.dashboard.core.gamma.settings.wrapper.GammaSettingsWrapper.bridge',
             new_callable=mocker.PropertyMock(return_value=gamma_settings)
         )
 

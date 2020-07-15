@@ -1,8 +1,0 @@
-<%inherit file="base.html" />
-
-<%!
-from django.contrib.staticfiles.storage import staticfiles_storage
-%>
-    <div id="app"></div>
-
-    <script src="${staticfiles_storage.url('leaderboard/js/app/dist/bundle.js')}"></script>

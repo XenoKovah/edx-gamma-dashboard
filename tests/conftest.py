@@ -3,7 +3,7 @@ Provide test fixtures.
 """
 import pytest
 
-from gamma_dashboard.leaderboard.core.gamma.api.settings import GammaApiSettings
+from gamma_dashboard.dashboard.core.gamma.api.settings import GammaApiSettings
 from tests.fixtures.constants import (
     GAMIFICATION_ENDPOINT,
     GAMIFICATION_KEY,

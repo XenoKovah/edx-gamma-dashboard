@@ -1,0 +1,22 @@
+@import 'dashboard-colors.scss';
+
+
+.row-block-items-list {
+    display: flex;
+    justify-content: space-around;
+    flex: 0 0 115px;
+    margin-top: 40px;
+}
+
+.row-block-text {
+    font-size: 16px;
+    line-height: 20px;
+    color: $mainTextColor;
+    padding: 15px 14px 0;
+    margin: 0;
+}
+
+.row-block-controls {
+    text-align: center;
+    margin-top: 30px;
+}

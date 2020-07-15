@@ -20,7 +20,7 @@ def _absolute_path_to(path):
 
 def plugin_settings(settings):
     """
-    Read / Update neccessarry project settings.
+    Read / Update necessary project settings.
     """
     settings.MAKO_TEMPLATE_DIRS_BASE.append(
         _absolute_path_to('templates')

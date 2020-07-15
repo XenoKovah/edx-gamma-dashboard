@@ -1,0 +1,13 @@
+.close-window-button {
+    display: inline-block;
+    border: none;
+    background: url(/static/edx-theme/images/close.svg) no-repeat center center !important;
+    width: 18px;
+    height: 18px;
+    position: absolute;
+    right: -30px;
+    top: -19px;
+    transition: opacity .15s linear;
+    box-shadow: none;
+    max-width: 100%;
+}

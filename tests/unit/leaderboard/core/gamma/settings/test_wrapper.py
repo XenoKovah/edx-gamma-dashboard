@@ -3,7 +3,7 @@ Provide tests for gamma.settings.wrapper module.
 """
 import pytest
 
-from gamma_dashboard.leaderboard.core.gamma.settings.wrapper import GammaSettingsWrapper
+from gamma_dashboard.dashboard.core.gamma.settings.wrapper import GammaSettingsWrapper
 
 
 class TestGammaSettingsWrapper:
