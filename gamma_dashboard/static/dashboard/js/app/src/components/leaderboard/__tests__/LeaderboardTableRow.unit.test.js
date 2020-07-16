@@ -34,6 +34,11 @@ const correctProfileData = {
 afterAll(cleanup);
 
 
+const BADGES_IN_FULL_LINE_COUNT = 16;
+const BADGES_IN_LINE_COUNT = 13;
+
+
+
 describe('<LeaderboardTableRow>', () => {
     it('renders', () => {
         const { getByTestId } = render(<LeaderboardTableRow />);
@@ -61,39 +66,65 @@ describe('<LeaderboardTableRow>', () => {
         expect(progressCell.textContent).toBe(expectedProgressText)
     });
 
-    it('renders with correct number of badges', () => {
-        const { getAllByTestId } = render(<LeaderboardTableRow profile={correctProfileData} />);
+    it(`renders with correct number of badges if there are more then ${BADGES_IN_FULL_LINE_COUNT} badges`, () => {
+        const { getAllByTestId, getByTestId } = render(<LeaderboardTableRow profile={correctProfileData} />);
 
-        const badge = getAllByTestId('leaderboard-badge');
-        const badgeCounter = getAllByTestId('badge-counter');
-        const badgeFullLine = 16; //we need only 16 badges in row
-        const counterText = "+" + (correctProfileData.badges.length - badgeFullLine);
+        const badges = getAllByTestId('leaderboard-badge');
+        const badgeCounter = getByTestId('badge-counter');
+        const counterText = `+${correctProfileData.badges.length - BADGES_IN_FULL_LINE_COUNT}`;
 
-        expect(badgeCounter[0].textContent).toBe(counterText);
-        expect(badge.length).toBe(badgeFullLine); 
-        expect(badgeCounter[0].classList.contains('badge-counter__hide')).toBe(false); //when we have more then 16 bages counter is visible
+        expect(badges.length).toBe(BADGES_IN_FULL_LINE_COUNT);
+
+        expect(badgeCounter).toBeInTheDocument();
+        expect(badgeCounter).toHaveTextContent(counterText);
     });
 
-    it('renders with small number of badges', () => {
-        const profileWithoutOneBadge = {...correctProfileData};
+    it(`renders without counter with less then ${BADGES_IN_FULL_LINE_COUNT} badges`, () => {
+        const profileWithoutSomeBadges = {...correctProfileData};
 
-        profileWithoutOneBadge.badges.shift();
+        const extraBadgesCount = profileWithoutSomeBadges.badges.length - BADGES_IN_FULL_LINE_COUNT;
+        if (extraBadgesCount > 0) {
+            profileWithoutSomeBadges.badges.splice(0, extraBadgesCount);
+        }
 
-        const { getAllByTestId } = render(<LeaderboardTableRow profile={profileWithoutOneBadge} />);
+        const { queryByTestId } = render(<LeaderboardTableRow profile={profileWithoutSomeBadges} />);
 
-        const badgeCounter = getAllByTestId('badge-counter');
+        const badgeCounter = queryByTestId('badge-counter');
 
-        expect(badgeCounter[0].classList.contains('badge-counter__hide')).toBe(true); //when we have less then 16 bages counter is hidden
+        expect(badgeCounter).not.toBeInTheDocument();
+    });
+
+    it(`renders with correct badges cell styles when there are more then ${BADGES_IN_LINE_COUNT} badges`, () => {
+        const { getByTestId } = render(<LeaderboardTableRow profile={correctProfileData} />);
+
+        const badgesCell = getByTestId('badges-cell');
+
+        expect(badgesCell).toHaveClass('badges-full');
+    });
+
+    it(`renders with correct badges cell styles when there are less then ${BADGES_IN_LINE_COUNT + 1} badges`, () => {
+        const profileWithoutSomeBadges = {...correctProfileData};
+
+        const extraBadgesCount = (profileWithoutSomeBadges.badges.length - BADGES_IN_LINE_COUNT) + 1;
+        if (extraBadgesCount > 0) {
+            profileWithoutSomeBadges.badges.splice(0, extraBadgesCount);
+        }
+
+        const { getByTestId } = render(<LeaderboardTableRow profile={profileWithoutSomeBadges} />);
+
+        const badgesCell = getByTestId('badges-cell');
+
+        expect(badgesCell).not.toHaveClass('badges-full');
     });
 
     it('renders with status', () => {
         const testStatus = 'Test User Status';
-        const { getAllByTestId } = render(<LeaderboardTableRow profile={correctProfileData} status={testStatus}/>);
+        const { getByTestId } = render(<LeaderboardTableRow profile={correctProfileData} status={testStatus}/>);
 
-        const userstatuses = getAllByTestId('userstatus');
+        const userStatus = getByTestId('userstatus');
 
-        expect(userstatuses.length).toBe(1);
-        expect(userstatuses[0].textContent).toBe(testStatus);
+        expect(userStatus).toBeInTheDocument();
+        expect(userStatus).toHaveTextContent(testStatus);
     });
 
     it('renders without `username` data but with `user_uid`', () => {
@@ -104,7 +135,7 @@ describe('<LeaderboardTableRow>', () => {
         const { getByTestId } = render(<LeaderboardTableRow profile={profileWithoutUserData} />);
         const username = getByTestId('username');
 
-        expect(username.textContent).toBe(correctProfileData.user_uid);
+        expect(username).toHaveTextContent(correctProfileData.user_uid);
     });
 
     it('renders without `username` and `user_uid` data', () => {

@@ -8,34 +8,24 @@ import Badge from './Badge';
 import './../../styles/app/leaderboard/table-row.scss';
 
 
+// 13 is number of badges which can be placed in one row in cell with margin
+const BADGES_IN_LINE_COUNT = 13;
+// 16 is number of badges which can be placed in one row in cell with negative margin
+const BADGES_IN_FULL_LINE_COUNT = 16;
+
+
 const LeaderboardTableRow = ({ profile, status }) => {
     const username = profile.username || profile.user_uid || '';
     const points = profile.points || '0';
     const badges = profile.badges || {};
-    const badgeInLine = 13; // 13 is number of badges which can be placed in one row in cell with margin
-    const badgeFullLine = 16; // 16 is number of badges which can be placed in one row in cell with negative margin
-    const badgesNumb = Object.keys(badges).length;
-    let isShowBadgeCounter = false;
-    let isBadgesFull = false;
+    const badgesCount = Object.keys(badges).length;
 
-    // Probably can be rewritten as an Array comprehensions
-    let badges_list = [];
+    const visibleBadgesList = Object.keys(badges).filter(
+        (badgeId, index) => index < BADGES_IN_FULL_LINE_COUNT
+    );
 
-    for (let slug in badges) {
-        badges_list.push(badges[slug].url);
-
-        if (badges_list.length == badgeFullLine) { // we show first 16 bages
-            break;
-        }
-    }
-
-    if (badges_list.length >= badgeInLine) {
-        isBadgesFull = true;
-    }
-
-    if (badgesNumb > badgeFullLine) {
-        isShowBadgeCounter = true;
-    }
+    const isBadgesRowFull = badgesCount >= BADGES_IN_LINE_COUNT;
+    const unshowedBadgesCount = badgesCount - BADGES_IN_FULL_LINE_COUNT;
 
     return (
         <div className="leaderboard-table-row" data-testid="leaderboard-table-row">
@@ -49,14 +39,31 @@ const LeaderboardTableRow = ({ profile, status }) => {
             <div className="leaderboard-table-cell table-cell progress-cell " data-testid="progress-cell">
                 <div>{points}</div>
             </div>
-            <div className={`leaderboard-table-cell table-cell badges-cell ${isBadgesFull ? "badges-full" : ""}`}>
-                {badges_list.map((badge, index) => (
-                    <Badge key={index} url={badge}>
+            <div
+                className={`leaderboard-table-cell table-cell badges-cell ${isBadgesRowFull ? "badges-full" : ""}`}
+                data-testid="badges-cell"
+            >
+                {visibleBadgesList.map((badgeId, index) => {
+                    const badge = badges[badgeId];
+
+                    return (
+                    <Badge
+                        key={index}
+                        url={badge.url}
+                    >
                     </Badge>
-                ))}
-                <div className={`badge-counter ${isShowBadgeCounter ? "" : "badge-counter__hide"}`} data-testid="badge-counter">
-                    <span className="badge-counter__number">+{badgesNumb - badgeFullLine}</span>
-                </div>
+                )})}
+                { unshowedBadgesCount > 0 ?
+                    <div
+                        className='badge-counter'
+                        data-testid="badge-counter"
+                    >
+                        <span className="badge-counter__number">+{unshowedBadgesCount}</span>
+                    </div>
+                :
+                    null
+                }
+
             </div>
         </div>
     );

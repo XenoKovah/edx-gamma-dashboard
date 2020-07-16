@@ -7,6 +7,6 @@ from gamma_dashboard.dashboard.api.v0.views import LeaderboardApiView, GameProfi
 
 
 urlpatterns = [
-    url(r'leaderboard/', LeaderboardApiView.as_view(), name='leaderboard'),
-    url(r'game-profile/', GameProfileApiView.as_view(), name='gameprofile')
+    url(r'^leaderboard/', LeaderboardApiView.as_view(), name='api-leaderboard'),
+    url(r'^game-profile/', GameProfileApiView.as_view(), name='api-gameprofile')
 ]

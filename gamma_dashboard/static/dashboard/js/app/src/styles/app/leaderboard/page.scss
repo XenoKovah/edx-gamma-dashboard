@@ -1,5 +1,10 @@
 @import 'table-colors.scss';
 
+.leaderboard-page-wrapper {
+    max-width: 1015px;
+    margin: 0 6%;
+}
+
 .leaderboard-page-title {
     font-size: 18px;
     font-weight: 700;

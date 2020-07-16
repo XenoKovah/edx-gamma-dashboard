@@ -32,14 +32,14 @@ class LeaderboardPage extends React.PureComponent {
         const { profiles,  system_statuses } = this.state;
 
         return (
-            <React.Fragment>
+            <div className="leaderboard-page-wrapper">
                 <div className="leaderboard-page-title" data-testid="leaderboard-page-title">
                     Leaderboard
                 </div>
                 <div className="leaderboard-table-container" data-testid="leaderboard-table-container">
                     <LeaderboardTable profiles={profiles} system_statuses={system_statuses}/>
                 </div>
-            </React.Fragment>
+            </div>
         )
     }
 }

@@ -2,6 +2,13 @@
 
 Provide gammification dashboard pages.
 
+1. [Configuration](#configuration)
+    - [Setup a development environment](#setup-a-development-environment)
+        - [Installing the plugin](#installing-the-plugin)
+        - [Frontend development (React)](#frontend-development-react)
+        - [Backend development](#backend-development)
+        - [Build distribution package](#build-distribution-package)
+
 # Configuraiton
 
 # Setup a development environment
@@ -94,5 +101,6 @@ $ make test-v
 ```
 
 
+## Build distribution package
 !TODO
 1. Instructions to build python package for production

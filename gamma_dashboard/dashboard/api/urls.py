@@ -7,5 +7,5 @@ contain namespaces for the active versions of the API.
 from django.conf.urls import include, url
 
 urlpatterns = [
-    url(r'v0/',  include(('gamma_dashboard.dashboard.api.v0.urls', 'api'), namespace='v0'))
+    url(r'^v0/',  include(('gamma_dashboard.dashboard.api.v0.urls', 'api'), namespace='v0'))
 ]
