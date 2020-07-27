@@ -27,13 +27,10 @@
 
     &.badges-cell {
         padding-bottom: 0;
-    }
 
-    span[data-testid="username"] {
-        overflow: hidden;
-        display: block;
-        text-overflow: ellipsis;
-        max-width: 245px;
+        @media screen and (max-width: 768px) {
+            display: none;
+        }
     }
 }
 
@@ -63,28 +60,53 @@
         &:before {
             left: -1px;
             border-left: 1px solid $headerBorderColor;
+
+            @media screen and (max-width: 768px) {
+                left: 0;
+            }
         }
 
         &:after {
             right: -1px;
             border-right: 1px solid $headerBorderColor;
+
+            @media screen and (max-width: 768px) {
+                display: none;
+            }
+        }
+    }
+
+    @media screen and (max-width: 768px) {
+        padding: 2px 1px;
+
+        &-cell {
+            font-size: 14px;
+
+            @media screen and (max-width: 414px) {
+                font-size: 13px;
+            }
         }
     }
 }
 
 .students-cell {
-    // flex-grow: 2;
     width: 327px;
     flex: none;
+
+    @media screen and (max-width: 768px) {
+        width: 70%;
+    }
 }
 
 .progress-cell {
-    // flex-grow: 1;
     width: 142px;
     flex: none;
+
+    @media screen and (max-width: 768px) {
+        width: 30%;
+    }
 }
 
 .badges-cell {
-    // flex-grow: 3;
     width: 100%;
 }
