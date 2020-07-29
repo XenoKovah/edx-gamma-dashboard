@@ -1,7 +1,7 @@
 include MANIFEST.in
 graft gamma_dashboard/templates
 prune gamma_dashboard/static
-include gamma_dashboard/static/leaderboard/js/app/dist/bundle.js
+include gamma_dashboard/static/dashboard/js/app/dist/bundle.js
 
 global-exclude __pycache__
 global-exclude *.py[co]

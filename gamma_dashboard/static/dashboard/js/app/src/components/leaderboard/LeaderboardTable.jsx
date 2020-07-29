@@ -9,7 +9,7 @@ import { getUserStatus } from '../../utility/statusTools';
 import './../../styles/app/leaderboard/table.scss';
 
 
-const LeaderboardTable = ({ profiles, systemStatuses }) => (
+const LeaderboardTable = ({ profiles, system_statuses }) => (
     <div className="leaderboard-table" data-testid="leaderboard-table">
         <div className="leaderboard-header">
             <div className="leaderboard-header-cell table-cell students-cell" data-testid="students-header">
@@ -30,7 +30,7 @@ const LeaderboardTable = ({ profiles, systemStatuses }) => (
                     <LeaderboardTableRow
                         key={index}
                         profile={profile}
-                        status={getUserStatus(systemStatuses, profile.points)}
+                        status={getUserStatus(system_statuses, profile.points)}
                     >
                     </LeaderboardTableRow>
                 ))

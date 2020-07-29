@@ -5,9 +5,9 @@ describe('function getUserStatus', () => {
 
     it('test getting correct status from system_statuses', () => {
         const testSystemStatuses = [
-            { "title": "Bronze", "points": 10 },
-            { "title": "Silver", "points": 50 },
-            { "title": "Gold", "points": 100  }
+            { "title": "Bronze", "status_points": 10 },
+            { "title": "Silver", "status_points": 50 },
+            { "title": "Gold", "status_points": 100  }
         ];
 
         expect(getUserStatus(testSystemStatuses, 0)).toBe("No status so far");
@@ -27,7 +27,7 @@ describe('function getUserStatus', () => {
     });
 
     it('test getting status from one system status only', () => {
-        const testSystemStatuses = [{ "title": "Bronze", "points": 10 }]
+        const testSystemStatuses = [{ "title": "Bronze", "status_points": 10 }]
 
         expect(getUserStatus(testSystemStatuses, 0)).toBe("No status so far");
         expect(getUserStatus(testSystemStatuses, 9)).toBe("No status so far");
