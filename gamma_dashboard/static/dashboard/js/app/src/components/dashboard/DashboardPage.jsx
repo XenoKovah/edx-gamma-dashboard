@@ -26,7 +26,7 @@ class DashboardPage extends React.Component {
    }
 
    parseData(data) {
-      const mergeBadges = (userBadges, systemBadges) => {
+      const mergeBadges = (userBadges, systemBadges, statusesTitle, eventsTitle) => {
          userBadges = userBadges || {};
          systemBadges = systemBadges || [];
 
@@ -57,7 +57,8 @@ class DashboardPage extends React.Component {
             for (const action in actions) {
                progressBase[action] = {
                   'count': 0,
-                  'goal': sBadge.rules.actions[action]
+                  'goal': sBadge.rules.actions[action],
+                  'title': action in eventsTitle ? eventsTitle[action]: action
                };
             }
 
@@ -72,13 +73,6 @@ class DashboardPage extends React.Component {
             }
 
             const dependencyStatusSlug = badgeRules.status_badge || '';
-            let statusDependencyName = dependencyStatusSlug;
-
-            for (const status of data.statuses) {
-               if (status.slug === dependencyStatusSlug) {
-                  statusDependencyName = status.title;
-               }
-            }
 
             const badgeData = {
                id: badgeKey,
@@ -86,16 +80,12 @@ class DashboardPage extends React.Component {
                title: sBadge.title,
                progress: progressBase,
                dependencies: dependencyBadges,
-               statusDependency: statusDependencyName,
+               statusDependency: (dependencyStatusSlug in statusesTitle ) ? statusesTitle[dependencyStatusSlug] : dependencyStatusSlug,
                done: false
             };
 
             if (badgeRules.badges) {
                badgeData.dependencies = sBadge.rules.badges;
-            }
-
-            if (badgeRules.status_badge) {
-               badgeData.status_dependency = sBadge.rules.status_badge;
             }
 
             if (sBadge.slug in userBadges) {
@@ -115,12 +105,15 @@ class DashboardPage extends React.Component {
       data = data || {};
       const badges = data.badges || {};
       const systemStatuses = data.system_statuses || [];
+      const statusesTitle = Object.assign({}, ...systemStatuses.map((x) => ({[x.slug]: x.title})));
       const systemBadges = data.system_badges || [];
+      const systemEvents = data.system_events || [];
+      const eventsTitle = Object.assign({}, ...systemEvents.map((x) => ({[x.event_type]: x.title})));
       const points = data.points || 0;
       const progress = data.progress || {};
       const chart = data.chart || {};
 
-      const mergedBadges = mergeBadges(badges, systemBadges);
+      const mergedBadges = mergeBadges(badges, systemBadges, statusesTitle, eventsTitle);
 
       const badgeItems = Object.entries(mergedBadges) || [];
 

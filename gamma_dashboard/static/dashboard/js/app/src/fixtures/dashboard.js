@@ -284,15 +284,18 @@ export const parsedBadgeItems = [
            progress: {
                edx_bookmark_added: {
                    count: 0,
-                   goal: 1
+                   goal: 1,
+                   title: 'Bookmark'
                },
                problem_graded: {
                    count: 1,
-                   goal: 1
+                   goal: 1,
+                   title: 'Problem Graded'
                },
                stop_video: {
                    count: 1,
-                   goal: 1
+                   goal: 1,
+                   title: 'Stop Video'
                }
            },
            dependencies: [],

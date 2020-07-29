@@ -22,7 +22,7 @@ const PointsDistributionChart = ({ data }) => {
             data[key][0],
             0,
             {
-                name: key,
+                name: data[key]['title'] != null ? data[key]['title'] : key,
                 y : points
             }
         );

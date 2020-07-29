@@ -12,11 +12,10 @@ const RowBlockItemPopup = ({title, data, ...props}) => {
     const statusPoints = data.statusPoints || -1;
 
     const bodyItems = [];
-
     for (const progressItem in progress) {
         const progressValues = progress[progressItem];
 
-        const progressTitle = `${progressItem.charAt(0).toUpperCase()}${progressItem.slice(1, progressItem.length)}`;
+        const progressTitle = `${progressValues.title.charAt(0).toUpperCase()}${progressValues.title.slice(1)}`;
 
         bodyItems.push((
             <ul key={`progress-${progressItem}`} className={'item-list'}>

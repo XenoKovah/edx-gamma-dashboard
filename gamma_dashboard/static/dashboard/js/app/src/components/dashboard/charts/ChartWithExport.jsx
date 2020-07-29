@@ -62,7 +62,7 @@ export const Highcharts = _Highcharts;
 export const chartTitleStyles = {
     color: "#3caada",
     fontFamily: "Exo2",
-    fontSize: "100px",
+    fontSize: "17px",
     fontWeight: 600,
     textTransform: "uppercase",
     marginBottom: '6px',

@@ -41,11 +41,13 @@ describe('<RowBlockItemPopup>', () => {
             progress: {
                 edx_bookmark_added: {
                     count: 0,
-                    goal: 1
+                    goal: 1,
+                    title: 'edx bookmark added'
                 },
                 problem_graded:{
                     count: 0,
-                    goal: 2
+                    goal: 2,
+                    title: 'problem graded'
                 }
             },
             statusDependency: statusDependency
@@ -65,7 +67,7 @@ describe('<RowBlockItemPopup>', () => {
             const progressGoal = data.progress[progressItemName].goal;
 
             const itemProgressString = `${progressCount}/${progressGoal}`;
-            const itemTitle = `${progressItemName.slice(0, 1).toUpperCase()}${progressItemName.slice(1)}`;
+            const itemTitle = `${data.progress[progressItemName].title.slice(0, 1).toUpperCase()}${data.progress[progressItemName].title.slice(1)}`;
 
             expect(getByText(itemProgressString)).toBeInTheDocument();
             expect(getByText(itemTitle)).toBeInTheDocument();
