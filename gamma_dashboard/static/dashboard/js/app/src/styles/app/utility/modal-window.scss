@@ -27,6 +27,10 @@
     padding: 0 !important;
 }
 
+.ReactModal__Body--open {
+    overflow: hidden;
+}
+
 .modal-window-wrapper {
     max-width: 945px;
     position: absolute;
@@ -38,4 +42,5 @@
     max-height: 90vh;
     box-sizing: border-box;
     border-radius: 20px;
+    padding: 0 15px;
 }

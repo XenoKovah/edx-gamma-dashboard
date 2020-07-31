@@ -10,16 +10,32 @@
     box-sizing: border-box;
     position: relative;
 
+    @media screen and (max-width: 991px) {
+        width: 100%;
+    }
+
+    @media screen and (max-width: 479px) {
+        padding: 15px 10px;
+    }
+
     &.full-width {
         width: 100%;
     }
 
     &.top-left {
         border-radius: 20px 0 0 0;
+
+        @media screen and (max-width: 991px) {
+            border-radius: 20px 20px 0 0;
+        }
     }
 
     &.top-right {
         border-radius: 0 20px 0 0;
+
+        @media screen and (max-width: 991px) {
+            border-radius: 0;
+        }
     }
 
     &.bottom-left {
@@ -48,4 +64,8 @@
 
 .dashboard-table-row-block+.dashboard-table-row-block {
     margin-left: 2px;
+
+    @media screen and (max-width: 991px) {
+        margin-left: 0;
+    }
 }

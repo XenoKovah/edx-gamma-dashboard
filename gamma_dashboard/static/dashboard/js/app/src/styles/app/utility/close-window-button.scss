@@ -10,4 +10,10 @@
     transition: opacity .15s linear;
     box-shadow: none;
     max-width: 100%;
+    padding: 15px;
+
+    @media screen and (max-width: 1023px) {
+        right: 10px;
+        top: -30px;
+    }
 }

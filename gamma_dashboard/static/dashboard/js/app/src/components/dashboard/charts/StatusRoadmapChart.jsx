@@ -70,7 +70,7 @@ function StatusRoadmapChart({ data, points }) {
                     marginTop: 160,
                     plotBorderWidth: 1,
                     height: 470,
-                    width: 535,
+                    maxWidth: 535,
                     marginBottom: 70,
                 },
                 title: {
@@ -177,7 +177,22 @@ function StatusRoadmapChart({ data, points }) {
                             textShadow: '-1px 0px 2.75px rgba(0, 0, 0, 0.6)',
                         }
                     }
-                }]
+                }],
+                responsive: {  
+                    rules: [{  
+                        condition: {  
+                            maxWidth: 500 
+                        },  
+                        chartOptions: {
+                            subtitle: {
+                                y: 50,
+                                style: {
+                                    fontSize: "14px"
+                                }
+                            }
+                        }  
+                    }]  
+                }
             }}
         >
         </ChartWithExport>

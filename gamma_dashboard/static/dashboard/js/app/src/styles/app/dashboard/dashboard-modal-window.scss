@@ -10,6 +10,11 @@
     position: relative;
     margin-bottom: 2px;
 
+    @media screen and (max-width: 479px) {
+        justify-content: flex-start;
+        padding: 18px 20px;
+    }
+
     .title {
         color: $titleTextColor;
         font-weight: 700;
@@ -25,6 +30,10 @@
         color: $mainTextColor;
         font-size: 12px;
 
+        @media screen and (max-width: 479px) {
+            right: 20px;
+        }
+
         span:last-child {
             font-weight: 700;
         }
@@ -37,7 +46,7 @@
     justify-content: center;
     flex-wrap: wrap;
     max-height: 80vh;
-    overflow: visible;
+    overflow: auto;
     min-height: 450px;
     padding: 10px;
     background-color: $darkBackgroundColor;

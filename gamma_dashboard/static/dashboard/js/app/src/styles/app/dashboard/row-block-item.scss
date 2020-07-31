@@ -4,6 +4,14 @@
 .row-block-item {
     text-align: center;
     position: relative;
+
+    @media screen and (max-width: 479px) {
+        margin-bottom: 25px;
+
+        &:last-child {
+            margin-bottom: 0;
+        }
+    }
 }
 
 .row-block-item-center {
@@ -12,6 +20,11 @@
     justify-content: center;
     flex-direction: column;
     margin: 0 20px 15px;
+
+    @media screen and (max-width: 479px) {
+        margin: 0 10px 15px;
+        width: calc(50% - 20px);
+    }
 }
 
 .row-block-item-figure {
@@ -22,6 +35,10 @@
     align-items: center;
     justify-content: center;
     margin: 0 0 10px;
+
+    @media screen and (max-width: 479px) {
+        margin: 0 auto 10px;
+    }
 }
 
 .row-block-item-figure-disabled {

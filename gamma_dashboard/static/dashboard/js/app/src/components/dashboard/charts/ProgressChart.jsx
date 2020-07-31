@@ -40,7 +40,7 @@ const ProgressChart = ({ data }) => {
                     spacingLeft: 100,
                     spacingRight: 100,
                     marginTop: 120,
-                    height: 500,
+                    minHeight: 500,
                 },
                 title: {
                     text: 'Progress Tracker',
@@ -158,7 +158,26 @@ const ProgressChart = ({ data }) => {
                             fontFamily: 'Exo2',
                         }
                     }
-                }]
+                }],
+                responsive: {
+                    rules: [{
+                        condition: {
+                            maxWidth: 500
+                        },
+                        chartOptions: {
+                            chart: {
+                                spacingLeft: 0,
+                                spacingRight: 0
+                            },
+                            title: {
+                                x: 0
+                            },
+                            subtitle: {
+                                x: 0
+                            }
+                        }
+                    }]
+                }
             }}
         >
         </ChartWithExport>

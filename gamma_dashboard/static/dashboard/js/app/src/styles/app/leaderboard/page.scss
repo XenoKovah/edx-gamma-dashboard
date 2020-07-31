@@ -3,6 +3,10 @@
 .leaderboard-page-wrapper {
     max-width: 1015px;
     margin: 0 6%;
+
+    @media screen and (max-width: 1080px) {
+        margin: 0;
+    }
 }
 
 .leaderboard-page-title {
