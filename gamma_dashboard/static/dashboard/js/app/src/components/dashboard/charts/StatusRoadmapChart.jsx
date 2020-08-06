@@ -121,7 +121,7 @@ function StatusRoadmapChart({ data, points }) {
                     shared: true,
                     useHTML: true,
                     formatter: function() {
-                        tooltip_html = points_to_status != null ? 'Points to next status: '+'<b>'+points_to_status+'</b>' : '';
+                        let tooltip_html = points_to_status ? 'Points to next status: '+'<b>'+points_to_status+'</b>' : '';
                         tooltip_html += "<table>";
 
                         this.points.forEach(function(entry) {
