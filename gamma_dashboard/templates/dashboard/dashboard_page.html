@@ -1,8 +1,10 @@
 <%inherit file="base.html" />
 
 <%!
+from django.conf import settings
 from django.contrib.staticfiles.storage import staticfiles_storage
 %>
     <div id="app"></div>
 
+    <script type="text/javascript">window.GAMIFICATION_BASE_URL="${settings.FEATURES.get('RG_GAMIFICATION', {}).get('RG_GAMIFICATION_ENDPOINT')}";</script>
     <script src="${staticfiles_storage.url('dashboard/js/app/dist/bundle.js')}"></script>

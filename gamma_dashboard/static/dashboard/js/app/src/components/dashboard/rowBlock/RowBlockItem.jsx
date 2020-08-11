@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import RowBlockItemPopup from './RowBlockItemPopup';
+import { buildURL } from '../../../utility/urlTools';
 
 import '../../../styles/app/dashboard/row-block-item.scss'
 
@@ -61,7 +62,7 @@ const RowBlockItem = ({ slug, data, center, children }) => {
             >
                 <img
                     className={'row-block-item-figure-image'}
-                    src={imageSrc}
+                    src={buildURL(imageSrc)}
                 />
             </div>
             <div className={'row-block-item-title'} data-testid={'row-block-item-title'}>
