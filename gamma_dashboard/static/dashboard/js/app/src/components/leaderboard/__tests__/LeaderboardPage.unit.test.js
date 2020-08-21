@@ -12,19 +12,19 @@ const correctProfilesData = [
     {
         username: 'Bi-Han',
         user_uid: 'Bi-Han',
-        badges: [
-            'https://badge.one.url/',
-        ],
+        badges: {
+            'badge.one': {'url': 'https://badge.one.url/'},
+        },
         points: 30
     },
     {
         username: 'Kuai Liang',
         user_uid: 'Kuai Liang',
-        badges: [
-            'https://badge.one.url/',
-            'https://badge.two.url/',
-            'https://badge.three.url/',
-        ],
+        badges: {
+            'badge.one': {'url': 'https://badge.one.url/'},
+            'badge.two': {'url': 'https://badge.two.url/'},
+            'badge.three': {'url': 'https://badge.three.url/'},
+        },
         points: 50
     }
 ];

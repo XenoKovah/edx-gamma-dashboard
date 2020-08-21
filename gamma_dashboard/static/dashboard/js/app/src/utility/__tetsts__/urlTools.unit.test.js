@@ -2,6 +2,8 @@ import '@testing-library/jest-dom';
 import { buildURL } from '../urlTools';
 
 describe('function buildURL', () => {
+    const base_url = 'http://base-url';
+    window.GAMIFICATION_BASE_URL = base_url;
 
     it('test get original url if it starts with http://', () => {
         const url = 'http://some-test-absolute-url';
@@ -14,9 +16,18 @@ describe('function buildURL', () => {
     });
 
     it('test building absolute url from relative', () => {
-        const base_url = 'http://base-url';
-        window.GAMIFICATION_BASE_URL = base_url;
         const url = '/some-relative-url';
         expect(buildURL(url)).toBe(`${base_url}${url}`);
     });
+
+    it('test building absolute url from relative - start and trailing slash at both parts', () => {
+        const url = '/some-relative-url';
+        expect(buildURL(url)).toBe(`http://base-url/some-relative-url`);
+    });
+
+    it('test building absolute url from relative  - no start and trailing slash at both parts', () => {
+        const url = 'some-relative-url';
+        expect(buildURL(url)).toBe(`http://base-url/some-relative-url`);
+    });
+
 });

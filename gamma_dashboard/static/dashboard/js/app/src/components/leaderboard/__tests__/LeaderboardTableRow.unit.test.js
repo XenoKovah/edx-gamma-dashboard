@@ -9,25 +9,25 @@ import LeaderboardTableRow from '../LeadeboardTableRow';
 const correctProfileData = {
     username: 'Bi-Han',
     user_uid: 'Bi-Han',
-    badges: [
-        'https://badge.1.url/',
-        'https://badge.2.url/',
-        'https://badge.3.url/',
-        'https://badge.4.url/',
-        'https://badge.5.url/',
-        'https://badge.6.url/',
-        'https://badge.7.url/',
-        'https://badge.8.url/',
-        'https://badge.9.url/',
-        'https://badge.10.url/',
-        'https://badge.11.url/',
-        'https://badge.12.url/',
-        'https://badge.13.url/',
-        'https://badge.14.url/',
-        'https://badge.15.url/',
-        'https://badge.16.url/',
-        'https://badge.17.url/'
-    ],
+    badges: {
+        'badge.1': {'url': 'https://badge.1.url/'},
+        'badge.2': {'url': 'https://badge.2.url/'},
+        'badge.3': {'url': 'https://badge.3.url/'},
+        'badge.4': {'url': 'https://badge.4.url/'},
+        'badge.5': {'url': 'https://badge.5.url/'},
+        'badge.6': {'url': 'https://badge.6.url/'},
+        'badge.7': {'url': 'https://badge.7.url/'},
+        'badge.8': {'url': 'https://badge.8.url/'},
+        'badge.9': {'url': 'https://badge.9.url/'},
+        'badge.10': {'url': 'https://badge.10.url/'},
+        'badge.11': {'url': 'https://badge.11.url/'},
+        'badge.12': {'url': 'https://badge.12.url/'},
+        'badge.13': {'url': 'https://badge.13.url/'},
+        'badge.14': {'url': 'https://badge.14.url/'},
+        'badge.15': {'url': 'https://badge.15.url/'},
+        'badge.16': {'url': 'https://badge.16.url/'},
+        'badge.17': {'url': 'https://badge.17.url/'}
+    },
     points: 30
 };
 
@@ -71,7 +71,7 @@ describe('<LeaderboardTableRow>', () => {
 
         const badges = getAllByTestId('leaderboard-badge');
         const badgeCounter = getByTestId('badge-counter');
-        const counterText = `+${correctProfileData.badges.length - BADGES_IN_FULL_LINE_COUNT}`;
+        const counterText = `+${Object.keys(correctProfileData.badges).length - BADGES_IN_FULL_LINE_COUNT}`;
 
         expect(badges.length).toBe(BADGES_IN_FULL_LINE_COUNT);
 
@@ -81,10 +81,12 @@ describe('<LeaderboardTableRow>', () => {
 
     it(`renders without counter with less then ${BADGES_IN_FULL_LINE_COUNT} badges`, () => {
         const profileWithoutSomeBadges = {...correctProfileData};
+        let badgesList = Object.entries(profileWithoutSomeBadges.badges); // convert object to list
 
-        const extraBadgesCount = profileWithoutSomeBadges.badges.length - BADGES_IN_FULL_LINE_COUNT;
+        const extraBadgesCount = badgesList.length - BADGES_IN_FULL_LINE_COUNT;
         if (extraBadgesCount > 0) {
-            profileWithoutSomeBadges.badges.splice(0, extraBadgesCount);
+            badgesList.splice(0, extraBadgesCount);
+            profileWithoutSomeBadges.badges = Object.assign({}, ...badgesList.map(([k, v]) => ({[k]: v}))); // convert list to object
         }
 
         const { queryByTestId } = render(<LeaderboardTableRow profile={profileWithoutSomeBadges} />);
@@ -104,10 +106,12 @@ describe('<LeaderboardTableRow>', () => {
 
     it(`renders with correct badges cell styles when there are less then ${BADGES_IN_LINE_COUNT + 1} badges`, () => {
         const profileWithoutSomeBadges = {...correctProfileData};
+        let badgesList = Object.entries(profileWithoutSomeBadges.badges); // convert object to list
 
-        const extraBadgesCount = (profileWithoutSomeBadges.badges.length - BADGES_IN_LINE_COUNT) + 1;
+        const extraBadgesCount = badgesList.length - BADGES_IN_LINE_COUNT + 1;
         if (extraBadgesCount > 0) {
-            profileWithoutSomeBadges.badges.splice(0, extraBadgesCount);
+            badgesList.splice(0, extraBadgesCount);
+            profileWithoutSomeBadges.badges = Object.assign({}, ...badgesList.map(([k, v]) => ({[k]: v}))); // convert list to object
         }
 
         const { getByTestId } = render(<LeaderboardTableRow profile={profileWithoutSomeBadges} />);
