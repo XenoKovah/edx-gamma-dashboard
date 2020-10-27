@@ -1,8 +1,12 @@
+$base-color: #0083bd;
+$base-color2: #333;
+$white: #fff;
+
 $mainTextColor: #bcbcbc;
 $titleTextColor: #232323;
 $blueTextColor: #3caada;
-$darkblueTransparentBackgroundColor: rgba(69,162,214,0.3);
+$darkblueTransparentBackgroundColor: rgba(69, 162, 214, .3);
 
 $darkBackgroundColor: #383838;
 $titleBackgroundColor: #495860;
-$whiteTintedBackgroundColor: rgba(255,255,255,0.1);
+$whiteTintedBackgroundColor: rgba($base-color2, .1);

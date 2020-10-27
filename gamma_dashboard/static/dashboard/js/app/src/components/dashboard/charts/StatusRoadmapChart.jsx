@@ -6,6 +6,7 @@ import ChartWithExport, {
     chartSubtitleStyles,
     chartTitleOptions,
     legendOptions,
+    isRtl,
 } from './ChartWithExport';
 
 
@@ -75,22 +76,25 @@ function StatusRoadmapChart({ data, points }) {
                 },
                 title: {
                     text: 'Status Roadmap',
-                    align: 'left',
+                    align: isRtl ? 'right' : 'left',
                     widthAdjust: 0,
-                    x: 7,
+                    x: isRtl ? 0 : 7,
                     y: 14,
                     margin: 50,
                     style: chartTitleStyles,
                 },
                 subtitle: {
                     text: 'Here you can track your status progress: see how many points you have so far and how much is left for each status',
-                    align: 'left',
+                    align: isRtl ? 'right' : 'left',
                     widthAdjust: -35,
-                    x: 7,
+                    x: isRtl ? 0 : 7,
                     y: 70,
                     style: chartSubtitleStyles,
                 },
                 navigation: chartTitleOptions,
+                credits: {
+                    enabled: false
+                },        
                 xAxis: {
                     categories: [''],
                     title: {
@@ -100,6 +104,7 @@ function StatusRoadmapChart({ data, points }) {
                     lineColor: '#aaa',
                 },
                 yAxis: {
+                    reversed: isRtl,
                     min: min_value,
                     max: max_value,
                     title: {
@@ -169,12 +174,12 @@ function StatusRoadmapChart({ data, points }) {
                     borderRadius: 3,
                     dataLabels: {
                         enabled: true,
-                        color: '#fafafa',
+                        color: '#bcbcbc',
                         style: {
                             fontWeight: 'bold',
                             textOutline: 'none',
                             fontFamily: 'Exo2',
-                            textShadow: '-1px 0px 2.75px rgba(0, 0, 0, 0.6)',
+                            textShadow: '-1px 0px 2.75px rgba(255, 255, 255, 0.6)',
                         }
                     }
                 }],

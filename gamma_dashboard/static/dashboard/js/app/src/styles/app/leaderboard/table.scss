@@ -61,6 +61,15 @@
             left: -1px;
             border-left: 1px solid $headerBorderColor;
 
+            .rtl & {
+                border-left: 0;
+                border-right: 1px solid $headerBorderColor;
+
+                @media screen and (max-width: 768px) {
+                    right: 0;
+                }
+            }
+
             @media screen and (max-width: 768px) {
                 left: 0;
             }

@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 
 import RowBlockItem from './rowBlock/RowBlockItem';
 import ModalWindow from '../utility/ModalWindow';
+import {isRtl} from './charts/ChartWithExport';
 
 import '../../styles/app/dashboard/dashboard-modal-window.scss';
 
@@ -21,8 +22,8 @@ const DashboardModalWindow = ({ title, items, getItemDataFunction, children, ...
                 </div>
                 <div className={'counter'}>
                     <span>
-                        Total badges:
-                    </span>&nbsp;
+                        {isRtl ? ':Total badges' : 'Total badges:'}
+                    </span>
                     <span data-testid={'counter-value'}>
                         {items.length}
                     </span>

@@ -8,11 +8,20 @@
     justify-content: center;
     align-items: center;
 
+    .rtl & {
+        margin-right: 0;
+        margin-left: 25px;
+    }
+
     @media screen and (max-width: 768px) {
         flex: none;
         width: 24px;
         height: 24px;
         margin-right: 10px;
+
+        .rtl & {
+            margin-left: 10px;
+        }
     }
 
     .avatar-letter {

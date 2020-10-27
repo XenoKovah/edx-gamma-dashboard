@@ -7,6 +7,7 @@ import ChartWithExport, {
     chartTitleOptions,
     legendOptions,
     Highcharts,
+    isRtl,
 } from './ChartWithExport';
 
 
@@ -41,24 +42,30 @@ const PointsDistributionChart = ({ data }) => {
                 },
                 title: {
                     text: 'Points Distribution',
-                    align: 'left',
+                    align: isRtl ? 'right' : 'left',
                     widthAdjust: 0,
-                    x: 7,
+                    x: isRtl ? 0 : 7,
                     y: 14,
                     margin: 50,
                     style: chartTitleStyles,
                 },
                 subtitle: {
                     text: 'Here you can see what actions caused your current points portfolio',
-                    align: 'left',
+                    align: isRtl ? 'right' : 'left',
                     widthAdjust: 7,
-                    x: 7,
+                    x: isRtl ? 0 : 7,
                     y: 69,
                     style: chartSubtitleStyles,
                 },
                 navigation: chartTitleOptions,
                 tooltip: {
-                    pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+                    pointFormat: isRtl ? 
+                    '<b>{point.percentage:.1f}%</b>: {series.name}' : 
+                    '{series.name}: <b>{point.percentage:.1f}%</b>',
+                    useHTML: isRtl,
+                    style: {
+                        textAlign: isRtl ? 'right' : 'left'
+                    }
                 },
                 plotOptions: {
                     pie: {
@@ -97,6 +104,9 @@ const PointsDistributionChart = ({ data }) => {
                 },
                 legend: {
                     enabled: false,
+                },
+                credits: {
+                    enabled: false
                 },
                 series: events.length > 0 ? [{
                     type: 'pie',

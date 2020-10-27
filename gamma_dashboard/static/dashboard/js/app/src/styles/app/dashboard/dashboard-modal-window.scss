@@ -34,8 +34,25 @@
             right: 20px;
         }
 
-        span:last-child {
-            font-weight: 700;
+        .rtl & {
+            right: initial;
+            left: 38px;
+            display: flex;
+            flex-direction: row-reverse;
+
+            span:first-child {
+                margin-left: 3px;
+            }
+        }
+
+        span {
+            &:first-child {
+                margin-right: 3px;
+            }
+
+            &:last-child {
+                font-weight: 700;
+            }
         }
     }
 }

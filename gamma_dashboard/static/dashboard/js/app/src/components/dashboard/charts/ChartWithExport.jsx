@@ -24,7 +24,8 @@ const applyColorScheme = (H) => {
         chart: {
             style: {
                 fontFamily: "'Open Sans', sans-serif"
-            }
+            },
+            backgroundColor: 'transparent'
         }
     })
 };
@@ -58,6 +59,8 @@ ChartWithExport.defaultProps = {
 export default ChartWithExport;
 
 export const Highcharts = _Highcharts;
+
+export const isRtl = document.querySelector('body').classList.contains('rtl');
 
 export const chartTitleStyles = {
     color: "#3caada",
@@ -95,11 +98,13 @@ export const chartTitleOptions = {
             }
         },
         x: -2,
-        y: -5
+        y: -5,
+        align: isRtl ? 'left' : 'right'
     }
 };
 
 export const legendOptions = {
+    rtl: isRtl,
     itemHoverStyle: {
         color: "#aaa"
     },

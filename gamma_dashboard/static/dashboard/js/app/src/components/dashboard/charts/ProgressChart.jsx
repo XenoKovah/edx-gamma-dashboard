@@ -6,6 +6,7 @@ import ChartWithExport, {
     chartSubtitleStyles,
     chartTitleOptions,
     legendOptions,
+    isRtl,
 } from './ChartWithExport';
 
 
@@ -30,7 +31,8 @@ const ProgressChart = ({ data }) => {
 
     const customChartTitleOptions = {...chartTitleOptions};
     customChartTitleOptions.buttonOptions = {...customChartTitleOptions.buttonOptions};
-    customChartTitleOptions.buttonOptions.x = 86;
+    customChartTitleOptions.buttonOptions.x = isRtl ? -86 : 86;
+    customChartTitleOptions.buttonOptions.align = isRtl ? 'left' : 'right';
 
     return (
         <ChartWithExport
@@ -44,23 +46,24 @@ const ProgressChart = ({ data }) => {
                 },
                 title: {
                     text: 'Progress Tracker',
-                    align: 'left',
+                    align: isRtl ? 'right' : 'left',
                     widthAdjust: 0,
-                    x: -86,
+                    x: isRtl ? 86 : -86,
                     y: 14,
                     margin: 50,
                     style: chartTitleStyles,
                 },
                 subtitle: {
                     text: 'See the dynamics of your activities and points acquisition through time  ',
-                    align: 'left',
+                    align: isRtl ? 'right' : 'left',
                     widthAdjust: -7,
-                    x: -86,
+                    x: isRtl ? 86 : -86,
                     y: 70,
                     style: chartSubtitleStyles,
                 },
                 navigation: customChartTitleOptions,
                 xAxis: {
+                    reversed: isRtl,
                     type: 'datetime',
                     dateTimeLabelFormats: {
                         month: '%e. %b',
@@ -79,12 +82,13 @@ const ProgressChart = ({ data }) => {
                     }
                 },
                 yAxis: [{
+                    opposite: isRtl,
                     title: {
                         text: null
                     },
                     labels: {
-                        align: 'left',
-                        x: -40,
+                        align: isRtl ? 'right' : 'left',
+                        x: isRtl ? 40 : -40,
                         y: 5,
                         format: '{value:.,0f}',
                         style: {
@@ -98,13 +102,13 @@ const ProgressChart = ({ data }) => {
                     lineWidth: 1,
                 }, {
                     gridLineWidth: 0,
-                    opposite: true,
+                    opposite: isRtl ? false : true,
                     title: {
                         text: null
                     },
                     labels: {
-                        align: 'right',
-                        x: 40,
+                        align: isRtl ? 'left' : 'right',
+                        x: isRtl ? -40 : 40,
                         y: 5,
                         format: '{value:.,0f}',
                         style: {
@@ -115,9 +119,16 @@ const ProgressChart = ({ data }) => {
                 }],
                 tooltip: {
                     headerFormat: '<b>{series.name}</b><br>',
-                    pointFormat: '{point.x:%e. %b}: {point.y:.2f}'
+                    pointFormat: '{point.x:%e. %b}: {point.y:.2f}',
+                    useHTML: isRtl,
+                    style: {
+                        textAlign: isRtl ? 'right' : 'left',
+                        direction: isRtl ? 'rtl' : 'ltr'
+                    }
                 },
-
+                credits: {
+                    enabled: false
+                },
                 plotOptions: {
                     spline: {
                         marker: {
