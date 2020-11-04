@@ -2,13 +2,20 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import RowBlockItemPopup from './RowBlockItemPopup';
+import { usePopper } from 'react-popper';
 import { buildURL } from '../../../utility/urlTools';
 
-import '../../../styles/app/dashboard/row-block-item.scss'
+import '../../../styles/app/dashboard/row-block-item.scss';
 
 
 const RowBlockItem = ({ slug, data, center, children }) => {
     const [ showPopup, setShowPopup ] = React.useState(false);
+    const [ referenceElement, setReferenceElement ] = React.useState(null);
+    const [ popperElement, setPopperElement ] = React.useState(null);
+    const { styles, attributes } = usePopper(referenceElement, popperElement, {
+        placement: 'auto',
+        scroll: false
+    });
 
     const {
         title,
@@ -59,6 +66,7 @@ const RowBlockItem = ({ slug, data, center, children }) => {
             <div
                 className={`row-block-item-figure ${hasPopup ? 'row-block-item-figure-disabled' : ''}`}
                 data-testid={'row-block-item-figure'}
+                ref={setReferenceElement}
             >
                 <img
                     className={'row-block-item-figure-image'}
@@ -70,8 +78,11 @@ const RowBlockItem = ({ slug, data, center, children }) => {
             </div>
             { hasPopup ?
                 <RowBlockItemPopup
+                    ref={setPopperElement}
                     title={title}
-                    {... popupProps}
+                    style={{... styles.popper, ... popupProps.style}}
+                    data={popupProps.data}
+                    {... attributes.popper}
                 />
             : null }
             {children}

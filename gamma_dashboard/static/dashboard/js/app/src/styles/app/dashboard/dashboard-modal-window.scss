@@ -13,6 +13,10 @@
     @media screen and (max-width: 479px) {
         justify-content: flex-start;
         padding: 18px 20px;
+
+        .rtl & {
+            justify-content: flex-end;
+        }
     }
 
     .title {
@@ -43,6 +47,10 @@
             span:first-child {
                 margin-left: 3px;
             }
+
+            @media screen and (max-width: 479px) {
+                left: 20px;
+            }
         }
 
         span {
@@ -68,4 +76,10 @@
     padding: 10px;
     background-color: $darkBackgroundColor;
     border-radius: 0 0 20px 20px;
+
+    .row-block-item-popup .item-head {
+        .rtl & {
+            justify-content: flex-end;
+        }
+    }
 }

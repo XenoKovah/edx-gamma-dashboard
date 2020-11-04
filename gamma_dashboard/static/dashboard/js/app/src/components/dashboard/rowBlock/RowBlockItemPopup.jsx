@@ -1,10 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { isRtl } from '../charts/ChartWithExport';
 
 import '../../../styles/app/dashboard/row-block-item-popup.scss';
 
 
-const RowBlockItemPopup = ({title, data, ...props}) => {
+const RowBlockItemPopup = React.forwardRef(({title, data, ...props}, ref) => {
     const { statusDependency } = data;
     const badgeDependencies = data.badgeDependencies || [];
     const progress = data.progress || {};
@@ -33,7 +34,10 @@ const RowBlockItemPopup = ({title, data, ...props}) => {
         bodyItems.push((
             <React.Fragment key={'badge-dependencies'}>
                 <div className={'list-item-dependency-title'}>
-                    Depends on badges:
+                    { isRtl ?
+                        ':Depends on badges' :
+                        'Depends on badges:'
+                    }
                 </div>
                 <ul className={'item-list'}>
                     {badgeDependencies.map((badge, index) => (
@@ -50,7 +54,10 @@ const RowBlockItemPopup = ({title, data, ...props}) => {
         bodyItems.push((
             <React.Fragment key={'status-dependencies'}>
                 <div className={'list-item-dependency-title'}>
-                    Depends on status:
+                    { isRtl ?
+                        ':Depends on status' :
+                        'Depends on status:'
+                    }
                 </div>
                 <ul className={'item-list'}>
                     <li className={'item-list-item'}>
@@ -77,17 +84,18 @@ const RowBlockItemPopup = ({title, data, ...props}) => {
         <div
             className={'row-block-item-popup'}
             data-testid={'row-block-item-popup'}
+            ref={ref}
             {... props}
         >
             <div className={'item-head'} data-testid={'item-head'}>
                 {title}
             </div>
             <div className={'item-body'} data-testid={'item-body'}>
-                    {bodyItems}
+                {bodyItems}
             </div>
         </div>
     );
-};
+});
 
 RowBlockItemPopup.propTypes = {
     title: PropTypes.string,
@@ -108,7 +116,7 @@ RowBlockItemPopup.defaultProps = {
         progress: {},
         points: -1,
         statusPoints: 0,
-    }
+    },
 }
 
 export default RowBlockItemPopup;

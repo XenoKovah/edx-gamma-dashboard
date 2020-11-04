@@ -19,10 +19,15 @@
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    margin: 0 20px 15px;
+    margin: 0 15px 30px;
+    width: calc(100% / 4 - 30px);
+
+    @media screen and (max-width: 767px) {
+        width: calc(100% / 3 - 30px);
+    }
 
     @media screen and (max-width: 479px) {
-        margin: 0 10px 15px;
+        margin: 0 10px 20px;
         width: calc(50% - 20px);
     }
 }
