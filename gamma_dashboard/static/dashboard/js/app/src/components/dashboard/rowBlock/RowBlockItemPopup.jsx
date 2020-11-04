@@ -34,10 +34,7 @@ const RowBlockItemPopup = React.forwardRef(({title, data, ...props}, ref) => {
         bodyItems.push((
             <React.Fragment key={'badge-dependencies'}>
                 <div className={'list-item-dependency-title'}>
-                    { isRtl ?
-                        ':Depends on badges' :
-                        'Depends on badges:'
-                    }
+                    { isRtl ? ':Depends on badges' : 'Depends on badges:' }
                 </div>
                 <ul className={'item-list'}>
                     {badgeDependencies.map((badge, index) => (
@@ -54,10 +51,7 @@ const RowBlockItemPopup = React.forwardRef(({title, data, ...props}, ref) => {
         bodyItems.push((
             <React.Fragment key={'status-dependencies'}>
                 <div className={'list-item-dependency-title'}>
-                    { isRtl ?
-                        ':Depends on status' :
-                        'Depends on status:'
-                    }
+                    { isRtl ? ':Depends on status' : 'Depends on status:' }
                 </div>
                 <ul className={'item-list'}>
                     <li className={'item-list-item'}>

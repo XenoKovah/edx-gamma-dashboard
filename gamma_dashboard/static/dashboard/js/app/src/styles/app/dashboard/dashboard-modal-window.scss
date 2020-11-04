@@ -77,9 +77,7 @@
     background-color: $darkBackgroundColor;
     border-radius: 0 0 20px 20px;
 
-    .row-block-item-popup .item-head {
-        .rtl & {
-            justify-content: flex-end;
-        }
+    .rtl & .row-block-item-popup .item-head {
+        justify-content: flex-end;
     }
 }

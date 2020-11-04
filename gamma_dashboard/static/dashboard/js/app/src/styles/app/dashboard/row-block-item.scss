@@ -1,6 +1,5 @@
 @import 'dashboard-colors.scss';
 
-
 .row-block-item {
     text-align: center;
     position: relative;
@@ -20,15 +19,15 @@
     justify-content: center;
     flex-direction: column;
     margin: 0 15px 30px;
-    width: calc(100% / 4 - 30px);
+    width: calc(100% / 4 - #{$space-30});
 
     @media screen and (max-width: 767px) {
-        width: calc(100% / 3 - 30px);
+        width: calc(100% / 3 - #{$space-30});
     }
 
     @media screen and (max-width: 479px) {
         margin: 0 10px 20px;
-        width: calc(50% - 20px);
+        width: calc(50% - #{$space-20});
     }
 }
 
