@@ -29,24 +29,35 @@
     &[data-popper-placement="top"],
     &[data-popper-placement="right"] {
         padding-top: 0;
+    }
+
+    &[data-popper-placement="left"] {
         padding-right: 16px;
+
+        &:before {
+            left: initial;
+            right: 2px;
+            top: 50%;
+        }
     }
 
-    &[data-popper-placement="left"]:before {
-        left: initial;
-        right: 2px;
-        top: 50%;
+    &[data-popper-placement="top"] {
+        padding-bottom: 16px;
+
+        &:before {
+            top: initial;
+            bottom: 2px;
+        }
     }
 
-    &[data-popper-placement="top"]:before {
-        top: initial;
-        bottom: 2px;
-    }
-
-    &[data-popper-placement="right"]:before {
-        top: 50%;
-        right: initial;
-        left: 16px;
+    &[data-popper-placement="right"] {
+        padding-left: 16px;
+        
+        &:before {
+            top: 50%;
+            right: initial;
+            left: 16px;
+        }
     }
 
     .item-head {
