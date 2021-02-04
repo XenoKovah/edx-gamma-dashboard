@@ -149,7 +149,7 @@ const ProgressChart = ({ data }) => {
                         style: {
                             fontWeight: 'bold',
                             textOutline: 'none',
-                            fontFamily: 'Exo2',
+                            fontFamily: 'Open Sans',
                         }
                     }
                 },
@@ -166,7 +166,7 @@ const ProgressChart = ({ data }) => {
                         style: {
                             fontWeight: 'bold',
                             textOutline: 'none',
-                            fontFamily: 'Exo2',
+                            fontFamily: 'Open Sans',
                         }
                     }
                 }],

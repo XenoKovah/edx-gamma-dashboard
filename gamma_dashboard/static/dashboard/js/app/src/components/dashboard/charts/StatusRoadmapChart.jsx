@@ -34,7 +34,7 @@ function StatusRoadmapChart({ data, points }) {
                 y: -10,
                 style: {
                     color: '#bcbcbc',
-                    fontFamily: 'Exo2'
+                    fontFamily: 'Open Sans'
                 }
             }
         });
@@ -156,7 +156,7 @@ function StatusRoadmapChart({ data, points }) {
                         style: {
                         fontWeight: 'bold',
                         textOutline: 'none',
-                        fontFamily: 'Exo2',
+                        fontFamily: 'Open Sans',
                         }
                     }
                     }
@@ -178,7 +178,7 @@ function StatusRoadmapChart({ data, points }) {
                         style: {
                             fontWeight: 'bold',
                             textOutline: 'none',
-                            fontFamily: 'Exo2',
+                            fontFamily: 'Open Sans',
                             textShadow: '-1px 0px 2.75px rgba(255, 255, 255, 0.6)',
                         }
                     }

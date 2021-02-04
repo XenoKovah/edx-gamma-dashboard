@@ -23,9 +23,8 @@ const applyColorScheme = (H) => {
         ],
         chart: {
             style: {
-                fontFamily: "'Open Sans', sans-serif"
-            },
-            backgroundColor: 'transparent'
+                fontFamily: "Open Sans, sans-serif"
+            }
         }
     })
 };
@@ -64,7 +63,7 @@ export const isRtl = document.querySelector('body').classList.contains('rtl');
 
 export const chartTitleStyles = {
     color: "#3caada",
-    fontFamily: "Exo2",
+    fontFamily: "Open Sans",
     fontSize: "17px",
     fontWeight: 600,
     textTransform: "uppercase",
@@ -76,7 +75,7 @@ export const chartTitleStyles = {
 
 export const chartSubtitleStyles = {
     color: "#bcbcbc",
-    fontFamily: "Exo2",
+    fontFamily: "Open Sans",
     fontSize: "16px",
     fontWeight: 300,
     lineHeight: "20px"
