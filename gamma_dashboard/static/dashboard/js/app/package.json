@@ -42,8 +42,8 @@
   },
   "dependencies": {
     "@popperjs/core": "^2.5.4",
-    "highcharts": "^8.1.2",
-    "highcharts-react-official": "^3.0.0",
+    "highcharts": "^9.3.1",
+    "highcharts-react-official": "^3.1.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-modal": "^3.11.2",
