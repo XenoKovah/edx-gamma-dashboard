@@ -5,7 +5,7 @@ __pycache__
 .pytest_cache
 
 # JS
-dist/
+/dist/
 node_modules/
 package-lock.json
 
