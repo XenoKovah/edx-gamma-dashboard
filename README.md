@@ -47,7 +47,7 @@ lms-docker-container $ ls /edx/var/edxapp/edx-gamma-dashboard
 ```
 devstack$ make lms-shell
 lms-container$ source /edx/app/edxapp/edxapp_env
-lms-container$ install -e /edx/var/edxapp/edx-gamma-dashboard
+lms-container$ pip install -e /edx/var/edxapp/edx-gamma-dashboard
 ```
 
 6. You're good to go.
