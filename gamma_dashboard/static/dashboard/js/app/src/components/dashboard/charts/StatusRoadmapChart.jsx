@@ -30,7 +30,7 @@ function StatusRoadmapChart({ data, points }) {
             label: {
                 text: data[i].title,
                 rotation: 0,
-                x: -15,
+                x: -10,
                 y: -10,
                 style: {
                     color: '#bcbcbc',
@@ -92,9 +92,6 @@ function StatusRoadmapChart({ data, points }) {
                     style: chartSubtitleStyles,
                 },
                 navigation: chartTitleOptions,
-                credits: {
-                    enabled: false
-                },        
                 xAxis: {
                     categories: [''],
                     title: {
@@ -183,11 +180,11 @@ function StatusRoadmapChart({ data, points }) {
                         }
                     }
                 }],
-                responsive: {  
-                    rules: [{  
-                        condition: {  
-                            maxWidth: 500 
-                        },  
+                responsive: {
+                    rules: [{
+                        condition: {
+                            maxWidth: 500
+                        },
                         chartOptions: {
                             subtitle: {
                                 y: 50,
@@ -195,8 +192,8 @@ function StatusRoadmapChart({ data, points }) {
                                     fontSize: "14px"
                                 }
                             }
-                        }  
-                    }]  
+                        }
+                    }]
                 }
             }}
         >
