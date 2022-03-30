@@ -3,6 +3,7 @@
 .row-block-item {
     text-align: center;
     position: relative;
+    flex: 0 0 115px;
 
     @media screen and (max-width: 479px) {
         margin-bottom: 25px;
@@ -18,6 +19,7 @@
     align-items: center;
     justify-content: center;
     flex-direction: column;
+    flex-basis: auto;
     margin: 0 15px 30px;
     width: calc(100% / 4 - #{$space-30});
 
@@ -61,6 +63,10 @@
     font-size: 12px;
     text-transform: uppercase;
     color: $mainTextColor;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
 }
 
 .row-block-item-popup-wrapper {
