@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.0.1 (2022-04-08)
+- [RGOeX-1096] Add automatic pypi build and publish
+- [RGOeX-1025] Fix achievement titles limit
+- [RGOeX-1004] Update documentation
+- [RGOeX-1033] Fix plot lines position for the status roadmap
+- [RGOeX-472]  Add bundle.js to the repo
+
 ## 1.0 (2021-08-27)
 - Support for Lilac release
 
