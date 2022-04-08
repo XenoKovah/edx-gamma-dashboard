@@ -43,3 +43,13 @@ test:	# run tests
 
 test-v:	# run tests in verbose mode (for debuging)
 	python -m "pytest" -sv
+
+
+#
+# PyPi build and publish
+#
+.build-pypi:
+	python setup.py sdist bdist_wheel
+
+pypi: build .build-pypi
+	TWINE_PASSWORD=${CI_JOB_TOKEN} TWINE_USERNAME=gitlab-ci-token python -m twine upload --repository-url https://gitlab.raccoongang.com/api/v4/projects/${CI_PROJECT_ID}/packages/pypi dist/*

@@ -1,6 +1,7 @@
-Django==2.2.16
-requests==2.23.0
-ipython>=5.9.0
-pytest>=4.6.9
-pytest-django>=3.9.0
-pytest-mock>=2.0.0
+Django ~= 3.2
+requests ~= 2.27
+ipython >= 5.9.0
+pytest >= 4.6.9
+pytest-django >= 3.9.0
+pytest-mock >= 2.0.0
+twine

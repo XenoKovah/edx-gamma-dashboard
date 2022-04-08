@@ -1,6 +1,8 @@
 stages:
     - build
     - test
+    - versions
+    - pypi
     - cleanup
 
 variables:
@@ -14,6 +16,7 @@ Build:
     only:
       - master
       - merge_requests
+      - tags
     script:
         - docker build -t $BUILD_BOX_NAME/app:$CI_COMMIT_SHORT_SHA .
 
@@ -24,6 +27,7 @@ Units:
     only:
       - master
       - merge_requests
+      - tags
     script:
       - docker run $BUILD_BOX_NAME/app:$CI_COMMIT_SHORT_SHA sh -c 'make test'
 
@@ -34,8 +38,26 @@ ReactUnits:
     only:
       - master
       - merge_requests
+      - tags
     script:
       - docker run $BUILD_BOX_NAME/app:$CI_COMMIT_SHORT_SHA sh -c 'make jest'
+
+CheckVersion:
+    stage: versions
+    image: python:3.8
+    script:
+      - python check_version.py
+    rules:
+      - if: $CI_COMMIT_TAG
+
+PyPiBuildAndPublish:
+    stage: pypi
+    tags:
+      - dind
+    script:
+      - docker run -e CI_JOB_TOKEN -e CI_PROJECT_ID $BUILD_BOX_NAME/app:$CI_COMMIT_SHORT_SHA sh -c 'make pypi'
+    rules:
+      - if: $CI_COMMIT_TAG
 
 CleanUp:
     stage: cleanup
@@ -44,5 +66,7 @@ CleanUp:
     only:
       - master
       - merge_requests
+      - tags
     script:
       - docker rmi -f $BUILD_BOX_NAME/app:$CI_COMMIT_SHORT_SHA || true
+    when: always
