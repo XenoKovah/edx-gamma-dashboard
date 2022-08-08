@@ -1,10 +1,54 @@
-<%inherit file="base.html" />
+<%page expression_filter="h"/>
+<%inherit file="../main.html" />
+<%namespace name='static' file='../static_content.html'/>
 
 <%!
 from django.conf import settings
 from django.contrib.staticfiles.storage import staticfiles_storage
-%>
-    <div id="app"></div>
+from django.urls import reverse
+from django.utils.translation import ugettext as _
 
-    <script type="text/javascript">window.GAMIFICATION_BASE_URL="${settings.FEATURES.get('RG_GAMIFICATION', {}).get('RG_GAMIFICATION_ENDPOINT')}";</script>
-    <script src="${staticfiles_storage.url('dashboard/js/app/dist/bundle.js')}"></script>
+from openedx.core.djangolib.js_utils import js_escaped_string
+%>
+
+<%block name="pagetitle">${_("Gamification Leaderboard")}</%block>
+<%block name="bodyclass">view-dashboard is-authenticated</%block>
+
+<%static:webpack entry="UnenrollmentFactory">
+    UnenrollmentFactory({
+        urls: {
+        dashboard: "${reverse('dashboard') | n, js_escaped_string}",
+        signInUser: "${reverse('signin_user') | n, js_escaped_string}",
+        changeEmailSettings: "${reverse('change_email_settings') | n, js_escaped_string}",
+        browseCourses: "${marketing_link('COURSES') | n, js_escaped_string}"
+        },
+        isEdx: false
+    });
+    console.log('marketing_link("COURSES"): ', "${marketing_link('COURSES') | n, js_escaped_string}");
+</%static:webpack>
+
+<%static:webpack entry="EntitlementUnenrollmentFactory">
+    ## Wait until the document is fully loaded before initializing the EntitlementUnenrollmentView
+    ## to ensure events are setup correctly.
+    $(document).ready(function() {
+        EntitlementUnenrollmentFactory({
+        dashboardPath: "${reverse('dashboard') | n, js_escaped_string}",
+        signInPath: "${reverse('signin_user') | n, js_escaped_string}",
+        browseCourses: "${marketing_link('COURSES') | n, js_escaped_string}",
+        isEdx: false
+        });
+    });
+</%static:webpack>
+
+% if settings.FEATURES.get('ENABLE_DASHBOARD_SEARCH'):
+    <%static:require_module module_name="course_search/js/dashboard_search_factory" class_name="DashboardSearchFactory">
+        DashboardSearchFactory();
+    </%static:require_module>
+% endif
+
+<div id="app"></div>
+
+<script type="text/javascript">
+    window.GAMIFICATION_BASE_URL="${settings.FEATURES.get('RG_GAMIFICATION', {}).get('RG_GAMIFICATION_ENDPOINT')}";
+</script>
+<script src="${staticfiles_storage.url('dashboard/js/app/dist/bundle.js')}"></script>

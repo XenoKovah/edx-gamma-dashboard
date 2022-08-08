@@ -1,5 +1,8 @@
 # Changelog
 
+## 1.0.2 (2022-05-30)
+- [RGG-566] Addopt dashboard/leaderboard template for Nutmeg
+
 ## 1.0.1 (2022-04-08)
 - [RGOeX-1096] Add automatic pypi build and publish
 - [RGOeX-1025] Fix achievement titles limit
