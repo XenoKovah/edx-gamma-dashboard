@@ -61,16 +61,17 @@ const RowBlockItemPopup = React.forwardRef(({title, data, ...props}, ref) => {
             </React.Fragment>
         ));
     }
-
-    bodyItems.push((
-        <ul key={'status-points'} className={'item-list'}>
-            <li className={'item-list-item'}>
-                <span className={'list-item-counter-text'}>
-                    {`${points}/${statusPoints}`}
-                </span>
-            </li>
-        </ul>
-    ));
+    if (statusPoints) {
+        bodyItems.push((
+            <ul key={'status-points'} className={'item-list'}>
+                <li className={'item-list-item'}>
+                    <span className={'list-item-counter-text'}>
+                        {`${points}/${statusPoints}`}
+                    </span>
+                </li>
+            </ul>
+        ));
+    }
 
     return (
         <div
