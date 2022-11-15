@@ -10,7 +10,7 @@ const RowBlockItemPopup = React.forwardRef(({title, data, ...props}, ref) => {
     const badgeDependencies = data.badgeDependencies || [];
     const progress = data.progress || {};
     const points = data.points || 0;
-    const statusPoints = data.statusPoints || 0;
+    const statusPoints = data.statusPoints;
 
     const bodyItems = [];
     for (const progressItem in progress) {
