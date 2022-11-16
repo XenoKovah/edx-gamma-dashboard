@@ -9,8 +9,8 @@ const RowBlockItemPopup = React.forwardRef(({title, data, ...props}, ref) => {
     const { statusDependency } = data;
     const badgeDependencies = data.badgeDependencies || [];
     const progress = data.progress || {};
-    const points = data.points || -1;
-    const statusPoints = data.statusPoints || -1;
+    const points = data.points || 0;
+    const statusPoints = data.statusPoints;
 
     const bodyItems = [];
     for (const progressItem in progress) {
@@ -61,8 +61,7 @@ const RowBlockItemPopup = React.forwardRef(({title, data, ...props}, ref) => {
             </React.Fragment>
         ));
     }
-
-    if (points >= 0 && statusPoints > 0) {
+    if (statusPoints) {
         bodyItems.push((
             <ul key={'status-points'} className={'item-list'}>
                 <li className={'item-list-item'}>
