@@ -1,6 +1,8 @@
 # Changelog
 
 ## [Unreleased]
+
+## 1.0.3 (2022-11-16)
 ## Fixed
 - [RGG-580] Status points on LMS "Performance" are displayed even if the user has no points
 
