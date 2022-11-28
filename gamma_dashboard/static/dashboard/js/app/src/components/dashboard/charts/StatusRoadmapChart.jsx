@@ -176,7 +176,6 @@ function StatusRoadmapChart({ data, points }) {
                             fontWeight: 'bold',
                             textOutline: 'none',
                             fontFamily: 'Open Sans',
-                            textShadow: '-1px 0px 2.75px rgba(255, 255, 255, 0.6)',
                         }
                     }
                 }],
