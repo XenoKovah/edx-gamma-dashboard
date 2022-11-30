@@ -1,6 +1,8 @@
 # Changelog
 
 ## [Unreleased]
+## Fixed
+- [RGG-661] Visual problem for showing "Number" on the Progress Line
 
 ## 1.0.3 (2022-11-16)
 ## Fixed
