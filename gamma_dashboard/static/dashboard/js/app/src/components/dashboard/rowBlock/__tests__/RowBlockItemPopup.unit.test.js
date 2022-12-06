@@ -28,6 +28,25 @@ describe('<RowBlockItemPopup>', () => {
         expect(getByText(progressString)).toBeInTheDocument();
     });
 
+    it('renders with correct but zeroed `status` data', () => {
+        const title = 'Test title';
+        const data = {
+            points: 0,
+            statusPoints: 669
+        };
+        const progressString = `${data.points}/${data.statusPoints}`;
+
+        const { getByText } = render(
+            <RowBlockItemPopup
+                title={title}
+                data={data}
+            />
+        );
+
+        expect(getByText(title)).toBeInTheDocument();
+        expect(getByText(progressString)).toBeInTheDocument();
+    });
+
     it('renders with correct `badge` data', () => {
         const title = 'Test title';
         const badgeDependencies = [

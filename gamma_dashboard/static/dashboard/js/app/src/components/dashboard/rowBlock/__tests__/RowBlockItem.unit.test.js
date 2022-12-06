@@ -118,6 +118,35 @@ describe('<RowBlockItem>', () => {
         expect(popup).toBeInTheDocument();
     });
 
+    it('renders with correct but zeroed `incomplete status` data', () => {
+        const data = {
+            active: true,
+            color: "",
+            points: 0,
+            slug: "test-status",
+            statusPoints: 669,
+            status_uid: "test-status",
+            title: "Test status",
+            url: "https://gamma-url.com/status-test-status.png",
+        };
+        const progressString = `${data.points}/${data.statusPoints}`;
+        const { getByTestId } = render(
+            <RowBlockItem
+                data={data}
+            />
+        );
+
+        const figure = getByTestId('row-block-item-figure');
+        expect(figure).toHaveClass('row-block-item-figure-disabled')
+
+        const title = getByTestId('row-block-item-title');
+        expect(title).toHaveTextContent(data.title);
+
+        const popup = getByTestId('row-block-item-popup');
+        expect(popup).toBeInTheDocument();
+        expect(popup).toHaveTextContent(progressString);
+    });
+
     it('renders with `center` prop defined', () => {
         const data = {
             active: true,
