@@ -4,12 +4,14 @@ import ReactModal from 'react-modal';
 import '@testing-library/jest-dom';
 import {
     cleanup,
+    fireEvent,
     getDefaultNormalizer,
     render,
     within
 } from '@testing-library/react';
 
 import ModalWindow from '../ModalWindow';
+import CloseWindowButton from '../CloseWindowButton';
 
 import {
     parsedBadgeItems,
@@ -27,7 +29,7 @@ afterEach(cleanup);
 
 
 describe('<ModalWindow>', () => {
-    it('renders with correct content', () => {
+    it('renders component', () => {
         const { getByTestId } = render(
             <ModalWindow
                 isOpen={true}
@@ -38,7 +40,7 @@ describe('<ModalWindow>', () => {
         expect(modalWindowWrapper).toBeInTheDocument();
     });
 
-    it('renders with correct content', () => {
+    it('renders with correct content text', () => {
         const content = 'Test content';
 
         const { getByTestId } = render(
@@ -52,7 +54,7 @@ describe('<ModalWindow>', () => {
         expect(modalWindowWrapper).toHaveTextContent(content);
     });
 
-    it('renders with correct content', () => {
+    it('renders with correct children', () => {
         const { getByTestId } = render(
             <ModalWindow
                 isOpen={true}
@@ -80,5 +82,21 @@ describe('<ModalWindow>', () => {
 
         const dashboardModalWindow = queryByTestId('dashboard-modal-window-title-bar');
         expect(dashboardModalWindow).not.toBeInTheDocument();
+    });
+
+    it('click callback is being called', () => {
+        const onClickHandler = jest.fn();
+
+        const { getByTestId } = render(
+            <CloseWindowButton
+                onClick={onClickHandler}
+            />
+        );
+
+        const button = getByTestId('close-window-button');
+        expect(button).toBeInTheDocument();
+
+        fireEvent.click(button);
+        expect(onClickHandler).toBeCalledTimes(1);
     });
 });

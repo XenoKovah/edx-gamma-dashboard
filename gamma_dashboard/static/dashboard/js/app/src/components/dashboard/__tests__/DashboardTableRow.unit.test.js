@@ -1,7 +1,7 @@
 import React from 'react';
 
 import '@testing-library/jest-dom';
-import { render, cleanup } from '@testing-library/react';
+import { render, within, cleanup } from '@testing-library/react';
 
 import DashboardTableRow from '../DashboardTableRow';
 
@@ -23,6 +23,20 @@ describe('<DashboardTableRow>', () => {
 
         expect(tableRow).toBeInTheDocument();
         expect(testItems).toBeInTheDocument();
+    });
+
+    it('renders with children', () => {
+        const { getByTestId } = render(
+            <DashboardTableRow>
+                <div data-testid='test-child'>
+                </div>
+            </DashboardTableRow>
+        );
+
+        const dashboardTableRow = getByTestId('dashboard-table-row');
+        const child = within(dashboardTableRow).getByTestId('test-child');
+
+        expect(child).toBeInTheDocument();
     });
 
     it('renders without children', () => {

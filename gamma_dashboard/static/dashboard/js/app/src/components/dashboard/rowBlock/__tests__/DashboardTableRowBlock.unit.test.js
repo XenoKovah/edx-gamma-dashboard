@@ -14,7 +14,7 @@ afterEach(cleanup);
 
 
 describe('<DashboardTableRowBlock>', () => {
-    it('renders', () => {
+    it('renders component', () => {
         const { getByTestId } = render(<DashboardTableRowBlock />);
 
         const tableRowBlock = getByTestId('dashboard-table-row-block');
@@ -23,7 +23,7 @@ describe('<DashboardTableRowBlock>', () => {
 
     });
 
-    it('renders with given children', () => {
+    it('renders with correct children', () => {
         const { getByTestId } = render(
             <DashboardTableRowBlock>
                 <div data-testid={'test-child'}></div>
@@ -51,6 +51,15 @@ describe('<DashboardTableRowBlock>', () => {
         ${CORNER_TOP_RIGHT}
         ${CORNER_BOTTOM}
     `('renders with corner value `$corner`', ({corner}) => {
+        const { getByTestId } = render(<DashboardTableRowBlock corner={corner} />);
+
+        const tableRowBlock = getByTestId('dashboard-table-row-block');
+        expect(tableRowBlock).toBeInTheDocument();
+        expect(tableRowBlock).toHaveClass(corner);
+    });
+
+    it('renders empty cornerClass if a corner is "none"', () => {
+        const corner = 'none';
         const { getByTestId } = render(<DashboardTableRowBlock corner={corner} />);
 
         const tableRowBlock = getByTestId('dashboard-table-row-block');

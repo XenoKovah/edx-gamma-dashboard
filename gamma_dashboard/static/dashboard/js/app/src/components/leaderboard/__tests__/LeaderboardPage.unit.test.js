@@ -7,6 +7,8 @@ import { render, cleanup } from '@testing-library/react';
 
 import LeaderboardPage from '../LeaderboardPage';
 
+import gammaApi from '../../../api/ApiRequests';
+
 
 const correctProfilesData = [
     {
@@ -47,6 +49,16 @@ describe('<LeaderboardPage>', () => {
         expect(leaderboardTable).toBeInTheDocument();
     });
 
+    it('renders with correct title', () => {
+        const title = 'Leaderboard';
+
+        const { getByTestId } = render(<LeaderboardPage />);
+        const windowTitle = getByTestId('leaderboard-page-title');
+
+        expect(windowTitle).toBeInTheDocument();
+        expect(windowTitle).toHaveTextContent(title);
+    });
+
     it.each`
         data
         ${{gameprofiles: null}}
@@ -63,4 +75,17 @@ describe('<LeaderboardPage>', () => {
         expect(pageTitle).toBeInTheDocument();
         expect(leaderboardTable).toBeInTheDocument();
     });
+
+    // it('calls gammaApi.leaderboard.getInfo on mount', () => {
+    //     const myMock = gammaApi.leaderboard.getInfo;
+
+    //     const spy = jest.spyOn(LeaderboardPage, 'myMock');
+        // const isPlaying = video.play();
+
+
+        // render(<LeaderboardPage />);
+        // expect(spy).toHaveBeenCalled();
+        // gammaApi.leaderboard.getInfo(correctProfilesData);
+        // expect(myMock).toHaveBeenCalled();
+    // });
 });

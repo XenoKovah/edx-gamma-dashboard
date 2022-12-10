@@ -170,6 +170,21 @@ describe('<RowBlockItem>', () => {
         expect(rowBlockItem).toHaveClass('row-block-item-center');
     });
 
+
+    it('renders correct children', () => {
+        const { getByTestId } = render(
+            <RowBlockItem>
+                <div data-testid='test-child'>
+                </div>
+            </RowBlockItem>
+        );
+
+        const rowBlockItem = getByTestId('row-block-item');
+        const child = within(rowBlockItem).getByTestId('test-child');
+
+        expect(child).toBeInTheDocument();
+    });
+
     it('renders without data', () => {
         const { getByTestId, queryByTestId } = render(<RowBlockItem />);
 

@@ -80,4 +80,20 @@ describe('<DashboardModalWindow>', () => {
         const dashboardModalWindow = queryByTestId('modal-window');
         expect(dashboardModalWindow).not.toBeInTheDocument();
     });
+
+    it('renders with children', () => {
+        const { getByTestId } = render(
+            <DashboardModalWindow
+                isOpen={true}
+            >   
+                <div data-testid='test-child'>
+                </div>
+            </DashboardModalWindow>     
+
+        );
+        const dashboardModalWindow = getByTestId('modal-window-wrapper');
+        const child = within(dashboardModalWindow).getByTestId('test-child');
+
+        expect(child).toBeInTheDocument();
+    });
 });

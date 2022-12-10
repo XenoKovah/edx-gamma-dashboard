@@ -50,4 +50,10 @@ describe('<Avatar>', () => {
         expect(avatar).toHaveStyle(`background-color: ${testBackgroundColor}`);
         expect(avatarLetter).toHaveStyle(`color: ${testFontColor}`);
     });
+
+    it('always renders username with the first character capitalized', () => {
+        const { getByText } = render(<Avatar username={'name'}/>);
+
+        expect(getByText('N')).toBeInTheDocument();
+    });
 });

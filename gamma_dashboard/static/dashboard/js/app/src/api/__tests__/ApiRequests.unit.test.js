@@ -61,6 +61,19 @@ describe('ApiRequests', () => {
             expect(logSpy).toHaveBeenCalled();
             expect(callback).toHaveBeenCalledWith({});
         });
+
+        it('getInfo returns empty data when response.data is falsy', async () => {
+            const mock = new MockAdapter(axios);
+            const callback = jest.fn();
+
+            const logSpy = jest.spyOn(global.console, 'log');
+            mock.onGet().reply(false);
+            gammaApi.leaderboard.getInfo(callback);
+            await flushPromises();
+
+            expect(logSpy).toHaveBeenCalled();
+            expect(callback).toHaveBeenCalledWith({});
+        });    
     });
 
     describe('dashboard', () => {
@@ -84,6 +97,20 @@ describe('ApiRequests', () => {
 
             const logSpy = jest.spyOn(global.console, 'log');
             mock.onGet().reply(new Error('No data was found.'));
+
+            gammaApi.dashboard.getGameProfile(callback);
+            await flushPromises();
+
+            expect(logSpy).toHaveBeenCalled();
+            expect(callback).toHaveBeenCalledWith({});
+        });
+
+        it('getGameProfile returns empty data when response.data is falsy', async () => {
+            const mock = new MockAdapter(axios);
+            const callback = jest.fn();
+
+            const logSpy = jest.spyOn(global.console, 'log');
+            mock.onGet().reply(false);
 
             gammaApi.dashboard.getGameProfile(callback);
             await flushPromises();

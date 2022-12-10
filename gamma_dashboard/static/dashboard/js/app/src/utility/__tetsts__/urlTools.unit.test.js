@@ -30,4 +30,15 @@ describe('function buildURL', () => {
         expect(buildURL(url)).toBe(`http://base-url/some-relative-url`);
     });
 
+    it('test logs a console message if window.GAMIFICATION_BASE_URL is not set', () => {
+        const url = undefined;
+        window.GAMIFICATION_BASE_URL = url;
+        const messageLog = 'window.GAMIFICATION_BASE_URL is not set';
+        const consoleSpy = jest.spyOn(console, 'log');
+        console.log(buildURL(url));
+        
+        expect(consoleSpy).toHaveBeenCalledWith(messageLog);
+        expect(consoleSpy).toHaveBeenCalledWith(url);
+    });
+
 });

@@ -9,10 +9,18 @@ import Loader from '../Loader';
 afterEach(cleanup);
 
 describe('<Loader>', () => {
-    test('renders', () => {
+    test('renders component', () => {
         const { getByTestId } = render(<Loader />)
         const loader = getByTestId('loader');
 
         expect(loader).toBeInTheDocument();
+    });
+
+    test('has the expected text', () => {
+        const content = 'Loading...';
+        const { getByTestId } = render(<Loader />)
+        const loader = getByTestId('loader');
+        
+        expect(loader).toHaveTextContent(content);
     });
 });
