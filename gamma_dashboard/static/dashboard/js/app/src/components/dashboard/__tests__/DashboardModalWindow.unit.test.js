@@ -4,7 +4,6 @@ import ReactModal from 'react-modal';
 import '@testing-library/jest-dom';
 import {
     cleanup,
-    getDefaultNormalizer,
     render,
     within
 } from '@testing-library/react';
@@ -15,6 +14,7 @@ import {
     parsedBadgeItems,
     parsedStatusItems
 } from '../../../fixtures/dashboard';
+import pretty from 'pretty';
 
 beforeAll(() => {
     ReactModal.setAppElement('body');
@@ -32,7 +32,7 @@ describe('<DashboardModalWindow>', () => {
     it('renders with correct title', () => {
         const title = 'Test title';
 
-        const { getByTestId } = render(
+        const { getByTestId, container } = render(
             <DashboardModalWindow
                 title={title}
                 isOpen={true}
@@ -45,6 +45,7 @@ describe('<DashboardModalWindow>', () => {
         const windowTitle = within(dashboardModalWindow).getByTestId('title');
         expect(windowTitle).toBeInTheDocument();
         expect(windowTitle).toHaveTextContent(title);
+        expect(pretty(container.innerHTML)).toMatchSnapshot();
     });
 
     it.each`
@@ -52,7 +53,7 @@ describe('<DashboardModalWindow>', () => {
         ${'badge'}  | ${parsedBadgeItems}  | ${item => item[1]}
         ${'status'} | ${parsedStatusItems} | ${item => item}
     `('renders with correct `$type items`', ({ items, getItemDataFunction }) => {
-        const { getByTestId } = render(
+        const { getByTestId, container } = render(
             <DashboardModalWindow
                 items={items}
                 isOpen={true}
@@ -72,6 +73,7 @@ describe('<DashboardModalWindow>', () => {
 
         const listItems = within(itemsList).getAllByTestId('row-block-item');
         expect(listItems.length).toBe(items.length);
+        expect(pretty(container.innerHTML)).toMatchSnapshot();
     });
 
     it('renders without data', () => {
@@ -82,7 +84,7 @@ describe('<DashboardModalWindow>', () => {
     });
 
     it('renders with children', () => {
-        const { getByTestId } = render(
+        const { getByTestId, container } = render(
             <DashboardModalWindow
                 isOpen={true}
             >   
@@ -95,5 +97,6 @@ describe('<DashboardModalWindow>', () => {
         const child = within(dashboardModalWindow).getByTestId('test-child');
 
         expect(child).toBeInTheDocument();
+        expect(pretty(container.innerHTML)).toMatchSnapshot();
     });
 });

@@ -1,6 +1,8 @@
 # Changelog
 
 ## [Unreleased]
+## Tests
+- [RGG-704] Add missing tests for gamma dashboard
 ## Fixed
 - [RGG-661] Visual problem for showing "Number" on the Progress Line
 

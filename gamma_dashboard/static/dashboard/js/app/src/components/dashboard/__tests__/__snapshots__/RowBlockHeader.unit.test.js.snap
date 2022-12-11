@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<RowBlockHeader> renders 1`] = `
+"<div class=\\"table-row-block-header\\" data-testid=\\"table-row-block-header\\">
+  <div class=\\"table-row-block-title\\" data-testid=\\"row-block-title\\">Test title</div>
+  <div class=\\"table-row-block-status\\" data-testid=\\"row-block-status\\"><span>Test status</span></div>
+  <div class=\\"table-row-block-description\\" data-testid=\\"row-block-description\\">Test description</div>
+</div>"
+`;

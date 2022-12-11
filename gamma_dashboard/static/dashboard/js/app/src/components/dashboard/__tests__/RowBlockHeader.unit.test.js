@@ -2,6 +2,7 @@ import React from 'react';
 
 import '@testing-library/jest-dom';
 import { render, cleanup } from '@testing-library/react';
+import pretty from 'pretty';
 
 import RowBlockHeader from '../RowBlockHeader';
 
@@ -15,7 +16,7 @@ describe('<RowBlockHeader>', () => {
         const status = 'Test status';
         const description = 'Test description';
 
-        const { getByText } = render(
+        const { getByText, container } = render(
             <RowBlockHeader
                 title={title}
                 status={status}
@@ -26,6 +27,7 @@ describe('<RowBlockHeader>', () => {
         expect(getByText(title)).toBeInTheDocument();
         expect(getByText(status)).toBeInTheDocument();
         expect(getByText(description)).toBeInTheDocument();
+        expect(pretty(container.innerHTML)).toMatchSnapshot();
     });
 
     it('renders without data', () => {

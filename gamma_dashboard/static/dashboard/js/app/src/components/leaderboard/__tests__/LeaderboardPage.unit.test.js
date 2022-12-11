@@ -4,6 +4,7 @@ import axios from 'axios';
 
 import '@testing-library/jest-dom';
 import { render, cleanup } from '@testing-library/react';
+import pretty from 'pretty';
 
 import LeaderboardPage from '../LeaderboardPage';
 
@@ -38,7 +39,7 @@ describe('<LeaderboardPage>', () => {
     it('renders', () => {
         axios.get.mockResolvedValue({data: {gameprofiles: correctProfilesData}});
 
-        const { getByTestId } = render(<LeaderboardPage />);
+        const { getByTestId, container } = render(<LeaderboardPage />);
 
         const pageTitle = getByTestId('leaderboard-page-title');
         const leaderboardTable = getByTestId('leaderboard-table');
@@ -47,6 +48,8 @@ describe('<LeaderboardPage>', () => {
         expect(leaderboardTable).toBeInTheDocument();
         expect(axios.get).toBeCalled();
         expect(axios.get.mock.calls[0][0]).toBe('/gamma_dashboard/api/v0/leaderboard/');
+        expect(pretty(container.innerHTML)).toMatchSnapshot();
+        
     });
 
     it('renders with correct title', () => {

@@ -11,3 +11,4 @@ package-lock.json
 
 # Python setup
 build/
+coverage/

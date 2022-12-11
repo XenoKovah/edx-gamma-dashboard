@@ -27,12 +27,14 @@ jest:	# run react tests
 jest-v:	# run react tests in verbose mode
 	npm run test-v --prefix ${REACT_APP_PATH}
 
-jest-watch: # run react tets and watch for rerun on changes
+jest-watch: # run react tests and watch for rerun on changes
 	npm run test-watch --prefix ${REACT_APP_PATH}
 
 jest-watch-v: # run react tets and watch for rerun on changes (verbose mode)
 	npm run test-watch-v --prefix ${REACT_APP_PATH}
 
+jest-cov: # run react tests with coverage report
+	npm run coverage --prefix ${REACT_APP_PATH}
 
 #
 # Django backend

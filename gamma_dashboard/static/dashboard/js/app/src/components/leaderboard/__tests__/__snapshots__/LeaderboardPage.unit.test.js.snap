@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<LeaderboardPage> renders 1`] = `
+"<div class=\\"leaderboard-page-wrapper\\">
+  <div class=\\"leaderboard-page-title\\" data-testid=\\"leaderboard-page-title\\">Leaderboard</div>
+  <div class=\\"leaderboard-table-container\\" data-testid=\\"leaderboard-table-container\\">
+    <div class=\\"leaderboard-table\\" data-testid=\\"leaderboard-table\\">
+      <div class=\\"leaderboard-header\\">
+        <div class=\\"leaderboard-header-cell table-cell students-cell\\" data-testid=\\"students-header\\">Students</div>
+        <div class=\\"leaderboard-header-cell table-cell  progress-cell\\" data-testid=\\"progress-header\\">Progress</div>
+        <div class=\\"leaderboard-header-cell table-cell  badges-cell\\" data-testid=\\"badges-header\\">Badges</div>
+      </div>
+      <div class=\\"leaderboard-table-body\\"></div>
+    </div>
+  </div>
+</div>"
+`;
