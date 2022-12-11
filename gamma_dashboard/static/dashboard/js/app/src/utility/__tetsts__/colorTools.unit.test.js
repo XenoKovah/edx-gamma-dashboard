@@ -2,17 +2,15 @@ import '@testing-library/jest-dom';
 import { getRandomColors } from '../colorTools';
 
 describe('function getRandomColors', () => {
-
     it('test returns different random colors on each call', () => {
-        const color_1 = getRandomColors();
-        const color_2 = getRandomColors();
-
-        expect(color_1.backgroundColor).not.toEqual(color_2.backgroundColor);
+        // Ensure we don't break getRandomColors function
+        // to return the same color on each call
+        // Also we make it more robust to call it 100 times
+        let arr = [];
+        for (let i = 0; i < 100; i++) {
+            arr.push(getRandomColors());
+        }
+        let uniqueColors = new Set(arr);
+        expect(uniqueColors.size).not.toBe(1);
     });
-
-    // it('test fontColor depends on backgroundColor contrast level', () => {
-    //     const getRandomColorsTest = getRandomColors;
-
-    //     expect(getRandomColors.fontColor).toEqual('rgb(1, 1, 1)');
-    // });
 });

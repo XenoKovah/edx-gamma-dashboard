@@ -35,10 +35,9 @@ describe('function buildURL', () => {
         window.GAMIFICATION_BASE_URL = url;
         const messageLog = 'window.GAMIFICATION_BASE_URL is not set';
         const consoleSpy = jest.spyOn(console, 'log');
-        console.log(buildURL(url));
+        buildURL(url);
         
         expect(consoleSpy).toHaveBeenCalledWith(messageLog);
-        expect(consoleSpy).toHaveBeenCalledWith(url);
     });
 
 });

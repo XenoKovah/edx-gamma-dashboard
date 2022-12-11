@@ -22,6 +22,8 @@ describe('<DashboardPage>', () => {
 
         const dashboardTable = getByTestId('dashboard-table');
         expect(dashboardTable).toBeInTheDocument();
+        expect(axios.get).toBeCalled();
+        expect(axios.get.mock.calls[0][0]).toBe('/gamma_dashboard/api/v0/game-profile/');
     });
 
     it.each`

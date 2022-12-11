@@ -7,8 +7,6 @@ import { render, cleanup } from '@testing-library/react';
 
 import LeaderboardPage from '../LeaderboardPage';
 
-import gammaApi from '../../../api/ApiRequests';
-
 
 const correctProfilesData = [
     {
@@ -47,6 +45,8 @@ describe('<LeaderboardPage>', () => {
 
         expect(pageTitle).toBeInTheDocument();
         expect(leaderboardTable).toBeInTheDocument();
+        expect(axios.get).toBeCalled();
+        expect(axios.get.mock.calls[0][0]).toBe('/gamma_dashboard/api/v0/leaderboard/');
     });
 
     it('renders with correct title', () => {
@@ -75,17 +75,4 @@ describe('<LeaderboardPage>', () => {
         expect(pageTitle).toBeInTheDocument();
         expect(leaderboardTable).toBeInTheDocument();
     });
-
-    // it('calls gammaApi.leaderboard.getInfo on mount', () => {
-    //     const myMock = gammaApi.leaderboard.getInfo;
-
-    //     const spy = jest.spyOn(LeaderboardPage, 'myMock');
-        // const isPlaying = video.play();
-
-
-        // render(<LeaderboardPage />);
-        // expect(spy).toHaveBeenCalled();
-        // gammaApi.leaderboard.getInfo(correctProfilesData);
-        // expect(myMock).toHaveBeenCalled();
-    // });
 });
