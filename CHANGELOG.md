@@ -1,13 +1,14 @@
 # Changelog
 
 ## [Unreleased]
+
+## 1.0.3 (2022-12-16)
 ## Tests
 - [RGG-704] Add missing tests for gamma dashboard
+- [RGG-704] add snapshots testing to some components
+- [RGG-669] Add tests for RowBlockItemPopup
 ## Fixed
 - [RGG-661] Visual problem for showing "Number" on the Progress Line
-
-## 1.0.3 (2022-11-16)
-## Fixed
 - [RGG-580] Status points on LMS "Performance" are displayed even if the user has no points
 
 ## 1.0.2 (2022-05-30)
