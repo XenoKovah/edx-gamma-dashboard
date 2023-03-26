@@ -112,4 +112,112 @@ describe('<RowBlockItemPopup>', () => {
         expect(head).toBeInTheDocument();
         expect(body).toBeInTheDocument();
     });
+
+    it('displays progress count value if it equals the goal value', () => {
+        const title = 'Test title';
+        const badgeDependencies = [
+            'Test badge',
+        ];
+
+        const data = {
+            badgeDependencies: badgeDependencies,
+            progress: {
+                problem_graded:{
+                    count: 4,
+                    goal: 4,
+                    title: 'problem graded'
+                }
+            },
+        };
+
+        const { getByText } = render(
+            <RowBlockItemPopup
+                title={title}
+                data={data}
+            />
+        );
+
+        expect(getByText('4/4')).toBeInTheDocument();
+    });
+
+    it('displays the goal value for the progress if progress is greater than the goal', () => {
+        const title = 'Test title';
+        const badgeDependencies = [
+            'Test badge',
+        ];
+
+        const data = {
+            badgeDependencies: badgeDependencies,
+            progress: {
+                problem_graded:{
+                    count: 5,
+                    goal: 4,
+                    title: 'problem graded'
+                }
+            },
+        };
+
+        const { getByText } = render(
+            <RowBlockItemPopup
+                title={title}
+                data={data}
+            />
+        );
+
+        expect(getByText('4/4')).toBeInTheDocument();
+    });
+
+    it('displays progress count value if it equals 0', () => {
+        const title = 'Test title';
+        const badgeDependencies = [
+            'Test badge',
+        ];
+
+        const data = {
+            badgeDependencies: badgeDependencies,
+            progress: {
+                problem_graded:{
+                    count: 0,
+                    goal: 4,
+                    title: 'problem graded'
+                }
+            },
+        };
+
+        const { getByText } = render(
+            <RowBlockItemPopup
+                title={title}
+                data={data}
+            />
+        );
+
+        expect(getByText('0/4')).toBeInTheDocument();
+    });
+
+    it('displays progress count value if it does not exceed the goal value', () => {
+        const title = 'Test title';
+        const badgeDependencies = [
+            'Test badge',
+        ];
+
+        const data = {
+            badgeDependencies: badgeDependencies,
+            progress: {
+                problem_graded:{
+                    count: 1,
+                    goal: 4,
+                    title: 'problem graded'
+                }
+            },
+        };
+
+        const { getByText } = render(
+            <RowBlockItemPopup
+                title={title}
+                data={data}
+            />
+        );
+
+        expect(getByText('1/4')).toBeInTheDocument();
+    });
 });

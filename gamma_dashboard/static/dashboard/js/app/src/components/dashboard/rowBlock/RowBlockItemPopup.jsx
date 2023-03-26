@@ -22,7 +22,7 @@ const RowBlockItemPopup = React.forwardRef(({title, data, ...props}, ref) => {
             <ul key={`progress-${progressItem}`} className={'item-list'}>
                 <li className={'item-list-item'}>
                     <span className={'list-item-counter-text'}>
-                        {`${progressValues.count}/${progressValues.goal}`}
+                        {`${progressValues.count > progressValues.goal ? progressValues.goal : progressValues.count}/${progressValues.goal}`}
                     </span>
                     {progressTitle}
                 </li>
