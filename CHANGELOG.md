@@ -1,6 +1,8 @@
 # Changelog
 
 ## [Unreleased]
+## Added
+- [RGG-820] Add the organisation-based filtering for the game_profile API
 - [RGG-592] Completed events counter limit set
 
 ## 1.0.3 (2022-12-16)

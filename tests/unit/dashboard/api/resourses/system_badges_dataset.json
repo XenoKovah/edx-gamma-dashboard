@@ -1,0 +1,425 @@
+[
+    {
+        "description": "1. Check on the main site if the badges contain filter for orgs from the blacklist and non blacklist, and one badge without a filter.",
+        "system_badges": [
+            {
+                "title": "Test Badge 1",
+                "rules": {"status_badge": "test_status_badge", "filters": {"org": "RG"}}
+            },
+            {
+                "title": "Test Badge 2",
+                "rules": {"status_badge": "test_status_badge", "filters": {"org": "edX"}}
+            },
+            {
+                "title": "Test Badge 3",
+                "rules": {"status_badge": "test_status_badge"}
+            }
+        ],
+        "expected_badges": [
+            {
+                "title": "Test Badge 2",
+                "rules": {"status_badge": "test_status_badge", "filters": {"org": "edX"}}
+            },
+            {
+                "title": "Test Badge 3",
+                "rules": {"status_badge": "test_status_badge"}
+            }
+        ],
+        "is_main_site": true,
+        "whitelist": [],
+        "blacklist": ["RG"],
+        "course_key_org": null
+    },
+
+    {
+        "description": "2. Check on the main site if the badges contain filter for blacklisted orgs and non blacklisted orgs, a badge with a course filter from a blacklisted org, and one badge without a filter.",
+        "system_badges": [
+            {
+                "title": "Test Badge 1",
+                "rules": {"status_badge": "test_status_badge", "filters": {"org": "RG"}}
+            },
+            {
+                "title": "Test Badge 2",
+                "rules": {"status_badge": "test_status_badge", "filters": {"org": "edX"}}
+            },
+            {
+                "title": "Test Badge 3",
+                "rules": {"status_badge": "test_status_badge", "filters": {"course": "course-v1:RG+DemoRG+Demo_CourseRG"}}
+            },
+            {
+                "title": "Test Badge 4",
+                "rules": {"status_badge": "test_status_badge"}
+            }
+        ],
+        "expected_badges": [
+            {
+                "title": "Test Badge 2",
+                "rules": {"status_badge": "test_status_badge", "filters": {"org": "edX"}}
+            },
+            {
+                "title": "Test Badge 4",
+                "rules": {"status_badge": "test_status_badge"}
+            }
+        ],
+        "is_main_site": true,
+        "whitelist": [],
+        "blacklist": ["RG", "TEST"],
+        "course_key_org": "RG"
+    },
+
+    {
+        "description": "3. Check on the main site if the badges contain filter for blacklisted orgs and non blacklisted orgs, a badge with a course filter from a non blacklisted org, and one badge without a filter.",
+        "system_badges": [
+            {
+                "title": "Test Badge 1",
+                "rules": {"status_badge": "test_status_badge", "filters": {"org": "RG"}}
+            },
+            {
+                "title": "Test Badge 2",
+                "rules": {"status_badge": "test_status_badge", "filters": {"org": "edX"}}
+            },
+            {
+                "title": "Test Badge 3",
+                "rules": {"status_badge": "test_status_badge", "filters": {"course": "course-v1:edX+Demo+Demo_Course"}}
+            },
+            {
+                "title": "Test Badge 4",
+                "rules": {"status_badge": "test_status_badge"}
+            }
+        ],
+        "expected_badges": [
+            {
+                "title": "Test Badge 2",
+                "rules": {"status_badge": "test_status_badge", "filters": {"org": "edX"}}
+            },
+            {
+                "title": "Test Badge 3",
+                "rules": {"status_badge": "test_status_badge", "filters": {"course": "course-v1:edX+Demo+Demo_Course"}}
+            },
+            {
+                "title": "Test Badge 4",
+                "rules": {"status_badge": "test_status_badge"}
+            }
+        ],
+        "is_main_site": true,
+        "whitelist": [],
+        "blacklist": ["RG"],
+        "course_key_org": "edX"
+    },
+
+    {
+        "description": "4. Check on the main site if the badges contain filter for blacklisted orgs, and a one badge with a course filter from a non blacklisted org and course filter from a non blacklisted orgs.",
+        "system_badges": [    
+            {
+                "title": "Test Badge 1",
+                "rules": {"status_badge": "test_status_badge", "filters": {"org": "RG"}}
+            },
+            {
+                "title": "Test Badge 2",
+                "rules": {"status_badge": "test_status_badge", "filters": {"org": "edX", "course": "course-v1:edX+Demo+Demo_Course"}}
+            }
+        ],
+        "expected_badges": [
+            {
+                "title": "Test Badge 2",
+                "rules": {"status_badge": "test_status_badge", "filters": {"org": "edX", "course": "course-v1:edX+Demo+Demo_Course"}}
+            }
+        ],
+        "is_main_site": true,
+        "whitelist": [],
+        "blacklist": ["RG", "TEST"],
+        "course_key_org": "edX"
+    },
+
+    {
+        "description": "5. Check on the main site if one badge contains filter for blacklisted orgs and course filter from a non blacklisted orgs, and badges contain filter for non blacklisted orgs.",
+        "system_badges": [
+            {
+                "title": "Test Badge 1",
+                "rules": {"status_badge": "test_status_badge", "filters": {"org": "RG", "course": "course-v1:edX+Demo+Demo_Course"}}
+            },
+            {
+                "title": "Test Badge 2",
+                "rules": {"status_badge": "test_status_badge", "filters": {"org": "edX"}}
+            }
+        ],
+        "expected_badges": [
+            {
+                "title": "Test Badge 2",
+                "rules": {"status_badge": "test_status_badge", "filters": {"org": "edX"}}
+            }
+        ],
+        "is_main_site": true,
+        "whitelist": [],
+        "blacklist": ["RG"],
+        "course_key_org": "edX"
+    },
+
+    {
+        "description": "6. Check on the main site if one badge contains filter for non blacklisted orgs and course from a blacklisted orgs and badge contain filter for course from a blacklisted orgs.",
+        "system_badges": [
+            {
+                "title": "Test Badge 1",
+                "rules": {"status_badge": "test_status_badge", "filters": {"org": "edX", "course": "course-v1:RG+Demo+Demo_CourseRG"}}
+            },
+            {
+                "title": "Test Badge 2",
+                "rules": {"status_badge": "test_status_badge", "filters": {"org": "RG"}}
+            }
+        ],
+        "expected_badges": [],
+        "is_main_site": true,
+        "whitelist": [],
+        "blacklist": ["RG"],
+        "course_key_org": "RG"
+    },
+
+    {
+        "description": "7. Check on the main site if blacklist is empty.",
+        "system_badges": [
+            {
+                "title": "Test Badge 1",
+                "rules": {"status_badge": "test_status_badge", "filters": {"org": "RG"}}
+            },
+            {
+                "title": "Test Badge 2",
+                "rules": {"status_badge": "test_status_badge", "filters": {"org": "edX"}}
+            },
+            {
+                "title": "Test Badge 3",
+                "rules": {"status_badge": "test_status_badge", "filters": {"course": "course-v1:edX+Demo+Demo_Course"}}
+            },
+            {
+                "title": "Test Badge 4",
+                "rules": {"status_badge": "test_status_badge"}
+            }
+        ],
+        "expected_badges": [
+            {
+                "title": "Test Badge 1",
+                "rules": {"status_badge": "test_status_badge", "filters": {"org": "RG"}}
+            },
+            {
+                "title": "Test Badge 2",
+                "rules": {"status_badge": "test_status_badge", "filters": {"org": "edX"}}
+            },
+            {
+                "title": "Test Badge 3",
+                "rules": {"status_badge": "test_status_badge", "filters": {"course": "course-v1:edX+Demo+Demo_Course"}}
+            },
+            {
+                "title": "Test Badge 4",
+                "rules": {"status_badge": "test_status_badge"}
+            }
+        ],
+        "is_main_site": true,
+        "whitelist": [],
+        "blacklist": [],
+        "course_key_org": "edX"
+    },
+
+    {
+        "description": "8. Check on the microsite if the badges contain filter for orgs from the whitelist and non whitelist.",
+        "system_badges": [
+            {
+                "title": "Test Badge 1",
+                "rules": {"status_badge": "test_status_badge", "filters": {"org": "RG"}}
+            },
+            {
+                "title": "Test Badge 2",
+                "rules": {"status_badge": "test_status_badge", "filters": {"org": "edX"}}
+            }
+        ],
+        "expected_badges": [
+            {
+                "title": "Test Badge 1",
+                "rules": {"status_badge": "test_status_badge", "filters": {"org": "RG"}}
+            }
+        ],
+        "is_main_site": false,
+        "whitelist": ["RG"],
+        "blacklist": [],
+        "course_key_org": null
+    },
+
+    {
+        "description": "9. Check on the microsite if the badges contain filter for whitelisted orgs and non whitelisted orgs, a badge with a course filter from a whitelisted org, and one badge without a filter.",
+        "system_badges": [
+            {
+                "title": "Test Badge 1",
+                "rules": {"status_badge": "test_status_badge", "filters": {"org": "RG"}}
+            },
+            {
+                "title": "Test Badge 2",
+                "rules": {"status_badge": "test_status_badge", "filters": {"org": "edX"}}
+            },
+            {
+                "title": "Test Badge 3",
+                "rules": {"status_badge": "test_status_badge", "filters": {"course": "course-v1:RG+DemoRG+Demo_CourseRG"}}
+            },
+            {
+                "title": "Test Badge 4",
+                "rules": {"status_badge": "test_status_badge"}
+            }
+        ],
+        "expected_badges": [
+            {
+                "title": "Test Badge 1",
+                "rules": {"status_badge": "test_status_badge", "filters": {"org": "RG"}}
+            },
+            {
+                "title": "Test Badge 3",
+                "rules": {"status_badge": "test_status_badge", "filters": {"course": "course-v1:RG+DemoRG+Demo_CourseRG"}}
+            },
+            {
+                "title": "Test Badge 4",
+                "rules": {"status_badge": "test_status_badge"}
+            }
+        ],
+        "is_main_site": false,
+        "whitelist": ["RG"],
+        "blacklist": [],
+        "course_key_org": "RG"
+    },
+
+    {
+        "description": "10. Check on the microsite if the badges contain filter for whitelisted orgs and non whitelisted orgs, a badge with a course filter from non whitelisted org, and one badge without a filter.",
+        "system_badges": [
+            {
+                "title": "Test Badge 1",
+                "rules": {"status_badge": "test_status_badge", "filters": {"org": "RG"}}
+            },
+            {
+                "title": "Test Badge 2",
+                "rules": {"status_badge": "test_status_badge", "filters": {"org": "edX"}}
+            },
+            {
+                "title": "Test Badge 3",
+                "rules": {"status_badge": "test_status_badge", "filters": {"course": "course-v1:edX+Demo+Demo_Course"}}
+            },
+            {
+                "title": "Test Badge 4",
+                "rules": {"status_badge": "test_status_badge"}
+            }
+        ],
+        "expected_badges": [
+            {
+                "title": "Test Badge 1",
+                "rules": {"status_badge": "test_status_badge", "filters": {"org": "RG"}}
+            },
+            {
+                "title": "Test Badge 4",
+                "rules": {"status_badge": "test_status_badge"}
+            }
+        ],
+        "is_main_site": false,
+        "whitelist": ["RG"],
+        "blacklist": [],
+        "course_key_org": "edX"
+    },
+
+    {
+        "description": "11. Check on the microsite if one badge contains filter for whitelisted orgs and course from a whitelisted orgs and badge contain filter for non whitelisted orgs.",
+        "system_badges": [
+            {
+                "title": "Test Badge 1",
+                "rules": {"status_badge": "test_status_badge", "filters": {"org": "RG", "course": "course-v1:RG+Demo+Demo_CourseRG"}}
+            },
+            {
+                "title": "Test Badge 2",
+                "rules": {"status_badge": "test_status_badge", "filters": {"org": "edX"}}
+            }
+        ],
+        "expected_badges": [
+            {
+                "title": "Test Badge 1",
+                "rules": {"status_badge": "test_status_badge", "filters": {"org": "RG", "course": "course-v1:RG+Demo+Demo_CourseRG"}}
+            }
+        ],
+        "is_main_site": false,
+        "whitelist": ["RG"],
+        "blacklist": [],
+        "course_key_org": "RG"
+    },
+
+    {
+        "description": "12. Check on the microsite if one badge contains filter for whitelisted orgs and course from non whitelisted orgs and badge contain filter for non whitelisted orgs.",
+        "system_badges": [
+            {
+                "title": "Test Badge 1",
+                "rules": {"status_badge": "test_status_badge", "filters": {"org": "RG", "course": "course-v1:edX+Demo+Demo_Course"}}
+            },
+            {
+                "title": "Test Badge 2",
+                "rules": {"status_badge": "test_status_badge", "filters": {"org": "edX"}}
+            }
+        ],
+        "expected_badges": [],
+        "is_main_site": false,
+        "whitelist": ["RG"],
+        "blacklist": [],
+        "course_key_org": "edX"
+    },
+
+    {
+        "description": "13. Check on the microsite if one badge contains filter for non whitelisted orgs and course from whitelisted orgs and badge contain filter for whitelisted orgs.",
+        "system_badges": [
+            {
+                "title": "Test Badge 1",
+                "rules": {"status_badge": "test_status_badge", "filters": {"org": "edX", "course": "course-v1:RG+Demo+Demo_CourseRG"}}
+            },
+            {
+                "title": "Test Badge 2",
+                "rules": {"status_badge": "test_status_badge", "filters": {"org": "RG"}}
+            }
+        ],
+        "expected_badges": [
+            {
+                "title": "Test Badge 2",
+                "rules": {"status_badge": "test_status_badge", "filters": {"org": "RG"}}
+            }
+        ],
+        "is_main_site": false,
+        "whitelist": ["RG"],
+        "blacklist": [],
+        "course_key_org": "RG"
+    },
+
+    {
+        "description": "14. Check on the microsite if badge contains filter for non whitelisted orgs and badge contain filter for non whitelisted orgs.",
+        "system_badges": [
+            {
+                "title": "Test Badge 1",
+                "rules": {"status_badge": "test_status_badge", "filters": {"course": "course-v1:edX+Demo+Demo_Course"}}
+            },
+            {
+                "title": "Test Badge 2",
+                "rules": {"status_badge": "test_status_badge", "filters": {"org": "RG"}}
+            }
+        ],
+        "expected_badges": [],
+        "is_main_site": false,
+        "whitelist": ["TEST"],
+        "blacklist": [],
+        "course_key_org": "edX"
+    },
+
+    {
+        "description": "15. Check on the microsite if whitelist is empty.",
+        "system_badges": [
+            {
+                "title": "Test Badge 1",
+                "rules": {"status_badge": "test_status_badge", "filters": {"org": "edX"}}
+            },
+            {
+                "title": "Test Badge 2",
+                "rules": {"status_badge": "test_status_badge", "filters": {"org": "RG"}}
+            }
+        ],
+        "expected_badges": [],
+        "is_main_site": false,
+        "whitelist": [],
+        "blacklist": [],
+        "course_key_org": null
+    }
+]
