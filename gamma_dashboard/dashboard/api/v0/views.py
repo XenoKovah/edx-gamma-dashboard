@@ -1,6 +1,9 @@
 """
 Gamma leaderboard API views.
 """
+from django.conf import settings
+from django.contrib.auth.models import User
+
 from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.views import APIView
@@ -10,6 +13,8 @@ from opaque_keys.edx.keys import CourseKey
 
 from gamma_dashboard.dashboard.core.gamma.api.wrapper import gamma_api
 from ..utils import site_badge_filter, is_main_site
+
+MAIN_SITE_NAME = 'main'
 
 
 class LeaderboardApiView(APIView):
@@ -21,7 +26,9 @@ class LeaderboardApiView(APIView):
         """
         Get Leaderboard info.
         """
-        leaderboard_info = gamma_api.get_leaderboard_info()
+        signup_source = request.user.usersignupsource_set.first()
+        user_signup_source = signup_source.site if signup_source else MAIN_SITE_NAME
+        leaderboard_info = gamma_api.get_leaderboard_info(user_signup_source)
 
         if leaderboard_info:
             response = Response(leaderboard_info)

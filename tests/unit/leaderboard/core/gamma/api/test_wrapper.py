@@ -152,10 +152,11 @@ class TestGammaApiWrapper:
     @pytest.mark.unittests
     def test_get_leaderboard_info(self, gamma_settings, mocker):
         """
-        Case: Request leaderboard data.
+        Case: Request leaderboard data for specific user.
         Expect: Request is sent to correct URL & correct data is received.
         """
         expeceted_data = {}
+        user_signup_source = 'main-site.com'
         leaderboard_absolute_url = '{}api/v0/leaderboard'.format(GAMIFICATION_ENDPOINT)
 
         mocked_get = mocker.patch('requests.get')
@@ -164,8 +165,8 @@ class TestGammaApiWrapper:
 
         api_wrapper = GammaApiWrapper(settings=gamma_settings)
         api_wrapper_spy = mocker.spy(api_wrapper, '_send_request')
-        leaderboard_data = api_wrapper.get_leaderboard_info()
+        leaderboard_data = api_wrapper.get_leaderboard_info(user_signup_source)
 
-        api_wrapper_spy.assert_called_with(leaderboard_absolute_url)
+        api_wrapper_spy.assert_called_with(leaderboard_absolute_url, params={'signup_source': user_signup_source})
 
         assert leaderboard_data == expeceted_data

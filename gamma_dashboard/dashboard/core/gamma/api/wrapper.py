@@ -80,14 +80,14 @@ class GammaApiWrapper:
 
         return self._send_request(absolute_url, **kwargs)
 
-    def get_leaderboard_info(self):
+    def get_leaderboard_info(self, user_signup_source, **kwargs):
         """
-        Return leaderboard data.
+        Return leaderboard data for user.
 
         Returns:
             dict: parsed leaderboard infromation.
         """
-        return self.request_api_endpoint('leaderboard')
+        return self.request_api_endpoint('leaderboard', params={'signup_source': user_signup_source}, **kwargs)
 
     def get_game_profile(self, username, **kwargs):
         """
