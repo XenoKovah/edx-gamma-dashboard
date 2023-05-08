@@ -2,6 +2,7 @@
 
 ## [Unreleased]
 ## Added
+- [RGG-882] The new design for displaying badges and statuses has been implemented
 - [RGG-805] Added the 'signup_source' parameter when executing a request to obtain a leaderboard
 - [RGG-820] Add the organisation-based filtering for the game_profile API
 - [RGG-592] Completed events counter limit set

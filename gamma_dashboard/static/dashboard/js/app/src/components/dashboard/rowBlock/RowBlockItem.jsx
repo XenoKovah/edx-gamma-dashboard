@@ -22,19 +22,29 @@ const RowBlockItem = ({ slug, data, center, children }) => {
         url: imageSrc,
         progress,
         points,
-        statusPoints
+        statusPoints,
     } = data;
     const dependencies = data.dependencies || [];
 
     const itemProps = {};
     const popupProps = {};
     let hasPopup = false;
+    let totalProgressPercent = 0;
 
     // Define the behavior for badge & status separately.
     if (data.done !== undefined) {
         hasPopup = !data.done;
+        // The code is calculating the current progress as a percentage in order to obtain a badge.
+        const percentageOneEvent = 100/Object.keys(progress).length;
+        for (let key in progress) {
+            if (progress.hasOwnProperty(key)) {
+                totalProgressPercent += Math.floor(progress[key]['count']/progress[key]['goal']*percentageOneEvent);
+            }
+        }
     } else if (data.active !== undefined) {
         hasPopup = !data.active || points < statusPoints;
+        // The code is calculating the current progress as a percentage in order to obtain a status.
+        totalProgressPercent = Math.floor(points/statusPoints*100);
     }
 
     if (hasPopup) {
@@ -57,22 +67,62 @@ const RowBlockItem = ({ slug, data, center, children }) => {
         };
     }
 
+    const progressRef = React.useRef(null);
+
+    const progressView = () => {
+        const diagramBox = progressRef.current;
+        if (!diagramBox) return;
+
+        const deg = (360 * diagramBox.dataset.percent / 100) + 180;
+        if (diagramBox.dataset.percent >= 50) {
+            diagramBox.classList.add('over_50');
+        } else {
+            diagramBox.classList.remove('over_50');
+        }
+        diagramBox.querySelector('.piece.right').style.transform = `rotate(${deg}deg)`;
+    }
+
+    React.useEffect(() => {
+        progressView();
+    }, []);
+
     return (
         <div
-            className={`row-block-item ${center ? 'row-block-item-center' : ''}`}
+            className={`row-block-item ${center ? 'row-block-item-center' : ''} ${hasPopup ? '' : 'row-block-item-completed'}`}
             data-testid={'row-block-item'}
             {... itemProps}
         >
-            <div
-                className={`row-block-item-figure ${hasPopup ? 'row-block-item-figure-disabled' : ''}`}
-                data-testid={'row-block-item-figure'}
-                ref={setReferenceElement}
-            >
-                <img
-                    className={'row-block-item-figure-image'}
-                    src={buildURL(imageSrc)}
-                />
-            </div>
+            { hasPopup ?
+                <div>
+                    <p className="total-progress-percent">{totalProgressPercent}%</p>
+                    <div className="diagram progress" data-percent={totalProgressPercent} ref={progressRef}>
+                        <div className="piece left"></div>
+                        <div className="piece right"></div>
+                        <div
+                            className={`row-block-item-figure row-block-item-figure-disabled`}
+                            data-testid={'row-block-item-figure'}
+                            ref={setReferenceElement}
+                        >
+                            <img
+                                className={'row-block-item-figure-image'}
+                                data-testid={'row-block-item-figure-image'}
+                                src={buildURL(imageSrc)}
+                            />
+                        </div>
+                    </div>
+                </div> 
+                : <div
+                    className={`row-block-item-figure`}
+                    data-testid={'row-block-item-figure'}
+                    ref={setReferenceElement}
+                >
+                    <img
+                        className={'row-block-item-figure-image'}
+                        data-testid={'row-block-item-figure-image'}
+                        src={buildURL(imageSrc)}
+                    />
+                </div>
+            }
             <div className={'row-block-item-title'} data-testid={'row-block-item-title'}>
                 {title}
             </div>

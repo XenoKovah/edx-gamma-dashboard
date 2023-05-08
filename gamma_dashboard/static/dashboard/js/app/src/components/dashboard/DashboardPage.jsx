@@ -25,6 +25,8 @@ class DashboardPage extends React.Component {
       });
    }
 
+   // TODO: It is necessary to refactor this function and move its 
+   // logic to the backend in the future.
    parseData(data) {
       const mergeBadges = (userBadges, systemBadges, statusesTitle, eventsTitle) => {
          userBadges = userBadges || {};

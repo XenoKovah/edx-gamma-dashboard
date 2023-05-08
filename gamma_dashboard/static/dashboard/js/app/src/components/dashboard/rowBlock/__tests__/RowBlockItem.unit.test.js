@@ -28,6 +28,9 @@ describe('<RowBlockItem>', () => {
             />
         );
 
+        const element = getByTestId('row-block-item').querySelector('.diagram.progress');
+        expect(element).not.toBeInTheDocument();
+
         const figure = getByTestId('row-block-item-figure');
         expect(figure).not.toHaveClass('row-block-item-figure-disabled')
 
@@ -36,6 +39,9 @@ describe('<RowBlockItem>', () => {
 
         const popup = queryByTestId('row-block-item-popup');
         expect(popup).not.toBeInTheDocument();
+
+        const imageBadge = queryByTestId('row-block-item-figure-image');
+        expect(imageBadge).toHaveAttribute('src', data.url)
     });
 
     it('renders with correct `incomplete badge` data', () => {
@@ -53,6 +59,9 @@ describe('<RowBlockItem>', () => {
             />
         );
 
+        const element = getByTestId('row-block-item').querySelector('.diagram.progress');
+        expect(element).toBeInTheDocument();
+
         const figure = getByTestId('row-block-item-figure');
         expect(figure).toHaveClass('row-block-item-figure-disabled')
 
@@ -61,6 +70,9 @@ describe('<RowBlockItem>', () => {
 
         const popup = getByTestId('row-block-item-popup');
         expect(popup).toBeInTheDocument();
+
+        const imageBadge = getByTestId('row-block-item-figure-image');
+        expect(imageBadge).toHaveAttribute('src', data.url)
     });
 
     it('renders with correct `complete status` data', () => {
@@ -80,6 +92,10 @@ describe('<RowBlockItem>', () => {
                 data={data}
             />
         );
+        
+        const element = getByTestId('row-block-item').querySelector('.diagram.progress');
+        expect(element).not.toBeInTheDocument();
+
         const figure = getByTestId('row-block-item-figure');
         expect(figure).not.toHaveClass('row-block-item-figure-disabled')
 
@@ -88,6 +104,9 @@ describe('<RowBlockItem>', () => {
 
         const popup = queryByTestId('row-block-item-popup');
         expect(popup).not.toBeInTheDocument();
+
+        const imageBadge = getByTestId('row-block-item-figure-image');
+        expect(imageBadge).toHaveAttribute('src', data.url)
     });
 
     it('renders with correct `incomplete status` data', () => {
@@ -108,6 +127,9 @@ describe('<RowBlockItem>', () => {
             />
         );
 
+        const element = getByTestId('row-block-item').querySelector('.diagram.progress');
+        expect(element).toBeInTheDocument();
+
         const figure = getByTestId('row-block-item-figure');
         expect(figure).toHaveClass('row-block-item-figure-disabled')
 
@@ -116,6 +138,9 @@ describe('<RowBlockItem>', () => {
 
         const popup = getByTestId('row-block-item-popup');
         expect(popup).toBeInTheDocument();
+
+        const imageBadge = getByTestId('row-block-item-figure-image');
+        expect(imageBadge).toHaveAttribute('src', data.url)
     });
 
     it('renders with correct but zeroed `incomplete status` data', () => {
