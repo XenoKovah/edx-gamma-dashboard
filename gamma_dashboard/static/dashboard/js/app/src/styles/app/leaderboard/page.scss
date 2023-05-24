@@ -1,29 +1,14 @@
-@import 'table-colors.scss';
+@import './variables';
 
-.leaderboard-page-wrapper {
-    max-width: 1015px;
-    margin: 40px auto;
-}
+.LeaderboardTitle {
+    font-size: 36px;
+    line-height: 49px;
+    font-weight: 400;
+    color: $textColor;
+    margin: 0 0 24px;
+    text-align: left;
 
-.leaderboard-page-title {
-    font-size: 18px;
-    font-weight: 700;
-    text-transform: uppercase;
-    color: $headerFontColor;
-    border-bottom: 2px solid rgba($headerFontColor, .3);
-    padding-bottom: 4px;
-    margin: 0 32px 8px;
-
-    @media screen and (max-width: 1080px) {
-        margin: 0 0 14px;
-    }
-}
-
-.leaderboard-table-container {
-    padding: 2rem;
-    border-radius: 2rem;
-
-    @media screen and (max-width: 1080px) {
-        padding: 1rem 0 0;
+    .rtl & {
+        text-align: right;
     }
 }

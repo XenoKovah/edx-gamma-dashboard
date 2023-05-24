@@ -9,39 +9,53 @@ import { getUserStatus } from '../../utility/statusTools';
 import './../../styles/app/leaderboard/table.scss';
 
 
-const LeaderboardTable = ({ profiles, system_statuses }) => (
-    <div className="leaderboard-table" data-testid="leaderboard-table">
-        <div className="leaderboard-header">
-            <div className="leaderboard-header-cell table-cell students-cell" data-testid="students-header">
-                Students
-            </div>
-            <div className="leaderboard-header-cell table-cell  progress-cell" data-testid="progress-header">
-                Progress
-            </div>
-            <div className="leaderboard-header-cell table-cell  badges-cell" data-testid="badges-header">
-                Badges
-            </div>
-        </div>
-        <div className="leaderboard-table-body">
-            {!profiles ?
-                <Loader />
-            :
-                profiles.map((profile, index) => (
-                    <LeaderboardTableRow
-                        key={index}
-                        profile={profile}
-                        status={getUserStatus(system_statuses, profile.points)}
-                    >
-                    </LeaderboardTableRow>
-                ))
-            }
-        </div>
-    </div>
+const LeaderboardTable = ({ rank, profiles, systemStatuses, delimiter }) => (
+  <div className="LeaderboardTable" data-testid="leaderboard-table">
+    {!profiles ? (
+        <Loader />
+      ) : (
+      profiles.map((profile, index) => (
+        <React.Fragment key={index}>
+          <LeaderboardTableRow
+            rank={rank}
+            profile={profile}
+            status={getUserStatus(systemStatuses, profile.points)}
+          />
+            {index === delimiter && (
+              <div className="LeaderboardTable-Separator" data-testid="leaderboard-table-separator">
+                  <span/> <span/> <span/>
+              </div>
+            )}
+        </React.Fragment>
+      ))
+    )}
+  </div>
 );
 
 LeaderboardTable.propTypes = {
-    profiles: PropTypes.array,
-    systemStatuses: PropTypes.array
+  profiles: PropTypes.arrayOf(
+    PropTypes.shape({
+      user_uid: PropTypes.string,
+      signup_source: PropTypes.string,
+      points: PropTypes.number,
+      badges: PropTypes.objectOf(
+        PropTypes.shape({
+          title: PropTypes.string,
+          description: PropTypes.string,
+          done: PropTypes.bool,
+          progress: PropTypes.object,
+          url: PropTypes.string
+        })
+      )
+    })
+  ),
+  systemStatuses: PropTypes.array,
+  rank: PropTypes.number,
+  delimiter: PropTypes.number,
+};
+
+LeaderboardTableRow.defaultProps = {
+  delimiter: null,
 };
 
 export default LeaderboardTable;

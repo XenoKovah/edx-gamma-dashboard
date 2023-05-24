@@ -1,5 +1,4 @@
 import React from 'react';
-
 import PropTypes from 'prop-types';
 
 import Avatar from './Avatar';
@@ -8,74 +7,62 @@ import Badge from './Badge';
 import './../../styles/app/leaderboard/table-row.scss';
 
 
-// 13 is number of badges which can be placed in one row in cell with margin
-const BADGES_IN_LINE_COUNT = 13;
-// 16 is number of badges which can be placed in one row in cell with negative margin
-const BADGES_IN_FULL_LINE_COUNT = 16;
+const LeaderboardTableRow = ({ profile, status, rank }) => {
+  const username = profile.user_uid || '';
+  const points = profile.points || 0;
+  const badges = profile.badges || {};
+  const selfPosition = profile.position === rank;
 
-
-const LeaderboardTableRow = ({ profile, status }) => {
-    const username = profile.username || profile.user_uid || '';
-    const points = profile.points || '0';
-    const badges = profile.badges || {};
-    const badgesCount = Object.keys(badges).length;
-
-    const visibleBadgesList = Object.keys(badges).filter(
-        (badgeId, index) => index < BADGES_IN_FULL_LINE_COUNT
-    );
-
-    const isBadgesRowFull = badgesCount >= BADGES_IN_LINE_COUNT;
-    const unshowedBadgesCount = badgesCount - BADGES_IN_FULL_LINE_COUNT;
-
-    return (
-        <div className="leaderboard-table-row" data-testid="leaderboard-table-row">
-            <div className="leaderboard-table-cell table-cell students-cell">
-                <Avatar username={username} />
-                <span className="Avatar-Holder">
-                    <span data-testid="username" className="Avatar-Username">{username}</span>
-                    <div data-testid="userstatus" className="Avatar-Status">{status}</div>
-                </span>
-            </div>
-            <div className="leaderboard-table-cell table-cell progress-cell " data-testid="progress-cell">
-                <div>{points}</div>
-            </div>
-            <div
-                className={`leaderboard-table-cell table-cell badges-cell ${isBadgesRowFull ? "badges-full" : ""}`}
-                data-testid="badges-cell"
-            >
-                {visibleBadgesList.map((badgeId, index) => {
-                    const badge = badges[badgeId];
-
-                    return (
-                    <Badge
-                        key={index}
-                        url={badge.url}
-                    >
-                    </Badge>
-                )})}
-                { unshowedBadgesCount > 0 ?
-                    <div
-                        className='badge-counter'
-                        data-testid="badge-counter"
-                    >
-                        <span className="badge-counter__number">+{unshowedBadgesCount}</span>
-                    </div>
-                :
-                    null
-                }
-
-            </div>
+  return (
+    <div className={`LeaderboardTable-Row ${selfPosition ? 'LeaderboardTable-Row_highlighted' : ''}`}
+         data-testid="leaderboard-table-row">
+      <div className="LeaderboardTable-Cell LeaderboardTable-Cell_student">
+        <Avatar username={username} urlProfileImage={profile.url_profile_image} position={profile.position} />
+        <span className="StudentInfo">
+          <span data-testid="username" className="StudentInfo-Name">{username}</span>
+          <div data-testid="userstatus" className="StudentInfo-Status">{status}</div>
+        </span>
+      </div>
+      <div className="LeaderboardTable-Cell LeaderboardTable-Cell_progress" data-testid="progress-cell">
+        {points}
+      </div>
+      <div className="LeaderboardTable-Cell LeaderboardTable-Cell_badges" data-testid="badges-cell">
+        <div className="Badges">
+          {Object.keys(badges).length ? (
+            Object.keys(badges).map((badgeId, index) => (
+              <Badge key={index} url={badges[badgeId].url} />
+            ))
+          ) : selfPosition && !rank ? 'No badges yet...' : null}
         </div>
-    );
+      </div>
+    </div>
+  );
 };
 
 LeaderboardTableRow.propTypes = {
-    profile: PropTypes.object,
-    status: PropTypes.any,
+  profile: PropTypes.shape({
+    user_uid: PropTypes.string,
+    signup_source: PropTypes.string,
+    points: PropTypes.number,
+    badges: PropTypes.objectOf(
+      PropTypes.shape({
+        title: PropTypes.string,
+        description: PropTypes.string,
+        done: PropTypes.bool,
+        progress: PropTypes.object,
+        url: PropTypes.string
+      })
+    ),
+    system_statuses: PropTypes.array,
+    system_events: PropTypes.array,
+    position: PropTypes.number
+  }).isRequired,
+  status: PropTypes.string,
+  rank: PropTypes.number
 };
 
 LeaderboardTableRow.defaultProps = {
-    profile: {}
+  rank: null,
 };
 
 export default LeaderboardTableRow;

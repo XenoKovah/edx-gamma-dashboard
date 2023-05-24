@@ -16,11 +16,12 @@ describe('<Badge>', () => {
         expect(getByTestId('leaderboard-badge')).toBeInTheDocument();
     });
 
-    it('has correct `background-image` style property', () => {
-        const testUrl = 'https://localhost/static/images/link.png'
+    it('has correct src attribute', () => {
+        const testUrl = 'https://localhost/static/images/link.png';
 
         const { getByTestId } = render(<Badge url={testUrl} />);
+        const badgeImage = getByTestId('leaderboard-badge');
 
-        expect(getByTestId('leaderboard-badge')).toHaveStyle(`background-image: url(${testUrl})`);
+        expect(badgeImage).toHaveAttribute('src', testUrl);
     });
 });

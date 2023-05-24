@@ -1,0 +1,29 @@
+{
+    "profile": {
+        "user_uid": "username",
+        "url_profile_image": "/images/default_0.png",
+        "points": 10000,
+        "position": 25,
+        "badges": {
+            "badge.1": {"url": "https://badge.1.url/"},
+            "badge.2": {"url": "https://badge.2.url/"},
+            "badge.3": {"url": "https://badge.3.url/"},
+            "badge.4": {"url": "https://badge.4.url/"},
+            "badge.5": {"url": "https://badge.5.url/"},
+            "badge.6": {"url": "https://badge.6.url/"},
+            "badge.7": {"url": "https://badge.7.url/"},
+            "badge.8": {"url": "https://badge.8.url/"},
+            "badge.9": {"url": "https://badge.9.url/"},
+            "badge.10": {"url": "https://badge.10.url/"},
+            "badge.11": {"url": "https://badge.11.url/"},
+            "badge.12": {"url": "https://badge.12.url/"},
+            "badge.13": {"url": "https://badge.13.url/"},
+            "badge.14": {"url": "https://badge.14.url/"},
+            "badge.15": {"url": "https://badge.15.url/"},
+            "badge.16": {"url": "https://badge.16.url/"},
+            "badge.17": {"url": "https://badge.17.url/"}
+        }
+    },
+    "status": "test-status",
+    "rank": 25
+}

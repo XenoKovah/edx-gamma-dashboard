@@ -1,61 +1,97 @@
-@import 'table-colors.scss';
+@import './variables';
 
-.leaderboard-table-row {
+.LeaderboardTable-Row {
     display: flex;
+    background: $white;
+    box-shadow: 0 1px 2px rgba($black, .15), 0 1px 4px rgba($black, .15);
+    border-radius: 4px;
+    padding: 17px 24px;
+    margin-bottom: 8px;
+    border: 1px solid transparent;
+    border-left-width: 4px;
 
-    .table-cell {
-        background-color: $tableCellColor;
-        margin: 0 1px 5px 0;
-        box-sizing: border-box;
+    .rtl & {
+        border-left-width: 1px;
+        border-right-width: 4px;
+    }
 
-        .rtl & {
-            margin: 0 0 5px 1px;
+    &_highlighted {
+        border-color: $accentColor;
+    }
 
-            &:last-child {
+    @media screen and (max-width: 768px) {
+        flex-wrap: wrap;
+        justify-content: space-between;
+    }
+}
+
+.LeaderboardTable-Cell {
+    display: flex;
+    align-items: center;
+
+    &_student {
+        width: 305px;
+        flex-shrink: 0;
+        align-items: flex-start;
+
+        @media screen and (max-width: 768px) {
+            width: calc(100% - 70px);
+        }
+    }
+
+    &_progress {
+        font-size: 16px;
+        line-height: 22px;
+        text-transform: uppercase;
+        width: 180px;
+        flex-shrink: 0;
+
+        @media screen and (max-width: 768px) {
+            width: auto;
+            margin-left: auto;
+            text-align: right;
+
+            .rtl & {
                 margin-left: 0;
+                margin-right: auto;
             }
         }
+    }
+
+    &_badges {
+        overflow: auto;
+        font-weight: 600;
+        font-size: 16px;
+        line-height: 22px;
+        color: $emptyMessageColor;
 
         @media screen and (max-width: 768px) {
-            margin: 0 1px 1px 0;
+            margin-top: 20px;
         }
     }
+}
 
-    .students-cell, .progress-cell, .badges-cell {
-        display: flex;
-        align-items: center;
-        flex-wrap: wrap;
-    }
+.StudentInfo {
+    display: flex;
+    height: 100%;
+    flex-direction: column;
+    justify-content: center;
+}
 
-    .students-cell {
-        margin-left: 0;
-        font-weight: 700;
-        padding: 1px 0;
-        flex-wrap: nowrap;
+.StudentInfo-Name {
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 22px;
+    text-transform: uppercase;
+    word-break: break-word;
+}
 
-        @media screen and (max-width: 768px) {
-            padding: 5px 0;
-        }
-    }
+.StudentInfo-Status {
+    font-size: 15px;
+    line-height: 20px;
+    margin-top: 2px;
 
-    .progress-cell {
-        font-size: 18px;
-        line-height: 21px;
-        color: #f5f5f5;
-        justify-content: center;
-        padding: 5px 0 0;
-
-        @media screen and (max-width: 768px) {
-            font-size: 16px;
-        }
-
-        div {
-            font-weight: 700;
-        }
-    }
-    
-    .badges-cell {
-        margin-right: 0px;
-        padding: 0 17px 0 20px;
+    &:empty {
+        display: none;
     }
 }

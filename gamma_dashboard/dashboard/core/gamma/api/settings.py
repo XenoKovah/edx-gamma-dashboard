@@ -10,9 +10,11 @@ AUTHORIZATION_SECRET_KEY = 'SECRET'
 
 DEFAULT_API_VERSION = 0
 DEFAULT_API_PREFIX = 'v0'
+API_VERSION_1 = 1
 # TODO: Use enum when the edx/project is moved to python > 3.4
 API_VERSION_PREFIX = {
-    0: 'v0'
+    0: 'v0',
+    1: 'v1'
 }
 
 

@@ -1,121 +1,23 @@
-@import 'table-colors.scss';
+@import './variables';
 
-.leaderboard-table {
+.LeaderboardTable {
     width: 100%;
-    display: block;
-}
-
-.leaderboard-header, .leaderboard-row {
     display: flex;
-    flex-direction: row;
-    align-items: stretch;
+    flex-direction: column;
+    color: $textColor;
 }
 
-.leaderboard-header {
-    color: $headerFontColor;
-    background-color: $headerBackgroundColor;
-    border-radius: 20px 20px 0 0;
-    text-transform: uppercase;
-    text-align: center;
-    padding: 10px 1px 6px;
-    margin: 0 0 2px 0;
-    font-weight: 900;
-}
+.LeaderboardTable-Separator {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 16px 0 24px;
 
-.table-cell {
-    padding: 0.5rem;
-
-    &.badges-cell {
-        padding-bottom: 0;
-
-        @media screen and (max-width: 768px) {
-            display: none;
-        }
+    span {
+        width: 8px;
+        height: 8px;
+        background: $accentColor;
+        margin: 0 3px;
+        border-radius: 50%;
     }
-}
-
-.leaderboard-header-cell {
-    padding: 10px;
-    color: $headerFontDark;
-    font-weight: 700;
-    box-sizing: border-box;
-}
-
-.leaderboard-table-cell {
-    margin: 0;
-}
-
-.leaderboard-header {
-    .progress-cell {
-        position: relative;
-        &:before,
-        &:after {
-            content: "";
-            position: absolute;
-            top: 0;
-            width: 1px;
-            height: 100%;
-        }
-
-        &:before {
-            left: -1px;
-            border-left: 1px solid $headerBorderColor;
-
-            .rtl & {
-                border-left: 0;
-                border-right: 1px solid $headerBorderColor;
-
-                @media screen and (max-width: 768px) {
-                    right: 0;
-                }
-            }
-
-            @media screen and (max-width: 768px) {
-                left: 0;
-            }
-        }
-
-        &:after {
-            right: -1px;
-            border-right: 1px solid $headerBorderColor;
-
-            @media screen and (max-width: 768px) {
-                display: none;
-            }
-        }
-    }
-
-    @media screen and (max-width: 768px) {
-        padding: 2px 1px;
-
-        &-cell {
-            font-size: 14px;
-
-            @media screen and (max-width: 414px) {
-                font-size: 13px;
-            }
-        }
-    }
-}
-
-.students-cell {
-    width: 327px;
-    flex: none;
-
-    @media screen and (max-width: 768px) {
-        width: 70%;
-    }
-}
-
-.progress-cell {
-    width: 142px;
-    flex: none;
-
-    @media screen and (max-width: 768px) {
-        width: 30%;
-    }
-}
-
-.badges-cell {
-    width: 100%;
 }

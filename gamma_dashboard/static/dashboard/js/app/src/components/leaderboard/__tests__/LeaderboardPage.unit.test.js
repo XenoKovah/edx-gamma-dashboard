@@ -3,53 +3,42 @@ import React from 'react';
 import axios from 'axios';
 
 import '@testing-library/jest-dom';
+import '@testing-library/jest-dom/extend-expect';
 import { render, cleanup } from '@testing-library/react';
-import pretty from 'pretty';
+import { act } from 'react-dom/test-utils';
+import renderer from 'react-test-renderer';
 
 import LeaderboardPage from '../LeaderboardPage';
-
-
-const correctProfilesData = [
-    {
-        username: 'Bi-Han',
-        user_uid: 'Bi-Han',
-        badges: {
-            'badge.one': {'url': 'https://badge.one.url/'},
-        },
-        points: 30
-    },
-    {
-        username: 'Kuai Liang',
-        user_uid: 'Kuai Liang',
-        badges: {
-            'badge.one': {'url': 'https://badge.one.url/'},
-            'badge.two': {'url': 'https://badge.two.url/'},
-            'badge.three': {'url': 'https://badge.three.url/'},
-        },
-        points: 50
-    }
-];
+import DataLeaderboardPage from './__mock__/DataLeaderboardPage.json';
 
 
 jest.mock('axios');
 afterAll(cleanup);
 
-
 describe('<LeaderboardPage>', () => {
-    it('renders', () => {
-        axios.get.mockResolvedValue({data: {gameprofiles: correctProfilesData}});
+    it.each(DataLeaderboardPage)
+    ('renders', async ({ state }) => {
+        axios.get.mockResolvedValue({
+            data: {
+                top10: state.top10,
+                competitors: state.competitors,
+                rank: state.rank,
+                user_uid: state.user_uid,
+                systemStatuses: state.systemStatuses
+            }
+        });
 
-        const { getByTestId, container } = render(<LeaderboardPage />);
+        let component;
 
-        const pageTitle = getByTestId('leaderboard-page-title');
-        const leaderboardTable = getByTestId('leaderboard-table');
+        await act(async () => 
+            component = renderer.create(<LeaderboardPage />)
+        );
 
-        expect(pageTitle).toBeInTheDocument();
-        expect(leaderboardTable).toBeInTheDocument();
+        const tree = component.toJSON();
+
         expect(axios.get).toBeCalled();
         expect(axios.get.mock.calls[0][0]).toBe('/gamma_dashboard/api/v0/leaderboard/');
-        expect(pretty(container.innerHTML)).toMatchSnapshot();
-        
+        expect(tree).toMatchSnapshot();
     });
 
     it('renders with correct title', () => {
@@ -64,8 +53,8 @@ describe('<LeaderboardPage>', () => {
 
     it.each`
         data
-        ${{gameprofiles: null}}
-        ${{gameprofiles: []}}
+        ${{profiles: null}}
+        ${{profiles: []}}
         ${null}
     `('renders with inconsistent data `$data`', ({data}) => {
         axios.get.mockResolvedValue({data: data});
@@ -77,5 +66,14 @@ describe('<LeaderboardPage>', () => {
 
         expect(pageTitle).toBeInTheDocument();
         expect(leaderboardTable).toBeInTheDocument();
+    });
+});
+
+describe('getLeaderboardTableProps', () => {
+    it.each(DataLeaderboardPage)(
+    'should return the correct props for given parameters', ({ state, expectedProps }) => {
+        const result = LeaderboardPage.prototype.getLeaderboardTableProps(state);
+
+        expect(result).toEqual(expectedProps);
     });
 });

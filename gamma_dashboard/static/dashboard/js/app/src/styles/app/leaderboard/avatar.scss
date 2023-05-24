@@ -1,69 +1,56 @@
-.avatar {
-    width: 48px;
-    height: 48px;
-    margin-right: 25px;
-    background-color: skyblue;
-    border-radius: 2px;
-    display: flex;
-    justify-content: center;
+@import "./variables";
+
+.Avatar {
+    position: relative;
+    width: 42px;
+    height: 42px;
+    border: 1px solid $avatarBorderColor;
+    border-radius: 8px;
+    display: inline-flex;
     align-items: center;
+    justify-content: center;
+    margin-right: 12px;
+    flex-shrink: 0;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center center;
 
     .rtl & {
-        margin-right: 0;
-        margin-left: 25px;
-    }
-
-    @media screen and (max-width: 768px) {
-        flex: none;
-        width: 24px;
-        height: 24px;
-        margin-right: 10px;
-
-        .rtl & {
-            margin-left: 10px;
-        }
-    }
-
-    .avatar-letter {
-        font-size: 26pt;
-        display: inline-block;
-        text-align: center;
-        vertical-align: middle;
-
-        @media screen and (max-width: 768px) {
-            font-size: 12pt;
-        }
+        margin: 0 0 0 12px;
     }
 }
 
-.Avatar-Holder {
-    display: flex;
-    flex-direction: column;
-
-    @media screen and (max-width: 768px) {
-        width: calc(100% - 40px);
-    }
-}
-
-.Avatar-Username {
-    font-size: 16px;
-    color: #f5f5f5;
-    letter-spacing: .24px;
-    line-height: 16px;
-    overflow: hidden;
-    display: block;
-    text-overflow: ellipsis;
-    max-width: 245px;
-
-    @media screen and (max-width: 768px) {
-        max-width: 100%;
-        font-size: 14px;
-        line-height: 14px;
-    }
-}
-
-.Avatar-Status {
+.Avatar-Position {
+    position: absolute;
+    left: -7px;
+    top: -7px;
+    padding: 1px 4px;
+    background: $accentColor;
+    border: 1px solid $avatarPositionColor;
+    border-radius: 10px;
+    color: $avatarPositionColor;
+    font-weight: 500;
     font-size: 12px;
     line-height: 16px;
-    color: #bcbcbc;
+    min-width: 20px;
+    min-height: 20px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+
+    .rtl & {
+        left: auto;
+        right: -7px;
+    }
+
+    &_winner {
+        padding: 0;
+        background: $white;
+        border: 1px solid $avatarPositionAccent;
+    }
+
+    &_undefined {
+        background: $avatarBorderColor;
+    }
 }

@@ -1,5 +1,5 @@
-const blackColor = 'rgb(0, 0, 0)';
-const whiteColor = 'rgb(1, 1, 1)';
+const blackColor = 'rgb(51, 51, 51)';
+const whiteColor = 'rgb(255, 255, 255)';
 
 export const getRandomColors = () => {
     const colors = {

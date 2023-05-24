@@ -23,7 +23,15 @@ module.exports = {
           // Compiles Sass to CSS
           'sass-loader',
           ],
-        }
+        },
+        {
+          test: [/\.bmp$/, /\.gif$/, /\.jpe?g$/, /\.png$/, /\.svg$/],
+          loader: require.resolve('url-loader'),
+          options: {
+            limit: parseInt('10000'),
+            name: 'images/[name].[ext]',
+          },
+        },
       ]
     },
     resolve: {

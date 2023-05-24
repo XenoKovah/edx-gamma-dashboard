@@ -1,17 +1,3854 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<LeaderboardPage> renders 1`] = `
-"<div class=\\"leaderboard-page-wrapper\\">
-  <div class=\\"leaderboard-page-title\\" data-testid=\\"leaderboard-page-title\\">Leaderboard</div>
-  <div class=\\"leaderboard-table-container\\" data-testid=\\"leaderboard-table-container\\">
-    <div class=\\"leaderboard-table\\" data-testid=\\"leaderboard-table\\">
-      <div class=\\"leaderboard-header\\">
-        <div class=\\"leaderboard-header-cell table-cell students-cell\\" data-testid=\\"students-header\\">Students</div>
-        <div class=\\"leaderboard-header-cell table-cell  progress-cell\\" data-testid=\\"progress-header\\">Progress</div>
-        <div class=\\"leaderboard-header-cell table-cell  badges-cell\\" data-testid=\\"badges-header\\">Badges</div>
+Array [
+  <h1
+    className="LeaderboardTitle"
+    data-testid="leaderboard-page-title"
+  >
+    Leaderboard
+  </h1>,
+  <div
+    className="LeaderboardTable"
+    data-testid="leaderboard-table"
+  />,
+]
+`;
+
+exports[`<LeaderboardPage> renders 2`] = `
+Array [
+  <h1
+    className="LeaderboardTitle"
+    data-testid="leaderboard-page-title"
+  >
+    Leaderboard
+  </h1>,
+  <div
+    className="LeaderboardTable"
+    data-testid="leaderboard-table"
+  >
+    <div
+      className="LeaderboardTable-Row "
+      data-testid="leaderboard-table-row"
+    >
+      <div
+        className="LeaderboardTable-Cell LeaderboardTable-Cell_student"
+      >
+        <div
+          className="Avatar"
+          data-testid="avatar"
+          style={
+            Object {
+              "backgroundImage": "url(/images/default.png)",
+            }
+          }
+        >
+          <span
+            className="Avatar-Position Avatar-Position_winner"
+          >
+            <img
+              alt=""
+              src={Object {}}
+            />
+          </span>
+        </div>
+        <span
+          className="StudentInfo"
+        >
+          <span
+            className="StudentInfo-Name"
+            data-testid="username"
+          >
+            username1
+          </span>
+          <div
+            className="StudentInfo-Status"
+            data-testid="userstatus"
+          >
+            No status so far
+          </div>
+        </span>
       </div>
-      <div class=\\"leaderboard-table-body\\"></div>
+      <div
+        className="LeaderboardTable-Cell LeaderboardTable-Cell_progress"
+        data-testid="progress-cell"
+      >
+        100000
+      </div>
+      <div
+        className="LeaderboardTable-Cell LeaderboardTable-Cell_badges"
+        data-testid="badges-cell"
+      >
+        <div
+          className="Badges"
+        />
+      </div>
     </div>
-  </div>
-</div>"
+    <div
+      className="LeaderboardTable-Row "
+      data-testid="leaderboard-table-row"
+    >
+      <div
+        className="LeaderboardTable-Cell LeaderboardTable-Cell_student"
+      >
+        <div
+          className="Avatar"
+          data-testid="avatar"
+          style={
+            Object {
+              "backgroundImage": "url(/images/default.png)",
+            }
+          }
+        >
+          <span
+            className="Avatar-Position Avatar-Position_winner"
+          >
+            <img
+              alt=""
+              src={Object {}}
+            />
+          </span>
+        </div>
+        <span
+          className="StudentInfo"
+        >
+          <span
+            className="StudentInfo-Name"
+            data-testid="username"
+          >
+            username2
+          </span>
+          <div
+            className="StudentInfo-Status"
+            data-testid="userstatus"
+          >
+            No status so far
+          </div>
+        </span>
+      </div>
+      <div
+        className="LeaderboardTable-Cell LeaderboardTable-Cell_progress"
+        data-testid="progress-cell"
+      >
+        99999
+      </div>
+      <div
+        className="LeaderboardTable-Cell LeaderboardTable-Cell_badges"
+        data-testid="badges-cell"
+      >
+        <div
+          className="Badges"
+        />
+      </div>
+    </div>
+    <div
+      className="LeaderboardTable-Row "
+      data-testid="leaderboard-table-row"
+    >
+      <div
+        className="LeaderboardTable-Cell LeaderboardTable-Cell_student"
+      >
+        <div
+          className="Avatar"
+          data-testid="avatar"
+          style={
+            Object {
+              "backgroundImage": "url(/images/default.png)",
+            }
+          }
+        >
+          <span
+            className="Avatar-Position Avatar-Position_winner"
+          >
+            <img
+              alt=""
+              src={Object {}}
+            />
+          </span>
+        </div>
+        <span
+          className="StudentInfo"
+        >
+          <span
+            className="StudentInfo-Name"
+            data-testid="username"
+          >
+            username3
+          </span>
+          <div
+            className="StudentInfo-Status"
+            data-testid="userstatus"
+          >
+            No status so far
+          </div>
+        </span>
+      </div>
+      <div
+        className="LeaderboardTable-Cell LeaderboardTable-Cell_progress"
+        data-testid="progress-cell"
+      >
+        88888
+      </div>
+      <div
+        className="LeaderboardTable-Cell LeaderboardTable-Cell_badges"
+        data-testid="badges-cell"
+      >
+        <div
+          className="Badges"
+        />
+      </div>
+    </div>
+    <div
+      className="LeaderboardTable-Row "
+      data-testid="leaderboard-table-row"
+    >
+      <div
+        className="LeaderboardTable-Cell LeaderboardTable-Cell_student"
+      >
+        <div
+          className="Avatar"
+          data-testid="avatar"
+          style={
+            Object {
+              "backgroundImage": "url(/images/default.png)",
+            }
+          }
+        >
+          <span
+            className="Avatar-Position"
+          >
+            4
+          </span>
+        </div>
+        <span
+          className="StudentInfo"
+        >
+          <span
+            className="StudentInfo-Name"
+            data-testid="username"
+          >
+            username4
+          </span>
+          <div
+            className="StudentInfo-Status"
+            data-testid="userstatus"
+          >
+            No status so far
+          </div>
+        </span>
+      </div>
+      <div
+        className="LeaderboardTable-Cell LeaderboardTable-Cell_progress"
+        data-testid="progress-cell"
+      >
+        77777
+      </div>
+      <div
+        className="LeaderboardTable-Cell LeaderboardTable-Cell_badges"
+        data-testid="badges-cell"
+      >
+        <div
+          className="Badges"
+        />
+      </div>
+    </div>
+    <div
+      className="LeaderboardTable-Row "
+      data-testid="leaderboard-table-row"
+    >
+      <div
+        className="LeaderboardTable-Cell LeaderboardTable-Cell_student"
+      >
+        <div
+          className="Avatar"
+          data-testid="avatar"
+          style={
+            Object {
+              "backgroundImage": "url(/images/default.png)",
+            }
+          }
+        >
+          <span
+            className="Avatar-Position"
+          >
+            5
+          </span>
+        </div>
+        <span
+          className="StudentInfo"
+        >
+          <span
+            className="StudentInfo-Name"
+            data-testid="username"
+          >
+            username5
+          </span>
+          <div
+            className="StudentInfo-Status"
+            data-testid="userstatus"
+          >
+            No status so far
+          </div>
+        </span>
+      </div>
+      <div
+        className="LeaderboardTable-Cell LeaderboardTable-Cell_progress"
+        data-testid="progress-cell"
+      >
+        66666
+      </div>
+      <div
+        className="LeaderboardTable-Cell LeaderboardTable-Cell_badges"
+        data-testid="badges-cell"
+      >
+        <div
+          className="Badges"
+        />
+      </div>
+    </div>
+    <div
+      className="LeaderboardTable-Row "
+      data-testid="leaderboard-table-row"
+    >
+      <div
+        className="LeaderboardTable-Cell LeaderboardTable-Cell_student"
+      >
+        <div
+          className="Avatar"
+          data-testid="avatar"
+          style={
+            Object {
+              "backgroundImage": "url(/images/default.png)",
+            }
+          }
+        >
+          <span
+            className="Avatar-Position"
+          >
+            6
+          </span>
+        </div>
+        <span
+          className="StudentInfo"
+        >
+          <span
+            className="StudentInfo-Name"
+            data-testid="username"
+          >
+            username6
+          </span>
+          <div
+            className="StudentInfo-Status"
+            data-testid="userstatus"
+          >
+            No status so far
+          </div>
+        </span>
+      </div>
+      <div
+        className="LeaderboardTable-Cell LeaderboardTable-Cell_progress"
+        data-testid="progress-cell"
+      >
+        55555
+      </div>
+      <div
+        className="LeaderboardTable-Cell LeaderboardTable-Cell_badges"
+        data-testid="badges-cell"
+      >
+        <div
+          className="Badges"
+        />
+      </div>
+    </div>
+    <div
+      className="LeaderboardTable-Row "
+      data-testid="leaderboard-table-row"
+    >
+      <div
+        className="LeaderboardTable-Cell LeaderboardTable-Cell_student"
+      >
+        <div
+          className="Avatar"
+          data-testid="avatar"
+          style={
+            Object {
+              "backgroundImage": "url(/images/default.png)",
+            }
+          }
+        >
+          <span
+            className="Avatar-Position"
+          >
+            7
+          </span>
+        </div>
+        <span
+          className="StudentInfo"
+        >
+          <span
+            className="StudentInfo-Name"
+            data-testid="username"
+          >
+            username7
+          </span>
+          <div
+            className="StudentInfo-Status"
+            data-testid="userstatus"
+          >
+            No status so far
+          </div>
+        </span>
+      </div>
+      <div
+        className="LeaderboardTable-Cell LeaderboardTable-Cell_progress"
+        data-testid="progress-cell"
+      >
+        44444
+      </div>
+      <div
+        className="LeaderboardTable-Cell LeaderboardTable-Cell_badges"
+        data-testid="badges-cell"
+      >
+        <div
+          className="Badges"
+        />
+      </div>
+    </div>
+    <div
+      className="LeaderboardTable-Row "
+      data-testid="leaderboard-table-row"
+    >
+      <div
+        className="LeaderboardTable-Cell LeaderboardTable-Cell_student"
+      >
+        <div
+          className="Avatar"
+          data-testid="avatar"
+          style={
+            Object {
+              "backgroundImage": "url(/images/default.png)",
+            }
+          }
+        >
+          <span
+            className="Avatar-Position"
+          >
+            8
+          </span>
+        </div>
+        <span
+          className="StudentInfo"
+        >
+          <span
+            className="StudentInfo-Name"
+            data-testid="username"
+          >
+            username8
+          </span>
+          <div
+            className="StudentInfo-Status"
+            data-testid="userstatus"
+          >
+            No status so far
+          </div>
+        </span>
+      </div>
+      <div
+        className="LeaderboardTable-Cell LeaderboardTable-Cell_progress"
+        data-testid="progress-cell"
+      >
+        33333
+      </div>
+      <div
+        className="LeaderboardTable-Cell LeaderboardTable-Cell_badges"
+        data-testid="badges-cell"
+      >
+        <div
+          className="Badges"
+        />
+      </div>
+    </div>
+    <div
+      className="LeaderboardTable-Row "
+      data-testid="leaderboard-table-row"
+    >
+      <div
+        className="LeaderboardTable-Cell LeaderboardTable-Cell_student"
+      >
+        <div
+          className="Avatar"
+          data-testid="avatar"
+          style={
+            Object {
+              "backgroundImage": "url(/images/default.png)",
+            }
+          }
+        >
+          <span
+            className="Avatar-Position"
+          >
+            9
+          </span>
+        </div>
+        <span
+          className="StudentInfo"
+        >
+          <span
+            className="StudentInfo-Name"
+            data-testid="username"
+          >
+            username9
+          </span>
+          <div
+            className="StudentInfo-Status"
+            data-testid="userstatus"
+          >
+            No status so far
+          </div>
+        </span>
+      </div>
+      <div
+        className="LeaderboardTable-Cell LeaderboardTable-Cell_progress"
+        data-testid="progress-cell"
+      >
+        22222
+      </div>
+      <div
+        className="LeaderboardTable-Cell LeaderboardTable-Cell_badges"
+        data-testid="badges-cell"
+      >
+        <div
+          className="Badges"
+        />
+      </div>
+    </div>
+    <div
+      className="LeaderboardTable-Separator"
+      data-testid="leaderboard-table-separator"
+    >
+      <span />
+       
+      <span />
+       
+      <span />
+    </div>
+    <div
+      className="LeaderboardTable-Row LeaderboardTable-Row_highlighted"
+      data-testid="leaderboard-table-row"
+    >
+      <div
+        className="LeaderboardTable-Cell LeaderboardTable-Cell_student"
+      >
+        <div
+          className="Avatar"
+          data-testid="avatar"
+          style={
+            Object {
+              "backgroundColor": "#cde4fc",
+            }
+          }
+        >
+          <span
+            className="Avatar-Logo"
+            data-testid="avatar-logo"
+            style={
+              Object {
+                "color": "#303030",
+              }
+            }
+          >
+            -
+          </span>
+          <span
+            className="Avatar-Position Avatar-Position_undefined"
+          >
+            ?
+          </span>
+        </div>
+        <span
+          className="StudentInfo"
+        >
+          <span
+            className="StudentInfo-Name"
+            data-testid="username"
+          >
+            
+          </span>
+          <div
+            className="StudentInfo-Status"
+            data-testid="userstatus"
+          >
+            No status so far
+          </div>
+        </span>
+      </div>
+      <div
+        className="LeaderboardTable-Cell LeaderboardTable-Cell_progress"
+        data-testid="progress-cell"
+      >
+        0
+      </div>
+      <div
+        className="LeaderboardTable-Cell LeaderboardTable-Cell_badges"
+        data-testid="badges-cell"
+      >
+        <div
+          className="Badges"
+        >
+          No badges yet...
+        </div>
+      </div>
+    </div>
+  </div>,
+]
+`;
+
+exports[`<LeaderboardPage> renders 3`] = `
+Array [
+  <h1
+    className="LeaderboardTitle"
+    data-testid="leaderboard-page-title"
+  >
+    Leaderboard
+  </h1>,
+  <div
+    className="LeaderboardTable"
+    data-testid="leaderboard-table"
+  >
+    <div
+      className="LeaderboardTable-Row "
+      data-testid="leaderboard-table-row"
+    >
+      <div
+        className="LeaderboardTable-Cell LeaderboardTable-Cell_student"
+      >
+        <div
+          className="Avatar"
+          data-testid="avatar"
+          style={
+            Object {
+              "backgroundImage": "url(/images/default.png)",
+            }
+          }
+        >
+          <span
+            className="Avatar-Position Avatar-Position_winner"
+          >
+            <img
+              alt=""
+              src={Object {}}
+            />
+          </span>
+        </div>
+        <span
+          className="StudentInfo"
+        >
+          <span
+            className="StudentInfo-Name"
+            data-testid="username"
+          >
+            username1
+          </span>
+          <div
+            className="StudentInfo-Status"
+            data-testid="userstatus"
+          >
+            No status so far
+          </div>
+        </span>
+      </div>
+      <div
+        className="LeaderboardTable-Cell LeaderboardTable-Cell_progress"
+        data-testid="progress-cell"
+      >
+        100000
+      </div>
+      <div
+        className="LeaderboardTable-Cell LeaderboardTable-Cell_badges"
+        data-testid="badges-cell"
+      >
+        <div
+          className="Badges"
+        />
+      </div>
+    </div>
+    <div
+      className="LeaderboardTable-Row "
+      data-testid="leaderboard-table-row"
+    >
+      <div
+        className="LeaderboardTable-Cell LeaderboardTable-Cell_student"
+      >
+        <div
+          className="Avatar"
+          data-testid="avatar"
+          style={
+            Object {
+              "backgroundImage": "url(/images/default.png)",
+            }
+          }
+        >
+          <span
+            className="Avatar-Position Avatar-Position_winner"
+          >
+            <img
+              alt=""
+              src={Object {}}
+            />
+          </span>
+        </div>
+        <span
+          className="StudentInfo"
+        >
+          <span
+            className="StudentInfo-Name"
+            data-testid="username"
+          >
+            username2
+          </span>
+          <div
+            className="StudentInfo-Status"
+            data-testid="userstatus"
+          >
+            No status so far
+          </div>
+        </span>
+      </div>
+      <div
+        className="LeaderboardTable-Cell LeaderboardTable-Cell_progress"
+        data-testid="progress-cell"
+      >
+        99999
+      </div>
+      <div
+        className="LeaderboardTable-Cell LeaderboardTable-Cell_badges"
+        data-testid="badges-cell"
+      >
+        <div
+          className="Badges"
+        />
+      </div>
+    </div>
+    <div
+      className="LeaderboardTable-Row "
+      data-testid="leaderboard-table-row"
+    >
+      <div
+        className="LeaderboardTable-Cell LeaderboardTable-Cell_student"
+      >
+        <div
+          className="Avatar"
+          data-testid="avatar"
+          style={
+            Object {
+              "backgroundImage": "url(/images/default.png)",
+            }
+          }
+        >
+          <span
+            className="Avatar-Position Avatar-Position_winner"
+          >
+            <img
+              alt=""
+              src={Object {}}
+            />
+          </span>
+        </div>
+        <span
+          className="StudentInfo"
+        >
+          <span
+            className="StudentInfo-Name"
+            data-testid="username"
+          >
+            username3
+          </span>
+          <div
+            className="StudentInfo-Status"
+            data-testid="userstatus"
+          >
+            No status so far
+          </div>
+        </span>
+      </div>
+      <div
+        className="LeaderboardTable-Cell LeaderboardTable-Cell_progress"
+        data-testid="progress-cell"
+      >
+        88888
+      </div>
+      <div
+        className="LeaderboardTable-Cell LeaderboardTable-Cell_badges"
+        data-testid="badges-cell"
+      >
+        <div
+          className="Badges"
+        />
+      </div>
+    </div>
+    <div
+      className="LeaderboardTable-Separator"
+      data-testid="leaderboard-table-separator"
+    >
+      <span />
+       
+      <span />
+       
+      <span />
+    </div>
+    <div
+      className="LeaderboardTable-Row "
+      data-testid="leaderboard-table-row"
+    >
+      <div
+        className="LeaderboardTable-Cell LeaderboardTable-Cell_student"
+      >
+        <div
+          className="Avatar"
+          data-testid="avatar"
+          style={
+            Object {
+              "backgroundImage": "url(/images/default.png)",
+            }
+          }
+        >
+          <span
+            className="Avatar-Position"
+          >
+            106
+          </span>
+        </div>
+        <span
+          className="StudentInfo"
+        >
+          <span
+            className="StudentInfo-Name"
+            data-testid="username"
+          >
+            username101
+          </span>
+          <div
+            className="StudentInfo-Status"
+            data-testid="userstatus"
+          >
+            No status so far
+          </div>
+        </span>
+      </div>
+      <div
+        className="LeaderboardTable-Cell LeaderboardTable-Cell_progress"
+        data-testid="progress-cell"
+      >
+        900
+      </div>
+      <div
+        className="LeaderboardTable-Cell LeaderboardTable-Cell_badges"
+        data-testid="badges-cell"
+      >
+        <div
+          className="Badges"
+        />
+      </div>
+    </div>
+    <div
+      className="LeaderboardTable-Row "
+      data-testid="leaderboard-table-row"
+    >
+      <div
+        className="LeaderboardTable-Cell LeaderboardTable-Cell_student"
+      >
+        <div
+          className="Avatar"
+          data-testid="avatar"
+          style={
+            Object {
+              "backgroundImage": "url(/images/default.png)",
+            }
+          }
+        >
+          <span
+            className="Avatar-Position"
+          >
+            107
+          </span>
+        </div>
+        <span
+          className="StudentInfo"
+        >
+          <span
+            className="StudentInfo-Name"
+            data-testid="username"
+          >
+            username102
+          </span>
+          <div
+            className="StudentInfo-Status"
+            data-testid="userstatus"
+          >
+            No status so far
+          </div>
+        </span>
+      </div>
+      <div
+        className="LeaderboardTable-Cell LeaderboardTable-Cell_progress"
+        data-testid="progress-cell"
+      >
+        850
+      </div>
+      <div
+        className="LeaderboardTable-Cell LeaderboardTable-Cell_badges"
+        data-testid="badges-cell"
+      >
+        <div
+          className="Badges"
+        />
+      </div>
+    </div>
+    <div
+      className="LeaderboardTable-Row "
+      data-testid="leaderboard-table-row"
+    >
+      <div
+        className="LeaderboardTable-Cell LeaderboardTable-Cell_student"
+      >
+        <div
+          className="Avatar"
+          data-testid="avatar"
+          style={
+            Object {
+              "backgroundImage": "url(/images/default.png)",
+            }
+          }
+        >
+          <span
+            className="Avatar-Position"
+          >
+            108
+          </span>
+        </div>
+        <span
+          className="StudentInfo"
+        >
+          <span
+            className="StudentInfo-Name"
+            data-testid="username"
+          >
+            username103
+          </span>
+          <div
+            className="StudentInfo-Status"
+            data-testid="userstatus"
+          >
+            No status so far
+          </div>
+        </span>
+      </div>
+      <div
+        className="LeaderboardTable-Cell LeaderboardTable-Cell_progress"
+        data-testid="progress-cell"
+      >
+        750
+      </div>
+      <div
+        className="LeaderboardTable-Cell LeaderboardTable-Cell_badges"
+        data-testid="badges-cell"
+      >
+        <div
+          className="Badges"
+        />
+      </div>
+    </div>
+    <div
+      className="LeaderboardTable-Row "
+      data-testid="leaderboard-table-row"
+    >
+      <div
+        className="LeaderboardTable-Cell LeaderboardTable-Cell_student"
+      >
+        <div
+          className="Avatar"
+          data-testid="avatar"
+          style={
+            Object {
+              "backgroundImage": "url(/images/default.png)",
+            }
+          }
+        >
+          <span
+            className="Avatar-Position"
+          >
+            109
+          </span>
+        </div>
+        <span
+          className="StudentInfo"
+        >
+          <span
+            className="StudentInfo-Name"
+            data-testid="username"
+          >
+            username104
+          </span>
+          <div
+            className="StudentInfo-Status"
+            data-testid="userstatus"
+          >
+            No status so far
+          </div>
+        </span>
+      </div>
+      <div
+        className="LeaderboardTable-Cell LeaderboardTable-Cell_progress"
+        data-testid="progress-cell"
+      >
+        650
+      </div>
+      <div
+        className="LeaderboardTable-Cell LeaderboardTable-Cell_badges"
+        data-testid="badges-cell"
+      >
+        <div
+          className="Badges"
+        />
+      </div>
+    </div>
+    <div
+      className="LeaderboardTable-Row "
+      data-testid="leaderboard-table-row"
+    >
+      <div
+        className="LeaderboardTable-Cell LeaderboardTable-Cell_student"
+      >
+        <div
+          className="Avatar"
+          data-testid="avatar"
+          style={
+            Object {
+              "backgroundImage": "url(/images/default_0.png)",
+            }
+          }
+        >
+          <span
+            className="Avatar-Position"
+          >
+            110
+          </span>
+        </div>
+        <span
+          className="StudentInfo"
+        >
+          <span
+            className="StudentInfo-Name"
+            data-testid="username"
+          >
+            current_user
+          </span>
+          <div
+            className="StudentInfo-Status"
+            data-testid="userstatus"
+          >
+            No status so far
+          </div>
+        </span>
+      </div>
+      <div
+        className="LeaderboardTable-Cell LeaderboardTable-Cell_progress"
+        data-testid="progress-cell"
+      >
+        550
+      </div>
+      <div
+        className="LeaderboardTable-Cell LeaderboardTable-Cell_badges"
+        data-testid="badges-cell"
+      >
+        <div
+          className="Badges"
+        />
+      </div>
+    </div>
+    <div
+      className="LeaderboardTable-Row "
+      data-testid="leaderboard-table-row"
+    >
+      <div
+        className="LeaderboardTable-Cell LeaderboardTable-Cell_student"
+      >
+        <div
+          className="Avatar"
+          data-testid="avatar"
+          style={
+            Object {
+              "backgroundImage": "url(/images/default.png)",
+            }
+          }
+        >
+          <span
+            className="Avatar-Position"
+          >
+            111
+          </span>
+        </div>
+        <span
+          className="StudentInfo"
+        >
+          <span
+            className="StudentInfo-Name"
+            data-testid="username"
+          >
+            username106
+          </span>
+          <div
+            className="StudentInfo-Status"
+            data-testid="userstatus"
+          >
+            No status so far
+          </div>
+        </span>
+      </div>
+      <div
+        className="LeaderboardTable-Cell LeaderboardTable-Cell_progress"
+        data-testid="progress-cell"
+      >
+        450
+      </div>
+      <div
+        className="LeaderboardTable-Cell LeaderboardTable-Cell_badges"
+        data-testid="badges-cell"
+      >
+        <div
+          className="Badges"
+        />
+      </div>
+    </div>
+    <div
+      className="LeaderboardTable-Row "
+      data-testid="leaderboard-table-row"
+    >
+      <div
+        className="LeaderboardTable-Cell LeaderboardTable-Cell_student"
+      >
+        <div
+          className="Avatar"
+          data-testid="avatar"
+          style={
+            Object {
+              "backgroundImage": "url(/images/default.png)",
+            }
+          }
+        >
+          <span
+            className="Avatar-Position"
+          >
+            112
+          </span>
+        </div>
+        <span
+          className="StudentInfo"
+        >
+          <span
+            className="StudentInfo-Name"
+            data-testid="username"
+          >
+            username107
+          </span>
+          <div
+            className="StudentInfo-Status"
+            data-testid="userstatus"
+          >
+            No status so far
+          </div>
+        </span>
+      </div>
+      <div
+        className="LeaderboardTable-Cell LeaderboardTable-Cell_progress"
+        data-testid="progress-cell"
+      >
+        350
+      </div>
+      <div
+        className="LeaderboardTable-Cell LeaderboardTable-Cell_badges"
+        data-testid="badges-cell"
+      >
+        <div
+          className="Badges"
+        />
+      </div>
+    </div>
+  </div>,
+]
+`;
+
+exports[`<LeaderboardPage> renders 4`] = `
+Array [
+  <h1
+    className="LeaderboardTitle"
+    data-testid="leaderboard-page-title"
+  >
+    Leaderboard
+  </h1>,
+  <div
+    className="LeaderboardTable"
+    data-testid="leaderboard-table"
+  >
+    <div
+      className="LeaderboardTable-Row "
+      data-testid="leaderboard-table-row"
+    >
+      <div
+        className="LeaderboardTable-Cell LeaderboardTable-Cell_student"
+      >
+        <div
+          className="Avatar"
+          data-testid="avatar"
+          style={
+            Object {
+              "backgroundImage": "url(/images/default.png)",
+            }
+          }
+        >
+          <span
+            className="Avatar-Position Avatar-Position_winner"
+          >
+            <img
+              alt=""
+              src={Object {}}
+            />
+          </span>
+        </div>
+        <span
+          className="StudentInfo"
+        >
+          <span
+            className="StudentInfo-Name"
+            data-testid="username"
+          >
+            username1
+          </span>
+          <div
+            className="StudentInfo-Status"
+            data-testid="userstatus"
+          >
+            No status so far
+          </div>
+        </span>
+      </div>
+      <div
+        className="LeaderboardTable-Cell LeaderboardTable-Cell_progress"
+        data-testid="progress-cell"
+      >
+        100000
+      </div>
+      <div
+        className="LeaderboardTable-Cell LeaderboardTable-Cell_badges"
+        data-testid="badges-cell"
+      >
+        <div
+          className="Badges"
+        />
+      </div>
+    </div>
+    <div
+      className="LeaderboardTable-Row LeaderboardTable-Row_highlighted"
+      data-testid="leaderboard-table-row"
+    >
+      <div
+        className="LeaderboardTable-Cell LeaderboardTable-Cell_student"
+      >
+        <div
+          className="Avatar"
+          data-testid="avatar"
+          style={
+            Object {
+              "backgroundImage": "url(/images/default_0.png)",
+            }
+          }
+        >
+          <span
+            className="Avatar-Position Avatar-Position_winner"
+          >
+            <img
+              alt=""
+              src={Object {}}
+            />
+          </span>
+        </div>
+        <span
+          className="StudentInfo"
+        >
+          <span
+            className="StudentInfo-Name"
+            data-testid="username"
+          >
+            current_user
+          </span>
+          <div
+            className="StudentInfo-Status"
+            data-testid="userstatus"
+          >
+            No status so far
+          </div>
+        </span>
+      </div>
+      <div
+        className="LeaderboardTable-Cell LeaderboardTable-Cell_progress"
+        data-testid="progress-cell"
+      >
+        99999
+      </div>
+      <div
+        className="LeaderboardTable-Cell LeaderboardTable-Cell_badges"
+        data-testid="badges-cell"
+      >
+        <div
+          className="Badges"
+        />
+      </div>
+    </div>
+    <div
+      className="LeaderboardTable-Row "
+      data-testid="leaderboard-table-row"
+    >
+      <div
+        className="LeaderboardTable-Cell LeaderboardTable-Cell_student"
+      >
+        <div
+          className="Avatar"
+          data-testid="avatar"
+          style={
+            Object {
+              "backgroundImage": "url(/images/default.png)",
+            }
+          }
+        >
+          <span
+            className="Avatar-Position Avatar-Position_winner"
+          >
+            <img
+              alt=""
+              src={Object {}}
+            />
+          </span>
+        </div>
+        <span
+          className="StudentInfo"
+        >
+          <span
+            className="StudentInfo-Name"
+            data-testid="username"
+          >
+            username3
+          </span>
+          <div
+            className="StudentInfo-Status"
+            data-testid="userstatus"
+          >
+            No status so far
+          </div>
+        </span>
+      </div>
+      <div
+        className="LeaderboardTable-Cell LeaderboardTable-Cell_progress"
+        data-testid="progress-cell"
+      >
+        88888
+      </div>
+      <div
+        className="LeaderboardTable-Cell LeaderboardTable-Cell_badges"
+        data-testid="badges-cell"
+      >
+        <div
+          className="Badges"
+        />
+      </div>
+    </div>
+    <div
+      className="LeaderboardTable-Row "
+      data-testid="leaderboard-table-row"
+    >
+      <div
+        className="LeaderboardTable-Cell LeaderboardTable-Cell_student"
+      >
+        <div
+          className="Avatar"
+          data-testid="avatar"
+          style={
+            Object {
+              "backgroundImage": "url(/images/default.png)",
+            }
+          }
+        >
+          <span
+            className="Avatar-Position"
+          >
+            4
+          </span>
+        </div>
+        <span
+          className="StudentInfo"
+        >
+          <span
+            className="StudentInfo-Name"
+            data-testid="username"
+          >
+            username4
+          </span>
+          <div
+            className="StudentInfo-Status"
+            data-testid="userstatus"
+          >
+            No status so far
+          </div>
+        </span>
+      </div>
+      <div
+        className="LeaderboardTable-Cell LeaderboardTable-Cell_progress"
+        data-testid="progress-cell"
+      >
+        77777
+      </div>
+      <div
+        className="LeaderboardTable-Cell LeaderboardTable-Cell_badges"
+        data-testid="badges-cell"
+      >
+        <div
+          className="Badges"
+        />
+      </div>
+    </div>
+    <div
+      className="LeaderboardTable-Row "
+      data-testid="leaderboard-table-row"
+    >
+      <div
+        className="LeaderboardTable-Cell LeaderboardTable-Cell_student"
+      >
+        <div
+          className="Avatar"
+          data-testid="avatar"
+          style={
+            Object {
+              "backgroundImage": "url(/images/default.png)",
+            }
+          }
+        >
+          <span
+            className="Avatar-Position"
+          >
+            5
+          </span>
+        </div>
+        <span
+          className="StudentInfo"
+        >
+          <span
+            className="StudentInfo-Name"
+            data-testid="username"
+          >
+            username5
+          </span>
+          <div
+            className="StudentInfo-Status"
+            data-testid="userstatus"
+          >
+            No status so far
+          </div>
+        </span>
+      </div>
+      <div
+        className="LeaderboardTable-Cell LeaderboardTable-Cell_progress"
+        data-testid="progress-cell"
+      >
+        66666
+      </div>
+      <div
+        className="LeaderboardTable-Cell LeaderboardTable-Cell_badges"
+        data-testid="badges-cell"
+      >
+        <div
+          className="Badges"
+        />
+      </div>
+    </div>
+    <div
+      className="LeaderboardTable-Row "
+      data-testid="leaderboard-table-row"
+    >
+      <div
+        className="LeaderboardTable-Cell LeaderboardTable-Cell_student"
+      >
+        <div
+          className="Avatar"
+          data-testid="avatar"
+          style={
+            Object {
+              "backgroundImage": "url(/images/default.png)",
+            }
+          }
+        >
+          <span
+            className="Avatar-Position"
+          >
+            6
+          </span>
+        </div>
+        <span
+          className="StudentInfo"
+        >
+          <span
+            className="StudentInfo-Name"
+            data-testid="username"
+          >
+            username6
+          </span>
+          <div
+            className="StudentInfo-Status"
+            data-testid="userstatus"
+          >
+            No status so far
+          </div>
+        </span>
+      </div>
+      <div
+        className="LeaderboardTable-Cell LeaderboardTable-Cell_progress"
+        data-testid="progress-cell"
+      >
+        55555
+      </div>
+      <div
+        className="LeaderboardTable-Cell LeaderboardTable-Cell_badges"
+        data-testid="badges-cell"
+      >
+        <div
+          className="Badges"
+        />
+      </div>
+    </div>
+    <div
+      className="LeaderboardTable-Row "
+      data-testid="leaderboard-table-row"
+    >
+      <div
+        className="LeaderboardTable-Cell LeaderboardTable-Cell_student"
+      >
+        <div
+          className="Avatar"
+          data-testid="avatar"
+          style={
+            Object {
+              "backgroundImage": "url(/images/default.png)",
+            }
+          }
+        >
+          <span
+            className="Avatar-Position"
+          >
+            7
+          </span>
+        </div>
+        <span
+          className="StudentInfo"
+        >
+          <span
+            className="StudentInfo-Name"
+            data-testid="username"
+          >
+            username7
+          </span>
+          <div
+            className="StudentInfo-Status"
+            data-testid="userstatus"
+          >
+            No status so far
+          </div>
+        </span>
+      </div>
+      <div
+        className="LeaderboardTable-Cell LeaderboardTable-Cell_progress"
+        data-testid="progress-cell"
+      >
+        44444
+      </div>
+      <div
+        className="LeaderboardTable-Cell LeaderboardTable-Cell_badges"
+        data-testid="badges-cell"
+      >
+        <div
+          className="Badges"
+        />
+      </div>
+    </div>
+    <div
+      className="LeaderboardTable-Row "
+      data-testid="leaderboard-table-row"
+    >
+      <div
+        className="LeaderboardTable-Cell LeaderboardTable-Cell_student"
+      >
+        <div
+          className="Avatar"
+          data-testid="avatar"
+          style={
+            Object {
+              "backgroundImage": "url(/images/default.png)",
+            }
+          }
+        >
+          <span
+            className="Avatar-Position"
+          >
+            8
+          </span>
+        </div>
+        <span
+          className="StudentInfo"
+        >
+          <span
+            className="StudentInfo-Name"
+            data-testid="username"
+          >
+            username8
+          </span>
+          <div
+            className="StudentInfo-Status"
+            data-testid="userstatus"
+          >
+            No status so far
+          </div>
+        </span>
+      </div>
+      <div
+        className="LeaderboardTable-Cell LeaderboardTable-Cell_progress"
+        data-testid="progress-cell"
+      >
+        33333
+      </div>
+      <div
+        className="LeaderboardTable-Cell LeaderboardTable-Cell_badges"
+        data-testid="badges-cell"
+      >
+        <div
+          className="Badges"
+        />
+      </div>
+    </div>
+    <div
+      className="LeaderboardTable-Row "
+      data-testid="leaderboard-table-row"
+    >
+      <div
+        className="LeaderboardTable-Cell LeaderboardTable-Cell_student"
+      >
+        <div
+          className="Avatar"
+          data-testid="avatar"
+          style={
+            Object {
+              "backgroundImage": "url(/images/default.png)",
+            }
+          }
+        >
+          <span
+            className="Avatar-Position"
+          >
+            9
+          </span>
+        </div>
+        <span
+          className="StudentInfo"
+        >
+          <span
+            className="StudentInfo-Name"
+            data-testid="username"
+          >
+            username9
+          </span>
+          <div
+            className="StudentInfo-Status"
+            data-testid="userstatus"
+          >
+            No status so far
+          </div>
+        </span>
+      </div>
+      <div
+        className="LeaderboardTable-Cell LeaderboardTable-Cell_progress"
+        data-testid="progress-cell"
+      >
+        22222
+      </div>
+      <div
+        className="LeaderboardTable-Cell LeaderboardTable-Cell_badges"
+        data-testid="badges-cell"
+      >
+        <div
+          className="Badges"
+        />
+      </div>
+    </div>
+    <div
+      className="LeaderboardTable-Row "
+      data-testid="leaderboard-table-row"
+    >
+      <div
+        className="LeaderboardTable-Cell LeaderboardTable-Cell_student"
+      >
+        <div
+          className="Avatar"
+          data-testid="avatar"
+          style={
+            Object {
+              "backgroundImage": "url(/images/default.png)",
+            }
+          }
+        >
+          <span
+            className="Avatar-Position"
+          >
+            10
+          </span>
+        </div>
+        <span
+          className="StudentInfo"
+        >
+          <span
+            className="StudentInfo-Name"
+            data-testid="username"
+          >
+            username10
+          </span>
+          <div
+            className="StudentInfo-Status"
+            data-testid="userstatus"
+          >
+            No status so far
+          </div>
+        </span>
+      </div>
+      <div
+        className="LeaderboardTable-Cell LeaderboardTable-Cell_progress"
+        data-testid="progress-cell"
+      >
+        11111
+      </div>
+      <div
+        className="LeaderboardTable-Cell LeaderboardTable-Cell_badges"
+        data-testid="badges-cell"
+      >
+        <div
+          className="Badges"
+        />
+      </div>
+    </div>
+  </div>,
+]
+`;
+
+exports[`<LeaderboardPage> renders 5`] = `
+Array [
+  <h1
+    className="LeaderboardTitle"
+    data-testid="leaderboard-page-title"
+  >
+    Leaderboard
+  </h1>,
+  <div
+    className="LeaderboardTable"
+    data-testid="leaderboard-table"
+  >
+    <div
+      className="LeaderboardTable-Row "
+      data-testid="leaderboard-table-row"
+    >
+      <div
+        className="LeaderboardTable-Cell LeaderboardTable-Cell_student"
+      >
+        <div
+          className="Avatar"
+          data-testid="avatar"
+          style={
+            Object {
+              "backgroundImage": "url(/images/default.png)",
+            }
+          }
+        >
+          <span
+            className="Avatar-Position Avatar-Position_winner"
+          >
+            <img
+              alt=""
+              src={Object {}}
+            />
+          </span>
+        </div>
+        <span
+          className="StudentInfo"
+        >
+          <span
+            className="StudentInfo-Name"
+            data-testid="username"
+          >
+            username1
+          </span>
+          <div
+            className="StudentInfo-Status"
+            data-testid="userstatus"
+          >
+            No status so far
+          </div>
+        </span>
+      </div>
+      <div
+        className="LeaderboardTable-Cell LeaderboardTable-Cell_progress"
+        data-testid="progress-cell"
+      >
+        100000
+      </div>
+      <div
+        className="LeaderboardTable-Cell LeaderboardTable-Cell_badges"
+        data-testid="badges-cell"
+      >
+        <div
+          className="Badges"
+        />
+      </div>
+    </div>
+    <div
+      className="LeaderboardTable-Row "
+      data-testid="leaderboard-table-row"
+    >
+      <div
+        className="LeaderboardTable-Cell LeaderboardTable-Cell_student"
+      >
+        <div
+          className="Avatar"
+          data-testid="avatar"
+          style={
+            Object {
+              "backgroundImage": "url(/images/default.png)",
+            }
+          }
+        >
+          <span
+            className="Avatar-Position Avatar-Position_winner"
+          >
+            <img
+              alt=""
+              src={Object {}}
+            />
+          </span>
+        </div>
+        <span
+          className="StudentInfo"
+        >
+          <span
+            className="StudentInfo-Name"
+            data-testid="username"
+          >
+            username2
+          </span>
+          <div
+            className="StudentInfo-Status"
+            data-testid="userstatus"
+          >
+            No status so far
+          </div>
+        </span>
+      </div>
+      <div
+        className="LeaderboardTable-Cell LeaderboardTable-Cell_progress"
+        data-testid="progress-cell"
+      >
+        99999
+      </div>
+      <div
+        className="LeaderboardTable-Cell LeaderboardTable-Cell_badges"
+        data-testid="badges-cell"
+      >
+        <div
+          className="Badges"
+        />
+      </div>
+    </div>
+    <div
+      className="LeaderboardTable-Row "
+      data-testid="leaderboard-table-row"
+    >
+      <div
+        className="LeaderboardTable-Cell LeaderboardTable-Cell_student"
+      >
+        <div
+          className="Avatar"
+          data-testid="avatar"
+          style={
+            Object {
+              "backgroundImage": "url(/images/default.png)",
+            }
+          }
+        >
+          <span
+            className="Avatar-Position Avatar-Position_winner"
+          >
+            <img
+              alt=""
+              src={Object {}}
+            />
+          </span>
+        </div>
+        <span
+          className="StudentInfo"
+        >
+          <span
+            className="StudentInfo-Name"
+            data-testid="username"
+          >
+            username3
+          </span>
+          <div
+            className="StudentInfo-Status"
+            data-testid="userstatus"
+          >
+            No status so far
+          </div>
+        </span>
+      </div>
+      <div
+        className="LeaderboardTable-Cell LeaderboardTable-Cell_progress"
+        data-testid="progress-cell"
+      >
+        88888
+      </div>
+      <div
+        className="LeaderboardTable-Cell LeaderboardTable-Cell_badges"
+        data-testid="badges-cell"
+      >
+        <div
+          className="Badges"
+        />
+      </div>
+    </div>
+    <div
+      className="LeaderboardTable-Separator"
+      data-testid="leaderboard-table-separator"
+    >
+      <span />
+       
+      <span />
+       
+      <span />
+    </div>
+    <div
+      className="LeaderboardTable-Row "
+      data-testid="leaderboard-table-row"
+    >
+      <div
+        className="LeaderboardTable-Cell LeaderboardTable-Cell_student"
+      >
+        <div
+          className="Avatar"
+          data-testid="avatar"
+          style={
+            Object {
+              "backgroundImage": "url(/images/default.png)",
+            }
+          }
+        >
+          <span
+            className="Avatar-Position"
+          >
+            107
+          </span>
+        </div>
+        <span
+          className="StudentInfo"
+        >
+          <span
+            className="StudentInfo-Name"
+            data-testid="username"
+          >
+            username101
+          </span>
+          <div
+            className="StudentInfo-Status"
+            data-testid="userstatus"
+          >
+            No status so far
+          </div>
+        </span>
+      </div>
+      <div
+        className="LeaderboardTable-Cell LeaderboardTable-Cell_progress"
+        data-testid="progress-cell"
+      >
+        900
+      </div>
+      <div
+        className="LeaderboardTable-Cell LeaderboardTable-Cell_badges"
+        data-testid="badges-cell"
+      >
+        <div
+          className="Badges"
+        />
+      </div>
+    </div>
+    <div
+      className="LeaderboardTable-Row "
+      data-testid="leaderboard-table-row"
+    >
+      <div
+        className="LeaderboardTable-Cell LeaderboardTable-Cell_student"
+      >
+        <div
+          className="Avatar"
+          data-testid="avatar"
+          style={
+            Object {
+              "backgroundImage": "url(/images/default.png)",
+            }
+          }
+        >
+          <span
+            className="Avatar-Position"
+          >
+            108
+          </span>
+        </div>
+        <span
+          className="StudentInfo"
+        >
+          <span
+            className="StudentInfo-Name"
+            data-testid="username"
+          >
+            username102
+          </span>
+          <div
+            className="StudentInfo-Status"
+            data-testid="userstatus"
+          >
+            No status so far
+          </div>
+        </span>
+      </div>
+      <div
+        className="LeaderboardTable-Cell LeaderboardTable-Cell_progress"
+        data-testid="progress-cell"
+      >
+        850
+      </div>
+      <div
+        className="LeaderboardTable-Cell LeaderboardTable-Cell_badges"
+        data-testid="badges-cell"
+      >
+        <div
+          className="Badges"
+        />
+      </div>
+    </div>
+    <div
+      className="LeaderboardTable-Row "
+      data-testid="leaderboard-table-row"
+    >
+      <div
+        className="LeaderboardTable-Cell LeaderboardTable-Cell_student"
+      >
+        <div
+          className="Avatar"
+          data-testid="avatar"
+          style={
+            Object {
+              "backgroundImage": "url(/images/default.png)",
+            }
+          }
+        >
+          <span
+            className="Avatar-Position"
+          >
+            109
+          </span>
+        </div>
+        <span
+          className="StudentInfo"
+        >
+          <span
+            className="StudentInfo-Name"
+            data-testid="username"
+          >
+            username103
+          </span>
+          <div
+            className="StudentInfo-Status"
+            data-testid="userstatus"
+          >
+            No status so far
+          </div>
+        </span>
+      </div>
+      <div
+        className="LeaderboardTable-Cell LeaderboardTable-Cell_progress"
+        data-testid="progress-cell"
+      >
+        750
+      </div>
+      <div
+        className="LeaderboardTable-Cell LeaderboardTable-Cell_badges"
+        data-testid="badges-cell"
+      >
+        <div
+          className="Badges"
+        />
+      </div>
+    </div>
+    <div
+      className="LeaderboardTable-Row "
+      data-testid="leaderboard-table-row"
+    >
+      <div
+        className="LeaderboardTable-Cell LeaderboardTable-Cell_student"
+      >
+        <div
+          className="Avatar"
+          data-testid="avatar"
+          style={
+            Object {
+              "backgroundImage": "url(/images/default.png)",
+            }
+          }
+        >
+          <span
+            className="Avatar-Position"
+          >
+            110
+          </span>
+        </div>
+        <span
+          className="StudentInfo"
+        >
+          <span
+            className="StudentInfo-Name"
+            data-testid="username"
+          >
+            username104
+          </span>
+          <div
+            className="StudentInfo-Status"
+            data-testid="userstatus"
+          >
+            No status so far
+          </div>
+        </span>
+      </div>
+      <div
+        className="LeaderboardTable-Cell LeaderboardTable-Cell_progress"
+        data-testid="progress-cell"
+      >
+        650
+      </div>
+      <div
+        className="LeaderboardTable-Cell LeaderboardTable-Cell_badges"
+        data-testid="badges-cell"
+      >
+        <div
+          className="Badges"
+        />
+      </div>
+    </div>
+    <div
+      className="LeaderboardTable-Row "
+      data-testid="leaderboard-table-row"
+    >
+      <div
+        className="LeaderboardTable-Cell LeaderboardTable-Cell_student"
+      >
+        <div
+          className="Avatar"
+          data-testid="avatar"
+          style={
+            Object {
+              "backgroundImage": "url(/images/default.png)",
+            }
+          }
+        >
+          <span
+            className="Avatar-Position"
+          >
+            111
+          </span>
+        </div>
+        <span
+          className="StudentInfo"
+        >
+          <span
+            className="StudentInfo-Name"
+            data-testid="username"
+          >
+            username105
+          </span>
+          <div
+            className="StudentInfo-Status"
+            data-testid="userstatus"
+          >
+            No status so far
+          </div>
+        </span>
+      </div>
+      <div
+        className="LeaderboardTable-Cell LeaderboardTable-Cell_progress"
+        data-testid="progress-cell"
+      >
+        550
+      </div>
+      <div
+        className="LeaderboardTable-Cell LeaderboardTable-Cell_badges"
+        data-testid="badges-cell"
+      >
+        <div
+          className="Badges"
+        />
+      </div>
+    </div>
+    <div
+      className="LeaderboardTable-Row "
+      data-testid="leaderboard-table-row"
+    >
+      <div
+        className="LeaderboardTable-Cell LeaderboardTable-Cell_student"
+      >
+        <div
+          className="Avatar"
+          data-testid="avatar"
+          style={
+            Object {
+              "backgroundImage": "url(/images/default_0.png)",
+            }
+          }
+        >
+          <span
+            className="Avatar-Position"
+          >
+            112
+          </span>
+        </div>
+        <span
+          className="StudentInfo"
+        >
+          <span
+            className="StudentInfo-Name"
+            data-testid="username"
+          >
+            current_user
+          </span>
+          <div
+            className="StudentInfo-Status"
+            data-testid="userstatus"
+          >
+            No status so far
+          </div>
+        </span>
+      </div>
+      <div
+        className="LeaderboardTable-Cell LeaderboardTable-Cell_progress"
+        data-testid="progress-cell"
+      >
+        450
+      </div>
+      <div
+        className="LeaderboardTable-Cell LeaderboardTable-Cell_badges"
+        data-testid="badges-cell"
+      >
+        <div
+          className="Badges"
+        />
+      </div>
+    </div>
+    <div
+      className="LeaderboardTable-Row "
+      data-testid="leaderboard-table-row"
+    >
+      <div
+        className="LeaderboardTable-Cell LeaderboardTable-Cell_student"
+      >
+        <div
+          className="Avatar"
+          data-testid="avatar"
+          style={
+            Object {
+              "backgroundImage": "url(/images/default.png)",
+            }
+          }
+        >
+          <span
+            className="Avatar-Position"
+          >
+            113
+          </span>
+        </div>
+        <span
+          className="StudentInfo"
+        >
+          <span
+            className="StudentInfo-Name"
+            data-testid="username"
+          >
+            username107
+          </span>
+          <div
+            className="StudentInfo-Status"
+            data-testid="userstatus"
+          >
+            No status so far
+          </div>
+        </span>
+      </div>
+      <div
+        className="LeaderboardTable-Cell LeaderboardTable-Cell_progress"
+        data-testid="progress-cell"
+      >
+        350
+      </div>
+      <div
+        className="LeaderboardTable-Cell LeaderboardTable-Cell_badges"
+        data-testid="badges-cell"
+      >
+        <div
+          className="Badges"
+        />
+      </div>
+    </div>
+  </div>,
+]
+`;
+
+exports[`<LeaderboardPage> renders 6`] = `
+Array [
+  <h1
+    className="LeaderboardTitle"
+    data-testid="leaderboard-page-title"
+  >
+    Leaderboard
+  </h1>,
+  <div
+    className="LeaderboardTable"
+    data-testid="leaderboard-table"
+  >
+    <div
+      className="LeaderboardTable-Row "
+      data-testid="leaderboard-table-row"
+    >
+      <div
+        className="LeaderboardTable-Cell LeaderboardTable-Cell_student"
+      >
+        <div
+          className="Avatar"
+          data-testid="avatar"
+          style={
+            Object {
+              "backgroundImage": "url(/images/default.png)",
+            }
+          }
+        >
+          <span
+            className="Avatar-Position Avatar-Position_winner"
+          >
+            <img
+              alt=""
+              src={Object {}}
+            />
+          </span>
+        </div>
+        <span
+          className="StudentInfo"
+        >
+          <span
+            className="StudentInfo-Name"
+            data-testid="username"
+          >
+            username1
+          </span>
+          <div
+            className="StudentInfo-Status"
+            data-testid="userstatus"
+          >
+            No status so far
+          </div>
+        </span>
+      </div>
+      <div
+        className="LeaderboardTable-Cell LeaderboardTable-Cell_progress"
+        data-testid="progress-cell"
+      >
+        100000
+      </div>
+      <div
+        className="LeaderboardTable-Cell LeaderboardTable-Cell_badges"
+        data-testid="badges-cell"
+      >
+        <div
+          className="Badges"
+        />
+      </div>
+    </div>
+    <div
+      className="LeaderboardTable-Row "
+      data-testid="leaderboard-table-row"
+    >
+      <div
+        className="LeaderboardTable-Cell LeaderboardTable-Cell_student"
+      >
+        <div
+          className="Avatar"
+          data-testid="avatar"
+          style={
+            Object {
+              "backgroundImage": "url(/images/default.png)",
+            }
+          }
+        >
+          <span
+            className="Avatar-Position Avatar-Position_winner"
+          >
+            <img
+              alt=""
+              src={Object {}}
+            />
+          </span>
+        </div>
+        <span
+          className="StudentInfo"
+        >
+          <span
+            className="StudentInfo-Name"
+            data-testid="username"
+          >
+            username2
+          </span>
+          <div
+            className="StudentInfo-Status"
+            data-testid="userstatus"
+          >
+            No status so far
+          </div>
+        </span>
+      </div>
+      <div
+        className="LeaderboardTable-Cell LeaderboardTable-Cell_progress"
+        data-testid="progress-cell"
+      >
+        99999
+      </div>
+      <div
+        className="LeaderboardTable-Cell LeaderboardTable-Cell_badges"
+        data-testid="badges-cell"
+      >
+        <div
+          className="Badges"
+        />
+      </div>
+    </div>
+    <div
+      className="LeaderboardTable-Row "
+      data-testid="leaderboard-table-row"
+    >
+      <div
+        className="LeaderboardTable-Cell LeaderboardTable-Cell_student"
+      >
+        <div
+          className="Avatar"
+          data-testid="avatar"
+          style={
+            Object {
+              "backgroundImage": "url(/images/default.png)",
+            }
+          }
+        >
+          <span
+            className="Avatar-Position Avatar-Position_winner"
+          >
+            <img
+              alt=""
+              src={Object {}}
+            />
+          </span>
+        </div>
+        <span
+          className="StudentInfo"
+        >
+          <span
+            className="StudentInfo-Name"
+            data-testid="username"
+          >
+            username3
+          </span>
+          <div
+            className="StudentInfo-Status"
+            data-testid="userstatus"
+          >
+            No status so far
+          </div>
+        </span>
+      </div>
+      <div
+        className="LeaderboardTable-Cell LeaderboardTable-Cell_progress"
+        data-testid="progress-cell"
+      >
+        88888
+      </div>
+      <div
+        className="LeaderboardTable-Cell LeaderboardTable-Cell_badges"
+        data-testid="badges-cell"
+      >
+        <div
+          className="Badges"
+        />
+      </div>
+    </div>
+    <div
+      className="LeaderboardTable-Separator"
+      data-testid="leaderboard-table-separator"
+    >
+      <span />
+       
+      <span />
+       
+      <span />
+    </div>
+    <div
+      className="LeaderboardTable-Row "
+      data-testid="leaderboard-table-row"
+    >
+      <div
+        className="LeaderboardTable-Cell LeaderboardTable-Cell_student"
+      >
+        <div
+          className="Avatar"
+          data-testid="avatar"
+          style={
+            Object {
+              "backgroundImage": "url(/images/default.png)",
+            }
+          }
+        >
+          <span
+            className="Avatar-Position"
+          >
+            108
+          </span>
+        </div>
+        <span
+          className="StudentInfo"
+        >
+          <span
+            className="StudentInfo-Name"
+            data-testid="username"
+          >
+            username101
+          </span>
+          <div
+            className="StudentInfo-Status"
+            data-testid="userstatus"
+          >
+            No status so far
+          </div>
+        </span>
+      </div>
+      <div
+        className="LeaderboardTable-Cell LeaderboardTable-Cell_progress"
+        data-testid="progress-cell"
+      >
+        900
+      </div>
+      <div
+        className="LeaderboardTable-Cell LeaderboardTable-Cell_badges"
+        data-testid="badges-cell"
+      >
+        <div
+          className="Badges"
+        />
+      </div>
+    </div>
+    <div
+      className="LeaderboardTable-Row "
+      data-testid="leaderboard-table-row"
+    >
+      <div
+        className="LeaderboardTable-Cell LeaderboardTable-Cell_student"
+      >
+        <div
+          className="Avatar"
+          data-testid="avatar"
+          style={
+            Object {
+              "backgroundImage": "url(/images/default.png)",
+            }
+          }
+        >
+          <span
+            className="Avatar-Position"
+          >
+            109
+          </span>
+        </div>
+        <span
+          className="StudentInfo"
+        >
+          <span
+            className="StudentInfo-Name"
+            data-testid="username"
+          >
+            username102
+          </span>
+          <div
+            className="StudentInfo-Status"
+            data-testid="userstatus"
+          >
+            No status so far
+          </div>
+        </span>
+      </div>
+      <div
+        className="LeaderboardTable-Cell LeaderboardTable-Cell_progress"
+        data-testid="progress-cell"
+      >
+        850
+      </div>
+      <div
+        className="LeaderboardTable-Cell LeaderboardTable-Cell_badges"
+        data-testid="badges-cell"
+      >
+        <div
+          className="Badges"
+        />
+      </div>
+    </div>
+    <div
+      className="LeaderboardTable-Row "
+      data-testid="leaderboard-table-row"
+    >
+      <div
+        className="LeaderboardTable-Cell LeaderboardTable-Cell_student"
+      >
+        <div
+          className="Avatar"
+          data-testid="avatar"
+          style={
+            Object {
+              "backgroundImage": "url(/images/default.png)",
+            }
+          }
+        >
+          <span
+            className="Avatar-Position"
+          >
+            110
+          </span>
+        </div>
+        <span
+          className="StudentInfo"
+        >
+          <span
+            className="StudentInfo-Name"
+            data-testid="username"
+          >
+            username103
+          </span>
+          <div
+            className="StudentInfo-Status"
+            data-testid="userstatus"
+          >
+            No status so far
+          </div>
+        </span>
+      </div>
+      <div
+        className="LeaderboardTable-Cell LeaderboardTable-Cell_progress"
+        data-testid="progress-cell"
+      >
+        750
+      </div>
+      <div
+        className="LeaderboardTable-Cell LeaderboardTable-Cell_badges"
+        data-testid="badges-cell"
+      >
+        <div
+          className="Badges"
+        />
+      </div>
+    </div>
+    <div
+      className="LeaderboardTable-Row "
+      data-testid="leaderboard-table-row"
+    >
+      <div
+        className="LeaderboardTable-Cell LeaderboardTable-Cell_student"
+      >
+        <div
+          className="Avatar"
+          data-testid="avatar"
+          style={
+            Object {
+              "backgroundImage": "url(/images/default.png)",
+            }
+          }
+        >
+          <span
+            className="Avatar-Position"
+          >
+            111
+          </span>
+        </div>
+        <span
+          className="StudentInfo"
+        >
+          <span
+            className="StudentInfo-Name"
+            data-testid="username"
+          >
+            username104
+          </span>
+          <div
+            className="StudentInfo-Status"
+            data-testid="userstatus"
+          >
+            No status so far
+          </div>
+        </span>
+      </div>
+      <div
+        className="LeaderboardTable-Cell LeaderboardTable-Cell_progress"
+        data-testid="progress-cell"
+      >
+        650
+      </div>
+      <div
+        className="LeaderboardTable-Cell LeaderboardTable-Cell_badges"
+        data-testid="badges-cell"
+      >
+        <div
+          className="Badges"
+        />
+      </div>
+    </div>
+    <div
+      className="LeaderboardTable-Row "
+      data-testid="leaderboard-table-row"
+    >
+      <div
+        className="LeaderboardTable-Cell LeaderboardTable-Cell_student"
+      >
+        <div
+          className="Avatar"
+          data-testid="avatar"
+          style={
+            Object {
+              "backgroundImage": "url(/images/default.png)",
+            }
+          }
+        >
+          <span
+            className="Avatar-Position"
+          >
+            112
+          </span>
+        </div>
+        <span
+          className="StudentInfo"
+        >
+          <span
+            className="StudentInfo-Name"
+            data-testid="username"
+          >
+            username105
+          </span>
+          <div
+            className="StudentInfo-Status"
+            data-testid="userstatus"
+          >
+            No status so far
+          </div>
+        </span>
+      </div>
+      <div
+        className="LeaderboardTable-Cell LeaderboardTable-Cell_progress"
+        data-testid="progress-cell"
+      >
+        550
+      </div>
+      <div
+        className="LeaderboardTable-Cell LeaderboardTable-Cell_badges"
+        data-testid="badges-cell"
+      >
+        <div
+          className="Badges"
+        />
+      </div>
+    </div>
+    <div
+      className="LeaderboardTable-Row "
+      data-testid="leaderboard-table-row"
+    >
+      <div
+        className="LeaderboardTable-Cell LeaderboardTable-Cell_student"
+      >
+        <div
+          className="Avatar"
+          data-testid="avatar"
+          style={
+            Object {
+              "backgroundImage": "url(/images/default.png)",
+            }
+          }
+        >
+          <span
+            className="Avatar-Position"
+          >
+            113
+          </span>
+        </div>
+        <span
+          className="StudentInfo"
+        >
+          <span
+            className="StudentInfo-Name"
+            data-testid="username"
+          >
+            username106
+          </span>
+          <div
+            className="StudentInfo-Status"
+            data-testid="userstatus"
+          >
+            No status so far
+          </div>
+        </span>
+      </div>
+      <div
+        className="LeaderboardTable-Cell LeaderboardTable-Cell_progress"
+        data-testid="progress-cell"
+      >
+        450
+      </div>
+      <div
+        className="LeaderboardTable-Cell LeaderboardTable-Cell_badges"
+        data-testid="badges-cell"
+      >
+        <div
+          className="Badges"
+        />
+      </div>
+    </div>
+    <div
+      className="LeaderboardTable-Row "
+      data-testid="leaderboard-table-row"
+    >
+      <div
+        className="LeaderboardTable-Cell LeaderboardTable-Cell_student"
+      >
+        <div
+          className="Avatar"
+          data-testid="avatar"
+          style={
+            Object {
+              "backgroundImage": "url(/images/default_0.png)",
+            }
+          }
+        >
+          <span
+            className="Avatar-Position"
+          >
+            114
+          </span>
+        </div>
+        <span
+          className="StudentInfo"
+        >
+          <span
+            className="StudentInfo-Name"
+            data-testid="username"
+          >
+            current_user
+          </span>
+          <div
+            className="StudentInfo-Status"
+            data-testid="userstatus"
+          >
+            No status so far
+          </div>
+        </span>
+      </div>
+      <div
+        className="LeaderboardTable-Cell LeaderboardTable-Cell_progress"
+        data-testid="progress-cell"
+      >
+        350
+      </div>
+      <div
+        className="LeaderboardTable-Cell LeaderboardTable-Cell_badges"
+        data-testid="badges-cell"
+      >
+        <div
+          className="Badges"
+        />
+      </div>
+    </div>
+  </div>,
+]
+`;
+
+exports[`<LeaderboardPage> renders 7`] = `
+Array [
+  <h1
+    className="LeaderboardTitle"
+    data-testid="leaderboard-page-title"
+  >
+    Leaderboard
+  </h1>,
+  <div
+    className="LeaderboardTable"
+    data-testid="leaderboard-table"
+  >
+    <div
+      className="LeaderboardTable-Row "
+      data-testid="leaderboard-table-row"
+    >
+      <div
+        className="LeaderboardTable-Cell LeaderboardTable-Cell_student"
+      >
+        <div
+          className="Avatar"
+          data-testid="avatar"
+          style={
+            Object {
+              "backgroundImage": "url(/images/default.png)",
+            }
+          }
+        >
+          <span
+            className="Avatar-Position Avatar-Position_winner"
+          >
+            <img
+              alt=""
+              src={Object {}}
+            />
+          </span>
+        </div>
+        <span
+          className="StudentInfo"
+        >
+          <span
+            className="StudentInfo-Name"
+            data-testid="username"
+          >
+            username1
+          </span>
+          <div
+            className="StudentInfo-Status"
+            data-testid="userstatus"
+          >
+            No status so far
+          </div>
+        </span>
+      </div>
+      <div
+        className="LeaderboardTable-Cell LeaderboardTable-Cell_progress"
+        data-testid="progress-cell"
+      >
+        100000
+      </div>
+      <div
+        className="LeaderboardTable-Cell LeaderboardTable-Cell_badges"
+        data-testid="badges-cell"
+      >
+        <div
+          className="Badges"
+        />
+      </div>
+    </div>
+    <div
+      className="LeaderboardTable-Row "
+      data-testid="leaderboard-table-row"
+    >
+      <div
+        className="LeaderboardTable-Cell LeaderboardTable-Cell_student"
+      >
+        <div
+          className="Avatar"
+          data-testid="avatar"
+          style={
+            Object {
+              "backgroundImage": "url(/images/default.png)",
+            }
+          }
+        >
+          <span
+            className="Avatar-Position Avatar-Position_winner"
+          >
+            <img
+              alt=""
+              src={Object {}}
+            />
+          </span>
+        </div>
+        <span
+          className="StudentInfo"
+        >
+          <span
+            className="StudentInfo-Name"
+            data-testid="username"
+          >
+            username2
+          </span>
+          <div
+            className="StudentInfo-Status"
+            data-testid="userstatus"
+          >
+            No status so far
+          </div>
+        </span>
+      </div>
+      <div
+        className="LeaderboardTable-Cell LeaderboardTable-Cell_progress"
+        data-testid="progress-cell"
+      >
+        99999
+      </div>
+      <div
+        className="LeaderboardTable-Cell LeaderboardTable-Cell_badges"
+        data-testid="badges-cell"
+      >
+        <div
+          className="Badges"
+        />
+      </div>
+    </div>
+    <div
+      className="LeaderboardTable-Row "
+      data-testid="leaderboard-table-row"
+    >
+      <div
+        className="LeaderboardTable-Cell LeaderboardTable-Cell_student"
+      >
+        <div
+          className="Avatar"
+          data-testid="avatar"
+          style={
+            Object {
+              "backgroundImage": "url(/images/default.png)",
+            }
+          }
+        >
+          <span
+            className="Avatar-Position Avatar-Position_winner"
+          >
+            <img
+              alt=""
+              src={Object {}}
+            />
+          </span>
+        </div>
+        <span
+          className="StudentInfo"
+        >
+          <span
+            className="StudentInfo-Name"
+            data-testid="username"
+          >
+            username3
+          </span>
+          <div
+            className="StudentInfo-Status"
+            data-testid="userstatus"
+          >
+            No status so far
+          </div>
+        </span>
+      </div>
+      <div
+        className="LeaderboardTable-Cell LeaderboardTable-Cell_progress"
+        data-testid="progress-cell"
+      >
+        88888
+      </div>
+      <div
+        className="LeaderboardTable-Cell LeaderboardTable-Cell_badges"
+        data-testid="badges-cell"
+      >
+        <div
+          className="Badges"
+        />
+      </div>
+    </div>
+    <div
+      className="LeaderboardTable-Row "
+      data-testid="leaderboard-table-row"
+    >
+      <div
+        className="LeaderboardTable-Cell LeaderboardTable-Cell_student"
+      >
+        <div
+          className="Avatar"
+          data-testid="avatar"
+          style={
+            Object {
+              "backgroundImage": "url(/images/default.png)",
+            }
+          }
+        >
+          <span
+            className="Avatar-Position"
+          >
+            4
+          </span>
+        </div>
+        <span
+          className="StudentInfo"
+        >
+          <span
+            className="StudentInfo-Name"
+            data-testid="username"
+          >
+            username4
+          </span>
+          <div
+            className="StudentInfo-Status"
+            data-testid="userstatus"
+          >
+            No status so far
+          </div>
+        </span>
+      </div>
+      <div
+        className="LeaderboardTable-Cell LeaderboardTable-Cell_progress"
+        data-testid="progress-cell"
+      >
+        77777
+      </div>
+      <div
+        className="LeaderboardTable-Cell LeaderboardTable-Cell_badges"
+        data-testid="badges-cell"
+      >
+        <div
+          className="Badges"
+        />
+      </div>
+    </div>
+    <div
+      className="LeaderboardTable-Row "
+      data-testid="leaderboard-table-row"
+    >
+      <div
+        className="LeaderboardTable-Cell LeaderboardTable-Cell_student"
+      >
+        <div
+          className="Avatar"
+          data-testid="avatar"
+          style={
+            Object {
+              "backgroundImage": "url(/images/default.png)",
+            }
+          }
+        >
+          <span
+            className="Avatar-Position"
+          >
+            5
+          </span>
+        </div>
+        <span
+          className="StudentInfo"
+        >
+          <span
+            className="StudentInfo-Name"
+            data-testid="username"
+          >
+            username5
+          </span>
+          <div
+            className="StudentInfo-Status"
+            data-testid="userstatus"
+          >
+            No status so far
+          </div>
+        </span>
+      </div>
+      <div
+        className="LeaderboardTable-Cell LeaderboardTable-Cell_progress"
+        data-testid="progress-cell"
+      >
+        66666
+      </div>
+      <div
+        className="LeaderboardTable-Cell LeaderboardTable-Cell_badges"
+        data-testid="badges-cell"
+      >
+        <div
+          className="Badges"
+        />
+      </div>
+    </div>
+    <div
+      className="LeaderboardTable-Row "
+      data-testid="leaderboard-table-row"
+    >
+      <div
+        className="LeaderboardTable-Cell LeaderboardTable-Cell_student"
+      >
+        <div
+          className="Avatar"
+          data-testid="avatar"
+          style={
+            Object {
+              "backgroundImage": "url(/images/default.png)",
+            }
+          }
+        >
+          <span
+            className="Avatar-Position"
+          >
+            6
+          </span>
+        </div>
+        <span
+          className="StudentInfo"
+        >
+          <span
+            className="StudentInfo-Name"
+            data-testid="username"
+          >
+            username6
+          </span>
+          <div
+            className="StudentInfo-Status"
+            data-testid="userstatus"
+          >
+            No status so far
+          </div>
+        </span>
+      </div>
+      <div
+        className="LeaderboardTable-Cell LeaderboardTable-Cell_progress"
+        data-testid="progress-cell"
+      >
+        55555
+      </div>
+      <div
+        className="LeaderboardTable-Cell LeaderboardTable-Cell_badges"
+        data-testid="badges-cell"
+      >
+        <div
+          className="Badges"
+        />
+      </div>
+    </div>
+    <div
+      className="LeaderboardTable-Row "
+      data-testid="leaderboard-table-row"
+    >
+      <div
+        className="LeaderboardTable-Cell LeaderboardTable-Cell_student"
+      >
+        <div
+          className="Avatar"
+          data-testid="avatar"
+          style={
+            Object {
+              "backgroundImage": "url(/images/default.png)",
+            }
+          }
+        >
+          <span
+            className="Avatar-Position"
+          >
+            7
+          </span>
+        </div>
+        <span
+          className="StudentInfo"
+        >
+          <span
+            className="StudentInfo-Name"
+            data-testid="username"
+          >
+            username7
+          </span>
+          <div
+            className="StudentInfo-Status"
+            data-testid="userstatus"
+          >
+            No status so far
+          </div>
+        </span>
+      </div>
+      <div
+        className="LeaderboardTable-Cell LeaderboardTable-Cell_progress"
+        data-testid="progress-cell"
+      >
+        44444
+      </div>
+      <div
+        className="LeaderboardTable-Cell LeaderboardTable-Cell_badges"
+        data-testid="badges-cell"
+      >
+        <div
+          className="Badges"
+        />
+      </div>
+    </div>
+    <div
+      className="LeaderboardTable-Row "
+      data-testid="leaderboard-table-row"
+    >
+      <div
+        className="LeaderboardTable-Cell LeaderboardTable-Cell_student"
+      >
+        <div
+          className="Avatar"
+          data-testid="avatar"
+          style={
+            Object {
+              "backgroundImage": "url(/images/default.png)",
+            }
+          }
+        >
+          <span
+            className="Avatar-Position"
+          >
+            8
+          </span>
+        </div>
+        <span
+          className="StudentInfo"
+        >
+          <span
+            className="StudentInfo-Name"
+            data-testid="username"
+          >
+            username8
+          </span>
+          <div
+            className="StudentInfo-Status"
+            data-testid="userstatus"
+          >
+            No status so far
+          </div>
+        </span>
+      </div>
+      <div
+        className="LeaderboardTable-Cell LeaderboardTable-Cell_progress"
+        data-testid="progress-cell"
+      >
+        33333
+      </div>
+      <div
+        className="LeaderboardTable-Cell LeaderboardTable-Cell_badges"
+        data-testid="badges-cell"
+      >
+        <div
+          className="Badges"
+        />
+      </div>
+    </div>
+    <div
+      className="LeaderboardTable-Row "
+      data-testid="leaderboard-table-row"
+    >
+      <div
+        className="LeaderboardTable-Cell LeaderboardTable-Cell_student"
+      >
+        <div
+          className="Avatar"
+          data-testid="avatar"
+          style={
+            Object {
+              "backgroundImage": "url(/images/default.png)",
+            }
+          }
+        >
+          <span
+            className="Avatar-Position"
+          >
+            9
+          </span>
+        </div>
+        <span
+          className="StudentInfo"
+        >
+          <span
+            className="StudentInfo-Name"
+            data-testid="username"
+          >
+            username9
+          </span>
+          <div
+            className="StudentInfo-Status"
+            data-testid="userstatus"
+          >
+            No status so far
+          </div>
+        </span>
+      </div>
+      <div
+        className="LeaderboardTable-Cell LeaderboardTable-Cell_progress"
+        data-testid="progress-cell"
+      >
+        22222
+      </div>
+      <div
+        className="LeaderboardTable-Cell LeaderboardTable-Cell_badges"
+        data-testid="badges-cell"
+      >
+        <div
+          className="Badges"
+        />
+      </div>
+    </div>
+    <div
+      className="LeaderboardTable-Separator"
+      data-testid="leaderboard-table-separator"
+    >
+      <span />
+       
+      <span />
+       
+      <span />
+    </div>
+    <div
+      className="LeaderboardTable-Row LeaderboardTable-Row_highlighted"
+      data-testid="leaderboard-table-row"
+    >
+      <div
+        className="LeaderboardTable-Cell LeaderboardTable-Cell_student"
+      >
+        <div
+          className="Avatar"
+          data-testid="avatar"
+          style={
+            Object {
+              "backgroundColor": "#cde4fc",
+            }
+          }
+        >
+          <span
+            className="Avatar-Logo"
+            data-testid="avatar-logo"
+            style={
+              Object {
+                "color": "#303030",
+              }
+            }
+          >
+            -
+          </span>
+          <span
+            className="Avatar-Position Avatar-Position_undefined"
+          >
+            ?
+          </span>
+        </div>
+        <span
+          className="StudentInfo"
+        >
+          <span
+            className="StudentInfo-Name"
+            data-testid="username"
+          >
+            
+          </span>
+          <div
+            className="StudentInfo-Status"
+            data-testid="userstatus"
+          >
+            No status so far
+          </div>
+        </span>
+      </div>
+      <div
+        className="LeaderboardTable-Cell LeaderboardTable-Cell_progress"
+        data-testid="progress-cell"
+      >
+        0
+      </div>
+      <div
+        className="LeaderboardTable-Cell LeaderboardTable-Cell_badges"
+        data-testid="badges-cell"
+      >
+        <div
+          className="Badges"
+        >
+          No badges yet...
+        </div>
+      </div>
+    </div>
+  </div>,
+]
+`;
+
+exports[`<LeaderboardPage> renders 8`] = `
+Array [
+  <h1
+    className="LeaderboardTitle"
+    data-testid="leaderboard-page-title"
+  >
+    Leaderboard
+  </h1>,
+  <div
+    className="LeaderboardTable"
+    data-testid="leaderboard-table"
+  >
+    <div
+      className="LeaderboardTable-Row "
+      data-testid="leaderboard-table-row"
+    >
+      <div
+        className="LeaderboardTable-Cell LeaderboardTable-Cell_student"
+      >
+        <div
+          className="Avatar"
+          data-testid="avatar"
+          style={
+            Object {
+              "backgroundImage": "url(/images/default.png)",
+            }
+          }
+        >
+          <span
+            className="Avatar-Position Avatar-Position_winner"
+          >
+            <img
+              alt=""
+              src={Object {}}
+            />
+          </span>
+        </div>
+        <span
+          className="StudentInfo"
+        >
+          <span
+            className="StudentInfo-Name"
+            data-testid="username"
+          >
+            username1
+          </span>
+          <div
+            className="StudentInfo-Status"
+            data-testid="userstatus"
+          >
+            No status so far
+          </div>
+        </span>
+      </div>
+      <div
+        className="LeaderboardTable-Cell LeaderboardTable-Cell_progress"
+        data-testid="progress-cell"
+      >
+        100000
+      </div>
+      <div
+        className="LeaderboardTable-Cell LeaderboardTable-Cell_badges"
+        data-testid="badges-cell"
+      >
+        <div
+          className="Badges"
+        />
+      </div>
+    </div>
+    <div
+      className="LeaderboardTable-Row "
+      data-testid="leaderboard-table-row"
+    >
+      <div
+        className="LeaderboardTable-Cell LeaderboardTable-Cell_student"
+      >
+        <div
+          className="Avatar"
+          data-testid="avatar"
+          style={
+            Object {
+              "backgroundImage": "url(/images/default.png)",
+            }
+          }
+        >
+          <span
+            className="Avatar-Position Avatar-Position_winner"
+          >
+            <img
+              alt=""
+              src={Object {}}
+            />
+          </span>
+        </div>
+        <span
+          className="StudentInfo"
+        >
+          <span
+            className="StudentInfo-Name"
+            data-testid="username"
+          >
+            username2
+          </span>
+          <div
+            className="StudentInfo-Status"
+            data-testid="userstatus"
+          >
+            No status so far
+          </div>
+        </span>
+      </div>
+      <div
+        className="LeaderboardTable-Cell LeaderboardTable-Cell_progress"
+        data-testid="progress-cell"
+      >
+        99999
+      </div>
+      <div
+        className="LeaderboardTable-Cell LeaderboardTable-Cell_badges"
+        data-testid="badges-cell"
+      >
+        <div
+          className="Badges"
+        />
+      </div>
+    </div>
+    <div
+      className="LeaderboardTable-Row "
+      data-testid="leaderboard-table-row"
+    >
+      <div
+        className="LeaderboardTable-Cell LeaderboardTable-Cell_student"
+      >
+        <div
+          className="Avatar"
+          data-testid="avatar"
+          style={
+            Object {
+              "backgroundImage": "url(/images/default.png)",
+            }
+          }
+        >
+          <span
+            className="Avatar-Position Avatar-Position_winner"
+          >
+            <img
+              alt=""
+              src={Object {}}
+            />
+          </span>
+        </div>
+        <span
+          className="StudentInfo"
+        >
+          <span
+            className="StudentInfo-Name"
+            data-testid="username"
+          >
+            username3
+          </span>
+          <div
+            className="StudentInfo-Status"
+            data-testid="userstatus"
+          >
+            No status so far
+          </div>
+        </span>
+      </div>
+      <div
+        className="LeaderboardTable-Cell LeaderboardTable-Cell_progress"
+        data-testid="progress-cell"
+      >
+        88888
+      </div>
+      <div
+        className="LeaderboardTable-Cell LeaderboardTable-Cell_badges"
+        data-testid="badges-cell"
+      >
+        <div
+          className="Badges"
+        />
+      </div>
+    </div>
+    <div
+      className="LeaderboardTable-Row "
+      data-testid="leaderboard-table-row"
+    >
+      <div
+        className="LeaderboardTable-Cell LeaderboardTable-Cell_student"
+      >
+        <div
+          className="Avatar"
+          data-testid="avatar"
+          style={
+            Object {
+              "backgroundImage": "url(/images/default.png)",
+            }
+          }
+        >
+          <span
+            className="Avatar-Position"
+          >
+            4
+          </span>
+        </div>
+        <span
+          className="StudentInfo"
+        >
+          <span
+            className="StudentInfo-Name"
+            data-testid="username"
+          >
+            username4
+          </span>
+          <div
+            className="StudentInfo-Status"
+            data-testid="userstatus"
+          >
+            No status so far
+          </div>
+        </span>
+      </div>
+      <div
+        className="LeaderboardTable-Cell LeaderboardTable-Cell_progress"
+        data-testid="progress-cell"
+      >
+        77777
+      </div>
+      <div
+        className="LeaderboardTable-Cell LeaderboardTable-Cell_badges"
+        data-testid="badges-cell"
+      >
+        <div
+          className="Badges"
+        />
+      </div>
+    </div>
+    <div
+      className="LeaderboardTable-Row "
+      data-testid="leaderboard-table-row"
+    >
+      <div
+        className="LeaderboardTable-Cell LeaderboardTable-Cell_student"
+      >
+        <div
+          className="Avatar"
+          data-testid="avatar"
+          style={
+            Object {
+              "backgroundImage": "url(/images/default.png)",
+            }
+          }
+        >
+          <span
+            className="Avatar-Position"
+          >
+            5
+          </span>
+        </div>
+        <span
+          className="StudentInfo"
+        >
+          <span
+            className="StudentInfo-Name"
+            data-testid="username"
+          >
+            username5
+          </span>
+          <div
+            className="StudentInfo-Status"
+            data-testid="userstatus"
+          >
+            No status so far
+          </div>
+        </span>
+      </div>
+      <div
+        className="LeaderboardTable-Cell LeaderboardTable-Cell_progress"
+        data-testid="progress-cell"
+      >
+        66666
+      </div>
+      <div
+        className="LeaderboardTable-Cell LeaderboardTable-Cell_badges"
+        data-testid="badges-cell"
+      >
+        <div
+          className="Badges"
+        />
+      </div>
+    </div>
+    <div
+      className="LeaderboardTable-Separator"
+      data-testid="leaderboard-table-separator"
+    >
+      <span />
+       
+      <span />
+       
+      <span />
+    </div>
+    <div
+      className="LeaderboardTable-Row LeaderboardTable-Row_highlighted"
+      data-testid="leaderboard-table-row"
+    >
+      <div
+        className="LeaderboardTable-Cell LeaderboardTable-Cell_student"
+      >
+        <div
+          className="Avatar"
+          data-testid="avatar"
+          style={
+            Object {
+              "backgroundColor": "#cde4fc",
+            }
+          }
+        >
+          <span
+            className="Avatar-Logo"
+            data-testid="avatar-logo"
+            style={
+              Object {
+                "color": "#303030",
+              }
+            }
+          >
+            -
+          </span>
+          <span
+            className="Avatar-Position Avatar-Position_undefined"
+          >
+            ?
+          </span>
+        </div>
+        <span
+          className="StudentInfo"
+        >
+          <span
+            className="StudentInfo-Name"
+            data-testid="username"
+          >
+            
+          </span>
+          <div
+            className="StudentInfo-Status"
+            data-testid="userstatus"
+          >
+            No status so far
+          </div>
+        </span>
+      </div>
+      <div
+        className="LeaderboardTable-Cell LeaderboardTable-Cell_progress"
+        data-testid="progress-cell"
+      >
+        0
+      </div>
+      <div
+        className="LeaderboardTable-Cell LeaderboardTable-Cell_badges"
+        data-testid="badges-cell"
+      >
+        <div
+          className="Badges"
+        >
+          No badges yet...
+        </div>
+      </div>
+    </div>
+  </div>,
+]
 `;

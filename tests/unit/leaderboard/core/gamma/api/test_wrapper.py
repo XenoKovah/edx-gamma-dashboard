@@ -3,7 +3,7 @@ Provide tests for gamma.api.wrapper module.
 """
 import pytest
 
-
+from gamma_dashboard.dashboard.core.gamma.api.settings import API_VERSION_1
 from gamma_dashboard.dashboard.core.gamma.api.wrapper import GammaApiWrapper
 from tests.fixtures.constants import (
     GAMIFICATION_ENDPOINT,
@@ -152,10 +152,11 @@ class TestGammaApiWrapper:
     @pytest.mark.unittests
     def test_get_leaderboard_info(self, gamma_settings, mocker):
         """
-        Case: Request leaderboard data for specific user.
+        Case: Request leaderboard data for specific user (DEFAULT_API_VERSION).
         Expect: Request is sent to correct URL & correct data is received.
         """
         expeceted_data = {}
+        username = 'test_username'
         user_signup_source = 'main-site.com'
         leaderboard_absolute_url = '{}api/v0/leaderboard'.format(GAMIFICATION_ENDPOINT)
 
@@ -165,8 +166,50 @@ class TestGammaApiWrapper:
 
         api_wrapper = GammaApiWrapper(settings=gamma_settings)
         api_wrapper_spy = mocker.spy(api_wrapper, '_send_request')
-        leaderboard_data = api_wrapper.get_leaderboard_info(user_signup_source)
+        leaderboard_data = api_wrapper.get_leaderboard_info(username, user_signup_source)
 
-        api_wrapper_spy.assert_called_with(leaderboard_absolute_url, params={'signup_source': user_signup_source})
+        api_wrapper_spy.assert_called_with(leaderboard_absolute_url, params={'username': username, 'signup_source': user_signup_source})
+
+        assert leaderboard_data == expeceted_data
+
+    @pytest.mark.unittests
+    def test_get_leaderboard_info_v1(self, gamma_settings, mocker):
+        """
+        Case: Request leaderboard data for specific user (API_VERSION_1).
+        Expect: Request is sent to correct URL & correct data is received.
+        """
+        expeceted_data = {
+            "top10": [
+                { "user_uid": "username1", "url_profile_image": "/images/default.png", "points": 100000, "system_statuses": [] },
+                { "user_uid": "username2", "url_profile_image": "/images/default.png", "points": 99999, "system_statuses": [] },
+                { "user_uid": "username3", "url_profile_image": "/images/default.png", "points": 88888, "system_statuses": [] },
+                { "user_uid": "username4", "url_profile_image": "/images/default.png", "points": 77777, "system_statuses": [] },
+                { "user_uid": "current_user", "url_profile_image": "/images/default_0.png", "points": 67891, "system_statuses": [] },
+                { "user_uid": "username6", "url_profile_image": "/images/default.png", "points": 55555, "system_statuses": [] },
+                { "user_uid": "username7", "url_profile_image": "/images/default.png", "points": 44444, "system_statuses": [] },
+                { "user_uid": "username8", "url_profile_image": "/images/default.png", "points": 33333, "system_statuses": [] },
+                { "user_uid": "username9", "url_profile_image": "/images/default.png", "points": 22222, "system_statuses": [] },
+                { "user_uid": "username10", "url_profile_image": "/images/default.png", "points": 11111, "system_statuses": [] }
+            ],
+            "system_statuses": [],
+            "rank": 5,
+            "user_uid": "current_user",
+            "url_profile_image": "/images/default_0.png",
+            "competitors": []
+        }
+
+        username = 'test_username'
+        user_signup_source = 'main'
+        leaderboard_absolute_url = '{}api/v1/leaderboard'.format(GAMIFICATION_ENDPOINT)
+
+        mocked_get = mocker.patch('requests.get')
+        mocked_get.return_value.ok = True
+        mocked_get.return_value.json = mocker.Mock(return_value=expeceted_data)
+
+        api_wrapper = GammaApiWrapper(settings=gamma_settings, version=API_VERSION_1)
+        api_wrapper_spy = mocker.spy(api_wrapper, '_send_request')
+        leaderboard_data = api_wrapper.get_leaderboard_info(username, user_signup_source)
+
+        api_wrapper_spy.assert_called_with(leaderboard_absolute_url, params={'username': username, 'signup_source': user_signup_source})
 
         assert leaderboard_data == expeceted_data

@@ -4,21 +4,10 @@ import '@testing-library/jest-dom';
 import { render, cleanup } from '@testing-library/react';
 
 import Avatar from '../Avatar';
-import { getRandomColors } from '../../../utility/colorTools';
-
-
-const testBackgroundColor = 'rgb(1, 1, 1)';
-const testFontColor = 'rgb(0, 0, 0)';
 
 jest.mock('../../../utility/colorTools');
-getRandomColors.mockImplementation(() => ({
-    backgroundColor: testBackgroundColor,
-    fontColor: testFontColor
-}));
-
 
 afterEach(cleanup);
-
 
 describe('<Avatar>', () => {
     it('renders', () => {
@@ -43,12 +32,21 @@ describe('<Avatar>', () => {
 
     it('has correct colors', () => {
         const { getByTestId } = render(<Avatar />);
-
+        const testBackgroundColor = '#cde4fc';
+        const testFontColor = '#303030';
         const avatar = getByTestId('avatar');
-        const avatarLetter = getByTestId('avatar-letter');
+        const avatarLetter = getByTestId('avatar-logo')
 
         expect(avatar).toHaveStyle(`background-color: ${testBackgroundColor}`);
         expect(avatarLetter).toHaveStyle(`color: ${testFontColor}`);
+    });
+
+    it('renders profile image', () => {
+        const { getByTestId } = render(<Avatar urlProfileImage={'/images/defaul.png'}/>);
+        const backgroundImage = 'url(/images/defaul.png)';
+
+        expect(getByTestId('avatar')).toBeInTheDocument();
+        expect(getByTestId('avatar')).toHaveStyle({backgroundImage: backgroundImage});
     });
 
     it('always renders username with the first character capitalized', () => {

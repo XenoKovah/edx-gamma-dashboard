@@ -1,0 +1,32 @@
+[
+    {
+        "description": "1. Renders with a number of rows equal to 10.",
+        "profiles": [
+            { "user_uid": "username1", "url_profile_image": "/images/default.png", "points": 100000, "position": 1, "system_statuses": [] },
+            { "user_uid": "username2", "url_profile_image": "/images/default.png", "points": 99999, "position": 2, "system_statuses": [] },
+            { "user_uid": "username3", "url_profile_image": "/images/default.png", "points": 88888, "position": 3, "system_statuses": [] },
+            { "user_uid": "username101", "url_profile_image": "/images/default.png", "points": 900, "position": 31, "system_statuses": [] },
+            { "user_uid": "username102", "url_profile_image": "/images/default.png", "points": 850, "position": 32, "system_statuses": [] },
+            { "user_uid": "username103", "url_profile_image": "/images/default.png", "points": 750, "position": 33, "system_statuses": [] },
+            { "user_uid": "username104", "url_profile_image": "/images/default.png", "points": 650, "position": 34, "system_statuses": [] },
+            { "user_uid": "current_user", "url_profile_image": "/images/default.png", "points": 550, "position": 35, "system_statuses": [] },
+            { "user_uid": "username106", "url_profile_image": "/images/default.png", "points": 450, "position": 36, "system_statuses": [] },
+            { "user_uid": "username107", "url_profile_image": "/images/default.png", "points": 350, "position": 37, "system_statuses": [] }
+        ],
+        "delimiter": 2,
+        "system_statuses": [],
+        "rank": 35
+    },
+
+    {
+        "description": "2. Renders with a number of rows less than 10.",
+        "profiles": [
+            { "user_uid": "username1", "url_profile_image": "/images/default.png", "points": 100000, "position": 1, "system_statuses": [] },
+            { "user_uid": "username2", "url_profile_image": "/images/default.png", "points": 99999, "position": 2, "system_statuses": [] },
+            { "user_uid": "current_user", "url_profile_image": "/images/default.png", "points": 0, "position": null, "system_statuses": [] }
+        ],
+        "delimiter": 1,
+        "system_statuses": [],
+        "rank": null
+    }
+]
