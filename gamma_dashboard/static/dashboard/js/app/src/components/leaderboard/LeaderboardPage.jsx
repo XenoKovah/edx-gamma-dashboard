@@ -56,7 +56,7 @@ class LeaderboardPage extends React.PureComponent {
         const delimiterPosition = profilesTop10.length < 10 ? profilesTop10.length - 1 : DELIMITER_POSITION_FOR_TOP_9;
 
         switch (true) {
-            case top10.length === 0:
+            case top10.length === 0 && !userUid:
                 // for the initial render
                 break;
             case !rank:
@@ -73,7 +73,7 @@ class LeaderboardPage extends React.PureComponent {
                     "position": null
                 };
                 propsObj.profiles = [...profilesTop9, currentUser];
-                propsObj.delimiter = delimiterPosition;
+                propsObj.delimiter = delimiterPosition > 0 ? delimiterPosition : null;
                 break;
             case rank <= 10:
                 // user in top 10
@@ -84,7 +84,7 @@ class LeaderboardPage extends React.PureComponent {
                 const competitorsList = addPositionInCompetitors(competitors, userUid, rank);
                 propsObj.profiles = [...profilesTop3, ...competitorsList];
                 propsObj.delimiter = DELIMITER_POSITION_FOR_TOP_3;
-        }
+        };
         return propsObj;
     }
 

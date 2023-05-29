@@ -4196,3 +4196,61 @@ Array [
   </div>,
 ]
 `;
+
+exports[`<LeaderboardPage> renders 9`] = `
+Array [
+  <div
+    className="gamification-title-wrapper d-flex justify-content-between align-items-center"
+  >
+    <h1
+      className="LeaderboardTitle"
+      data-testid="leaderboard-page-title"
+    >
+      Leaderboard
+    </h1>
+    <div
+      className="pgn__dropdown pgn__dropdown-light dropdown"
+      data-testid="dropdown"
+    >
+      <button
+        aria-expanded={false}
+        aria-haspopup={true}
+        className="btn-logo btn btn-tertiary"
+        disabled={false}
+        id="logo-dropdown"
+        onClick={[Function]}
+        type="button"
+      >
+        <img
+          alt="analytics-logo"
+          src={Object {}}
+        />
+        <span
+          className="pgn__icon"
+          variant="tertiary"
+        >
+          <svg
+            aria-hidden={true}
+            fill="none"
+            focusable={false}
+            height={24}
+            role="img"
+            viewBox="0 0 24 24"
+            width={24}
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M7 10l5 5 5-5H7z"
+              fill="currentColor"
+            />
+          </svg>
+        </span>
+      </button>
+    </div>
+  </div>,
+  <div
+    className="LeaderboardTable"
+    data-testid="leaderboard-table"
+  />,
+]
+`;

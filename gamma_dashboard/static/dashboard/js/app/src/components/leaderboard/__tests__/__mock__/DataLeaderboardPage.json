@@ -1,4 +1,3 @@
-
 [
     {
         "description": "1. To display an empty Leaderboard.",
@@ -311,6 +310,25 @@
             "rank": null,
             "systemStatuses": []
         }
+    },
+
+    {
+        "description": "9. To display the situation where there are no other users on the platform except the current user, and the current user does not have any points yet.",
+        "state": {
+            "top10": [],
+            "systemStatuses": [],
+            "rank": null,
+            "userUid": "current_user",
+            "urlProfileImage": "/images/default_0.png",
+            "competitors": []
+        },
+        "expectedProps": {
+            "delimiter": null,
+            "profiles": [
+                { "user_uid": "current_user", "url_profile_image": "/images/default_0.png", "points": 0, "position": null, "system_statuses": [], "system_events": [], "badges": {}, "signup_source": null }
+            ],
+            "rank": null,
+            "systemStatuses": []
+        }
     }
 ]
-
