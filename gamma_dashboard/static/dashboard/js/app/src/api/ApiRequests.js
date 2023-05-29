@@ -9,6 +9,7 @@ const LEADERBOARD_URLS = {
 const DASHBOARD_URLS = {
     getGameProfile: `${BASE_URL}game-profile/`
 }
+const FEEDBACK_FORM_URL = '/rg_products_toolkit/api/v0/submit_feedback/';
 
 const leaderboard =  {
     getInfo: (callback) => {
@@ -36,9 +37,23 @@ const dashboard = {
     }
 };
 
+const sendFeedbackForm = (body, callback) => {
+    const csrfToken = document.cookie.match('(^|;)\\s*csrftoken\\s*=\\s*([^;]+)')?.pop();
+
+    axios.post(
+        FEEDBACK_FORM_URL, body, { headers: { "Content-Type": "application/json", "X-CSRFToken": csrfToken } }
+    ).then(result => {
+        callback(result.statusText || 'Error');
+    }).catch(error => {
+        console.log('FeedbackForm::ERROR: ', error);
+        callback('Error');
+    });
+};
+
 const gammaApi = {
     leaderboard,
-    dashboard
+    dashboard,
+    sendFeedbackForm,
 };
 
 export default gammaApi;

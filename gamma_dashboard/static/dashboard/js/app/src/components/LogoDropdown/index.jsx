@@ -1,0 +1,36 @@
+import React, { useState } from "react";
+import { Dropdown, Icon } from "@edx/paragon";
+import { ArrowDropDown } from '@edx/paragon/icons';
+
+import { Modal, FeedbackForm } from "./components";
+
+import LogoImage from "./assets/logo.svg";
+import "./assets/LogoDropdown.scss";
+
+const LogoDropdown = () => {
+  const [isOpen, toggleModal] = useState(false);
+
+  return (
+    <>
+      <Dropdown alignRight>
+        <Dropdown.Toggle variant="tertiary" bsPrefix="btn-logo" id="logo-dropdown">
+          <img src={LogoImage} alt="analytics-logo" />
+          <Icon src={ArrowDropDown} variant="tertiary" />
+        </Dropdown.Toggle>
+        <Dropdown.Menu>
+          <Dropdown.Item target="_blank" href="https://products.pages.raccoongang.com/docs/rg-gamification/index.html">
+            Gamification user guide
+          </Dropdown.Item>
+          <Dropdown.Item type="button" onClick={() => toggleModal(true)}>
+            Give feedback
+          </Dropdown.Item>
+        </Dropdown.Menu>
+      </Dropdown>
+      <Modal isOpen={isOpen} title="Give feedback" handleClose={() => toggleModal(false)}>
+        <FeedbackForm handleClose={() => toggleModal(false)} />
+      </Modal>
+    </>
+  );
+};
+
+export default LogoDropdown;

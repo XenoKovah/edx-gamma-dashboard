@@ -4,6 +4,7 @@ import LeaderboardTable from './LeaderboardTable';
 
 import gammaApi from '../../api/ApiRequests';
 import { addPositionInCompetitors, addPositionInTop10 } from '../../utility/utils';
+import LogoDropdown from '../LogoDropdown'
 
 import '../../styles/app/leaderboard/page.scss';
 
@@ -92,9 +93,12 @@ class LeaderboardPage extends React.PureComponent {
         
         return (
             <>
-                <h1 className="LeaderboardTitle" data-testid="leaderboard-page-title">
-                    Leaderboard
-                </h1>
+                <div className="gamification-title-wrapper d-flex justify-content-between align-items-center">
+                    <h1 className="LeaderboardTitle" data-testid="leaderboard-page-title">
+                        Leaderboard
+                    </h1>
+                    <LogoDropdown />
+                </div>
                 <LeaderboardTable
                     delimiter={propsLeaderboardTable.delimiter}
                     rank={propsLeaderboardTable.rank}

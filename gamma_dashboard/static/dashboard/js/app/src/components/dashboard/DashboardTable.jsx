@@ -14,7 +14,7 @@ import PointsDistributionChart from './charts/PointsDistributionChart';
 import ProgressChart from './charts/ProgressChart';
 import StatusRoadmapChart from './charts/StatusRoadmapChart';
 import RowBlockItem from './rowBlock/RowBlockItem';
-
+import LogoDropdown from '../LogoDropdown';
 
 import DashboardModalWindow from './DashboardModalWindow';
 import Loader from '../utility/Loader';
@@ -42,6 +42,12 @@ const DashboardTable = ({ statusItems, badgeItems, statusRoadmap, progress, char
     return (
         <React.Fragment>
         <div className="dashboard-table" data-testid="dashboard-table">
+            <div className="gamification-title-wrapper d-flex justify-content-between align-items-center">
+                <h1 className="DashboardTitle" data-testid="dashboard-page-title">
+                    Performance
+                </h1>
+                <LogoDropdown />
+            </div>
             <div className="dashboard-table-body">
                 <DashboardTableRow>
                     <DashboardTableRowBlock corner={CORNER_TOP_LEFT}>
