@@ -34,42 +34,43 @@ class LeaderboardApiView(APIView):
                            .get_leaderboard_info(request.user.username, user_signup_source)
 
         if leaderboard_info:
-            leaderboard_info_with_users_images = self._add_profile_image_urls(request.user, leaderboard_info)
-            response = Response(leaderboard_info_with_users_images)
+            updated_leaderboard_info = self._update_leaderboard_info(request.user, leaderboard_info)
+            response = Response(updated_leaderboard_info)
         else:
             response = Response(
-                {'error': 'No data received from Gamma server.'},
+                {"error": "No data received from Gamma server."},
                 status=status.HTTP_422_UNPROCESSABLE_ENTITY
             )
 
         return response
 
     @staticmethod
-    def _add_profile_image_urls(user, leaderboard_info):
+    def _update_leaderboard_info(user, leaderboard_info):
         """
-        Adds profile image URLs for each user in the leaderboard_info dictionary.
+        Updates the leaderboard_info with profile image URLs and updated user_uid field for each user.
 
         Arguments:
             user (User): current user instance.
             leaderboard_info (dict):dictionary containing leaderboard information.
         Return:
-            leaderboard_info (dict): Updated leaderboard_info with profile image URLs.
+            leaderboard_info (dict): Updated leaderboard_info with profile image URLs and new user_uid.
         """
-        # Retrieving the url_profile_image for the current user
-        # and adding it to the leaderboard_info dictionary.
-        leaderboard_info['url_profile_image'] = get_profile_image_urls_for_user(user)['medium']
-        
-        all_user_list = leaderboard_info.get('top10') + leaderboard_info.get('competitors')
-        user_uids = set(item['user_uid'] for item in all_user_list)
+        leaderboard_info["url_profile_image"] = get_profile_image_urls_for_user(user)["medium"]
+        leaderboard_info["user_uid"] = user.profile.name if user.profile.name else user.username
+
+        all_users = leaderboard_info.get("top10") + leaderboard_info.get("competitors")
+        user_uids = set(item["user_uid"] for item in all_users)
         users = User.objects.filter(username__in=user_uids)
         users_dict = {user.username: user for user in users}
 
-        for key in ('top10', 'competitors'):
+        for key in ("top10", "competitors"):
             for item in leaderboard_info[key]:
-                if user := users_dict.get(item['user_uid']):
-                    # Fetch the url_profile_image for users in the top 10 list and competitors list
-                    # and add it as a parameter to each user.
-                    item['url_profile_image'] = get_profile_image_urls_for_user(user)['medium']
+                if user := users_dict.get(item["user_uid"]):
+                    item["user_uid"] = user.profile.name if user.profile.name else user.username
+                    item["url_profile_image"] = get_profile_image_urls_for_user(user)["medium"]
+                else:
+                    # If the user is not found on the platform, change their Gamma-sourced username
+                    item["user_uid"] = "unknown user"
 
         return leaderboard_info
 
@@ -86,8 +87,8 @@ class GameProfileApiView(APIView):
         user_info = GammaApiWrapper(version=DEFAULT_API_VERSION).get_game_profile(request.user.username)
         site_org_whitelist, site_org_blacklist = get_org_black_and_whitelist_for_site()
 
-        user_info['system_badges'] = site_badge_filter(
-            badges=user_info.get('system_badges'),
+        user_info["system_badges"] = site_badge_filter(
+            badges=user_info.get("system_badges"),
             is_main_site=is_main_site(request),
             whitelist=site_org_whitelist,
             blacklist=site_org_blacklist,
@@ -98,7 +99,7 @@ class GameProfileApiView(APIView):
             response = Response(user_info)
         else:
             response = Response(
-                {'error': 'No data recieved from Gamma server.'},
+                {"error": "No data recieved from Gamma server."},
                 status=status.HTTP_422_UNPROCESSABLE_ENTITY
             )
 

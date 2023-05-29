@@ -1,0 +1,96 @@
+[
+    {
+        "current_user": { "id": 106, "username": "current_user" },
+        "users": [
+            { "id": 1, "username": "username_1", "profile": { "name": "Full Name 1" } },
+            { "id": 2, "username": "username_2", "profile": { "name": "Full Name 2" } },
+            { "id": 3, "username": "username_3", "profile": { "name": "Full Name 3" } },
+            { "id": 4, "username": "username_4", "profile": { "name": "Full Name 4" } },
+            { "id": 5, "username": "username_5", "profile": { "name": "Full Name 5" } },
+            { "id": 6, "username": "username_6", "profile": { "name": "Full Name 6" } },
+            { "id": 7, "username": "username_7", "profile": { "name": "Full Name 7" } },
+            { "id": 8, "username": "username_8", "profile": { "name": "Full Name 8" } },
+            { "id": 9, "username": "username_9", "profile": { "name": "Full Name 9" } },
+            { "id": 10, "username": "username_10", "profile": { "name": "Full Name 10" } },
+            { "id": 106, "username": "current_user", "profile": { "name": "Test Full Name" } },
+            { "id": 101, "username": "username_101", "profile": { "name": "Full Name 101" } },
+            { "id": 102, "username": "username_102", "profile": { "name": "Full Name 102" } },
+            { "id": 103, "username": "username_103", "profile": { "name": "Full Name 103" } },
+            { "id": 104, "username": "username_104", "profile": { "name": "Full Name 104" } },
+            { "id": 105, "username": "username_105", "profile": { "name": "Full Name 105" } },
+            { "id": 107, "username": "username_107" }
+        ],
+        "leaderboard_info": {
+            "top10": [
+                { "user_uid": "username_1", "points": 100000, "system_statuses": [] },
+                { "user_uid": "username_2", "points": 99999, "system_statuses": [] },
+                { "user_uid": "username_3", "points": 88888, "system_statuses": [] },
+                { "user_uid": "username_4", "points": 77777, "system_statuses": [] },
+                { "user_uid": "username_5", "points": 66666, "system_statuses": [] },
+                { "user_uid": "username_6", "points": 55555, "system_statuses": [] },
+                { "user_uid": "username_7", "points": 44444, "system_statuses": [] },
+                { "user_uid": "username_8", "points": 33333, "system_statuses": [] },
+                { "user_uid": "username_9", "points": 22222, "system_statuses": [] },
+                { "user_uid": "username_10", "points": 11111, "system_statuses": [] }
+            ],
+            "system_statuses": [],
+            "rank": 106,
+            "user_uid": "current_user",
+            "competitors": [
+                { "user_uid": "username_101", "points": 900, "system_statuses": [] },
+                { "user_uid": "username_102", "points": 850, "system_statuses": [] },
+                { "user_uid": "username_103", "points": 750, "system_statuses": [] },
+                { "user_uid": "username_104", "points": 650, "system_statuses": [] },
+                { "user_uid": "username_105", "points": 550, "system_statuses": [] },
+                { "user_uid": "current_user", "points": 450, "system_statuses": [] },
+                { "user_uid": "username_107", "points": 350, "system_statuses": [] }
+            ]
+        },
+        "users_set": [
+            "username_1",
+            "username_2",
+            "username_3",
+            "username_4",
+            "username_5",
+            "username_6",
+            "username_7",
+            "username_8",
+            "username_9",
+            "username_10",
+            "username_101",
+            "username_102",
+            "username_103",
+            "username_104",
+            "username_105",
+            "username_107",
+            "current_user"
+        ],
+        "expected_leaderboard_info": {
+            "top10": [
+                { "user_uid": "Full Name 1", "url_profile_image": "/images/default.png", "points": 100000, "system_statuses": [] },
+                { "user_uid": "Full Name 2", "url_profile_image": "/images/default.png", "points": 99999, "system_statuses": [] },
+                { "user_uid": "Full Name 3", "url_profile_image": "/images/default.png", "points": 88888, "system_statuses": [] },
+                { "user_uid": "Full Name 4", "url_profile_image": "/images/default.png", "points": 77777, "system_statuses": [] },
+                { "user_uid": "Full Name 5", "url_profile_image": "/images/default.png", "points": 66666, "system_statuses": [] },
+                { "user_uid": "Full Name 6", "url_profile_image": "/images/default.png", "points": 55555, "system_statuses": [] },
+                { "user_uid": "Full Name 7", "url_profile_image": "/images/default.png", "points": 44444, "system_statuses": [] },
+                { "user_uid": "Full Name 8", "url_profile_image": "/images/default.png", "points": 33333, "system_statuses": [] },
+                { "user_uid": "Full Name 9", "url_profile_image": "/images/default.png", "points": 22222, "system_statuses": [] },
+                { "user_uid": "username_10", "url_profile_image": "/images/default.png", "points": 11111, "system_statuses": [] }
+            ],
+            "system_statuses": [],
+            "rank": 106,
+            "user_uid": "Test Full Name",
+            "url_urofile_image": "/images/default.png",
+            "competitors": [
+                { "user_uid": "Full Name 101", "url_profile_image": "/images/default.png", "points": 900, "system_statuses": [] },
+                { "user_uid": "Full Name 102", "url_profile_image": "/images/default.png", "points": 850, "system_statuses": [] },
+                { "user_uid": "Full Name 103", "url_profile_image": "/images/default.png", "points": 750, "system_statuses": [] },
+                { "user_uid": "Full Name 104", "url_profile_image": "/images/default.png", "points": 650, "system_statuses": [] },
+                { "user_uid": "Full Name 105", "url_profile_image": "/images/default.png", "points": 550, "system_statuses": [] },
+                { "user_uid": "Test Full Name", "url_profile_image": "/images/default.png", "points": 450, "system_statuses": [] },
+                { "user_uid": "username_107", "url_profile_image": "/images/default.png", "points": 350, "system_statuses": [] }
+            ]
+        }
+    }
+]
