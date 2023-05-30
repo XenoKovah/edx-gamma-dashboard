@@ -2,6 +2,7 @@
 
 ## [Unreleased]
 ## Added
+- [RGG-906] Added the RG Toolkit plugin as a requirement for RGG Dashboard
 - [RGG-857] Added logo with dropdown and feedback form popup
 - [RGG-789] The new design for displaying leaderboard has been implemented
 - [RGG-882] The new design for displaying badges and statuses has been implemented
