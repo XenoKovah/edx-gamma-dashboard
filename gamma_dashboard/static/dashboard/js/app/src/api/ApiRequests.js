@@ -43,7 +43,7 @@ const sendFeedbackForm = (body, callback) => {
     axios.post(
         FEEDBACK_FORM_URL, body, { headers: { "Content-Type": "application/json", "X-CSRFToken": csrfToken } }
     ).then(result => {
-        callback(result.statusText || 'Error');
+        callback(result.status);
     }).catch(error => {
         console.log('FeedbackForm::ERROR: ', error);
         callback('Error');

@@ -1,6 +1,10 @@
 # Changelog
 
 ## [Unreleased]
+
+## Fixed
+- [RGG-917] Hotfix for the Feedback form submission
+
 ## Added
 - [RGG-906] Added the RG Toolkit plugin as a requirement for RGG Dashboard
 - [RGG-857] Added logo with dropdown and feedback form popup

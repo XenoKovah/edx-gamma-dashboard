@@ -46,7 +46,7 @@ const FeedbackForm = ({ handleClose }) => {
   if (status) {
     return (
       <>
-        {status === "OK" ? (
+        {status === 200 ? (
           <Alert variant="success" icon={CheckCircle}>
             <Alert.Heading>Your feedback has been noted.</Alert.Heading>
           </Alert>
@@ -70,7 +70,7 @@ const FeedbackForm = ({ handleClose }) => {
             <MenuItem
               as="div"
               key={subject}
-              onClick= {()=> setFieldValue(subject, "subject")}
+              onClick= {()=> setFieldValue("subject", subject)}
               defaultSelected={subject === formData.subject}
             >
               {subject}
