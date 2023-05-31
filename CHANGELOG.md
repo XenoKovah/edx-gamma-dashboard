@@ -3,6 +3,7 @@
 ## [Unreleased]
 
 ## Fixed
+- [RGG-915] Hotfix for the leaderboard delimiter
 - [RGG-917] Hotfix for the Feedback form submission
 
 ## Added

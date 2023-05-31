@@ -4254,3 +4254,196 @@ Array [
   />,
 ]
 `;
+
+exports[`<LeaderboardPage> renders 10`] = `
+Array [
+  <div
+    className="gamification-title-wrapper d-flex justify-content-between align-items-center"
+  >
+    <h1
+      className="LeaderboardTitle"
+      data-testid="leaderboard-page-title"
+    >
+      Leaderboard
+    </h1>
+    <div
+      className="pgn__dropdown pgn__dropdown-light dropdown"
+      data-testid="dropdown"
+    >
+      <button
+        aria-expanded={false}
+        aria-haspopup={true}
+        className="btn-logo btn btn-tertiary"
+        disabled={false}
+        id="logo-dropdown"
+        onClick={[Function]}
+        type="button"
+      >
+        <img
+          alt="analytics-logo"
+          src={Object {}}
+        />
+        <span
+          className="pgn__icon"
+          variant="tertiary"
+        >
+          <svg
+            aria-hidden={true}
+            fill="none"
+            focusable={false}
+            height={24}
+            role="img"
+            viewBox="0 0 24 24"
+            width={24}
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M7 10l5 5 5-5H7z"
+              fill="currentColor"
+            />
+          </svg>
+        </span>
+      </button>
+    </div>
+  </div>,
+  <div
+    className="LeaderboardTable"
+    data-testid="leaderboard-table"
+  >
+    <div
+      className="LeaderboardTable-Row "
+      data-testid="leaderboard-table-row"
+    >
+      <div
+        className="LeaderboardTable-Cell LeaderboardTable-Cell_student"
+      >
+        <div
+          className="Avatar"
+          data-testid="avatar"
+          style={
+            Object {
+              "backgroundImage": "url(/images/default.png)",
+            }
+          }
+        >
+          <span
+            className="Avatar-Position Avatar-Position_winner"
+          >
+            <img
+              alt=""
+              src={Object {}}
+            />
+          </span>
+        </div>
+        <span
+          className="StudentInfo"
+        >
+          <span
+            className="StudentInfo-Name"
+            data-testid="username"
+          >
+            username1
+          </span>
+          <div
+            className="StudentInfo-Status"
+            data-testid="userstatus"
+          >
+            No status so far
+          </div>
+        </span>
+      </div>
+      <div
+        className="LeaderboardTable-Cell LeaderboardTable-Cell_progress"
+        data-testid="progress-cell"
+      >
+        100000
+      </div>
+      <div
+        className="LeaderboardTable-Cell LeaderboardTable-Cell_badges"
+        data-testid="badges-cell"
+      >
+        <div
+          className="Badges"
+        />
+      </div>
+    </div>
+    <div
+      className="LeaderboardTable-Separator"
+      data-testid="leaderboard-table-separator"
+    >
+      <span />
+       
+      <span />
+       
+      <span />
+    </div>
+    <div
+      className="LeaderboardTable-Row LeaderboardTable-Row_highlighted"
+      data-testid="leaderboard-table-row"
+    >
+      <div
+        className="LeaderboardTable-Cell LeaderboardTable-Cell_student"
+      >
+        <div
+          className="Avatar"
+          data-testid="avatar"
+          style={
+            Object {
+              "backgroundColor": "#cde4fc",
+            }
+          }
+        >
+          <span
+            className="Avatar-Logo"
+            data-testid="avatar-logo"
+            style={
+              Object {
+                "color": "#303030",
+              }
+            }
+          >
+            -
+          </span>
+          <span
+            className="Avatar-Position Avatar-Position_undefined"
+          >
+            ?
+          </span>
+        </div>
+        <span
+          className="StudentInfo"
+        >
+          <span
+            className="StudentInfo-Name"
+            data-testid="username"
+          >
+            
+          </span>
+          <div
+            className="StudentInfo-Status"
+            data-testid="userstatus"
+          >
+            No status so far
+          </div>
+        </span>
+      </div>
+      <div
+        className="LeaderboardTable-Cell LeaderboardTable-Cell_progress"
+        data-testid="progress-cell"
+      >
+        0
+      </div>
+      <div
+        className="LeaderboardTable-Cell LeaderboardTable-Cell_badges"
+        data-testid="badges-cell"
+      >
+        <div
+          className="Badges"
+        >
+          No badges yet...
+        </div>
+      </div>
+    </div>
+  </div>,
+]
+`;

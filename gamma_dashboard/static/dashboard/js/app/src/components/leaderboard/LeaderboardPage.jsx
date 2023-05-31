@@ -73,7 +73,7 @@ class LeaderboardPage extends React.PureComponent {
                     "position": null
                 };
                 propsObj.profiles = [...profilesTop9, currentUser];
-                propsObj.delimiter = delimiterPosition > 0 ? delimiterPosition : null;
+                propsObj.delimiter = delimiterPosition >= 0 ? delimiterPosition : null;
                 break;
             case rank <= 10:
                 // user in top 10

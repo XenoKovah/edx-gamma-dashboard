@@ -330,5 +330,28 @@
             "rank": null,
             "systemStatuses": []
         }
+    },
+
+    {
+        "description": "10. To display the situation where there is one user with points on the platform except the current user, and the current user does not have any points yet.",
+        "state": {
+            "top10": [
+                { "user_uid": "username1", "url_profile_image": "/images/default.png", "points": 100000, "position": 1, "system_statuses": [] }
+            ],
+            "systemStatuses": [],
+            "rank": null,
+            "userUid": "current_user",
+            "urlProfileImage": "/images/default_0.png",
+            "competitors": []
+        },
+        "expectedProps": {
+            "delimiter": 0,
+            "profiles": [
+                { "user_uid": "username1", "url_profile_image": "/images/default.png", "points": 100000, "position": 1, "system_statuses": [] },
+                { "user_uid": "current_user", "url_profile_image": "/images/default_0.png", "points": 0, "position": null, "system_statuses": [], "system_events": [], "badges": {}, "signup_source": null }
+            ],
+            "rank": null,
+            "systemStatuses": []
+        }
     }
 ]
