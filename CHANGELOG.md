@@ -3,6 +3,7 @@
 ## [Unreleased]
 
 ## Fixed
+- [RGG-921] Hotfix correct display of leaderboard page and performance page for an anonymous user
 - [RGG-915] Hotfix for the leaderboard delimiter
 - [RGG-917] Hotfix for the Feedback form submission
 

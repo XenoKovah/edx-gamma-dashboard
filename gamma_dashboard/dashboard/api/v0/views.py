@@ -1,10 +1,10 @@
 """
 Gamma leaderboard API views.
 """
-from django.conf import settings
 from django.contrib.auth.models import User
-
+from edx_rest_framework_extensions.auth.session.authentication import SessionAuthenticationAllowInactiveUser
 from rest_framework import status
+from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
@@ -23,6 +23,8 @@ class LeaderboardApiView(APIView):
     """
     Leaderboard API view.
     """
+    permission_classes = (IsAuthenticated,)
+    authentication_classes = (SessionAuthenticationAllowInactiveUser,)
 
     def get(self, request):
         """
@@ -79,6 +81,8 @@ class GameProfileApiView(APIView):
     """
     Game Profile API view.
     """
+    permission_classes = (IsAuthenticated,)
+    authentication_classes = (SessionAuthenticationAllowInactiveUser,)
 
     def get(self, request):
         """
