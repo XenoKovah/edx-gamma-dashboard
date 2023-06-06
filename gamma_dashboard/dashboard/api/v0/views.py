@@ -89,8 +89,14 @@ class GameProfileApiView(APIView):
         Get Game Profile of current logged user.
         """
         user_info = GammaApiWrapper(version=DEFAULT_API_VERSION).get_game_profile(request.user.username)
-        site_org_whitelist, site_org_blacklist = get_org_black_and_whitelist_for_site()
 
+        if not user_info:
+            return Response(
+                {"error": "No data recieved from Gamma server."},
+                status=status.HTTP_422_UNPROCESSABLE_ENTITY
+            )
+
+        site_org_whitelist, site_org_blacklist = get_org_black_and_whitelist_for_site()
         user_info["system_badges"] = site_badge_filter(
             badges=user_info.get("system_badges"),
             is_main_site=is_main_site(request),
@@ -99,12 +105,4 @@ class GameProfileApiView(APIView):
             course_key_parser=CourseKey.from_string
         )
 
-        if user_info:
-            response = Response(user_info)
-        else:
-            response = Response(
-                {"error": "No data recieved from Gamma server."},
-                status=status.HTTP_422_UNPROCESSABLE_ENTITY
-            )
-
-        return response
+        return Response(user_info)
