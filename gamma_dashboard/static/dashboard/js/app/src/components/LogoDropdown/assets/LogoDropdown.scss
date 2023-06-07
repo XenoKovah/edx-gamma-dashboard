@@ -30,7 +30,7 @@ $btn-disabled-opacity: .3;
 @import "./paragon-core";
 @import "../../../styles/app/dashboard/dashboard-colors";
 
-button {
+button:not(.close-window-button) {
     letter-spacing: normal;
 
     &:hover {
