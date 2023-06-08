@@ -2,6 +2,7 @@
 
 ## [Unreleased]
 
+## 1.1.0 (2023-06-08)
 ## Fixed
 - [RGG-918] Fix popup close button hover and remove unnecessary border around the badges
 - [RGG-919] Fix the error when retrieving system badges
