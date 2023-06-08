@@ -52,6 +52,7 @@ ReactUnits:
 CheckVersion:
     stage: versions
     image: python:3.8
+    before_script: []
     script:
       - python check_version.py
     rules:
