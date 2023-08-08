@@ -216,4 +216,56 @@ describe('<RowBlockItem>', () => {
         const rowBlockItem = getByTestId('row-block-item');
         expect(rowBlockItem).toBeInTheDocument();
     });
+
+    it('check correct progressCount when count < goal', () => {
+        const data = {
+            done: false,
+            id: "3",
+            progress: {
+                stop_video: {
+                    title: "Stop Video",
+                    count: 5,
+                    goal: 10,
+                },
+                problem_check: {
+                    title: "Problem Check",
+                    count: 0,
+                    goal: 10,
+                },
+            },
+            title: "Badge 3",
+            url: "https://gamma.com/badge3.png",
+        };
+
+        const { getByTestId } = render(<RowBlockItem data={data} />);
+
+        const totalProgressElement = getByTestId('total-progress-percent');
+        expect(totalProgressElement).toHaveTextContent('25%');
+    });
+
+    it('check correct progressCount when count > goal', () => {
+        const data = {
+            done: false,
+            id: "3",
+            progress: {
+                stop_video: {
+                    title: "Stop Video",
+                    count: 30,
+                    goal: 10,
+                },
+                problem_check: {
+                    title: "Problem Check",
+                    count: 0,
+                    goal: 10,
+                },
+            },
+            title: "Badge 3",
+            url: "https://gamma.com/badge3.png",
+        };
+
+        const { getByTestId } = render(<RowBlockItem data={data} />);
+
+        const totalProgressElement = getByTestId('total-progress-percent');
+        expect(totalProgressElement).toHaveTextContent('50%');
+    });
 });

@@ -15,14 +15,15 @@ const RowBlockItemPopup = React.forwardRef(({title, data, ...props}, ref) => {
     const bodyItems = [];
     for (const progressItem in progress) {
         const progressValues = progress[progressItem];
+        const { count, goal, title } = progressValues;
 
-        const progressTitle = `${progressValues.title.charAt(0).toUpperCase()}${progressValues.title.slice(1)}`;
+        const progressTitle = `${title.charAt(0).toUpperCase()}${title.slice(1)}`;
 
         bodyItems.push((
             <ul key={`progress-${progressItem}`} className={'item-list'}>
                 <li className={'item-list-item'}>
                     <span className={'list-item-counter-text'}>
-                        {`${progressValues.count > progressValues.goal ? progressValues.goal : progressValues.count}/${progressValues.goal}`}
+                        {`${Math.min(count, goal)}/${goal}`}
                     </span>
                     {progressTitle}
                 </li>

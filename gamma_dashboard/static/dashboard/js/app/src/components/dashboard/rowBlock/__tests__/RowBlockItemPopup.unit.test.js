@@ -165,6 +165,7 @@ describe('<RowBlockItemPopup>', () => {
         );
 
         expect(getByText('4/4')).toBeInTheDocument();
+        expect(getByText('Problem graded')).toBeInTheDocument();
     });
 
     it('displays progress count value if it equals 0', () => {
@@ -192,6 +193,7 @@ describe('<RowBlockItemPopup>', () => {
         );
 
         expect(getByText('0/4')).toBeInTheDocument();
+        expect(getByText('Problem graded')).toBeInTheDocument();
     });
 
     it('displays progress count value if it does not exceed the goal value', () => {

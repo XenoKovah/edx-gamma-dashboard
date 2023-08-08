@@ -1,6 +1,8 @@
 # Changelog
 
 ## [Unreleased]
+## Fixed
+- [RGG-941] Fix the percentage continues to calculate after required condition completing for 1 type of event
 
 ## 1.1.0 (2023-06-08)
 ## Fixed

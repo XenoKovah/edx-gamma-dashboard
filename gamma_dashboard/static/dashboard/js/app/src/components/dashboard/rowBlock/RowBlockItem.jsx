@@ -38,7 +38,8 @@ const RowBlockItem = ({ slug, data, center, children }) => {
         const percentageOneEvent = 100/Object.keys(progress).length;
         for (let key in progress) {
             if (progress.hasOwnProperty(key)) {
-                totalProgressPercent += Math.floor(progress[key]['count']/progress[key]['goal']*percentageOneEvent);
+                const { count, goal } = progress[key]
+                totalProgressPercent += Math.floor((Math.min(count, goal) / goal) * percentageOneEvent);
             }
         }
     } else if (data.active !== undefined) {
@@ -94,7 +95,7 @@ const RowBlockItem = ({ slug, data, center, children }) => {
         >
             { hasPopup ?
                 <div>
-                    <p className="total-progress-percent">{totalProgressPercent}%</p>
+                    <p className="total-progress-percent" data-testid="total-progress-percent">{totalProgressPercent}%</p>
                     <div className="diagram progress" data-percent={totalProgressPercent} ref={progressRef}>
                         <div className="piece left"></div>
                         <div className="piece right"></div>
