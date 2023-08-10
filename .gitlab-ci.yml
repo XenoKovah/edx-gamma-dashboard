@@ -1,58 +1,65 @@
-before_script:
-  - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY
-
 stages:
     - build
     - test
     - versions
     - pypi
-    - cleanup
 
 variables:
     BUILD_BOX_NAME: $CI_REGISTRY_IMAGE/build-box-gamma
-
-services:
-  - docker:20.10.16-dind
+    IMAGE_NAME: $BUILD_BOX_NAME/app:$CI_COMMIT_SHORT_SHA
 
 Build:
     stage: build
     tags:
-      - dind
+      - k8s-kaniko
+    variables:
+      KUBERNETES_CPU_REQUEST: "1200m"
+      KUBERNETES_CPU_LIMIT: "2500m"
+      KUBERNETES_MEMORY_REQUEST: "2Gi"
+      KUBERNETES_MEMORY_LIMIT: "4Gi"
     only:
       - master
       - merge_requests
       - tags
     script:
-        - docker build -t $BUILD_BOX_NAME/app:$CI_COMMIT_SHORT_SHA --push .
+      - /kaniko/executor
+        --context "${CI_PROJECT_DIR}"
+        --dockerfile "${CI_PROJECT_DIR}/Dockerfile"
+        --destination "$IMAGE_NAME"
+        --cache=true
+        --use-new-run
 
 Units:
     stage: test
+    variables:
+      GIT_STRATEGY: none
     tags:
-      - dind
+      - k8s-runner
+    image: $IMAGE_NAME
     only:
       - master
       - merge_requests
       - tags
     script:
-      - docker pull $BUILD_BOX_NAME/app:$CI_COMMIT_SHORT_SHA || true
-      - docker run $BUILD_BOX_NAME/app:$CI_COMMIT_SHORT_SHA sh -c 'make test'
+      - cd /app && make test
 
 ReactUnits:
     stage: test
+    variables:
+      GIT_STRATEGY: none
     tags:
-      - dind
+      - k8s-runner
+    image: $IMAGE_NAME
     only:
       - master
       - merge_requests
       - tags
     script:
-      - docker pull $BUILD_BOX_NAME/app:$CI_COMMIT_SHORT_SHA || true
-      - docker run $BUILD_BOX_NAME/app:$CI_COMMIT_SHORT_SHA sh -c 'make jest'
+      - cd /app && make jest
 
 CheckVersion:
     stage: versions
     image: python:3.8
-    before_script: []
     script:
       - python check_version.py
     rules:
@@ -60,22 +67,12 @@ CheckVersion:
 
 PyPiBuildAndPublish:
     stage: pypi
+    variables:
+      GIT_STRATEGY: none
     tags:
-      - dind
+      - k8s-runner
+    image: $IMAGE_NAME
     script:
-      - docker pull $BUILD_BOX_NAME/app:$CI_COMMIT_SHORT_SHA || true
-      - docker run -e CI_JOB_TOKEN -e CI_PROJECT_ID $BUILD_BOX_NAME/app:$CI_COMMIT_SHORT_SHA sh -c 'make pypi'
+      - make pypi
     rules:
       - if: $CI_COMMIT_TAG
-
-CleanUp:
-    stage: cleanup
-    tags:
-      - dind
-    only:
-      - master
-      - merge_requests
-      - tags
-    script:
-      - docker rmi -f $BUILD_BOX_NAME/app:$CI_COMMIT_SHORT_SHA || true
-    when: always
