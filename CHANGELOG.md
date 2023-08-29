@@ -2,6 +2,7 @@
 
 ## [Unreleased]
 ## Fixed
+- [RGG-798] add Nix support for local development
 - [RGG-941] Fix the percentage continues to calculate after required condition completing for 1 type of event
 
 ## 1.1.0 (2023-06-08)

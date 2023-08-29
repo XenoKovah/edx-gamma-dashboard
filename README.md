@@ -100,6 +100,41 @@ $ make test
 $ make test-v
 ```
 
+## Nix
+1. Install nix
+```
+sh <(curl -L https://nixos.org/nix/install) --daemon
+```
+2. Activate development environment (OPTIONAL in case of direnv)
+```
+make nix-shell
+```
+3. Check versions
+```
+python --version
+```
+```
+node -v && npm -v
+```
+4. Build frontend
+```
+make install-react-deps
+```
+```
+make build
+```
+
+### Using direnv
+1. Install direnv
+2. Add .envrc
+```
+echo "export NIXPKGS_ALLOW_INSECURE=1" > .envrc
+echo "use flake . --impure" >> .envrc
+```
+3. Allow direnv
+```
+direnv allow
+```
 
 ## Build distribution package
 !TODO

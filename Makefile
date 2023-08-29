@@ -7,7 +7,7 @@ REACT_APP_PATH = "${CURRENT_DIR}/gamma_dashboard/static/dashboard/js/app"
 
 .PHONY: build build-watch build-prod install-react-deps \
 		jest jest-v jest-watch jest-watch-v \
-		test test-v
+		test test-v nix-shell
 
 build:	# build development bundle
 	npm run build --prefix ${REACT_APP_PATH}
@@ -55,3 +55,9 @@ test-v:	# run tests in verbose mode (for debuging)
 
 pypi: build .build-pypi
 	TWINE_PASSWORD=${CI_JOB_TOKEN} TWINE_USERNAME=gitlab-ci-token python -m twine upload --repository-url https://gitlab.raccoongang.com/api/v4/projects/${CI_PROJECT_ID}/packages/pypi dist/*
+
+#
+# Nix support
+#
+nix-shell:
+	NIXPKGS_ALLOW_INSECURE=1 nix develop --impure
