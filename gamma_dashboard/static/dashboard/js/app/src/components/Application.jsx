@@ -1,7 +1,7 @@
 import React from 'react';
 import {
     BrowserRouter as Router,
-    Switch,
+    Routes,
     Route
 } from 'react-router-dom';
 
@@ -15,14 +15,10 @@ import '../styles/app/app.scss';
 
 const Application = () => (
     <Router>
-        <Switch>
-            <Route exact path={URLS.dashboardPage}>
-                <DashboardPage />
-            </Route>
-            <Route exact path={URLS.leaderboardPage}>
-                <LeaderboardPage />
-            </Route>
-        </Switch>
+        <Routes>
+            <Route exact path={URLS.dashboardPage} element={<DashboardPage />} />
+            <Route exact path={URLS.leaderboardPage} element={<LeaderboardPage />} />
+        </Routes>
     </Router>
 );
 

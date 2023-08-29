@@ -26,8 +26,7 @@ $form-group-margin-bottom: 1.5rem;
 // buttons
 $btn-disabled-opacity: .3;
 
-// ToDo: this import should be changed to original paragon core scss file after we'll fix problem with webpack
-@import "./paragon-core";
+@import "@edx/paragon/scss/core/core";
 @import "../../../styles/app/dashboard/dashboard-colors";
 
 button:not(.close-window-button) {

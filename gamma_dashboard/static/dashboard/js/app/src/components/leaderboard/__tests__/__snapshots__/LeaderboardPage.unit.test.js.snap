@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<LeaderboardPage> renders 1`] = `
-Array [
+[
   <div
     className="gamification-title-wrapper d-flex justify-content-between align-items-center"
   >
@@ -26,7 +26,7 @@ Array [
       >
         <img
           alt="analytics-logo"
-          src={Object {}}
+          src={{}}
         />
         <span
           className="pgn__icon"
@@ -59,7 +59,7 @@ Array [
 `;
 
 exports[`<LeaderboardPage> renders 2`] = `
-Array [
+[
   <div
     className="gamification-title-wrapper d-flex justify-content-between align-items-center"
   >
@@ -84,7 +84,7 @@ Array [
       >
         <img
           alt="analytics-logo"
-          src={Object {}}
+          src={{}}
         />
         <span
           className="pgn__icon"
@@ -124,7 +124,7 @@ Array [
           className="Avatar"
           data-testid="avatar"
           style={
-            Object {
+            {
               "backgroundImage": "url(/images/default.png)",
             }
           }
@@ -134,7 +134,7 @@ Array [
           >
             <img
               alt=""
-              src={Object {}}
+              src={{}}
             />
           </span>
         </div>
@@ -181,7 +181,7 @@ Array [
           className="Avatar"
           data-testid="avatar"
           style={
-            Object {
+            {
               "backgroundImage": "url(/images/default.png)",
             }
           }
@@ -191,7 +191,7 @@ Array [
           >
             <img
               alt=""
-              src={Object {}}
+              src={{}}
             />
           </span>
         </div>
@@ -238,7 +238,7 @@ Array [
           className="Avatar"
           data-testid="avatar"
           style={
-            Object {
+            {
               "backgroundImage": "url(/images/default.png)",
             }
           }
@@ -248,7 +248,7 @@ Array [
           >
             <img
               alt=""
-              src={Object {}}
+              src={{}}
             />
           </span>
         </div>
@@ -295,7 +295,7 @@ Array [
           className="Avatar"
           data-testid="avatar"
           style={
-            Object {
+            {
               "backgroundImage": "url(/images/default.png)",
             }
           }
@@ -349,7 +349,7 @@ Array [
           className="Avatar"
           data-testid="avatar"
           style={
-            Object {
+            {
               "backgroundImage": "url(/images/default.png)",
             }
           }
@@ -403,7 +403,7 @@ Array [
           className="Avatar"
           data-testid="avatar"
           style={
-            Object {
+            {
               "backgroundImage": "url(/images/default.png)",
             }
           }
@@ -457,7 +457,7 @@ Array [
           className="Avatar"
           data-testid="avatar"
           style={
-            Object {
+            {
               "backgroundImage": "url(/images/default.png)",
             }
           }
@@ -511,7 +511,7 @@ Array [
           className="Avatar"
           data-testid="avatar"
           style={
-            Object {
+            {
               "backgroundImage": "url(/images/default.png)",
             }
           }
@@ -565,7 +565,7 @@ Array [
           className="Avatar"
           data-testid="avatar"
           style={
-            Object {
+            {
               "backgroundImage": "url(/images/default.png)",
             }
           }
@@ -629,7 +629,7 @@ Array [
           className="Avatar"
           data-testid="avatar"
           style={
-            Object {
+            {
               "backgroundColor": "#cde4fc",
             }
           }
@@ -638,7 +638,7 @@ Array [
             className="Avatar-Logo"
             data-testid="avatar-logo"
             style={
-              Object {
+              {
                 "color": "#303030",
               }
             }
@@ -690,7 +690,7 @@ Array [
 `;
 
 exports[`<LeaderboardPage> renders 3`] = `
-Array [
+[
   <div
     className="gamification-title-wrapper d-flex justify-content-between align-items-center"
   >
@@ -715,7 +715,7 @@ Array [
       >
         <img
           alt="analytics-logo"
-          src={Object {}}
+          src={{}}
         />
         <span
           className="pgn__icon"
@@ -755,7 +755,7 @@ Array [
           className="Avatar"
           data-testid="avatar"
           style={
-            Object {
+            {
               "backgroundImage": "url(/images/default.png)",
             }
           }
@@ -765,7 +765,7 @@ Array [
           >
             <img
               alt=""
-              src={Object {}}
+              src={{}}
             />
           </span>
         </div>
@@ -812,7 +812,7 @@ Array [
           className="Avatar"
           data-testid="avatar"
           style={
-            Object {
+            {
               "backgroundImage": "url(/images/default.png)",
             }
           }
@@ -822,7 +822,7 @@ Array [
           >
             <img
               alt=""
-              src={Object {}}
+              src={{}}
             />
           </span>
         </div>
@@ -869,7 +869,7 @@ Array [
           className="Avatar"
           data-testid="avatar"
           style={
-            Object {
+            {
               "backgroundImage": "url(/images/default.png)",
             }
           }
@@ -879,7 +879,7 @@ Array [
           >
             <img
               alt=""
-              src={Object {}}
+              src={{}}
             />
           </span>
         </div>
@@ -936,7 +936,7 @@ Array [
           className="Avatar"
           data-testid="avatar"
           style={
-            Object {
+            {
               "backgroundImage": "url(/images/default.png)",
             }
           }
@@ -990,7 +990,7 @@ Array [
           className="Avatar"
           data-testid="avatar"
           style={
-            Object {
+            {
               "backgroundImage": "url(/images/default.png)",
             }
           }
@@ -1044,7 +1044,7 @@ Array [
           className="Avatar"
           data-testid="avatar"
           style={
-            Object {
+            {
               "backgroundImage": "url(/images/default.png)",
             }
           }
@@ -1098,7 +1098,7 @@ Array [
           className="Avatar"
           data-testid="avatar"
           style={
-            Object {
+            {
               "backgroundImage": "url(/images/default.png)",
             }
           }
@@ -1152,7 +1152,7 @@ Array [
           className="Avatar"
           data-testid="avatar"
           style={
-            Object {
+            {
               "backgroundImage": "url(/images/default_0.png)",
             }
           }
@@ -1206,7 +1206,7 @@ Array [
           className="Avatar"
           data-testid="avatar"
           style={
-            Object {
+            {
               "backgroundImage": "url(/images/default.png)",
             }
           }
@@ -1260,7 +1260,7 @@ Array [
           className="Avatar"
           data-testid="avatar"
           style={
-            Object {
+            {
               "backgroundImage": "url(/images/default.png)",
             }
           }
@@ -1308,7 +1308,7 @@ Array [
 `;
 
 exports[`<LeaderboardPage> renders 4`] = `
-Array [
+[
   <div
     className="gamification-title-wrapper d-flex justify-content-between align-items-center"
   >
@@ -1333,7 +1333,7 @@ Array [
       >
         <img
           alt="analytics-logo"
-          src={Object {}}
+          src={{}}
         />
         <span
           className="pgn__icon"
@@ -1373,7 +1373,7 @@ Array [
           className="Avatar"
           data-testid="avatar"
           style={
-            Object {
+            {
               "backgroundImage": "url(/images/default.png)",
             }
           }
@@ -1383,7 +1383,7 @@ Array [
           >
             <img
               alt=""
-              src={Object {}}
+              src={{}}
             />
           </span>
         </div>
@@ -1430,7 +1430,7 @@ Array [
           className="Avatar"
           data-testid="avatar"
           style={
-            Object {
+            {
               "backgroundImage": "url(/images/default_0.png)",
             }
           }
@@ -1440,7 +1440,7 @@ Array [
           >
             <img
               alt=""
-              src={Object {}}
+              src={{}}
             />
           </span>
         </div>
@@ -1487,7 +1487,7 @@ Array [
           className="Avatar"
           data-testid="avatar"
           style={
-            Object {
+            {
               "backgroundImage": "url(/images/default.png)",
             }
           }
@@ -1497,7 +1497,7 @@ Array [
           >
             <img
               alt=""
-              src={Object {}}
+              src={{}}
             />
           </span>
         </div>
@@ -1544,7 +1544,7 @@ Array [
           className="Avatar"
           data-testid="avatar"
           style={
-            Object {
+            {
               "backgroundImage": "url(/images/default.png)",
             }
           }
@@ -1598,7 +1598,7 @@ Array [
           className="Avatar"
           data-testid="avatar"
           style={
-            Object {
+            {
               "backgroundImage": "url(/images/default.png)",
             }
           }
@@ -1652,7 +1652,7 @@ Array [
           className="Avatar"
           data-testid="avatar"
           style={
-            Object {
+            {
               "backgroundImage": "url(/images/default.png)",
             }
           }
@@ -1706,7 +1706,7 @@ Array [
           className="Avatar"
           data-testid="avatar"
           style={
-            Object {
+            {
               "backgroundImage": "url(/images/default.png)",
             }
           }
@@ -1760,7 +1760,7 @@ Array [
           className="Avatar"
           data-testid="avatar"
           style={
-            Object {
+            {
               "backgroundImage": "url(/images/default.png)",
             }
           }
@@ -1814,7 +1814,7 @@ Array [
           className="Avatar"
           data-testid="avatar"
           style={
-            Object {
+            {
               "backgroundImage": "url(/images/default.png)",
             }
           }
@@ -1868,7 +1868,7 @@ Array [
           className="Avatar"
           data-testid="avatar"
           style={
-            Object {
+            {
               "backgroundImage": "url(/images/default.png)",
             }
           }
@@ -1916,7 +1916,7 @@ Array [
 `;
 
 exports[`<LeaderboardPage> renders 5`] = `
-Array [
+[
   <div
     className="gamification-title-wrapper d-flex justify-content-between align-items-center"
   >
@@ -1941,7 +1941,7 @@ Array [
       >
         <img
           alt="analytics-logo"
-          src={Object {}}
+          src={{}}
         />
         <span
           className="pgn__icon"
@@ -1981,7 +1981,7 @@ Array [
           className="Avatar"
           data-testid="avatar"
           style={
-            Object {
+            {
               "backgroundImage": "url(/images/default.png)",
             }
           }
@@ -1991,7 +1991,7 @@ Array [
           >
             <img
               alt=""
-              src={Object {}}
+              src={{}}
             />
           </span>
         </div>
@@ -2038,7 +2038,7 @@ Array [
           className="Avatar"
           data-testid="avatar"
           style={
-            Object {
+            {
               "backgroundImage": "url(/images/default.png)",
             }
           }
@@ -2048,7 +2048,7 @@ Array [
           >
             <img
               alt=""
-              src={Object {}}
+              src={{}}
             />
           </span>
         </div>
@@ -2095,7 +2095,7 @@ Array [
           className="Avatar"
           data-testid="avatar"
           style={
-            Object {
+            {
               "backgroundImage": "url(/images/default.png)",
             }
           }
@@ -2105,7 +2105,7 @@ Array [
           >
             <img
               alt=""
-              src={Object {}}
+              src={{}}
             />
           </span>
         </div>
@@ -2162,7 +2162,7 @@ Array [
           className="Avatar"
           data-testid="avatar"
           style={
-            Object {
+            {
               "backgroundImage": "url(/images/default.png)",
             }
           }
@@ -2216,7 +2216,7 @@ Array [
           className="Avatar"
           data-testid="avatar"
           style={
-            Object {
+            {
               "backgroundImage": "url(/images/default.png)",
             }
           }
@@ -2270,7 +2270,7 @@ Array [
           className="Avatar"
           data-testid="avatar"
           style={
-            Object {
+            {
               "backgroundImage": "url(/images/default.png)",
             }
           }
@@ -2324,7 +2324,7 @@ Array [
           className="Avatar"
           data-testid="avatar"
           style={
-            Object {
+            {
               "backgroundImage": "url(/images/default.png)",
             }
           }
@@ -2378,7 +2378,7 @@ Array [
           className="Avatar"
           data-testid="avatar"
           style={
-            Object {
+            {
               "backgroundImage": "url(/images/default.png)",
             }
           }
@@ -2432,7 +2432,7 @@ Array [
           className="Avatar"
           data-testid="avatar"
           style={
-            Object {
+            {
               "backgroundImage": "url(/images/default_0.png)",
             }
           }
@@ -2486,7 +2486,7 @@ Array [
           className="Avatar"
           data-testid="avatar"
           style={
-            Object {
+            {
               "backgroundImage": "url(/images/default.png)",
             }
           }
@@ -2534,7 +2534,7 @@ Array [
 `;
 
 exports[`<LeaderboardPage> renders 6`] = `
-Array [
+[
   <div
     className="gamification-title-wrapper d-flex justify-content-between align-items-center"
   >
@@ -2559,7 +2559,7 @@ Array [
       >
         <img
           alt="analytics-logo"
-          src={Object {}}
+          src={{}}
         />
         <span
           className="pgn__icon"
@@ -2599,7 +2599,7 @@ Array [
           className="Avatar"
           data-testid="avatar"
           style={
-            Object {
+            {
               "backgroundImage": "url(/images/default.png)",
             }
           }
@@ -2609,7 +2609,7 @@ Array [
           >
             <img
               alt=""
-              src={Object {}}
+              src={{}}
             />
           </span>
         </div>
@@ -2656,7 +2656,7 @@ Array [
           className="Avatar"
           data-testid="avatar"
           style={
-            Object {
+            {
               "backgroundImage": "url(/images/default.png)",
             }
           }
@@ -2666,7 +2666,7 @@ Array [
           >
             <img
               alt=""
-              src={Object {}}
+              src={{}}
             />
           </span>
         </div>
@@ -2713,7 +2713,7 @@ Array [
           className="Avatar"
           data-testid="avatar"
           style={
-            Object {
+            {
               "backgroundImage": "url(/images/default.png)",
             }
           }
@@ -2723,7 +2723,7 @@ Array [
           >
             <img
               alt=""
-              src={Object {}}
+              src={{}}
             />
           </span>
         </div>
@@ -2780,7 +2780,7 @@ Array [
           className="Avatar"
           data-testid="avatar"
           style={
-            Object {
+            {
               "backgroundImage": "url(/images/default.png)",
             }
           }
@@ -2834,7 +2834,7 @@ Array [
           className="Avatar"
           data-testid="avatar"
           style={
-            Object {
+            {
               "backgroundImage": "url(/images/default.png)",
             }
           }
@@ -2888,7 +2888,7 @@ Array [
           className="Avatar"
           data-testid="avatar"
           style={
-            Object {
+            {
               "backgroundImage": "url(/images/default.png)",
             }
           }
@@ -2942,7 +2942,7 @@ Array [
           className="Avatar"
           data-testid="avatar"
           style={
-            Object {
+            {
               "backgroundImage": "url(/images/default.png)",
             }
           }
@@ -2996,7 +2996,7 @@ Array [
           className="Avatar"
           data-testid="avatar"
           style={
-            Object {
+            {
               "backgroundImage": "url(/images/default.png)",
             }
           }
@@ -3050,7 +3050,7 @@ Array [
           className="Avatar"
           data-testid="avatar"
           style={
-            Object {
+            {
               "backgroundImage": "url(/images/default.png)",
             }
           }
@@ -3104,7 +3104,7 @@ Array [
           className="Avatar"
           data-testid="avatar"
           style={
-            Object {
+            {
               "backgroundImage": "url(/images/default_0.png)",
             }
           }
@@ -3152,7 +3152,7 @@ Array [
 `;
 
 exports[`<LeaderboardPage> renders 7`] = `
-Array [
+[
   <div
     className="gamification-title-wrapper d-flex justify-content-between align-items-center"
   >
@@ -3177,7 +3177,7 @@ Array [
       >
         <img
           alt="analytics-logo"
-          src={Object {}}
+          src={{}}
         />
         <span
           className="pgn__icon"
@@ -3217,7 +3217,7 @@ Array [
           className="Avatar"
           data-testid="avatar"
           style={
-            Object {
+            {
               "backgroundImage": "url(/images/default.png)",
             }
           }
@@ -3227,7 +3227,7 @@ Array [
           >
             <img
               alt=""
-              src={Object {}}
+              src={{}}
             />
           </span>
         </div>
@@ -3274,7 +3274,7 @@ Array [
           className="Avatar"
           data-testid="avatar"
           style={
-            Object {
+            {
               "backgroundImage": "url(/images/default.png)",
             }
           }
@@ -3284,7 +3284,7 @@ Array [
           >
             <img
               alt=""
-              src={Object {}}
+              src={{}}
             />
           </span>
         </div>
@@ -3331,7 +3331,7 @@ Array [
           className="Avatar"
           data-testid="avatar"
           style={
-            Object {
+            {
               "backgroundImage": "url(/images/default.png)",
             }
           }
@@ -3341,7 +3341,7 @@ Array [
           >
             <img
               alt=""
-              src={Object {}}
+              src={{}}
             />
           </span>
         </div>
@@ -3388,7 +3388,7 @@ Array [
           className="Avatar"
           data-testid="avatar"
           style={
-            Object {
+            {
               "backgroundImage": "url(/images/default.png)",
             }
           }
@@ -3442,7 +3442,7 @@ Array [
           className="Avatar"
           data-testid="avatar"
           style={
-            Object {
+            {
               "backgroundImage": "url(/images/default.png)",
             }
           }
@@ -3496,7 +3496,7 @@ Array [
           className="Avatar"
           data-testid="avatar"
           style={
-            Object {
+            {
               "backgroundImage": "url(/images/default.png)",
             }
           }
@@ -3550,7 +3550,7 @@ Array [
           className="Avatar"
           data-testid="avatar"
           style={
-            Object {
+            {
               "backgroundImage": "url(/images/default.png)",
             }
           }
@@ -3604,7 +3604,7 @@ Array [
           className="Avatar"
           data-testid="avatar"
           style={
-            Object {
+            {
               "backgroundImage": "url(/images/default.png)",
             }
           }
@@ -3658,7 +3658,7 @@ Array [
           className="Avatar"
           data-testid="avatar"
           style={
-            Object {
+            {
               "backgroundImage": "url(/images/default.png)",
             }
           }
@@ -3722,7 +3722,7 @@ Array [
           className="Avatar"
           data-testid="avatar"
           style={
-            Object {
+            {
               "backgroundColor": "#cde4fc",
             }
           }
@@ -3731,7 +3731,7 @@ Array [
             className="Avatar-Logo"
             data-testid="avatar-logo"
             style={
-              Object {
+              {
                 "color": "#303030",
               }
             }
@@ -3783,7 +3783,7 @@ Array [
 `;
 
 exports[`<LeaderboardPage> renders 8`] = `
-Array [
+[
   <div
     className="gamification-title-wrapper d-flex justify-content-between align-items-center"
   >
@@ -3808,7 +3808,7 @@ Array [
       >
         <img
           alt="analytics-logo"
-          src={Object {}}
+          src={{}}
         />
         <span
           className="pgn__icon"
@@ -3848,7 +3848,7 @@ Array [
           className="Avatar"
           data-testid="avatar"
           style={
-            Object {
+            {
               "backgroundImage": "url(/images/default.png)",
             }
           }
@@ -3858,7 +3858,7 @@ Array [
           >
             <img
               alt=""
-              src={Object {}}
+              src={{}}
             />
           </span>
         </div>
@@ -3905,7 +3905,7 @@ Array [
           className="Avatar"
           data-testid="avatar"
           style={
-            Object {
+            {
               "backgroundImage": "url(/images/default.png)",
             }
           }
@@ -3915,7 +3915,7 @@ Array [
           >
             <img
               alt=""
-              src={Object {}}
+              src={{}}
             />
           </span>
         </div>
@@ -3962,7 +3962,7 @@ Array [
           className="Avatar"
           data-testid="avatar"
           style={
-            Object {
+            {
               "backgroundImage": "url(/images/default.png)",
             }
           }
@@ -3972,7 +3972,7 @@ Array [
           >
             <img
               alt=""
-              src={Object {}}
+              src={{}}
             />
           </span>
         </div>
@@ -4019,7 +4019,7 @@ Array [
           className="Avatar"
           data-testid="avatar"
           style={
-            Object {
+            {
               "backgroundImage": "url(/images/default.png)",
             }
           }
@@ -4073,7 +4073,7 @@ Array [
           className="Avatar"
           data-testid="avatar"
           style={
-            Object {
+            {
               "backgroundImage": "url(/images/default.png)",
             }
           }
@@ -4137,7 +4137,7 @@ Array [
           className="Avatar"
           data-testid="avatar"
           style={
-            Object {
+            {
               "backgroundColor": "#cde4fc",
             }
           }
@@ -4146,7 +4146,7 @@ Array [
             className="Avatar-Logo"
             data-testid="avatar-logo"
             style={
-              Object {
+              {
                 "color": "#303030",
               }
             }
@@ -4198,7 +4198,7 @@ Array [
 `;
 
 exports[`<LeaderboardPage> renders 9`] = `
-Array [
+[
   <div
     className="gamification-title-wrapper d-flex justify-content-between align-items-center"
   >
@@ -4223,7 +4223,7 @@ Array [
       >
         <img
           alt="analytics-logo"
-          src={Object {}}
+          src={{}}
         />
         <span
           className="pgn__icon"
@@ -4256,7 +4256,7 @@ Array [
 `;
 
 exports[`<LeaderboardPage> renders 10`] = `
-Array [
+[
   <div
     className="gamification-title-wrapper d-flex justify-content-between align-items-center"
   >
@@ -4281,7 +4281,7 @@ Array [
       >
         <img
           alt="analytics-logo"
-          src={Object {}}
+          src={{}}
         />
         <span
           className="pgn__icon"
@@ -4321,7 +4321,7 @@ Array [
           className="Avatar"
           data-testid="avatar"
           style={
-            Object {
+            {
               "backgroundImage": "url(/images/default.png)",
             }
           }
@@ -4331,7 +4331,7 @@ Array [
           >
             <img
               alt=""
-              src={Object {}}
+              src={{}}
             />
           </span>
         </div>
@@ -4388,7 +4388,7 @@ Array [
           className="Avatar"
           data-testid="avatar"
           style={
-            Object {
+            {
               "backgroundColor": "#cde4fc",
             }
           }
@@ -4397,7 +4397,7 @@ Array [
             className="Avatar-Logo"
             data-testid="avatar-logo"
             style={
-              Object {
+              {
                 "color": "#303030",
               }
             }

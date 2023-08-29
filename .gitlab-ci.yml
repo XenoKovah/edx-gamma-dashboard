@@ -1,6 +1,7 @@
 stages:
     - build
-    - test
+    - test-py
+    - test-js
     - versions
     - pypi
 
@@ -30,7 +31,7 @@ Build:
         --use-new-run
 
 Units:
-    stage: test
+    stage: test-py
     variables:
       GIT_STRATEGY: none
     tags:
@@ -44,7 +45,7 @@ Units:
       - cd /app && make test
 
 ReactUnits:
-    stage: test
+    stage: test-js
     variables:
       GIT_STRATEGY: none
     tags:

@@ -1,7 +1,8 @@
 import React from 'react';
 
 import '@testing-library/jest-dom';
-import { render, cleanup } from '@testing-library/react';
+import { render, screen, cleanup } from '@testing-library/react';
+import { act } from 'react-dom/test-utils';
 
 import DashboardTable from '../DashboardTable';
 
@@ -89,25 +90,29 @@ describe('<DashboardTable>', () => {
         };
 
 
-        const { getByTestId } = render(
-            <DashboardTable
-                badgeItems={parsedBadgeItems}
-                statusItems={parsedStatusItems}
-                statusRoadmap={statusRoadmap}
-                progress={progress}
-                chart={chart}
-            />
-        );
+        act(() => {
+            render(
+                <DashboardTable
+                    badgeItems={parsedBadgeItems}
+                    statusItems={parsedStatusItems}
+                    statusRoadmap={statusRoadmap}
+                    progress={progress}
+                    chart={chart}
+                />
+            );
+        });
 
-        const dashboardTable = getByTestId('dashboard-table');
+        const dashboardTable = screen.getByTestId('dashboard-table');
 
         expect(dashboardTable).toBeInTheDocument();
     });
 
     it('renders without data', () => {
-        const { getByTestId } = render(<DashboardTable />);
+        act(() => {
+            render(<DashboardTable />);
+        });
 
-        const dashboardTable = getByTestId('dashboard-table');
+        const dashboardTable = screen.getByTestId('dashboard-table');
 
         expect(dashboardTable).toBeInTheDocument();
     });

@@ -4,7 +4,7 @@ import axios from 'axios';
 
 import '@testing-library/jest-dom';
 import '@testing-library/jest-dom/extend-expect';
-import { render, cleanup } from '@testing-library/react';
+import { render, screen, cleanup } from '@testing-library/react';
 import { act } from 'react-dom/test-utils';
 import renderer from 'react-test-renderer';
 
@@ -44,8 +44,10 @@ describe('<LeaderboardPage>', () => {
     it('renders with correct title', () => {
         const title = 'Leaderboard';
 
-        const { getByTestId } = render(<LeaderboardPage />);
-        const windowTitle = getByTestId('leaderboard-page-title');
+        act(() => {
+            render(<LeaderboardPage />);
+        });
+        const windowTitle = screen.getByTestId('leaderboard-page-title');
 
         expect(windowTitle).toBeInTheDocument();
         expect(windowTitle).toHaveTextContent(title);
@@ -59,10 +61,12 @@ describe('<LeaderboardPage>', () => {
     `('renders with inconsistent data `$data`', ({data}) => {
         axios.get.mockResolvedValue({data: data});
 
-        const { getByTestId } = render(<LeaderboardPage />);
+        act(() => {
+            render(<LeaderboardPage />);
+        });
 
-        const pageTitle = getByTestId('leaderboard-page-title');
-        const leaderboardTable = getByTestId('leaderboard-table');
+        const pageTitle = screen.getByTestId('leaderboard-page-title');
+        const leaderboardTable = screen.getByTestId('leaderboard-table');
 
         expect(pageTitle).toBeInTheDocument();
         expect(leaderboardTable).toBeInTheDocument();

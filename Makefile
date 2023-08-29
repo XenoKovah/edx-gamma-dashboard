@@ -21,6 +21,9 @@ build-prod: # build production bundle
 install-react-deps:
 	npm install --prefix ${REACT_APP_PATH}
 
+install-react-deps-ci:
+	npm ci --prefix ${REACT_APP_PATH}
+
 jest:	# run react tests
 	npm run test --prefix ${REACT_APP_PATH}
 
@@ -53,7 +56,7 @@ test-v:	# run tests in verbose mode (for debuging)
 .build-pypi:
 	python setup.py sdist bdist_wheel
 
-pypi: build .build-pypi
+pypi: build-prod .build-pypi
 	TWINE_PASSWORD=${CI_JOB_TOKEN} TWINE_USERNAME=gitlab-ci-token python -m twine upload --repository-url https://gitlab.raccoongang.com/api/v4/projects/${CI_PROJECT_ID}/packages/pypi dist/*
 
 #

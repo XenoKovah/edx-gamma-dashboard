@@ -2,7 +2,7 @@
   description = "Nix shell flake";
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-23.05";
     flake-utils.url = "github:numtide/flake-utils";
 
     mach-nix.url = "github:davhau/mach-nix";
@@ -10,7 +10,7 @@
 
   outputs = { self, nixpkgs, mach-nix, flake-utils, ... }:
     let
-      pythonVersion = "python38";
+      pythonVersion = "python310";
     in
     flake-utils.lib.eachDefaultSystem (system:
       let
@@ -26,7 +26,7 @@
         devShells.default = pkgs.mkShellNoCC {
           packages = [
             pythonEnv
-            pkgs.nodejs-14_x
+            pkgs.nodejs-18_x
           ];
 
           shellHook = ''

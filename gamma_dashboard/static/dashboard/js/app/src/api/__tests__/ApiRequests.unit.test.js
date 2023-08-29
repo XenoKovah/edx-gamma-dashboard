@@ -1,3 +1,8 @@
+/*
+* @jest-environment node
+*/
+
+
 import 'regenerator-runtime';
 
 import axios from 'axios';
