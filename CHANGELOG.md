@@ -2,6 +2,7 @@
 
 ## [Unreleased]
 ## Added
+- [RGG-866] update Performance Board with the redesigned Level Chart
 - [RGG-798] add Nix support for local development
 
 ## Changed

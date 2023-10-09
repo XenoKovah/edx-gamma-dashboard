@@ -10,6 +10,7 @@ export const CORNER_TOP_RIGHT = 'top-right';
 export const CORNER_BOTTOM_LEFT = 'bottom-left';
 export const CORNER_BOTTOM_RIGHT = 'bottom-right';
 export const CORNER_BOTTOM = 'bottom';
+export const CORNER_TOP = 'top';
 
 
 const DashboardTableRowBlock = ({ fullWidth, corner, children }) => {
@@ -39,7 +40,8 @@ DashboardTableRowBlock.propTypes = {
         CORNER_TOP_RIGHT,
         CORNER_BOTTOM_LEFT,
         CORNER_BOTTOM_RIGHT,
-        CORNER_BOTTOM
+        CORNER_BOTTOM,
+        CORNER_TOP,
     ])
 };
 

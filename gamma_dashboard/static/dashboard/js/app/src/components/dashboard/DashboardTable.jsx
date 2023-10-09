@@ -4,27 +4,20 @@ import PropTypes from 'prop-types';
 import ReactModal from 'react-modal';
 
 import DashboardTableRow from './DashboardTableRow';
-import DashboardTableRowBlock, {
-    CORNER_TOP_LEFT,
-    CORNER_TOP_RIGHT,
-    CORNER_BOTTOM
-} from './rowBlock/DashboardTableRowBlock';
+import DashboardTableRowBlock, { CORNER_BOTTOM, CORNER_TOP } from './rowBlock/DashboardTableRowBlock';
 import CustomRowBlock from './rowBlock/CustomRowBlock';
 import PointsDistributionChart from './charts/PointsDistributionChart';
 import ProgressChart from './charts/ProgressChart';
-import StatusRoadmapChart from './charts/StatusRoadmapChart';
 import RowBlockItem from './rowBlock/RowBlockItem';
-import LogoDropdown from '../LogoDropdown';
+import StatusesBlock from "./rowBlock/statusesBlock/StatusesBlock";
 
+import LogoDropdown from '../LogoDropdown';
 import DashboardModalWindow from './DashboardModalWindow';
-import Loader from '../utility/Loader';
 
 import './../../styles/app/dashboard/table.scss';
-import Button from '../utility/Button';
 
-
-const PREVIEW_ITEMS_COUNT = 3;
-
+const PREVIEW_BADGES_ITEMS_COUNT = 3;
+const PREVIEW_STATUSES_ITEMS_COUNT = 3;
 
 ReactModal.setAppElement('body');
 
@@ -36,8 +29,8 @@ const DashboardTable = ({ statusItems, badgeItems, statusRoadmap, progress, char
         getItemDataFunction: item => item
     });
 
-    const previewBadgeItems = badgeItems.slice(0, PREVIEW_ITEMS_COUNT);
-    const previewStatusItems = statusItems.slice(0, PREVIEW_ITEMS_COUNT);
+    const previewBadgeItems = badgeItems.slice(0, PREVIEW_BADGES_ITEMS_COUNT);
+    const previewStatusItems = statusItems.slice(0, PREVIEW_STATUSES_ITEMS_COUNT);
 
     return (
         <React.Fragment>
@@ -50,65 +43,41 @@ const DashboardTable = ({ statusItems, badgeItems, statusRoadmap, progress, char
             </div>
             <div className="dashboard-table-body">
                 <DashboardTableRow>
-                    <DashboardTableRowBlock corner={CORNER_TOP_LEFT}>
-                        <PointsDistributionChart data={chart} />
-                    </DashboardTableRowBlock>
-                    <DashboardTableRowBlock corner={CORNER_TOP_RIGHT}>
-                        <StatusRoadmapChart
-                            data={statusRoadmap.statuses}
-                            points={statusRoadmap.points}
+                    <DashboardTableRowBlock fullWidth corner={CORNER_TOP}>
+                        <StatusesBlock
+                          status={`${previewStatusItems.length} of ${statusItems.length}`}
+                          statusItems={statusItems}
                         />
                     </DashboardTableRowBlock>
                 </DashboardTableRow>
                 <DashboardTableRow>
                     <CustomRowBlock
-                        title={'Your Badges'}
-                        status={`${previewBadgeItems.length} of ${badgeItems.length}`}
-                        content={'You get badges for specific combo actions on the platform. Hover on a badge what to do to get one.'}
-                        items={previewBadgeItems.map((item, index) => {
-                            return (
+                      title={'Your Badges'}
+                      status={`${previewBadgeItems.length} of ${badgeItems.length}`}
+                      content={'You get badges for specific combo actions on the platform. Hover on a badge what to do to get one.'}
+                      items={previewBadgeItems.map((item, index) => {
+                          return (
                             <RowBlockItem
-                                key={index}
-                                data={item[1]}
+                              key={index}
+                              data={item[1]}
                             >
                             </RowBlockItem>
-                        )})}
-                        buttonData={{
-                            title: 'Badges',
-                            onClick: () => {
-                                setModalData({
-                                    title: 'All Badges',
-                                    items: badgeItems,
-                                    getItemDataFunction: item => item[1]
-                                });
-                                setIsModalOpen(true);
-                            }
-                        }}
+                          )})}
+                      buttonData={{
+                          title: 'Badges',
+                          onClick: () => {
+                              setModalData({
+                                  title: 'All Badges',
+                                  items: badgeItems,
+                                  getItemDataFunction: item => item[1]
+                              });
+                              setIsModalOpen(true);
+                          }
+                      }}
                     />
-                    <CustomRowBlock
-                        title={'Your Statuses'}
-                        status={`${previewStatusItems.length} of ${statusItems.length}`}
-                        content={'The more points you have, the higher status you own. Hover on a badge to know how many points you need to have it.'}
-                        items={previewStatusItems.map((item, index) => (
-                            <RowBlockItem
-                                key={index}
-                                data={item}
-                            >
-                            </RowBlockItem>
-                        ))}
-                        buttonData={{
-                            title: 'Status',
-                            onClick: () => {
-                                setModalData({
-                                    title: 'All Statuses',
-                                    items: statusItems,
-                                    getItemDataFunction: item => item
-                                });
-                                setIsModalOpen(true);
-                            }
-                        }}
-
-                    />
+                    <DashboardTableRowBlock>
+                        <PointsDistributionChart data={chart} />
+                    </DashboardTableRowBlock>
                 </DashboardTableRow>
                 <DashboardTableRow>
                     <DashboardTableRowBlock fullWidth corner={CORNER_BOTTOM}>

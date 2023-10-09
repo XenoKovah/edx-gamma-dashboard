@@ -10,10 +10,8 @@ import DashboardPage from '../DashboardPage';
 
 import { gameProfileData } from '../../../fixtures/dashboard';
 
-
 jest.mock('axios')
 afterAll(cleanup);
-
 
 describe('<DashboardPage>', () => {
     it('renders', () => {
