@@ -17,11 +17,10 @@ import DashboardModalWindow from './DashboardModalWindow';
 import './../../styles/app/dashboard/table.scss';
 
 const PREVIEW_BADGES_ITEMS_COUNT = 3;
-const PREVIEW_STATUSES_ITEMS_COUNT = 3;
 
 ReactModal.setAppElement('body');
 
-const DashboardTable = ({ statusItems, badgeItems, statusRoadmap, progress, chart }) => {
+const DashboardTable = ({ statusItems, badgeItems, progress, chart }) => {
     const [ isModalOpen, setIsModalOpen ] = React.useState(false);
     const [ modalData, setModalData ] = React.useState({
         title: '',
@@ -30,7 +29,8 @@ const DashboardTable = ({ statusItems, badgeItems, statusRoadmap, progress, char
     });
 
     const previewBadgeItems = badgeItems.slice(0, PREVIEW_BADGES_ITEMS_COUNT);
-    const previewStatusItems = statusItems.slice(0, PREVIEW_STATUSES_ITEMS_COUNT);
+    const points = statusItems[0]?.points;
+    const doneStatuses = statusItems.filter((item) => points >= item.statusPoints);
 
     return (
         <React.Fragment>
@@ -45,7 +45,7 @@ const DashboardTable = ({ statusItems, badgeItems, statusRoadmap, progress, char
                 <DashboardTableRow>
                     <DashboardTableRowBlock fullWidth corner={CORNER_TOP}>
                         <StatusesBlock
-                          status={`${previewStatusItems.length} of ${statusItems.length}`}
+                          status={`${doneStatuses.length} of ${statusItems.length}`}
                           statusItems={statusItems}
                         />
                     </DashboardTableRowBlock>
@@ -101,10 +101,6 @@ const DashboardTable = ({ statusItems, badgeItems, statusRoadmap, progress, char
 DashboardTable.propTypes = {
     statusItems: PropTypes.array,
     badgeItems: PropTypes.array,
-    statusRoadmap: PropTypes.shape({
-        points: PropTypes.number,
-        statuses: PropTypes.array
-    }),
     progress: PropTypes.object,
     chart: PropTypes.object,
 };
@@ -112,10 +108,6 @@ DashboardTable.propTypes = {
 DashboardTable.defaultProps = {
     statusItems: [],
     badgeItems: [],
-    statusRoadmap: {
-        points: 0,
-        statuses: []
-    },
     progress: {},
     chart: {}
 };
