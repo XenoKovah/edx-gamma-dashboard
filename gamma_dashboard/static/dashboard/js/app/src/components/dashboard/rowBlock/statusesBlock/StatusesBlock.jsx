@@ -49,13 +49,14 @@ const StatusesBlock = ({ status, statusItems }) => {
                         alt="Complete icon"
                       />
                     )}
-                    <img
-                      className="row-block-item-figure-image"
-                      data-testid="row-block-item-figure-image"
-                      src={buildURL(url)}
-                      style={badgeStyles}
-                      alt="Status icon"
-                    />
+                    <div className="slider-item__info-image">
+                      <img
+                        data-testid="row-block-item-figure-image"
+                        src={buildURL(url)}
+                        style={badgeStyles}
+                        alt="Status icon"
+                      />
+                    </div>
                     <div
                       className="row-block-item-title"
                       data-testid="row-block-item-title"

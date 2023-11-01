@@ -76,6 +76,18 @@
             transform: translateX(50px);
         }
 
+        .slider-item__info-image {
+            display: flex;
+            align-items: center;
+            height: 70px;
+            margin-bottom: 16px;
+
+            & img {
+                max-height: 100%;
+                max-width: 100%;
+            }
+        }
+
         .slider-item__info-amount {
             font-size: 10px;
         }
