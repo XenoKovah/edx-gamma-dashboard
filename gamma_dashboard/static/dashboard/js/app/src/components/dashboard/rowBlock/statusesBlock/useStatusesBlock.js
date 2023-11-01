@@ -106,7 +106,7 @@ export function useStatusesBlock({ statusItems }) {
     if (sliderRef.current) {
       sliderRef.current?.slickGoTo(index);
     }
-  }, [sliderRef.current]);
+  }, [sliderRef.current, statusItems]);
 
   return {
     sliderRef,
