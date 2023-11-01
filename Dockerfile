@@ -1,4 +1,4 @@
-FROM python:3.10-slim-bullseye
+FROM python:3.10-bookworm
 LABEL maintainer="cmltaWt0@gmail.com"
 
 ADD ./requirements/dev.txt /
