@@ -25,7 +25,7 @@ const StatusesBlock = ({ status, statusItems }) => {
         <div className="table-row-block-description" data-testid="row-block-description"></div>
       </div>
       <p className="row-block-text" data-testid="row-block-text">
-        The more points you have, the higher status you own. Hover on a badge to know how many points you need to have it.
+        The more points you have, the higher status you own.
       </p>
       {statusItems.length ? (
         <div className="statuses-block__slider">

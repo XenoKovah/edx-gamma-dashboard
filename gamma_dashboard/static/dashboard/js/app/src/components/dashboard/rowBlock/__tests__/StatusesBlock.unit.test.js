@@ -101,7 +101,7 @@ describe('<StatusesBlock />', () => {
 
     expect(getByText('Your Statuses')).toBeInTheDocument();
     expect(getByText('3 of 7')).toBeInTheDocument();
-    expect(getByText('The more points you have, the higher status you own. Hover on a badge to know how many points you need to have it.')).toBeInTheDocument();
+    expect(getByText('The more points you have, the higher status you own.')).toBeInTheDocument();
 
     const image = getAllByTestId('row-block-item-figure-image');
 
