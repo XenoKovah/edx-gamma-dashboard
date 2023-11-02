@@ -1,15 +1,18 @@
 # Changelog
 
 ## [Unreleased]
+
+## 1.2.0 (2023-11-02)
 ## Added
 - [RGG-866] update Performance Board with the redesigned Level Chart
 - [RGG-798] add Nix support for local development
 
 ## Changed
 - [RGG-798] Update to NodeJS 18
+- Update Docker image to python:3.10-bookworm
 
 ## Fixed
-- [RGG-941] Fix the percentage continues to calculate after required condition completing for 1 type of event
+- [RGG-941] fix percentage progress calculation
 
 ## 1.1.0 (2023-06-08)
 ## Fixed
