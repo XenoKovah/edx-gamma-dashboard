@@ -103,7 +103,7 @@ describe('<StatusesBlock />', () => {
     expect(getByText('3 of 7')).toBeInTheDocument();
     expect(getByText('The more points you have, the higher status you own.')).toBeInTheDocument();
 
-    const image = getAllByTestId('row-block-item-figure-image');
+    const image = getAllByTestId('slider-item__status-image');
 
     statusItemsMock.forEach(({ title, points, statusPoints, url }, index) => {
       const pointsTitle = `${points >= statusPoints ? statusPoints : points}/${statusPoints}`;
@@ -122,8 +122,8 @@ describe('<StatusesBlock />', () => {
       const statusItem = statusItems[index];
 
       expect(statusItem.querySelector('.slider-item__info-icon')).toBeInTheDocument();
-      expect(statusItem.querySelector('.row-block-item-figure-image')).toHaveStyle('filter: grayscale(0)');
-      expect(statusItem.querySelector('.row-block-item-figure-image')).toHaveStyle('opacity: 1');
+      expect(statusItem.querySelector('.slider-item__status-image')).toHaveStyle('filter: grayscale(0)');
+      expect(statusItem.querySelector('.slider-item__status-image')).toHaveStyle('opacity: 1');
       expect(statusItem.querySelector('.slider-item__progress-track')).toHaveStyle('width: 100%');
       expect(statusItem.querySelector('.slider-item__progress-end')).toHaveStyle('background-color: rgb(85, 107, 47)');
       expect(statusItem.querySelector('.slider-item__progress-end')).toHaveStyle('z-index: 99;');
@@ -136,8 +136,8 @@ describe('<StatusesBlock />', () => {
     const statusItem = statusItems[3];
 
     expect(statusItem.querySelector('.slider-item__info-icon')).not.toBeInTheDocument();
-    expect(statusItem.querySelector('.row-block-item-figure-image')).toHaveStyle('filter: grayscale(0)');
-    expect(statusItem.querySelector('.row-block-item-figure-image')).toHaveStyle('opacity: 1');
+    expect(statusItem.querySelector('.slider-item__status-image')).toHaveStyle('filter: grayscale(0)');
+    expect(statusItem.querySelector('.slider-item__status-image')).toHaveStyle('opacity: 1');
     expect(statusItem.querySelector('.slider-item__progress-track')).toHaveStyle(`width: 39%`);
     expect(statusItem.querySelector('.slider-item__progress-end')).toHaveStyle('background-color: rgb(223, 224, 232)');
     expect(statusItem.querySelector('.slider-item__progress-end')).toHaveStyle('z-index: 1');
@@ -151,8 +151,8 @@ describe('<StatusesBlock />', () => {
       const statusItem = statusItems[index + 4];
 
       expect(statusItem.querySelector('.slider-item__info-icon')).not.toBeInTheDocument();
-      expect(statusItem.querySelector('.row-block-item-figure-image')).toHaveStyle('filter: grayscale(1)');
-      expect(statusItem.querySelector('.row-block-item-figure-image')).toHaveStyle('opacity: 0.3');
+      expect(statusItem.querySelector('.slider-item__status-image')).toHaveStyle('filter: grayscale(1)');
+      expect(statusItem.querySelector('.slider-item__status-image')).toHaveStyle('opacity: 0.3');
       expect(statusItem.querySelector('.slider-item__progress-track')).toHaveStyle(`width: 0%`);
       expect(statusItem.querySelector('.slider-item__progress-end')).toHaveStyle('background-color: rgb(223, 224, 232)');
       expect(statusItem.querySelector('.slider-item__progress-end')).toHaveStyle('z-index: 1');

@@ -51,7 +51,8 @@ const StatusesBlock = ({ status, statusItems }) => {
                     )}
                     <div className="slider-item__info-image">
                       <img
-                        data-testid="row-block-item-figure-image"
+                        className="slider-item__status-image"
+                        data-testid="slider-item__status-image"
                         src={buildURL(url)}
                         style={badgeStyles}
                         alt="Status icon"
