@@ -63,9 +63,11 @@ export function useStatusesBlock({ statusItems }) {
       switch (true) {
         case isStatusComplete:
           return '100%';
-        case !isStatusComplete && points > prevItem?.statusPoints:
         case !isStatusComplete && index === 0:
           return `${Math.round((points / currentItem.statusPoints) * 100)}%`;
+        case !isStatusComplete && index > 0  && points > prevItem.statusPoints:
+          return `${Math.round((points - prevItem.statusPoints) / 
+                               (currentItem.statusPoints - prevItem.statusPoints) * 100)}%`;
         default:
           return '0%';
       }

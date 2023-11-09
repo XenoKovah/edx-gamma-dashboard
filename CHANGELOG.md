@@ -1,6 +1,8 @@
 # Changelog
 
 ## [Unreleased]
+## Fixed
+- [RGG-972] current status toggle is displayed on status line incorrectly
 
 ## 1.2.0 (2023-11-02)
 ## Added

@@ -1,0 +1,151 @@
+[
+    {
+        "description": "1. User has 0 points. Styles for 1st Status (not complited).",
+        "statusItems": [
+            {
+                "points": 0,
+                "statusPoints": 100
+            },
+            {
+                "points": 0,
+                "statusPoints": 200
+            },
+            {
+                "points": 0,
+                "statusPoints": 300
+            }
+        ],
+        "index": 0,
+        "expectResult": {
+            "filter": "grayscale(0)",
+            "opacity": "1",
+            "width": "0%",
+            "display": "block"
+        }
+    },
+
+    {
+        "description": "2. User has 10 points. Styles for 1st Status (not complited).",
+        "statusItems": [
+            {
+                "points": 10,
+                "statusPoints": 100
+            },
+            {
+                "points": 10,
+                "statusPoints": 200
+            },
+            {
+                "points": 10,
+                "statusPoints": 300
+            }
+        ],
+        "index": 0,
+        "expectResult": {
+            "filter": "grayscale(0)",
+            "opacity": "1",
+            "width": "10%",
+            "display": "block"
+        }
+    },
+
+    {
+        "description": "3. User has 100 points. Styles for 1st Status (complited).",
+        "statusItems": [
+            {
+                "points": 100,
+                "statusPoints": 100
+            },
+            {
+                "points": 100,
+                "statusPoints": 200
+            },
+            {
+                "points": 100,
+                "statusPoints": 300
+            }
+        ],
+        "index": 0,
+        "expectResult": {
+            "filter": "grayscale(0)",
+            "opacity": "1",
+            "width": "100%",
+            "display": "block"
+        }
+    },
+
+    {
+        "description": "4. User has 150 points. Styles for 2st Status (not complited).",
+        "statusItems": [
+            {
+                "points": 150,
+                "statusPoints": 100
+            },
+            {
+                "points": 150,
+                "statusPoints": 200
+            },
+            {
+                "points": 150,
+                "statusPoints": 300
+            }
+        ],
+        "index": 1,
+        "expectResult": {
+            "filter": "grayscale(0)",
+            "opacity": "1",
+            "width": "50%",
+            "display": "block"
+        }
+    },
+
+    {
+        "description": "5. User has 300 points. Styles for 2st Status (2st - complited, 3st - complited).",
+        "statusItems": [
+            {
+                "points": 300,
+                "statusPoints": 100
+            },
+            {
+                "points": 300,
+                "statusPoints": 200
+            },
+            {
+                "points": 300,
+                "statusPoints": 300
+            }
+        ],
+        "index": 1,
+        "expectResult": {
+            "filter": "grayscale(0)",
+            "opacity": "1",
+            "width": "100%",
+            "display": "none"
+        }
+    },
+
+    {
+        "description": "6. User has 300 points. Styles for 3st Status (complited).",
+        "statusItems": [
+            {
+                "points": 300,
+                "statusPoints": 100
+            },
+            {
+                "points": 300,
+                "statusPoints": 200
+            },
+            {
+                "points": 300,
+                "statusPoints": 300
+            }
+        ],
+        "index": 2,
+        "expectResult": {
+            "filter": "grayscale(0)",
+            "opacity": "1",
+            "width": "100%",
+            "display": "block"
+        }
+    }
+]

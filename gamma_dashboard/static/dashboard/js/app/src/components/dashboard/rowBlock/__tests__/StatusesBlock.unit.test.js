@@ -138,7 +138,7 @@ describe('<StatusesBlock />', () => {
     expect(statusItem.querySelector('.slider-item__info-icon')).not.toBeInTheDocument();
     expect(statusItem.querySelector('.slider-item__status-image')).toHaveStyle('filter: grayscale(0)');
     expect(statusItem.querySelector('.slider-item__status-image')).toHaveStyle('opacity: 1');
-    expect(statusItem.querySelector('.slider-item__progress-track')).toHaveStyle(`width: 39%`);
+    expect(statusItem.querySelector('.slider-item__progress-track')).toHaveStyle(`width: 4%`);
     expect(statusItem.querySelector('.slider-item__progress-end')).toHaveStyle('background-color: rgb(223, 224, 232)');
     expect(statusItem.querySelector('.slider-item__progress-end')).toHaveStyle('z-index: 1');
   });
