@@ -2,6 +2,7 @@
 
 ## [Unreleased]
 ## Fixed
+- [RGG-961] User see first page with statuses instead of page with last achieved status after login/refresh
 - [RGG-972] current status toggle is displayed on status line incorrectly
 
 ## 1.2.0 (2023-11-02)

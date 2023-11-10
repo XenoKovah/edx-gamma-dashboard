@@ -1,0 +1,199 @@
+[
+    {
+        "description": "1. The user has 0 points (1st Status - not complited). Return index 0.",
+        "statusItems": [
+            {
+                "status": "1",
+                "points": 0,
+                "statusPoints": 100
+            },
+            {
+                "status": "2",
+                "points": 0,
+                "statusPoints": 200
+            },
+            {
+                "status": "3",
+                "points": 0,
+                "statusPoints": 220
+            },
+            {
+                "status": "4",
+                "points": 0,
+                "statusPoints": 350
+            },
+            {
+                "status": "5",
+                "points": 0,
+                "statusPoints": 400
+            }
+        ],
+        "expectResult": {
+            "currentIndex": 0
+        }
+    },
+
+    {
+        "description": "2. The user has 50 points (1st Status - not complited). Return index 0.",
+        "statusItems": [
+            {
+                "status": "1",
+                "points": 50,
+                "statusPoints": 100
+            },
+            {
+                "status": "2",
+                "points": 50,
+                "statusPoints": 200
+            },
+            {
+                "status": "3",
+                "points": 50,
+                "statusPoints": 220
+            },
+            {
+                "status": "4",
+                "points": 50,
+                "statusPoints": 350
+            },
+            {
+                "status": "5",
+                "points": 50,
+                "statusPoints": 400
+            }
+        ],
+        "expectResult": {
+            "currentIndex": 0
+        }
+    },
+
+    {
+        "description": "3.  The user has 100 points (only 1st Status - complited). Return index 0.",
+        "statusItems": [
+            {
+                "status": "1",
+                "points": 100,
+                "statusPoints": 100
+            },
+            {
+                "status": "2",
+                "points": 100,
+                "statusPoints": 200
+            },
+            {
+                "status": "3",
+                "points": 100,
+                "statusPoints": 220
+            },
+            {
+                "status": "4",
+                "points": 100,
+                "statusPoints": 350
+            },
+            {
+                "status": "5",
+                "points": 100,
+                "statusPoints": 400
+            }
+        ],
+        "expectResult": {
+            "currentIndex": 0
+        }
+    },
+
+    {
+        "description": "4. The user has 340 points (1st, 2st and 3st Status - complited). Return index 2.",
+        "statusItems": [
+            {
+                "status": "1",
+                "points": 340,
+                "statusPoints": 100
+            },
+            {
+                "status": "2",
+                "points": 340,
+                "statusPoints": 200
+            },
+            {
+                "status": "3",
+                "points": 340,
+                "statusPoints": 220
+            },
+            {
+                "status": "4",
+                "points": 340,
+                "statusPoints": 350
+            },
+            {
+                "status": "5",
+                "points": 340,
+                "statusPoints": 400
+            }
+        ],
+        "expectResult": {
+            "currentIndex": 2
+        }
+    },
+
+    {
+        "description": "5. The user has 700 points (all Statuses are complited). Return index 4.",
+        "statusItems": [
+            {
+                "status": "1",
+                "points": 700,
+                "statusPoints": 100
+            },
+            {
+                "status": "2",
+                "points": 700,
+                "statusPoints": 200
+            },
+            {
+                "status": "3",
+                "points": 700,
+                "statusPoints": 220
+            },
+            {
+                "status": "4",
+                "points": 700,
+                "statusPoints": 350
+            },
+            {
+                "status": "5",
+                "points": 700,
+                "statusPoints": 400
+            }
+        ],
+        "expectResult": {
+            "currentIndex": 4
+        }
+    },
+
+    {
+        "description": "6. User has 10 points (Status - not complited). Return index 0.",
+        "statusItems": [
+            {
+                "status": "1",
+                "points": 10,
+                "statusPoints": 100
+            }
+        ],
+        "expectResult": {
+            "currentIndex": 0
+        }
+    },
+
+    {
+        "description": "7. User has 500 points (Status - complited). Return index 0.",
+        "statusItems": [
+            {
+                "status": "1",
+                "points": 500,
+                "statusPoints": 100
+            }
+        ],
+        "expectResult": {
+            "currentIndex": 0
+        }
+    }
+]

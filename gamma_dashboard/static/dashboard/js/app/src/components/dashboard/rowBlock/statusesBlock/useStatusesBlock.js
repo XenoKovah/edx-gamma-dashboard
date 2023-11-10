@@ -8,8 +8,15 @@ import {
 export function useStatusesBlock({ statusItems }) {
   const sliderRef = useRef();
 
-  const currentItemIndex = statusItems.indexOf(statusItems.find((item) => item.points <= item.statusPoints))
-  const index = currentItemIndex <= 0 ? 0 : currentItemIndex - 1;
+  const calculateCurrentIndex = (statusItems) => {
+    let index = statusItems.indexOf(statusItems.find((item) => item.points <= item.statusPoints));
+    if (index === -1) {
+      index = statusItems.length - 1;
+    } else if (index > 0) {
+      index -= 1;
+    }
+    return index;
+  };
 
   const sliderSettings = {
     dots: true,
@@ -106,13 +113,14 @@ export function useStatusesBlock({ statusItems }) {
 
   useEffect(() => {
     if (sliderRef.current) {
-      sliderRef.current?.slickGoTo(index);
+      sliderRef.current?.slickGoTo(calculateCurrentIndex(statusItems));
     }
   }, [sliderRef.current, statusItems]);
 
   return {
     sliderRef,
     sliderSettings,
+    calculateCurrentIndex,
     getProgressTrackStyles,
   }
 }
