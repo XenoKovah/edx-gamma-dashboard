@@ -1,7 +1,12 @@
 # Changelog
 
 ## [Unreleased]
+
 ## Fixed
+- [RGG-975] fixed the issue with slider dots on mobile resolutions
+- [RGG-974] fixed long status titles that were overlapping with other titles
+- [RGG-973] fixed the status line and circles in the slider
+- [RGG-971] fixed the font weight of subtitles on the Performance page
 - [RGG-961] User see first page with statuses instead of page with last achieved status after login/refresh
 - [RGG-972] current status toggle is displayed on status line incorrectly
 

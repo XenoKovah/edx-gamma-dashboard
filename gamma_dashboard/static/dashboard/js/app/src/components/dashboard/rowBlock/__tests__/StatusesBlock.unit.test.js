@@ -114,6 +114,15 @@ describe('<StatusesBlock />', () => {
     });
   });
 
+  it('renders StatusesBlock component correctly with titles', () => {
+    const { getAllByTestId } = renderComponent();
+  
+    const titleElements = getAllByTestId('row-block-item-title');
+    statusItemsMock.forEach(({ title }, index) => {
+      expect(titleElements[index]).toHaveTextContent(title);
+    });
+  });  
+
   it('check that first three statuses is done', () => {
     const { getAllByTestId } = renderComponent();
     const statusItems = getAllByTestId('slider-item');

@@ -75,10 +75,10 @@ export const chartTitleStyles = {
 
 export const chartSubtitleStyles = {
     color: "#bcbcbc",
-    fontFamily: "Open Sans",
+    fontFamily: "Open Sans, Helvetica Neue, Helvetica, Arial, sans-serif",
     fontSize: "16px",
-    fontWeight: 300,
-    lineHeight: "20px"
+    lineHeight: "20px",
+    transform: "translateY(-9px)"
 };
 
 export const chartTitleOptions = {

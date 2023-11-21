@@ -1,4 +1,4 @@
-@import "dashboard-colors.scss";
+@import "dashboard-colors";
 
 .statuses-block {
     .statuses-block__slider {
@@ -18,18 +18,19 @@
         }
 
         .slick-dots {
-            bottom: -90px;
+            position: static;
+            margin-top: 68px !important;
 
             li {
                 margin: 0 !important;
             }
 
             @media screen and (max-width: 991px) {
-                bottom: -70px;
+                margin-top: 48px !important;
             }
 
             @media screen and (max-width: 567px) {
-                bottom: -50px;
+                margin-top: 28px !important;
             }
         }
 
@@ -54,6 +55,11 @@
         .row-block-item-title {
             margin-bottom: 22px;
             white-space: nowrap;
+            text-overflow: ellipsis;
+            overflow: hidden;
+            width: 100%;
+            display: block !important;
+            text-align: center;
         }
 
         .slider-item {
@@ -64,6 +70,10 @@
             height: 170px;
             padding-top: 10px;
             transform: translateX(-50%);
+
+            &.with-progress {
+                z-index: 1;
+            }
         }
 
         .slider-item__info {
@@ -72,8 +82,8 @@
             align-items: center;
             position: relative;
             margin-bottom: 12px;
-            width: 100px;
-            transform: translateX(50px);
+            width: 100%;
+            transform: translateX(50%);
         }
 
         .slider-item__info-image {
@@ -81,6 +91,7 @@
             align-items: center;
             height: 70px;
             margin-bottom: 16px;
+            max-width: 100px;
 
             & img {
                 max-height: 100%;

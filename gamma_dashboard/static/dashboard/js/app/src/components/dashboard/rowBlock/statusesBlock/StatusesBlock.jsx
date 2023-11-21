@@ -40,7 +40,11 @@ const StatusesBlock = ({ status, statusItems }) => {
               } = getProgressTrackStyles(index);
 
               return (
-                <div className="slider-item" key={status_uid} data-testid="slider-item">
+                <div 
+                  className={`slider-item ${parseFloat(progressTrackStyles.width) ? 'with-progress' : ''}`} 
+                  key={status_uid}
+                  data-testid="slider-item"
+                >
                   <div className="slider-item__info">
                     {isStatusComplete && (
                       <img
@@ -61,6 +65,7 @@ const StatusesBlock = ({ status, statusItems }) => {
                     <div
                       className="row-block-item-title"
                       data-testid="row-block-item-title"
+                      title={title}
                     >
                       {title}
                     </div>
