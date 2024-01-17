@@ -2,6 +2,7 @@
 
 ## [Unreleased]
 
+## 1.2.1 (2023-11-09)
 ## Fixed
 - [RGG-975] fixed the issue with slider dots on mobile resolutions
 - [RGG-974] fixed long status titles that were overlapping with other titles
