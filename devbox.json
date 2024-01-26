@@ -1,0 +1,16 @@
+{
+  "packages": [
+    "python311Packages.pip@latest",
+    "nodejs@18"
+  ],
+  "shell": {
+    "init_hook": [
+      ". $VENV_DIR/bin/activate"
+    ],
+    "scripts": {
+      "requirements": [
+        "pip install -U -r requirements/dev.txt"
+      ]
+    }
+  }
+}

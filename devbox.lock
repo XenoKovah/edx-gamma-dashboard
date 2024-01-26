@@ -1,0 +1,45 @@
+{
+  "lockfile_version": "1",
+  "packages": {
+    "nodejs@18": {
+      "last_modified": "2024-01-14T03:55:27Z",
+      "resolved": "github:NixOS/nixpkgs/dd5621df6dcb90122b50da5ec31c411a0de3e538#nodejs_18",
+      "source": "devbox-search",
+      "version": "18.19.0",
+      "systems": {
+        "aarch64-darwin": {
+          "store_path": "/nix/store/jvp3jsc9dwn64ycnjalw959811lj7x3g-nodejs-18.19.0"
+        },
+        "aarch64-linux": {
+          "store_path": "/nix/store/0b7li2bh1zl86dn2zbcwyrjp7wbbg1q9-nodejs-18.19.0"
+        },
+        "x86_64-darwin": {
+          "store_path": "/nix/store/s87scp45c388gaa4jd27kyh66hr4vfwb-nodejs-18.19.0"
+        },
+        "x86_64-linux": {
+          "store_path": "/nix/store/6fy84r0hj7vdqzdzjn9gva18fzdl510z-nodejs-18.19.0"
+        }
+      }
+    },
+    "python311Packages.pip@latest": {
+      "last_modified": "2024-01-14T03:55:27Z",
+      "resolved": "github:NixOS/nixpkgs/dd5621df6dcb90122b50da5ec31c411a0de3e538#python311Packages.pip",
+      "source": "devbox-search",
+      "version": "23.3.1",
+      "systems": {
+        "aarch64-darwin": {
+          "store_path": "/nix/store/wd905qgi0ljazglncz4b99sp8kx2ipyh-python3.11-pip-23.3.1"
+        },
+        "aarch64-linux": {
+          "store_path": "/nix/store/fn21mwcjnxh61as3bis7ik5s1mcdwm16-python3.11-pip-23.3.1"
+        },
+        "x86_64-darwin": {
+          "store_path": "/nix/store/n75prxisg8pgh12q2661r30g12zr9i5a-python3.11-pip-23.3.1"
+        },
+        "x86_64-linux": {
+          "store_path": "/nix/store/4fhfpra41k1vbazj2zxc3l515sscqgxc-python3.11-pip-23.3.1"
+        }
+      }
+    }
+  }
+}
