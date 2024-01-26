@@ -2,6 +2,11 @@
 
 ## [Unreleased]
 
+## 1.2.2 (2023-11-16)
+## Maintenance
+- Add dist folder to the wheel package
+- Add devbox for a local development
+
 ## 1.2.1 (2023-11-09)
 ## Fixed
 - [RGG-975] fixed the issue with slider dots on mobile resolutions
