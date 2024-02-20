@@ -2,6 +2,10 @@
 
 ## [Unreleased]
 
+Changed
+=======
+* Update the rg-toolkit requirement version [RGOeX-26271]
+
 ## 1.2.2 (2023-11-16)
 ## Maintenance
 - Add dist folder to the wheel package

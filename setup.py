@@ -46,7 +46,7 @@ setup(
     include_package_data=True,
     install_requires=[
         'requests==2.27.0',
-        'rg-products-toolkit@ git+https://gitlab.raccoongang.com/products/tool-kits/rg-products-toolkit.git@0.1.0#egg=rg_products_toolkit==0.1.0',
+        'rg-products-toolkit@ git+https://gitlab.raccoongang.com/products/tool-kits/rg-products-toolkit.git@0.1.1#egg=rg_products_toolkit==0.1.1',
     ],
     license="Apache Software License 2.0",
     zip_safe=False,
