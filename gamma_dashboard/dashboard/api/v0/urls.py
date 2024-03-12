@@ -1,12 +1,12 @@
 """
 Gamma leaderboard API urls.
 """
-from django.conf.urls import include, url
+from django.urls import re_path
 
 from gamma_dashboard.dashboard.api.v0.views import LeaderboardApiView, GameProfileApiView
 
 
 urlpatterns = [
-    url(r'^leaderboard/', LeaderboardApiView.as_view(), name='api-leaderboard'),
-    url(r'^game-profile/', GameProfileApiView.as_view(), name='api-gameprofile')
+    re_path(r'^leaderboard/', LeaderboardApiView.as_view(), name='api-leaderboard'),
+    re_path(r'^game-profile/', GameProfileApiView.as_view(), name='api-gameprofile')
 ]
