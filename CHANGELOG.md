@@ -6,6 +6,7 @@
 - [RGG-986] Django 4 support added
 
 ## Changed
+- [RGG-986] Update the rg-toolkit requirement version to 0.2.0
 - [RGOeX-26271] Update the rg-toolkit requirement version
 
 ## 1.2.2 (2023-11-16)
