@@ -2,6 +2,7 @@
 
 ## [Unreleased]
 
+## 1.3.0 (2023-11-16)
 ## Added
 - [RGG-986] Django 4 support added
 
