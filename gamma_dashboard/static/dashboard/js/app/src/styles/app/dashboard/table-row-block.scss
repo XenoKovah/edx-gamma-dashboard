@@ -19,6 +19,7 @@
         position: absolute;
         left: 30px;
         top: 45px;
+        z-index: 2;
 
         .rtl & {
             left: initial;

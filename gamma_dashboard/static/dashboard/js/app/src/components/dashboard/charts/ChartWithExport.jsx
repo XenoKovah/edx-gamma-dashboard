@@ -99,6 +99,9 @@ export const chartTitleOptions = {
         x: -2,
         y: -5,
         align: isRtl ? 'left' : 'right'
+    },
+    menuStyle: {
+        transform: 'translateY(10px)'
     }
 };
 

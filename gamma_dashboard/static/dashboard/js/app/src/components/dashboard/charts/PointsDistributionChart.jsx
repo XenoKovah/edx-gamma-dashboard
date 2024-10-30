@@ -27,7 +27,7 @@ const PointsDistributionChart = ({ data }) => {
                 y : points
             }
         );
-    };
+    }
 
     return (
         <ChartWithExport

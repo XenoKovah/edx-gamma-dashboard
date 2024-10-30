@@ -19,7 +19,7 @@ const ProgressChart = ({ data }) => {
 
             points_by_day.push([Date.parse(year_data.date), year_data.points]);
             let accumulated = 0;
-            if (accumulative_data.length != 0) {
+            if (accumulative_data.length !== 0) {
                 accumulated = accumulative_data[accumulative_data.length-1][1] + year_data.points;
             }
             else {
@@ -31,7 +31,7 @@ const ProgressChart = ({ data }) => {
 
     const customChartTitleOptions = {...chartTitleOptions};
     customChartTitleOptions.buttonOptions = {...customChartTitleOptions.buttonOptions};
-    customChartTitleOptions.buttonOptions.x = isRtl ? -86 : 86;
+    customChartTitleOptions.buttonOptions.x = isRtl ? -6 : 6;
     customChartTitleOptions.buttonOptions.align = isRtl ? 'left' : 'right';
 
     return (
@@ -39,8 +39,8 @@ const ProgressChart = ({ data }) => {
             options={{
                 chart: {
                     type: 'spline',
-                    spacingLeft: 100,
-                    spacingRight: 100,
+                    spacingLeft: 70,
+                    spacingRight: 20,
                     marginTop: 120,
                     minHeight: 500,
                 },
@@ -48,16 +48,16 @@ const ProgressChart = ({ data }) => {
                     text: 'Progress Tracker',
                     align: isRtl ? 'right' : 'left',
                     widthAdjust: 0,
-                    x: isRtl ? 86 : -86,
+                    x: isRtl ? 56 : -56,
                     y: 14,
                     margin: 50,
                     style: chartTitleStyles,
                 },
                 subtitle: {
-                    text: 'See the dynamics of your activities and points acquisition through time  ',
+                    text: 'See the dynamics of your activities and points acquisition through time',
                     align: isRtl ? 'right' : 'left',
                     widthAdjust: -7,
-                    x: isRtl ? 86 : -86,
+                    x: isRtl ? 56 : -56,
                     y: 70,
                     style: chartSubtitleStyles,
                 },
@@ -102,7 +102,7 @@ const ProgressChart = ({ data }) => {
                     lineWidth: 1,
                 }, {
                     gridLineWidth: 0,
-                    opposite: isRtl ? false : true,
+                    opposite: isRtl,
                     title: {
                         text: null
                     },
@@ -176,15 +176,17 @@ const ProgressChart = ({ data }) => {
                             maxWidth: 500
                         },
                         chartOptions: {
-                            chart: {
-                                spacingLeft: 0,
-                                spacingRight: 0
+                            navigation: {
+                                buttonOptions: {
+                                    x: isRtl ? -8 : 8
+                                }
                             },
                             title: {
-                                x: 0
+                                x: isRtl ? 53 : -53,
                             },
                             subtitle: {
-                                x: 0
+                                x: isRtl ? 53 : -53,
+                                widthAdjust: 50,
                             }
                         }
                     }]
