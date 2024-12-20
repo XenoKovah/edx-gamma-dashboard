@@ -8,6 +8,7 @@ import ChartWithExport, {
   legendOptions,
   isRtl,
 } from './ChartWithExport';
+import { useTranslate } from '../../../i18n/utils';
 
 const ProgressChart = ({ data }) => {
   const pointsByDay = [];
@@ -44,7 +45,7 @@ const ProgressChart = ({ data }) => {
           minHeight: 500,
         },
         title: {
-          text: 'Progress Tracker',
+          text: useTranslate('performance.progress.tracker.section.heading.text'),
           align: isRtl ? 'right' : 'left',
           widthAdjust: 0,
           x: isRtl ? 56 : -56,
@@ -53,7 +54,7 @@ const ProgressChart = ({ data }) => {
           style: chartTitleStyles,
         },
         subtitle: {
-          text: 'See the dynamics of your activities and points acquisition through time',
+          text: useTranslate('performance.progress.tracker.section.description.text'),
           align: isRtl ? 'right' : 'left',
           widthAdjust: -7,
           x: isRtl ? 56 : -56,
@@ -137,7 +138,7 @@ const ProgressChart = ({ data }) => {
         },
         legend: legendOptions,
         series: [{
-          name: 'Points',
+          name: useTranslate('performance.progress.tracker.chart.points.label'),
           type: 'column',
           data: pointsByDay,
           borderColor: '#aaa',
@@ -153,7 +154,7 @@ const ProgressChart = ({ data }) => {
           },
         },
         {
-          name: 'Progress',
+          name: useTranslate('performance.progress.tracker.chart.progress.label'),
           type: 'area',
           yAxis: 1,
           data: accumulativeData,
@@ -192,6 +193,7 @@ const ProgressChart = ({ data }) => {
         },
       }}
     />
+
   );
 };
 

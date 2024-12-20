@@ -1,10 +1,9 @@
 import React from 'react';
-
 import '@testing-library/jest-dom';
-import { render, cleanup } from '@testing-library/react';
+import { cleanup } from '@testing-library/react';
 
+import { renderWithProviders } from '../../../../setupTests';
 import PointsDistributionChart from '../PointsDistributionChart';
-
 import { gameProfileData } from '../../../../fixtures/dashboard';
 
 afterEach(cleanup);
@@ -15,7 +14,7 @@ const CHART_DESCRIPTION = 'Here you can see what actions caused your current poi
 describe('<PointsDistributionChart>', () => {
   it('renders', () => {
     const data = gameProfileData.chart;
-    const { getByText } = render(<PointsDistributionChart data={data} />);
+    const { getByText } = renderWithProviders(<PointsDistributionChart data={data} />);
 
     const title = getByText(CHART_TITLE);
     const description = getByText(CHART_DESCRIPTION);
@@ -29,7 +28,7 @@ describe('<PointsDistributionChart>', () => {
   });
 
   it('renders without data', () => {
-    const { getByText } = render(<PointsDistributionChart />);
+    const { getByText } = renderWithProviders(<PointsDistributionChart />);
     const title = getByText(CHART_TITLE);
     const description = getByText(CHART_DESCRIPTION);
 

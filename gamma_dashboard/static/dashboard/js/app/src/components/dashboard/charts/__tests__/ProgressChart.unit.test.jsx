@@ -1,10 +1,9 @@
 import React from 'react';
-
 import '@testing-library/jest-dom';
-import { render, cleanup } from '@testing-library/react';
+import { cleanup } from '@testing-library/react';
 
+import { renderWithProviders } from '../../../../setupTests';
 import ProgressChart from '../ProgressChart';
-
 import { gameProfileData } from '../../../../fixtures/dashboard';
 
 afterEach(cleanup);
@@ -15,7 +14,7 @@ const CHART_DESCRIPTION = 'See the dynamics of your activities and points acquis
 describe('<ProgressChart>', () => {
   it('renders', () => {
     const data = gameProfileData.progress;
-    const { getByText } = render(<ProgressChart data={data} />);
+    const { getByText } = renderWithProviders(<ProgressChart data={data} />);
 
     const title = getByText(CHART_TITLE);
     const description = getByText(CHART_DESCRIPTION);
@@ -29,7 +28,7 @@ describe('<ProgressChart>', () => {
   });
 
   it('renders without data', () => {
-    const { getByText } = render(<ProgressChart />);
+    const { getByText } = renderWithProviders(<ProgressChart />);
 
     const title = getByText(CHART_TITLE);
     const description = getByText(CHART_DESCRIPTION);

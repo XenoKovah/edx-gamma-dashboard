@@ -8,6 +8,7 @@ import ChartWithExport, {
   Highcharts,
   isRtl,
 } from './ChartWithExport';
+import { useTranslate } from '../../../i18n/utils';
 
 function dataLabelFormatter() {
   const percent = (this.y / this.series.data.map((p) => p.y).reduce((a, b) => a + b, 0)) * 100;
@@ -46,7 +47,7 @@ const PointsDistributionChart = ({ data }) => {
           marginBottom: 35,
         },
         title: {
-          text: 'Points Distribution',
+          text: useTranslate('performance.points.distribution.section.heading.text'),
           align: isRtl ? 'right' : 'left',
           widthAdjust: 0,
           x: isRtl ? 0 : 7,
@@ -55,7 +56,7 @@ const PointsDistributionChart = ({ data }) => {
           style: chartTitleStyles,
         },
         subtitle: {
-          text: 'Here you can see what actions caused your current points portfolio',
+          text: useTranslate('performance.points.distribution.section.description.text'),
           align: isRtl ? 'right' : 'left',
           widthAdjust: 7,
           x: isRtl ? 0 : 7,
@@ -116,6 +117,7 @@ const PointsDistributionChart = ({ data }) => {
         }] : null,
       }}
     />
+
   );
 };
 

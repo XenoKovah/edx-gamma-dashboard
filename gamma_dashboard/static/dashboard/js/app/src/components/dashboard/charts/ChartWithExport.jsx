@@ -1,10 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-
 import _Highcharts from 'highcharts';
 import ReactHighCharts from 'highcharts-react-official';
 import applyExporting from 'highcharts/modules/exporting';
 import applyDebugger from 'highcharts/modules/debugger';
+
+import { useHighchartsLang } from '../../../i18n/utils';
 
 import '../../../styles/app/dashboard/charts/chart.scss';
 
@@ -28,10 +29,21 @@ const applyColorScheme = (H) => {
   });
 };
 
+const useTranslations = (H) => {
+  const langOptions = useHighchartsLang();
+  H.setOptions({
+    lang: {
+      ...langOptions,
+    },
+  });
+};
+
 applyExporting(_Highcharts);
 applyColorScheme(_Highcharts);
 
 const ChartWithExport = ({ debug, ...props }) => {
+  useTranslations(_Highcharts);
+
   if (debug) {
     applyDebugger(_Highcharts);
   }

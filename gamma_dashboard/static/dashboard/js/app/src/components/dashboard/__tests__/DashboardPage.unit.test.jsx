@@ -1,24 +1,22 @@
 import React from 'react';
-
 import axios from 'axios';
-
 import '@testing-library/jest-dom';
-import { render, screen, cleanup } from '@testing-library/react';
+import { screen, cleanup } from '@testing-library/react';
 import { act } from 'react-dom/test-utils';
 
+import { renderWithProviders } from '../../../setupTests';
 import DashboardPage from '../DashboardPage';
-
 import { gameProfileData } from '../../../fixtures/dashboard';
 
 jest.mock('axios');
-afterAll(cleanup);
+afterEach(cleanup);
 
 describe('<DashboardPage>', () => {
   it('renders', () => {
     axios.get.mockResolvedValue({ data: gameProfileData });
 
     act(() => {
-      render(<DashboardPage />);
+      renderWithProviders(<DashboardPage />);
     });
 
     const dashboardTable = screen.getByTestId('dashboard-table');
@@ -35,9 +33,11 @@ describe('<DashboardPage>', () => {
     `('render with inconsistent data', (data) => {
     axios.get.mockResolvedValue({ data });
 
-    const { getByTestId } = render(<DashboardPage />);
+    act(() => {
+      const { getByTestId } = renderWithProviders(<DashboardPage />);
 
-    const dashboardTable = getByTestId('dashboard-table');
-    expect(dashboardTable).toBeInTheDocument();
+      const dashboardTable = getByTestId('dashboard-table');
+      expect(dashboardTable).toBeInTheDocument();
+    });
   });
 });

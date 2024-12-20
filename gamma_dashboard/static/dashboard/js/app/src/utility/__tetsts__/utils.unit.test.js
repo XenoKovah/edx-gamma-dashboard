@@ -1,5 +1,10 @@
 import '@testing-library/jest-dom';
-import { addPositionInCompetitors, addPositionInTop10, findIndexByUserUid } from '../utils';
+import {
+  addPositionInCompetitors,
+  addPositionInTop10,
+  findIndexByUserUid,
+  getCookieByName,
+} from '../utils';
 
 describe('addPositionInCompetitors', () => {
   it('should correctly add positions to competitors list', () => {
@@ -70,5 +75,45 @@ describe('addPositionInTop10', () => {
     const result = addPositionInTop10(listUsers);
 
     expect(result).toEqual(expectedListUsers);
+  });
+});
+
+describe('getCookieByName', () => {
+  beforeEach(() => {
+    Object.defineProperty(document, 'cookie', {
+      writable: true,
+      value: '',
+    });
+  });
+
+  it('should return the cookie value if the cookie exists', () => {
+    document.cookie = 'username=JohnDoe';
+    expect(getCookieByName('username')).toBe('JohnDoe');
+  });
+
+  it('should return null if the cookie is not found', () => {
+    document.cookie = 'username=JohnDoe';
+    expect(getCookieByName('session')).toBeNull();
+  });
+
+  it('should correctly handle multiple cookies', () => {
+    document.cookie = 'username=JohnDoe; session=abc123';
+    expect(getCookieByName('username')).toBe('JohnDoe');
+    expect(getCookieByName('session')).toBe('abc123');
+  });
+
+  it('should decode cookie values', () => {
+    document.cookie = 'data=Hello%20World';
+    expect(getCookieByName('data')).toBe('Hello World');
+  });
+
+  it('should return null if no cookies are set', () => {
+    expect(getCookieByName('anyCookie')).toBeNull();
+  });
+
+  it('should correctly handle cookies with similar names', () => {
+    document.cookie = 'user=John; username=Jane';
+    expect(getCookieByName('user')).toBe('John');
+    expect(getCookieByName('username')).toBe('Jane');
   });
 });

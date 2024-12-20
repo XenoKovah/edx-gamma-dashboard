@@ -17,4 +17,20 @@ function addPositionInCompetitors(listUsers, userUid, rank) {
   }));
 }
 
-export { addPositionInTop10, addPositionInCompetitors, findIndexByUserUid };
+function getCookieByName(cookieName) {
+  const cookies = document.cookie.split('; ');
+  for (const cookie of cookies) {
+    const [name, value] = cookie.split('=');
+    if (name === cookieName) {
+      return decodeURIComponent(value);
+    }
+  }
+  return null;
+}
+
+export {
+  addPositionInTop10,
+  addPositionInCompetitors,
+  findIndexByUserUid,
+  getCookieByName,
+};

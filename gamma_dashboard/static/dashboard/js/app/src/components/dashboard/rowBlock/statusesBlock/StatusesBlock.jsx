@@ -5,10 +5,12 @@ import { OverlayTrigger, Tooltip } from '@openedx/paragon';
 import 'slick-carousel/slick/slick.scss';
 import 'slick-carousel/slick/slick-theme.scss';
 
+import { useTranslate } from '../../../../i18n/utils';
 import CompleteIcon from '../../../../assets/icons/complete-icon.svg';
-import '../../../../styles/app/dashboard/statuses-block.scss';
 import { buildURL } from '../../../../utility/urlTools';
 import { useStatusesBlock } from './useStatusesBlock';
+
+import '../../../../styles/app/dashboard/statuses-block.scss';
 
 const StatusesBlock = ({ status, statusItems }) => {
   const {
@@ -20,12 +22,14 @@ const StatusesBlock = ({ status, statusItems }) => {
   return (
     <div className="statuses-block">
       <div className="table-row-block-header" data-testid="table-row-block-header">
-        <div className="table-row-block-title" data-testid="row-block-title">Your Statuses</div>
+        <div className="table-row-block-title" data-testid="row-block-title">
+          {useTranslate('performance.statuses.section.heading.text')}
+        </div>
         <div className="table-row-block-status" data-testid="row-block-status"><span>{status}</span></div>
         <div className="table-row-block-description" data-testid="row-block-description" />
       </div>
       <p className="row-block-text" data-testid="row-block-text">
-        The more points you have, the higher status you own.
+        {useTranslate('performance.statuses.section.description.text')}
       </p>
       {statusItems.length ? (
         <div className="statuses-block__slider">
@@ -128,7 +132,7 @@ StatusesBlock.propTypes = {
 };
 
 StatusesBlock.defaultProps = {
-  status: '0 of 0',
+  status: '',
   statusItems: {},
 };
 

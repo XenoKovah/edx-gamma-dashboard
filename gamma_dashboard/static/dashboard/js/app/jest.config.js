@@ -18,5 +18,5 @@ module.exports = {
       { configFile: presets.babel.resolvedFilepath },
     ],
   },
-  setupFiles: ['./src/setupTests.js'],
+  setupFiles: ['./src/setupTests.jsx'],
 };

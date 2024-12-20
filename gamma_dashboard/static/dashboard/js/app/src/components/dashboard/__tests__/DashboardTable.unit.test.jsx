@@ -1,11 +1,10 @@
 import React from 'react';
-
 import '@testing-library/jest-dom';
-import { render, screen, cleanup } from '@testing-library/react';
+import { screen, cleanup } from '@testing-library/react';
 import { act } from 'react-dom/test-utils';
 
+import { renderWithProviders } from '../../../setupTests';
 import DashboardTable from '../DashboardTable';
-
 import {
   parsedBadgeItems,
   parsedStatusItems,
@@ -55,7 +54,7 @@ describe('<DashboardTable>', () => {
     };
 
     act(() => {
-      render(
+      renderWithProviders(
         <DashboardTable
           badgeItems={parsedBadgeItems}
           statusItems={parsedStatusItems}
@@ -66,17 +65,15 @@ describe('<DashboardTable>', () => {
     });
 
     const dashboardTable = screen.getByTestId('dashboard-table');
-
     expect(dashboardTable).toBeInTheDocument();
   });
 
   it('renders without data', () => {
     act(() => {
-      render(<DashboardTable />);
+      renderWithProviders(<DashboardTable />);
     });
 
     const dashboardTable = screen.getByTestId('dashboard-table');
-
     expect(dashboardTable).toBeInTheDocument();
   });
 });

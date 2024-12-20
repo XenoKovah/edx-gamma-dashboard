@@ -1,16 +1,11 @@
 import React from 'react';
-
+import pretty from 'pretty';
 import ReactModal from 'react-modal';
 import '@testing-library/jest-dom';
-import {
-  cleanup,
-  render,
-  within,
-} from '@testing-library/react';
+import { cleanup, within } from '@testing-library/react';
 
-import pretty from 'pretty';
+import { renderWithProviders } from '../../../setupTests';
 import DashboardModalWindow from '../DashboardModalWindow';
-
 import {
   parsedBadgeItems,
   parsedStatusItems,
@@ -29,7 +24,7 @@ describe('<DashboardModalWindow>', () => {
   it('renders with correct title', () => {
     const title = 'Test title';
 
-    const { getByTestId, container } = render(
+    const { getByTestId, container } = renderWithProviders(
       <DashboardModalWindow
         title={title}
         isOpen
@@ -50,7 +45,7 @@ describe('<DashboardModalWindow>', () => {
         ${'badge'}  | ${parsedBadgeItems}  | ${item => item[1]}
         ${'status'} | ${parsedStatusItems} | ${item => item}
     `('renders with correct `$type items`', ({ items, getItemDataFunction }) => {
-    const { getByTestId, container } = render(
+    const { getByTestId, container } = renderWithProviders(
       <DashboardModalWindow
         items={items}
         isOpen
@@ -74,14 +69,14 @@ describe('<DashboardModalWindow>', () => {
   });
 
   it('renders without data', () => {
-    const { queryByTestId } = render(<DashboardModalWindow />);
+    const { queryByTestId } = renderWithProviders(<DashboardModalWindow />);
 
     const dashboardModalWindow = queryByTestId('modal-window');
     expect(dashboardModalWindow).not.toBeInTheDocument();
   });
 
   it('renders with children', () => {
-    const { getByTestId, container } = render(
+    const { getByTestId, container } = renderWithProviders(
       <DashboardModalWindow
         isOpen
       >

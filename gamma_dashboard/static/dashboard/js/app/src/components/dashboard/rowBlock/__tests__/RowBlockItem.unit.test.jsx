@@ -1,12 +1,8 @@
 import React from 'react';
-
 import '@testing-library/jest-dom';
-import {
-  render,
-  cleanup,
-  within,
-} from '@testing-library/react';
+import { cleanup, within } from '@testing-library/react';
 
+import { renderWithProviders } from '../../../../setupTests';
 import RowBlockItem from '../RowBlockItem';
 
 afterEach(cleanup);
@@ -21,7 +17,7 @@ describe('<RowBlockItem>', () => {
       url: 'https://gamma-url.com/badge3.png',
     };
 
-    const { getByTestId, queryByTestId } = render(
+    const { getByTestId, queryByTestId } = renderWithProviders(
       <RowBlockItem
         data={data}
       />,
@@ -52,7 +48,7 @@ describe('<RowBlockItem>', () => {
       url: 'https://gamma-url.com/badge3.png',
     };
 
-    const { getByTestId } = render(
+    const { getByTestId } = renderWithProviders(
       <RowBlockItem
         data={data}
       />,
@@ -86,7 +82,7 @@ describe('<RowBlockItem>', () => {
       url: 'https://gamma-url.com/status-test-status.png',
     };
 
-    const { getByTestId, queryByTestId } = render(
+    const { getByTestId, queryByTestId } = renderWithProviders(
       <RowBlockItem
         data={data}
       />,
@@ -120,7 +116,7 @@ describe('<RowBlockItem>', () => {
       url: 'https://gamma-url.com/status-test-status.png',
     };
 
-    const { getByTestId } = render(
+    const { getByTestId } = renderWithProviders(
       <RowBlockItem
         data={data}
       />,
@@ -154,7 +150,7 @@ describe('<RowBlockItem>', () => {
       url: 'https://gamma-url.com/status-test-status.png',
     };
     const progressString = `${data.points}/${data.statusPoints}`;
-    const { getByTestId } = render(
+    const { getByTestId } = renderWithProviders(
       <RowBlockItem
         data={data}
       />,
@@ -183,7 +179,7 @@ describe('<RowBlockItem>', () => {
       url: 'https://gamma-url.com/status-test-status.png',
     };
 
-    const { getByTestId } = render(
+    const { getByTestId } = renderWithProviders(
       <RowBlockItem
         data={data}
         center
@@ -195,7 +191,7 @@ describe('<RowBlockItem>', () => {
   });
 
   it('renders correct children', () => {
-    const { getByTestId } = render(
+    const { getByTestId } = renderWithProviders(
       <RowBlockItem>
         <div data-testid="test-child" />
       </RowBlockItem>,
@@ -208,7 +204,7 @@ describe('<RowBlockItem>', () => {
   });
 
   it('renders without data', () => {
-    const { getByTestId } = render(<RowBlockItem />);
+    const { getByTestId } = renderWithProviders(<RowBlockItem />);
 
     const rowBlockItem = getByTestId('row-block-item');
     expect(rowBlockItem).toBeInTheDocument();
@@ -234,7 +230,7 @@ describe('<RowBlockItem>', () => {
       url: 'https://gamma.com/badge3.png',
     };
 
-    const { getByTestId } = render(<RowBlockItem data={data} />);
+    const { getByTestId } = renderWithProviders(<RowBlockItem data={data} />);
 
     const totalProgressElement = getByTestId('total-progress-percent');
     expect(totalProgressElement).toHaveTextContent('25%');
@@ -260,7 +256,7 @@ describe('<RowBlockItem>', () => {
       url: 'https://gamma.com/badge3.png',
     };
 
-    const { getByTestId } = render(<RowBlockItem data={data} />);
+    const { getByTestId } = renderWithProviders(<RowBlockItem data={data} />);
 
     const totalProgressElement = getByTestId('total-progress-percent');
     expect(totalProgressElement).toHaveTextContent('50%');

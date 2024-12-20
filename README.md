@@ -139,3 +139,37 @@ direnv allow
 ## Build distribution package
 !TODO
 1. Instructions to build python package for production
+
+## Localization and Translations (React)
+
+This project uses **React Intl** for managing translations and localization. It provides a flexible way to handle multiple languages and ensures that your app can easily adapt to different regions and cultures.
+
+### Functionality
+
+- **Translation Files**: Translations are stored in separate JavaScript files, organized by language (e.g., `en/index.js`, `fr/index.js`).
+- **Text Keys**: Each piece of text has a unique key and an associated default value. This allows for easy reference and translation.
+- **Dynamic Language Switching**: You can switch between languages dynamically in the application.
+- **Fallback Mechanism**: If a translation for the current language is missing, the default English text will be used.
+
+### How to Use Translations
+
+You can use translations in two main ways:
+
+1. **Using `getTranslate()` Helper**  
+   The `getTranslate` function allows you to retrieve translations dynamically. You can pass the translation key as a parameter and it will return the appropriate translated string.
+   ```javascript
+   import { getTranslate } from './utils/getTranslate';
+
+   const translatedText = getTranslate('header.main.title');
+   // Example: returns "Welcome to the project" for English or the translation in the current language
+
+2. **Using `<FormattedMessage />`**  
+   Alternatively, you can use the <FormattedMessage /> component to directly display translated text in your JSX.
+   ```javascript
+   import { FormattedMessage } from 'react-intl';
+
+   const Header = () => (
+     <h1>
+       <FormattedMessage id="header.main.title" defaultMessage="Welcome to the project" />
+     </h1>
+   );

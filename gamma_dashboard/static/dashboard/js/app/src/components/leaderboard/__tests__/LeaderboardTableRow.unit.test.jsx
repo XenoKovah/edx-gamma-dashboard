@@ -1,12 +1,11 @@
 import React from 'react';
-
 import '@testing-library/jest-dom';
 import { render, cleanup } from '@testing-library/react';
 
 import LeaderboardTableRow from '../LeadeboardTableRow';
 import DataLeaderboardTableRow from './__mock__/DataLeaderboardTableRow.json';
 
-afterAll(cleanup);
+afterEach(cleanup);
 
 const BADGES_IN_FULL_LINE = 17;
 const { profile, status, rank } = DataLeaderboardTableRow;

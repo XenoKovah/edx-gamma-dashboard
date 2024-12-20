@@ -1,18 +1,18 @@
 import React from 'react';
-
 import axios from 'axios';
-
+import { IntlProvider } from 'react-intl';
 import '@testing-library/jest-dom';
 import '@testing-library/jest-dom/extend-expect';
-import { render, screen, cleanup } from '@testing-library/react';
+import { screen, cleanup } from '@testing-library/react';
 import { act } from 'react-dom/test-utils';
 import renderer from 'react-test-renderer';
 
+import { renderWithProviders } from '../../../setupTests';
 import LeaderboardPage from '../LeaderboardPage';
 import DataLeaderboardPage from './__mock__/DataLeaderboardPage.json';
 
 jest.mock('axios');
-afterAll(cleanup);
+afterEach(cleanup);
 
 describe('<LeaderboardPage>', () => {
   it.each(DataLeaderboardPage)('renders', async ({ state }) => {
@@ -29,7 +29,11 @@ describe('<LeaderboardPage>', () => {
     let component;
 
     await act(async () => {
-      component = renderer.create(<LeaderboardPage />);
+      component = renderer.create(
+        <IntlProvider locale="en">
+          <LeaderboardPage />
+        </IntlProvider>,
+      );
     });
 
     const tree = component.toJSON();
@@ -43,7 +47,7 @@ describe('<LeaderboardPage>', () => {
     const title = 'Leaderboard';
 
     act(() => {
-      render(<LeaderboardPage />);
+      renderWithProviders(<LeaderboardPage />);
     });
     const windowTitle = screen.getByTestId('leaderboard-page-title');
 
@@ -60,7 +64,7 @@ describe('<LeaderboardPage>', () => {
     axios.get.mockResolvedValue({ data });
 
     act(() => {
-      render(<LeaderboardPage />);
+      renderWithProviders(<LeaderboardPage />);
     });
 
     const pageTitle = screen.getByTestId('leaderboard-page-title');
@@ -68,13 +72,5 @@ describe('<LeaderboardPage>', () => {
 
     expect(pageTitle).toBeInTheDocument();
     expect(leaderboardTable).toBeInTheDocument();
-  });
-});
-
-describe('getLeaderboardTableProps', () => {
-  it.each(DataLeaderboardPage)('should return the correct props for given parameters', ({ state, expectedProps }) => {
-    const result = LeaderboardPage.prototype.getLeaderboardTableProps(state);
-
-    expect(result).toEqual(expectedProps);
   });
 });

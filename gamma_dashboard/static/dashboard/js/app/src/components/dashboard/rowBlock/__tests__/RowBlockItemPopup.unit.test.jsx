@@ -1,8 +1,8 @@
 import React from 'react';
-
 import '@testing-library/jest-dom';
-import { render, cleanup } from '@testing-library/react';
+import { cleanup } from '@testing-library/react';
 
+import { renderWithProviders } from '../../../../setupTests';
 import RowBlockItemPopup from '../RowBlockItemPopup';
 
 afterEach(cleanup);
@@ -16,7 +16,7 @@ describe('<RowBlockItemPopup>', () => {
     };
     const progressString = `${data.points}/${data.statusPoints}`;
 
-    const { getByText } = render(
+    const { getByText } = renderWithProviders(
       <RowBlockItemPopup
         title={title}
         data={data}
@@ -35,7 +35,7 @@ describe('<RowBlockItemPopup>', () => {
     };
     const progressString = `${data.points}/${data.statusPoints}`;
 
-    const { getByText } = render(
+    const { getByText } = renderWithProviders(
       <RowBlockItemPopup
         title={title}
         data={data}
@@ -71,7 +71,7 @@ describe('<RowBlockItemPopup>', () => {
       statusDependency,
     };
 
-    const { getByText } = render(
+    const { getByText } = renderWithProviders(
       <RowBlockItemPopup
         title={title}
         data={data}
@@ -104,7 +104,7 @@ describe('<RowBlockItemPopup>', () => {
   });
 
   it('renders without data', () => {
-    const { getByTestId } = render(<RowBlockItemPopup />);
+    const { getByTestId } = renderWithProviders(<RowBlockItemPopup />);
 
     const popup = getByTestId('row-block-item-popup');
     const head = getByTestId('item-head');
@@ -132,7 +132,7 @@ describe('<RowBlockItemPopup>', () => {
       },
     };
 
-    const { getByText } = render(
+    const { getByText } = renderWithProviders(
       <RowBlockItemPopup
         title={title}
         data={data}
@@ -159,7 +159,7 @@ describe('<RowBlockItemPopup>', () => {
       },
     };
 
-    const { getByText } = render(
+    const { getByText } = renderWithProviders(
       <RowBlockItemPopup
         title={title}
         data={data}
@@ -187,7 +187,7 @@ describe('<RowBlockItemPopup>', () => {
       },
     };
 
-    const { getByText } = render(
+    const { getByText } = renderWithProviders(
       <RowBlockItemPopup
         title={title}
         data={data}
@@ -215,7 +215,7 @@ describe('<RowBlockItemPopup>', () => {
       },
     };
 
-    const { getByText } = render(
+    const { getByText } = renderWithProviders(
       <RowBlockItemPopup
         title={title}
         data={data}

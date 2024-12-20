@@ -1,9 +1,10 @@
 import React from 'react';
 
 import '@testing-library/jest-dom';
-import { render, cleanup } from '@testing-library/react';
+import { cleanup } from '@testing-library/react';
 
 import StatusesBlock from '../statusesBlock/StatusesBlock';
+import { renderWithProviders } from '../../../../setupTests';
 
 const statusItemsMock = [
   {
@@ -85,7 +86,7 @@ const statusItemsMock = [
   },
 ];
 
-const renderComponent = (props) => render(
+const renderComponent = (props) => renderWithProviders(
   <StatusesBlock
     status="3 of 7"
     statusItems={statusItemsMock}

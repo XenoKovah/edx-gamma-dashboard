@@ -1,7 +1,8 @@
 import React from 'react';
-
 import '@testing-library/jest-dom';
-import { render, cleanup } from '@testing-library/react';
+import { cleanup } from '@testing-library/react';
+
+import { renderWithProviders } from '../../../setupTests';
 import LeaderboardTable from '../LeaderboardTable';
 import DataLeaderboardTable from './__mock__/DataLeaderboardTable.json';
 
@@ -9,7 +10,7 @@ afterEach(cleanup);
 
 describe('<LeaderboardTable>', () => {
   it('renders empty with loader', () => {
-    const { getByTestId, queryByTestId } = render(<LeaderboardTable />);
+    const { getByTestId, queryByTestId } = renderWithProviders(<LeaderboardTable />);
 
     expect(getByTestId('leaderboard-table')).toBeInTheDocument();
     expect(queryByTestId('leaderboard-table-row')).not.toBeInTheDocument();
@@ -19,7 +20,7 @@ describe('<LeaderboardTable>', () => {
   it.each(DataLeaderboardTable)('renders with correct number of rows', ({
     profiles, system_statuses, delimiter, rank, // eslint-disable-line camelcase
   }) => {
-    const { getAllByTestId, getByTestId } = render(
+    const { getAllByTestId, getByTestId } = renderWithProviders(
       <LeaderboardTable
         delimiter={delimiter}
         rank={rank}

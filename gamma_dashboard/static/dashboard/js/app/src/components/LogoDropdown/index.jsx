@@ -3,6 +3,7 @@ import { Dropdown, Icon } from '@openedx/paragon';
 import { ArrowDropDown } from '@openedx/paragon/icons';
 
 import { Modal, FeedbackForm } from './components';
+import { useTranslate } from '../../i18n/utils';
 
 import LogoImage from './assets/logo.svg';
 import './assets/LogoDropdown.scss';
@@ -19,10 +20,10 @@ const LogoDropdown = () => {
         </Dropdown.Toggle>
         <Dropdown.Menu>
           <Dropdown.Item target="_blank" href="https://products.pages.raccoongang.com/docs/rg-gamification/index.html">
-            Gamification user guide
+            {useTranslate('logo.dropdown.guide.item.text')}
           </Dropdown.Item>
           <Dropdown.Item type="button" onClick={() => toggleModal(true)}>
-            Give feedback
+            {useTranslate('logo.dropdown.feedback.item.text')}
           </Dropdown.Item>
         </Dropdown.Menu>
       </Dropdown>

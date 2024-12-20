@@ -1,37 +1,41 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import LeaderboardTableRow from './LeadeboardTableRow';
-import Loader from '../utility/Loader';
-
 import { getUserStatus } from '../../utility/statusTools';
+import { useTranslate } from '../../i18n/utils';
+import Loader from '../utility/Loader';
+import LeaderboardTableRow from './LeadeboardTableRow';
 
 import '../../styles/app/leaderboard/table.scss';
 
 const LeaderboardTable = ({
   rank, profiles, systemStatuses, delimiter,
-}) => (
-  <div className="LeaderboardTable" data-testid="leaderboard-table">
-    {!profiles ? (
-      <Loader />
-    ) : (
-      profiles.map((profile, index) => (
-        <React.Fragment key={profile.userUid}>
-          <LeaderboardTableRow
-            rank={rank}
-            profile={profile}
-            status={getUserStatus(systemStatuses, profile.points)}
-          />
-          {index === delimiter && (
-            <div className="LeaderboardTable-Separator" data-testid="leaderboard-table-separator">
-              <span /> <span /> <span />
-            </div>
-          )}
-        </React.Fragment>
-      ))
-    )}
-  </div>
-);
+}) => {
+  const translatedEmptyText = useTranslate('leaderboard.status.empty.text');
+
+  return (
+    <div className="LeaderboardTable" data-testid="leaderboard-table">
+      {!profiles ? (
+        <Loader />
+      ) : (
+        profiles.map((profile, index) => (
+          <React.Fragment key={profile.userUid}>
+            <LeaderboardTableRow
+              rank={rank}
+              profile={profile}
+              status={getUserStatus(systemStatuses, profile.points, translatedEmptyText)}
+            />
+            {index === delimiter && (
+              <div className="LeaderboardTable-Separator" data-testid="leaderboard-table-separator">
+                <span /> <span /> <span />
+              </div>
+            )}
+          </React.Fragment>
+        ))
+      )}
+    </div>
+  );
+};
 
 const EventPropType = PropTypes.shape({
   count: PropTypes.number.isRequired,

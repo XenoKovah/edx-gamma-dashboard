@@ -16,7 +16,7 @@ module.exports = {
         devDependencies: [
           '**/*.config.*',
           '**/*.test.*',
-          '**/setupTest.js',
+          '**/setupTests.jsx',
         ],
       },
     ],

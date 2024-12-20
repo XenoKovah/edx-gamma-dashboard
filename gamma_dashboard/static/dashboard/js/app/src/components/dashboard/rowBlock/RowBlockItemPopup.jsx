@@ -1,16 +1,19 @@
-import React from 'react';
+import React, { forwardRef } from 'react';
 import PropTypes from 'prop-types';
 
 import { isRtl } from '../charts/ChartWithExport';
+import { useTranslate } from '../../../i18n/utils';
 
 import '../../../styles/app/dashboard/row-block-item-popup.scss';
 
-const RowBlockItemPopup = React.forwardRef(({ title, data, ...props }, ref) => {
+const RowBlockItemPopup = forwardRef(({ title, data, ...props }, ref) => {
   const { statusDependency } = data;
   const badgeDependencies = data.badgeDependencies || [];
   const progress = data.progress || {};
   const points = data.points || 0;
   const { statusPoints } = data;
+  const dependsOnBadgesText = useTranslate('dashboard.badges.depends.on.badges.text');
+  const dependsOnStatusesText = useTranslate('dashboard.badges.depends.on.status.text');
 
   const bodyItems = [];
   for (const progressItem in progress) {
@@ -35,7 +38,7 @@ const RowBlockItemPopup = React.forwardRef(({ title, data, ...props }, ref) => {
     bodyItems.push((
       <React.Fragment key="badge-dependencies">
         <div className="list-item-dependency-title">
-          { isRtl ? ':Depends on badges' : 'Depends on badges:' }
+          { isRtl ? `:${dependsOnBadgesText}` : `${dependsOnBadgesText}:` }
         </div>
         <ul className="item-list">
           {badgeDependencies.map((badge) => (
@@ -52,7 +55,7 @@ const RowBlockItemPopup = React.forwardRef(({ title, data, ...props }, ref) => {
     bodyItems.push((
       <React.Fragment key="status-dependencies">
         <div className="list-item-dependency-title">
-          { isRtl ? ':Depends on status' : 'Depends on status:' }
+          { isRtl ? `:${dependsOnStatusesText}` : `${dependsOnStatusesText}:` }
         </div>
         <ul className="item-list">
           <li className="item-list-item">

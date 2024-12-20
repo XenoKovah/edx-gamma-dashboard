@@ -1,50 +1,54 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import RowBlockItem from './rowBlock/RowBlockItem';
+import { useTranslate } from '../../i18n/utils';
 import ModalWindow from '../utility/ModalWindow';
+import RowBlockItem from './rowBlock/RowBlockItem';
 import { isRtl } from './charts/ChartWithExport';
 
 import '../../styles/app/dashboard/dashboard-modal-window.scss';
 
 const DashboardModalWindow = ({
   title, items, getItemDataFunction, children, ...props
-}) => (
-  <ModalWindow {...props}>
-    <div
-      className="dashboard-modal-window-title-bar"
-      data-testid="dashboard-modal-window-title-bar"
-    >
+}) => {
+  const counterTranslation = useTranslate('performance.badges.section.total.badges.button.text');
+  const counterLabelText = isRtl ? `:${counterTranslation}` : `${counterTranslation}:`;
+
+  return (
+    <ModalWindow {...props}>
       <div
-        className="title"
-        data-testid="title"
+        className="dashboard-modal-window-title-bar"
+        data-testid="dashboard-modal-window-title-bar"
       >
-        {title}
+        <div
+          className="title"
+          data-testid="title"
+        >
+          {title}
+        </div>
+        <div className="counter">
+          <span>{counterLabelText}</span>
+          <span data-testid="counter-value">
+            {items.length}
+          </span>
+        </div>
       </div>
-      <div className="counter">
-        <span>
-          {isRtl ? ':Total badges' : 'Total badges:'}
-        </span>
-        <span data-testid="counter-value">
-          {items.length}
-        </span>
+      <div
+        className="dashboard-modal-window-items-list"
+        data-testid="dashboard-modal-window-items-list"
+      >
+        {items.map((item) => (
+          <RowBlockItem
+            key={getItemDataFunction(item).title}
+            data={getItemDataFunction(item)}
+            center
+          />
+        ))}
       </div>
-    </div>
-    <div
-      className="dashboard-modal-window-items-list"
-      data-testid="dashboard-modal-window-items-list"
-    >
-      {items.map((item) => (
-        <RowBlockItem
-          key={getItemDataFunction(item).title}
-          data={getItemDataFunction(item)}
-          center
-        />
-      ))}
-    </div>
-    {children}
-  </ModalWindow>
-);
+      {children}
+    </ModalWindow>
+  );
+};
 
 const ProgressPropType = PropTypes.shape({
   count: PropTypes.number.isRequired,
