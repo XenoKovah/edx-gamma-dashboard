@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Slider from 'react-slick';
-import { OverlayTrigger, Tooltip } from '@edx/paragon';
+import { OverlayTrigger, Tooltip } from '@openedx/paragon';
 import 'slick-carousel/slick/slick.scss';
 import 'slick-carousel/slick/slick-theme.scss';
 
@@ -22,7 +22,7 @@ const StatusesBlock = ({ status, statusItems }) => {
       <div className="table-row-block-header" data-testid="table-row-block-header">
         <div className="table-row-block-title" data-testid="row-block-title">Your Statuses</div>
         <div className="table-row-block-status" data-testid="row-block-status"><span>{status}</span></div>
-        <div className="table-row-block-description" data-testid="row-block-description"></div>
+        <div className="table-row-block-description" data-testid="row-block-description" />
       </div>
       <p className="row-block-text" data-testid="row-block-text">
         The more points you have, the higher status you own.
@@ -30,19 +30,21 @@ const StatusesBlock = ({ status, statusItems }) => {
       {statusItems.length ? (
         <div className="statuses-block__slider">
           <Slider {...sliderSettings} ref={sliderRef}>
-            {statusItems.map(({ status_uid, url, title, statusPoints, points }, index) => {
+            {statusItems.map(({
+              status_uid, url, title, statusPoints, points, // eslint-disable-line camelcase
+            }, index) => {
               const isStatusComplete = points >= statusPoints;
               const {
                 badgeStyles,
                 progressTrackStyles,
                 progressTrackEndStyles,
-                progressEndStyles
+                progressEndStyles,
               } = getProgressTrackStyles(index);
 
               return (
-                <div 
-                  className={`slider-item ${parseFloat(progressTrackStyles.width) ? 'with-progress' : ''}`} 
-                  key={status_uid}
+                <div
+                  className={`slider-item ${parseFloat(progressTrackStyles.width) ? 'with-progress' : ''}`}
+                  key={status_uid} // eslint-disable-line camelcase
                   data-testid="slider-item"
                 >
                   <div className="slider-item__info">
@@ -81,11 +83,11 @@ const StatusesBlock = ({ status, statusItems }) => {
                       <OverlayTrigger
                         key="bottom"
                         placement="bottom"
-                        overlay={
+                        overlay={(
                           <Tooltip id="tooltip-points">
                             {points}
                           </Tooltip>
-                        }
+                        )}
                       >
                         <div
                           className="slider-item__progress-track-end"
@@ -99,7 +101,7 @@ const StatusesBlock = ({ status, statusItems }) => {
                     />
                   </div>
                 </div>
-              )
+              );
             })}
           </Slider>
         </div>
@@ -108,14 +110,26 @@ const StatusesBlock = ({ status, statusItems }) => {
   );
 };
 
-StatusesBlock.defaultProps = {
-  status: '0 of 0',
-  statusItems: [],
-};
+const StatusPropType = PropTypes.shape({
+  status_uid: PropTypes.string.isRequired,
+  slug: PropTypes.string.isRequired,
+  title: PropTypes.string.isRequired,
+  description: PropTypes.string,
+  active: PropTypes.bool.isRequired,
+  color: PropTypes.string.isRequired,
+  url: PropTypes.string.isRequired,
+  statusPoints: PropTypes.number.isRequired,
+  points: PropTypes.number.isRequired,
+});
 
 StatusesBlock.propTypes = {
   status: PropTypes.string,
-  statusItems: PropTypes.array,
+  statusItems: PropTypes.arrayOf(StatusPropType),
+};
+
+StatusesBlock.defaultProps = {
+  status: '0 of 0',
+  statusItems: {},
 };
 
 export default StatusesBlock;

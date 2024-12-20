@@ -1,6 +1,7 @@
 stages:
     - build
     - test-py
+    - lint-react-app
     - test-js
     - versions
     - pypi
@@ -43,6 +44,20 @@ Units:
       - tags
     script:
       - cd /app && make test
+
+Lint:
+  stage: lint-react-app
+  variables:
+    GIT_STRATEGY: none
+  tags:
+    - k8s-runner
+  image: $IMAGE_NAME
+  only:
+    - master
+    - merge_requests
+    - tags
+  script:
+    - cd /app && make lint-js lint-styles
 
 ReactUnits:
     stage: test-js

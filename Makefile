@@ -7,7 +7,7 @@ REACT_APP_PATH = "${CURRENT_DIR}/gamma_dashboard/static/dashboard/js/app"
 
 .PHONY: build build-watch build-prod install-react-deps \
 		jest jest-v jest-watch jest-watch-v \
-		test test-v nix-shell
+		test test-v nix-shell lint-js lint-styles
 
 build:	# build development bundle
 	npm run build --prefix ${REACT_APP_PATH}
@@ -24,7 +24,7 @@ install-react-deps:
 install-react-deps-ci:
 	npm ci --prefix ${REACT_APP_PATH}
 
-jest:	# run react tests
+jest: # run react tests
 	npm run test --prefix ${REACT_APP_PATH}
 
 jest-v:	# run react tests in verbose mode
@@ -39,11 +39,17 @@ jest-watch-v: # run react tets and watch for rerun on changes (verbose mode)
 jest-cov: # run react tests with coverage report
 	npm run coverage --prefix ${REACT_APP_PATH}
 
+lint-js: # run react js linter
+	npm run lint-js --prefix ${REACT_APP_PATH}
+
+lint-styles: # run react styles linter
+	npm run lint-styles --prefix ${REACT_APP_PATH}
+
 #
 # Django backend
 #
 
-test:	# run tests
+test: # run tests
 	python -m "pytest"
 
 test-v:	# run tests in verbose mode (for debuging)

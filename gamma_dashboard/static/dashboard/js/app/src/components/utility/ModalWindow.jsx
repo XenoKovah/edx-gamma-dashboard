@@ -11,29 +11,29 @@ import '../../styles/app/utility/modal-window.scss';
 // until a better solution is found
 const CLOSE_TIMEOUT_SECONDS = 0.5;
 
-
-const ModalWindow = ({ isOpen, closeCallback, content, children}) => {
-    return (
-        <ReactModal
-            closeTimeoutMS={CLOSE_TIMEOUT_SECONDS * 1000}
-            isOpen={isOpen}
-        >
-            <div
-                className={'modal-window-wrapper'}
-                data-testid={'modal-window-wrapper'}
-            >
-                <CloseWindowButton onClick={closeCallback}/>
-                {content}
-                {children}
-            </div>
-        </ReactModal>
-    )
-};
+const ModalWindow = ({
+  isOpen, closeCallback, content, children,
+}) => (
+  <ReactModal
+    closeTimeoutMS={CLOSE_TIMEOUT_SECONDS * 1000}
+    isOpen={isOpen}
+  >
+    <div
+      className="modal-window-wrapper"
+      data-testid="modal-window-wrapper"
+    >
+      <CloseWindowButton onClick={closeCallback} />
+      {content}
+      {children}
+    </div>
+  </ReactModal>
+);
 
 ModalWindow.propTypes = {
-    isOpen: PropTypes.bool,
-    closeCallback: PropTypes.func,
-    content: PropTypes.any
+  isOpen: PropTypes.bool.isRequired,
+  closeCallback: PropTypes.func.isRequired,
+  content: PropTypes.string.isRequired,
+  children: PropTypes.node.isRequired,
 };
 
 export default ModalWindow;

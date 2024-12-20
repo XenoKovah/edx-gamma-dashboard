@@ -6,7 +6,6 @@ import cupSilver from './images/cup-silver.svg';
 import cupBronze from './images/cup-bronze.svg';
 import '../../styles/app/leaderboard/avatar.scss';
 
-
 const Avatar = ({ username, urlProfileImage, position }) => {
   const firstLetter = username ? username.charAt(0).toUpperCase() : '-';
   const getPositionForAvatar = () => {
@@ -17,7 +16,7 @@ const Avatar = ({ username, urlProfileImage, position }) => {
       case 3:
         return (
           <span className="Avatar-Position Avatar-Position_winner">
-            <img src={cups[position - 1]} alt=""/>
+            <img src={cups[position - 1]} alt="" />
           </span>
         );
       case null:
@@ -35,34 +34,32 @@ const Avatar = ({ username, urlProfileImage, position }) => {
     <div
       className="Avatar"
       data-testid="avatar"
-      style={urlProfileImage ? { backgroundImage: `url(${urlProfileImage})` } : { backgroundColor: "#cde4fc" }}
+      style={urlProfileImage ? { backgroundImage: `url(${urlProfileImage})` } : { backgroundColor: '#cde4fc' }}
     >
-      <>
-        {!urlProfileImage && (
-          <span
-            className="Avatar-Logo"
-            data-testid="avatar-logo"
-            style={{ color: "#303030" }}
-          >
-            {firstLetter}
-          </span>
-        )}
-        {getPositionForAvatar()}
-      </>
+      {!urlProfileImage && (
+      <span
+        className="Avatar-Logo"
+        data-testid="avatar-logo"
+        style={{ color: '#303030' }}
+      >
+        {firstLetter}
+      </span>
+      )}
+      {getPositionForAvatar()}
     </div>
   );
-}
+};
 
 Avatar.propTypes = {
   urlProfileImage: PropTypes.string,
   username: PropTypes.string,
-  position: PropTypes.number
+  position: PropTypes.number,
 };
 
 Avatar.defaultProps = {
   urlProfileImage: null,
   username: null,
-  position: null
+  position: null,
 };
 
 export default Avatar;

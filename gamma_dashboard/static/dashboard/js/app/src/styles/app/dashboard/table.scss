@@ -1,14 +1,13 @@
-@import 'dashboard-colors.scss';
-
+@import "dashboard-colors";
 
 .dashboard-table {
-    font-weight: 400;
-    font-size: 12px;
-    margin: 42px auto 55px;
-    padding: 0;
-    color: $mainTextColor;
+  font-weight: 400;
+  font-size: 12px;
+  margin: 42px auto 55px;
+  padding: 0;
+  color: $mainTextColor;
 
-    &-body {
-        overflow: hidden;
-    }
+  &-body {
+    overflow: hidden;
+  }
 }

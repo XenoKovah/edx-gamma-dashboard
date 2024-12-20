@@ -1,11 +1,11 @@
-import React, { useState } from "react";
-import { Dropdown, Icon } from "@edx/paragon";
-import { ArrowDropDown } from '@edx/paragon/icons';
+import React, { useState } from 'react';
+import { Dropdown, Icon } from '@openedx/paragon';
+import { ArrowDropDown } from '@openedx/paragon/icons';
 
-import { Modal, FeedbackForm } from "./components";
+import { Modal, FeedbackForm } from './components';
 
-import LogoImage from "./assets/logo.svg";
-import "./assets/LogoDropdown.scss";
+import LogoImage from './assets/logo.svg';
+import './assets/LogoDropdown.scss';
 
 const LogoDropdown = () => {
   const [isOpen, toggleModal] = useState(false);

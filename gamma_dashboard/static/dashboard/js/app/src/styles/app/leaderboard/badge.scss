@@ -1,16 +1,16 @@
 .Badges {
-    display: flex;
+  display: flex;
 }
 
 .BadgeItem {
-    max-width: 48px;
-    max-height: 42px;
+  max-width: 48px;
+  max-height: 42px;
 
-    &:not(:last-child) {
-        margin-right: 12px;
+  &:not(:last-child) {
+    margin-right: 12px;
 
-        .rtl & {
-            margin: 0 0 0 12px;
-        }
+    .rtl & {
+      margin: 0 0 0 12px;
     }
+  }
 }

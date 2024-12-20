@@ -5,7 +5,6 @@ const defaultConfigDir = path.resolve(__dirname, '../config');
 
 function ConfigPreset({
   defaultDir = defaultConfigDir,
-  defaultFilename,
   searchFilenames,
   searchFilepaths,
 }) {

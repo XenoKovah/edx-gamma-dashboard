@@ -1,6 +1,12 @@
 # Changelog
 
 ## [Unreleased]
+## Changed
+- [NAU-93] Updated Paragon to the 22+ version.
+- [NAU-93] Integrated stylelint and eslint using frontend-build configurations.
+- [NAU-93] Introduced new Makefile commands: lint-js and lint-styles.
+- [NAU-93] Added CI tasks to execute lint-js and lint-styles.
+- [NAU-93] Resolved syntax issues in the React application.
 
 ## 1.3.1 (2025-02-13)
 ## Fixed

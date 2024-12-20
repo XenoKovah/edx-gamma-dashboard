@@ -1,14 +1,14 @@
-@import './variables';
+@import "./variables";
 
 .LeaderboardTitle {
-    font-size: 36px;
-    line-height: 49px;
-    font-weight: 400;
-    color: $textColor;
-    margin: 0 0 24px;
-    text-align: left;
+  font-size: 36px;
+  line-height: 49px;
+  font-weight: 400;
+  color: $textColor;
+  margin: 0 0 24px;
+  text-align: left;
 
-    .rtl & {
-        text-align: right;
-    }
+  .rtl & {
+    text-align: right;
+  }
 }

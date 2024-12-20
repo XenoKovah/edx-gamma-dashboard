@@ -8,5 +8,4 @@ const babel = new ConfigPreset({
   searchFilepaths,
 });
 
-
 module.exports = { babel };

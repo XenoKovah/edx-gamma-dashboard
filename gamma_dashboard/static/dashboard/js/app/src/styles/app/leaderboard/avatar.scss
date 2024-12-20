@@ -1,56 +1,56 @@
 @import "./variables";
 
 .Avatar {
-    position: relative;
-    width: 42px;
-    height: 42px;
-    border: 1px solid $avatarBorderColor;
-    border-radius: 8px;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    margin-right: 12px;
-    flex-shrink: 0;
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-position: center center;
+  position: relative;
+  width: 42px;
+  height: 42px;
+  border: 1px solid $avatarBorderColor;
+  border-radius: 8px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 12px;
+  flex-shrink: 0;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center center;
 
-    .rtl & {
-        margin: 0 0 0 12px;
-    }
+  .rtl & {
+    margin: 0 0 0 12px;
+  }
 }
 
 .Avatar-Position {
-    position: absolute;
-    left: -7px;
-    top: -7px;
-    padding: 1px 4px;
-    background: $accentColor;
-    border: 1px solid $avatarPositionColor;
-    border-radius: 10px;
-    color: $avatarPositionColor;
-    font-weight: 500;
-    font-size: 12px;
-    line-height: 16px;
-    min-width: 20px;
-    min-height: 20px;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    box-sizing: border-box;
+  position: absolute;
+  left: -7px;
+  top: -7px;
+  padding: 1px 4px;
+  background: $accentColor;
+  border: 1px solid $avatarPositionColor;
+  border-radius: 10px;
+  color: $avatarPositionColor;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 16px;
+  min-width: 20px;
+  min-height: 20px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
 
-    .rtl & {
-        left: auto;
-        right: -7px;
-    }
+  .rtl & {
+    left: auto;
+    right: -7px;
+  }
 
-    &_winner {
-        padding: 0;
-        background: $white;
-        border: 1px solid $avatarPositionAccent;
-    }
+  &_winner {
+    padding: 0;
+    background: $white;
+    border: 1px solid $avatarPositionAccent;
+  }
 
-    &_undefined {
-        background: $avatarBorderColor;
-    }
+  &_undefined {
+    background: $avatarBorderColor;
+  }
 }

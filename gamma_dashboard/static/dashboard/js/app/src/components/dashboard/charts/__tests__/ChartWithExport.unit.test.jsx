@@ -5,14 +5,12 @@ import { render, cleanup } from '@testing-library/react';
 
 import ChartWithExport from '../ChartWithExport';
 
-
 afterEach(cleanup);
 
-
 describe('<ChartWithExport>', () => {
-    it('renders', () => {
-        const { getByText } = render(<ChartWithExport options={{}} />);
+  it('renders', () => {
+    const { getByText } = render(<ChartWithExport options={{}} />);
 
-        expect(getByText(/chart title/i)).toBeInTheDocument();
-    });
+    expect(getByText(/chart title/i)).toBeInTheDocument();
+  });
 });

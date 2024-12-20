@@ -1,6 +1,6 @@
-import React from "react";
-import PropTypes from "prop-types";
-import { ModalDialog } from "@edx/paragon";
+import React from 'react';
+import PropTypes from 'prop-types';
+import { ModalDialog } from '@openedx/paragon';
 
 const Modal = ({
   isOpen, handleClose, title, children,

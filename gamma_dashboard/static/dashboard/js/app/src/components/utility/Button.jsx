@@ -3,21 +3,20 @@ import PropTypes from 'prop-types';
 
 import '../../styles/app/utility/button.scss';
 
-
 const Button = ({ title, onClick }) => (
-    <a
-        className={'btn'}
-        data-testid={'button'}
-        href='#'
-        onClick={(event) => {event.preventDefault(); onClick()}}
-    >
-        {title}
-    </a>
+  <button
+    className="btn"
+    data-testid="button"
+    type="button"
+    onClick={onClick}
+  >
+    {title}
+  </button>
 );
 
 Button.propTypes = {
-    title: PropTypes.string,
-    onClick: PropTypes.func,
+  title: PropTypes.string.isRequired,
+  onClick: PropTypes.func.isRequired,
 };
 
 export default Button;

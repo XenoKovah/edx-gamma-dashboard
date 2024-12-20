@@ -1,21 +1,22 @@
-import React, { useState } from "react";
-import PropTypes from "prop-types";
-import { Form, Button, SelectMenu, MenuItem, Alert } from "@edx/paragon";
-import { CheckCircle, Info } from "@edx/paragon/icons";
+import React, { useState } from 'react';
+import PropTypes from 'prop-types';
+import {
+  Form, Button, SelectMenu, MenuItem, Alert,
+} from '@openedx/paragon';
+import { CheckCircle, Info } from '@openedx/paragon/icons';
 
-import gammaApi from '../../../api/ApiRequests';
-
+import { gammaApi } from '../../../api/ApiRequests';
 
 const SUBJECT_LIST = [
-  "Ask a question", "Leave a comment", "Report a bug", "Suggest an improvement",
+  'Ask a question', 'Leave a comment', 'Report a bug', 'Suggest an improvement',
 ];
 
 const FeedbackForm = ({ handleClose }) => {
   const [status, setStatus] = useState(null);
   const [formData, setFormData] = useState({
-    message: "",
-    subject: "Ask a question",
-    product: "rg_gamification",
+    message: '',
+    subject: 'Ask a question',
+    product: 'rg_gamification',
   });
 
   const setFieldValue = (key, value) => {
@@ -34,12 +35,12 @@ const FeedbackForm = ({ handleClose }) => {
       return;
     }
 
-    gammaApi.sendFeedbackForm(formData, setStatus)
+    gammaApi.sendFeedbackForm(formData, setStatus);
   };
 
   const handleChange = ({ target }) => {
     const key = target.name;
-    const value = target.type === "checkbox" ? target.checked : target.value;
+    const value = target.type === 'checkbox' ? target.checked : target.value;
     setFieldValue(key, value);
   };
 
@@ -70,7 +71,7 @@ const FeedbackForm = ({ handleClose }) => {
             <MenuItem
               as="div"
               key={subject}
-              onClick= {()=> setFieldValue("subject", subject)}
+              onClick={() => setFieldValue('subject', subject)}
               defaultSelected={subject === formData.subject}
             >
               {subject}
