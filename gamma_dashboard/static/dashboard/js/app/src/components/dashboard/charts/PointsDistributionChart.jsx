@@ -1,13 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import ChartWithExport, {
-  chartTitleStyles,
-  chartSubtitleStyles,
-  chartTitleOptions,
-  Highcharts,
-  isRtl,
-} from './ChartWithExport';
+import ChartWithExport, { Highcharts } from './ChartWithExport';
+import { chartSubtitleStyles, chartTitleOptions, chartTitleStyles } from './constants';
+import { isRtl } from '../../../constants';
 import { useTranslate } from '../../../i18n/utils';
 
 function dataLabelFormatter() {

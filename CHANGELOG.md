@@ -2,6 +2,10 @@
 
 ## [Unreleased]
 ## Changed
+- [NAU-105] Updated the Loader component.
+- [NAU-105] Refactored the styles structure to improve organization and maintainability.
+- [NAU-105] Enhanced the React components by restructuring and cleaning up the code.
+- [NAU-105] Refactored tests.
 - [NAU-93] Updated Paragon to the 22+ version.
 - [NAU-93] Integrated stylelint and eslint using frontend-build configurations.
 - [NAU-93] Introduced new Makefile commands: lint-js and lint-styles.

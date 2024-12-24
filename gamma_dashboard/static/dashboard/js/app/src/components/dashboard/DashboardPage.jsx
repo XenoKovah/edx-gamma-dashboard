@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-import { gammaApi } from '../../api/ApiRequests';
+import { gammaApi } from '../../api';
 import DashboardTable from './DashboardTable';
 import { parseData } from './utils';
 

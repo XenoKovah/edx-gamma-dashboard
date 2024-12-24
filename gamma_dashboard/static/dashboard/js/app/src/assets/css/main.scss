@@ -1,0 +1,12 @@
+#app,
+#paragon-portal-root,
+.ReactModalPortal {
+  // By targeting specific root elements of the React application, we isolate styles
+  // and avoid unintended side effects in the Legacy LMS.
+  @import "@openedx/paragon/scss/core/core";
+  @import "variables";
+  @import "./global";
+  @import "./generic";
+  @import "./leaderboard";
+  @import "./dashboard";
+}

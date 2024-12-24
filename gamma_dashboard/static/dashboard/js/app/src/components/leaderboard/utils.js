@@ -1,4 +1,4 @@
-import { addPositionInCompetitors, addPositionInTop10 } from '../../utility/utils';
+import { addPositionInCompetitors, addPositionInTop10 } from '../../utils';
 
 export const getLeaderboardTableProps = (data) => {
   const {

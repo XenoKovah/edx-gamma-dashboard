@@ -5,7 +5,7 @@ import {
 } from '@openedx/paragon';
 import { CheckCircle, Info } from '@openedx/paragon/icons';
 
-import { gammaApi } from '../../../api/ApiRequests';
+import { gammaApi } from '../../../api';
 import { useTranslate } from '../../../i18n/utils';
 
 const FeedbackForm = ({ handleClose }) => {

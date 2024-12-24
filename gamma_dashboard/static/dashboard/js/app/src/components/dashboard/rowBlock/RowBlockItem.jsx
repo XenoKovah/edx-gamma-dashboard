@@ -1,11 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-
 import { usePopper } from 'react-popper';
-import RowBlockItemPopup from './RowBlockItemPopup';
-import { buildURL } from '../../../utility/urlTools';
 
-import '../../../styles/app/dashboard/row-block-item.scss';
+import { buildURL } from '../../../utils';
+import RowBlockItemPopup from './RowBlockItemPopup';
 
 const RowBlockItem = ({
   data, center, children,

@@ -2,11 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import { useTranslate } from '../../i18n/utils';
-import ModalWindow from '../utility/ModalWindow';
+import { ModalWindow } from '../generic';
 import RowBlockItem from './rowBlock/RowBlockItem';
-import { isRtl } from './charts/ChartWithExport';
-
-import '../../styles/app/dashboard/dashboard-modal-window.scss';
+import { isRtl } from '../../constants';
 
 const DashboardModalWindow = ({
   title, items, getItemDataFunction, children, ...props

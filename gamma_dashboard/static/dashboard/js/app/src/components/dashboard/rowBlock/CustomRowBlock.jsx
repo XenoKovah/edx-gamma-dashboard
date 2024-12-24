@@ -1,11 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import DashboardTableRowBlock from './DashboardTableRowBlock';
 import RowBlockHeader from '../RowBlockHeader';
-import Button from '../../utility/Button';
-
-import '../../../styles/app/dashboard/custom-row-block.scss';
+import { Button } from '../../generic';
+import DashboardTableRowBlock from './DashboardTableRowBlock';
 
 const CustomRowBlock = ({
   title,

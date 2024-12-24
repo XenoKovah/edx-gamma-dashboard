@@ -1,12 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { getUserStatus } from '../../utility/statusTools';
-import { useTranslate } from '../../i18n/utils';
-import Loader from '../utility/Loader';
 import LeaderboardTableRow from './LeadeboardTableRow';
+import { Loader } from '../generic';
 
-import '../../styles/app/leaderboard/table.scss';
+import { getUserStatus } from '../../utils';
+import { useTranslate } from '../../i18n/utils';
 
 const LeaderboardTable = ({
   rank, profiles, systemStatuses, delimiter,

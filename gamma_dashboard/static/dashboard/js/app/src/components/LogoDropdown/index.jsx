@@ -5,8 +5,7 @@ import { ArrowDropDown } from '@openedx/paragon/icons';
 import { Modal, FeedbackForm } from './components';
 import { useTranslate } from '../../i18n/utils';
 
-import LogoImage from './assets/logo.svg';
-import './assets/LogoDropdown.scss';
+import LogoImage from '../../assets/images/logo.svg';
 
 const LogoDropdown = () => {
   const [isOpen, toggleModal] = useState(false);

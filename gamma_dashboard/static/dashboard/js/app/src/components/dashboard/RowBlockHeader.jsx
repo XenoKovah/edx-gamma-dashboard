@@ -1,8 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import '../../styles/app/dashboard/table-row-block-header.scss';
-
 const RowBlockHeader = ({ title, status, description }) => (
   <div
     className="table-row-block-header"

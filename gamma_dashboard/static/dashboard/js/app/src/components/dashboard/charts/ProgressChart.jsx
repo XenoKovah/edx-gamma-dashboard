@@ -1,14 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import ChartWithExport, {
-  chartTitleStyles,
-  chartSubtitleStyles,
-  chartTitleOptions,
-  legendOptions,
-  isRtl,
-} from './ChartWithExport';
+import ChartWithExport from './ChartWithExport';
+import {
+  chartSubtitleStyles, chartTitleOptions, chartTitleStyles, legendOptions,
+} from './constants';
 import { useTranslate } from '../../../i18n/utils';
+import { isRtl } from '../../../constants';
 
 const ProgressChart = ({ data }) => {
   const pointsByDay = [];

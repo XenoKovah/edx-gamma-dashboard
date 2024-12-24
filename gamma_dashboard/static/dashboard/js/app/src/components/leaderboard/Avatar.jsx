@@ -1,10 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import cupGold from './images/cup-gold.svg';
-import cupSilver from './images/cup-silver.svg';
-import cupBronze from './images/cup-bronze.svg';
-import '../../styles/app/leaderboard/avatar.scss';
+import cupGold from '../../assets/images/cup-gold.svg';
+import cupSilver from '../../assets/images/cup-silver.svg';
+import cupBronze from '../../assets/images/cup-bronze.svg';
 
 const Avatar = ({ username, urlProfileImage, position }) => {
   const firstLetter = username ? username.charAt(0).toUpperCase() : '-';

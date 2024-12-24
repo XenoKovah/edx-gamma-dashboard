@@ -4,8 +4,6 @@ import PropTypes from 'prop-types';
 import Avatar from './Avatar';
 import Badge from './Badge';
 
-import '../../styles/app/leaderboard/table-row.scss';
-
 const LeaderboardTableRow = ({ profile, status, rank }) => {
   const username = profile.user_uid || '';
   const points = profile.points || 0;

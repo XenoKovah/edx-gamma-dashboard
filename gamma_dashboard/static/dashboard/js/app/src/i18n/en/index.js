@@ -184,6 +184,11 @@ const en = {
     defaultMessage: 'View in full screen',
     description: 'Text for viewing the chart in full screen',
   },
+  'generic.loader.screenReader.text': {
+    id: 'generic.loader.screenReader.text',
+    defaultMessage: 'Loading...',
+    description: 'Text for screen readers inside the component Loader.',
+  },
 };
 
 export default en;

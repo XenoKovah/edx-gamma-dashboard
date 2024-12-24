@@ -63,6 +63,8 @@ ReactUnits:
     stage: test-js
     variables:
       GIT_STRATEGY: none
+      KUBERNETES_MEMORY_REQUEST: "2Gi"
+      KUBERNETES_MEMORY_LIMIT: "3Gi"
     tags:
       - k8s-runner
     variables:

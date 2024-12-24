@@ -8,11 +8,9 @@ import { IntlProvider } from 'react-intl';
 
 import { URLS } from '../settings/routes';
 import { getMessages } from '../i18n/utils';
-import { getCookieByName } from '../utility/utils';
+import { getCookieByName } from '../utils';
 import LeaderboardPage from './leaderboard/LeaderboardPage';
 import DashboardPage from './dashboard/DashboardPage';
-
-import '../styles/app/app.scss';
 
 const Application = () => {
   const locale = getCookieByName('openedx-language-preference') || 'en';

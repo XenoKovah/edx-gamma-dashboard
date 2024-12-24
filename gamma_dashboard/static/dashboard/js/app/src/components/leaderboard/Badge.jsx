@@ -1,9 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { buildURL } from '../../utility/urlTools';
-
-import '../../styles/app/leaderboard/badge.scss';
+import { buildURL } from '../../utils';
 
 const Badge = ({ url }) => (
   <img

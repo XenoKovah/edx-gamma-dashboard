@@ -5,15 +5,13 @@ import ReactModal from 'react-modal';
 import { useTranslate } from '../../i18n/utils';
 import LogoDropdown from '../LogoDropdown';
 import DashboardTableRow from './DashboardTableRow';
-import DashboardTableRowBlock, { CORNER_BOTTOM, CORNER_TOP } from './rowBlock/DashboardTableRowBlock';
+import DashboardTableRowBlock from './rowBlock/DashboardTableRowBlock';
 import CustomRowBlock from './rowBlock/CustomRowBlock';
-import PointsDistributionChart from './charts/PointsDistributionChart';
-import ProgressChart from './charts/ProgressChart';
+import { PointsDistributionChart, ProgressChart } from './charts';
 import RowBlockItem from './rowBlock/RowBlockItem';
 import StatusesBlock from './rowBlock/statusesBlock/StatusesBlock';
 import DashboardModalWindow from './DashboardModalWindow';
-
-import '../../styles/app/dashboard/table.scss';
+import { CORNER_BOTTOM, CORNER_TOP } from './rowBlock/constants';
 
 const PREVIEW_BADGES_ITEMS_COUNT = 3;
 

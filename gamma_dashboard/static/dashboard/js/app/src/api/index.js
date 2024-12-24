@@ -1,0 +1,1 @@
+export { gammaApi } from './ApiRequests';

@@ -1,0 +1,30 @@
+.row-block-items-list {
+  display: flex;
+  justify-content: space-around;
+  flex: 0 0 115px;
+  margin-top: 80px;
+
+  @media screen and (max-width: map-get($grid-breakpoints, "lg")) {
+    justify-content: space-between;
+  }
+
+  @media screen and (max-width: map-get($grid-breakpoints, "xs")) {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 40px;
+  }
+}
+
+.row-block-text {
+  font-size: 16px;
+  line-height: 20px;
+  color: $main-text-color;
+  padding: 15px 14px 0;
+  margin: 0;
+}
+
+.row-block-controls {
+  text-align: center;
+  margin-top: 30px;
+}

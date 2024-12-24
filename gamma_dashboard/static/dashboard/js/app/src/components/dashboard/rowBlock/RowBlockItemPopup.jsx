@@ -1,10 +1,9 @@
 import React, { forwardRef } from 'react';
 import PropTypes from 'prop-types';
 
-import { isRtl } from '../charts/ChartWithExport';
+import { capitalizeFirstLetter } from '../../../utils';
+import { isRtl } from '../../../constants';
 import { useTranslate } from '../../../i18n/utils';
-
-import '../../../styles/app/dashboard/row-block-item-popup.scss';
 
 const RowBlockItemPopup = forwardRef(({ title, data, ...props }, ref) => {
   const { statusDependency } = data;
@@ -27,7 +26,7 @@ const RowBlockItemPopup = forwardRef(({ title, data, ...props }, ref) => {
             <span className="list-item-counter-text">
               {`${Math.min(count, goal)}/${goal}`}
             </span>
-            {`${progressTitle.charAt(0).toUpperCase()}${progressTitle.slice(1)}`}
+            {capitalizeFirstLetter(progressTitle)}
           </li>
         </ul>
       ));

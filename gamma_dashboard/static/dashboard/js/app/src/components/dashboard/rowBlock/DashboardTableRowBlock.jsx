@@ -1,15 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-
-import '../../../styles/app/dashboard/table-row-block.scss';
-
-export const CORNER_NONE = 'none';
-export const CORNER_TOP_LEFT = 'top-left';
-export const CORNER_TOP_RIGHT = 'top-right';
-export const CORNER_BOTTOM_LEFT = 'bottom-left';
-export const CORNER_BOTTOM_RIGHT = 'bottom-right';
-export const CORNER_BOTTOM = 'bottom';
-export const CORNER_TOP = 'top';
+import {
+  CORNER_BOTTOM,
+  CORNER_BOTTOM_LEFT,
+  CORNER_BOTTOM_RIGHT,
+  CORNER_NONE, CORNER_TOP,
+  CORNER_TOP_LEFT,
+  CORNER_TOP_RIGHT,
+} from './constants';
 
 const DashboardTableRowBlock = ({ fullWidth, corner, children }) => (
   <div

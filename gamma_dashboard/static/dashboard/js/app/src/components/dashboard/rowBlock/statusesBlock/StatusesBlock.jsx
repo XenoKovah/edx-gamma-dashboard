@@ -2,15 +2,15 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Slider from 'react-slick';
 import { OverlayTrigger, Tooltip } from '@openedx/paragon';
+
+import { buildURL } from '../../../../utils';
+import { useStatusesBlock } from './useStatusesBlock';
+
 import 'slick-carousel/slick/slick.scss';
 import 'slick-carousel/slick/slick-theme.scss';
 
 import { useTranslate } from '../../../../i18n/utils';
-import CompleteIcon from '../../../../assets/icons/complete-icon.svg';
-import { buildURL } from '../../../../utility/urlTools';
-import { useStatusesBlock } from './useStatusesBlock';
-
-import '../../../../styles/app/dashboard/statuses-block.scss';
+import CompleteIcon from '../../../../assets/images/complete-icon.svg';
 
 const StatusesBlock = ({ status, statusItems }) => {
   const {

@@ -1,0 +1,11 @@
+.dashboard-table {
+  font-weight: $font-weight-normal;
+  font-size: 12px;
+  margin: 42px auto 55px;
+  padding: 0;
+  color: $main-text-color;
+
+  .dashboard-table-body {
+    overflow: hidden;
+  }
+}

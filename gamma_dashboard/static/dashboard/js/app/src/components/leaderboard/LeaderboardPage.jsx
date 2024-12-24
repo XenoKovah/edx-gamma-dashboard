@@ -1,12 +1,10 @@
 import React, { useState, useEffect } from 'react';
 
-import { gammaApi } from '../../api/ApiRequests';
+import { gammaApi } from '../../api';
 import { useTranslate } from '../../i18n/utils';
 import LogoDropdown from '../LogoDropdown';
 import { getLeaderboardTableProps } from './utils';
 import LeaderboardTable from './LeaderboardTable';
-
-import '../../styles/app/leaderboard/page.scss';
 
 const LeaderboardPage = () => {
   const [data, setData] = useState({
