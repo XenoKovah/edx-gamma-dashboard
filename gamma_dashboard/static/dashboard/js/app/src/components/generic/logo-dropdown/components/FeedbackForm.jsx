@@ -3,40 +3,25 @@ import PropTypes from 'prop-types';
 import {
   Form, Button, SelectMenu, MenuItem, Alert,
 } from '@openedx/paragon';
-import { CheckCircle, Info } from '@openedx/paragon/icons';
+import {
+  CheckCircle as CheckCircleIcon,
+  Info as InfoIcon,
+} from '@openedx/paragon/icons';
 
-import { gammaApi } from '../../../api';
-import { useTranslate } from '../../../i18n/utils';
+import { gammaApi } from '../../../../api';
+import { getTranslations } from './utils';
+import { PRODUCT_NAME } from '../constants';
 
 const FeedbackForm = ({ handleClose }) => {
-  const SUBJECT_LIST = [
-    useTranslate('logo.dropdown.feedback.form.subject.question.text'),
-    useTranslate('logo.dropdown.feedback.form.subject.comment.text'),
-    useTranslate('logo.dropdown.feedback.form.subject.bug.text'),
-    useTranslate('logo.dropdown.feedback.form.subject.improvement.text'),
-  ];
-  const [status, setStatus] = useState(null);
+  const [requestStatus, setRequestStatus] = useState(null);
   const [formData, setFormData] = useState({
     message: '',
-    subject: SUBJECT_LIST[0],
-    product: 'rg_gamification',
+    subject: getTranslations().SUBJECT_LIST[0],
+    product: PRODUCT_NAME,
   });
+  const isSuccess = requestStatus === 200;
 
-  const messages = {
-    successMessage: useTranslate('logo.dropdown.feedback.form.alert.success.text'),
-    errorMessage: useTranslate('logo.dropdown.feedback.form.alert.error.text'),
-    confirmButtonText: useTranslate('logo.dropdown.feedback.form.alert.button.submit.text'),
-    messageFieldLabel: useTranslate('logo.dropdown.feedback.form.message.label.text'),
-    cancelButtonText: useTranslate('logo.dropdown.feedback.form.button.cancel.text'),
-    submitButtonText: useTranslate('logo.dropdown.feedback.form.button.submit.text'),
-  };
-
-  const setFieldValue = (key, value) => {
-    setFormData((prevState) => ({
-      ...prevState,
-      [key]: value,
-    }));
-  };
+  const setFieldValue = (key, value) => setFormData({ ...formData, [key]: value });
 
   const isValid = () => !Object.values(formData).some(value => !value);
 
@@ -47,7 +32,7 @@ const FeedbackForm = ({ handleClose }) => {
       return;
     }
 
-    gammaApi.sendFeedbackForm(formData, setStatus);
+    gammaApi.sendFeedbackForm(formData, setRequestStatus);
   };
 
   const handleChange = ({ target }) => {
@@ -56,25 +41,25 @@ const FeedbackForm = ({ handleClose }) => {
     setFieldValue(key, value);
   };
 
-  if (status) {
+  if (requestStatus) {
     return (
       <>
-        {status === 200 ? (
-          <Alert variant="success" icon={CheckCircle}>
+        {isSuccess ? (
+          <Alert variant="success" icon={CheckCircleIcon}>
             <Alert.Heading>
-              {messages.successMessage}
+              {getTranslations().successMessage}
             </Alert.Heading>
           </Alert>
         ) : (
-          <Alert variant="danger" icon={Info}>
+          <Alert variant="danger" icon={InfoIcon}>
             <Alert.Heading>
-              {messages.errorMessage}
+              {getTranslations().errorMessage}
             </Alert.Heading>
           </Alert>
         )}
         <div className="modal-buttons d-flex justify-content-end pt-4.5">
-          <Button variant="primary" onClick={handleClose}>
-            {messages.confirmButtonText}
+          <Button onClick={handleClose}>
+            {getTranslations().confirmButtonText}
           </Button>
         </div>
       </>
@@ -85,7 +70,7 @@ const FeedbackForm = ({ handleClose }) => {
     <Form onSubmit={handleSubmit}>
       <Form.Group>
         <SelectMenu variant="tertiary">
-          {SUBJECT_LIST.map(subject => (
+          {getTranslations().SUBJECT_LIST.map(subject => (
             <MenuItem
               as="div"
               key={subject}
@@ -102,17 +87,17 @@ const FeedbackForm = ({ handleClose }) => {
           as="textarea"
           name="message"
           autoResize
-          floatingLabel={messages.messageFieldLabel}
+          floatingLabel={getTranslations().messageFieldLabel}
           value={formData.message}
           onChange={handleChange}
         />
       </Form.Group>
       <div className="modal-buttons d-flex justify-content-end mt-2.5">
         <Button variant="tertiary" type="submit" onClick={handleClose}>
-          {messages.cancelButtonText}
+          {getTranslations().cancelButtonText}
         </Button>
-        <Button variant="primary" type="submit" className="ml-2" disabled={!isValid()}>
-          {messages.submitButtonText}
+        <Button type="submit" className="ml-2" disabled={!isValid()}>
+          {getTranslations().submitButtonText}
         </Button>
       </div>
     </Form>

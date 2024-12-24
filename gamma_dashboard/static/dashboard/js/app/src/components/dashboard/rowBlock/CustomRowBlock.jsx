@@ -49,7 +49,7 @@ CustomRowBlock.propTypes = {
   status: PropTypes.string,
   description: PropTypes.string,
   content: PropTypes.string,
-  items: PropTypes.objectOf(React.Component),
+  items: PropTypes.arrayOf(React.Component),
   buttonData: PropTypes.shape({
     title: PropTypes.string,
     onClick: PropTypes.func,

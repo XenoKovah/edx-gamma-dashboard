@@ -1,57 +1,5 @@
-button:not(.close-window-button) {
-  letter-spacing: normal;
-
-  &:hover {
-    background-image: none !important;
-  }
-}
-
-.form-control:focus ~ .pgn__form-control-floating-label .pgn__form-control-floating-label-text,
-.form-control.has-value ~ .pgn__form-control-floating-label .pgn__form-control-floating-label-text {
-  transform: translateY(-0.5625rem) scale(0.75) translateY(-65.0008%);
-  background-color: $white;
-}
-
-.btn-primary,
-.btn-primary:disabled,
-.btn-primary.disabled {
-  background-color: $blue-text-color;
-  border-color: $blue-text-color;
-
-  &:hover,
-  &:active,
-  &:focus {
-    background: $blue-text-color-darken !important;
-    border-color: $blue-text-color-darken !important;
-  }
-}
-
-// Logo
-
-.gamification-title-wrapper {
-  margin-bottom: 24px;
-
-  @media screen and (max-width: map-get($grid-breakpoints, "xs")) {
-    flex-direction: column;
-    align-items: flex-start !important;
-  }
-
-  h1 {
-    margin-bottom: 0;
-    font-size: 36px;
-    line-height: 49px;
-    font-weight: $font-weight-normal;
-
-    @media screen and (max-width: map-get($grid-breakpoints, "sm")) {
-      font-size: 26px;
-    }
-
-    @media screen and (max-width: map-get($grid-breakpoints, "xs")) {
-      order: 2;
-    }
-  }
-
-  img {
+.logo-dropdown {
+  .logo-dropdown-img {
     margin-right: 7px;
     cursor: pointer !important;
   }
@@ -66,10 +14,6 @@ button:not(.close-window-button) {
     @media screen and (max-width: map-get($grid-breakpoints, "xs")) {
       order: 1;
       margin-bottom: 5px;
-    }
-
-    &:before {
-      display: none;
     }
 
     &:active,
@@ -113,104 +57,6 @@ button:not(.close-window-button) {
       position: absolute;
       right: 13px;
       top: -10px;
-    }
-  }
-}
-
-// feedback form and modal
-
-.feedBack-modal {
-  .pgn__modal-header {
-    padding: 20px 1.5rem 17px !important;
-
-    .pgn__modal-title {
-      color: $secondary-text-color;
-    }
-  }
-
-  .pgn__modal-body-content {
-    .pgn__form-label {
-      font-size: 12px;
-      margin-bottom: 0;
-    }
-
-    .pgn__menu-select button {
-      border: 1px solid $select-btn-border-color !important;
-      border-radius: 3px;
-      font-size: 14px;
-      color: $secondary-text-color;
-      width: 100%;
-      max-width: none;
-      justify-content: space-between;
-      text-shadow: none;
-      box-shadow: none;
-      background: none;
-
-      &[aria-expanded="true"] svg {
-        transform: rotate(180deg);
-      }
-
-      &:active,
-      &:focus,
-      &:hover {
-        background: none;
-        border: none;
-        box-shadow: none;
-      }
-
-      &:focus:before {
-        display: none;
-      }
-    }
-
-    .pgn__menu-item {
-      width: 100%;
-      max-width: none;
-
-      &:hover {
-        background: #f2f0ef;
-      }
-    }
-
-    .pgn__menu-select-popup,
-    .pgn__menu-select-popup > div {
-      width: 100%;
-    }
-
-    .pgn__form-control-decorator-group {
-      margin-inline-end: 0;
-    }
-
-    textarea.form-control {
-      height: 122px;
-      font-style: normal;
-    }
-
-    .pgn__form-control-floating-label-text {
-      color: $secondary-text-color;
-      font: 400 $font-weight-normal 14px/1.2 "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
-    }
-  }
-
-  .modal-buttons .btn {
-    text-shadow: none;
-    box-shadow: none;
-
-    &.btn-primary:focus:before {
-      border-color: $blue-text-color;
-      opacity: 0.2;
-    }
-
-    &.btn-tertiary {
-      background: none;
-      color: $gray-700;
-
-      &:hover,
-      &:active,
-      &:focus {
-        background: #e1dddb !important;
-        border-color: #e1dddb !important;
-      }
     }
   }
 }

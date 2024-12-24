@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 
 import { gammaApi } from '../../api';
 import { useTranslate } from '../../i18n/utils';
-import LogoDropdown from '../LogoDropdown';
+import { LogoDropdown } from '../generic/logo-dropdown';
 import { getLeaderboardTableProps } from './utils';
 import LeaderboardTable from './LeaderboardTable';
 

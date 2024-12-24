@@ -55,4 +55,5 @@ export const gammaApi = {
   leaderboard,
   dashboard,
   sendFeedbackForm,
+  FEEDBACK_FORM_URL,
 };

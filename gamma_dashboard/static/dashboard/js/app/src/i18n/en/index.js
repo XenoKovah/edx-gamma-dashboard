@@ -189,6 +189,11 @@ const en = {
     defaultMessage: 'Loading...',
     description: 'Text for screen readers inside the component Loader.',
   },
+  'generic.logo-dropdown.image.screen-reader.text': {
+    id: 'generic.logo-dropdown.image.screen-reader.text',
+    defaultMessage: 'analytics logo',
+    description: 'Alt text for the logo image in the logo dropdown.',
+  },
 };
 
 export default en;

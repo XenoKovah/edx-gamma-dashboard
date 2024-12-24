@@ -12,7 +12,7 @@ exports[`<LeaderboardPage> renders 1`] = `
       Leaderboard
     </h1>
     <div
-      className="pgn__dropdown pgn__dropdown-light dropdown"
+      className="pgn__dropdown pgn__dropdown-light logo-dropdown dropdown"
       data-testid="dropdown"
     >
       <button
@@ -25,7 +25,8 @@ exports[`<LeaderboardPage> renders 1`] = `
         type="button"
       >
         <img
-          alt="analytics-logo"
+          alt="analytics logo"
+          className="logo-dropdown-img"
           src={{}}
         />
         <span
@@ -70,7 +71,7 @@ exports[`<LeaderboardPage> renders 2`] = `
       Leaderboard
     </h1>
     <div
-      className="pgn__dropdown pgn__dropdown-light dropdown"
+      className="pgn__dropdown pgn__dropdown-light logo-dropdown dropdown"
       data-testid="dropdown"
     >
       <button
@@ -83,7 +84,8 @@ exports[`<LeaderboardPage> renders 2`] = `
         type="button"
       >
         <img
-          alt="analytics-logo"
+          alt="analytics logo"
+          className="logo-dropdown-img"
           src={{}}
         />
         <span
@@ -701,7 +703,7 @@ exports[`<LeaderboardPage> renders 3`] = `
       Leaderboard
     </h1>
     <div
-      className="pgn__dropdown pgn__dropdown-light dropdown"
+      className="pgn__dropdown pgn__dropdown-light logo-dropdown dropdown"
       data-testid="dropdown"
     >
       <button
@@ -714,7 +716,8 @@ exports[`<LeaderboardPage> renders 3`] = `
         type="button"
       >
         <img
-          alt="analytics-logo"
+          alt="analytics logo"
+          className="logo-dropdown-img"
           src={{}}
         />
         <span
@@ -1319,7 +1322,7 @@ exports[`<LeaderboardPage> renders 4`] = `
       Leaderboard
     </h1>
     <div
-      className="pgn__dropdown pgn__dropdown-light dropdown"
+      className="pgn__dropdown pgn__dropdown-light logo-dropdown dropdown"
       data-testid="dropdown"
     >
       <button
@@ -1332,7 +1335,8 @@ exports[`<LeaderboardPage> renders 4`] = `
         type="button"
       >
         <img
-          alt="analytics-logo"
+          alt="analytics logo"
+          className="logo-dropdown-img"
           src={{}}
         />
         <span
@@ -1927,7 +1931,7 @@ exports[`<LeaderboardPage> renders 5`] = `
       Leaderboard
     </h1>
     <div
-      className="pgn__dropdown pgn__dropdown-light dropdown"
+      className="pgn__dropdown pgn__dropdown-light logo-dropdown dropdown"
       data-testid="dropdown"
     >
       <button
@@ -1940,7 +1944,8 @@ exports[`<LeaderboardPage> renders 5`] = `
         type="button"
       >
         <img
-          alt="analytics-logo"
+          alt="analytics logo"
+          className="logo-dropdown-img"
           src={{}}
         />
         <span
@@ -2545,7 +2550,7 @@ exports[`<LeaderboardPage> renders 6`] = `
       Leaderboard
     </h1>
     <div
-      className="pgn__dropdown pgn__dropdown-light dropdown"
+      className="pgn__dropdown pgn__dropdown-light logo-dropdown dropdown"
       data-testid="dropdown"
     >
       <button
@@ -2558,7 +2563,8 @@ exports[`<LeaderboardPage> renders 6`] = `
         type="button"
       >
         <img
-          alt="analytics-logo"
+          alt="analytics logo"
+          className="logo-dropdown-img"
           src={{}}
         />
         <span
@@ -3163,7 +3169,7 @@ exports[`<LeaderboardPage> renders 7`] = `
       Leaderboard
     </h1>
     <div
-      className="pgn__dropdown pgn__dropdown-light dropdown"
+      className="pgn__dropdown pgn__dropdown-light logo-dropdown dropdown"
       data-testid="dropdown"
     >
       <button
@@ -3176,7 +3182,8 @@ exports[`<LeaderboardPage> renders 7`] = `
         type="button"
       >
         <img
-          alt="analytics-logo"
+          alt="analytics logo"
+          className="logo-dropdown-img"
           src={{}}
         />
         <span
@@ -3794,7 +3801,7 @@ exports[`<LeaderboardPage> renders 8`] = `
       Leaderboard
     </h1>
     <div
-      className="pgn__dropdown pgn__dropdown-light dropdown"
+      className="pgn__dropdown pgn__dropdown-light logo-dropdown dropdown"
       data-testid="dropdown"
     >
       <button
@@ -3807,7 +3814,8 @@ exports[`<LeaderboardPage> renders 8`] = `
         type="button"
       >
         <img
-          alt="analytics-logo"
+          alt="analytics logo"
+          className="logo-dropdown-img"
           src={{}}
         />
         <span
@@ -4209,7 +4217,7 @@ exports[`<LeaderboardPage> renders 9`] = `
       Leaderboard
     </h1>
     <div
-      className="pgn__dropdown pgn__dropdown-light dropdown"
+      className="pgn__dropdown pgn__dropdown-light logo-dropdown dropdown"
       data-testid="dropdown"
     >
       <button
@@ -4222,7 +4230,8 @@ exports[`<LeaderboardPage> renders 9`] = `
         type="button"
       >
         <img
-          alt="analytics-logo"
+          alt="analytics logo"
+          className="logo-dropdown-img"
           src={{}}
         />
         <span
@@ -4267,7 +4276,7 @@ exports[`<LeaderboardPage> renders 10`] = `
       Leaderboard
     </h1>
     <div
-      className="pgn__dropdown pgn__dropdown-light dropdown"
+      className="pgn__dropdown pgn__dropdown-light logo-dropdown dropdown"
       data-testid="dropdown"
     >
       <button
@@ -4280,7 +4289,8 @@ exports[`<LeaderboardPage> renders 10`] = `
         type="button"
       >
         <img
-          alt="analytics-logo"
+          alt="analytics logo"
+          className="logo-dropdown-img"
           src={{}}
         />
         <span

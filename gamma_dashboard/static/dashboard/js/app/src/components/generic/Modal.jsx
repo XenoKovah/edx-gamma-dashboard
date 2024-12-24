@@ -2,6 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { ModalDialog } from '@openedx/paragon';
 
+const ZINDEX_MODAL = 1050;
+
 const Modal = ({
   isOpen, handleClose, title, children,
 }) => (
@@ -10,7 +12,15 @@ const Modal = ({
     isOpen={isOpen}
     onClose={handleClose}
     hasCloseButton={false}
-    className="feedBack-modal"
+    className="gamification-modal-dialog"
+    closeLabel=""
+    isBlocking={false}
+    isFullscreenOnMobile={false}
+    isFullscreenScroll={false}
+    isOverflowVisible={false}
+    size="md"
+    variant="default"
+    zIndex={ZINDEX_MODAL}
   >
     <ModalDialog.Header>
       <ModalDialog.Title>{title}</ModalDialog.Title>

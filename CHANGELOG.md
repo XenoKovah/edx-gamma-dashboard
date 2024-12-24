@@ -2,6 +2,10 @@
 
 ## [Unreleased]
 ## Changed
+- [NAU-95] Refactored the LogoDropdown component.
+- [NAU-95] Improved accessibility for the LogoDropdown component.
+- [NAU-95] Corrected styles.
+- [NAU-95] Added tests.
 - [NAU-105] Updated the Loader component.
 - [NAU-105] Refactored the styles structure to improve organization and maintainability.
 - [NAU-105] Enhanced the React components by restructuring and cleaning up the code.

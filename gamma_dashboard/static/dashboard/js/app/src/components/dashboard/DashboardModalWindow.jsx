@@ -76,13 +76,14 @@ DashboardModalWindow.propTypes = {
     ),
   ),
   getItemDataFunction: PropTypes.func,
-  children: PropTypes.node.isRequired,
+  children: PropTypes.node,
 };
 
 DashboardModalWindow.defaultProps = {
   title: '',
   items: [],
-  getItemDataFunction: item => item,
+  getItemDataFunction: null,
+  children: null,
 };
 
 export default DashboardModalWindow;

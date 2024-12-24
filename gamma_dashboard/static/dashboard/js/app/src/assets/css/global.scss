@@ -1,7 +1,51 @@
-#app {
-  font-family: "Open Sans", Roboto, Helvetica, Arial, sans-serif;
-  font-weight: $font-weight-normal;
-  margin: 42px auto 0;
-  max-width: 1200px;
-  box-sizing: border-box;
+.gamification-title-wrapper {
+  margin-bottom: 24px;
+
+  @media screen and (max-width: map-get($grid-breakpoints, "xs")) {
+    flex-direction: column;
+    align-items: flex-start !important;
+  }
+
+  h1 {
+    margin-bottom: 0;
+    font-size: 36px;
+    line-height: 49px;
+    font-weight: $font-weight-normal;
+
+    @media screen and (max-width: map-get($grid-breakpoints, "sm")) {
+      font-size: 26px;
+    }
+
+    @media screen and (max-width: map-get($grid-breakpoints, "xs")) {
+      order: 2;
+    }
+  }
+}
+
+button:not(.close-window-button) {
+  letter-spacing: normal;
+
+  &:hover {
+    background-image: none !important;
+  }
+}
+
+.form-control:focus ~ .pgn__form-control-floating-label .pgn__form-control-floating-label-text,
+.form-control.has-value ~ .pgn__form-control-floating-label .pgn__form-control-floating-label-text {
+  transform: translateY(-0.5625rem) scale(0.75) translateY(-65.0008%);
+  background-color: $white;
+}
+
+.btn-primary,
+.btn-primary:disabled,
+.btn-primary.disabled {
+  background-color: $blue-text-color;
+  border-color: $blue-text-color;
+
+  &:hover,
+  &:active,
+  &:focus {
+    background: $blue-text-color-darken !important;
+    border-color: $blue-text-color-darken !important;
+  }
 }

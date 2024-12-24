@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import ReactModal from 'react-modal';
 
 import { useTranslate } from '../../i18n/utils';
-import LogoDropdown from '../LogoDropdown';
+import { LogoDropdown } from '../generic/logo-dropdown';
 import DashboardTableRow from './DashboardTableRow';
 import DashboardTableRowBlock from './rowBlock/DashboardTableRowBlock';
 import CustomRowBlock from './rowBlock/CustomRowBlock';
@@ -97,7 +97,7 @@ const DashboardTable = ({
 };
 
 const StatusItemPropType = PropTypes.shape({
-  statusUid: PropTypes.string.isRequired,
+  statusUid: PropTypes.string,
   slug: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
   description: PropTypes.string,
