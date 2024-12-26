@@ -2,6 +2,8 @@
 
 ## [Unreleased]
 ## Changed
+- [NAU-118]: Refactored charts components.
+- [NAU-117]: Refactored Progress Tracker block.
 - [NAU-94] Created the SubHeader component.
 - [NAU-94] Implemented Skip to main content hook.
 - [NAU-94] Refactored scripts and styles.

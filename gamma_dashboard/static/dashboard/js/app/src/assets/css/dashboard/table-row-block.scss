@@ -101,13 +101,3 @@
     }
   }
 }
-
-.highcharts-menu-item {
-  .rtl & {
-    text-align: right;
-  }
-
-  &:hover {
-    background-color: $highcharts-menu-item-bg-color !important;
-  }
-}

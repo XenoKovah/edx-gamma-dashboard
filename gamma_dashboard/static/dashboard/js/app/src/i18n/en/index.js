@@ -124,6 +124,11 @@ const en = {
     defaultMessage: 'Here you can see what actions caused your current points portfolio',
     description: 'Description of how the points distribution works and how actions contribute to the points portfolio',
   },
+  'performance.points.series.name': {
+    id: 'performance.points.series.name',
+    defaultMessage: 'Points share',
+    description: 'Label for a series in the performance points chart.',
+  },
   'performance.progress.tracker.section.heading.text': {
     id: 'performance.statuses.section.heading.text',
     defaultMessage: 'Progress Tracker',

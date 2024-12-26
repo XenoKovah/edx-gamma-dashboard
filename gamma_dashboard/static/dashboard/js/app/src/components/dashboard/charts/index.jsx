@@ -1,5 +1,5 @@
-export { default as PointsDistributionChart } from './PointsDistributionChart';
-export { default as ProgressChart } from './ProgressChart';
+export { PointsDistributionChart } from './points-distribution-chart';
+export { ProgressChart } from './progress-chart';
 export {
   chartTitleStyles,
   chartSubtitleStyles,

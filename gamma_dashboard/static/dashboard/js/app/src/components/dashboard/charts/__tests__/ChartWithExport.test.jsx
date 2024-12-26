@@ -2,8 +2,8 @@ import React from 'react';
 import '@testing-library/jest-dom';
 import { cleanup } from '@testing-library/react';
 
-import ChartWithExport from '../ChartWithExport';
 import { renderWithProviders } from '../../../../setupTests';
+import { ChartWithExport } from '../chart-with-export';
 
 afterEach(cleanup);
 

@@ -3,13 +3,14 @@ import '@testing-library/jest-dom';
 import { cleanup } from '@testing-library/react';
 
 import { renderWithProviders } from '../../../../setupTests';
-import ProgressChart from '../ProgressChart';
 import { gameProfileData } from '../../../../__mocks__/dashboard';
+import messages from '../../../../i18n/en';
+import { ProgressChart } from '../progress-chart';
 
 afterEach(cleanup);
 
-const CHART_TITLE = 'Progress Tracker';
-const CHART_DESCRIPTION = 'See the dynamics of your activities and points acquisition through time';
+const CHART_TITLE = messages['performance.progress.tracker.section.heading.text'].defaultMessage;
+const CHART_DESCRIPTION = messages['performance.progress.tracker.section.description.text'].defaultMessage;
 
 describe('<ProgressChart>', () => {
   it('renders', () => {

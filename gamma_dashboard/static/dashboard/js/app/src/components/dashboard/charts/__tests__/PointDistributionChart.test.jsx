@@ -3,13 +3,14 @@ import '@testing-library/jest-dom';
 import { cleanup } from '@testing-library/react';
 
 import { renderWithProviders } from '../../../../setupTests';
-import PointsDistributionChart from '../PointsDistributionChart';
 import { gameProfileData } from '../../../../__mocks__/dashboard';
+import messages from '../../../../i18n/en';
+import { PointsDistributionChart } from '../points-distribution-chart';
 
 afterEach(cleanup);
 
-const CHART_TITLE = 'Points Distribution';
-const CHART_DESCRIPTION = 'Here you can see what actions caused your current points portfolio';
+const CHART_TITLE = messages['performance.points.distribution.section.heading.text'].defaultMessage;
+const CHART_DESCRIPTION = messages['performance.points.distribution.section.description.text'].defaultMessage;
 
 describe('<PointsDistributionChart>', () => {
   it('renders', () => {
