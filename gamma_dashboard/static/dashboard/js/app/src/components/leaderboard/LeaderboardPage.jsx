@@ -2,9 +2,10 @@ import React, { useState, useEffect } from 'react';
 
 import { gammaApi } from '../../api';
 import { useTranslate } from '../../i18n/utils';
-import { LogoDropdown } from '../generic/logo-dropdown';
 import { getLeaderboardTableProps } from './utils';
 import LeaderboardTable from './LeaderboardTable';
+import { useScrollToContent } from '../generic/hooks';
+import { SubHeader } from '../sub-header';
 
 const LeaderboardPage = () => {
   const [data, setData] = useState({
@@ -15,6 +16,8 @@ const LeaderboardPage = () => {
     urlProfileImage: '',
     systemStatuses: [],
   });
+
+  useScrollToContent('leaderboard-page-title', 'a[href="#main"]');
 
   useEffect(() => {
     gammaApi.leaderboard.getInfo((res) => setData({
@@ -31,12 +34,10 @@ const LeaderboardPage = () => {
 
   return (
     <>
-      <div className="gamification-title-wrapper d-flex justify-content-between align-items-center">
-        <h1 className="LeaderboardTitle" data-testid="leaderboard-page-title">
-          {useTranslate('leaderboard.heading.text')}
-        </h1>
-        <LogoDropdown />
-      </div>
+      <SubHeader
+        id="leaderboard-page-title"
+        title={useTranslate('leaderboard.heading.text')}
+      />
       <LeaderboardTable
         delimiter={propsLeaderboardTable.delimiter}
         rank={propsLeaderboardTable.rank}

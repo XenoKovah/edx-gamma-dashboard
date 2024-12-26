@@ -2,6 +2,9 @@
 
 ## [Unreleased]
 ## Changed
+- [NAU-94] Created the SubHeader component.
+- [NAU-94] Implemented Skip to main content hook.
+- [NAU-94] Refactored scripts and styles.
 - [NAU-95] Refactored the LogoDropdown component.
 - [NAU-95] Improved accessibility for the LogoDropdown component.
 - [NAU-95] Corrected styles.

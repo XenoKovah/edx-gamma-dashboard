@@ -6,8 +6,9 @@ exports[`<LeaderboardPage> renders 1`] = `
     className="gamification-title-wrapper d-flex justify-content-between align-items-center"
   >
     <h1
-      className="LeaderboardTitle"
       data-testid="leaderboard-page-title"
+      id="leaderboard-page-title"
+      tabIndex={-1}
     >
       Leaderboard
     </h1>
@@ -65,8 +66,9 @@ exports[`<LeaderboardPage> renders 2`] = `
     className="gamification-title-wrapper d-flex justify-content-between align-items-center"
   >
     <h1
-      className="LeaderboardTitle"
       data-testid="leaderboard-page-title"
+      id="leaderboard-page-title"
+      tabIndex={-1}
     >
       Leaderboard
     </h1>
@@ -697,8 +699,9 @@ exports[`<LeaderboardPage> renders 3`] = `
     className="gamification-title-wrapper d-flex justify-content-between align-items-center"
   >
     <h1
-      className="LeaderboardTitle"
       data-testid="leaderboard-page-title"
+      id="leaderboard-page-title"
+      tabIndex={-1}
     >
       Leaderboard
     </h1>
@@ -1316,8 +1319,9 @@ exports[`<LeaderboardPage> renders 4`] = `
     className="gamification-title-wrapper d-flex justify-content-between align-items-center"
   >
     <h1
-      className="LeaderboardTitle"
       data-testid="leaderboard-page-title"
+      id="leaderboard-page-title"
+      tabIndex={-1}
     >
       Leaderboard
     </h1>
@@ -1925,8 +1929,9 @@ exports[`<LeaderboardPage> renders 5`] = `
     className="gamification-title-wrapper d-flex justify-content-between align-items-center"
   >
     <h1
-      className="LeaderboardTitle"
       data-testid="leaderboard-page-title"
+      id="leaderboard-page-title"
+      tabIndex={-1}
     >
       Leaderboard
     </h1>
@@ -2544,8 +2549,9 @@ exports[`<LeaderboardPage> renders 6`] = `
     className="gamification-title-wrapper d-flex justify-content-between align-items-center"
   >
     <h1
-      className="LeaderboardTitle"
       data-testid="leaderboard-page-title"
+      id="leaderboard-page-title"
+      tabIndex={-1}
     >
       Leaderboard
     </h1>
@@ -3163,8 +3169,9 @@ exports[`<LeaderboardPage> renders 7`] = `
     className="gamification-title-wrapper d-flex justify-content-between align-items-center"
   >
     <h1
-      className="LeaderboardTitle"
       data-testid="leaderboard-page-title"
+      id="leaderboard-page-title"
+      tabIndex={-1}
     >
       Leaderboard
     </h1>
@@ -3795,8 +3802,9 @@ exports[`<LeaderboardPage> renders 8`] = `
     className="gamification-title-wrapper d-flex justify-content-between align-items-center"
   >
     <h1
-      className="LeaderboardTitle"
       data-testid="leaderboard-page-title"
+      id="leaderboard-page-title"
+      tabIndex={-1}
     >
       Leaderboard
     </h1>
@@ -4211,8 +4219,9 @@ exports[`<LeaderboardPage> renders 9`] = `
     className="gamification-title-wrapper d-flex justify-content-between align-items-center"
   >
     <h1
-      className="LeaderboardTitle"
       data-testid="leaderboard-page-title"
+      id="leaderboard-page-title"
+      tabIndex={-1}
     >
       Leaderboard
     </h1>
@@ -4270,8 +4279,9 @@ exports[`<LeaderboardPage> renders 10`] = `
     className="gamification-title-wrapper d-flex justify-content-between align-items-center"
   >
     <h1
-      className="LeaderboardTitle"
       data-testid="leaderboard-page-title"
+      id="leaderboard-page-title"
+      tabIndex={-1}
     >
       Leaderboard
     </h1>

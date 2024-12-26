@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import ReactModal from 'react-modal';
 
 import { useTranslate } from '../../i18n/utils';
-import { LogoDropdown } from '../generic/logo-dropdown';
 import DashboardTableRow from './DashboardTableRow';
 import DashboardTableRowBlock from './rowBlock/DashboardTableRowBlock';
 import CustomRowBlock from './rowBlock/CustomRowBlock';
@@ -12,6 +11,7 @@ import RowBlockItem from './rowBlock/RowBlockItem';
 import StatusesBlock from './rowBlock/statusesBlock/StatusesBlock';
 import DashboardModalWindow from './DashboardModalWindow';
 import { CORNER_BOTTOM, CORNER_TOP } from './rowBlock/constants';
+import { SubHeader } from '../sub-header';
 
 const PREVIEW_BADGES_ITEMS_COUNT = 3;
 
@@ -30,12 +30,10 @@ const DashboardTable = ({
   return (
     <>
       <div className="dashboard-table" data-testid="dashboard-table">
-        <div className="gamification-title-wrapper d-flex justify-content-between align-items-center">
-          <h1 className="DashboardTitle" data-testid="dashboard-page-title">
-            {useTranslate('performance.heading.text')}
-          </h1>
-          <LogoDropdown />
-        </div>
+        <SubHeader
+          id="dashboard-page-title"
+          title={useTranslate('performance.heading.text')}
+        />
         <div className="dashboard-table-body">
           <DashboardTableRow>
             <DashboardTableRowBlock fullWidth corner={CORNER_TOP}>

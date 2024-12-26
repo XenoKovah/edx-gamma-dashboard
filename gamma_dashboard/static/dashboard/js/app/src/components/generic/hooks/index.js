@@ -1,0 +1,1 @@
+export { useScrollToContent } from './useScrollToContent';

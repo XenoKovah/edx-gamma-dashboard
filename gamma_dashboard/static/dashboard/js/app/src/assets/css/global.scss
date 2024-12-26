@@ -1,27 +1,3 @@
-.gamification-title-wrapper {
-  margin-bottom: 24px;
-
-  @media screen and (max-width: map-get($grid-breakpoints, "xs")) {
-    flex-direction: column;
-    align-items: flex-start !important;
-  }
-
-  h1 {
-    margin-bottom: 0;
-    font-size: 36px;
-    line-height: 49px;
-    font-weight: $font-weight-normal;
-
-    @media screen and (max-width: map-get($grid-breakpoints, "sm")) {
-      font-size: 26px;
-    }
-
-    @media screen and (max-width: map-get($grid-breakpoints, "xs")) {
-      order: 2;
-    }
-  }
-}
-
 button:not(.close-window-button) {
   letter-spacing: normal;
 
