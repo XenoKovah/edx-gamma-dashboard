@@ -21,7 +21,11 @@ const RowBlockHeader = ({ title, status, description }) => (
 RowBlockHeader.propTypes = {
   title: PropTypes.string.isRequired,
   status: PropTypes.string.isRequired,
-  description: PropTypes.string.isRequired,
+  description: PropTypes.string,
+};
+
+RowBlockHeader.defaultProps = {
+  description: null,
 };
 
 export default RowBlockHeader;

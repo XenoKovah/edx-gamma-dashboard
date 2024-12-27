@@ -15,6 +15,8 @@ export const COLOR_PALETTE = {
   darkGray: '#888b8d',
   errorRed: '#ff0000',
   light: '#fafafa',
+  oliveGreen: '#556b2f',
+  lightGray: '#dfe0e8',
 };
 
 export const chartTitleStyles = {

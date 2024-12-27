@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import { useTranslate } from '../../i18n/utils';
 import { ModalWindow } from '../generic';
-import RowBlockItem from './rowBlock/RowBlockItem';
+import { ProgressBadge } from './rowBlock/progress-badge';
 import { isRtl } from '../../constants';
 
 const DashboardModalWindow = ({
@@ -36,7 +36,7 @@ const DashboardModalWindow = ({
         data-testid="dashboard-modal-window-items-list"
       >
         {items.map((item) => (
-          <RowBlockItem
+          <ProgressBadge
             key={getItemDataFunction(item).title}
             data={getItemDataFunction(item)}
             center

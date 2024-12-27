@@ -30,8 +30,12 @@ const ModalWindow = ({
 ModalWindow.propTypes = {
   isOpen: PropTypes.bool.isRequired,
   closeCallback: PropTypes.func.isRequired,
-  content: PropTypes.string.isRequired,
+  content: PropTypes.string,
   children: PropTypes.node.isRequired,
+};
+
+ModalWindow.defaultProps = {
+  content: null,
 };
 
 export default ModalWindow;

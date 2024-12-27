@@ -1,0 +1,1 @@
+export { useSliderStatusesBlock } from './useSliderStatusesBlock';

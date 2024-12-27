@@ -1,8 +1,8 @@
 import { renderHook } from '@testing-library/react-hooks';
 import { cleanup } from '@testing-library/react';
-import { useStatusesBlock } from '../statusesBlock/useStatusesBlock';
+import { useSliderStatusesBlock } from '../slider-statuses-block/hooks';
 import DataForTestsCurrentIndex from './__mock__/DataForTestsCurrentIndex.json';
-import DataUseStatusesBlock from './__mock__/DataUseStatusesBlock.json';
+import DataUseSliderStatusesBlock from './__mock__/DataUseSliderStatusesBlock.json';
 
 afterEach(cleanup);
 
@@ -11,9 +11,9 @@ describe('getProgressTrackStyles', () => {
     cleanup();
   });
 
-  it.each(DataUseStatusesBlock)('getProgressTrackStyles returns expected styles', ({ statusItems, index, expectResult }) => {
-    const { result } = renderHook(() => useStatusesBlock({ statusItems }));
-    const styles = result.current.getProgressTrackStyles(index);
+  it.each(DataUseSliderStatusesBlock)('getProgressTrackStyles returns expected styles', ({ statusItems, index, expectResult }) => {
+    const { result } = renderHook(() => useSliderStatusesBlock({ statusItems }));
+    const styles = result.current.getProgressTrackStyles(index, statusItems);
 
     expect(styles.badgeStyles.filter).toBe(expectResult.filter);
     expect(styles.badgeStyles.opacity).toBe(expectResult.opacity);
@@ -28,7 +28,7 @@ describe('calculateCurrentIndex', () => {
   });
 
   it.each(DataForTestsCurrentIndex)('calculateCurrentIndex returns expected index', ({ statusItems, expectResult }) => {
-    const { result } = renderHook(() => useStatusesBlock({ statusItems }));
+    const { result } = renderHook(() => useSliderStatusesBlock({ statusItems }));
     const receivedIndex = result.current.calculateCurrentIndex(statusItems);
 
     expect(receivedIndex).toBe(expectResult.currentIndex);

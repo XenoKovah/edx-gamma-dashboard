@@ -27,8 +27,8 @@ describe('<CustomRowBlock>', () => {
     const tableRowBlock = getByTestId('dashboard-table-row-block');
     const rowBlockHeader = getByTestId('table-row-block-header');
     const detailsButton = getByTestId('button');
-    const contentContainer = getByTestId('row-block-text');
-    const itemsContainer = getByTestId('row-block-items-list');
+    const contentContainer = getByTestId('slider-statuses-block-description');
+    const itemsContainer = getByTestId('progress-badges-list');
     const testItems = getByTestId('test-items');
 
     expect(tableRowBlock).toBeInTheDocument();
@@ -53,8 +53,8 @@ describe('<CustomRowBlock>', () => {
     const tableRowBlock = getByTestId('dashboard-table-row-block');
     const rowBlockHeader = getByTestId('table-row-block-header');
     const detailsButton = getByTestId('button');
-    const contentContainer = getByTestId('row-block-text');
-    const itemsContainer = getByTestId('row-block-items-list');
+    const contentContainer = getByTestId('slider-statuses-block-description');
+    const itemsContainer = getByTestId('progress-badges-list');
 
     expect(tableRowBlock).toBeInTheDocument();
     expect(rowBlockHeader).toBeInTheDocument();

@@ -63,7 +63,7 @@ describe('<DashboardModalWindow>', () => {
     const itemsList = getByTestId('dashboard-modal-window-items-list');
     expect(itemsList).toBeInTheDocument();
 
-    const listItems = within(itemsList).getAllByTestId('row-block-item');
+    const listItems = within(itemsList).getAllByTestId('progress-badge');
     expect(listItems.length).toBe(items.length);
     expect(pretty(container.innerHTML)).toMatchSnapshot();
   });

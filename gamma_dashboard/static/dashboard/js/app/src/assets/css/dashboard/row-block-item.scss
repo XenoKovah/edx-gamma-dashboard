@@ -1,13 +1,14 @@
-.row-block-item {
+.progress-badge {
   text-align: center;
   position: relative;
   flex: 0 0 100px;
+  list-style: none;
 
   @media screen and (max-width: map-get($grid-breakpoints, "xs")) {
     margin-bottom: 25px;
   }
 
-  &.row-block-item-completed {
+  &.progress-badge-completed {
     margin-top: 23px;
 
     &:before {
@@ -25,7 +26,7 @@
       @include pgn-box-shadow(1, "down");
     }
 
-    .row-block-item-figure {
+    .progress-badge-figure {
       position: relative;
       width: 100px;
       height: 100px;
@@ -39,14 +40,14 @@
       }
     }
 
-    .row-block-item-figure-image {
+    .progress-badge-figure-image {
       max-width: 100px;
       max-height: 100px;
     }
   }
 }
 
-.row-block-item-center {
+.progress-badge-center {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -65,7 +66,7 @@
   }
 }
 
-.row-block-item-figure {
+.progress-badge-figure {
   width: 90px;
   height: 90px;
   border-radius: 50%;
@@ -100,17 +101,17 @@
   }
 }
 
-.row-block-item-figure-disabled {
+.progress-badge-figure-disabled {
   filter: grayscale(1);
 }
 
-.row-block-item-figure-image {
+.progress-badge-figure-image {
   display: block;
   max-width: 70px;
   max-height: 70px;
 }
 
-.row-block-item-title {
+.progress-badge-title {
   font-weight: $font-weight-bold;
   font-size: 12px;
   text-transform: uppercase;
@@ -149,7 +150,7 @@
   margin-bottom: 8px;
 }
 
-.diagram.progress {
+.progress-badge-diagram.progress {
   width: 100px;
   height: 100px;
   border-radius: 50%;

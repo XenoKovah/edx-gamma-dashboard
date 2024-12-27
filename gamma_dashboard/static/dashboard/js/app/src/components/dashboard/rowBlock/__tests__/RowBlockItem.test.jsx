@@ -3,11 +3,11 @@ import '@testing-library/jest-dom';
 import { cleanup, within } from '@testing-library/react';
 
 import { renderWithProviders } from '../../../../setupTests';
-import RowBlockItem from '../RowBlockItem';
+import { ProgressBadge } from '../progress-badge';
 
 afterEach(cleanup);
 
-describe('<RowBlockItem>', () => {
+describe('<ProgressBadge>', () => {
   it('renders with correct `complete badge` data', () => {
     const data = {
       done: true,
@@ -18,24 +18,24 @@ describe('<RowBlockItem>', () => {
     };
 
     const { getByTestId, queryByTestId } = renderWithProviders(
-      <RowBlockItem
+      <ProgressBadge
         data={data}
       />,
     );
 
-    const element = getByTestId('row-block-item').querySelector('.diagram.progress');
+    const element = getByTestId('progress-badge').querySelector('.progress-badge-diagram.progress');
     expect(element).not.toBeInTheDocument();
 
-    const figure = getByTestId('row-block-item-figure');
-    expect(figure).not.toHaveClass('row-block-item-figure-disabled');
+    const figure = getByTestId('progress-badge-figure');
+    expect(figure).not.toHaveClass('progress-badge-figure-disabled');
 
-    const title = getByTestId('row-block-item-title');
+    const title = getByTestId('progress-badge-title');
     expect(title).toHaveTextContent(data.title);
 
     const popup = queryByTestId('row-block-item-popup');
     expect(popup).not.toBeInTheDocument();
 
-    const imageBadge = queryByTestId('row-block-item-figure-image');
+    const imageBadge = queryByTestId('progress-badge-figure-image');
     expect(imageBadge).toHaveAttribute('src', data.url);
   });
 
@@ -49,24 +49,24 @@ describe('<RowBlockItem>', () => {
     };
 
     const { getByTestId } = renderWithProviders(
-      <RowBlockItem
+      <ProgressBadge
         data={data}
       />,
     );
 
-    const element = getByTestId('row-block-item').querySelector('.diagram.progress');
+    const element = getByTestId('progress-badge').querySelector('.progress-badge-diagram.progress');
     expect(element).toBeInTheDocument();
 
-    const figure = getByTestId('row-block-item-figure');
-    expect(figure).toHaveClass('row-block-item-figure-disabled');
+    const figure = getByTestId('progress-badge-figure');
+    expect(figure).toHaveClass('progress-badge-figure-disabled');
 
-    const title = getByTestId('row-block-item-title');
+    const title = getByTestId('progress-badge-title');
     expect(title).toHaveTextContent(data.title);
 
     const popup = getByTestId('row-block-item-popup');
     expect(popup).toBeInTheDocument();
 
-    const imageBadge = getByTestId('row-block-item-figure-image');
+    const imageBadge = getByTestId('progress-badge-figure-image');
     expect(imageBadge).toHaveAttribute('src', data.url);
   });
 
@@ -83,24 +83,24 @@ describe('<RowBlockItem>', () => {
     };
 
     const { getByTestId, queryByTestId } = renderWithProviders(
-      <RowBlockItem
+      <ProgressBadge
         data={data}
       />,
     );
 
-    const element = getByTestId('row-block-item').querySelector('.diagram.progress');
+    const element = getByTestId('progress-badge').querySelector('.progress-badge-diagram.progress');
     expect(element).not.toBeInTheDocument();
 
-    const figure = getByTestId('row-block-item-figure');
-    expect(figure).not.toHaveClass('row-block-item-figure-disabled');
+    const figure = getByTestId('progress-badge-figure');
+    expect(figure).not.toHaveClass('progress-badge-figure-disabled');
 
-    const title = getByTestId('row-block-item-title');
+    const title = getByTestId('progress-badge-title');
     expect(title.textContent).toBe(data.title);
 
     const popup = queryByTestId('row-block-item-popup');
     expect(popup).not.toBeInTheDocument();
 
-    const imageBadge = getByTestId('row-block-item-figure-image');
+    const imageBadge = getByTestId('progress-badge-figure-image');
     expect(imageBadge).toHaveAttribute('src', data.url);
   });
 
@@ -117,24 +117,24 @@ describe('<RowBlockItem>', () => {
     };
 
     const { getByTestId } = renderWithProviders(
-      <RowBlockItem
+      <ProgressBadge
         data={data}
       />,
     );
 
-    const element = getByTestId('row-block-item').querySelector('.diagram.progress');
+    const element = getByTestId('progress-badge').querySelector('.progress-badge-diagram.progress');
     expect(element).toBeInTheDocument();
 
-    const figure = getByTestId('row-block-item-figure');
-    expect(figure).toHaveClass('row-block-item-figure-disabled');
+    const figure = getByTestId('progress-badge-figure');
+    expect(figure).toHaveClass('progress-badge-figure-disabled');
 
-    const title = getByTestId('row-block-item-title');
+    const title = getByTestId('progress-badge-title');
     expect(title).toHaveTextContent(data.title);
 
     const popup = getByTestId('row-block-item-popup');
     expect(popup).toBeInTheDocument();
 
-    const imageBadge = getByTestId('row-block-item-figure-image');
+    const imageBadge = getByTestId('progress-badge-figure-image');
     expect(imageBadge).toHaveAttribute('src', data.url);
   });
 
@@ -151,15 +151,15 @@ describe('<RowBlockItem>', () => {
     };
     const progressString = `${data.points}/${data.statusPoints}`;
     const { getByTestId } = renderWithProviders(
-      <RowBlockItem
+      <ProgressBadge
         data={data}
       />,
     );
 
-    const figure = getByTestId('row-block-item-figure');
-    expect(figure).toHaveClass('row-block-item-figure-disabled');
+    const figure = getByTestId('progress-badge-figure');
+    expect(figure).toHaveClass('progress-badge-figure-disabled');
 
-    const title = getByTestId('row-block-item-title');
+    const title = getByTestId('progress-badge-title');
     expect(title).toHaveTextContent(data.title);
 
     const popup = getByTestId('row-block-item-popup');
@@ -180,33 +180,33 @@ describe('<RowBlockItem>', () => {
     };
 
     const { getByTestId } = renderWithProviders(
-      <RowBlockItem
+      <ProgressBadge
         data={data}
         center
       />,
     );
 
-    const rowBlockItem = getByTestId('row-block-item');
-    expect(rowBlockItem).toHaveClass('row-block-item-center');
+    const rowBlockItem = getByTestId('progress-badge');
+    expect(rowBlockItem).toHaveClass('progress-badge-center');
   });
 
   it('renders correct children', () => {
     const { getByTestId } = renderWithProviders(
-      <RowBlockItem>
+      <ProgressBadge>
         <div data-testid="test-child" />
-      </RowBlockItem>,
+      </ProgressBadge>,
     );
 
-    const rowBlockItem = getByTestId('row-block-item');
+    const rowBlockItem = getByTestId('progress-badge');
     const child = within(rowBlockItem).getByTestId('test-child');
 
     expect(child).toBeInTheDocument();
   });
 
   it('renders without data', () => {
-    const { getByTestId } = renderWithProviders(<RowBlockItem />);
+    const { getByTestId } = renderWithProviders(<ProgressBadge />);
 
-    const rowBlockItem = getByTestId('row-block-item');
+    const rowBlockItem = getByTestId('progress-badge');
     expect(rowBlockItem).toBeInTheDocument();
   });
 
@@ -230,7 +230,7 @@ describe('<RowBlockItem>', () => {
       url: 'https://gamma.com/badge3.png',
     };
 
-    const { getByTestId } = renderWithProviders(<RowBlockItem data={data} />);
+    const { getByTestId } = renderWithProviders(<ProgressBadge data={data} />);
 
     const totalProgressElement = getByTestId('total-progress-percent');
     expect(totalProgressElement).toHaveTextContent('25%');
@@ -256,7 +256,7 @@ describe('<RowBlockItem>', () => {
       url: 'https://gamma.com/badge3.png',
     };
 
-    const { getByTestId } = renderWithProviders(<RowBlockItem data={data} />);
+    const { getByTestId } = renderWithProviders(<ProgressBadge data={data} />);
 
     const totalProgressElement = getByTestId('total-progress-percent');
     expect(totalProgressElement).toHaveTextContent('50%');

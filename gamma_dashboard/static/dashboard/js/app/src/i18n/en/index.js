@@ -196,8 +196,23 @@ const en = {
   },
   'generic.logo-dropdown.image.screen-reader.text': {
     id: 'generic.logo-dropdown.image.screen-reader.text',
-    defaultMessage: 'analytics logo',
+    defaultMessage: 'Analytics logo',
     description: 'Alt text for the logo image in the logo dropdown.',
+  },
+  'dashboard.progress-badge.figure.image.screen-reader.text': {
+    id: 'dashboard.progress-badge.figure.image.screen-reader.text',
+    defaultMessage: 'Progress figure',
+    description: 'Alt text for the progress-badge image.',
+  },
+  'dashboard.slider-item.info.icon.complete.screen-reader.text': {
+    id: 'dashboard.slider-item.info.icon.complete.screen-reader.text',
+    defaultMessage: 'Complete icon',
+    description: 'Alt text for the complete slider-item image.',
+  },
+  'dashboard.slider-item.info.icon.status.screen-reader.text': {
+    id: 'dashboard.slider-item.info.icon.status.screen-reader.text',
+    defaultMessage: 'Status icon',
+    description: 'Alt text for the status slider-item image.',
   },
 };
 

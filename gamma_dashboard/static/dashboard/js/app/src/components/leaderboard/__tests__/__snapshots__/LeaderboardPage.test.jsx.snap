@@ -26,7 +26,7 @@ exports[`<LeaderboardPage> renders 1`] = `
         type="button"
       >
         <img
-          alt="analytics logo"
+          alt="Analytics logo"
           className="logo-dropdown-img"
           src={{}}
         />
@@ -86,7 +86,7 @@ exports[`<LeaderboardPage> renders 2`] = `
         type="button"
       >
         <img
-          alt="analytics logo"
+          alt="Analytics logo"
           className="logo-dropdown-img"
           src={{}}
         />
@@ -719,7 +719,7 @@ exports[`<LeaderboardPage> renders 3`] = `
         type="button"
       >
         <img
-          alt="analytics logo"
+          alt="Analytics logo"
           className="logo-dropdown-img"
           src={{}}
         />
@@ -1339,7 +1339,7 @@ exports[`<LeaderboardPage> renders 4`] = `
         type="button"
       >
         <img
-          alt="analytics logo"
+          alt="Analytics logo"
           className="logo-dropdown-img"
           src={{}}
         />
@@ -1949,7 +1949,7 @@ exports[`<LeaderboardPage> renders 5`] = `
         type="button"
       >
         <img
-          alt="analytics logo"
+          alt="Analytics logo"
           className="logo-dropdown-img"
           src={{}}
         />
@@ -2569,7 +2569,7 @@ exports[`<LeaderboardPage> renders 6`] = `
         type="button"
       >
         <img
-          alt="analytics logo"
+          alt="Analytics logo"
           className="logo-dropdown-img"
           src={{}}
         />
@@ -3189,7 +3189,7 @@ exports[`<LeaderboardPage> renders 7`] = `
         type="button"
       >
         <img
-          alt="analytics logo"
+          alt="Analytics logo"
           className="logo-dropdown-img"
           src={{}}
         />
@@ -3822,7 +3822,7 @@ exports[`<LeaderboardPage> renders 8`] = `
         type="button"
       >
         <img
-          alt="analytics logo"
+          alt="Analytics logo"
           className="logo-dropdown-img"
           src={{}}
         />
@@ -4239,7 +4239,7 @@ exports[`<LeaderboardPage> renders 9`] = `
         type="button"
       >
         <img
-          alt="analytics logo"
+          alt="Analytics logo"
           className="logo-dropdown-img"
           src={{}}
         />
@@ -4299,7 +4299,7 @@ exports[`<LeaderboardPage> renders 10`] = `
         type="button"
       >
         <img
-          alt="analytics logo"
+          alt="Analytics logo"
           className="logo-dropdown-img"
           src={{}}
         />

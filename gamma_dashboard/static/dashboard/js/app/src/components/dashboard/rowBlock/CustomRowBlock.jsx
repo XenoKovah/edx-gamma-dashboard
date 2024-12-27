@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import RowBlockHeader from '../RowBlockHeader';
 import { Button } from '../../generic';
+import RowBlockHeader from '../RowBlockHeader';
 import DashboardTableRowBlock from './DashboardTableRowBlock';
 
 const CustomRowBlock = ({
@@ -23,17 +23,18 @@ const CustomRowBlock = ({
       description={description}
     />
     <p
-      className="row-block-text"
-      data-testid="row-block-text"
+      className="slider-statuses-block-description"
+      data-testid="slider-statuses-block-description"
     >
       {content}
     </p>
-    <div
-      className="row-block-items-list"
-      data-testid="row-block-items-list"
+    <ul
+      className="progress-badges-list p-0"
+      data-testid="progress-badges-list"
+      aria-label="Budges list"
     >
       {items}
-    </div>
+    </ul>
     <div className="row-block-controls">
       <Button
         data-testid="details-button"

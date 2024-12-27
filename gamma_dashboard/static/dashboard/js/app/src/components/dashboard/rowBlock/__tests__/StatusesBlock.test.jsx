@@ -3,8 +3,8 @@ import React from 'react';
 import '@testing-library/jest-dom';
 import { cleanup } from '@testing-library/react';
 
-import StatusesBlock from '../statusesBlock/StatusesBlock';
 import { renderWithProviders } from '../../../../setupTests';
+import { SliderStatusesBlock } from '../slider-statuses-block';
 
 const statusItemsMock = [
   {
@@ -87,7 +87,7 @@ const statusItemsMock = [
 ];
 
 const renderComponent = (props) => renderWithProviders(
-  <StatusesBlock
+  <SliderStatusesBlock
     status="3 of 7"
     statusItems={statusItemsMock}
     {...props}
@@ -96,15 +96,15 @@ const renderComponent = (props) => renderWithProviders(
 
 afterEach(cleanup);
 
-describe('<StatusesBlock />', () => {
-  it('render StatusesBlock component correctly', () => {
+describe('<SliderStatusesBlock />', () => {
+  it('render SliderStatusesBlock component correctly', () => {
     const { getByText, getAllByTestId } = renderComponent();
 
     expect(getByText('Your Statuses')).toBeInTheDocument();
     expect(getByText('3 of 7')).toBeInTheDocument();
     expect(getByText('The more points you have, the higher status you own.')).toBeInTheDocument();
 
-    const image = getAllByTestId('slider-item__status-image');
+    const image = getAllByTestId('slider-item-status-image');
 
     statusItemsMock.forEach(({
       title, points, statusPoints, url,
@@ -117,7 +117,7 @@ describe('<StatusesBlock />', () => {
     });
   });
 
-  it('renders StatusesBlock component correctly with titles', () => {
+  it('renders SliderStatusesBlock component correctly with titles', () => {
     const { getAllByTestId } = renderComponent();
 
     const titleElements = getAllByTestId('row-block-item-title');
@@ -133,12 +133,12 @@ describe('<StatusesBlock />', () => {
     statusItemsMock.slice(0, 3).forEach((_, index) => {
       const statusItem = statusItems[index];
 
-      expect(statusItem.querySelector('.slider-item__info-icon')).toBeInTheDocument();
-      expect(statusItem.querySelector('.slider-item__status-image')).toHaveStyle('filter: grayscale(0)');
-      expect(statusItem.querySelector('.slider-item__status-image')).toHaveStyle('opacity: 1');
-      expect(statusItem.querySelector('.slider-item__progress-track')).toHaveStyle('width: 100%');
-      expect(statusItem.querySelector('.slider-item__progress-end')).toHaveStyle('background-color: rgb(85, 107, 47)');
-      expect(statusItem.querySelector('.slider-item__progress-end')).toHaveStyle('z-index: 99;');
+      expect(statusItem.querySelector('.slider-item-info-icon')).toBeInTheDocument();
+      expect(statusItem.querySelector('.slider-item-status-image')).toHaveStyle('filter: grayscale(0)');
+      expect(statusItem.querySelector('.slider-item-status-image')).toHaveStyle('opacity: 1');
+      expect(statusItem.querySelector('.slider-item-progress-track')).toHaveStyle('width: 100%');
+      expect(statusItem.querySelector('.slider-item-progress-end')).toHaveStyle('background-color: rgb(85, 107, 47)');
+      expect(statusItem.querySelector('.slider-item-progress-end')).toHaveStyle('z-index: 99;');
     });
   });
 
@@ -147,12 +147,12 @@ describe('<StatusesBlock />', () => {
     const statusItems = getAllByTestId('slider-item');
     const statusItem = statusItems[3];
 
-    expect(statusItem.querySelector('.slider-item__info-icon')).not.toBeInTheDocument();
-    expect(statusItem.querySelector('.slider-item__status-image')).toHaveStyle('filter: grayscale(0)');
-    expect(statusItem.querySelector('.slider-item__status-image')).toHaveStyle('opacity: 1');
-    expect(statusItem.querySelector('.slider-item__progress-track')).toHaveStyle('width: 4%');
-    expect(statusItem.querySelector('.slider-item__progress-end')).toHaveStyle('background-color: rgb(223, 224, 232)');
-    expect(statusItem.querySelector('.slider-item__progress-end')).toHaveStyle('z-index: 1');
+    expect(statusItem.querySelector('.slider-item-info-icon')).not.toBeInTheDocument();
+    expect(statusItem.querySelector('.slider-item-status-image')).toHaveStyle('filter: grayscale(0)');
+    expect(statusItem.querySelector('.slider-item-status-image')).toHaveStyle('opacity: 1');
+    expect(statusItem.querySelector('.slider-item-progress-track')).toHaveStyle('width: 4%');
+    expect(statusItem.querySelector('.slider-item-progress-end')).toHaveStyle('background-color: rgb(223, 224, 232)');
+    expect(statusItem.querySelector('.slider-item-progress-end')).toHaveStyle('z-index: 1');
   });
 
   it('check that last three status is not done', () => {
@@ -162,12 +162,12 @@ describe('<StatusesBlock />', () => {
     statusItemsMock.slice(-3).forEach((_, index) => {
       const statusItem = statusItems[index + 4];
 
-      expect(statusItem.querySelector('.slider-item__info-icon')).not.toBeInTheDocument();
-      expect(statusItem.querySelector('.slider-item__status-image')).toHaveStyle('filter: grayscale(1)');
-      expect(statusItem.querySelector('.slider-item__status-image')).toHaveStyle('opacity: 0.3');
-      expect(statusItem.querySelector('.slider-item__progress-track')).toHaveStyle('width: 0%');
-      expect(statusItem.querySelector('.slider-item__progress-end')).toHaveStyle('background-color: rgb(223, 224, 232)');
-      expect(statusItem.querySelector('.slider-item__progress-end')).toHaveStyle('z-index: 1');
+      expect(statusItem.querySelector('.slider-item-info-icon')).not.toBeInTheDocument();
+      expect(statusItem.querySelector('.slider-item-status-image')).toHaveStyle('filter: grayscale(1)');
+      expect(statusItem.querySelector('.slider-item-status-image')).toHaveStyle('opacity: 0.3');
+      expect(statusItem.querySelector('.slider-item-progress-track')).toHaveStyle('width: 0%');
+      expect(statusItem.querySelector('.slider-item-progress-end')).toHaveStyle('background-color: rgb(223, 224, 232)');
+      expect(statusItem.querySelector('.slider-item-progress-end')).toHaveStyle('z-index: 1');
     });
   });
 });

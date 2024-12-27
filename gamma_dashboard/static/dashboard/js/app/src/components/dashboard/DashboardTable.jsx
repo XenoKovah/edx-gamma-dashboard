@@ -7,8 +7,8 @@ import DashboardTableRow from './DashboardTableRow';
 import DashboardTableRowBlock from './rowBlock/DashboardTableRowBlock';
 import CustomRowBlock from './rowBlock/CustomRowBlock';
 import { PointsDistributionChart, ProgressChart } from './charts';
-import RowBlockItem from './rowBlock/RowBlockItem';
-import StatusesBlock from './rowBlock/statusesBlock/StatusesBlock';
+import { ProgressBadge } from './rowBlock/progress-badge';
+import { SliderStatusesBlock } from './rowBlock/slider-statuses-block';
 import DashboardModalWindow from './DashboardModalWindow';
 import { CORNER_BOTTOM, CORNER_TOP } from './rowBlock/constants';
 import { SubHeader } from '../sub-header';
@@ -37,7 +37,7 @@ const DashboardTable = ({
         <div className="dashboard-table-body">
           <DashboardTableRow>
             <DashboardTableRowBlock fullWidth corner={CORNER_TOP}>
-              <StatusesBlock
+              <SliderStatusesBlock
                 status={
                   useTranslate('performance.section.counter.text', {
                     previewBadgeItemsLength: doneStatuses.length,
@@ -59,7 +59,7 @@ const DashboardTable = ({
               }
               content={useTranslate('performance.badges.section.description.text')}
               items={previewBadgeItems.map((item) => (
-                <RowBlockItem
+                <ProgressBadge
                   key={item}
                   data={item[1]}
                 />

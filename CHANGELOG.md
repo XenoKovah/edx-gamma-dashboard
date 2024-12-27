@@ -2,6 +2,8 @@
 
 ## [Unreleased]
 ## Changed
+- [NAU-114]: Refactored Badge component.
+- [NAU-114]: Refactored Slider block.
 - [NAU-118]: Refactored charts components.
 - [NAU-117]: Refactored Progress Tracker block.
 - [NAU-94] Created the SubHeader component.

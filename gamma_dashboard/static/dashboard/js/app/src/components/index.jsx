@@ -12,7 +12,10 @@ import { getCookieByName } from '../utils';
 import LeaderboardPage from './leaderboard/LeaderboardPage';
 import DashboardPage from './dashboard/DashboardPage';
 
-const Application = () => {
+import 'slick-carousel/slick/slick.scss';
+import 'slick-carousel/slick/slick-theme.scss';
+
+const App = () => {
   const locale = getCookieByName('openedx-language-preference') || 'en';
   const messages = getMessages(locale);
 
@@ -28,4 +31,4 @@ const Application = () => {
   );
 };
 
-export default Application;
+export default App;
