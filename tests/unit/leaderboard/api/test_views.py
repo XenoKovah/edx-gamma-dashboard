@@ -1,11 +1,11 @@
 # TODO test not completed, need to mock the database query
 
-# import pytest
+import pytest
 
-# import pytest
-# from pytest_mock import mocker
+from rest_framework import status
 
-# from gamma_dashboard.dashboard.api.v0.views import LeaderboardApiView
+from gamma_dashboard.dashboard.api.v0.views import LeaderboardApiView
+from gamma_dashboard.dashboard.core.gamma.api.wrapper import GammaApiWrapper
 
 # from tests.utils import load_params_from_json
 
@@ -73,3 +73,63 @@
 #     mocked_user_objects_filter.assert_called_once_with(username__in=set(users_set))
 
 #     assert result == expected_leaderboard_info
+
+
+class TestLeaderboardApiView:
+    """
+    Test Case for the testing LeaderboardApiView.
+    """
+
+    @pytest.mark.django_db
+    def test_leaderboard_toggle_enabled_and_leaderboard_info_exist(self, mocker):
+        view = LeaderboardApiView()
+        request_mock = mocker.MagicMock()
+        leaderboard_info_mock = {"rank": 1, "score": 100}
+        toggle_mock = mocker.patch("gamma_dashboard.dashboard.api.v0.views.show_gamma_leaderboard", return_value=True)
+        gamma_api_wrapper_mock = mocker.patch.object(
+            GammaApiWrapper, "get_leaderboard_info", return_value=leaderboard_info_mock
+        )
+        update_leaderboard_info_mock = mocker.patch(
+            "gamma_dashboard.dashboard.api.v0.views.LeaderboardApiView._update_leaderboard_info",
+            return_value=leaderboard_info_mock
+        )
+
+        response = view.get(request_mock)
+
+        toggle_mock.assert_called_once_with()
+        gamma_api_wrapper_mock.assert_called_once_with(
+            request_mock.user.username,
+            request_mock.user.usersignupsource_set.first.return_value.site
+        )
+        update_leaderboard_info_mock.assert_called_once_with(request_mock.user, leaderboard_info_mock)
+        assert response.status_code == status.HTTP_200_OK
+        assert response.data == leaderboard_info_mock
+
+    @pytest.mark.django_db
+    def test_leaderboard_toggle_enabled_and_not_leaderboard_info(self, mocker):
+        view = LeaderboardApiView()
+        request_mock = mocker.MagicMock()
+        toggle_mock = mocker.patch("gamma_dashboard.dashboard.api.v0.views.show_gamma_leaderboard", return_value=True)
+        gamma_api_wrapper_mock = mocker.patch.object(GammaApiWrapper, "get_leaderboard_info", return_value=None)
+
+        response = view.get(request_mock)
+
+        toggle_mock.assert_called_once_with()
+        gamma_api_wrapper_mock.assert_called_once_with(
+            request_mock.user.username,
+            request_mock.user.usersignupsource_set.first.return_value.site
+        )
+        assert response.status_code == status.HTTP_422_UNPROCESSABLE_ENTITY
+        assert response.data == {"error": "No data received from Gamma server."}
+
+    @pytest.mark.django_db
+    def test_leaderboard_toggle_disabled(self, mocker):
+        view = LeaderboardApiView()
+        request_mock = mocker.MagicMock()
+        toggle_mock = mocker.patch("gamma_dashboard.dashboard.api.v0.views.show_gamma_leaderboard", return_value=False)
+
+        response = view.get(request_mock)
+
+        toggle_mock.assert_called_once_with()
+        assert response.status_code == status.HTTP_404_NOT_FOUND
+        assert response.data == {"error": "Gamma Leaderboard is disabled."}

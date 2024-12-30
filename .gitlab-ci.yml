@@ -43,7 +43,7 @@ Units:
       - merge_requests
       - tags
     script:
-      - cd /app && make test
+      - cd /app && make test-wo-edx
 
 Lint:
   stage: lint-react-app

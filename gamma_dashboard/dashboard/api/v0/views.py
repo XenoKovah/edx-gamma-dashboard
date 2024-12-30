@@ -14,6 +14,7 @@ from openedx.core.djangoapps.user_api.accounts.image_helpers import get_profile_
 
 from gamma_dashboard.dashboard.core.gamma.api.settings import API_VERSION_1, DEFAULT_API_VERSION
 from gamma_dashboard.dashboard.core.gamma.api.wrapper import GammaApiWrapper
+from gamma_dashboard.toggles import show_gamma_leaderboard
 from ..utils import site_badge_filter, is_main_site
 
 MAIN_SITE_NAME = 'main'
@@ -30,18 +31,21 @@ class LeaderboardApiView(APIView):
         """
         Get Leaderboard info.
         """
+        if not show_gamma_leaderboard():
+            return Response({"error": "Gamma Leaderboard is disabled."}, status=status.HTTP_404_NOT_FOUND)
+
         signup_source = request.user.usersignupsource_set.first()
         user_signup_source = signup_source.site if signup_source else MAIN_SITE_NAME
-        leaderboard_info = GammaApiWrapper(version=API_VERSION_1)\
-                           .get_leaderboard_info(request.user.username, user_signup_source)
+        leaderboard_info = GammaApiWrapper(
+            version=API_VERSION_1
+        ).get_leaderboard_info(request.user.username, user_signup_source)
 
         if leaderboard_info:
             updated_leaderboard_info = self._update_leaderboard_info(request.user, leaderboard_info)
             response = Response(updated_leaderboard_info)
         else:
             response = Response(
-                {"error": "No data received from Gamma server."},
-                status=status.HTTP_422_UNPROCESSABLE_ENTITY
+                {"error": "No data received from Gamma server."}, status=status.HTTP_422_UNPROCESSABLE_ENTITY
             )
 
         return response

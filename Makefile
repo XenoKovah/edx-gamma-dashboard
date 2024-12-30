@@ -55,6 +55,8 @@ test: # run tests
 test-v:	# run tests in verbose mode (for debuging)
 	python -m "pytest" -sv
 
+test-wo-edx: # do not run tests depend on edX infrastructure
+	python -m "pytest" --ignore=tests/unit/leaderboard/api/test_views.py
 
 #
 # PyPi build and publish
