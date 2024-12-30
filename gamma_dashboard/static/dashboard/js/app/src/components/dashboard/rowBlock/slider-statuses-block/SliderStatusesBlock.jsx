@@ -6,6 +6,7 @@ import { useTranslate } from '../../../../i18n/utils';
 import RowBlockHeader from '../../RowBlockHeader';
 import { SliderStatusesItem } from './slider-statuses-item';
 import { useSliderStatusesBlock } from './hooks';
+import { StatusPropType } from '../../../propTypes';
 
 const SliderStatusesBlock = ({ status, statusItems }) => {
   const {
@@ -60,21 +61,9 @@ const SliderStatusesBlock = ({ status, statusItems }) => {
   );
 };
 
-const StatusPropType = PropTypes.shape({
-  status_uid: PropTypes.string.isRequired,
-  slug: PropTypes.string.isRequired,
-  title: PropTypes.string.isRequired,
-  description: PropTypes.string,
-  active: PropTypes.bool.isRequired,
-  color: PropTypes.string.isRequired,
-  url: PropTypes.string.isRequired,
-  statusPoints: PropTypes.number.isRequired,
-  points: PropTypes.number.isRequired,
-});
-
 SliderStatusesBlock.propTypes = {
   status: PropTypes.string,
-  statusItems: PropTypes.arrayOf(StatusPropType),
+  statusItems: PropTypes.arrayOf(PropTypes.shape(StatusPropType)),
 };
 
 SliderStatusesBlock.defaultProps = {

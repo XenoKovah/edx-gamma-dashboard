@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 
 import Avatar from './Avatar';
 import Badge from './Badge';
+import { EventPropType, ProgressPropType, StatusPropType } from '../propTypes';
 
 const LeaderboardTableRow = ({ profile, status, rank }) => {
   const username = profile.user_uid || '';
@@ -38,22 +39,6 @@ const LeaderboardTableRow = ({ profile, status, rank }) => {
   );
 };
 
-const EventPropType = PropTypes.shape({
-  count: PropTypes.number.isRequired,
-  goal: PropTypes.number.isRequired,
-});
-
-const StatusPropType = PropTypes.shape({
-  statusUid: PropTypes.string.isRequired,
-  slug: PropTypes.string.isRequired,
-  title: PropTypes.string.isRequired,
-  description: PropTypes.string,
-  active: PropTypes.bool.isRequired,
-  statusPoints: PropTypes.number.isRequired,
-  color: PropTypes.string.isRequired,
-  url: PropTypes.string.isRequired,
-});
-
 LeaderboardTableRow.propTypes = {
   profile: PropTypes.shape({
     user_uid: PropTypes.string,
@@ -65,25 +50,12 @@ LeaderboardTableRow.propTypes = {
         title: PropTypes.string,
         description: PropTypes.string,
         done: PropTypes.bool,
-        progress: PropTypes.shape({
-          edxForumCommentCreated: EventPropType,
-          openassessmentblockSaveSubmission: EventPropType,
-          edxBookmarkAdded: EventPropType,
-          edxForumThreadCreated: EventPropType,
-          edxForumResponseCreated: EventPropType,
-          edxForumThreadVoted: EventPropType,
-          stopVideo: EventPropType,
-          edxCertificateCreated: EventPropType,
-          edxGradesProblemSubmitted: EventPropType,
-          edxCourseEnrollmentActivated: EventPropType,
-          problemCheck: EventPropType,
-          problemGraded: EventPropType,
-        }),
+        progress: PropTypes.shape(ProgressPropType),
         url: PropTypes.string,
       }),
     ),
-    systemStatuses: PropTypes.arrayOf(StatusPropType).isRequired,
-    system_events: PropTypes.arrayOf(EventPropType).isRequired,
+    systemStatuses: PropTypes.arrayOf(PropTypes.shape(StatusPropType)).isRequired,
+    system_events: PropTypes.arrayOf(PropTypes.shape(EventPropType)).isRequired,
     position: PropTypes.number,
   }).isRequired,
   status: PropTypes.string.isRequired,

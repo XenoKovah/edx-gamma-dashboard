@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 
 import { ChartWithExport } from '../chart-with-export';
@@ -6,7 +6,7 @@ import { getPointsDistributionChartConfig } from './config';
 import { prepareEvents } from './utils';
 
 const PointsDistributionChart = ({ data }) => {
-  const events = useMemo(() => prepareEvents(data), [data]);
+  const events = prepareEvents(data);
 
   return (
     <ChartWithExport

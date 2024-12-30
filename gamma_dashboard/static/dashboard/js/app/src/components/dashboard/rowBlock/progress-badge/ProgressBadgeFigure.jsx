@@ -6,13 +6,12 @@ import { Image } from '@openedx/paragon';
 import { useTranslate } from '../../../../i18n/utils';
 import { buildURL } from '../../../../utils';
 
-const ProgressBadgeFigure = ({ setReferenceElement, imageSrc, isDisabled }) => (
+const ProgressBadgeFigure = ({ imageSrc, isDisabled }) => (
   <div
     className={classNames('progress-badge-figure', {
       'progress-badge-figure-disabled': isDisabled,
     })}
     data-testid="progress-badge-figure"
-    ref={setReferenceElement}
   >
     <Image
       className="progress-badge-figure-image"
@@ -24,7 +23,6 @@ const ProgressBadgeFigure = ({ setReferenceElement, imageSrc, isDisabled }) => (
 );
 
 ProgressBadgeFigure.propTypes = {
-  setReferenceElement: PropTypes.func.isRequired,
   imageSrc: PropTypes.string.isRequired,
   isDisabled: PropTypes.bool,
 };

@@ -122,26 +122,6 @@
   overflow: hidden;
 }
 
-.row-block-item-popup-wrapper {
-  pointer-events: auto !important;
-
-  &.place-bottom:before {
-    content: "";
-    width: 14px;
-    height: 14px;
-    background: $title-bg-color;
-    position: absolute;
-    top: 18px;
-    left: 50%;
-    transform: translate(-50%, -50%) rotate(45deg);
-  }
-
-  &:hover {
-    visibility: visible !important;
-    opacity: 1 !important;
-  }
-}
-
 .total-progress-percent {
   font-size: 12px;
   line-height: 15px;

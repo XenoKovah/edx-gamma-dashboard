@@ -1,6 +1,7 @@
 import React from 'react';
 import '@testing-library/jest-dom';
-import { cleanup, within } from '@testing-library/react';
+import { cleanup, within, waitFor } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 
 import { renderWithProviders } from '../../../../setupTests';
 import { ProgressBadge } from '../progress-badge';
@@ -18,9 +19,7 @@ describe('<ProgressBadge>', () => {
     };
 
     const { getByTestId, queryByTestId } = renderWithProviders(
-      <ProgressBadge
-        data={data}
-      />,
+      <ProgressBadge data={data} />,
     );
 
     const element = getByTestId('progress-badge').querySelector('.progress-badge-diagram.progress');
@@ -32,7 +31,7 @@ describe('<ProgressBadge>', () => {
     const title = getByTestId('progress-badge-title');
     expect(title).toHaveTextContent(data.title);
 
-    const popup = queryByTestId('row-block-item-popup');
+    const popup = queryByTestId('popover-content');
     expect(popup).not.toBeInTheDocument();
 
     const imageBadge = queryByTestId('progress-badge-figure-image');
@@ -48,11 +47,7 @@ describe('<ProgressBadge>', () => {
       url: 'https://gamma-url.com/badge3.png',
     };
 
-    const { getByTestId } = renderWithProviders(
-      <ProgressBadge
-        data={data}
-      />,
-    );
+    const { getByTestId } = renderWithProviders(<ProgressBadge data={data} />);
 
     const element = getByTestId('progress-badge').querySelector('.progress-badge-diagram.progress');
     expect(element).toBeInTheDocument();
@@ -63,11 +58,15 @@ describe('<ProgressBadge>', () => {
     const title = getByTestId('progress-badge-title');
     expect(title).toHaveTextContent(data.title);
 
-    const popup = getByTestId('row-block-item-popup');
-    expect(popup).toBeInTheDocument();
-
     const imageBadge = getByTestId('progress-badge-figure-image');
     expect(imageBadge).toHaveAttribute('src', data.url);
+
+    userEvent.hover(getByTestId('progress-badge'));
+
+    waitFor(() => {
+      const popup = getByTestId('popover-positioned-popover');
+      expect(popup).toBeInTheDocument();
+    });
   });
 
   it('renders with correct `complete status` data', () => {
@@ -82,11 +81,7 @@ describe('<ProgressBadge>', () => {
       url: 'https://gamma-url.com/status-test-status.png',
     };
 
-    const { getByTestId, queryByTestId } = renderWithProviders(
-      <ProgressBadge
-        data={data}
-      />,
-    );
+    const { getByTestId, queryByTestId } = renderWithProviders(<ProgressBadge data={data} />);
 
     const element = getByTestId('progress-badge').querySelector('.progress-badge-diagram.progress');
     expect(element).not.toBeInTheDocument();
@@ -97,7 +92,7 @@ describe('<ProgressBadge>', () => {
     const title = getByTestId('progress-badge-title');
     expect(title.textContent).toBe(data.title);
 
-    const popup = queryByTestId('row-block-item-popup');
+    const popup = queryByTestId('popover-content');
     expect(popup).not.toBeInTheDocument();
 
     const imageBadge = getByTestId('progress-badge-figure-image');
@@ -116,11 +111,7 @@ describe('<ProgressBadge>', () => {
       url: 'https://gamma-url.com/status-test-status.png',
     };
 
-    const { getByTestId } = renderWithProviders(
-      <ProgressBadge
-        data={data}
-      />,
-    );
+    const { getByTestId } = renderWithProviders(<ProgressBadge data={data} />);
 
     const element = getByTestId('progress-badge').querySelector('.progress-badge-diagram.progress');
     expect(element).toBeInTheDocument();
@@ -131,11 +122,15 @@ describe('<ProgressBadge>', () => {
     const title = getByTestId('progress-badge-title');
     expect(title).toHaveTextContent(data.title);
 
-    const popup = getByTestId('row-block-item-popup');
-    expect(popup).toBeInTheDocument();
-
     const imageBadge = getByTestId('progress-badge-figure-image');
     expect(imageBadge).toHaveAttribute('src', data.url);
+
+    userEvent.hover(getByTestId('progress-badge'));
+
+    waitFor(() => {
+      const popup = getByTestId('popover-positioned-popover');
+      expect(popup).toBeInTheDocument();
+    });
   });
 
   it('renders with correct but zeroed `incomplete status` data', () => {
@@ -150,11 +145,7 @@ describe('<ProgressBadge>', () => {
       url: 'https://gamma-url.com/status-test-status.png',
     };
     const progressString = `${data.points}/${data.statusPoints}`;
-    const { getByTestId } = renderWithProviders(
-      <ProgressBadge
-        data={data}
-      />,
-    );
+    const { getByTestId } = renderWithProviders(<ProgressBadge data={data} />);
 
     const figure = getByTestId('progress-badge-figure');
     expect(figure).toHaveClass('progress-badge-figure-disabled');
@@ -162,9 +153,13 @@ describe('<ProgressBadge>', () => {
     const title = getByTestId('progress-badge-title');
     expect(title).toHaveTextContent(data.title);
 
-    const popup = getByTestId('row-block-item-popup');
-    expect(popup).toBeInTheDocument();
-    expect(popup).toHaveTextContent(progressString);
+    userEvent.hover(getByTestId('progress-badge'));
+
+    waitFor(() => {
+      const popup = getByTestId('popover-positioned-popover');
+      expect(popup).toBeInTheDocument();
+      expect(popup).toHaveTextContent(progressString);
+    });
   });
 
   it('renders with `center` prop defined', () => {
@@ -180,10 +175,7 @@ describe('<ProgressBadge>', () => {
     };
 
     const { getByTestId } = renderWithProviders(
-      <ProgressBadge
-        data={data}
-        center
-      />,
+      <ProgressBadge data={data} center />,
     );
 
     const rowBlockItem = getByTestId('progress-badge');

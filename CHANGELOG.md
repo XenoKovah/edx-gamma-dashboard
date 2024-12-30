@@ -2,6 +2,8 @@
 
 ## [Unreleased]
 ## Changed
+- [NAU-115] Improved Badge Popup component.
+- [NAU-115] Corrected styles for Dashboard modal and Badge popup.
 - [NAU-114]: Refactored Badge component.
 - [NAU-114]: Refactored Slider block.
 - [NAU-118]: Refactored charts components.

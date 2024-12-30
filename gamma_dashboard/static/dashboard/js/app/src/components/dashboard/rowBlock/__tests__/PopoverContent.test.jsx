@@ -1,58 +1,47 @@
 import React from 'react';
 import '@testing-library/jest-dom';
-import { cleanup } from '@testing-library/react';
+import { cleanup, waitFor } from '@testing-library/react';
 
+import { capitalizeFirstLetter } from '../../../../utils';
 import { renderWithProviders } from '../../../../setupTests';
-import RowBlockItemPopup from '../RowBlockItemPopup';
+import { PopoverContent } from '../progress-badge/popover-content';
+
+import messages from '../../../../i18n/en';
 
 afterEach(cleanup);
 
-describe('<RowBlockItemPopup>', () => {
+const badgeDependencies = ['Test badge 1'];
+
+const getProgressString = ({ points, statusPoints }) => `${points}/${statusPoints}`;
+
+describe('<PopoverContent>', () => {
   it('renders with correct `status` data', () => {
-    const title = 'Test title';
     const data = {
       points: 180,
       statusPoints: 250,
     };
-    const progressString = `${data.points}/${data.statusPoints}`;
+    const progressString = getProgressString(data);
 
-    const { getByText } = renderWithProviders(
-      <RowBlockItemPopup
-        title={title}
-        data={data}
-      />,
-    );
+    const { getByText } = renderWithProviders(<PopoverContent data={data} />);
 
-    expect(getByText(title)).toBeInTheDocument();
     expect(getByText(progressString)).toBeInTheDocument();
   });
 
   it('renders with correct but zeroed `status` data', () => {
-    const title = 'Test title';
     const data = {
       points: 0,
       statusPoints: 669,
     };
-    const progressString = `${data.points}/${data.statusPoints}`;
+    const progressString = getProgressString(data);
 
-    const { getByText } = renderWithProviders(
-      <RowBlockItemPopup
-        title={title}
-        data={data}
-      />,
-    );
+    const { getByText } = renderWithProviders(<PopoverContent data={data} />);
 
-    expect(getByText(title)).toBeInTheDocument();
     expect(getByText(progressString)).toBeInTheDocument();
   });
 
   it('renders with correct `badge` data', () => {
-    const title = 'Test title';
-    const badgeDependencies = [
-      'Test badge 1',
-      'Test badge 2',
-    ];
     const statusDependency = 'Test status';
+    badgeDependencies.push('Test badge 2');
 
     const data = {
       badgeDependencies,
@@ -71,56 +60,42 @@ describe('<RowBlockItemPopup>', () => {
       statusDependency,
     };
 
-    const { getByText } = renderWithProviders(
-      <RowBlockItemPopup
-        title={title}
-        data={data}
-      />,
-    );
+    const { getByText } = renderWithProviders(<PopoverContent data={data} />);
 
-    expect(getByText(title)).toBeInTheDocument();
-
-    for (const progressItemName in data.progress) {
-      if (Object.hasOwn(data.progress, progressItemName)) { // Guard statement
-        const progressCount = data.progress[progressItemName].count;
-        const progressGoal = data.progress[progressItemName].goal;
+    for (const [progressItemName, progressItem] of Object.entries(data.progress)) {
+      if (Object.hasOwn(data.progress, progressItemName)) {
+        const { count: progressCount, goal: progressGoal, title } = progressItem;
 
         const itemProgressString = `${progressCount}/${progressGoal}`;
-        const itemTitle = `${data.progress[progressItemName]
-          .title.slice(0, 1).toUpperCase()}${data.progress[progressItemName].title.slice(1)}`;
+        const itemTitle = capitalizeFirstLetter(title);
 
         expect(getByText(itemProgressString)).toBeInTheDocument();
         expect(getByText(itemTitle)).toBeInTheDocument();
       }
     }
 
-    expect(getByText('Depends on badges:')).toBeInTheDocument();
+    expect(getByText(`${messages['dashboard.badges.depends.on.badges.text'].defaultMessage}:`)).toBeInTheDocument();
     for (const badgeName of badgeDependencies) {
       expect(getByText(badgeName)).toBeInTheDocument();
     }
 
-    expect(getByText('Depends on status:')).toBeInTheDocument();
+    expect(getByText(`${messages['dashboard.badges.depends.on.status.text'].defaultMessage}:`)).toBeInTheDocument();
     expect(getByText(statusDependency)).toBeInTheDocument();
   });
 
   it('renders without data', () => {
-    const { getByTestId } = renderWithProviders(<RowBlockItemPopup />);
+    const { getByTestId } = renderWithProviders(<PopoverContent />);
 
-    const popup = getByTestId('row-block-item-popup');
-    const head = getByTestId('item-head');
-    const body = getByTestId('item-body');
+    waitFor(() => {
+      const popup = getByTestId('popover-positioned-popover');
+      const content = getByTestId('popover-content');
 
-    expect(popup).toBeInTheDocument();
-    expect(head).toBeInTheDocument();
-    expect(body).toBeInTheDocument();
+      expect(popup).toBeInTheDocument();
+      expect(content).toBeInTheDocument();
+    });
   });
 
   it('displays progress count value if it equals the goal value', () => {
-    const title = 'Test title';
-    const badgeDependencies = [
-      'Test badge',
-    ];
-
     const data = {
       badgeDependencies,
       progress: {
@@ -132,22 +107,12 @@ describe('<RowBlockItemPopup>', () => {
       },
     };
 
-    const { getByText } = renderWithProviders(
-      <RowBlockItemPopup
-        title={title}
-        data={data}
-      />,
-    );
+    const { getByText } = renderWithProviders(<PopoverContent data={data} />);
 
     expect(getByText('4/4')).toBeInTheDocument();
   });
 
   it('displays the goal value for the progress if progress is greater than the goal', () => {
-    const title = 'Test title';
-    const badgeDependencies = [
-      'Test badge',
-    ];
-
     const data = {
       badgeDependencies,
       progress: {
@@ -159,23 +124,13 @@ describe('<RowBlockItemPopup>', () => {
       },
     };
 
-    const { getByText } = renderWithProviders(
-      <RowBlockItemPopup
-        title={title}
-        data={data}
-      />,
-    );
+    const { getByText } = renderWithProviders(<PopoverContent data={data} />);
 
     expect(getByText('4/4')).toBeInTheDocument();
     expect(getByText('Problem graded')).toBeInTheDocument();
   });
 
   it('displays progress count value if it equals 0', () => {
-    const title = 'Test title';
-    const badgeDependencies = [
-      'Test badge',
-    ];
-
     const data = {
       badgeDependencies,
       progress: {
@@ -187,23 +142,13 @@ describe('<RowBlockItemPopup>', () => {
       },
     };
 
-    const { getByText } = renderWithProviders(
-      <RowBlockItemPopup
-        title={title}
-        data={data}
-      />,
-    );
+    const { getByText } = renderWithProviders(<PopoverContent data={data} />);
 
     expect(getByText('0/4')).toBeInTheDocument();
     expect(getByText('Problem graded')).toBeInTheDocument();
   });
 
   it('displays progress count value if it does not exceed the goal value', () => {
-    const title = 'Test title';
-    const badgeDependencies = [
-      'Test badge',
-    ];
-
     const data = {
       badgeDependencies,
       progress: {
@@ -215,12 +160,7 @@ describe('<RowBlockItemPopup>', () => {
       },
     };
 
-    const { getByText } = renderWithProviders(
-      <RowBlockItemPopup
-        title={title}
-        data={data}
-      />,
-    );
+    const { getByText } = renderWithProviders(<PopoverContent data={data} />);
 
     expect(getByText('1/4')).toBeInTheDocument();
   });
