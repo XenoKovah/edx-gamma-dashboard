@@ -1,19 +1,19 @@
 .logo-dropdown {
   .logo-dropdown-img {
-    margin-right: 7px;
+    margin-right: map-get($spacers, 2);
     cursor: pointer !important;
   }
 
   .btn-logo {
-    padding: 0;
+    padding: map-get($spacers, 0);
     border: none !important;
     color: $btn-logo-dropdown-base-color !important;
     background: none;
     box-shadow: none;
 
-    @media screen and (max-width: map-get($grid-breakpoints, "xs")) {
+    @media screen and (max-width: map-get($grid-breakpoints, "sm")) {
       order: 1;
-      margin-bottom: 5px;
+      margin-bottom: 0.313rem;
     }
 
     &:active,
@@ -29,15 +29,15 @@
   .dropdown-menu {
     @include pgn-box-shadow(3, "up");
 
-    right: -10px !important;
-    top: 7px !important;
+    right: -0.625rem !important;
+    top: 0.438rem !important;
     min-width: 0;
     position: relative;
 
     a {
       color: $btn-logo-dropdown-base-color;
       padding: $dropdown-item-padding-y $dropdown-item-padding-x;
-      font-size: 14px;
+      font-size: $font-size-sm;
 
       &:hover {
         text-decoration: none;
@@ -52,11 +52,11 @@
       width: 0;
       height: 0;
       border-style: solid;
-      border-width: 0 10px 10px;
+      border-width: 0 0.625rem 0.625rem;
       border-color: transparent transparent $white;
       position: absolute;
-      right: 13px;
-      top: -10px;
+      right: 0.813rem;
+      top: -0.625rem;
     }
   }
 }

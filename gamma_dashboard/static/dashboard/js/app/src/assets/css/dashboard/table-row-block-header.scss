@@ -3,28 +3,28 @@
   justify-content: space-between;
   align-items: flex-start;
   flex-wrap: wrap;
-  margin: 5px 14px;
+  margin: 0.313rem 0.875rem;
 
   .table-row-block-title,
   .table-row-block-status {
     color: $blue-text-color;
-    font-size: 17px;
+    font-size: 1.063rem;
     text-transform: uppercase;
     font-weight: 600;
-    margin-bottom: 6px;
+    margin-bottom: 0.375rem;
     line-height: normal;
   }
 
   .table-row-block-status {
-    font-size: 16px;
+    font-size: 1rem;
     text-transform: none;
   }
 
   .table-row-block-description {
     color: $main-text-color;
-    font-size: 16px;
+    font-size: 1rem;
     font-weight: $font-weight-light;
-    margin-top: 20px;
+    margin-top: 1.25rem;
   }
 
   .table-row-block-description:empty {

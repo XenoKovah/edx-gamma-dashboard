@@ -44,6 +44,11 @@ const en = {
     defaultMessage: 'Got it',
     description: 'Text for the button to acknowledge feedback alert messages.',
   },
+  'logo.dropdown.feedback.form.button.submit.default.text': {
+    id: 'logo.dropdown.feedback.form.button.submit.default.text',
+    defaultMessage: 'Submit',
+    description: 'Default text for the submit button.',
+  },
   'logo.dropdown.feedback.form.message.label.text': {
     id: 'logo.dropdown.feedback.form.message.label.text',
     defaultMessage: 'Let us know how we can help',

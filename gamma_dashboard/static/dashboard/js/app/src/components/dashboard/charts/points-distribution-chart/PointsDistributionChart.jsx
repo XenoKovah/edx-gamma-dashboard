@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import { useTranslate } from '../../../../i18n/utils';
 import { ChartWithExport } from '../chart-with-export';
 import { getPointsDistributionChartConfig } from './config';
 import { prepareEvents } from './utils';
@@ -8,9 +9,17 @@ import { prepareEvents } from './utils';
 const PointsDistributionChart = ({ data }) => {
   const events = prepareEvents(data);
 
+  const messages = {
+    distributionSection: {
+      headingText: useTranslate('performance.points.distribution.section.heading.text'),
+      descriptionText: useTranslate('performance.points.distribution.section.description.text'),
+    },
+    performancePointsSeriesName: useTranslate('performance.points.series.name'),
+  };
+
   return (
     <ChartWithExport
-      options={getPointsDistributionChartConfig(events)}
+      options={getPointsDistributionChartConfig(events, messages)}
     />
   );
 };

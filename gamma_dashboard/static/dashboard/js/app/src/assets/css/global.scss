@@ -1,27 +1,41 @@
-button:not(.close-window-button) {
-  letter-spacing: normal;
-
-  &:hover {
-    background-image: none !important;
-  }
-}
-
 .form-control:focus ~ .pgn__form-control-floating-label .pgn__form-control-floating-label-text,
 .form-control.has-value ~ .pgn__form-control-floating-label .pgn__form-control-floating-label-text {
   transform: translateY(-0.5625rem) scale(0.75) translateY(-65.0008%);
   background-color: $white;
 }
 
-.btn-primary,
-.btn-primary:disabled,
-.btn-primary.disabled {
-  background-color: $blue-text-color;
-  border-color: $blue-text-color;
+.btn:not(.pgn__menu-select button, .btn-logo) {
+  color: $accent-color;
+  background: transparent;
+  border: 2px solid $accent-color !important;
+  display: inline-block;
+  min-width: 84px;
+  font-size: $font-size-xs;
+  text-transform: uppercase;
+  font-weight: 600;
+  box-shadow: none;
+  line-height: normal;
+  padding: 7px 5px 6px;
+  transition: all 0.15s linear;
+  border-radius: 15px !important;
+  text-align: center;
+  text-shadow: none;
 
-  &:hover,
-  &:active,
-  &:focus {
-    background: $blue-text-color-darken !important;
-    border-color: $blue-text-color-darken !important;
+  &:hover {
+    background: $accent-color !important;
+    color: $white !important;
+  }
+
+  &:focus:before {
+    border-radius: calc(1.375rem + 4px);
+    border: solid 2px $accent-color;
+  }
+
+  &.btn-outline-primary:not(:disabled, .disabled):active {
+    color: $accent-color;
+
+    &:hover {
+      color: $white;
+    }
   }
 }

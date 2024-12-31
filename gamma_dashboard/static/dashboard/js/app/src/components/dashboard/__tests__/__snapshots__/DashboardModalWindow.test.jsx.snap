@@ -1,9 +1,0 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
-
-exports[`<DashboardModalWindow> renders with children 1`] = `""`;
-
-exports[`<DashboardModalWindow> renders with correct \`badge items\` 1`] = `""`;
-
-exports[`<DashboardModalWindow> renders with correct \`status items\` 1`] = `""`;
-
-exports[`<DashboardModalWindow> renders with correct title 1`] = `""`;

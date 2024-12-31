@@ -1,11 +1,10 @@
-import { useTranslate as translate } from '../../../../i18n/utils';
 import { isRtl } from '../../../../constants';
 import {
   chartSubtitleStyles, chartTitleOptions, chartTitleStyles, COLOR_PALETTE,
 } from '../constants';
 import { dataLabelFormatter } from './utils';
 
-export const getPointsDistributionChartConfig = (events) => {
+export const getPointsDistributionChartConfig = (events, messages) => {
   const alignment = isRtl ? { align: 'right', x: 0 } : { align: 'left', x: 7 };
 
   return {
@@ -18,7 +17,7 @@ export const getPointsDistributionChartConfig = (events) => {
       marginBottom: 35,
     },
     title: {
-      text: translate('performance.points.distribution.section.heading.text'),
+      text: messages.distributionSection.headingText,
       ...alignment,
       widthAdjust: 0,
       x: isRtl ? 0 : 7,
@@ -27,7 +26,7 @@ export const getPointsDistributionChartConfig = (events) => {
       style: chartTitleStyles,
     },
     subtitle: {
-      text: translate('performance.points.distribution.section.description.text'),
+      text: messages.distributionSection.descriptionText,
       ...alignment,
       widthAdjust: 7,
       x: isRtl ? 0 : 7,
@@ -82,7 +81,7 @@ export const getPointsDistributionChartConfig = (events) => {
     },
     series: events.length > 0 ? [{
       type: 'pie',
-      name: translate('performance.points.series.name'),
+      name: messages.performancePointsSeriesName,
       innerSize: '30%',
       data: events,
     }] : null,

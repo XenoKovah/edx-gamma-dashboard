@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Button } from '@openedx/paragon';
 
-import { Button } from '../../generic';
 import RowBlockHeader from '../RowBlockHeader';
 import DashboardTableRowBlock from './DashboardTableRowBlock';
 
@@ -35,12 +35,15 @@ const CustomRowBlock = ({
     >
       {items}
     </ul>
-    <div className="row-block-controls">
+    <div className="progress-badges-details-btn-wrapper">
       <Button
-        data-testid="details-button"
+        data-testid="progress-badges-details-btn"
         title={buttonTitle}
-        onClick={() => buttonOnClick()}
-      />
+        variant="outline-primary"
+        onClick={buttonOnClick}
+      >
+        {buttonTitle}
+      </Button>
     </div>
   </DashboardTableRowBlock>
 );

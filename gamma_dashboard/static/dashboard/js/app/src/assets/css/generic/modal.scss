@@ -9,14 +9,14 @@
 
   .pgn__modal-body-content {
     .pgn__form-label {
-      font-size: 12px;
-      margin-bottom: 0;
+      font-size: $font-size-xs;
+      margin-bottom: map-get($spacers, 0);
     }
 
     .pgn__menu-select button {
       border: 1px solid $select-btn-border-color !important;
-      border-radius: 3px;
-      font-size: 14px;
+      border-radius: 0.188rem;
+      font-size: $font-size-sm;
       color: $secondary-text-color;
       width: 100%;
       max-width: none;
@@ -57,39 +57,73 @@
     }
 
     .pgn__form-control-decorator-group {
-      margin-inline-end: 0;
+      margin-inline-end: map-get($spacers, 0);
     }
 
     textarea.form-control {
-      height: 122px;
+      height: 7.625rem;
       font-style: normal;
     }
 
     .pgn__form-control-floating-label-text {
       color: $secondary-text-color;
-      font: 400 $font-weight-normal 14px/1.2 "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+      font: 400 $font-weight-normal 0.875rem/1.2 "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
     }
   }
 
   .modal-buttons .btn {
     text-shadow: none;
-    box-shadow: none;
 
-    &.btn-primary:focus:before {
-      border-color: $blue-text-color;
-      opacity: 0.2;
+    &:focus:before {
+      border-radius: calc(1.375rem + 4px);
+      border: solid 2px $accent-color;
     }
 
-    &.btn-tertiary {
-      background: none;
-      color: $gray-700;
+    &.btn-outline-primary:not(:disabled, .disabled):active {
+      color: $accent-color;
 
-      &:hover,
-      &:active,
-      &:focus {
-        background: #e1dddb !important;
-        border-color: #e1dddb !important;
+      &:hover {
+        color: $white;
       }
+    }
+
+    &.btn-tertiary:not(:disabled, .disabled):active {
+      color: $accent-color;
+      background-color: $white;
+
+      &:hover {
+        color: $white;
+      }
+    }
+  }
+
+  .badge-info {
+    background-color: $accent-color;
+
+    &:hover {
+      background-color: $accent-color;
+    }
+  }
+
+  .pgn__modal-close-button {
+    background-image: none;
+    box-shadow: none;
+
+    &:hover {
+      background-color: $accent-color;
+
+      svg {
+        color: $white;
+      }
+    }
+
+    &:active,
+    &:focus {
+      box-shadow: inset 0 0 0 2px $accent-color;
+    }
+
+    svg {
+      color: $accent-color;
     }
   }
 }

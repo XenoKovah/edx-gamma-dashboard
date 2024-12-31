@@ -1,40 +1,27 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { useTranslate } from '../../i18n/utils';
-import { ModalWindow } from '../generic';
-import { ProgressBadge } from './rowBlock/progress-badge';
-import { isRtl } from '../../constants';
+import { useTranslate } from '../../../../i18n/utils';
+import { isRtl } from '../../../../constants';
+import { Modal } from '../../../generic/modal';
+import ProgressBadge from './ProgressBadge';
 
-const DashboardModalWindow = ({
-  title, items, getItemDataFunction, children, ...props
+const ProgressBadgesModal = ({
+  title, items, getItemDataFunction, isOpen, closeCallback,
 }) => {
   const counterTranslation = useTranslate('performance.badges.section.total.badges.button.text');
   const counterLabelText = isRtl ? `:${counterTranslation}` : `${counterTranslation}:`;
 
   return (
-    <ModalWindow {...props}>
-      <div
-        className="dashboard-modal-window-title-bar"
-        data-testid="dashboard-modal-window-title-bar"
-      >
-        <div
-          className="title"
-          data-testid="title"
-        >
-          {title}
-        </div>
-        <div className="counter">
-          <span>{counterLabelText}</span>
-          <span data-testid="counter-value">
-            {items.length}
-          </span>
-        </div>
-      </div>
-      <div
-        className="dashboard-modal-window-items-list"
-        data-testid="dashboard-modal-window-items-list"
-      >
+    <Modal
+      title={title}
+      isOpen={isOpen}
+      handleClose={closeCallback}
+      size="xl"
+      hasCloseButton
+      footerText={`${counterLabelText}: ${items.length}`}
+    >
+      <ul className="d-flex flex-wrap p-0" data-testid="dashboard-modal-window-items-list">
         {items.map((item) => (
           <ProgressBadge
             key={getItemDataFunction(item).title}
@@ -42,9 +29,8 @@ const DashboardModalWindow = ({
             center
           />
         ))}
-      </div>
-      {children}
-    </ModalWindow>
+      </ul>
+    </Modal>
   );
 };
 
@@ -65,7 +51,7 @@ const ItemPropType = PropTypes.shape({
   done: PropTypes.bool.isRequired,
 });
 
-DashboardModalWindow.propTypes = {
+ProgressBadgesModal.propTypes = {
   title: PropTypes.string,
   items: PropTypes.arrayOf(
     PropTypes.arrayOf(
@@ -76,14 +62,14 @@ DashboardModalWindow.propTypes = {
     ),
   ),
   getItemDataFunction: PropTypes.func,
-  children: PropTypes.node,
+  isOpen: PropTypes.bool.isRequired,
+  closeCallback: PropTypes.func.isRequired,
 };
 
-DashboardModalWindow.defaultProps = {
+ProgressBadgesModal.defaultProps = {
   title: '',
   items: [],
   getItemDataFunction: null,
-  children: null,
 };
 
-export default DashboardModalWindow;
+export default ProgressBadgesModal;

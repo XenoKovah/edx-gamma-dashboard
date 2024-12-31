@@ -1,14 +1,14 @@
 .gamification-title-wrapper {
-  margin-bottom: 24px;
+  margin-bottom: map-get($spacers, 4);
 
-  @media screen and (max-width: map-get($grid-breakpoints, "xs")) {
+  @media screen and (max-width: map-get($grid-breakpoints, "sm")) {
     flex-direction: column;
     align-items: flex-start !important;
   }
 
   h1 {
-    font-size: 36px;
-    line-height: 49px;
+    font-size: 2.25rem;
+    line-height: 3.063rem;
     font-weight: $font-weight-normal;
     color: $secondary-text-color;
     text-align: left;
@@ -22,10 +22,10 @@
     }
 
     @media screen and (max-width: map-get($grid-breakpoints, "sm")) {
-      font-size: 26px;
+      font-size: 1.625rem;
     }
 
-    @media screen and (max-width: map-get($grid-breakpoints, "xs")) {
+    @media screen and (max-width: map-get($grid-breakpoints, "sm")) {
       order: 2;
     }
   }

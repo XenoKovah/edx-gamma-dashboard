@@ -2,12 +2,14 @@
 
 ## [Unreleased]
 ## Changed
+- [NAU-116] Replaced badge list modal window for Dashboard page.
+- [NAU-116] Updated Feedback modal window.
 - [NAU-115] Improved Badge Popup component.
 - [NAU-115] Corrected styles for Dashboard modal and Badge popup.
-- [NAU-114]: Refactored Badge component.
-- [NAU-114]: Refactored Slider block.
-- [NAU-118]: Refactored charts components.
-- [NAU-117]: Refactored Progress Tracker block.
+- [NAU-114] Refactored Badge component.
+- [NAU-114] Refactored Slider block.
+- [NAU-118] Refactored charts components.
+- [NAU-117] Refactored Progress Tracker block.
 - [NAU-94] Created the SubHeader component.
 - [NAU-94] Implemented Skip to main content hook.
 - [NAU-94] Refactored scripts and styles.

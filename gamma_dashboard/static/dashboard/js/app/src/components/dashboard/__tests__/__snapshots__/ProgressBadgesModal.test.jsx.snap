@@ -1,0 +1,7 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ProgressBadgesModal> renders with correct \`badge items\` 1`] = `""`;
+
+exports[`<ProgressBadgesModal> renders with correct \`status items\` 1`] = `""`;
+
+exports[`<ProgressBadgesModal> renders with correct title 1`] = `""`;

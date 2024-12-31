@@ -1,26 +1,26 @@
 .dashboard-table-row-block {
   width: calc(50% - 1px);
-  min-height: 400px;
-  margin-bottom: 2px;
+  min-height: 25rem;
+  margin-bottom: 0.125rem;
   background: $white;
-  padding: 15px;
+  padding: $spacer;
   box-sizing: border-box;
   position: relative;
 
   &:before {
     content: "";
     display: block;
-    width: calc(100% - 60px);
-    height: 2px;
+    width: calc(100% - 3.75rem);
+    height: 0.125rem;
     background: $darkblue-transparent-bg-color;
     position: absolute;
-    left: 30px;
-    top: 45px;
+    left: 1.875rem;
+    top: 2.813rem;
     z-index: 2;
 
     .rtl & {
       left: initial;
-      right: 30px;
+      right: 1.875rem;
     }
   }
 
@@ -28,8 +28,8 @@
     width: 100%;
   }
 
-  @media screen and (max-width: map-get($grid-breakpoints, "xs")) {
-    padding: 15px 10px;
+  @media screen and (max-width: map-get($grid-breakpoints, "sm")) {
+    padding: $spacer 0.625rem;
   }
 
   &.full-width {
@@ -37,30 +37,30 @@
   }
 
   &.top-left {
-    border-radius: 20px 0 0;
+    border-radius: $dashboard-table-corner-border-radius 0 0;
 
     .rtl & {
-      border-radius: 0 20px 0 0;
+      border-radius: 0 $dashboard-table-corner-border-radius 0 0;
 
       @media screen and (max-width: map-get($grid-breakpoints, "lg")) {
-        border-radius: 20px 20px 0 0;
+        border-radius: $dashboard-table-corner-border-radius $dashboard-table-corner-border-radius 0 0;
       }
     }
 
     @media screen and (max-width: map-get($grid-breakpoints, "lg")) {
-      border-radius: 20px 20px 0 0;
+      border-radius: $dashboard-table-corner-border-radius $dashboard-table-corner-border-radius 0 0;
     }
   }
 
   &.top-right {
-    border-radius: 0 20px 0 0;
+    border-radius: 0 $dashboard-table-corner-border-radius 0 0;
 
     @media screen and (max-width: map-get($grid-breakpoints, "lg")) {
       border-radius: 0;
     }
 
     .rtl & {
-      border-radius: 20px 0 0;
+      border-radius: $dashboard-table-corner-border-radius 0 0;
 
       @media screen and (max-width: map-get($grid-breakpoints, "lg")) {
         border-radius: 0;
@@ -69,35 +69,35 @@
   }
 
   &.bottom-left {
-    border-radius: 0 0 0 20px;
+    border-radius: 0 0 0 $dashboard-table-corner-border-radius;
   }
 
   &.bottom-right {
-    border-radius: 0 0 20px;
+    border-radius: 0 0 $dashboard-table-corner-border-radius;
   }
 
   &.bottom {
-    border-radius: 0 0 20px 20px;
+    border-radius: 0 0 $dashboard-table-corner-border-radius $dashboard-table-corner-border-radius;
   }
 
   &.top {
-    border-radius: 20px 20px 0 0;
+    border-radius: $dashboard-table-corner-border-radius $dashboard-table-corner-border-radius 0 0;
   }
 }
 
 .dashboard-table-row-block + .dashboard-table-row-block {
-  margin-left: 2px;
+  margin-left: 0.125rem;
 
   @media screen and (max-width: map-get($grid-breakpoints, "lg")) {
-    margin-left: 0;
+    margin-left: map-get($spacers, 0);
   }
 
   .rtl & {
-    margin-left: 0;
-    margin-right: 2px;
+    margin-left: map-get($spacers, 0);
+    margin-right: 0.125rem;
 
     @media screen and (max-width: map-get($grid-breakpoints, "lg")) {
-      margin-right: 0;
+      margin-right: map-get($spacers, 0);
     }
   }
 }

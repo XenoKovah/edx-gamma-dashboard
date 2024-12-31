@@ -1,25 +1,25 @@
 .progress-badge {
   text-align: center;
   position: relative;
-  flex: 0 0 100px;
+  flex: 0 0 6.25rem;
   list-style: none;
 
-  @media screen and (max-width: map-get($grid-breakpoints, "xs")) {
-    margin-bottom: 25px;
+  @media screen and (max-width: map-get($grid-breakpoints, "sm")) {
+    margin-bottom: 1.563rem;
   }
 
   &.progress-badge-completed {
-    margin-top: 23px;
+    margin-top: 1.438rem;
 
     &:before {
       content: "";
-      width: 22px;
-      height: 22px;
+      width: 1.375rem;
+      height: 1.375rem;
       background: url("data:image/svg+xml,%3Csvg width='22' height='22' viewBox='0 0 22 22' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='11' cy='11' r='10' fill='%23178253' stroke='white' stroke-width='2'/%3E%3Cpath d='M7.5 12L10 14.5L15.5 9' stroke='white' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E%0A") no-repeat;
       border-radius: 50%;
       position: absolute;
       left: 50%;
-      top: -11px;
+      top: -0.688rem;
       transform: translateX(-50%);
       z-index: 4;
 
@@ -28,12 +28,12 @@
 
     .progress-badge-figure {
       position: relative;
-      width: 100px;
-      height: 100px;
+      width: 6.25rem;
+      height: 6.25rem;
       border-radius: 0;
       left: auto;
       top: auto;
-      margin-bottom: 8px;
+      margin-bottom: map-get($spacers, 2);
 
       &:before {
         display: none;
@@ -41,8 +41,8 @@
     }
 
     .progress-badge-figure-image {
-      max-width: 100px;
-      max-height: 100px;
+      max-width: 6.25rem;
+      max-height: 6.25rem;
     }
   }
 }
@@ -53,35 +53,35 @@
   justify-content: center;
   flex-direction: column;
   flex-basis: auto;
-  margin: 0 15px $space-30;
+  margin: map-get($spacers, 0) $spacer $space-30;
   width: calc(100% / 4 - #{$space-30});
 
   @media screen and (max-width: map-get($grid-breakpoints, "md")) {
     width: calc(100% / 3 - #{$space-30});
   }
 
-  @media screen and (max-width: map-get($grid-breakpoints, "xs")) {
-    margin: 0 10px $space-20;
+  @media screen and (max-width: map-get($grid-breakpoints, "sm")) {
+    margin: map-get($spacers, 0) 0.625rem $space-20;
     width: calc(50% - #{$space-20});
   }
 }
 
 .progress-badge-figure {
-  width: 90px;
-  height: 90px;
+  width: 5.625rem;
+  height: 5.625rem;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 0;
+  margin: map-get($spacers, 0);
   position: absolute;
-  left: 5px;
-  top: 5px;
+  left: 0.313rem;
+  top: 0.313rem;
   z-index: 3;
   overflow: hidden;
 
-  @media screen and (max-width: map-get($grid-breakpoints, "xs")) {
-    margin: 0 auto;
+  @media screen and (max-width: map-get($grid-breakpoints, "sm")) {
+    margin: map-get($spacers, 0) auto;
   }
 
   &:before {
@@ -91,13 +91,9 @@
     position: absolute;
     left: 0;
     top: 0;
-    border: 10px solid $white;
+    border: 0.625rem solid $white;
     border-radius: 50%;
     box-sizing: border-box;
-
-    .dashboard-modal-window-items-list & {
-      border-color: $dark-bg-color;
-    }
   }
 }
 
@@ -107,13 +103,13 @@
 
 .progress-badge-figure-image {
   display: block;
-  max-width: 70px;
-  max-height: 70px;
+  max-width: 4.375rem;
+  max-height: 4.375rem;
 }
 
 .progress-badge-title {
   font-weight: $font-weight-bold;
-  font-size: 12px;
+  font-size: $font-size-xs;
   text-transform: uppercase;
   color: $main-text-color;
   display: -webkit-box;
@@ -123,36 +119,32 @@
 }
 
 .total-progress-percent {
-  font-size: 12px;
-  line-height: 15px;
-  height: 15px;
+  font-size: $font-size-xs;
+  line-height: 0.938rem;
+  height: 0.938rem;
   color: $main-text-color;
-  margin-bottom: 8px;
+  margin-bottom: map-get($spacers, 2);
 }
 
 .progress-badge-diagram.progress {
-  width: 100px;
-  height: 100px;
+  width: 6.25rem;
+  height: 6.25rem;
   border-radius: 50%;
   background: $accent-color;
   position: relative;
   overflow: hidden;
-  margin: 0 auto 10px;
+  margin: map-get($spacers, 0) auto 0.625rem;
   border: none !important;
 
   &:before {
     content: "";
     display: block;
     position: absolute;
-    inset: 5px;
+    inset: 0.313rem;
     border-radius: 50%;
     background: $white;
     z-index: 3;
     opacity: 1;
-
-    .dashboard-modal-window-items-list & {
-      background: $dark-bg-color;
-    }
   }
 
   .piece {

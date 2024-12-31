@@ -1,21 +1,17 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import ReactModal from 'react-modal';
 
 import { useTranslate } from '../../i18n/utils';
-import DashboardTableRow from './DashboardTableRow';
 import DashboardTableRowBlock from './rowBlock/DashboardTableRowBlock';
 import CustomRowBlock from './rowBlock/CustomRowBlock';
-import { PointsDistributionChart, ProgressChart } from './charts';
-import { ProgressBadge } from './rowBlock/progress-badge';
+import { ProgressBadge, ProgressBadgesModal } from './rowBlock/progress-badge';
 import { SliderStatusesBlock } from './rowBlock/slider-statuses-block';
-import DashboardModalWindow from './DashboardModalWindow';
 import { CORNER_BOTTOM, CORNER_TOP } from './rowBlock/constants';
 import { SubHeader } from '../sub-header';
+import DashboardTableRow from './DashboardTableRow';
+import { PointsDistributionChart, ProgressChart } from './charts';
 
 const PREVIEW_BADGES_ITEMS_COUNT = 3;
-
-ReactModal.setAppElement('body');
 
 const DashboardTable = ({
   statusItems, badgeItems, progress, chart,
@@ -83,7 +79,7 @@ const DashboardTable = ({
           </DashboardTableRow>
         </div>
       </div>
-      <DashboardModalWindow
+      <ProgressBadgesModal
         isOpen={isModalOpen}
         closeCallback={() => setIsModalOpen(false)}
         title={useTranslate('performance.badges.section.all.badges.button.text')}

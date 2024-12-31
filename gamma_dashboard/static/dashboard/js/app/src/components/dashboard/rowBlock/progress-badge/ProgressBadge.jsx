@@ -90,7 +90,7 @@ const ProgressBadge = ({ data, center, children }) => {
         {...props}
       >
         <Popover.Title as="h3">
-          <strong>{title}</strong>
+          <strong>{title.toUpperCase()}</strong>
         </Popover.Title>
         <PopoverContent
           title={title}

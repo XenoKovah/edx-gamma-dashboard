@@ -1,8 +1,8 @@
 .progress-badges-list {
   display: flex;
   justify-content: space-around;
-  flex: 0 0 115px;
-  margin-top: 80px;
+  flex: 0 0 7.188rem;
+  margin-top: map-get($spacers, 6);
 
   @media screen and (max-width: map-get($grid-breakpoints, "lg")) {
     justify-content: space-between;
@@ -12,19 +12,19 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    margin-top: 40px;
+    margin-top: 2.5rem;
   }
 }
 
 .slider-statuses-block-description {
-  font-size: 16px;
-  line-height: 20px;
+  font-size: 1rem;
+  line-height: 1.25rem;
   color: $main-text-color;
-  padding: 15px 14px 0;
-  margin: 0;
+  padding: $spacer 0.875rem map-get($spacers, 0);
+  margin: map-get($spacers, 0);
 }
 
-.row-block-controls {
+.progress-badges-details-btn-wrapper {
   text-align: center;
-  margin-top: 30px;
+  margin-top: 1.875rem;
 }
