@@ -1,16 +1,17 @@
-.Badges {
+.badge-list {
+  width: 100%;
   display: flex;
+
+  @media screen and (max-width: map-get($grid-breakpoints, "md")) {
+    margin-top: $spacer;
+  }
 }
 
-.BadgeItem {
-  max-width: 48px;
-  max-height: 42px;
+.badge-item {
+  max-width: 3rem;
+  max-height: 2.625rem;
 
   &:not(:last-child) {
-    margin-right: 12px;
-
-    .rtl & {
-      margin: 0 0 0 12px;
-    }
+    @extend .mr-2;
   }
 }

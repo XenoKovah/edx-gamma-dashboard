@@ -10,26 +10,30 @@ afterEach(cleanup);
 
 describe('<LeaderboardTable>', () => {
   it('renders empty with loader', () => {
-    const { getByTestId, queryByTestId, getByRole } = renderWithProviders(<LeaderboardTable />);
+    const {
+      getByTestId,
+      queryByTestId,
+      getByRole,
+    } = renderWithProviders(<LeaderboardTable />);
 
     expect(getByTestId('leaderboard-table')).toBeInTheDocument();
-    expect(queryByTestId('leaderboard-table-row')).not.toBeInTheDocument();
+    expect(queryByTestId('leaderboard-card')).not.toBeInTheDocument();
     expect(getByRole('status')).toBeInTheDocument();
   });
 
   it.each(DataLeaderboardTable)('renders with correct number of rows', ({
-    profiles, system_statuses, delimiter, rank, // eslint-disable-line camelcase
+    profiles, system_statuses: systemStatuses, delimiter, rank,
   }) => {
     const { getAllByTestId, getByTestId } = renderWithProviders(
       <LeaderboardTable
         delimiter={delimiter}
         rank={rank}
         profiles={profiles}
-        systemStatuses={system_statuses} // eslint-disable-line camelcase
+        systemStatuses={systemStatuses}
       />,
     );
 
-    const tableRows = getAllByTestId('leaderboard-table-row');
+    const tableRows = getAllByTestId('leaderboard-card');
 
     expect(tableRows.length).toBe(profiles.length);
     expect(getByTestId('leaderboard-table-separator')).toBeInTheDocument();

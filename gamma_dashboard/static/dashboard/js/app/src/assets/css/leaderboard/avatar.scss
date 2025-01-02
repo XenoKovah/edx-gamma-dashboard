@@ -1,54 +1,52 @@
-.Avatar {
+.avatar-wrapper {
+  @extend .mr-md-3;
+  @extend .mb-2;
+  @extend .mb-md-0;
+
   position: relative;
-  width: 42px;
-  height: 42px;
-  border: 1px solid $avatar-border-color;
-  border-radius: 8px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  margin-right: 12px;
-  flex-shrink: 0;
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-position: center center;
 
   .rtl & {
-    margin: 0 0 0 12px;
-  }
-}
-
-.Avatar-Position {
-  position: absolute;
-  left: -7px;
-  top: -7px;
-  padding: 1px 4px;
-  background: $accent-color;
-  border: 1px solid $avatar-position-color;
-  border-radius: 10px;
-  color: $avatar-position-color;
-  font-weight: $font-weight-semi-bold;
-  font-size: 12px;
-  line-height: 16px;
-  min-width: 20px;
-  min-height: 20px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  box-sizing: border-box;
-
-  .rtl & {
-    left: auto;
-    right: -7px;
+    @extend .mr-md-0;
+    @extend .ml-md-3;
   }
 
-  &_winner {
+  .pgn__avatar {
+    border-color: $avatar-border-color;
+    border-radius: 10px;
+  }
+
+  .avatar-position {
+    position: absolute;
+    left: -0.4375rem;
+    top: -0.4375rem;
+    padding: 0.0625rem 0.25rem;
+    background: $accent-color;
+    border: 1px solid $avatar-position-color;
+    border-radius: 10px;
+    color: $avatar-position-color;
+    font-weight: $font-weight-semi-bold;
+    font-size: 0.75rem;
+    line-height: 1;
+    min-width: 1.25rem;
+    min-height: 1.25rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+
+    .rtl & {
+      left: auto;
+      right: -0.4375rem;
+    }
+  }
+
+  .avatar-position_winner {
     padding: 0;
     background: $white;
     border: 1px solid $avatar-position-accent-color;
   }
 
-  &_undefined {
+  .avatar-position_undefined {
     background: $avatar-border-color;
   }
 }

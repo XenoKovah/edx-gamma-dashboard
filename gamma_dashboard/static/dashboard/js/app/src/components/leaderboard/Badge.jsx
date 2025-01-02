@@ -1,14 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Image } from '@openedx/paragon';
 
 import { buildURL } from '../../utils';
+import { useTranslate } from '../../i18n/utils';
 
 const Badge = ({ url }) => (
-  <img
-    className="BadgeItem"
+  <Image
+    className="badge-item"
     data-testid="leaderboard-badge"
     src={buildURL(url)}
-    alt="leaderboard badge"
+    alt={useTranslate('performance.badges.item.image.alternative.text')}
   />
 );
 

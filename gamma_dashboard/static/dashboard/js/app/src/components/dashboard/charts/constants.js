@@ -17,6 +17,11 @@ export const COLOR_PALETTE = {
   light: '#fafafa',
   oliveGreen: '#556b2f',
   lightGray: '#dfe0e8',
+  gold: '#f8b805',
+  silver: '#afbac7',
+  bronze: '#e6814d',
+  avatarImageBgGray: '#cde4fc',
+  avatarLetterBgGray: '#303030',
 };
 
 export const chartTitleStyles = {

@@ -1,31 +1,32 @@
 import React from 'react';
 import '@testing-library/jest-dom';
-import { render, cleanup } from '@testing-library/react';
+import { cleanup } from '@testing-library/react';
 
-import LeaderboardTableRow from '../LeadeboardTableRow';
-import DataLeaderboardTableRow from './__mock__/DataLeaderboardTableRow.json';
+import { renderWithProviders } from '../../../setupTests';
+import LeaderboardCard from '../LeaderboardCard';
+import DataLeaderboardCard from './__mock__/DataLeaderboardCard.json';
+
+const BADGES_IN_FULL_LINE = 17;
+const { profile, status, rank } = DataLeaderboardCard;
 
 afterEach(cleanup);
 
-const BADGES_IN_FULL_LINE = 17;
-const { profile, status, rank } = DataLeaderboardTableRow;
-
-describe('<LeaderboardTableRow>', () => {
+describe('<LeaderboardCard>', () => {
   it('renders', () => {
-    const { getByTestId } = render(
-      <LeaderboardTableRow
+    const { getByTestId } = renderWithProviders(
+      <LeaderboardCard
         profile={profile}
         status={status}
         rank={rank}
       />,
     );
 
-    expect(getByTestId('leaderboard-table-row')).toBeInTheDocument();
+    expect(getByTestId('leaderboard-card')).toBeInTheDocument();
   });
 
   it('renders with an avatar and correct name', () => {
-    const { getAllByTestId } = render(
-      <LeaderboardTableRow
+    const { getAllByTestId, getAllByText } = renderWithProviders(
+      <LeaderboardCard
         profile={profile}
         status={status}
         rank={rank}
@@ -33,7 +34,7 @@ describe('<LeaderboardTableRow>', () => {
     );
 
     const avatars = getAllByTestId('avatar');
-    const usernames = getAllByTestId('username');
+    const usernames = getAllByText(profile.user_uid);
 
     expect(avatars.length).toBe(1);
     expect(usernames.length).toBe(1);
@@ -41,8 +42,8 @@ describe('<LeaderboardTableRow>', () => {
   });
 
   it('renders with correct `points` value', () => {
-    const { getByTestId } = render(
-      <LeaderboardTableRow
+    const { getByTestId } = renderWithProviders(
+      <LeaderboardCard
         profile={profile}
         status={status}
         rank={rank}
@@ -56,8 +57,8 @@ describe('<LeaderboardTableRow>', () => {
   });
 
   it(`renders ${BADGES_IN_FULL_LINE} badges`, () => {
-    const { getAllByTestId } = render(
-      <LeaderboardTableRow
+    const { getAllByTestId } = renderWithProviders(
+      <LeaderboardCard
         profile={profile}
         status={status}
         rank={rank}
@@ -71,35 +72,16 @@ describe('<LeaderboardTableRow>', () => {
 
   it('renders with status', () => {
     const testStatus = 'Test Status';
-    const { getByTestId } = render(
-      <LeaderboardTableRow
+    const { getByText } = renderWithProviders(
+      <LeaderboardCard
         profile={profile}
         status={testStatus}
         rank={rank}
       />,
     );
 
-    const userStatus = getByTestId('userstatus');
-
-    expect(userStatus).toBeInTheDocument();
-    expect(userStatus).toHaveTextContent(testStatus);
-  });
-
-  it('renders without `user_uid` data', () => {
-    const profileWithoutUserUID = { ...profile };
-
-    delete profileWithoutUserUID.user_uid;
-
-    const { getByTestId } = render(
-      <LeaderboardTableRow
-        profile={profileWithoutUserUID}
-        status={status}
-        rank={rank}
-      />,
-    );
-    const username = getByTestId('username');
-
-    expect(username.textContent).toBe('');
+    expect(getByText(profile.position)).toBeInTheDocument();
+    expect(getByText(testStatus)).toBeInTheDocument();
   });
 
   it('renders without `points` data', () => {
@@ -107,8 +89,8 @@ describe('<LeaderboardTableRow>', () => {
 
     delete profileWithoutPointsData.points;
 
-    const { getByTestId } = render(
-      <LeaderboardTableRow
+    const { getByTestId } = renderWithProviders(
+      <LeaderboardCard
         profile={profileWithoutPointsData}
         status={status}
         rank={rank}
@@ -126,8 +108,8 @@ describe('<LeaderboardTableRow>', () => {
 
     delete profileWithoutBadgesData.badges;
 
-    const { queryAllByTestId } = render(
-      <LeaderboardTableRow
+    const { queryAllByTestId } = renderWithProviders(
+      <LeaderboardCard
         profile={profileWithoutBadgesData}
         status={status}
         rank={rank}

@@ -21,7 +21,8 @@ export const ProgressPropType = {
 };
 
 export const StatusPropType = {
-  status_uid: PropTypes.string.isRequired,
+  status_uid: PropTypes.string,
+  statusUid: PropTypes.string,
   slug: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
   description: PropTypes.string,
@@ -29,4 +30,23 @@ export const StatusPropType = {
   statusPoints: PropTypes.number.isRequired,
   color: PropTypes.string.isRequired,
   url: PropTypes.string.isRequired,
+};
+
+export const BadgePropType = {
+  title: PropTypes.string,
+  description: PropTypes.string,
+  done: PropTypes.bool,
+  progress: PropTypes.shape(ProgressPropType),
+  url: PropTypes.string,
+};
+
+export const ProfilePropType = {
+  user_uid: PropTypes.string,
+  signup_source: PropTypes.string,
+  points: PropTypes.number,
+  url_profile_image: PropTypes.string,
+  badges: PropTypes.objectOf(PropTypes.shape(BadgePropType)),
+  systemStatuses: PropTypes.arrayOf(PropTypes.shape(StatusPropType)),
+  system_events: PropTypes.arrayOf(EventPropType).isRequired,
+  position: PropTypes.number,
 };

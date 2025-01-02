@@ -89,6 +89,11 @@ const en = {
     defaultMessage: '{previewBadgeItemsLength} of {badgeItemsLength}',
     description: 'Text displaying a count of items or badges, with placeholders for dynamic values',
   },
+  'performance.badges.empty.message.text': {
+    id: 'performance.badges.empty.message.text',
+    defaultMessage: 'No badges yet...',
+    description: 'Empty message when badges list doesn\'t have any badges',
+  },
   'performance.badges.section.description.text': {
     id: 'performance.badges.section.description.text',
     defaultMessage: 'You get badges for specific combo actions on the platform. Hover on a badge what to do to get one.',
@@ -108,6 +113,11 @@ const en = {
     id: 'performance.badges.section.total.badges.button.text',
     defaultMessage: 'Total badges',
     description: 'Label text for all available badges in the performance section',
+  },
+  'performance.badges.item.image.alternative.text': {
+    id: 'performance.badges.item.image.alternative.text',
+    defaultMessage: 'Leaderboard badge',
+    description: 'Alternative text for badge image in the performance section',
   },
   'performance.statuses.section.heading.text': {
     id: 'performance.statuses.section.heading.text',
@@ -163,6 +173,11 @@ const en = {
     id: 'leaderboard.status.empty.text',
     defaultMessage: 'No status so far',
     description: 'Text displayed when there are no available statuses in the leaderboard',
+  },
+  'leaderboard.avatar.alt.text': {
+    id: 'leaderboard.avatar.alt.text',
+    defaultMessage: '{username} profile image',
+    description: 'Alternative text for user profile image in the leaderboard',
   },
   'chart.downloadJPEG': {
     id: 'chart.downloadJPEG',

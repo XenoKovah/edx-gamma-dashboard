@@ -1,0 +1,67 @@
+.leaderboard-card {
+  @extend .mb-2;
+
+  border: 1px solid transparent;
+
+  &.highlighted {
+    border-color: $accent-color;
+  }
+
+  .pgn__card-body {
+    width: auto;
+  }
+
+  &.pgn__card .pgn__card-header {
+    @extend .p-0;
+
+    .pgn__card-header-content {
+      @extend .m-0;
+      @extend .pr-2;
+
+      .rtl & {
+        @extend .pr-0;
+        @extend .pl-2;
+      }
+
+      width: 15.6rem;
+      color: $secondary-text-color;
+      overflow: visible;
+    }
+
+    [class*="pgn__card-header-title"] {
+      font-weight: $font-weight-bold;
+      font-size: 1rem;
+      line-height: 1.3;
+      word-break: break-word;
+      color: inherit;
+      text-transform: uppercase;
+    }
+
+    [class*="pgn__card-header-subtitle"] {
+      @extend .mt-1;
+
+      font-size: 1rem;
+      line-height: 1.2;
+      color: inherit;
+
+      &:empty {
+        display: none;
+      }
+    }
+  }
+
+  .pgn__card-footer {
+    min-height: 2rem;
+  }
+}
+
+.leaderboard-card-progress {
+  font-size: 1rem;
+  line-height: 1.2;
+  width: 11.2rem;
+  flex-shrink: 0;
+
+  @media screen and (max-width: map-get($grid-breakpoints, "md")) {
+    text-align: center;
+  }
+}

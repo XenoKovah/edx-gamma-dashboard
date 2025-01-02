@@ -1,55 +1,62 @@
 import React from 'react';
-
 import '@testing-library/jest-dom';
-import { render, cleanup } from '@testing-library/react';
+import { cleanup } from '@testing-library/react';
 
+import { renderWithProviders } from '../../../setupTests';
 import Avatar from '../Avatar';
+
+const username = 'John';
+const profileImage = '/images/default.png';
 
 afterEach(cleanup);
 
 describe('<Avatar>', () => {
   it('renders', () => {
-    const { getByTestId } = render(<Avatar />);
+    const { getByTestId } = renderWithProviders(<Avatar />);
 
     expect(getByTestId('avatar')).toBeInTheDocument();
   });
 
-  it('renders with correct username', () => {
-    const testName = 'Ivasyk';
-
-    const { getByText } = render(<Avatar username={testName} />);
-
-    expect(getByText('I')).toBeInTheDocument();
-  });
-
   it('renders with empty username', () => {
-    const { getByText } = render(<Avatar />);
+    const { getByText } = renderWithProviders(<Avatar />);
 
     expect(getByText('-')).toBeInTheDocument();
   });
 
   it('has correct colors', () => {
-    const { getByTestId } = render(<Avatar />);
+    const { getByTestId } = renderWithProviders(<Avatar />);
     const testBackgroundColor = '#cde4fc';
     const testFontColor = '#303030';
     const avatar = getByTestId('avatar');
-    const avatarLetter = getByTestId('avatar-logo');
+    const avatarLetter = getByTestId('avatar-letter-logo');
 
     expect(avatar).toHaveStyle(`background-color: ${testBackgroundColor}`);
     expect(avatarLetter).toHaveStyle(`color: ${testFontColor}`);
   });
 
   it('renders profile image', () => {
-    const { getByTestId } = render(<Avatar urlProfileImage="/images/defaul.png" />);
-    const backgroundImage = 'url(/images/defaul.png)';
+    const { getByAltText } = renderWithProviders(
+      <Avatar username={username} urlProfileImage={profileImage} />,
+    );
 
-    expect(getByTestId('avatar')).toBeInTheDocument();
-    expect(getByTestId('avatar')).toHaveStyle({ backgroundImage });
+    expect(getByAltText(`${username} profile image`)).toHaveAttribute('src', profileImage);
   });
 
   it('always renders username with the first character capitalized', () => {
-    const { getByText } = render(<Avatar username="name" />);
+    const { getByText } = renderWithProviders(<Avatar username={username} />);
 
-    expect(getByText('N')).toBeInTheDocument();
+    expect(getByText('J')).toBeInTheDocument();
+  });
+
+  it('renders an icon instead of a position number', () => {
+    const { getByLabelText } = renderWithProviders(<Avatar username={username} position={1} />);
+
+    expect(getByLabelText('1')).toBeInTheDocument();
+  });
+
+  it('renders a position number', () => {
+    const { getByText } = renderWithProviders(<Avatar username={username} position={10} />);
+
+    expect(getByText('10')).toBeInTheDocument();
   });
 });

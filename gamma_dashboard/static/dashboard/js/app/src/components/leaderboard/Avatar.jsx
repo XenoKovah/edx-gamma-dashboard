@@ -1,48 +1,62 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Avatar as AvatarImage } from '@openedx/paragon';
+import { Award as AwardIcon } from '@openedx/paragon/icons';
 
-import cupGold from '../../assets/images/cup-gold.svg';
-import cupSilver from '../../assets/images/cup-silver.svg';
-import cupBronze from '../../assets/images/cup-bronze.svg';
+import { useTranslate } from '../../i18n/utils';
+import { capitalizeFirstLetter } from '../../utils';
+import { COLOR_PALETTE } from '../dashboard/charts/constants';
+
+const CUP_COLORS = [COLOR_PALETTE.gold, COLOR_PALETTE.silver, COLOR_PALETTE.bronze];
 
 const Avatar = ({ username, urlProfileImage, position }) => {
-  const firstLetter = username ? username.charAt(0).toUpperCase() : '-';
+  const firstLetter = capitalizeFirstLetter(username).charAt(0) || '-';
+  const messages = {
+    avatarAltText: useTranslate('leaderboard.avatar.alt.text', { username }),
+  };
+
   const getPositionForAvatar = () => {
-    const cups = [cupGold, cupSilver, cupBronze];
     switch (position) {
       case 1:
       case 2:
       case 3:
         return (
-          <span className="Avatar-Position Avatar-Position_winner">
-            <img src={cups[position - 1]} alt="" />
+          <span className="avatar-position avatar-position_winner">
+            <AwardIcon style={{ color: CUP_COLORS[position - 1] }} aria-label={position} />
           </span>
         );
       case null:
         return (
-          <span className="Avatar-Position Avatar-Position_undefined">?</span>
+          <span className="avatar-position avatar-position_undefined">?</span>
         );
       default:
         return (
-          <span className="Avatar-Position">{position}</span>
+          <span className="avatar-position">{position}</span>
         );
     }
   };
 
   return (
     <div
-      className="Avatar"
+      className="avatar-wrapper"
       data-testid="avatar"
-      style={urlProfileImage ? { backgroundImage: `url(${urlProfileImage})` } : { backgroundColor: '#cde4fc' }}
+      style={{ backgroundColor: !urlProfileImage ? COLOR_PALETTE.avatarImageBgGray : 'transparent' }}
     >
-      {!urlProfileImage && (
-      <span
-        className="Avatar-Logo"
-        data-testid="avatar-logo"
-        style={{ color: '#303030' }}
-      >
-        {firstLetter}
-      </span>
+      {urlProfileImage ? (
+        <AvatarImage
+          size="md"
+          className="flex-shrink-0"
+          src={urlProfileImage}
+          alt={messages.avatarAltText}
+        />
+      ) : (
+        <span
+          className="avatar-letter"
+          data-testid="avatar-letter-logo"
+          style={{ color: COLOR_PALETTE.avatarLetterBgGray }}
+        >
+          {firstLetter}
+        </span>
       )}
       {getPositionForAvatar()}
     </div>

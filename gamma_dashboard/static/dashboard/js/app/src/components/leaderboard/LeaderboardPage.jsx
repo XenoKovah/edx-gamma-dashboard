@@ -2,16 +2,16 @@ import React, { useState, useEffect } from 'react';
 
 import { gammaApi } from '../../api';
 import { useTranslate } from '../../i18n/utils';
-import { getLeaderboardTableProps } from './utils';
-import LeaderboardTable from './LeaderboardTable';
 import { useScrollToContent } from '../generic/hooks';
 import { SubHeader } from '../sub-header';
+import { getLeaderboardTableProps } from './utils';
+import LeaderboardTable from './LeaderboardTable';
 
 const LeaderboardPage = () => {
   const [data, setData] = useState({
     top10: [],
     competitors: [],
-    rank: null,
+    rank: 0,
     userUid: null,
     urlProfileImage: '',
     systemStatuses: [],
@@ -30,7 +30,12 @@ const LeaderboardPage = () => {
     }));
   }, []);
 
-  const propsLeaderboardTable = getLeaderboardTableProps(data);
+  const {
+    rank,
+    profiles,
+    delimiter,
+    systemStatuses,
+  } = getLeaderboardTableProps(data);
 
   return (
     <>
@@ -39,10 +44,10 @@ const LeaderboardPage = () => {
         title={useTranslate('leaderboard.heading.text')}
       />
       <LeaderboardTable
-        delimiter={propsLeaderboardTable.delimiter}
-        rank={propsLeaderboardTable.rank}
-        profiles={propsLeaderboardTable.profiles}
-        systemStatuses={propsLeaderboardTable.systemStatuses}
+        rank={rank}
+        profiles={profiles}
+        delimiter={delimiter}
+        systemStatuses={systemStatuses}
       />
     </>
   );

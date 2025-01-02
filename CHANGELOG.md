@@ -2,6 +2,7 @@
 
 ## [Unreleased]
 ## Changed
+- [NAU-120]: Refactored and replaced custom Leaderboard components with paragon components.
 - [NAU-116] Replaced badge list modal window for Dashboard page.
 - [NAU-116] Updated Feedback modal window.
 - [NAU-115] Improved Badge Popup component.
