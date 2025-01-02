@@ -1,17 +1,14 @@
 import axios from 'axios';
 
-const API_VERSION = 0;
-const BASE_URL = `/gamma_dashboard/api/v${API_VERSION}/`;
-
-const LEADERBOARD_URLS = {
-  getInfo: `${BASE_URL}leaderboard/`,
-};
-const DASHBOARD_URLS = {
-  getGameProfile: `${BASE_URL}game-profile/`,
-};
-const FEEDBACK_FORM_URL = '/rg_products_toolkit/api/v0/submit_feedback/';
+import { prepareDashboardData } from './utils';
+import { DASHBOARD_URLS, FEEDBACK_FORM_URL, LEADERBOARD_URLS } from './constants';
 
 const leaderboard = {
+  /**
+   * Fetches leaderboard information.
+   *
+   * @param {Function} callback - Callback function to handle the response data.
+   */
   getInfo: (callback) => {
     axios.get(
       LEADERBOARD_URLS.getInfo,
@@ -26,11 +23,16 @@ const leaderboard = {
 };
 
 const dashboard = {
+  /**
+   * Fetches game profile data and processes it.
+   *
+   * @param {Function} callback - Callback function to handle the processed data.
+   */
   getGameProfile: (callback) => {
     axios.get(
       DASHBOARD_URLS.getGameProfile,
     ).then(result => {
-      callback(result.data || {});
+      callback(prepareDashboardData(result.data) || {});
     }).catch(error => {
       // eslint-disable-next-line no-console
       console.log('Dashboard.getGameProfile::ERROR: ', error);
@@ -39,10 +41,21 @@ const dashboard = {
   },
 };
 
+/**
+ * Sends feedback form data to the server.
+ *
+ * @param {Object} body - The data to be sent in the feedback form.
+ * @param {Function} callback - Callback function to handle the server response.
+ */
 const sendFeedbackForm = (body, callback) => {
   const csrfToken = document.cookie.match('(^|;)\\s*csrftoken\\s*=\\s*([^;]+)')?.pop();
 
-  axios.post(FEEDBACK_FORM_URL, body, { headers: { 'Content-Type': 'application/json', 'X-CSRFToken': csrfToken } }).then(result => {
+  axios.post(FEEDBACK_FORM_URL, body, {
+    headers: {
+      'Content-Type': 'application/json',
+      'X-CSRFToken': csrfToken,
+    },
+  }).then(result => {
     callback(result.status);
   }).catch(error => {
     // eslint-disable-next-line no-console

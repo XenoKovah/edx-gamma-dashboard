@@ -1,8 +1,14 @@
+// By targeting specific root elements of the React application, we isolate styles
+// and avoid unintended side effects in the Legacy LMS.
+// In addition to #app, we include style imports for Paragon elements that are rendered directly
+// into the DOM under the <body>.
+// TODO: This isolation can be removed once the React application is no longer embedded
+// within the legacy LMS interface, as style conflicts will no longer be a concern.
 #app,
 #paragon-portal-root,
-.ReactModalPortal {
-  // By targeting specific root elements of the React application, we isolate styles
-  // and avoid unintended side effects in the Legacy LMS.
+.ReactModalPortal,
+.progress-badge-popover,
+.slider-item-progress-track-tooltip {
   @import "@openedx/paragon/scss/core/core";
   @import "variables";
   @import "./global";
@@ -11,7 +17,7 @@
   @import "./dashboard";
   @import "./sub-header";
 
-  font-family: "Open Sans", Roboto, Helvetica, Arial, sans-serif;
+  font-family: $primary-font-family;
   font-weight: $font-weight-normal;
   margin: 2.625rem auto 0;
   max-width: 75rem;

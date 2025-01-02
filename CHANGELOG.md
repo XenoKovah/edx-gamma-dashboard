@@ -2,6 +2,8 @@
 
 ## [Unreleased]
 ## Changed
+- [NAU-113] DashboardPage component refactoring
+  - Refactored API scripts, styles and Dashboard page components
 - [NAU-120]: Refactored and replaced custom Leaderboard components with paragon components.
 - [NAU-116] Replaced badge list modal window for Dashboard page.
 - [NAU-116] Updated Feedback modal window.

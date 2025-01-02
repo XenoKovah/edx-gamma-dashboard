@@ -4,7 +4,7 @@ import '@testing-library/jest-dom';
 import { cleanup, within } from '@testing-library/react';
 
 import { renderWithProviders } from '../../../setupTests';
-import { ProgressBadgesModal } from '../rowBlock/progress-badge';
+import { ProgressBadgesModal } from '../components/progress-badge';
 import {
   parsedBadgeItems,
   parsedStatusItems,

@@ -10,6 +10,7 @@ import MockAdapter from 'axios-mock-adapter';
 import { gammaApi } from '..';
 
 import { gameProfileData } from '../../__mocks__/dashboard';
+import { prepareDashboardData } from '../utils';
 
 const correctProfilesData = {
   gameprofiles: [
@@ -90,7 +91,7 @@ describe('ApiRequests', () => {
       gammaApi.dashboard.getGameProfile(callback);
       await flushPromises();
 
-      expect(callback).toHaveBeenCalledWith(gameProfileData);
+      expect(callback).toHaveBeenCalledWith(prepareDashboardData(gameProfileData));
     });
 
     it('getGameProfile returns empty data on error', async () => {

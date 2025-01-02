@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<DashboardSectionHeader> renders 1`] = `
+"<header class="dashboard-section-header" data-testid="dashboard-section-header">
+  <h2 class="dashboard-section-header-title" data-testid="dashboard-section-header-title">Test title</h2>
+  <div class="dashboard-section-header-status" data-testid="dashboard-section-header-status"><span class="badge badge-info">Test status</span></div>
+  <p class="dashboard-section-header-description" data-testid="dashboard-section-header-description">Test description</p>
+</header>"
+`;

@@ -2,25 +2,37 @@ import React, { useState } from 'react';
 import {
   Dropdown, Hyperlink, Icon, Image, useToggle,
 } from '@openedx/paragon';
-import { ArrowDropDown } from '@openedx/paragon/icons';
+import { ArrowDropDown as ArrowDropDownIcon } from '@openedx/paragon/icons';
 
 import { useTranslate } from '../../../i18n/utils';
+import { gammaApi } from '../../../api';
 import { Modal } from '../modal';
-import { FeedbackForm } from './components';
+import { FeedbackForm } from './feedback-form';
 import { GAMIFICATION_GUIDE_URL, PRODUCT_NAME } from './constants';
 
 import LogoImage from '../../../assets/images/logo.svg';
-import { gammaApi } from '../../../api';
-import { getTranslations } from './components/utils';
 
 const LogoDropdown = () => {
   const [isModalOpen, openModal, closeModal] = useToggle(false);
   const [isValidData, setIsValidData] = useState(false);
 
+  const messages = {
+    SUBJECT_LIST: [
+      useTranslate('logo.dropdown.feedback.form.subject.question.text'),
+    ],
+    confirmButtonText: useTranslate('logo.dropdown.feedback.form.alert.button.submit.text'),
+    cancelButtonText: useTranslate('logo.dropdown.feedback.form.button.cancel.text'),
+    submitButtonText: useTranslate('logo.dropdown.feedback.form.button.submit.text'),
+    guideItemText: useTranslate('logo.dropdown.guide.item.text'),
+    feedbackItemText: useTranslate('logo.dropdown.feedback.item.text'),
+    imageAltText: useTranslate('generic.logo-dropdown.image.screen-reader.text'),
+    feedbackModalTitle: useTranslate('logo.dropdown.feedback.item.text'),
+  };
+
   const [requestStatus, setRequestStatus] = useState(null);
   const [formData, setFormData] = useState({
     message: '',
-    subject: getTranslations().SUBJECT_LIST[0],
+    subject: messages.SUBJECT_LIST[0],
     product: PRODUCT_NAME,
   });
   const isSuccess = requestStatus === 200;
@@ -32,19 +44,20 @@ const LogoDropdown = () => {
       as: Hyperlink,
       target: '_blank',
       href: GAMIFICATION_GUIDE_URL,
-      content: useTranslate('logo.dropdown.guide.item.text'),
+      content: messages.guideItemText,
       destination: '', // TODO: Paragon bug, if the component as a Hyperlink link must be passed via `destination` without `href`.
     },
     {
       type: 'button',
       onClick: openModal,
-      content: useTranslate('logo.dropdown.feedback.item.text'),
+      content: messages.feedbackItemText,
     },
   ];
 
   const handleCloseFeedbackModal = () => {
     closeModal();
     setIsValidData(false);
+    setFormData({ ...formData, message: '' });
   };
 
   const isDataValid = (data) => {
@@ -59,6 +72,7 @@ const LogoDropdown = () => {
     }
 
     gammaApi.sendFeedbackForm(formData, setRequestStatus);
+    setFormData({ ...formData, message: '' });
   };
 
   const handleChange = ({ target }) => {
@@ -75,9 +89,9 @@ const LogoDropdown = () => {
           <Image
             className="logo-dropdown-img"
             src={LogoImage}
-            alt={useTranslate('generic.logo-dropdown.image.screen-reader.text')}
+            alt={messages.imageAltText}
           />
-          <Icon src={ArrowDropDown} variant="tertiary" />
+          <Icon src={ArrowDropDownIcon} variant="tertiary" />
         </Dropdown.Toggle>
         <Dropdown.Menu>
           {dropdownItems.map((item) => (
@@ -89,12 +103,12 @@ const LogoDropdown = () => {
       </Dropdown>
       <Modal
         isOpen={isModalOpen}
-        title={useTranslate('logo.dropdown.feedback.item.text')}
+        title={messages.feedbackModalTitle}
         handleClose={handleCloseFeedbackModal}
-        closeBtnTitle={isSuccess ? getTranslations().confirmButtonText : 'Cancel'}
+        closeBtnTitle={isSuccess ? messages.confirmButtonText : messages.cancelButtonText}
         submitBtnOptions={{
           show: !isSuccess,
-          title: getTranslations().submitButtonText,
+          title: messages.submitButtonText,
           submitFn: handleSubmitFeedbackModalData,
           disabled: !isValidData,
         }}

@@ -1,0 +1,11 @@
+.dashboard-page {
+  font-weight: $font-weight-normal;
+  font-size: $font-size-xs;
+  margin: 2.625rem auto 3.438rem;
+  padding: map-get($spacers, 0);
+  color: $main-text-color;
+
+  .dashboard-page-body {
+    overflow: hidden;
+  }
+}

@@ -19,7 +19,7 @@ describe('<DashboardPage>', () => {
       renderWithProviders(<DashboardPage />);
     });
 
-    const dashboardTable = screen.getByTestId('dashboard-table');
+    const dashboardTable = screen.getByTestId('dashboard-page');
 
     expect(dashboardTable).toBeInTheDocument();
     expect(axios.get).toBeCalled();
@@ -36,7 +36,7 @@ describe('<DashboardPage>', () => {
     act(() => {
       const { getByTestId } = renderWithProviders(<DashboardPage />);
 
-      const dashboardTable = getByTestId('dashboard-table');
+      const dashboardTable = getByTestId('dashboard-page');
       expect(dashboardTable).toBeInTheDocument();
     });
   });

@@ -124,6 +124,11 @@ const en = {
     defaultMessage: 'Your Statuses',
     description: 'Heading text for the statuses section in the performance page',
   },
+  'performance.statuses.section.progress-track.item.text': {
+    id: 'performance.statuses.section.progress-track.item.tex',
+    defaultMessage: 'Progress points: {pointsCount}',
+    description: 'Label for progress track items indicating the number of progress points.',
+  },
   'performance.statuses.section.description.text': {
     id: 'performance.statuses.section.description.text',
     defaultMessage: 'The more points you have, the higher status you own.',
@@ -223,6 +228,11 @@ const en = {
     id: 'dashboard.progress-badge.figure.image.screen-reader.text',
     defaultMessage: 'Progress figure',
     description: 'Alt text for the progress-badge image.',
+  },
+  'dashboard.progress-badge.modal.button.close.text': {
+    id: 'dashboard.progress-badge.modal.button.close.text',
+    defaultMessage: 'Close',
+    description: 'Label for the button used to close the progress badge modal.',
   },
   'dashboard.slider-item.info.icon.complete.screen-reader.text': {
     id: 'dashboard.slider-item.info.icon.complete.screen-reader.text',

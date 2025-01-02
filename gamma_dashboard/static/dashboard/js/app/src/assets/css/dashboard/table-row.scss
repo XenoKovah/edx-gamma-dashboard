@@ -1,8 +1,0 @@
-.dashboard-table-row {
-  display: flex;
-  justify-content: space-between;
-
-  @media screen and (max-width: map-get($grid-breakpoints, "lg")) {
-    flex-direction: column;
-  }
-}

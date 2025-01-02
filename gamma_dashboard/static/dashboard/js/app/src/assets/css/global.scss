@@ -4,38 +4,60 @@
   background-color: $white;
 }
 
-.btn:not(.pgn__menu-select button, .btn-logo) {
-  color: $accent-color;
-  background: transparent;
-  border: 2px solid $accent-color !important;
-  display: inline-block;
-  min-width: 84px;
-  font-size: $font-size-xs;
-  text-transform: uppercase;
-  font-weight: 600;
-  box-shadow: none;
-  line-height: normal;
-  padding: 7px 5px 6px;
-  transition: all 0.15s linear;
-  border-radius: 15px !important;
-  text-align: center;
+.slick-dots button {
   text-shadow: none;
+  box-shadow: none;
+  border: 1px solid transparent;
+
+  &:hover,
+  &:focus {
+    background-color: $white;
+    background-image: none;
+    border: 1px solid $accent-color;
+    opacity: 0.8;
+  }
+}
+
+.badge-info {
+  background-color: $accent-color;
 
   &:hover {
-    background: $accent-color !important;
-    color: $white !important;
+    background-color: $accent-color;
   }
+}
 
-  &:focus:before {
-    border-radius: calc(1.375rem + 4px);
-    border: solid 2px $accent-color;
-  }
+.slick-prev,
+.slick-next {
+  position: absolute;
+}
 
-  &.btn-outline-primary:not(:disabled, .disabled):active {
+.btn:not(.pgn__menu-select button, .btn-logo) {
+  box-shadow: none;
+  text-shadow: none;
+  background: transparent;
+
+  &.btn-outline-primary {
+    border-color: $accent-color !important;
     color: $accent-color;
 
-    &:hover {
+    &:hover,
+    &:focus {
+      background: $accent-color;
       color: $white;
+    }
+
+    &:focus:before {
+      border-color: $accent-color;
+    }
+  }
+
+  &.btn-tertiary:not(:disabled, .disabled) {
+    color: $gray-700;
+    border-color: transparent;
+
+    &:hover,
+    &:focus {
+      background-color: $light-500;
     }
   }
 }

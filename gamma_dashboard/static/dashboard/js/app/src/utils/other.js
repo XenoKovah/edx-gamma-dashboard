@@ -63,3 +63,24 @@ export const getCookieByName = (cookieName) => {
   }
   return null;
 };
+
+/**
+ * Gets the value from the CSS variable.
+ * If the variable does not exist, returns the default value.
+ *
+ * @param {string} variableName - The name of the CSS variable (e.g. '--primary-color').
+ * @param {string} defaultValue - The default value if the variable is not found.
+ * @returns {string} The value from the CSS variable or the default value.
+ */
+export const getCssVariableValue = (variableName, defaultValue) => {
+  if (!variableName.startsWith('--')) {
+    console.warn(`CSS variables must start with "--": ${variableName}`); // eslint-disable-line no-console
+    return defaultValue;
+  }
+
+  const root = document.documentElement;
+  const style = getComputedStyle(root);
+  const value = style.getPropertyValue(variableName).trim();
+
+  return value || defaultValue;
+};
