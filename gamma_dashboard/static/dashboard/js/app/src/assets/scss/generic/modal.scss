@@ -1,0 +1,100 @@
+.gamification-modal-dialog {
+  .pgn__modal-header {
+    padding: 1.25rem 1.5rem $spacer !important;
+
+    .pgn__modal-title {
+      color: $secondary-text-color;
+      font-family: $font;
+    }
+  }
+
+  .pgn__modal-body-content {
+    .pgn__form-label {
+      font-size: $font-size-xs;
+      margin-bottom: map-get($spacers, 0);
+    }
+
+    .pgn__menu-select button {
+      border: 1px solid $secondary-text-color !important;
+      border-radius: 0.188rem;
+      font-size: $font-size-base;
+      font-family: $font;
+      color: $secondary-text-color;
+      letter-spacing: normal;
+      width: 100%;
+      max-width: none;
+      justify-content: space-between;
+      text-shadow: none;
+      box-shadow: none;
+      background: none;
+
+      &[aria-expanded="true"] svg {
+        transform: rotate(180deg);
+      }
+
+      &:active,
+      &:focus,
+      &:hover {
+        background: none;
+        border: none;
+        box-shadow: none;
+      }
+
+      &:focus:before {
+        display: none;
+      }
+    }
+
+    .pgn__menu-item {
+      width: 100%;
+      max-width: none;
+      line-height: normal;
+
+      &:hover {
+        background: #f2f0ef;
+      }
+    }
+
+    .pgn__menu-select-popup,
+    .pgn__menu-select-popup > div {
+      width: 100%;
+    }
+
+    .pgn__form-control-decorator-group {
+      margin-inline-end: map-get($spacers, 0);
+    }
+
+    textarea.form-control {
+      height: 7.625rem;
+      font-style: normal;
+      font-family: $font;
+    }
+
+    .pgn__form-control-floating-label-text {
+      color: $secondary-text-color;
+      font: $font-weight-normal #{$font-size-base}/1.2rem $font;
+    }
+  }
+
+  .pgn__modal-close-button {
+    background-image: none;
+    box-shadow: none;
+
+    &:hover {
+      background-color: $accent-color;
+
+      svg {
+        color: $white;
+      }
+    }
+
+    &:active,
+    &:focus {
+      box-shadow: inset 0 0 0 2px $accent-color;
+    }
+
+    svg {
+      color: $accent-color;
+    }
+  }
+}

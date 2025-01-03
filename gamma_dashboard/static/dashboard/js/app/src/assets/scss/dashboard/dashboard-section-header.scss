@@ -1,0 +1,30 @@
+.dashboard-section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  margin: 0.313rem 0.875rem;
+
+  h2.dashboard-section-header-title,
+  .dashboard-section-header-status {
+    color: $blue-text-color;
+    text-transform: uppercase;
+    margin-bottom: 0.375rem;
+    font: $font-weight-bold 1.063rem/normal $font;
+  }
+
+  .dashboard-section-header-status {
+    font-size: 1rem;
+    text-transform: none;
+  }
+
+  .dashboard-section-header-description {
+    color: $main-text-color;
+    font-size: 1rem;
+    font-weight: $font-weight-normal;
+
+    &:empty {
+      display: none;
+    }
+  }
+}

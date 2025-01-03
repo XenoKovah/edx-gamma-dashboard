@@ -1,11 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import './assets/css/main.scss';
+import AppRoutes from './routes/AppRoutes';
 
-import App from './components';
+import 'slick-carousel/slick/slick.scss';
+import 'slick-carousel/slick/slick-theme.scss';
+import './assets/scss/index.scss';
 
 ReactDOM.render(
-  <App />,
+  <AppRoutes />,
   document.getElementById('app'),
 );

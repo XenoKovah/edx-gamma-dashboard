@@ -173,3 +173,20 @@ You can use translations in two main ways:
        <FormattedMessage id="header.main.title" defaultMessage="Welcome to the project" />
      </h1>
    );
+
+### Styling Guidelines
+
+This application is embedded within the edX ecosystem, inheriting styles from both the legacy edX styles and the **Paragon** component library. As such, the application's styling is a combination of these inherited designs and custom theming.
+
+#### Theming
+
+Custom theming for colors, fonts, and other design elements is implemented using the **legacy theme**. This is achieved by overriding CSS variables prefixed with `--rgg`.
+
+#### CSS Variables
+
+A comprehensive list of available CSS variables for customization can be found in the following files:
+
+- `gamma_dashboard/static/dashboard/js/app/src/assets/scss/_variables.scss`
+- `gamma_dashboard/static/dashboard/js/app/src/constants.js`
+
+Ensure that all styling adjustments are compatible with both the legacy edX styles and the Paragon library to maintain a cohesive design.
