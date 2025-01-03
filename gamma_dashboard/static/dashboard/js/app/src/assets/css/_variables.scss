@@ -1,10 +1,7 @@
 $space-20: var(--rgg-space-20, 1.25rem);
 $space-30: var(--rgg-space-30, 1.875rem);
 $accent-color: var(--rgg-accent-color, #3caada);
-$dark-bg-color: var(--rgg-dark-bg-color, #383838);
-$title-bg-color: var(--rgg-title-bg-color, #495860);
 $main-text-color: var(--rgg-main-text-color, #bcbcbc);
-$title-text-color: var(--rgg-title-text-color, #232323);
 $secondary-text-color: var(--rgg-secondary-text-color, #333);
 $dropdown-item-padding-y: var(--rgg-dropdown-item-padding-y, 0.563rem);
 $dropdown-item-padding-x: var(--rgg-dropdown-item-padding-x, 1.875rem);
@@ -16,35 +13,9 @@ $blue-text-color-darken: var(--rgg-blue-text-color-darken, #2f85ab);
 $statuses-progress-bg-color: var(--rgg-statuses-progress-bg-color, #dfe0e8);
 $avatar-position-accent-color: var(--rgg-avatar-position-accent-color, #bacbd5);
 $btn-logo-dropdown-base-color: var(--rgg-btn-logo-dropdown-base-color, #313131);
-$highcharts-menu-item-hover-bg-color: var(--rgg-highcharts-menu-item-bg-color, #0083bd);
-$highcharts-menu-item-hover-text-color: var(--rgg-highcharts-menu-item-hover-text-color, $white);
-$highcharts-menu-dropdown-padding-y: var(--rgg-highcharts-menu-dropdown-padding-y, $dropdown-item-padding-y);
-$highcharts-menu-dropdown-padding-x: var(--rgg-highcharts-menu-dropdown-padding-x, $dropdown-item-padding-x);
-$highcharts-menu-border-color: var(--rgg-highcharts-menu-border-color, rgba($black, 0.15));
 $statuses-progress-track-bg-color: var(--rgg-statuses-progress-track-bg-color, #556b2f);
-$select-btn-border-color: var(--rgg-select-btn-border-color, $secondary-text-color);
 $darkblue-transparent-bg-color: var(--rgg-darkblue-transparent-bg-color, rgba(69, 162, 214, 0.3));
 $dashboard-page-corner-border-radius: var(--rgg-dashboard-page-corner-border-radius, 1.25rem);
-$primary-font-family: var(--rgg-primary-font-family, "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif);
 
-// Additional CSS variables used in JS:
-// --rgg-quaternary-color, default value: '#00abd9'
-// --rgg-main-text-color, default value: '#bcbcbc'
-// --rgg-muted-gray-color, default value: '#aaa'
-// --rgg-medium-gray-color, default value: '#6c6d6e'
-// --rgg-success-green-color, default value: '#419e4d'
-// --rgg-sky-blue-color, default value: '#4599c3'
-// --rgg-warning-yellow-color, default value: '#ffcd00'
-// --rgg-orange-accent-color, default value: '#e87722'
-// --rgg-aqua-blue-color, default value: '#00b5e2'
-// --rgg-purple-accent-color, default value: '#6244bb'
-// --rgg-dark-gray-color, default value: '#888b8d'
-// --rgg-error-red-color, default value: '#ff0000'
-// --rgg-light-color, default value: '#fafafa'
-// --rgg-olive-green-color, default value: '#556b2f'
-// --rgg-light-gray-color, default value: '#dfe0e8'
-// --rgg-gold-color, default value: '#f8b805'
-// --rgg-silver-color, default value: '#afbac7'
-// --rgg-bronze-color, default value: '#e6814d'
-// --rgg-avatar-image-bg-gray-color, default value: '#cde4fc'
-// --rgg-avatar-letter-bg-gray-color, default value: '#303030'
+// Override Paragon variables:
+$font: var(--rgg-primary-font-family, "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif);

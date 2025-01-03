@@ -44,32 +44,3 @@ export const useTranslate = (id, values = {}) => {
     values,
   );
 };
-
-/**
- * A React Hook that provides localized strings for Highcharts configuration.
- *
- * @returns {Object} An object containing localized Highcharts language options.
- * Each key corresponds to a Highcharts language property (e.g., "downloadPNG").
- */
-export const useHighchartsLang = () => {
-  const intl = useIntl();
-
-  const keys = [
-    'chart.downloadJPEG',
-    'chart.downloadPDF',
-    'chart.downloadPNG',
-    'chart.downloadSVG',
-    'chart.printChart',
-    'chart.viewFullscreen',
-  ];
-
-  const langOptions = {};
-  keys.forEach((key) => {
-    const defaultMessage = en[key]?.defaultMessage || '';
-    langOptions[key.split('.')[1]] = intl.formatMessage(
-      { id: key, defaultMessage },
-    );
-  });
-
-  return langOptions;
-};

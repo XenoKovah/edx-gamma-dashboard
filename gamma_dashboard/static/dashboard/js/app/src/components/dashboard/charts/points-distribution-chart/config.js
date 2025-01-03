@@ -1,89 +1,72 @@
 import { isRtl } from '../../../../constants';
 import {
-  chartSubtitleStyles, chartTitleOptions, chartTitleStyles, COLOR_PALETTE,
+  CHART_SIDE_INDENT,
+  CHART_COLOR_SCHEME,
+  CHART_ICON_STYLES,
+  CHART_SERIES_ITEM_STYLES,
+  CHART_SUBTITLE_STYLES,
+  CHART_TITLE_STYLES,
 } from '../constants';
-import { dataLabelFormatter } from './utils';
 
-export const getPointsDistributionChartConfig = (events, messages) => {
-  const alignment = isRtl ? { align: 'right', x: 0 } : { align: 'left', x: 7 };
-
-  return {
-    chart: {
-      plotBackgroundColor: null,
-      plotBorderWidth: 0,
-      plotShadow: false,
-      height: 470,
-      marginTop: 135,
-      marginBottom: 35,
-    },
-    title: {
-      text: messages.distributionSection.headingText,
-      ...alignment,
-      widthAdjust: 0,
-      x: isRtl ? 0 : 7,
-      y: 14,
-      margin: 50,
-      style: chartTitleStyles,
-    },
-    subtitle: {
-      text: messages.distributionSection.descriptionText,
-      ...alignment,
-      widthAdjust: 7,
-      x: isRtl ? 0 : 7,
-      y: 69,
-      style: chartSubtitleStyles,
-    },
-    navigation: chartTitleOptions,
-    tooltip: {
-      pointFormat: isRtl
-        ? '<b>{point.percentage:.1f}%</b>: {series.name}'
-        : '{series.name}: <b>{point.percentage:.1f}%</b>',
-      useHTML: isRtl,
-      style: {
-        textAlign: alignment.align,
+export const getConfig = (events, messages, containerWidth, isSmall) => ({
+  color: CHART_COLOR_SCHEME,
+  title: {
+    left: isRtl ? 'right' : 'left',
+    text: `{header|${messages.headingText}}`,
+    textStyle: {
+      rich: {
+        header: CHART_TITLE_STYLES,
       },
     },
-    plotOptions: {
-      pie: {
-        dataLabels: {
-          enabled: true,
-          distance: 30,
-          style: {
-            fontWeight: 'bold',
-            color: 'white',
-            textShadow: 'unset',
-          },
-        },
-        center: ['50%', '50%'],
-        showInLegend: true,
-      },
-      series: {
-        dataLabels: {
-          enabled: true,
-          color: COLOR_PALETTE.neutralGray,
-          borderWidth: 0,
-          shadow: false,
-          style: {
-            fontWeight: '700',
-            fontSize: '12px',
-            textShadow: false,
-            textOutline: 0,
-          },
-          formatter: dataLabelFormatter,
-        },
-      },
-    },
-    legend: {
-      enabled: false,
-    },
-    credits: {
-      enabled: false,
-    },
-    series: events.length > 0 ? [{
+  },
+  tooltip: {
+    trigger: 'item',
+    formatter: '{b} <br/> {a}: <strong>{d}%</strong>',
+  },
+  legend: {
+    show: false,
+  },
+  series: [
+    {
+      clockwise: !isRtl,
+      name: messages.seriesPointsName,
       type: 'pie',
-      name: messages.performancePointsSeriesName,
-      innerSize: '30%',
+      top: 50,
+      radius: ['40%', '70%'],
+      avoidLabelOverlap: false,
+      itemStyle: CHART_SERIES_ITEM_STYLES,
+      label: {
+        show: true,
+        position: isSmall ? 'inside' : 'outside',
+        formatter: '{d}%',
+      },
       data: events,
-    }] : null,
-  };
-};
+    },
+  ],
+  toolbox: {
+    show: true,
+    right: isRtl ? null : 10,
+    left: isRtl ? 10 : null,
+    feature: {
+      saveAsImage: {
+        show: true,
+        title: messages.controls.saveAsImage,
+        iconStyle: CHART_ICON_STYLES,
+      },
+    },
+  },
+  graphic: [
+    {
+      type: 'text',
+      top: 5,
+      left: isRtl ? 'auto' : 5,
+      right: isRtl ? 5 : 'auto',
+      align: isRtl ? 'right' : 'left',
+      style: {
+        text: messages.descriptionText,
+        ...CHART_SUBTITLE_STYLES,
+        width: Math.max(0, (containerWidth || 0) - CHART_SIDE_INDENT),
+      },
+    },
+  ],
+});

@@ -2,6 +2,7 @@
 
 ## [Unreleased]
 ## Changed
+- [NAU-130] Replace highcharts with echarts graphics.
 - [NAU-113] DashboardPage component refactoring
   - Refactored API scripts, styles and Dashboard page components
 - [NAU-120]: Refactored and replaced custom Leaderboard components with paragon components.

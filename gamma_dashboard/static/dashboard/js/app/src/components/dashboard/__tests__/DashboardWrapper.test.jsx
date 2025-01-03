@@ -8,7 +8,15 @@ import DashboardWrapper from '../DashboardWrapper';
 import {
   parsedBadgeItems,
   parsedStatusItems,
+  gameProfileData,
 } from '../../../__mocks__/dashboard';
+
+jest.mock('echarts-for-react', () => jest.fn((props) => (
+  <div
+    data-testid="echarts-instance"
+    data-options={props.option ? JSON.stringify(props.option) : null}
+  />
+)));
 
 afterEach(cleanup);
 
@@ -26,40 +34,13 @@ describe('<DashboardWrapper>', () => {
       ],
     };
 
-    const chart = {
-      problem_graded: {
-        points: 36,
-        title: null,
-      },
-      edx_grades_problem_submitted: {
-        points: 12,
-        title: null,
-      },
-      edx_forum_thread_created: {
-        points: 13,
-        title: null,
-      },
-      edx_course_enrollment_activated: {
-        points: 10,
-        title: 'Course Enrollment',
-      },
-      problem_check: {
-        points: 96,
-        title: null,
-      },
-      stop_video: {
-        points: 13,
-        title: null,
-      },
-    };
-
     act(() => {
       renderWithProviders(
         <DashboardWrapper
           badgeItems={parsedBadgeItems}
           statusItems={parsedStatusItems}
           progress={progress}
-          chart={chart}
+          chart={gameProfileData}
         />,
       );
     });

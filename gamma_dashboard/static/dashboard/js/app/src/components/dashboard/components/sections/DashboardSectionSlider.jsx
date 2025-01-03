@@ -29,7 +29,7 @@ const DashboardSectionSlider = ({
       {content}
     </p>
     <ul
-      className="progress-badges-list p-0"
+      className="progress-badges-list p-0 mb-0"
       data-testid="progress-badges-list"
     >
       {items}

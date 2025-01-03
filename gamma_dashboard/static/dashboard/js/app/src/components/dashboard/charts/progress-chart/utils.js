@@ -30,3 +30,22 @@ export const processChartData = (data) => Object.entries(data).reduce(
   },
   { pointsByDay: [], accumulativeData: [] },
 );
+
+/**
+ * Processes an array of timestamp-value pairs into formatted dates and their corresponding values.
+ *
+ * @param {Array.<[number, number]>} data - An array of data points where each item is a tuple [timestamp, value].
+ * @returns {{ dates: string[], values: number[] }} An object containing:
+ *  - `dates`: An array of formatted date strings (e.g., "1 Jan", "2 Feb").
+ *  - `values`: An array of corresponding numeric values.
+ */
+export const transformData = (data) => {
+  const dates = data.map(([timestamp]) => {
+    const date = new Date(timestamp);
+    return date.toLocaleDateString('en-US', { day: 'numeric', month: 'short' });
+  });
+
+  const values = data.map(([, value]) => value);
+
+  return { dates, values };
+};

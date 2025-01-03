@@ -4,7 +4,7 @@
 
     .pgn__modal-title {
       color: $secondary-text-color;
-      font-family: $primary-font-family;
+      font-family: $font;
     }
   }
 
@@ -15,11 +15,12 @@
     }
 
     .pgn__menu-select button {
-      border: 1px solid $select-btn-border-color !important;
+      border: 1px solid $secondary-text-color !important;
       border-radius: 0.188rem;
       font-size: $font-size-sm;
-      font-family: $primary-font-family;
+      font-family: $font;
       color: $secondary-text-color;
+      letter-spacing: normal;
       width: 100%;
       max-width: none;
       justify-content: space-between;
@@ -65,12 +66,12 @@
     textarea.form-control {
       height: 7.625rem;
       font-style: normal;
-      font-family: $primary-font-family;
+      font-family: $font;
     }
 
     .pgn__form-control-floating-label-text {
       color: $secondary-text-color;
-      font: 400 $font-weight-normal 0.875rem/1.2 $primary-font-family;
+      font: $font-weight-normal #{$font-size-sm}/1.2rem $font;
     }
   }
 

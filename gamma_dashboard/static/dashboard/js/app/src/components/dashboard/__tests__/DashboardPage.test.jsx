@@ -9,6 +9,14 @@ import DashboardPage from '../DashboardPage';
 import { gameProfileData } from '../../../__mocks__/dashboard';
 
 jest.mock('axios');
+
+jest.mock('echarts-for-react', () => jest.fn((props) => (
+  <div
+    data-testid="echarts-instance"
+    data-options={props.option ? JSON.stringify(props.option) : null}
+  />
+)));
+
 afterEach(cleanup);
 
 describe('<DashboardPage>', () => {

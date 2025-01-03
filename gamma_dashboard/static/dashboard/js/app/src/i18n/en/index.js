@@ -136,12 +136,12 @@ const en = {
   },
   'performance.points.distribution.section.heading.text': {
     id: 'performance.statuses.section.heading.text',
-    defaultMessage: 'Points Distribution',
+    defaultMessage: 'POINTS DISTRIBUTION',
     description: 'Heading text for the points distribution section in the performance page',
   },
   'performance.points.distribution.section.description.text': {
     id: 'performance.statuses.section.description.text',
-    defaultMessage: 'Here you can see what actions caused your current points portfolio',
+    defaultMessage: 'Here you can see what actions caused your current points portfolio.',
     description: 'Description of how the points distribution works and how actions contribute to the points portfolio',
   },
   'performance.points.series.name': {
@@ -149,14 +149,49 @@ const en = {
     defaultMessage: 'Points share',
     description: 'Label for a series in the performance points chart.',
   },
+  'performance.points.controls.saveAsImage.label': {
+    id: 'performance.points.controls.saveAsImage.label',
+    defaultMessage: 'Save as image',
+    description: 'Label for save as image control button in the performance points chart.',
+  },
+  'performance.points.controls.zoomIn.label': {
+    id: 'performance.points.controls.zoomIn.label',
+    defaultMessage: 'Zoom',
+    description: 'Label for zoom control button in the performance points chart.',
+  },
+  'performance.points.controls.zoomOut.label': {
+    id: 'performance.points.controls.zoomOut.label',
+    defaultMessage: 'Zoom reset',
+    description: 'Label for zoom reset control button in the performance points chart.',
+  },
+  'performance.points.controls.lineChart.label': {
+    id: 'performance.points.controls.lineChart.label',
+    defaultMessage: 'Switch to Line Chart',
+    description: 'Label for switch to line chart control button in the performance points chart.',
+  },
+  'performance.points.controls.barChart.label': {
+    id: 'performance.points.controls.barChart.label',
+    defaultMessage: 'Switch to Bar Chart',
+    description: 'Label for switch to bar chart control button in the performance points chart.',
+  },
+  'performance.points.item.progress.label': {
+    id: 'performance.points.item.progress.label',
+    defaultMessage: 'Progress',
+    description: 'Label for progress item in the performance points chart.',
+  },
+  'performance.points.item.points.label': {
+    id: 'performance.points.item.points.label',
+    defaultMessage: 'Points',
+    description: 'Label for points item in the performance points chart.',
+  },
   'performance.progress.tracker.section.heading.text': {
     id: 'performance.statuses.section.heading.text',
-    defaultMessage: 'Progress Tracker',
+    defaultMessage: 'PROGRESS TRACKER',
     description: 'Heading text for the progress tracker section in the performance page',
   },
   'performance.progress.tracker.section.description.text': {
     id: 'performance.statuses.section.description.text',
-    defaultMessage: 'See the dynamics of your activities and points acquisition through time',
+    defaultMessage: 'See the dynamics of your activities and points acquisition through time.',
     description: 'Text explaining how the progress tracker shows the dynamics of activities and points over time',
   },
   'performance.progress.tracker.chart.progress.label': {
@@ -183,36 +218,6 @@ const en = {
     id: 'leaderboard.avatar.alt.text',
     defaultMessage: '{username} profile image',
     description: 'Alternative text for user profile image in the leaderboard',
-  },
-  'chart.downloadJPEG': {
-    id: 'chart.downloadJPEG',
-    defaultMessage: 'Download JPEG image',
-    description: 'Text for downloading JPEG image',
-  },
-  'chart.downloadPDF': {
-    id: 'chart.downloadPDF',
-    defaultMessage: 'Download PDF document',
-    description: 'Text for downloading PDF document',
-  },
-  'chart.downloadPNG': {
-    id: 'chart.downloadPNG',
-    defaultMessage: 'Download PNG image',
-    description: 'Text for downloading PNG image',
-  },
-  'chart.downloadSVG': {
-    id: 'chart.downloadSVG',
-    defaultMessage: 'Download SVG vector',
-    description: 'Text for downloading SVG vector',
-  },
-  'chart.printChart': {
-    id: 'chart.printChart',
-    defaultMessage: 'Print chart',
-    description: 'Text for printing the chart',
-  },
-  'chart.viewFullscreen': {
-    id: 'chart.viewFullscreen',
-    defaultMessage: 'View in full screen',
-    description: 'Text for viewing the chart in full screen',
   },
   'generic.loader.screenReader.text': {
     id: 'generic.loader.screenReader.text',

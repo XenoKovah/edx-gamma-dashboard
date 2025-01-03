@@ -1,162 +1,112 @@
-import { useTranslate as translate } from '../../../../i18n/utils';
 import { isRtl } from '../../../../constants';
 import {
-  chartSubtitleStyles, chartTitleStyles, COLOR_PALETTE, legendOptions,
+  CHART_SIDE_INDENT,
+  CHART_COLOR_SCHEME,
+  CHART_ICON_STYLES,
+  CHART_SUBTITLE_STYLES,
+  CHART_TITLE_STYLES,
 } from '../constants';
 
-export const getProgressChartConfig = (customChartTitleOptions, pointsByDay, accumulativeData) => ({
-  chart: {
-    type: 'spline',
-    spacingLeft: 70,
-    spacingRight: 20,
-    marginTop: 120,
-    minHeight: 500,
-  },
+export const getConfig = (dates, points, progress, messages, containerWidth, isSmall) => ({
+  color: CHART_COLOR_SCHEME,
   title: {
-    text: translate('performance.progress.tracker.section.heading.text'),
-    align: isRtl ? 'right' : 'left',
-    widthAdjust: 0,
-    x: isRtl ? 56 : -56,
-    y: 14,
-    margin: 50,
-    style: chartTitleStyles,
+    left: isRtl ? 'right' : 'left',
+    text: `{header|${messages.headingText}}`,
+    textStyle: {
+      rich: {
+        header: CHART_TITLE_STYLES,
+      },
+    },
   },
-  subtitle: {
-    text: translate('performance.progress.tracker.section.description.text'),
-    align: isRtl ? 'right' : 'left',
-    widthAdjust: -7,
-    x: isRtl ? 56 : -56,
-    y: 70,
-    style: chartSubtitleStyles,
+  legend: {
+    data: [messages.legend.progress, messages.legend.points],
+    bottom: 10,
+    selected: {
+      Progress: true,
+      Points: true,
+    },
   },
-  navigation: customChartTitleOptions,
   xAxis: {
-    reversed: isRtl,
-    type: 'datetime',
-    dateTimeLabelFormats: {
-      month: '%e. %b',
-      year: '%b',
-    },
-    title: {
-      text: null,
-    },
-    tickWidth: 0,
-    lineColor: COLOR_PALETTE.mutedGray,
-    labels: {
-      style: {
-        color: COLOR_PALETTE.neutralGray,
-        textTransform: 'uppercase',
-      },
-    },
+    type: 'category',
+    data: dates,
   },
-  yAxis: [{
-    opposite: isRtl,
-    title: {
-      text: null,
-    },
-    labels: {
-      align: isRtl ? 'right' : 'left',
-      x: isRtl ? 40 : -40,
-      y: 5,
-      format: '{value:.,0f}',
-      style: {
-        color: COLOR_PALETTE.neutralGray,
-      },
-    },
-    showFirstLabel: false,
-    gridLineColor: COLOR_PALETTE.mediumGray,
-    gridLineDashStyle: 'dash',
-    lineColor: COLOR_PALETTE.mutedGray,
-    lineWidth: 1,
-  }, {
-    gridLineWidth: 0,
-    opposite: isRtl,
-    title: {
-      text: null,
-    },
-    labels: {
-      align: isRtl ? 'left' : 'right',
-      x: isRtl ? -40 : 40,
-      y: 5,
-      format: '{value:.,0f}',
-      style: {
-        color: COLOR_PALETTE.neutralGray,
-      },
-    },
-    showFirstLabel: false,
-  }],
-  tooltip: {
-    headerFormat: '<b>{series.name}</b><br>',
-    pointFormat: '{point.x:%e. %b}: {point.y:.2f}',
-    useHTML: isRtl,
-    style: {
-      textAlign: isRtl ? 'right' : 'left',
-      direction: isRtl ? 'rtl' : 'ltr',
-    },
+  yAxis: {
+    type: 'value',
   },
-  credits: {
-    enabled: false,
+  grid: {
+    top: isSmall ? 120 : 100,
+    left: isSmall ? '20%' : '10%',
+    right: '10%',
   },
-  plotOptions: {
-    spline: {
-      marker: {
-        enabled: true,
-      },
+  series: [
+    {
+      clockwise: !isRtl,
+      name: messages.legend.progress,
+      type: 'line',
+      data: progress,
+      areaStyle: {},
     },
-  },
-  legend: legendOptions,
-  series: [{
-    name: translate('performance.progress.tracker.chart.points.label'),
-    type: 'column',
-    data: pointsByDay,
-    borderColor: COLOR_PALETTE.mutedGray,
-    borderRadius: 3,
-    dataLabels: {
-      enabled: false,
-      color: COLOR_PALETTE.light,
-      style: {
-        fontWeight: 'bold',
-        textOutline: 'none',
-        fontFamily: 'Open Sans',
-      },
+    {
+      clockwise: !isRtl,
+      name: messages.legend.points,
+      type: 'line',
+      data: points,
     },
-  },
-  {
-    name: translate('performance.progress.tracker.chart.progress.label'),
-    type: 'area',
-    yAxis: 1,
-    data: accumulativeData,
-    borderColor: COLOR_PALETTE.mutedGray,
-    borderRadius: 3,
-    dataLabels: {
-      enabled: false,
-      color: COLOR_PALETTE.light,
-      style: {
-        fontWeight: 'bold',
-        textOutline: 'none',
-        fontFamily: 'Open Sans',
+  ],
+  toolbox: {
+    show: true,
+    right: isRtl ? null : 10,
+    left: isRtl ? 10 : null,
+    feature: {
+      saveAsImage: {
+        type: 'png',
+        title: messages.controls.saveAsImage,
+        iconStyle: CHART_ICON_STYLES,
       },
-    },
-  }],
-  responsive: {
-    rules: [{
-      condition: {
-        maxWidth: 500,
-      },
-      chartOptions: {
-        navigation: {
-          buttonOptions: {
-            x: isRtl ? -8 : 8,
-          },
-        },
+      dataZoom: {
         title: {
-          x: isRtl ? 53 : -53,
+          zoom: messages.controls.zoomIn,
+          back: messages.controls.zoomOut,
         },
-        subtitle: {
-          x: isRtl ? 53 : -53,
-          widthAdjust: 50,
-        },
+        iconStyle: CHART_ICON_STYLES,
       },
-    }],
+      magicType: {
+        type: ['line', 'bar'],
+        title: {
+          line: messages.controls.lineChart,
+          bar: messages.controls.barChart,
+        },
+        iconStyle: CHART_ICON_STYLES,
+      },
+    },
+  },
+  graphic: [
+    {
+      type: 'text',
+      top: 5,
+      left: isRtl ? 'auto' : 5,
+      right: isRtl ? 5 : 'auto',
+      align: isRtl ? 'right' : 'left',
+      style: {
+        text: messages.descriptionText,
+        ...CHART_SUBTITLE_STYLES,
+        width: Math.max(0, (containerWidth || 0) - CHART_SIDE_INDENT),
+      },
+    },
+  ],
+  tooltip: {
+    trigger: 'axis',
+    formatter(params) {
+      let tooltipContent = '<div>';
+      tooltipContent += `${params[0].axisValue}<br/>`;
+      params.forEach((item) => {
+        tooltipContent += `
+              <span style="display: inline-block; width: 10px; height: 10px; background-color: ${item.color}; border-radius: 50%;"></span>
+              ${item.seriesName}: <strong>${item.value}</strong><br/>
+          `;
+      });
+      tooltipContent += '</div>';
+      return tooltipContent;
+    },
   },
 });

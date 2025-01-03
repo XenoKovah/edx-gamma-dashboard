@@ -1,4 +1,3 @@
-import { isRtl } from '../../../constants';
 import { getCssVariableValue } from '../../../utils/other';
 
 export const COLOR_PALETTE = {
@@ -25,58 +24,47 @@ export const COLOR_PALETTE = {
   avatarLetterBgGray: getCssVariableValue('--rgg-avatar-letter-bg-gray-color', '#303030'),
 };
 
-export const chartTitleStyles = {
+export const CHART_COLOR_SCHEME = [
+  COLOR_PALETTE.successGreen,
+  COLOR_PALETTE.skyBlue,
+  COLOR_PALETTE.warningYellow,
+  COLOR_PALETTE.orangeAccent,
+  COLOR_PALETTE.aquaBlue,
+  COLOR_PALETTE.purpleAccent,
+  COLOR_PALETTE.darkGray,
+  COLOR_PALETTE.errorRed,
+];
+
+export const FONT_FAMILIES = {
+  primary: getCssVariableValue('--rgg-primary-font-family', '"Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif'),
+};
+
+export const CHART_TITLE_STYLES = {
   color: COLOR_PALETTE.primary,
-  fontFamily: 'Open Sans',
-  fontSize: '17px',
-  fontWeight: 600,
-  textTransform: 'uppercase',
-  marginBottom: '6px',
-  x: -100,
-  y: -100,
+  fontFamily: FONT_FAMILIES.primary,
+  fontSize: 17,
+  fontWeight: 700,
+  padding: [4, 10, 6],
 };
 
-export const chartSubtitleStyles = {
+export const CHART_SUBTITLE_STYLES = {
   color: COLOR_PALETTE.neutralGray,
-  fontFamily: 'Open Sans, Helvetica Neue, Helvetica, Arial, sans-serif',
-  fontSize: '16px',
-  lineHeight: '20px',
-  transform: 'translateY(-9px)',
+  fill: COLOR_PALETTE.neutralGray,
+  fontFamily: FONT_FAMILIES.primary,
+  fontSize: 16,
+  lineHeight: 20,
+  padding: [50, 10, 6],
+  overflow: 'break',
 };
 
-export const chartTitleOptions = {
-  buttonOptions: {
-    symbolStroke: COLOR_PALETTE.quaternary,
-    theme: {
-      fill: 'transparent',
-      states: {
-        hover: {
-          fill: 'transparent',
-
-        },
-        select: {
-          fill: 'transparent',
-        },
-      },
-    },
-    x: -2,
-    y: -5,
-    align: isRtl ? 'left' : 'right',
-  },
-  menuStyle: {
-    transform: 'translateY(10px)',
-  },
+export const CHART_ICON_STYLES = {
+  borderColor: COLOR_PALETTE.primary,
 };
 
-export const legendOptions = {
-  rtl: isRtl,
-  itemHoverStyle: {
-    color: COLOR_PALETTE.mutedGray,
-  },
-  itemStyle: {
-    color: COLOR_PALETTE.neutralGray,
-    fontSize: '12px',
-    fontWeight: 'bold',
-    textTransform: 'uppercase',
-  },
+export const CHART_SERIES_ITEM_STYLES = {
+  borderRadius: 10,
+  borderColor: 'white',
+  borderWidth: 2,
 };
+
+export const CHART_SIDE_INDENT = 20;
