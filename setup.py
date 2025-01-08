@@ -63,8 +63,12 @@ setup(
     entry_points={
         "lms.djangoapp": [
             "gamma_dashboard = gamma_dashboard.apps:GamificationDashboardConfig",
+            "course_leaderboard = course_leaderboard.apps:CourseLeaderboardConfig",
         ],
         "cms.djangoapp": [
+        ],
+        "openedx.course_tab": [
+            "course_leaderboard_tab = course_leaderboard.tab:CourseLeaderboardTab",
         ],
     }
 )
