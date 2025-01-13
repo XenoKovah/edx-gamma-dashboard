@@ -31,6 +31,7 @@
 - [NAU-93] Introduced new Makefile commands: lint-js and lint-styles.
 - [NAU-93] Added CI tasks to execute lint-js and lint-styles.
 - [NAU-93] Resolved syntax issues in the React application.
+- [NAU-139] fixed tooltip position on focus when progress at the beginning of status bar
 
 ## 1.3.1 (2025-02-13)
 ## Fixed

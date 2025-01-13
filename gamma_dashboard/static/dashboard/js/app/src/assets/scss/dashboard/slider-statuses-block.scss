@@ -8,6 +8,10 @@
 
   .slick-slide {
     position: relative;
+
+    &[data-index="0"] .slider-item-progress {
+      width: 45%;
+    }
   }
 
   .slick-arrow:before {
