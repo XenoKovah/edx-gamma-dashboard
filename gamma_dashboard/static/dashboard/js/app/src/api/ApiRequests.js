@@ -9,9 +9,9 @@ const leaderboard = {
    *
    * @param {Function} callback - Callback function to handle the response data.
    */
-  getInfo: (callback) => {
+  getInfo: (callback, courseId = '') => {
     axios.get(
-      LEADERBOARD_URLS.getInfo,
+      LEADERBOARD_URLS(courseId).getInfo,
     ).then(result => {
       callback(result.data || {});
     }).catch(error => {

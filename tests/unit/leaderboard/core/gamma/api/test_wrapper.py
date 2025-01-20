@@ -168,7 +168,11 @@ class TestGammaApiWrapper:
         api_wrapper_spy = mocker.spy(api_wrapper, '_send_request')
         leaderboard_data = api_wrapper.get_leaderboard_info(username, user_signup_source)
 
-        api_wrapper_spy.assert_called_with(leaderboard_absolute_url, params={'username': username, 'signup_source': user_signup_source})
+        api_wrapper_spy.assert_called_with(
+            leaderboard_absolute_url, params={
+                'username': username, 'signup_source': user_signup_source, 'course_id': None,
+            }
+        )
 
         assert leaderboard_data == expeceted_data
 
@@ -210,6 +214,10 @@ class TestGammaApiWrapper:
         api_wrapper_spy = mocker.spy(api_wrapper, '_send_request')
         leaderboard_data = api_wrapper.get_leaderboard_info(username, user_signup_source)
 
-        api_wrapper_spy.assert_called_with(leaderboard_absolute_url, params={'username': username, 'signup_source': user_signup_source})
+        api_wrapper_spy.assert_called_with(
+            leaderboard_absolute_url, params={
+                'username': username, 'signup_source': user_signup_source, 'course_id': None
+            }
+        )
 
         assert leaderboard_data == expeceted_data

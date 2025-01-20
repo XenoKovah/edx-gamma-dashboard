@@ -77,6 +77,19 @@ describe('ApiRequests', () => {
       expect(logSpy).toHaveBeenCalled();
       expect(callback).toHaveBeenCalledWith({});
     });
+
+    it('getInfo returns valid data under external app', async () => {
+      const courseId = 'course-v1:edx+101+101';
+      const mock = new MockAdapter(axios);
+
+      const callback = jest.fn();
+
+      mock.onGet().reply(200, correctProfilesData);
+      gammaApi.leaderboard.getInfo(callback, courseId);
+      await flushPromises();
+
+      expect(callback).toHaveBeenCalledWith(correctProfilesData);
+    });
   });
 
   describe('dashboard', () => {

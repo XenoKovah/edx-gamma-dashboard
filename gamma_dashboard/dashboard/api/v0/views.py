@@ -17,6 +17,8 @@ from gamma_dashboard.dashboard.core.gamma.api.wrapper import GammaApiWrapper
 from gamma_dashboard.toggles import show_gamma_leaderboard
 from ..utils import site_badge_filter, is_main_site
 
+from .temporary_mock_data import COURSE_LEADERBOARD_MOCK
+
 MAIN_SITE_NAME = 'main'
 
 
@@ -27,7 +29,8 @@ class LeaderboardApiView(APIView):
     permission_classes = (IsAuthenticated,)
     authentication_classes = (SessionAuthenticationAllowInactiveUser,)
 
-    def get(self, request):
+    # TODO: Need to Refactor after `LeaderBoardView` updating in Gamma Core.
+    def get(self, request, *args, **kwargs):
         """
         Get Leaderboard info.
         """
@@ -36,9 +39,15 @@ class LeaderboardApiView(APIView):
 
         signup_source = request.user.usersignupsource_set.first()
         user_signup_source = signup_source.site if signup_source else MAIN_SITE_NAME
-        leaderboard_info = GammaApiWrapper(
-            version=API_VERSION_1
-        ).get_leaderboard_info(request.user.username, user_signup_source)
+
+        course_id = kwargs.get("course_id")
+
+        if course_id:
+            leaderboard_info = COURSE_LEADERBOARD_MOCK
+        else:
+            leaderboard_info = GammaApiWrapper(
+                version=API_VERSION_1
+            ).get_leaderboard_info(request.user.username, user_signup_source, course_id)
 
         if leaderboard_info:
             updated_leaderboard_info = self._update_leaderboard_info(request.user, leaderboard_info)

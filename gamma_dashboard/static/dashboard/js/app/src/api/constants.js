@@ -2,9 +2,9 @@ export const API_VERSION = 0;
 
 export const BASE_URL = `/gamma_dashboard/api/v${API_VERSION}/`;
 
-export const LEADERBOARD_URLS = {
-  getInfo: `${BASE_URL}leaderboard/`,
-};
+export const LEADERBOARD_URLS = (courseId) => ({
+  getInfo: `${BASE_URL}leaderboard/${courseId}`,
+});
 
 export const DASHBOARD_URLS = {
   getGameProfile: `${BASE_URL}game-profile/`,

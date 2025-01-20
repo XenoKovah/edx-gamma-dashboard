@@ -22002,7 +22002,8 @@ var leaderboard = {
    * @param {Function} callback - Callback function to handle the response data.
    */
   getInfo: function getInfo(callback) {
-    axios__WEBPACK_IMPORTED_MODULE_2__["default"].get(_constants__WEBPACK_IMPORTED_MODULE_1__.LEADERBOARD_URLS.getInfo).then(function (result) {
+    var courseId = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : '';
+    axios__WEBPACK_IMPORTED_MODULE_2__["default"].get((0,_constants__WEBPACK_IMPORTED_MODULE_1__.LEADERBOARD_URLS)(courseId).getInfo).then(function (result) {
       callback(result.data || {});
     })["catch"](function (error) {
       // eslint-disable-next-line no-console
@@ -22076,8 +22077,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 var API_VERSION = 0;
 var BASE_URL = "/gamma_dashboard/api/v".concat(API_VERSION, "/");
-var LEADERBOARD_URLS = {
-  getInfo: "".concat(BASE_URL, "leaderboard/")
+var LEADERBOARD_URLS = function LEADERBOARD_URLS(courseId) {
+  return {
+    getInfo: "".concat(BASE_URL, "leaderboard/").concat(courseId)
+  };
 };
 var DASHBOARD_URLS = {
   getGameProfile: "".concat(BASE_URL, "game-profile/")
@@ -26048,6 +26051,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/dist/index.js");
 /* harmony import */ var _api__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../api */ "./src/api/index.js");
 /* harmony import */ var _i18n_utils__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../i18n/utils */ "./src/i18n/utils.jsx");
 /* harmony import */ var _generic_hooks__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../generic/hooks */ "./src/generic/hooks/index.js");
@@ -26067,7 +26071,10 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
+
 var LeaderboardPage = function LeaderboardPage() {
+  var _useParams = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_7__.useParams)(),
+    courseId = _useParams.courseId;
   var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)({
       top10: [],
       competitors: [],
@@ -26090,7 +26097,7 @@ var LeaderboardPage = function LeaderboardPage() {
         urlProfileImage: res.url_profile_image || null,
         systemStatuses: res.system_statuses || []
       });
-    });
+    }, courseId);
   }, []);
   var _getLeaderboardTableP = (0,_utils__WEBPACK_IMPORTED_MODULE_5__.getLeaderboardTableProps)(data),
     rank = _getLeaderboardTableP.rank,
@@ -26639,6 +26646,9 @@ var AppRoutes = function AppRoutes() {
     exact: true,
     path: _constants__WEBPACK_IMPORTED_MODULE_5__.URLS.leaderboardPage,
     element: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_leaderboard__WEBPACK_IMPORTED_MODULE_3__.LeaderboardPage, null)
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_8__.Route, {
+    path: _constants__WEBPACK_IMPORTED_MODULE_5__.EXTERNAL_URLS.leaderboardTabPage,
+    element: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_leaderboard__WEBPACK_IMPORTED_MODULE_3__.LeaderboardPage, null)
   }))));
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (AppRoutes);
@@ -26654,15 +26664,19 @@ var AppRoutes = function AppRoutes() {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   EXTERNAL_URLS: () => (/* binding */ EXTERNAL_URLS),
 /* harmony export */   URLS: () => (/* binding */ URLS)
 /* harmony export */ });
-var BASE_ROOT = '/gamma_dashboard';
+/* harmony import */ var _constants__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../constants */ "./src/constants.js");
+
 var URLS = {
-  dashboardPage: "".concat(BASE_ROOT, "/dashboard"),
+  dashboardPage: "".concat(_constants__WEBPACK_IMPORTED_MODULE_0__.BASE_ROOT, "/dashboard"),
   // Dashboard page
-  leaderboardPage: "".concat(BASE_ROOT, "/leaderboard"),
-  // Leaderboard page
-  leaderboardTapPage: '/courses/:courseId/course_leaderboard' // Leaderboard tab in the course
+  leaderboardPage: "".concat(_constants__WEBPACK_IMPORTED_MODULE_0__.BASE_ROOT, "/leaderboard") // Leaderboard page
+};
+
+var EXTERNAL_URLS = {
+  leaderboardTabPage: '/courses/:courseId/course_leaderboard' // Course Leaderboard tab
 };
 
 /***/ }),

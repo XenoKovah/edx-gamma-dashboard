@@ -4,6 +4,7 @@ import pytest
 
 from rest_framework import status
 
+from gamma_dashboard.dashboard.api.v0.temporary_mock_data import COURSE_LEADERBOARD_MOCK
 from gamma_dashboard.dashboard.api.v0.views import LeaderboardApiView
 from gamma_dashboard.dashboard.core.gamma.api.wrapper import GammaApiWrapper
 
@@ -99,7 +100,8 @@ class TestLeaderboardApiView:
         toggle_mock.assert_called_once_with()
         gamma_api_wrapper_mock.assert_called_once_with(
             request_mock.user.username,
-            request_mock.user.usersignupsource_set.first.return_value.site
+            request_mock.user.usersignupsource_set.first.return_value.site,
+            None
         )
         update_leaderboard_info_mock.assert_called_once_with(request_mock.user, leaderboard_info_mock)
         assert response.status_code == status.HTTP_200_OK
@@ -117,7 +119,8 @@ class TestLeaderboardApiView:
         toggle_mock.assert_called_once_with()
         gamma_api_wrapper_mock.assert_called_once_with(
             request_mock.user.username,
-            request_mock.user.usersignupsource_set.first.return_value.site
+            request_mock.user.usersignupsource_set.first.return_value.site,
+            None
         )
         assert response.status_code == status.HTTP_422_UNPROCESSABLE_ENTITY
         assert response.data == {"error": "No data received from Gamma server."}
@@ -133,3 +136,26 @@ class TestLeaderboardApiView:
         toggle_mock.assert_called_once_with()
         assert response.status_code == status.HTTP_404_NOT_FOUND
         assert response.data == {"error": "Gamma Leaderboard is disabled."}
+
+    @pytest.mark.django_db
+    def test_leaderboard_toggle_enabled_with_course_id(self, mocker):
+        view = LeaderboardApiView()
+        request_mock = mocker.MagicMock()
+        course_id_mock = "course-v1:mock+mock+mock"
+        leaderboard_info_mock = {"rank": 1, "score": 100}
+        toggle_mock = mocker.patch("gamma_dashboard.dashboard.api.v0.views.show_gamma_leaderboard", return_value=True)
+        gamma_api_wrapper_mock = mocker.patch.object(
+            GammaApiWrapper, "get_leaderboard_info", return_value=leaderboard_info_mock
+        )
+        update_leaderboard_info_mock = mocker.patch(
+            "gamma_dashboard.dashboard.api.v0.views.LeaderboardApiView._update_leaderboard_info",
+            return_value=leaderboard_info_mock
+        )
+
+        response = view.get(request_mock, course_id=course_id_mock)
+
+        toggle_mock.assert_called_once_with()
+        gamma_api_wrapper_mock.assert_not_called()
+        update_leaderboard_info_mock.assert_called_once_with(request_mock.user, COURSE_LEADERBOARD_MOCK)
+        assert response.status_code == status.HTTP_200_OK
+        assert response.data == leaderboard_info_mock

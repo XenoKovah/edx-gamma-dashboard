@@ -2,6 +2,7 @@
 
 ## [Unreleased]
 ## Changed
+- [NAU-153] Added optional parameter courseId to Leaderboard Page which handles API.
 - Refactoring React application structure to align with best practices for improved maintainability and scalability.
 - [NAU-130] Replace highcharts with echarts graphics.
 - [NAU-113] DashboardPage component refactoring

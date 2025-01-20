@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 
 import { gammaApi } from '../api';
 import { useTranslate } from '../i18n/utils';
@@ -8,6 +9,7 @@ import { getLeaderboardTableProps } from './utils';
 import { LeaderboardTable } from './components';
 
 const LeaderboardPage = () => {
+  const { courseId } = useParams();
   const [data, setData] = useState({
     top10: [],
     competitors: [],
@@ -27,7 +29,7 @@ const LeaderboardPage = () => {
       userUid: res.user_uid || null,
       urlProfileImage: res.url_profile_image || null,
       systemStatuses: res.system_statuses || [],
-    }));
+    }), courseId);
   }, []);
 
   const {
