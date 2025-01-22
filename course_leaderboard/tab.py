@@ -3,6 +3,8 @@ from django.utils.translation import gettext_noop
 from common.djangoapps.student.models import CourseEnrollment
 from xmodule.tabs import CourseTab
 
+from course_leaderboard.toggles import show_course_leaderboard_tab
+
 
 class CourseLeaderboardTab(CourseTab):
     """
@@ -20,4 +22,11 @@ class CourseLeaderboardTab(CourseTab):
         """
         Enables the tab only to instructors and staff members.
         """
-        return user and user.is_authenticated and CourseEnrollment.is_enrolled(user, course.id)
+        return all(
+            [
+                show_course_leaderboard_tab(),
+                user,
+                user.is_authenticated,
+                CourseEnrollment.is_enrolled(user, course.id)
+            ]
+        )
