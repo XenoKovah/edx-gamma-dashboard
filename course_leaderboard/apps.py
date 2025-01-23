@@ -25,6 +25,7 @@ class CourseLeaderboardConfig(AppConfig):
         PluginURLs.CONFIG: {
             ProjectType.LMS: {
                 PluginURLs.NAMESPACE: COURSE_LEADERBOARD,
+                PluginURLs.APP_NAME: COURSE_LEADERBOARD,
                 PluginURLs.REGEX: '',
                 PluginURLs.RELATIVE_PATH: 'urls',
             },
