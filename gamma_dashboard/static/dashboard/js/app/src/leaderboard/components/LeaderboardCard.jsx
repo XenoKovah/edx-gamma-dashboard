@@ -48,7 +48,7 @@ const LeaderboardCard = ({ profile, status, rank }) => {
           {points}
         </span>
       </Card.Body>
-      <Card.Footer className="p-0 overflow-auto">
+      <Card.Footer className="p-0 mt-3 mt-md-0 overflow-auto">
         <BadgeList badges={badges} />
       </Card.Footer>
     </Card>

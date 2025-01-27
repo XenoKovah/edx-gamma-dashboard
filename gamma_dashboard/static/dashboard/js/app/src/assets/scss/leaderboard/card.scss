@@ -9,10 +9,20 @@
 
   .pgn__card-body {
     width: auto;
+
+    @media screen and (max-width: map-get($grid-breakpoints, "md")) {
+      width: 100%;
+      max-width: 100%;
+      overflow: hidden;
+    }
   }
 
   &.pgn__card .pgn__card-header {
     @extend .p-0;
+
+    @media screen and (max-width: map-get($grid-breakpoints, "md")) {
+      width: 50%;
+    }
 
     .pgn__card-header-content {
       @extend .m-0;
@@ -63,5 +73,6 @@
 
   @media screen and (max-width: map-get($grid-breakpoints, "md")) {
     text-align: center;
+    width: 50%;
   }
 }
