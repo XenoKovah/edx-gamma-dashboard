@@ -34,13 +34,13 @@ class LeaderboardApiView(APIView):
         """
         Get Leaderboard info.
         """
-        if not show_gamma_leaderboard():
+        course_id = kwargs.get("course_id")
+
+        if not show_gamma_leaderboard() and not course_id:
             return Response({"error": "Gamma Leaderboard is disabled."}, status=status.HTTP_404_NOT_FOUND)
 
         signup_source = request.user.usersignupsource_set.first()
         user_signup_source = signup_source.site if signup_source else MAIN_SITE_NAME
-
-        course_id = kwargs.get("course_id")
 
         if course_id:
             leaderboard_info = COURSE_LEADERBOARD_MOCK
