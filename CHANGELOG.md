@@ -1,6 +1,8 @@
 # Changelog
 
 ## [Unreleased]
+
+## 1.3.1 (2025-02-13)
 ## Fixed
 - [RGG-997] fixed visual issue: block border, image alignments, responsive images and charts
 - [RGG-997] added `.nvmrc`, replaced npm package `node-sass` with `sass`, fixed style issue caused build fail
