@@ -50,6 +50,11 @@ ReactUnits:
       GIT_STRATEGY: none
     tags:
       - k8s-runner
+    variables:
+      KUBERNETES_CPU_REQUEST: "500m"
+      KUBERNETES_CPU_LIMIT: "1000m"
+      KUBERNETES_MEMORY_REQUEST: "2Gi"
+      KUBERNETES_MEMORY_LIMIT: "3Gi"
     image: $IMAGE_NAME
     only:
       - master
