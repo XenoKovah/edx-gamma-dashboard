@@ -100,4 +100,4 @@ class GammaApiWrapper:
         Returns:
             dict: parsed game profile information.
         """
-        return self.request_api_endpoint('gamma-profile', params={'username': username}, **kwargs)
+        return self.request_api_endpoint('users/gamma-profile', params={'username': username}, **kwargs)
