@@ -98,7 +98,7 @@ const DashboardWrapper = ({
           title={messages.subHeaderTitle}
         />
         <div className="dashboard-page-body">
-          {process.env.REACT_APP_SHOW_AVATARS_BLOCK === 'true' && (
+
             <DashboardSectionContainer>
               <ErrorBoundary
                 FallbackComponent={ErrorFallback}
@@ -148,7 +148,7 @@ const DashboardWrapper = ({
                 </DashboardSection>
               </ErrorBoundary>
             </DashboardSectionContainer>
-          )}
+
           <DashboardSectionContainer>
             <ErrorBoundary
               FallbackComponent={ErrorFallback}
