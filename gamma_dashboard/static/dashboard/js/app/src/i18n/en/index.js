@@ -104,6 +104,11 @@ const en = {
     defaultMessage: 'Badges',
     description: 'Button text for viewing badges in the performance section',
   },
+  'performance.avatar.section.avatar-sets.button.text': {
+    id: 'performance.avatar.section.avatar-sets.button.text',
+    defaultMessage: 'Avatar sets',
+    description: 'Label text for available avatar sets in the performance section',
+  },
   'performance.badges.section.all.badges.button.text': {
     id: 'performance.badges.section.all.badges.button.text',
     defaultMessage: 'All Badges',
@@ -113,6 +118,21 @@ const en = {
     id: 'performance.badges.section.total.badges.button.text',
     defaultMessage: 'Total badges',
     description: 'Label text for all available badges in the performance section',
+  },
+  'performance.avatar.section.total.avatar-sets.button.text': {
+    id: 'performance.avatar.section.total.avatar-sets.button.text',
+    defaultMessage: 'Total avatar sets',
+    description: 'Label text for all available avatar sets in the performance section',
+  },
+  'performance.avatar.section.title.text': {
+    id: 'performance.avatar.section.title.text',
+    defaultMessage: 'Your avatar',
+    description: 'Title text for the avatar section in the performance page',
+  },
+  'performance.avatar.section.description.text': {
+    id: 'performance.avatar.section.description.text',
+    defaultMessage: 'Gear up with your avatar set to track your journey! Complete challenges, earn rewards, and level up your avatar as you conquer new tasks.',
+    description: 'Text explaining how users can use the avatar set to track their progress and unlock new avatar levels',
   },
   'performance.badges.item.image.alternative.text': {
     id: 'performance.badges.item.image.alternative.text',
@@ -239,6 +259,11 @@ const en = {
     defaultMessage: 'Close',
     description: 'Label for the button used to close the progress badge modal.',
   },
+  'dashboard.progress-avatar.modal.button.close.text': {
+    id: 'dashboard.progress-avatar.modal.button.close.text',
+    defaultMessage: 'Close',
+    description: 'Label for the button used to close the progress avatar modal.',
+  },
   'dashboard.slider-item.info.icon.complete.screen-reader.text': {
     id: 'dashboard.slider-item.info.icon.complete.screen-reader.text',
     defaultMessage: 'Complete icon',
@@ -248,6 +273,76 @@ const en = {
     id: 'dashboard.slider-item.info.icon.status.screen-reader.text',
     defaultMessage: 'Status icon',
     description: 'Alt text for the status slider-item image.',
+  },
+  'dashboard.progress-avatar-set.modal.avatar-set.card.select.btn': {
+    id: 'dashboard.progress-avatar-set.modal.avatar-set.card.select.btn',
+    defaultMessage: 'Select',
+    description: 'Label for the button used to select an avatar set in the progress avatar set modal.',
+  },
+  'dashboard.progress-avatar-set.modal.avatar-set.save.btn': {
+    id: 'dashboard.progress-avatar-set.modal.avatar-set.save.btn',
+    defaultMessage: 'Save',
+    description: 'Label for the button used to save the selected avatar set in the progress avatar set modal.',
+  },
+  'dashboard.progress-avatar-set.modal.avatar-set.success.text': {
+    id: 'dashboard.progress-avatar-set.modal.avatar-set.success.text',
+    defaultMessage: 'Avatar set saved successfully',
+    description: 'Success message displayed when the avatar set is saved successfully in the progress avatar set modal.',
+  },
+  'dashboard.progress-avatar-set.modal.avatar-set.error.text': {
+    id: 'dashboard.progress-avatar-set.modal.avatar-set.error.text',
+    defaultMessage: 'Error while saving avatar set',
+    description: 'Error message displayed when there is an error while saving the avatar set in the progress avatar set modal.',
+  },
+  'dashboard.progress-avatar-set.modal.avatar-set.info.text': {
+    id: 'dashboard.progress-avatar-set.modal.avatar-set.info.text',
+    defaultMessage: 'Select an avatar set to save',
+    description: 'Information message displayed when no avatar set is selected in the progress avatar set modal.',
+  },
+  'dashboard.progress-avatar-set.modal.alert.avatar-set-not-completed.title': {
+    id: 'dashboard.progress-avatar-set.modal.alert.avatar-set-not-completed.title',
+    defaultMessage: 'Your avatar set is en route!',
+    description: 'Title of the alert shown when the selected avatar set is not completed in the progress avatar set modal.',
+  },
+  'dashboard.progress-avatar-set.modal.alert.avatar-set-not-completed.text': {
+    id: 'dashboard.progress-avatar-set.modal.alert.avatar-set-not-completed.text',
+    defaultMessage: 'Check back soon to unlock your new look.',
+    description: 'Text displayed in the alert message when the selected avatar set is not completed in the progress avatar set modal.',
+  },
+  'dashboard.progress-avatar-set.modal.alert.avatar-set-not-selected.title': {
+    id: 'dashboard.progress-avatar-set.modal.alert.avatar-set-not-selected.title',
+    defaultMessage: 'No avatar, no quest!',
+    description: 'Title of the alert shown when no avatar set is selected in the progress avatar set modal.',
+  },
+  'dashboard.progress-avatar-set.modal.alert.avatar-set-not-selected.text': {
+    id: 'dashboard.progress-avatar-set.modal.alert.avatar-set-not-selected.text',
+    defaultMessage: 'Select your avatar set now to begin your journey, earn rewards, and level up as you complete tasks.',
+    description: 'Text displayed in the alert message when no avatar set is selected in the progress avatar set modal.',
+  },
+  'dashboard.progress-avatar-set.modal.empty.text': {
+    id: 'dashboard.progress-avatar-set.modal.empty.text',
+    defaultMessage: 'No avatar sets are available. Please contact your course administrator to configure avatar sets.',
+    description: 'Displayed when no avatar sets meet the filter criteria, instructing the user to ask the course administrator to set up avatar sets.',
+  },
+  'dashboard.progress-avatar-set.modal.title': {
+    id: 'dashboard.progress-avatar-set.modal.title',
+    defaultMessage: 'Avatar sets',
+    description: 'Title for the progress avatar set modal.',
+  },
+  'generic.error.fallback.btn.text': {
+    id: 'generic.error.fallback.btn.text',
+    defaultMessage: 'Try again',
+    description: 'Text for the button to try again in the error fallback component.',
+  },
+  'generic.error.fallback.title': {
+    id: 'generic.error.fallback.title',
+    defaultMessage: 'Something went wrong...',
+    description: 'Title for the error fallback component.',
+  },
+  'generic.error.fallback.description': {
+    id: 'generic.error.fallback.description',
+    defaultMessage: 'There was an error:',
+    description: 'Description for the error fallback component.',
   },
 };
 

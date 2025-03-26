@@ -1,7 +1,16 @@
 const path = require('path');
+const webpack = require('webpack');
+const dotenv = require('dotenv');
 
 module.exports = (env, argv) => {
   const isDevelopment = argv.mode === 'development';
+
+  const envConfig = dotenv.config().parsed || {};
+
+  const envKeys = Object.keys(envConfig).reduce((acc, key) => {
+    acc[`process.env.${key}`] = JSON.stringify(envConfig[key]);
+    return acc;
+  }, {});
 
   return {
     entry: './src/index.jsx',
@@ -36,5 +45,11 @@ module.exports = (env, argv) => {
     resolve: {
       extensions: ['*', '.js', '.jsx'],
     },
+    plugins: [
+      new webpack.DefinePlugin({
+        'process.env.NODE_ENV': JSON.stringify(argv.mode),
+        ...envKeys,
+      }),
+    ],
   };
 };

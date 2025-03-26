@@ -1,0 +1,46 @@
+.progress-avatar-list {
+  display: flex;
+  justify-content: space-around;
+  flex: 0 0 7.188rem;
+  margin-top: map-get($spacers, 6);
+
+  @media screen and (max-width: map-get($grid-breakpoints, "lg")) {
+    justify-content: space-between;
+  }
+
+  @media screen and (max-width: map-get($grid-breakpoints, "sm")) {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 2.5rem;
+  }
+}
+
+.progress-avatar {
+  .pgn__card-header-content {
+    margin-bottom: 2rem !important;
+  }
+
+  .pgn__card-wrapper-image-cap.vertical {
+    max-height: 18.75rem !important;
+  }
+
+  &.pgn__card.pgn__card-muted.card .pgn__card-image-cap.show {
+    filter: opacity(0.4);
+  }
+
+  .pgn__card-header-title-md {
+    line-height: 1.875rem !important;
+  }
+
+  &.pgn__card.avatar-selected {
+    cursor: pointer;
+
+    @extend %pgn__card-focused;
+  }
+}
+
+.progress-avatar-details-btn-wrapper {
+  text-align: center;
+  margin-top: 1.875rem;
+}

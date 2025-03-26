@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
+import { Info as InfoIcon } from '@openedx/paragon/icons';
 
 import { gammaApi } from '../api';
 import { useTranslate } from '../i18n/utils';
 import { useScrollToContent } from '../generic/hooks';
-import { SubHeader } from '../generic';
+import { SubHeader, Alert } from '../generic';
 import { getLeaderboardTableProps } from './utils';
 import { LeaderboardTable } from './components';
 
@@ -18,19 +19,30 @@ const LeaderboardPage = () => {
     urlProfileImage: '',
     systemStatuses: [],
   });
+  const [error, setError] = useState(null);
+
+  const messages = {
+    alertTitle: useTranslate('leaderboard.heading.text'),
+  };
 
   useScrollToContent('leaderboard-page-title', 'a[href="#main"]');
 
   useEffect(() => {
-    gammaApi.leaderboard.getInfo((res) => setData({
-      top10: res.top10 || [],
-      competitors: res.competitors || [],
-      rank: res.rank || null,
-      userUid: res.user_uid || null,
-      urlProfileImage: res.url_profile_image || null,
-      systemStatuses: res.system_statuses || [],
-    }), courseId);
-  }, []);
+    gammaApi.leaderboard.getInfo((res) => {
+      if (res.error) {
+        setError(res.error);
+      } else {
+        setData({
+          top10: res.top10 || [],
+          competitors: res.competitors || [],
+          rank: res.rank || null,
+          userUid: res.user_uid || null,
+          urlProfileImage: res.url_profile_image || null,
+          systemStatuses: res.system_statuses || [],
+        });
+      }
+    }, courseId);
+  }, [courseId]);
 
   const {
     rank,
@@ -39,11 +51,22 @@ const LeaderboardPage = () => {
     systemStatuses,
   } = getLeaderboardTableProps(data);
 
+  if (error) {
+    return (
+      <Alert
+        className="mt-6"
+        title={error}
+        variant="danger"
+        icon={InfoIcon}
+      />
+    );
+  }
+
   return (
     <>
       <SubHeader
         id="leaderboard-page-title"
-        title={useTranslate('leaderboard.heading.text')}
+        title={messages.alertTitle}
       />
       <LeaderboardTable
         rank={rank}

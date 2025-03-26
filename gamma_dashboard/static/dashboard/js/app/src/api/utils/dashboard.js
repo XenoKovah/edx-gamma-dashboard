@@ -24,6 +24,8 @@ export const prepareDashboardData = (data = {}) => {
     points = 0,
     progress = {},
     chart = {},
+    avatar_sets: avatarSets = [],
+    gamma_user_info: gammaUserInfo = {},
   } = data;
 
   const statusTitles = mapStatusTitles(systemStatuses);
@@ -46,5 +48,7 @@ export const prepareDashboardData = (data = {}) => {
     },
     progress,
     chart,
+    avatarSets,
+    gammaUserInfo,
   };
 };

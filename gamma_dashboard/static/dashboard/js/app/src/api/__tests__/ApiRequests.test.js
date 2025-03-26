@@ -1,7 +1,3 @@
-/*
-* @jest-environment node
-*/
-
 import 'regenerator-runtime';
 
 import axios from 'axios';
@@ -37,7 +33,9 @@ const correctProfilesData = {
 
 describe('ApiRequests', () => {
   describe('leaderboard', () => {
-    const flushPromises = () => new Promise(setImmediate);
+    const flushPromises = () => new Promise(resolve => {
+      setTimeout(resolve, 0);
+    });
 
     it('getInfo returns valid data', async () => {
       const mock = new MockAdapter(axios);
@@ -62,7 +60,9 @@ describe('ApiRequests', () => {
       await flushPromises();
 
       expect(logSpy).toHaveBeenCalled();
-      expect(callback).toHaveBeenCalledWith({});
+      expect(callback).toHaveBeenCalledWith({
+        error: 'Request failed with status code Error: No data was found.',
+      });
     });
 
     it('getInfo returns empty data when response.data is falsy', async () => {
@@ -75,7 +75,9 @@ describe('ApiRequests', () => {
       await flushPromises();
 
       expect(logSpy).toHaveBeenCalled();
-      expect(callback).toHaveBeenCalledWith({});
+      expect(callback).toHaveBeenCalledWith({
+        error: 'Request failed with status code false',
+      });
     });
 
     it('getInfo returns valid data under external app', async () => {
@@ -93,7 +95,9 @@ describe('ApiRequests', () => {
   });
 
   describe('dashboard', () => {
-    const flushPromises = () => new Promise(setImmediate);
+    const flushPromises = () => new Promise(resolve => {
+      setTimeout(resolve, 0);
+    });
 
     it('getGameProfile returns valid data', async () => {
       const mock = new MockAdapter(axios);

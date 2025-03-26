@@ -5,19 +5,18 @@ import { Button } from '@openedx/paragon';
 import DashboardSectionHeader from './DashboardSectionHeader';
 import DashboardSection from './DashboardSection';
 
-const DashboardSectionSlider = ({
+const DashboardSectionAvatar = ({
   title,
-  status,
-  description,
-  content,
   items,
+  status,
+  content,
+  description,
   buttonData: {
     title: buttonTitle,
     onClick: buttonOnClick,
   },
-  fullWidth,
 }) => (
-  <DashboardSection fullWidth={fullWidth}>
+  <DashboardSection>
     <DashboardSectionHeader
       title={title}
       status={status}
@@ -30,14 +29,14 @@ const DashboardSectionSlider = ({
       {content}
     </p>
     <ul
-      className="progress-badges-list p-0 mb-0"
-      data-testid="progress-badges-list"
+      className="progress-avatar-list p-0 mb-0"
+      data-testid="progress-avatar-list"
     >
       {items}
     </ul>
-    <div className="progress-badges-details-btn-wrapper">
+    <div className="progress-avatar-details-btn-wrapper">
       <Button
-        data-testid="progress-badges-details-btn"
+        data-testid="progress-avatar-details-btn-wrapper"
         title={buttonTitle}
         variant="outline-primary"
         onClick={buttonOnClick}
@@ -48,7 +47,7 @@ const DashboardSectionSlider = ({
   </DashboardSection>
 );
 
-DashboardSectionSlider.propTypes = {
+DashboardSectionAvatar.propTypes = {
   title: PropTypes.string,
   status: PropTypes.string,
   description: PropTypes.string,
@@ -58,10 +57,9 @@ DashboardSectionSlider.propTypes = {
     title: PropTypes.string,
     onClick: PropTypes.func,
   }),
-  fullWidth: PropTypes.bool,
 };
 
-DashboardSectionSlider.defaultProps = {
+DashboardSectionAvatar.defaultProps = {
   title: '',
   status: '',
   description: '',
@@ -71,6 +69,6 @@ DashboardSectionSlider.defaultProps = {
     title: '',
     onClick: () => {},
   },
-  fullWidth: false,
+
 };
-export default DashboardSectionSlider;
+export default DashboardSectionAvatar;
