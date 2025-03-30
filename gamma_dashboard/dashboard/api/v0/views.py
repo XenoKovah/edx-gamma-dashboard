@@ -12,7 +12,7 @@ from common.djangoapps.student.views import get_org_black_and_whitelist_for_site
 from opaque_keys.edx.keys import CourseKey
 from openedx.core.djangoapps.user_api.accounts.image_helpers import get_profile_image_urls_for_user
 
-from gamma_dashboard.dashboard.core.gamma.api.settings import API_VERSION_1, DEFAULT_API_VERSION
+from gamma_dashboard.dashboard.core.gamma.api.settings import DEFAULT_API_VERSION
 from gamma_dashboard.dashboard.core.gamma.api.wrapper import GammaApiWrapper
 from gamma_dashboard.toggles import show_gamma_leaderboard
 from ..utils import site_badge_filter, is_main_site
@@ -46,7 +46,7 @@ class LeaderboardApiView(APIView):
             leaderboard_info = COURSE_LEADERBOARD_MOCK
         else:
             leaderboard_info = GammaApiWrapper(
-                version=API_VERSION_1
+                version=DEFAULT_API_VERSION
             ).get_leaderboard_info(request.user.username, user_signup_source, course_id)
 
         if leaderboard_info:
