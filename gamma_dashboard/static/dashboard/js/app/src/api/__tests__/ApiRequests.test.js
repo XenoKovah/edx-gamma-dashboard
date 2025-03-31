@@ -3,10 +3,10 @@ import 'regenerator-runtime';
 import axios from 'axios';
 import MockAdapter from 'axios-mock-adapter';
 
-import { gammaApi } from '..';
-
 import { gameProfileData } from '../../__mocks__/dashboard';
 import { prepareDashboardData } from '../utils';
+import { DASHBOARD_URLS } from '../constants';
+import { gammaApi } from '..';
 
 const correctProfilesData = {
   gameprofiles: [
@@ -99,6 +99,27 @@ describe('ApiRequests', () => {
       setTimeout(resolve, 0);
     });
 
+    beforeEach(() => {
+      jest.resetModules();
+      gammaApi.dashboard = {
+        getGameProfile: jest.fn((callback, courseId) => {
+          axios.get(DASHBOARD_URLS.getGameProfile, { params: { course_id: courseId } })
+            .then(response => {
+              if (response.data) {
+                callback(prepareDashboardData(response.data));
+              } else {
+                console.log('No data received from the server'); // eslint-disable-line no-console
+                callback({});
+              }
+            })
+            .catch(error => {
+              console.log(error); // eslint-disable-line no-console
+              callback({});
+            });
+        }),
+      };
+    });
+
     it('getGameProfile returns valid data', async () => {
       const mock = new MockAdapter(axios);
 
@@ -106,6 +127,18 @@ describe('ApiRequests', () => {
 
       mock.onGet().reply(200, gameProfileData);
       gammaApi.dashboard.getGameProfile(callback);
+      await flushPromises();
+
+      expect(callback).toHaveBeenCalledWith(prepareDashboardData(gameProfileData));
+    });
+
+    it('getGameProfile returns valid data under external app', async () => {
+      const mock = new MockAdapter(axios);
+      const callback = jest.fn();
+      const courseId = 'course-v1:edx+101+101';
+
+      mock.onGet().reply(200, gameProfileData);
+      gammaApi.dashboard.getGameProfile(callback, courseId);
       await flushPromises();
 
       expect(callback).toHaveBeenCalledWith(prepareDashboardData(gameProfileData));

@@ -239,6 +239,111 @@ export const gameProfileData = {
       slug: '3',
     },
   ],
+  gamma_user_info: {
+    gamma_user_id: 17,
+    user_avatar_set_info: {
+      id: 17,
+      gamma_user_id: 17,
+      selected_avatar_id: 967,
+      selected_avatar_set_id: 309,
+    },
+  },
+  avatar_sets: [
+    {
+      id: 308,
+      title: 'Test 1',
+      avatars: [
+        {
+          id: 964,
+          title: 'Title placeholder',
+          description: 'Some description',
+          image: '/media/uploads/avatars/bd915c1f-691c-4785-aada-207f76295624.svg',
+          rules: [
+            {
+              id: 213,
+              event_configuration: 5,
+              action: {
+                edx_bookmark_added: 2,
+              },
+              filters: {},
+              created_at: '2025-03-25T16:34:16.355746Z',
+            },
+          ],
+          stage: null,
+          created_at: '2025-03-24T12:25:51.996383Z',
+        },
+        {
+          id: 965,
+          title: 'Title placeholder',
+          description: 'Some description',
+          image: '/media/uploads/avatars/7e926b17-b65c-4b9e-9429-61b863b49437.svg',
+          rules: [
+            {
+              id: 214,
+              event_configuration: 5,
+              action: {
+                edx_bookmark_added: 3,
+              },
+              filters: {},
+              created_at: '2025-03-26T06:26:31.358713Z',
+            },
+          ],
+          stage: null,
+          created_at: '2025-03-24T12:25:52.014104Z',
+        },
+      ],
+      use_in_courses: [],
+      is_draft: false,
+      created_at: '2025-03-24T12:25:44.943881Z',
+    },
+    {
+      id: 309,
+      title: 'My avatar set 2',
+      avatars: [
+        {
+          id: 966,
+          title: 'Avatar 1 from Avatar set 12',
+          description: 'Avatar 1 from Avatar set 1',
+          image: '/media/uploads/avatars/dbffdda4-ca62-4b52-b0bf-acd2a2432e4e.svg',
+          rules: [
+            {
+              id: 212,
+              event_configuration: 5,
+              action: {
+                edx_bookmark_added: 1,
+              },
+              filters: {},
+              created_at: '2025-03-25T16:34:08.013434Z',
+            },
+          ],
+          stage: 1,
+          created_at: '2025-03-25T16:30:17.081434Z',
+        },
+        {
+          id: 967,
+          title: 'Avatar 2 from Avatar set 1',
+          description: 'Avatar 2 from Avatar set 1',
+          image: '/media/uploads/avatars/6d5fd8b2-2f75-4981-b86e-80980358a4f5.svg',
+          rules: [
+            {
+              id: 213,
+              event_configuration: 5,
+              action: {
+                edx_bookmark_added: 2,
+              },
+              filters: {},
+              created_at: '2025-03-25T16:34:16.355746Z',
+            },
+          ],
+          stage: 2,
+          created_at: '2025-03-25T16:30:17.096711Z',
+        },
+      ],
+      use_in_courses: [],
+      is_draft: false,
+      created_at: '2025-03-25T16:30:09.225473Z',
+    },
+  ],
 };
 
 export const statusRoadmap = {

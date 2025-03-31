@@ -7,19 +7,19 @@ import {
   Warning as WarningIcon,
 } from '@openedx/paragon/icons';
 
+import { AvatarProcessingStatesPropType, AvatarSetsPropType } from '../../propTypes';
 import { useTranslate } from '../../../i18n/utils';
 import { isRtl } from '../../../constants';
 import { Modal, Loader, Alert } from '../../../generic';
 import ProgressAvatar from './ProgressAvatar';
+import { isIdle } from './utils';
 
 const ProgressAvatarModal = ({
   title,
   isOpen,
   avatarSets,
-  isUpdating,
-  updateError,
   closeCallback,
-  updateSuccess,
+  avatarProcessingStates,
   selectedAvatarSetId,
   hasSelectedAvatarSet,
   handleSelectAvatarSet,
@@ -27,6 +27,10 @@ const ProgressAvatarModal = ({
   savedSelectedAvatarSetId,
   handleUpdateSelectedAvatarSet,
 }) => {
+  const {
+    details: { update, select },
+  } = avatarProcessingStates;
+
   const messages = {
     modalBtnCloseTitle: useTranslate('dashboard.progress-avatar.modal.button.close.text'),
     counterText: useTranslate('performance.avatar.section.total.avatar-sets.button.text'),
@@ -35,64 +39,64 @@ const ProgressAvatarModal = ({
     avatarErrorText: useTranslate('dashboard.progress-avatar-set.modal.avatar-set.error.text'),
     avatarInfoText: useTranslate('dashboard.progress-avatar-set.modal.avatar-set.info.text'),
     emptyAvatarSetText: useTranslate('dashboard.progress-avatar-set.modal.empty.text'),
+    modalSupportText: useTranslate('dashboard.progress-avatar-set.modal.avatar-set.support.text'),
   };
 
   const counterLabelText = isRtl ? `:${messages.counterText}` : `${messages.counterText}:`;
 
-  const canShowForm = !isUpdating && !updateSuccess && !updateError && avatarSets.length > 0;
+  const canShowForm = isIdle(update) && isIdle(select) && avatarSets.length > 0;
 
   const footerText = canShowForm
     ? `${counterLabelText} ${avatarSets?.length || 0}`
     : '';
 
   const getAlertContent = () => {
-    if (updateSuccess) {
+    if (update.isSuccess || select.isSuccess) {
       return {
-        title: messages.avatarSuccessText,
+        titleText: messages.avatarSuccessText,
         variant: 'success',
         icon: CheckCircleIcon,
       };
     }
-    if (updateError) {
+    if (update.isError || select.isError) {
       return {
-        title: messages.avatarErrorText,
+        titleText: messages.avatarErrorText,
         variant: 'danger',
         icon: ErrorIcon,
       };
     }
     return {
-      title: messages.emptyAvatarSetText,
+      titleText: messages.emptyAvatarSetText,
       variant: 'warning',
       icon: WarningIcon,
     };
   };
 
   let modalContent;
-  if (isUpdating) {
+  if (update.isLoading || select.isLoading) {
     modalContent = <Loader className="text-center mb-4" />;
   } else if (!canShowForm) {
-    const alertContent = getAlertContent();
+    const { titleText, variant, icon } = getAlertContent();
     modalContent = (
-      <Alert
-        title={alertContent.title}
-        variant={alertContent.variant}
-        icon={alertContent.icon}
-      />
+      <Alert title={titleText} variant={variant} icon={icon} />
     );
   } else {
     modalContent = (
-      <CardGrid columnSizes={{ xs: 12, lg: 6, xl: 4 }}>
-        {avatarSets.map((avatarSet) => (
-          <ProgressAvatar
-            key={avatarSet.id}
-            avatarSetData={avatarSet}
-            isSelected={selectedAvatarSetId === avatarSet.id}
-            onSelect={() => setSelectedAvatarSetId(avatarSet.id)}
-            savedSelectedAvatarSetId={savedSelectedAvatarSetId}
-            isAvatarSetSelectable
-          />
-        ))}
-      </CardGrid>
+      <>
+        <p>{messages.modalSupportText}</p>
+        <CardGrid columnSizes={{ xs: 12, lg: 6, xl: 4 }}>
+          {avatarSets.map((avatarSet) => (
+            <ProgressAvatar
+              key={avatarSet.id}
+              avatarSetData={avatarSet}
+              isSelected={selectedAvatarSetId === avatarSet.id}
+              onSelect={() => setSelectedAvatarSetId(avatarSet.id)}
+              savedSelectedAvatarSetId={savedSelectedAvatarSetId}
+              isAvatarSetSelectable
+            />
+          ))}
+        </CardGrid>
+      </>
     );
   }
 
@@ -123,61 +127,29 @@ const ProgressAvatarModal = ({
 
 ProgressAvatarModal.propTypes = {
   title: PropTypes.string,
-  isOpen: PropTypes.bool,
-  closeCallback: PropTypes.func,
-  avatarSets: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-      title: PropTypes.string,
-      avatars: PropTypes.arrayOf(
-        PropTypes.shape({
-          id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
-          title: PropTypes.string,
-          description: PropTypes.string,
-          image: PropTypes.string.isRequired,
-          rules: PropTypes.arrayOf(
-            PropTypes.shape({
-              id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
-              event_configuration: PropTypes.number,
-              action: PropTypes.objectOf(PropTypes.string),
-              filters: PropTypes.object, // eslint-disable-line react/forbid-prop-types
-              created_at: PropTypes.string,
-            }),
-          ),
-          stage: PropTypes.string,
-          created_at: PropTypes.string,
-        }),
-      ).isRequired,
-    }),
-  ),
-  handleUpdateSelectedAvatarSet: PropTypes.func,
-  updateSuccess: PropTypes.bool,
-  updateError: PropTypes.oneOfType([
-    PropTypes.object,
-    PropTypes.oneOf([null]),
+  isOpen: PropTypes.bool.isRequired,
+  closeCallback: PropTypes.func.isRequired,
+  avatarSets: AvatarSetsPropType,
+  avatarProcessingStates: AvatarProcessingStatesPropType,
+  selectedAvatarSetId: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.number,
   ]),
-  isUpdating: PropTypes.bool,
-  selectedAvatarSetId: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  setSelectedAvatarSetId: PropTypes.func,
-  savedSelectedAvatarSetId: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  hasSelectedAvatarSet: PropTypes.bool,
-  handleSelectAvatarSet: PropTypes.func,
+  hasSelectedAvatarSet: PropTypes.bool.isRequired,
+  handleSelectAvatarSet: PropTypes.func.isRequired,
+  setSelectedAvatarSetId: PropTypes.func.isRequired,
+  savedSelectedAvatarSetId: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.number,
+  ]),
+  handleUpdateSelectedAvatarSet: PropTypes.func.isRequired,
 };
 
 ProgressAvatarModal.defaultProps = {
   title: '',
-  isOpen: false,
-  closeCallback: () => {},
   avatarSets: [],
-  handleUpdateSelectedAvatarSet: () => {},
-  updateSuccess: false,
-  updateError: null,
-  isUpdating: false,
   selectedAvatarSetId: null,
-  setSelectedAvatarSetId: () => {},
   savedSelectedAvatarSetId: null,
-  hasSelectedAvatarSet: false,
-  handleSelectAvatarSet: () => {},
 };
 
 export default ProgressAvatarModal;

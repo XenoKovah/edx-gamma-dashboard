@@ -279,6 +279,16 @@ const en = {
     defaultMessage: 'Select',
     description: 'Label for the button used to select an avatar set in the progress avatar set modal.',
   },
+  'dashboard.progress-avatar-set.modal.avatar-set.card.selected.text': {
+    id: 'dashboard.progress-avatar-set.modal.avatar-set.card.selected.text',
+    defaultMessage: 'Current avatar set',
+    description: 'Text displayed when the avatar set is selected in the progress avatar set modal.',
+  },
+  'dashboard.progress-avatar-set.modal.avatar-set.support.text': {
+    id: 'dashboard.progress-avatar-set.modal.avatar-set.support.text',
+    defaultMessage: "Don't forget to click the Save button to apply the changes.",
+    description: 'Support message displayed in the progress avatar set modal.',
+  },
   'dashboard.progress-avatar-set.modal.avatar-set.save.btn': {
     id: 'dashboard.progress-avatar-set.modal.avatar-set.save.btn',
     defaultMessage: 'Save',

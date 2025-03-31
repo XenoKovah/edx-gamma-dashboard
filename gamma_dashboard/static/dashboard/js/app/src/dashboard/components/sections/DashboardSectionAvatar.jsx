@@ -52,7 +52,7 @@ DashboardSectionAvatar.propTypes = {
   status: PropTypes.string,
   description: PropTypes.string,
   content: PropTypes.string,
-  items: PropTypes.arrayOf(PropTypes.node),
+  items: PropTypes.node,
   buttonData: PropTypes.shape({
     title: PropTypes.string,
     onClick: PropTypes.func,

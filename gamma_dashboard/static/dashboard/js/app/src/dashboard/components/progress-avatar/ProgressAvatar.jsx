@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import {
-  Button, breakpoints, useMediaQuery, Card as BaseCard,
+  Button, breakpoints, useMediaQuery, Card as BaseCard, Badge,
 } from '@openedx/paragon';
 
 import { useTranslate } from '../../../i18n/utils';
@@ -23,6 +23,7 @@ const ProgressAvatar = ({
 
   const messages = {
     avatarSetCardSelectBtnText: useTranslate('dashboard.progress-avatar-set.modal.avatar-set.card.select.btn'),
+    avatarSetCardSelectedText: useTranslate('dashboard.progress-avatar-set.modal.avatar-set.card.selected.text'),
   };
 
   const actualImageUrl = getActualImageUrl(
@@ -42,28 +43,32 @@ const ProgressAvatar = ({
   return (
     <BaseCard
       className={classNames('progress-avatar', {
-        'avatar-selected': isSelected,
+        'avatar-selected': isSelected && !isSavedUserAvatarSet,
       })}
       style={{ width: isExtraSmall ? '100%' : '18rem' }}
       onClick={handleSelectAvatarSet}
-      variant={isSavedUserAvatarSet ? 'muted' : 'light'}
     >
       <BaseCard.ImageCap
         className="card-item-image"
         src={imageSrc}
-        srcAlt={avatarSetData?.title}
+        srcAlt={avatarSetData.title}
       />
       <BaseCard.Header
         classNames="avatar-card-header"
-        title={avatarSetData?.title}
+        title={avatarSetData.title}
       />
-      {isAvatarSetSelectable && !isSavedUserAvatarSet && (
-        <BaseCard.Footer>
+      <BaseCard.Footer>
+        {isAvatarSetSelectable && !isSavedUserAvatarSet && (
           <Button variant="outline-primary" block>
             {messages.avatarSetCardSelectBtnText}
           </Button>
-        </BaseCard.Footer>
-      )}
+        )}
+        {isSavedUserAvatarSet && (
+          <Badge variant="info">
+            {messages.avatarSetCardSelectedText}
+          </Badge>
+        )}
+      </BaseCard.Footer>
     </BaseCard>
   );
 };

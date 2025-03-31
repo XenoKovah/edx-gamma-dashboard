@@ -1,7 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import '@testing-library/jest-dom';
-import { screen, cleanup } from '@testing-library/react';
+import { screen, cleanup, waitFor } from '@testing-library/react';
 import { act } from 'react-dom/test-utils';
 
 import { renderWithProviders } from '../../setupTests';
@@ -17,14 +17,19 @@ jest.mock('echarts-for-react', () => jest.fn((props) => (
   />
 )));
 
-afterEach(cleanup);
+afterEach(() => {
+  cleanup();
+  jest.clearAllMocks();
+});
 
 describe('<DashboardPage>', () => {
-  it('renders', () => {
+  const renderComponent = (component) => renderWithProviders(component);
+
+  it('renders', async () => {
     axios.get.mockResolvedValue({ data: gameProfileData });
 
-    act(() => {
-      renderWithProviders(<DashboardPage />);
+    await act(async () => {
+      renderComponent(<DashboardPage />);
     });
 
     const dashboardTable = screen.getByTestId('dashboard-page');
@@ -42,10 +47,12 @@ describe('<DashboardPage>', () => {
     axios.get.mockResolvedValue({ data });
 
     act(() => {
-      const { getByTestId } = renderWithProviders(<DashboardPage />);
+      const { getByTestId } = renderComponent(<DashboardPage />);
 
-      const dashboardTable = getByTestId('dashboard-page');
-      expect(dashboardTable).toBeInTheDocument();
+      waitFor(() => {
+        const dashboardTable = getByTestId('dashboard-page');
+        expect(dashboardTable).toBeInTheDocument();
+      });
     });
   });
 });

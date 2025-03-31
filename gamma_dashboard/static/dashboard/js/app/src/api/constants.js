@@ -17,10 +17,3 @@ export const DASHBOARD_URLS = {
 };
 
 export const FEEDBACK_FORM_URL = `/rg_products_toolkit/api/v${API_VERSION}/submit_feedback/`;
-
-export const csrfToken = document.cookie.match('(^|;)\\s*csrftoken\\s*=\\s*([^;]+)')?.pop();
-
-export const DEFAULT_HEADERS = {
-  'Content-Type': 'application/json',
-  'X-CSRFToken': csrfToken,
-};

@@ -16,24 +16,34 @@ import { ProgressAvatar, ProgressAvatarModal } from './components/progress-avata
 import { SliderStatusesBlock } from './components/slider-statuses-block';
 import { CORNER_BOTTOM, CORNER_TOP } from './components/constants';
 import {
-  BadgeItemPropType, ChartDataPropType, ProgressDataPropType, StatusPropType,
+  SHOW_STATUS_BLOCK,
+  SHOW_PROGRESS_CHART,
+  SHOW_PROGRESS_BADGES,
+  SHOW_POINTS_DISTRIBUTION_CHART,
+} from '../featureFlags';
+import {
+  BadgeItemPropType, ChartDataPropType, ProgressDataPropType,
+  StatusPropType, AvatarProcessingStatesPropType, AvatarSetsPropType,
 } from './propTypes';
 import { PointsDistributionChart, ProgressChart } from './charts';
 
 const PREVIEW_BADGES_ITEMS_COUNT = 3;
+
+// TODO: Replace with process.env.REACT_APP_SHOW_STATUS_BLOCK when env vars are available
+// const SHOW_STATUS_BLOCK = false;
+// const SHOW_PROGRESS_CHART = false;
+// const SHOW_PROGRESS_BADGES = false;
+// const SHOW_POINTS_DISTRIBUTION_CHART = false;
 
 const DashboardWrapper = ({
   chart,
   progress,
   badgeItems,
   avatarSets,
-  isUpdating,
-  updateError,
   statusItems,
-  updateSuccess,
+  avatarProcessingStates,
+  avatarResetProcessingMutations,
   gammaUserInfo,
-  setUpdateError,
-  setUpdateSuccess,
   handleSelectAvatarSet,
   handleUpdateSelectedAvatarSet,
 }) => {
@@ -45,11 +55,11 @@ const DashboardWrapper = ({
   const previewBadgeItems = badgeItems.slice(0, PREVIEW_BADGES_ITEMS_COUNT);
   const points = statusItems[0]?.points;
   const doneStatuses = statusItems.filter((item) => points >= item.statusPoints);
-  const hasSelectedAvatarSet = Boolean(gammaUserInfo?.user_avatar_set_info);
-  const hasCompletedAvatarSet = Boolean(gammaUserInfo?.user_avatar_set_info?.selected_avatar_id);
+  const hasSelectedAvatarSet = Boolean(gammaUserInfo.userAvatarSetInfo);
+  const hasCompletedAvatarSet = Boolean(gammaUserInfo.userAvatarSetInfo?.selectedAvatarId);
 
-  const savedSelectedAvatarSetId = gammaUserInfo?.user_avatar_set_info?.selected_avatar_set_id;
-  const selectedAvatarId = gammaUserInfo?.user_avatar_set_info?.selected_avatar_id;
+  const savedSelectedAvatarSetId = gammaUserInfo.userAvatarSetInfo?.selectedAvatarSetId;
+  const selectedAvatarId = gammaUserInfo.userAvatarSetInfo?.selectedAvatarId;
 
   const completedAvatar = useMemo(() => {
     if (!avatarSets || !savedSelectedAvatarSetId || !selectedAvatarId) { return null; }
@@ -86,8 +96,8 @@ const DashboardWrapper = ({
   const handleCloseProgressAvatarModal = () => {
     setIsAvatarModalOpen(false);
     setSelectedAvatarSetId(null);
-    setUpdateSuccess(false);
-    setUpdateError(false);
+
+    avatarResetProcessingMutations.all();
   };
 
   return (
@@ -99,15 +109,15 @@ const DashboardWrapper = ({
         />
         <div className="dashboard-page-body">
 
-            <DashboardSectionContainer>
-              <ErrorBoundary
-                FallbackComponent={ErrorFallback}
-                onReset={() => window.location.reload()}
-              >
-                <DashboardSectionAvatar
-                  title={messages.avatarSectionTitle}
-                  content={messages.avatarSectionDescription}
-                  items={
+          <DashboardSectionContainer>
+            <ErrorBoundary
+              FallbackComponent={ErrorFallback}
+              onReset={() => window.location.reload()}
+            >
+              <DashboardSectionAvatar
+                title={messages.avatarSectionTitle}
+                content={messages.avatarSectionDescription}
+                items={
                     hasCompletedAvatarSet ? (
                       <ProgressAvatar avatarSetData={completedAvatar} />
                     ) : (
@@ -129,16 +139,16 @@ const DashboardWrapper = ({
                       </Alert>
                     )
                   }
-                  buttonData={{
-                    title: messages.avatarSectionBtnTitle,
-                    onClick: () => {
-                      setModalData(badgeItems);
-                      setIsAvatarModalOpen(true);
-                    },
-                  }}
-                />
-              </ErrorBoundary>
-
+                buttonData={{
+                  title: messages.avatarSectionBtnTitle,
+                  onClick: () => {
+                    setModalData(badgeItems);
+                    setIsAvatarModalOpen(true);
+                  },
+                }}
+              />
+            </ErrorBoundary>
+            {SHOW_POINTS_DISTRIBUTION_CHART && (
               <ErrorBoundary
                 FallbackComponent={ErrorFallback}
                 onReset={() => window.location.reload()}
@@ -147,32 +157,35 @@ const DashboardWrapper = ({
                   <PointsDistributionChart data={chart} />
                 </DashboardSection>
               </ErrorBoundary>
-            </DashboardSectionContainer>
-
-          <DashboardSectionContainer>
-            <ErrorBoundary
-              FallbackComponent={ErrorFallback}
-              onReset={() => window.location.reload()}
-            >
-              <DashboardSectionSlider
-                fullWidth
-                title={messages.badgesSectionTitle}
-                status={messages.performanceSectionCounter}
-                content={messages.badgesSectionDescription}
-                items={previewBadgeItems.map((item) => (
-                  <ProgressBadge key={item} data={item[1]} />
-                ))}
-                buttonData={{
-                  title: messages.badgesSectionBtnTitle,
-                  onClick: () => {
-                    setModalData(badgeItems);
-                    setIsModalOpen(true);
-                  },
-                }}
-              />
-            </ErrorBoundary>
+            )}
           </DashboardSectionContainer>
-          {process.env.REACT_APP_SHOW_STATUS_BLOCK === 'true' && (
+
+          {SHOW_PROGRESS_BADGES && (
+            <DashboardSectionContainer>
+              <ErrorBoundary
+                FallbackComponent={ErrorFallback}
+                onReset={() => window.location.reload()}
+              >
+                <DashboardSectionSlider
+                  fullWidth
+                  title={messages.badgesSectionTitle}
+                  status={messages.performanceSectionCounter}
+                  content={messages.badgesSectionDescription}
+                  items={previewBadgeItems.map((item) => (
+                    <ProgressBadge key={item} data={item[1]} />
+                  ))}
+                  buttonData={{
+                    title: messages.badgesSectionBtnTitle,
+                    onClick: () => {
+                      setModalData(badgeItems);
+                      setIsModalOpen(true);
+                    },
+                  }}
+                />
+              </ErrorBoundary>
+            </DashboardSectionContainer>
+          )}
+          {SHOW_STATUS_BLOCK && (
             <DashboardSectionContainer>
               <ErrorBoundary
                 FallbackComponent={ErrorFallback}
@@ -187,16 +200,18 @@ const DashboardWrapper = ({
               </ErrorBoundary>
             </DashboardSectionContainer>
           )}
-          <DashboardSectionContainer>
-            <ErrorBoundary
-              FallbackComponent={ErrorFallback}
-              onReset={() => window.location.reload()}
-            >
-              <DashboardSection fullWidth corner={CORNER_BOTTOM}>
-                <ProgressChart data={progress} />
-              </DashboardSection>
-            </ErrorBoundary>
-          </DashboardSectionContainer>
+          {SHOW_PROGRESS_CHART && (
+            <DashboardSectionContainer>
+              <ErrorBoundary
+                FallbackComponent={ErrorFallback}
+                onReset={() => window.location.reload()}
+              >
+                <DashboardSection fullWidth corner={CORNER_BOTTOM}>
+                  <ProgressChart data={progress} />
+                </DashboardSection>
+              </ErrorBoundary>
+            </DashboardSectionContainer>
+          )}
         </div>
       </div>
       <ProgressBadgesModal
@@ -214,9 +229,7 @@ const DashboardWrapper = ({
         handleUpdateSelectedAvatarSet={handleUpdateSelectedAvatarSet}
         handleSelectAvatarSet={handleSelectAvatarSet}
         hasSelectedAvatarSet={hasSelectedAvatarSet}
-        updateSuccess={updateSuccess}
-        updateError={updateError}
-        isUpdating={isUpdating}
+        avatarProcessingStates={avatarProcessingStates}
         selectedAvatarSetId={selectedAvatarSetId}
         setSelectedAvatarSetId={setSelectedAvatarSetId}
         savedSelectedAvatarSetId={savedSelectedAvatarSetId}
@@ -230,47 +243,21 @@ DashboardWrapper.propTypes = {
   badgeItems: PropTypes.arrayOf(BadgeItemPropType),
   progress: ProgressDataPropType,
   chart: ChartDataPropType,
-  avatarSets: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
-      title: PropTypes.string,
-      avatars: PropTypes.arrayOf(
-        PropTypes.shape({
-          id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
-          title: PropTypes.string,
-          description: PropTypes.string,
-          image: PropTypes.string.isRequired,
-          rules: PropTypes.arrayOf(
-            PropTypes.shape({
-              id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
-              event_configuration: PropTypes.number,
-              action: PropTypes.objectOf(PropTypes.string),
-              filters: PropTypes.object, // eslint-disable-line react/forbid-prop-types
-              created_at: PropTypes.string,
-            }),
-          ),
-          stage: PropTypes.string,
-          created_at: PropTypes.string,
-        }),
-      ).isRequired,
-    }),
-  ),
+  avatarSets: AvatarSetsPropType,
   gammaUserInfo: PropTypes.shape({
-    user_avatar_set_info: PropTypes.shape({
-      selected_avatar_id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-      selected_avatar_set_id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+    userAvatarSetInfo: PropTypes.shape({
+      selectedAvatarId: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+      selectedAvatarSetId: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     }),
-  }),
-  handleUpdateSelectedAvatarSet: PropTypes.func,
-  isUpdating: PropTypes.bool,
-  updateSuccess: PropTypes.bool,
-  updateError: PropTypes.oneOfType([
-    PropTypes.object,
-    PropTypes.oneOf([null]),
-  ]),
-  setUpdateSuccess: PropTypes.func,
-  setUpdateError: PropTypes.func,
-  handleSelectAvatarSet: PropTypes.func,
+  }).isRequired,
+  avatarProcessingStates: AvatarProcessingStatesPropType,
+  avatarResetProcessingMutations: PropTypes.shape({
+    all: PropTypes.func.isRequired,
+    update: PropTypes.func.isRequired,
+    select: PropTypes.func.isRequired,
+  }).isRequired,
+  handleUpdateSelectedAvatarSet: PropTypes.func.isRequired,
+  handleSelectAvatarSet: PropTypes.func.isRequired,
 };
 
 DashboardWrapper.defaultProps = {
@@ -278,15 +265,6 @@ DashboardWrapper.defaultProps = {
   badgeItems: [],
   progress: {},
   chart: {},
-  avatarSets: [],
-  gammaUserInfo: {},
-  handleUpdateSelectedAvatarSet: () => {},
-  isUpdating: false,
-  updateSuccess: false,
-  updateError: null,
-  setUpdateSuccess: () => {},
-  setUpdateError: () => {},
-  handleSelectAvatarSet: () => {},
 };
 
 export default DashboardWrapper;

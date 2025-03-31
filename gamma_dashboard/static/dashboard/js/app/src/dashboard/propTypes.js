@@ -38,10 +38,57 @@ const BadgeItemPropType = PropTypes.arrayOf(
   }),
 );
 
+const ProcessingStatePropType = PropTypes.shape({
+  isLoading: PropTypes.bool.isRequired,
+  isError: PropTypes.bool.isRequired,
+  isSuccess: PropTypes.bool.isRequired,
+});
+
+const AvatarProcessingStatesPropType = PropTypes.shape({
+  details: PropTypes.shape({
+    update: ProcessingStatePropType.isRequired,
+    select: ProcessingStatePropType.isRequired,
+  }).isRequired,
+}).isRequired;
+
+const IdPropType = PropTypes.oneOfType([PropTypes.string, PropTypes.number]);
+
+const AvatarRulePropType = PropTypes.shape({
+  id: IdPropType.isRequired,
+  eventConfiguration: PropTypes.number,
+  action: PropTypes.objectOf(PropTypes.oneOfType([PropTypes.string, PropTypes.number])),
+  filters: PropTypes.object, // eslint-disable-line react/forbid-prop-types
+  createdAt: PropTypes.string,
+});
+
+const AvatarPropType = PropTypes.shape({
+  id: IdPropType.isRequired,
+  title: PropTypes.string,
+  description: PropTypes.string,
+  image: PropTypes.string.isRequired,
+  rules: PropTypes.arrayOf(AvatarRulePropType),
+  stage: PropTypes.number,
+  created_at: PropTypes.string,
+});
+
+const AvatarSetsPropType = PropTypes.arrayOf(
+  PropTypes.shape({
+    id: IdPropType.isRequired,
+    title: PropTypes.string,
+    avatars: PropTypes.arrayOf(AvatarPropType).isRequired,
+  }),
+).isRequired;
+
 export {
   ProgressDataPropType,
   ChartDataPropType,
   BadgeItemPropType,
   ProgressPropType,
   StatusPropType,
+  ProcessingStatePropType,
+  AvatarProcessingStatesPropType,
+  IdPropType,
+  AvatarSetsPropType,
+  AvatarPropType,
+  AvatarRulePropType,
 };
