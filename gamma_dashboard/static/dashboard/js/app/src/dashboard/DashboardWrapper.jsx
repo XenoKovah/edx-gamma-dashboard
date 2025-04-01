@@ -1,9 +1,9 @@
 import React, { useState, useMemo } from 'react';
+import { useIntl } from 'react-intl';
 import PropTypes from 'prop-types';
 import { Info as InfoIcon, Warning as WarningIcon } from '@openedx/paragon/icons';
 import { ErrorBoundary } from 'react-error-boundary';
 
-import { useTranslate } from '../i18n/utils';
 import { SubHeader, Alert, ErrorFallback } from '../generic';
 import {
   DashboardSection,
@@ -27,13 +27,9 @@ import {
 } from './propTypes';
 import { PointsDistributionChart, ProgressChart } from './charts';
 
-const PREVIEW_BADGES_ITEMS_COUNT = 3;
+import messages from '../i18n';
 
-// TODO: Replace with process.env.REACT_APP_SHOW_STATUS_BLOCK when env vars are available
-// const SHOW_STATUS_BLOCK = false;
-// const SHOW_PROGRESS_CHART = false;
-// const SHOW_PROGRESS_BADGES = false;
-// const SHOW_POINTS_DISTRIBUTION_CHART = false;
+const PREVIEW_BADGES_ITEMS_COUNT = 3;
 
 const DashboardWrapper = ({
   chart,
@@ -47,6 +43,8 @@ const DashboardWrapper = ({
   handleSelectAvatarSet,
   handleUpdateSelectedAvatarSet,
 }) => {
+  const intl = useIntl();
+
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isAvatarModalOpen, setIsAvatarModalOpen] = useState(false);
   const [modalData, setModalData] = useState([]);
@@ -73,24 +71,32 @@ const DashboardWrapper = ({
     return null;
   }, [avatarSets, savedSelectedAvatarSetId, selectedAvatarId]);
 
-  const messages = {
-    subHeaderTitle: useTranslate('performance.heading.text'),
-    performanceSectionCounter: useTranslate('performance.section.counter.text', {
+  const translations = {
+    subHeaderTitle: intl.formatMessage(messages.performanceHeadingText),
+    performanceSectionCounter: intl.formatMessage(messages.performanceSectionCounterText, {
       previewBadgeItemsLength: doneStatuses.length,
       badgeItemsLength: statusItems.length,
     }),
-    badgesSectionTitle: useTranslate('performance.badges.section.heading.text'),
-    badgesSectionDescription: useTranslate('performance.badges.section.description.text'),
-    badgesSectionBtnTitle: useTranslate('performance.badges.section.badges.button.text'),
-    badgesSectionAllBadgesBtnTitle: useTranslate('performance.badges.section.all.badges.button.text'),
-    avatarSectionTitle: useTranslate('performance.avatar.section.title.text'),
-    avatarSectionDescription: useTranslate('performance.avatar.section.description.text'),
-    avatarSectionBtnTitle: useTranslate('performance.avatar.section.avatar-sets.button.text'),
-    avatarSetsModalTitle: useTranslate('dashboard.progress-avatar-set.modal.title'),
-    alertAvatarSetNotCompletedTitle: useTranslate('dashboard.progress-avatar-set.modal.alert.avatar-set-not-completed.title'),
-    alertAvatarSetNotCompletedText: useTranslate('dashboard.progress-avatar-set.modal.alert.avatar-set-not-completed.text'),
-    alertAvatarSetNotSelectedTitle: useTranslate('dashboard.progress-avatar-set.modal.alert.avatar-set-not-selected.title'),
-    alertAvatarSetNotSelectedText: useTranslate('dashboard.progress-avatar-set.modal.alert.avatar-set-not-selected.text'),
+    badgesSectionTitle: intl.formatMessage(messages.performanceBadgesSectionHeadingText),
+    badgesSectionDescription: intl.formatMessage(messages.performanceBadgesSectionDescriptionText),
+    badgesSectionBtnTitle: intl.formatMessage(messages.performanceBadgesSectionBadgesButtonText),
+    badgesSectionAllBadgesBtnTitle: intl.formatMessage(messages.performanceBadgesSectionAllBadgesButtonText),
+    avatarSectionTitle: intl.formatMessage(messages.performanceAvatarSectionTitleText),
+    avatarSectionDescription: intl.formatMessage(messages.performanceAvatarSectionDescriptionText),
+    avatarSectionBtnTitle: intl.formatMessage(messages.performanceAvatarSectionAvatarSetsButtonText),
+    avatarSetsModalTitle: intl.formatMessage(messages.dashboardProgressAvatarSetModalTitle),
+    alertAvatarSetNotCompletedTitle: intl.formatMessage(
+      messages.dashboardProgressAvatarSetModalAlertAvatarSetNotCompletedTitle,
+    ),
+    alertAvatarSetNotCompletedText: intl.formatMessage(
+      messages.dashboardProgressAvatarSetModalAlertAvatarSetNotCompletedText,
+    ),
+    alertAvatarSetNotSelectedTitle: intl.formatMessage(
+      messages.dashboardProgressAvatarSetModalAlertAvatarSetNotSelectedTitle,
+    ),
+    alertAvatarSetNotSelectedText: intl.formatMessage(
+      messages.dashboardProgressAvatarSetModalAlertAvatarSetNotSelectedText,
+    ),
   };
 
   const handleCloseProgressAvatarModal = () => {
@@ -105,7 +111,7 @@ const DashboardWrapper = ({
       <div className="dashboard-page" data-testid="dashboard-page">
         <SubHeader
           id="dashboard-page-title"
-          title={messages.subHeaderTitle}
+          title={translations.subHeaderTitle}
         />
         <div className="dashboard-page-body">
 
@@ -115,8 +121,8 @@ const DashboardWrapper = ({
               onReset={() => window.location.reload()}
             >
               <DashboardSectionAvatar
-                title={messages.avatarSectionTitle}
-                content={messages.avatarSectionDescription}
+                title={translations.avatarSectionTitle}
+                content={translations.avatarSectionDescription}
                 items={
                     hasCompletedAvatarSet ? (
                       <ProgressAvatar avatarSetData={completedAvatar} />
@@ -127,20 +133,20 @@ const DashboardWrapper = ({
                         icon={hasSelectedAvatarSet ? WarningIcon : InfoIcon}
                         title={
                           hasSelectedAvatarSet
-                            ? messages.alertAvatarSetNotCompletedTitle
-                            : messages.alertAvatarSetNotSelectedTitle
+                            ? translations.alertAvatarSetNotCompletedTitle
+                            : translations.alertAvatarSetNotSelectedTitle
                         }
                       >
                         <p>
                           {hasSelectedAvatarSet
-                            ? messages.alertAvatarSetNotCompletedText
-                            : messages.alertAvatarSetNotSelectedText}
+                            ? translations.alertAvatarSetNotCompletedText
+                            : translations.alertAvatarSetNotSelectedText}
                         </p>
                       </Alert>
                     )
                   }
                 buttonData={{
-                  title: messages.avatarSectionBtnTitle,
+                  title: translations.avatarSectionBtnTitle,
                   onClick: () => {
                     setModalData(badgeItems);
                     setIsAvatarModalOpen(true);
@@ -168,14 +174,14 @@ const DashboardWrapper = ({
               >
                 <DashboardSectionSlider
                   fullWidth
-                  title={messages.badgesSectionTitle}
-                  status={messages.performanceSectionCounter}
-                  content={messages.badgesSectionDescription}
+                  title={translations.badgesSectionTitle}
+                  status={translations.performanceSectionCounter}
+                  content={translations.badgesSectionDescription}
                   items={previewBadgeItems.map((item) => (
                     <ProgressBadge key={item} data={item[1]} />
                   ))}
                   buttonData={{
-                    title: messages.badgesSectionBtnTitle,
+                    title: translations.badgesSectionBtnTitle,
                     onClick: () => {
                       setModalData(badgeItems);
                       setIsModalOpen(true);
@@ -193,7 +199,7 @@ const DashboardWrapper = ({
               >
                 <DashboardSection fullWidth corner={CORNER_TOP}>
                   <SliderStatusesBlock
-                    status={messages.performanceSectionCounter}
+                    status={translations.performanceSectionCounter}
                     statusItems={statusItems}
                   />
                 </DashboardSection>
@@ -217,14 +223,14 @@ const DashboardWrapper = ({
       <ProgressBadgesModal
         isOpen={isModalOpen}
         closeCallback={() => setIsModalOpen(false)}
-        title={messages.badgesSectionAllBadgesBtnTitle}
+        title={translations.badgesSectionAllBadgesBtnTitle}
         items={modalData}
         getItemDataFunction={(item) => item[1]}
       />
       <ProgressAvatarModal
         isOpen={isAvatarModalOpen}
         closeCallback={handleCloseProgressAvatarModal}
-        title={messages.avatarSetsModalTitle}
+        title={translations.avatarSetsModalTitle}
         avatarSets={avatarSets}
         handleUpdateSelectedAvatarSet={handleUpdateSelectedAvatarSet}
         handleSelectAvatarSet={handleSelectAvatarSet}

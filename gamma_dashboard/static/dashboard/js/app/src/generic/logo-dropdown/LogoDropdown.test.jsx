@@ -5,7 +5,7 @@ import userEvent from '@testing-library/user-event';
 import '@testing-library/jest-dom';
 
 import { renderWithProviders } from '../../setupTests';
-import messages from '../../i18n/en';
+import messages from '../../i18n';
 import { gammaApi } from '../../api';
 import { GAMIFICATION_GUIDE_URL, PRODUCT_NAME } from './constants';
 import LogoDropdown from './LogoDropdown';
@@ -17,7 +17,7 @@ jest.mock('axios');
 describe('LogoDropdown', () => {
   it('renders the logo with the correct alt text', () => {
     const { getByAltText } = renderWithProviders(<LogoDropdown />);
-    expect(getByAltText(messages['generic.logo-dropdown.image.screen-reader.text'].defaultMessage)).toBeInTheDocument();
+    expect(getByAltText(messages.genericLogoDropdownImageScreenReaderText.defaultMessage)).toBeInTheDocument();
   });
 
   it('toggles the dropdown open and closed when the toggle button is clicked', async () => {
@@ -28,10 +28,10 @@ describe('LogoDropdown', () => {
     userEvent.click(dropdownTriggerBtn);
 
     const feedbackBtn = await waitFor(() => getByRole('button', {
-      name: messages['logo.dropdown.feedback.item.text'].defaultMessage,
+      name: messages.logoDropdownFeedbackItemText.defaultMessage,
     }));
     const gamificationUserGuide = getByRole('link', {
-      name: `${messages['logo.dropdown.guide.item.text'].defaultMessage} in a new tab`,
+      name: `${messages.logoDropdownGuideItemText.defaultMessage} in a new tab`,
     });
 
     expect(feedbackBtn).toBeInTheDocument();
@@ -44,19 +44,19 @@ describe('LogoDropdown', () => {
     const dropdownTriggerBtn = getByRole('button');
     userEvent.click(dropdownTriggerBtn);
 
-    expect(queryByText(messages['logo.dropdown.feedback.item.text'].defaultMessage)).toBeInTheDocument();
+    expect(queryByText(messages.logoDropdownFeedbackItemText.defaultMessage)).toBeInTheDocument();
 
     const feedbackBtn = await waitFor(() => getByRole('button', {
-      name: messages['logo.dropdown.feedback.item.text'].defaultMessage,
+      name: messages.logoDropdownFeedbackItemText.defaultMessage,
     }));
     userEvent.click(feedbackBtn);
 
     expect(getByRole('dialog')).toBeInTheDocument();
     expect(getByRole('button', {
-      name: messages['logo.dropdown.feedback.form.button.submit.text'].defaultMessage,
+      name: messages.logoDropdownFeedbackFormButtonSubmitText.defaultMessage,
     })).toBeInTheDocument();
     expect(getByRole('button', {
-      name: messages['logo.dropdown.feedback.form.button.cancel.text'].defaultMessage,
+      name: messages.logoDropdownFeedbackFormButtonCancelText.defaultMessage,
     })).toBeInTheDocument();
   });
 
@@ -68,7 +68,7 @@ describe('LogoDropdown', () => {
     userEvent.click(dropdownTriggerBtn);
 
     const gamificationUserGuide = getByRole('link', {
-      name: `${messages['logo.dropdown.guide.item.text'].defaultMessage} in a new tab`,
+      name: `${messages.logoDropdownGuideItemText.defaultMessage} in a new tab`,
     });
     expect(gamificationUserGuide).toHaveAttribute('href', GAMIFICATION_GUIDE_URL);
     expect(gamificationUserGuide).toHaveAttribute('target', '_blank');
@@ -82,12 +82,12 @@ describe('LogoDropdown', () => {
     userEvent.click(dropdownTriggerBtn);
 
     const feedbackBtn = await waitFor(() => getByRole('button', {
-      name: messages['logo.dropdown.feedback.item.text'].defaultMessage,
+      name: messages.logoDropdownFeedbackItemText.defaultMessage,
     }));
     userEvent.click(feedbackBtn);
 
     const closeButton = getByRole('button', {
-      name: messages['logo.dropdown.feedback.form.button.cancel.text'].defaultMessage,
+      name: messages.logoDropdownFeedbackFormButtonCancelText.defaultMessage,
     });
     userEvent.click(closeButton);
 
@@ -123,7 +123,7 @@ describe('LogoDropdown', () => {
       userEvent.click(dropdownTriggerBtn);
 
       const feedbackBtn = await waitFor(() => getByRole('button', {
-        name: messages['logo.dropdown.feedback.item.text'].defaultMessage,
+        name: messages.logoDropdownFeedbackItemText.defaultMessage,
       }));
       userEvent.click(feedbackBtn);
 
@@ -133,7 +133,7 @@ describe('LogoDropdown', () => {
       expect(getByText(feedbackMessage)).toBeInTheDocument();
 
       const sendFeedbackBtn = getByRole('button', {
-        name: messages['logo.dropdown.feedback.form.button.submit.text'].defaultMessage,
+        name: messages.logoDropdownFeedbackFormButtonSubmitText.defaultMessage,
       });
       userEvent.click(sendFeedbackBtn);
 
@@ -151,7 +151,7 @@ describe('LogoDropdown', () => {
       });
       const successAlert = getByRole('alert');
       expect(within(successAlert).getByText(
-        messages['logo.dropdown.feedback.form.alert.success.text'].defaultMessage,
+        messages.logoDropdownFeedbackFormAlertSuccessText.defaultMessage,
       )).toBeInTheDocument();
     });
 
@@ -164,7 +164,7 @@ describe('LogoDropdown', () => {
       userEvent.click(dropdownTriggerBtn);
 
       const feedbackBtn = await waitFor(() => getByRole('button', {
-        name: messages['logo.dropdown.feedback.item.text'].defaultMessage,
+        name: messages.logoDropdownFeedbackItemText.defaultMessage,
       }));
       userEvent.click(feedbackBtn);
 
@@ -174,7 +174,7 @@ describe('LogoDropdown', () => {
       expect(getByText(feedbackMessage)).toBeInTheDocument();
 
       const sendFeedbackBtn = getByRole('button', {
-        name: messages['logo.dropdown.feedback.form.button.submit.text'].defaultMessage,
+        name: messages.logoDropdownFeedbackFormButtonSubmitText.defaultMessage,
       });
       userEvent.click(sendFeedbackBtn);
 
@@ -192,7 +192,7 @@ describe('LogoDropdown', () => {
       });
       const errorAlert = getByRole('alert');
       expect(within(errorAlert).getByText(
-        messages['logo.dropdown.feedback.form.alert.error.text'].defaultMessage,
+        messages.logoDropdownFeedbackFormAlertErrorText.defaultMessage,
       )).toBeInTheDocument();
     });
   });

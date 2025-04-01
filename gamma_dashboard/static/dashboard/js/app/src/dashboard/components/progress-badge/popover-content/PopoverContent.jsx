@@ -1,14 +1,17 @@
 import React from 'react';
+import { useIntl } from 'react-intl';
 import PropTypes from 'prop-types';
 import { Popover } from '@openedx/paragon';
 
-import { useTranslate } from '../../../../i18n/utils';
 import { ProgressPropType } from '../../../propTypes';
 import DependencyBlock from './DependencyBlock';
 import PointsBlock from './PointsBlock';
 import ProgressBlock from './ProgressBlock';
 
+import messages from '../../../../i18n';
+
 const PopoverContent = ({ data }) => {
+  const intl = useIntl();
   const {
     statusDependency,
     statusPoints,
@@ -17,9 +20,9 @@ const PopoverContent = ({ data }) => {
     points: studentPoints = 0,
   } = data;
 
-  const messages = {
-    dependsOnBadgesText: useTranslate('dashboard.badges.depends.on.badges.text'),
-    dependsOnStatusesText: useTranslate('dashboard.badges.depends.on.status.text'),
+  const translations = {
+    dependsOnBadgesText: intl.formatMessage(messages.dashboardBadgesDependsOnBadgesText),
+    dependsOnStatusesText: intl.formatMessage(messages.dashboardBadgesDependsOnStatusText),
   };
 
   const renderProgressItems = () => Object.entries(studentProgress).map(([progressItem, progressValues]) => (
@@ -46,10 +49,10 @@ const PopoverContent = ({ data }) => {
   const bodyItems = [
     ...renderProgressItems(),
     ...(badgeDependencies.length > 0
-      ? [renderDependencyBlock(messages.dependsOnBadgesText, badgeDependencies)]
+      ? [renderDependencyBlock(translations.dependsOnBadgesText, badgeDependencies)]
       : []),
     ...(statusDependency
-      ? [renderDependencyBlock(messages.dependsOnStatusesText, [statusDependency])]
+      ? [renderDependencyBlock(translations.dependsOnStatusesText, [statusDependency])]
       : []),
     ...(statusPoints ? [renderStatusPoints()] : []),
   ];

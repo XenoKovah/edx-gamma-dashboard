@@ -4,15 +4,11 @@ import userEvent from '@testing-library/user-event';
 import { cleanup } from '@testing-library/react';
 
 import { renderWithProviders } from '../../../setupTests';
-import messages from '../../../i18n/en';
+import messages from '../../../i18n';
 import ModalFooter from '../ModalFooter';
 
-jest.mock('../../../i18n/utils', () => ({
-  useTranslate: () => 'Submit',
-}));
-
-const submitBtnText = messages['logo.dropdown.feedback.form.button.submit.default.text'].defaultMessage;
-const cancelBtnText = messages['logo.dropdown.feedback.form.button.cancel.text'].defaultMessage;
+const submitBtnText = messages.logoDropdownFeedbackFormButtonSubmitDefaultText.defaultMessage;
+const cancelBtnText = messages.logoDropdownFeedbackFormButtonCancelText.defaultMessage;
 
 describe('<ModalFooter />', () => {
   const defaultProps = {

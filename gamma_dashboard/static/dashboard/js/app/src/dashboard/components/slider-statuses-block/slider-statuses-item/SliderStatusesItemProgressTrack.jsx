@@ -1,15 +1,21 @@
 import React from 'react';
+import { useIntl } from 'react-intl';
 import PropTypes from 'prop-types';
 import { OverlayTrigger, Tooltip } from '@openedx/paragon';
 
-import { useTranslate } from '../../../../i18n/utils';
 import { progressEndStylesTypes, progressTrackStylesTypes } from './propTypes';
+
+import messages from '../../../../i18n';
 
 const SliderStatusesItemProgressTrack = ({
   progressTrackStyles, points, progressTrackEndStyles, progressEndStyles,
 }) => {
-  const messages = {
-    progressTrackItemText: useTranslate('performance.statuses.section.progress-track.item.text', { pointsCount: points }),
+  const intl = useIntl();
+
+  const translations = {
+    progressTrackItemText: intl.formatMessage(messages.performanceStatusesSectionProgressTrackItemText, {
+      pointsCount: points,
+    }),
   };
 
   return (
@@ -32,7 +38,7 @@ const SliderStatusesItemProgressTrack = ({
             style={progressTrackEndStyles}
             role="button"
             tabIndex={0}
-            aria-label={messages.progressTrackItemText}
+            aria-label={translations.progressTrackItemText}
           />
         </OverlayTrigger>
       </div>

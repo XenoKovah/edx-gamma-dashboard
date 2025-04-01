@@ -3,7 +3,7 @@ import userEvent from '@testing-library/user-event';
 import '@testing-library/jest-dom';
 
 import { renderWithProviders } from '../../../../setupTests';
-import messages from '../../../../i18n/en';
+import messages from '../../../../i18n';
 import ProgressAvatarModal from '../ProgressAvatarModal';
 
 jest.mock('../../../../constants', () => ({
@@ -46,20 +46,20 @@ describe('<ProgressAvatarModal />', () => {
     expect(getByText('Choose Your Avatar')).toBeInTheDocument();
     expect(getByText('Avatar 1')).toBeInTheDocument();
     expect(getByText('Avatar 2')).toBeInTheDocument();
-    expect(getByText(messages['dashboard.progress-avatar-set.modal.avatar-set.save.btn'].defaultMessage)).toBeInTheDocument();
+    expect(getByText(messages.dashboardProgressAvatarSetModalAvatarSetSaveBtn.defaultMessage)).toBeInTheDocument();
   });
 
   it('disables submit button if no avatar is selected', () => {
     const { getByRole } = renderWithProviders(<ProgressAvatarModal {...baseProps} selectedAvatarSetId={null} />);
     expect(getByRole('button', {
-      name: messages['dashboard.progress-avatar-set.modal.avatar-set.save.btn'].defaultMessage,
+      name: messages.dashboardProgressAvatarSetModalAvatarSetSaveBtn.defaultMessage,
     })).toBeDisabled();
   });
 
   it('calls handleSelectAvatarSet on submit when no avatar was previously saved', async () => {
     const { getByRole } = renderWithProviders(<ProgressAvatarModal {...baseProps} />);
     const button = getByRole('button', {
-      name: messages['dashboard.progress-avatar-set.modal.avatar-set.save.btn'].defaultMessage,
+      name: messages.dashboardProgressAvatarSetModalAvatarSetSaveBtn.defaultMessage,
     });
     await userEvent.click(button);
     expect(baseProps.handleSelectAvatarSet).toHaveBeenCalledWith(1);
@@ -68,7 +68,7 @@ describe('<ProgressAvatarModal />', () => {
   it('calls handleUpdateSelectedAvatarSet on submit when avatar was previously saved', async () => {
     const { getByRole } = renderWithProviders(<ProgressAvatarModal {...baseProps} hasSelectedAvatarSet />);
     const button = getByRole('button', {
-      name: messages['dashboard.progress-avatar-set.modal.avatar-set.save.btn'].defaultMessage,
+      name: messages.dashboardProgressAvatarSetModalAvatarSetSaveBtn.defaultMessage,
     });
     await userEvent.click(button);
     expect(baseProps.handleUpdateSelectedAvatarSet).toHaveBeenCalledWith(1);
@@ -99,7 +99,7 @@ describe('<ProgressAvatarModal />', () => {
       },
     };
     const { getByText } = renderWithProviders(<ProgressAvatarModal {...successProps} />);
-    expect(getByText(messages['dashboard.progress-avatar-set.modal.avatar-set.success.text'].defaultMessage)).toBeInTheDocument();
+    expect(getByText(messages.dashboardProgressAvatarSetModalAvatarSetSuccessText.defaultMessage)).toBeInTheDocument();
   });
 
   it('shows error alert when update or select fails', () => {
@@ -113,7 +113,7 @@ describe('<ProgressAvatarModal />', () => {
       },
     };
     const { getByText } = renderWithProviders(<ProgressAvatarModal {...errorProps} />);
-    expect(getByText(messages['dashboard.progress-avatar-set.modal.avatar-set.error.text'].defaultMessage)).toBeInTheDocument();
+    expect(getByText(messages.dashboardProgressAvatarSetModalAvatarSetErrorText.defaultMessage)).toBeInTheDocument();
   });
 
   it('shows empty alert when avatarSets is empty and idle', () => {
@@ -122,6 +122,6 @@ describe('<ProgressAvatarModal />', () => {
       avatarSets: [],
     };
     const { getByText } = renderWithProviders(<ProgressAvatarModal {...emptyProps} />);
-    expect(getByText(messages['dashboard.progress-avatar-set.modal.empty.text'].defaultMessage)).toBeInTheDocument();
+    expect(getByText(messages.dashboardProgressAvatarSetModalEmptyText.defaultMessage)).toBeInTheDocument();
   });
 });

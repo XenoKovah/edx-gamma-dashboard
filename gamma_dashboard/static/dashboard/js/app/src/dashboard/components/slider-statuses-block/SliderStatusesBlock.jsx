@@ -1,14 +1,17 @@
 import React from 'react';
+import { useIntl } from 'react-intl';
 import PropTypes from 'prop-types';
 import Slider from 'react-slick';
 
-import { useTranslate } from '../../../i18n/utils';
 import { StatusPropType } from '../../propTypes';
 import { DashboardSectionHeader } from '../sections';
 import { SliderStatusesItem } from './slider-statuses-item';
 import { useSliderStatusesBlock } from './hooks';
 
+import messages from '../../../i18n';
+
 const SliderStatusesBlock = ({ status, statusItems }) => {
+  const intl = useIntl();
   const {
     sliderRef,
     sliderSettings,
@@ -18,11 +21,11 @@ const SliderStatusesBlock = ({ status, statusItems }) => {
   return (
     <div className="slider-statuses-block">
       <DashboardSectionHeader
-        title={useTranslate('performance.statuses.section.heading.text')}
+        title={intl.formatMessage(messages.performanceStatusesSectionHeadingText)}
         status={status}
       />
       <p className="slider-statuses-block-description" data-testid="slider-statuses-block-description">
-        {useTranslate('performance.statuses.section.description.text')}
+        {intl.formatMessage(messages.performanceStatusesSectionDescriptionText)}
       </p>
       {statusItems.length ? (
         <div className="slider-statuses-block-item">

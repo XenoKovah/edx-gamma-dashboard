@@ -3,7 +3,7 @@ import userEvent from '@testing-library/user-event';
 import '@testing-library/jest-dom';
 
 import { renderWithProviders } from '../../setupTests';
-import messages from '../../i18n/en';
+import messages from '../../i18n';
 import ErrorFallback from '.';
 
 describe('ErrorFallback', () => {
@@ -24,7 +24,7 @@ describe('ErrorFallback', () => {
   it('displays error message', () => {
     const { getByText } = rendered;
 
-    expect(getByText(messages['generic.error.fallback.title'].defaultMessage)).toBeInTheDocument();
+    expect(getByText(messages.genericErrorFallbackTitle.defaultMessage)).toBeInTheDocument();
     expect(getByText(/there was an error:/i)).toBeInTheDocument();
     expect(getByText(mockError.message)).toBeInTheDocument();
   });
@@ -33,7 +33,7 @@ describe('ErrorFallback', () => {
     const { getAllByRole } = rendered;
 
     const resetButton = getAllByRole('button', {
-      name: messages['generic.error.fallback.btn.text'].defaultMessage,
+      name: messages.genericErrorFallbackBtnText.defaultMessage,
     })[0];
     await userEvent.click(resetButton);
 

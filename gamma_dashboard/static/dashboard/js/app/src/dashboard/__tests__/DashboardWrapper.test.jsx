@@ -11,7 +11,7 @@ import {
 } from '../../__mocks__/dashboard';
 import DashboardWrapper from '../DashboardWrapper';
 
-import messages from '../../i18n/en';
+import messages from '../../i18n';
 
 jest.mock('../../featureFlags', () => ({
   SHOW_STATUS_BLOCK: true,
@@ -131,10 +131,10 @@ describe('<DashboardWrapper>', () => {
     );
 
     expect(getByText(
-      messages['dashboard.progress-avatar-set.modal.alert.avatar-set-not-completed.title'].defaultMessage,
+      messages.dashboardProgressAvatarSetModalAlertAvatarSetNotCompletedTitle.defaultMessage,
     )).toBeInTheDocument();
     expect(getByText(
-      messages['dashboard.progress-avatar-set.modal.alert.avatar-set-not-completed.text'].defaultMessage,
+      messages.dashboardProgressAvatarSetModalAlertAvatarSetNotCompletedText.defaultMessage,
     )).toBeInTheDocument();
   });
 

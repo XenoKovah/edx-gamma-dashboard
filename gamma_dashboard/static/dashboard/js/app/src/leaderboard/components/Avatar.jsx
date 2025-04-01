@@ -1,18 +1,23 @@
 import React from 'react';
+import { useIntl } from 'react-intl';
 import PropTypes from 'prop-types';
 import { Avatar as AvatarImage } from '@openedx/paragon';
 import { Award as AwardIcon } from '@openedx/paragon/icons';
 
-import { useTranslate } from '../../i18n/utils';
 import { capitalizeFirstLetter } from '../../utils';
 import { COLOR_PALETTE } from '../../constants';
+
+import messages from '../../i18n';
 
 const CUP_COLORS = [COLOR_PALETTE.gold, COLOR_PALETTE.silver, COLOR_PALETTE.bronze];
 
 const Avatar = ({ username, urlProfileImage, position }) => {
+  const intl = useIntl();
+
   const firstLetter = capitalizeFirstLetter(username).charAt(0) || '-';
-  const messages = {
-    avatarAltText: useTranslate('leaderboard.avatar.alt.text', { username }),
+
+  const translations = {
+    avatarAltText: intl.formatMessage(messages.leaderboardAvatarAltText, { username }),
   };
 
   const getPositionForAvatar = () => {
@@ -47,7 +52,7 @@ const Avatar = ({ username, urlProfileImage, position }) => {
           size="md"
           className="flex-shrink-0"
           src={urlProfileImage}
-          alt={messages.avatarAltText}
+          alt={translations.avatarAltText}
         />
       ) : (
         <span

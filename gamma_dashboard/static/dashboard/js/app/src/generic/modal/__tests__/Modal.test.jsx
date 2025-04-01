@@ -2,7 +2,7 @@ import React from 'react';
 import userEvent from '@testing-library/user-event';
 import '@testing-library/jest-dom';
 
-import messages from '../../../i18n/en';
+import messages from '../../../i18n';
 import { renderWithProviders } from '../../../setupTests';
 import Modal from '../Modal';
 
@@ -27,7 +27,7 @@ describe('<Modal />', () => {
   it('calls handleClose when close button is clicked', async () => {
     const { getByRole } = renderWithProviders(<Modal {...defaultProps} />);
     const closeButton = getByRole('button', {
-      name: messages['logo.dropdown.feedback.form.button.cancel.text'].defaultMessage,
+      name: messages.logoDropdownFeedbackFormButtonCancelText.defaultMessage,
     });
 
     await userEvent.click(closeButton);

@@ -1,18 +1,22 @@
 import React from 'react';
+import { useIntl } from 'react-intl';
 import PropTypes from 'prop-types';
 import {
   ActionRow, Badge, Button, ModalDialog,
 } from '@openedx/paragon';
 
-import { useTranslate } from '../../i18n/utils';
+import messages from '../../i18n';
 
 const ModalFooter = ({
   footerText, closeBtnTitle, submitBtnOptions, handleClose,
 }) => {
-  const messages = {
-    submitButtonText: useTranslate('logo.dropdown.feedback.form.button.submit.default.text'),
+  const intl = useIntl();
+
+  const translations = {
+    submitButtonText: intl.formatMessage(messages.logoDropdownFeedbackFormButtonSubmitDefaultText),
   };
-  const resolvedSubmitBtnTitle = submitBtnOptions.title || messages.submitButtonText;
+
+  const resolvedSubmitBtnTitle = submitBtnOptions.title || translations.submitButtonText;
 
   return (
     <ModalDialog.Footer>

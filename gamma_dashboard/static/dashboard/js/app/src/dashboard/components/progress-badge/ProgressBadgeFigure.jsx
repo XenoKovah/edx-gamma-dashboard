@@ -1,14 +1,18 @@
 import React from 'react';
+import { useIntl } from 'react-intl';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { Image } from '@openedx/paragon';
 
-import { useTranslate } from '../../../i18n/utils';
 import { buildURL } from '../../../utils';
 
+import messages from '../../../i18n';
+
 const ProgressBadgeFigure = ({ imageSrc, isDisabled }) => {
-  const messages = {
-    figureImageAltText: useTranslate('dashboard.progress-badge.figure.image.screen-reader.text'),
+  const intl = useIntl();
+
+  const translations = {
+    figureImageAltText: intl.formatMessage(messages.dashboardProgressBadgeFigureImageScreenReaderText),
   };
 
   return (
@@ -22,7 +26,7 @@ const ProgressBadgeFigure = ({ imageSrc, isDisabled }) => {
         className="progress-badge-figure-image"
         data-testid="progress-badge-figure-image"
         src={buildURL(imageSrc)}
-        alt={messages.figureImageAltText}
+        alt={translations.figureImageAltText}
       />
     </div>
   );

@@ -1,15 +1,17 @@
 import React from 'react';
+import { useIntl } from 'react-intl';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import {
   Button, breakpoints, useMediaQuery, Card as BaseCard, Badge,
 } from '@openedx/paragon';
 
-import { useTranslate } from '../../../i18n/utils';
 import defaultAvatarSetPlaceholder from '../../../assets/images/image-placeholder.jpg';
 import { useImageLoader } from '../../../generic/hooks';
 import { GAMMA_ADMIN_BASE_URL } from '../../../constants';
 import { getActualImageUrl } from './utils';
+
+import messages from '../../../i18n';
 
 const ProgressAvatar = ({
   onSelect,
@@ -18,12 +20,13 @@ const ProgressAvatar = ({
   isAvatarSetSelectable,
   savedSelectedAvatarSetId,
 }) => {
+  const intl = useIntl();
   const isExtraSmall = useMediaQuery({ maxWidth: breakpoints.extraSmall.maxWidth });
   const isSavedUserAvatarSet = savedSelectedAvatarSetId === avatarSetData?.id;
 
-  const messages = {
-    avatarSetCardSelectBtnText: useTranslate('dashboard.progress-avatar-set.modal.avatar-set.card.select.btn'),
-    avatarSetCardSelectedText: useTranslate('dashboard.progress-avatar-set.modal.avatar-set.card.selected.text'),
+  const translations = {
+    avatarSetCardSelectBtnText: intl.formatMessage(messages.dashboardProgressAvatarSetModalAvatarSetCardSelectBtn),
+    avatarSetCardSelectedText: intl.formatMessage(messages.dashboardProgressAvatarSetModalAvatarSetCardSelectedText),
   };
 
   const actualImageUrl = getActualImageUrl(
@@ -60,12 +63,12 @@ const ProgressAvatar = ({
       <BaseCard.Footer>
         {isAvatarSetSelectable && !isSavedUserAvatarSet && (
           <Button variant="outline-primary" block>
-            {messages.avatarSetCardSelectBtnText}
+            {translations.avatarSetCardSelectBtnText}
           </Button>
         )}
         {isSavedUserAvatarSet && (
           <Badge variant="info">
-            {messages.avatarSetCardSelectedText}
+            {translations.avatarSetCardSelectedText}
           </Badge>
         )}
       </BaseCard.Footer>

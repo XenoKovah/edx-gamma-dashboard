@@ -1,15 +1,18 @@
 import React, { useState, useEffect } from 'react';
+import { useIntl } from 'react-intl';
 import { useParams } from 'react-router-dom';
 import { Info as InfoIcon } from '@openedx/paragon/icons';
 
 import { gammaApi } from '../api';
-import { useTranslate } from '../i18n/utils';
 import { useScrollToContent } from '../generic/hooks';
 import { SubHeader, Alert } from '../generic';
 import { getLeaderboardTableProps } from './utils';
 import { LeaderboardTable } from './components';
 
+import messages from '../i18n';
+
 const LeaderboardPage = () => {
+  const intl = useIntl();
   const { courseId } = useParams();
   const [data, setData] = useState({
     top10: [],
@@ -21,8 +24,8 @@ const LeaderboardPage = () => {
   });
   const [error, setError] = useState(null);
 
-  const messages = {
-    alertTitle: useTranslate('leaderboard.heading.text'),
+  const translations = {
+    alertTitle: intl.formatMessage(messages.leaderboardHeadingText),
   };
 
   useScrollToContent('leaderboard-page-title', 'a[href="#main"]');
@@ -66,7 +69,7 @@ const LeaderboardPage = () => {
     <>
       <SubHeader
         id="leaderboard-page-title"
-        title={messages.alertTitle}
+        title={translations.alertTitle}
       />
       <LeaderboardTable
         rank={rank}

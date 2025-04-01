@@ -1,4 +1,5 @@
 import React from 'react';
+import { useIntl } from 'react-intl';
 import PropTypes from 'prop-types';
 import {
   Form, SelectMenu, MenuItem, Alert,
@@ -8,34 +9,35 @@ import {
   Info as InfoIcon,
 } from '@openedx/paragon/icons';
 
-import { useTranslate } from '../../i18n/utils';
+import messages from '../../i18n';
 
 const FeedbackForm = ({
   handleChange, isSuccess, requestStatus, setFieldValue, formData,
 }) => {
-  const messages = {
+  const intl = useIntl();
+  const translations = {
     SUBJECT_LIST: [
-      useTranslate('logo.dropdown.feedback.form.subject.question.text'),
-      useTranslate('logo.dropdown.feedback.form.subject.comment.text'),
-      useTranslate('logo.dropdown.feedback.form.subject.bug.text'),
-      useTranslate('logo.dropdown.feedback.form.subject.improvement.text'),
+      intl.formatMessage(messages.logoDropdownFeedbackFormSubjectQuestionText),
+      intl.formatMessage(messages.logoDropdownFeedbackFormSubjectCommentText),
+      intl.formatMessage(messages.logoDropdownFeedbackFormSubjectBugText),
+      intl.formatMessage(messages.logoDropdownFeedbackFormSubjectImprovementText),
     ],
-    successMessage: useTranslate('logo.dropdown.feedback.form.alert.success.text'),
-    errorMessage: useTranslate('logo.dropdown.feedback.form.alert.error.text'),
-    messageFieldLabel: useTranslate('logo.dropdown.feedback.form.message.label.text'),
+    successMessage: intl.formatMessage(messages.logoDropdownFeedbackFormAlertSuccessText),
+    errorMessage: intl.formatMessage(messages.logoDropdownFeedbackFormAlertErrorText),
+    messageFieldLabel: intl.formatMessage(messages.logoDropdownFeedbackFormMessageLabelText),
   };
 
   if (requestStatus) {
     return isSuccess ? (
       <Alert variant="success" icon={CheckCircleIcon}>
         <Alert.Heading>
-          {messages.successMessage}
+          {translations.successMessage}
         </Alert.Heading>
       </Alert>
     ) : (
       <Alert variant="danger" icon={InfoIcon}>
         <Alert.Heading>
-          {messages.errorMessage}
+          {translations.errorMessage}
         </Alert.Heading>
       </Alert>
     );
@@ -45,7 +47,7 @@ const FeedbackForm = ({
     <Form>
       <Form.Group>
         <SelectMenu variant="tertiary">
-          {messages.SUBJECT_LIST.map(subject => (
+          {translations.SUBJECT_LIST.map(subject => (
             <MenuItem
               as="div"
               key={subject}
@@ -62,7 +64,7 @@ const FeedbackForm = ({
           as="textarea"
           name="message"
           autoResize
-          floatingLabel={messages.messageFieldLabel}
+          floatingLabel={translations.messageFieldLabel}
           value={formData.message}
           onChange={handleChange}
         />

@@ -4,7 +4,7 @@ import { cleanup } from '@testing-library/react';
 import '@testing-library/jest-dom';
 
 import { renderWithProviders } from '../../../../setupTests';
-import messages from '../../../../i18n/en';
+import messages from '../../../../i18n';
 import ProgressAvatar from '../ProgressAvatar';
 
 jest.mock('../../../../generic/hooks/useImageLoader', () => ({
@@ -45,14 +45,14 @@ describe('<ProgressAvatar />', () => {
   it('renders "Select" button if set is selectable and not saved', () => {
     const { getByRole } = renderComponent({ isAvatarSetSelectable: true });
     expect(getByRole('button', {
-      name: messages['dashboard.progress-avatar-set.modal.avatar-set.card.select.btn'].defaultMessage,
+      name: messages.dashboardProgressAvatarSetModalAvatarSetCardSelectBtn.defaultMessage,
     })).toBeInTheDocument();
   });
 
   it('does not render select button if set is not selectable', () => {
     const { queryByRole } = renderComponent({ isAvatarSetSelectable: false });
     expect(queryByRole('button', {
-      name: messages['dashboard.progress-avatar-set.modal.avatar-set.card.select.btn'].defaultMessage,
+      name: messages.dashboardProgressAvatarSetModalAvatarSetCardSelectBtn.defaultMessage,
     })).not.toBeInTheDocument();
   });
 
@@ -62,7 +62,7 @@ describe('<ProgressAvatar />', () => {
       savedSelectedAvatarSetId: 1,
     });
     expect(queryByRole('button', {
-      name: messages['dashboard.progress-avatar-set.modal.avatar-set.card.select.btn'].defaultMessage,
+      name: messages.dashboardProgressAvatarSetModalAvatarSetCardSelectBtn.defaultMessage,
     })).not.toBeInTheDocument();
   });
 

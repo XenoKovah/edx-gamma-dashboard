@@ -1,16 +1,19 @@
 import React from 'react';
+import { useIntl } from 'react-intl';
 import PropTypes from 'prop-types';
 
 import { Loader } from '../../generic';
 import { getUserStatus } from '../../utils';
-import { useTranslate } from '../../i18n/utils';
 import { ProfilePropType, StatusPropType } from '../propTypes';
 import LeaderboardCard from './LeaderboardCard';
+
+import messages from '../../i18n';
 
 const LeaderboardTable = ({
   rank, profiles = [], systemStatuses, delimiter,
 }) => {
-  const translatedEmptyText = useTranslate('leaderboard.status.empty.text');
+  const intl = useIntl();
+  const translatedEmptyText = intl.formatMessage(messages.leaderboardStatusEmptyText);
 
   return (
     <div className="leaderboard-table" data-testid="leaderboard-table">

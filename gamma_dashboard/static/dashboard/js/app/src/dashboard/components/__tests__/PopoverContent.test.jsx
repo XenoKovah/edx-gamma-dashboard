@@ -6,7 +6,7 @@ import { capitalizeFirstLetter } from '../../../utils';
 import { renderWithProviders } from '../../../setupTests';
 import { PopoverContent } from '../progress-badge/popover-content';
 
-import messages from '../../../i18n/en';
+import messages from '../../../i18n';
 
 afterEach(cleanup);
 
@@ -74,12 +74,12 @@ describe('<PopoverContent>', () => {
       }
     }
 
-    expect(getByText(`${messages['dashboard.badges.depends.on.badges.text'].defaultMessage}:`)).toBeInTheDocument();
+    expect(getByText(`${messages.dashboardBadgesDependsOnBadgesText.defaultMessage}:`)).toBeInTheDocument();
     for (const badgeName of badgeDependencies) {
       expect(getByText(badgeName)).toBeInTheDocument();
     }
 
-    expect(getByText(`${messages['dashboard.badges.depends.on.status.text'].defaultMessage}:`)).toBeInTheDocument();
+    expect(getByText(`${messages.dashboardBadgesDependsOnStatusText.defaultMessage}:`)).toBeInTheDocument();
     expect(getByText(statusDependency)).toBeInTheDocument();
   });
 

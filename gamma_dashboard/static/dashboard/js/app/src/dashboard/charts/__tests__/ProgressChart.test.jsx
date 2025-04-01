@@ -4,7 +4,7 @@ import '@testing-library/jest-dom';
 
 import { renderWithProviders } from '../../../setupTests';
 import { gameProfileData } from '../../../__mocks__/dashboard';
-import messages from '../../../i18n/en';
+import messages from '../../../i18n';
 import { ProgressChart } from '../progress-chart';
 
 jest.mock('echarts-for-react', () => jest.fn((props) => (
@@ -18,8 +18,8 @@ afterEach(cleanup);
 
 describe('ProgressChart', () => {
   const data = gameProfileData.progress;
-  const CHART_TITLE = `{header|${ messages['performance.progress.tracker.section.heading.text'].defaultMessage}}`;
-  const CHART_DESCRIPTION = messages['performance.progress.tracker.section.description.text'].defaultMessage;
+  const CHART_TITLE = `{header|${ messages.performanceProgressTrackerSectionHeadingText.defaultMessage}}`;
+  const CHART_DESCRIPTION = messages.performanceProgressTrackerSectionDescriptionText.defaultMessage;
 
   beforeAll(() => {
     Object.defineProperty(HTMLElement.prototype, 'offsetWidth', {

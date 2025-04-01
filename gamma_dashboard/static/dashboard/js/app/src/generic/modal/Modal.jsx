@@ -1,10 +1,12 @@
 import React from 'react';
+import { useIntl } from 'react-intl';
 import PropTypes from 'prop-types';
 import { ModalDialog } from '@openedx/paragon';
 
-import { useTranslate } from '../../i18n/utils';
 import { MODAL_SIZES, ZINDEX_MODAL } from './constants';
 import ModalFooter from './ModalFooter';
+
+import messages from '../../i18n';
 
 const Modal = ({
   size,
@@ -23,10 +25,13 @@ const Modal = ({
   isFullscreenScroll,
   isFullscreenOnMobile,
 }) => {
-  const messages = {
-    cancelButtonText: useTranslate('logo.dropdown.feedback.form.button.cancel.text'),
+  const intl = useIntl();
+
+  const translations = {
+    cancelButtonText: intl.formatMessage(messages.logoDropdownFeedbackFormButtonCancelText),
   };
-  const resolvedCloseBtnTitle = closeBtnTitle || messages.cancelButtonText;
+
+  const resolvedCloseBtnTitle = closeBtnTitle || translations.cancelButtonText;
 
   return (
     <ModalDialog

@@ -1,20 +1,24 @@
 import React from 'react';
+import { useIntl } from 'react-intl';
 import PropTypes from 'prop-types';
 
-import { useTranslate } from '../../../i18n/utils';
 import { isRtl } from '../../../constants';
 import { Modal } from '../../../generic';
 import ProgressBadge from './ProgressBadge';
 
+import messages from '../../../i18n';
+
 const ProgressBadgesModal = ({
   title, items, getItemDataFunction, isOpen, closeCallback,
 }) => {
-  const messages = {
-    modalBtnCloseTitle: useTranslate('dashboard.progress-badge.modal.button.close.text'),
-    counterText: useTranslate('performance.badges.section.total.badges.button.text'),
+  const intl = useIntl();
+
+  const translations = {
+    modalBtnCloseTitle: intl.formatMessage(messages.dashboardProgressBadgeModalButtonCloseText),
+    counterText: intl.formatMessage(messages.performanceBadgesSectionTotalBadgesButtonText),
   };
 
-  const counterLabelText = isRtl ? `:${messages.counterText}` : `${messages.counterText}:`;
+  const counterLabelText = isRtl ? `:${translations.counterText}` : `${translations.counterText}:`;
 
   return (
     <Modal
@@ -23,7 +27,7 @@ const ProgressBadgesModal = ({
       handleClose={closeCallback}
       size="xl"
       hasCloseButton
-      closeBtnTitle={messages.modalBtnCloseTitle}
+      closeBtnTitle={translations.modalBtnCloseTitle}
       footerText={`${counterLabelText} ${items.length}`}
     >
       <ul

@@ -1,14 +1,19 @@
 import React from 'react';
+import { useIntl } from 'react-intl';
 import PropType from 'prop-types';
 
-import { useTranslate } from '../../i18n/utils';
 import { BadgePropType } from '../propTypes';
 import Badge from './Badge';
 
+import messages from '../../i18n';
+
 const BadgeList = ({ badges }) => {
+  const intl = useIntl();
+
   const badgeKeys = Object.keys(badges);
-  const messages = {
-    emptyBadgesText: useTranslate('performance.badges.empty.message.text'),
+
+  const translations = {
+    emptyBadgesText: intl.formatMessage(messages.performanceBadgesEmptyMessageText),
   };
 
   return (
@@ -20,7 +25,7 @@ const BadgeList = ({ badges }) => {
           </li>
         ))
       ) : (
-        messages.emptyBadgesText
+        translations.emptyBadgesText
       )}
     </ul>
   );

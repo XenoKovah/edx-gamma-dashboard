@@ -4,7 +4,7 @@ import '@testing-library/jest-dom';
 
 import { renderWithProviders } from '../../../setupTests';
 import { gameProfileData } from '../../../__mocks__/dashboard';
-import messages from '../../../i18n/en';
+import messages from '../../../i18n';
 import { PointsDistributionChart } from '../points-distribution-chart';
 
 jest.mock('echarts-for-react', () => jest.fn((props) => (
@@ -18,8 +18,8 @@ afterEach(cleanup);
 
 describe('PointsDistributionChart', () => {
   const data = gameProfileData.chart;
-  const CHART_TITLE = `{header|${ messages['performance.points.distribution.section.heading.text'].defaultMessage}}`;
-  const CHART_DESCRIPTION = messages['performance.points.distribution.section.description.text'].defaultMessage;
+  const CHART_TITLE = `{header|${ messages.performancePointsDistributionSectionHeadingText.defaultMessage}}`;
+  const CHART_DESCRIPTION = messages.performancePointsDistributionSectionDescriptionText.defaultMessage;
 
   beforeAll(() => {
     Object.defineProperty(HTMLElement.prototype, 'offsetWidth', {

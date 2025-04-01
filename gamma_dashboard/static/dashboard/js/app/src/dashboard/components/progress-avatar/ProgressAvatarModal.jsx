@@ -1,4 +1,5 @@
 import React from 'react';
+import { useIntl } from 'react-intl';
 import PropTypes from 'prop-types';
 import { CardGrid } from '@openedx/paragon';
 import {
@@ -8,11 +9,12 @@ import {
 } from '@openedx/paragon/icons';
 
 import { AvatarProcessingStatesPropType, AvatarSetsPropType } from '../../propTypes';
-import { useTranslate } from '../../../i18n/utils';
 import { isRtl } from '../../../constants';
 import { Modal, Loader, Alert } from '../../../generic';
 import ProgressAvatar from './ProgressAvatar';
 import { isIdle } from './utils';
+
+import messages from '../../../i18n';
 
 const ProgressAvatarModal = ({
   title,
@@ -27,22 +29,24 @@ const ProgressAvatarModal = ({
   savedSelectedAvatarSetId,
   handleUpdateSelectedAvatarSet,
 }) => {
+  const intl = useIntl();
+
   const {
     details: { update, select },
   } = avatarProcessingStates;
 
-  const messages = {
-    modalBtnCloseTitle: useTranslate('dashboard.progress-avatar.modal.button.close.text'),
-    counterText: useTranslate('performance.avatar.section.total.avatar-sets.button.text'),
-    saveAvatarSetBtnText: useTranslate('dashboard.progress-avatar-set.modal.avatar-set.save.btn'),
-    avatarSuccessText: useTranslate('dashboard.progress-avatar-set.modal.avatar-set.success.text'),
-    avatarErrorText: useTranslate('dashboard.progress-avatar-set.modal.avatar-set.error.text'),
-    avatarInfoText: useTranslate('dashboard.progress-avatar-set.modal.avatar-set.info.text'),
-    emptyAvatarSetText: useTranslate('dashboard.progress-avatar-set.modal.empty.text'),
-    modalSupportText: useTranslate('dashboard.progress-avatar-set.modal.avatar-set.support.text'),
+  const translations = {
+    modalBtnCloseTitle: intl.formatMessage(messages.dashboardProgressAvatarModalButtonCloseText),
+    counterText: intl.formatMessage(messages.performanceAvatarSectionTotalAvatarSetsButtonText),
+    saveAvatarSetBtnText: intl.formatMessage(messages.dashboardProgressAvatarSetModalAvatarSetSaveBtn),
+    avatarSuccessText: intl.formatMessage(messages.dashboardProgressAvatarSetModalAvatarSetSuccessText),
+    avatarErrorText: intl.formatMessage(messages.dashboardProgressAvatarSetModalAvatarSetErrorText),
+    avatarInfoText: intl.formatMessage(messages.dashboardProgressAvatarSetModalAvatarSetInfoText),
+    emptyAvatarSetText: intl.formatMessage(messages.dashboardProgressAvatarSetModalEmptyText),
+    modalSupportText: intl.formatMessage(messages.dashboardProgressAvatarSetModalAvatarSetSupportText),
   };
 
-  const counterLabelText = isRtl ? `:${messages.counterText}` : `${messages.counterText}:`;
+  const counterLabelText = isRtl ? `:${translations.counterText}` : `${translations.counterText}:`;
 
   const canShowForm = isIdle(update) && isIdle(select) && avatarSets.length > 0;
 
@@ -53,20 +57,20 @@ const ProgressAvatarModal = ({
   const getAlertContent = () => {
     if (update.isSuccess || select.isSuccess) {
       return {
-        titleText: messages.avatarSuccessText,
+        titleText: translations.avatarSuccessText,
         variant: 'success',
         icon: CheckCircleIcon,
       };
     }
     if (update.isError || select.isError) {
       return {
-        titleText: messages.avatarErrorText,
+        titleText: translations.avatarErrorText,
         variant: 'danger',
         icon: ErrorIcon,
       };
     }
     return {
-      titleText: messages.emptyAvatarSetText,
+      titleText: translations.emptyAvatarSetText,
       variant: 'warning',
       icon: WarningIcon,
     };
@@ -83,7 +87,7 @@ const ProgressAvatarModal = ({
   } else {
     modalContent = (
       <>
-        <p>{messages.modalSupportText}</p>
+        <p>{translations.modalSupportText}</p>
         <CardGrid columnSizes={{ xs: 12, lg: 6, xl: 4 }}>
           {avatarSets.map((avatarSet) => (
             <ProgressAvatar
@@ -107,11 +111,11 @@ const ProgressAvatarModal = ({
       handleClose={closeCallback}
       size="xl"
       hasCloseButton
-      closeBtnTitle={messages.modalBtnCloseTitle}
+      closeBtnTitle={translations.modalBtnCloseTitle}
       footerText={footerText}
       submitBtnOptions={{
         show: canShowForm,
-        title: messages.saveAvatarSetBtnText,
+        title: translations.saveAvatarSetBtnText,
         submitFn: () => (
           hasSelectedAvatarSet
             ? handleUpdateSelectedAvatarSet(selectedAvatarSetId)

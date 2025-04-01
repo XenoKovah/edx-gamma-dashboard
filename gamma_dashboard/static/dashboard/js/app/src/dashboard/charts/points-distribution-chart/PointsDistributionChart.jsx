@@ -1,32 +1,35 @@
 import React, { useRef } from 'react';
+import { useIntl } from 'react-intl';
 import PropTypes from 'prop-types';
 import ReactECharts from 'echarts-for-react';
 import { breakpoints, useMediaQuery } from '@openedx/paragon';
 
-import { useTranslate } from '../../../i18n/utils';
 import { useElementWidth } from '../hooks';
 import { getConfig } from './config';
 import { prepareEvents } from './utils';
 
+import messages from '../../../i18n';
+
 const PointsDistributionChart = ({ data }) => {
+  const intl = useIntl();
   const chartRef = useRef(null);
   const chartWidth = useElementWidth(chartRef);
   const events = prepareEvents(data);
   const isSmall = useMediaQuery({ maxWidth: breakpoints.extraSmall.maxWidth });
 
-  const messages = {
-    headingText: useTranslate('performance.points.distribution.section.heading.text'),
-    descriptionText: useTranslate('performance.points.distribution.section.description.text'),
-    seriesPointsName: useTranslate('performance.points.series.name'),
+  const translations = {
+    headingText: intl.formatMessage(messages.performancePointsDistributionSectionHeadingText),
+    descriptionText: intl.formatMessage(messages.performancePointsDistributionSectionDescriptionText),
+    seriesPointsName: intl.formatMessage(messages.performancePointsSeriesName),
     controls: {
-      saveAsImage: useTranslate('performance.points.controls.saveAsImage.label'),
+      saveAsImage: intl.formatMessage(messages.performancePointsControlsSaveAsImageLabel),
     },
   };
 
   return (
     <div ref={chartRef}>
       <ReactECharts
-        option={getConfig(events, messages, chartWidth, isSmall)}
+        option={getConfig(events, translations, chartWidth, isSmall)}
         style={{ height: '470px' }}
       />
     </div>

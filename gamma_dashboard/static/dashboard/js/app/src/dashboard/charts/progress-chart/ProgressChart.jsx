@@ -1,14 +1,17 @@
 import React, { useMemo, useRef } from 'react';
+import { useIntl } from 'react-intl';
 import PropTypes from 'prop-types';
 import ReactECharts from 'echarts-for-react';
 import { breakpoints, useMediaQuery } from '@openedx/paragon';
 
-import { useTranslate } from '../../../i18n/utils';
 import { useElementWidth } from '../hooks';
 import { getConfig } from './config';
 import { processChartData, transformData } from './utils';
 
+import messages from '../../../i18n';
+
 const ProgressChart = ({ data }) => {
+  const intl = useIntl();
   const chartRef = useRef(null);
   const chartWidth = useElementWidth(chartRef);
   const isSmall = useMediaQuery({ maxWidth: breakpoints.extraSmall.maxWidth });
@@ -16,26 +19,26 @@ const ProgressChart = ({ data }) => {
   const { dates, values: points } = transformData(pointsByDay);
   const { values: progress } = transformData(accumulativeData);
 
-  const messages = {
-    headingText: useTranslate('performance.progress.tracker.section.heading.text'),
-    descriptionText: useTranslate('performance.progress.tracker.section.description.text'),
+  const translations = {
+    headingText: intl.formatMessage(messages.performanceProgressTrackerSectionHeadingText),
+    descriptionText: intl.formatMessage(messages.performanceProgressTrackerSectionDescriptionText),
     legend: {
-      progress: useTranslate('performance.points.item.progress.label'),
-      points: useTranslate('performance.points.item.points.label'),
+      progress: intl.formatMessage(messages.performancePointsItemProgressLabel),
+      points: intl.formatMessage(messages.performancePointsItemPointsLabel),
     },
     controls: {
-      saveAsImage: useTranslate('performance.points.controls.saveAsImage.label'),
-      zoomIn: useTranslate('performance.points.controls.zoomIn.label'),
-      zoomOut: useTranslate('performance.points.controls.zoomOut.label'),
-      lineChart: useTranslate('performance.points.controls.lineChart.label'),
-      barChart: useTranslate('performance.points.controls.barChart.label'),
+      saveAsImage: intl.formatMessage(messages.performancePointsControlsSaveAsImageLabel),
+      zoomIn: intl.formatMessage(messages.performancePointsControlsZoomInLabel),
+      zoomOut: intl.formatMessage(messages.performancePointsControlsZoomOutLabel),
+      lineChart: intl.formatMessage(messages.performancePointsControlsLineChartLabel),
+      barChart: intl.formatMessage(messages.performancePointsControlsBarChartLabel),
     },
   };
 
   return (
     <div ref={chartRef}>
       <ReactECharts
-        option={getConfig(dates, points, progress, messages, chartWidth, isSmall)}
+        option={getConfig(dates, points, progress, translations, chartWidth, isSmall)}
         style={{ height: '400px' }}
       />
     </div>
