@@ -241,7 +241,7 @@ export const gameProfileData = {
   ],
   gamma_user_info: {
     gamma_user_id: 17,
-    user_avatar_set_info: {
+    user_avatar_config: {
       id: 17,
       gamma_user_id: 17,
       selected_avatar_id: 967,

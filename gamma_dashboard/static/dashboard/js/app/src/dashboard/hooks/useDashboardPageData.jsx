@@ -23,7 +23,7 @@ export const useDashboardPageData = () => {
   };
 
   const handleUpdateSelectedAvatarSet = (targetAvatarSetId) => {
-    const userConfigurationId = gameProfileData.gammaUserInfo.userAvatarSetInfo?.id;
+    const userConfigurationId = gameProfileData.gammaUserInfo.userAvatarConfig?.id;
     const { gammaUserId } = gameProfileData.gammaUserInfo;
     mutations.updateAvatarSet({
       userConfigurationId,

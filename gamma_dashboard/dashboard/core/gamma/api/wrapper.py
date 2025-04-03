@@ -101,3 +101,33 @@ class GammaApiWrapper:
             dict: parsed game profile information.
         """
         return self.request_api_endpoint('users/gamma-profile', params={'username': username}, **kwargs)
+
+    def get_gamma_user_avatar_config(self, config_id, **kwargs):
+        """
+        Return User's Avatar Set Config for given `config_id`.
+
+        Returns:
+            dict: User's Avatar Set Config information.
+        """
+        return self.request_api_endpoint(f'user_avatar_config/{config_id}/',  **kwargs)
+
+    def create_gamma_user_avatar_config(self, data, **kwargs):
+        """
+        Create User's Avatar Set Config for given.
+
+        Returns:
+            dict: Created User's Avatar Set Config information.
+        """
+
+        return self.request_api_endpoint('user_avatar_config/',  method='POST', data=data, **kwargs)
+
+    def update_gamma_user_avatar_config(self, config_id, data, **kwargs):
+        """
+        Update User's Avatar Set Config for given `config_id`.
+
+        Returns:
+            dict: Updated User's Avatar Set Config information.
+        """
+        return self.request_api_endpoint(
+            f'user_avatar_config/{config_id}/', method='PATCH', data=data, **kwargs
+        )

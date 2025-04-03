@@ -221,3 +221,78 @@ class TestGammaApiWrapper:
         )
 
         assert leaderboard_data == expeceted_data
+
+    @pytest.mark.unittests
+    def test_get_gamma_user_avatar_config(self, gamma_settings, mocker):
+        """
+        Case: Request User's Avatar Set Config data for given `config_id` (DEFAULT_API_VERSION).
+        Expect: Request is sent to correct URL & correct data is received.
+        """
+        expected_data = {}
+        user_avatar_config_absolute_url = '{}api/v0/user_avatar_config'.format(GAMIFICATION_ENDPOINT)
+        config_id_mock = 1
+
+        mocked_get = mocker.patch('requests.get')
+        mocked_get.return_value.ok = True
+        mocked_get.return_value.json = mocker.Mock(return_value={})
+
+        api_wrapper = GammaApiWrapper(settings=gamma_settings)
+        api_wrapper_spy = mocker.spy(api_wrapper, '_send_request')
+        user_avatar_config_data = api_wrapper.get_gamma_user_avatar_config(config_id=config_id_mock)
+
+        api_wrapper_spy.assert_called_with(f'{user_avatar_config_absolute_url}/{config_id_mock}/')
+
+        assert user_avatar_config_data == expected_data
+
+    @pytest.mark.unittests
+    def test_create_gamma_user_avatar_config(self, gamma_settings, mocker):
+        """
+        Case: Create User's Avatar Set Config data for given (DEFAULT_API_VERSION).
+        Expect: Request is sent to correct URL & correct data is received.
+        """
+        expected_data = {}
+        user_avatar_config_absolute_url = '{}api/v0/user_avatar_config/'.format(GAMIFICATION_ENDPOINT)
+        data_mock = {
+            'gamma_user_id': 1,
+            'selected_avatar_set_id': 1
+        }
+
+        mocked_get = mocker.patch('requests.post')
+        mocked_get.return_value.ok = True
+        mocked_get.return_value.json = mocker.Mock(return_value={})
+
+        api_wrapper = GammaApiWrapper(settings=gamma_settings)
+        api_wrapper_spy = mocker.spy(api_wrapper, '_send_request')
+        user_avatar_config_data = api_wrapper.create_gamma_user_avatar_config(data=data_mock)
+
+        api_wrapper_spy.assert_called_with(user_avatar_config_absolute_url, method='POST', data=data_mock)
+
+        assert user_avatar_config_data == expected_data
+
+    @pytest.mark.unittests
+    def test_update_gamma_user_avatar_config(self, gamma_settings, mocker):
+        """
+        Case: Update User's Avatar Set Config data for given `config_id` (DEFAULT_API_VERSION).
+        Expect: Request is sent to correct URL & correct data is received.
+        """
+        expected_data = {}
+        user_avatar_config_absolute_url = '{}api/v0/user_avatar_config'.format(GAMIFICATION_ENDPOINT)
+        config_id_mock = 1
+        data_mock = {
+            'gamma_user_id': 1,
+            'selected_avatar_set_id': 1
+        }
+
+        mocked_get = mocker.patch('requests.patch')
+        mocked_get.return_value.ok = True
+        mocked_get.return_value.json = mocker.Mock(return_value={})
+
+        api_wrapper = GammaApiWrapper(settings=gamma_settings)
+        api_wrapper_spy = mocker.spy(api_wrapper, '_send_request')
+        user_avatar_config_data = api_wrapper.update_gamma_user_avatar_config(config_id=config_id_mock, data=data_mock)
+
+        api_wrapper_spy.assert_called_with(
+            f'{user_avatar_config_absolute_url}/{config_id_mock}/', method='PATCH', data=data_mock
+        )
+
+        assert user_avatar_config_data == expected_data

@@ -53,11 +53,11 @@ const DashboardWrapper = ({
   const previewBadgeItems = badgeItems.slice(0, PREVIEW_BADGES_ITEMS_COUNT);
   const points = statusItems[0]?.points;
   const doneStatuses = statusItems.filter((item) => points >= item.statusPoints);
-  const hasSelectedAvatarSet = Boolean(gammaUserInfo.userAvatarSetInfo);
-  const hasCompletedAvatarSet = Boolean(gammaUserInfo.userAvatarSetInfo?.selectedAvatarId);
+  const hasSelectedAvatarSet = Boolean(gammaUserInfo.userAvatarConfig);
+  const hasCompletedAvatarSet = Boolean(gammaUserInfo.userAvatarConfig?.selectedAvatarId);
 
-  const savedSelectedAvatarSetId = gammaUserInfo.userAvatarSetInfo?.selectedAvatarSetId;
-  const selectedAvatarId = gammaUserInfo.userAvatarSetInfo?.selectedAvatarId;
+  const savedSelectedAvatarSetId = gammaUserInfo.userAvatarConfig?.selectedAvatarSetId;
+  const selectedAvatarId = gammaUserInfo.userAvatarConfig?.selectedAvatarId;
 
   const completedAvatar = useMemo(() => {
     if (!avatarSets || !savedSelectedAvatarSetId || !selectedAvatarId) { return null; }
@@ -251,7 +251,7 @@ DashboardWrapper.propTypes = {
   chart: ChartDataPropType,
   avatarSets: AvatarSetsPropType,
   gammaUserInfo: PropTypes.shape({
-    userAvatarSetInfo: PropTypes.shape({
+    userAvatarConfig: PropTypes.shape({
       selectedAvatarId: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
       selectedAvatarSetId: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     }),

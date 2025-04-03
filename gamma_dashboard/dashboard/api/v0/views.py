@@ -119,3 +119,44 @@ class GameProfileApiView(APIView):
         )
 
         return Response(user_info)
+
+
+class GameUserAvatarConfigApiView(APIView):
+    """
+    Gamma User Avatar Config API view.
+    """
+
+    permission_classes = (IsAuthenticated,)
+    authentication_classes = (SessionAuthenticationAllowInactiveUser,)
+
+    def get(self, request):
+        """
+        Get User's Avatar Set Config by `config_id`.
+        """
+        config_id = request.query_params.get('config_id')
+        gamma_user_avatar_config = GammaApiWrapper(
+            version=DEFAULT_API_VERSION
+        ).get_gamma_user_avatar_config(config_id=config_id)
+
+        return Response(gamma_user_avatar_config)
+
+    def post(self, request):
+        """
+        Create new User's Avatar Set Config.
+        """
+        gamma_user_avatar_config = GammaApiWrapper(
+            version=DEFAULT_API_VERSION
+        ).create_gamma_user_avatar_config(data=request.data)
+
+        return Response(gamma_user_avatar_config)
+
+    def patch(self, request):
+        """
+        Update existent User's Avatar Set Config by `config_id`.
+        """
+        config_id = request.query_params.get('config_id')
+        gamma_user_avatar_config = GammaApiWrapper(
+            version=DEFAULT_API_VERSION
+        ).update_gamma_user_avatar_config(config_id=config_id, data=request.data)
+
+        return Response(gamma_user_avatar_config)

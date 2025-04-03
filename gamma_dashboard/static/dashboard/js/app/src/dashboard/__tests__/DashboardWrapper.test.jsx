@@ -63,7 +63,7 @@ afterEach(cleanup);
 
 describe('<DashboardWrapper>', () => {
   const mockGammaUserInfo = {
-    userAvatarSetInfo: {
+    userAvatarConfig: {
       selectedAvatarId: null,
       selectedAvatarSetId: null,
     },
@@ -120,7 +120,7 @@ describe('<DashboardWrapper>', () => {
 
   it('displays avatar section with warning when avatar set is selected but not completed', () => {
     const userInfoWithSelectedSet = {
-      userAvatarSetInfo: {
+      userAvatarConfig: {
         selectedAvatarId: null,
         selectedAvatarSetId: '123',
       },
