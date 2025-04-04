@@ -25,7 +25,7 @@ const ProgressBadgeFigure = ({ imageSrc, isDisabled }) => {
       <Image
         className="progress-badge-figure-image"
         data-testid="progress-badge-figure-image"
-        src={buildURL(imageSrc)}
+        src={imageSrc ? buildURL(imageSrc) : null}
         alt={translations.figureImageAltText}
       />
     </div>

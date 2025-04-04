@@ -2,7 +2,7 @@ import axios from 'axios';
 import { useQuery } from 'react-query';
 
 import { DASHBOARD_URLS } from '../constants';
-import { prepareDashboardData } from '../utils';
+import { prepareDashboardData } from '../helpers';
 
 export function useGameProfile() {
   return useQuery(

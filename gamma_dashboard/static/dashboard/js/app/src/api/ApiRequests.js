@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 import { FEEDBACK_FORM_URL, LEADERBOARD_URLS } from './constants';
-import { getDefaultHeaders } from './utils/dashboard';
+import { getDefaultHeaders } from './helpers/utils';
 
 const leaderboard = {
   /**

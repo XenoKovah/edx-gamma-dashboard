@@ -41,3 +41,15 @@ export const buildURL = (url) => {
   }
   return `${trimTrailingSlash(window.GAMIFICATION_BASE_URL)}/${trimStartSlash(url)}`;
 };
+
+/**
+ * Resolves a URL to an absolute URL if it's relative.
+ *
+ * @param {string} url - The URL to check.
+ * @param {string} baseUrl - The base URL to prepend if the URL is relative.
+ * @returns {string} The absolute URL.
+ */
+export const resolveUrl = (url, baseUrl) => {
+  const isAbsoluteUrl = /^https?:\/\//i.test(url);
+  return isAbsoluteUrl ? url : `${baseUrl}${url}`;
+};

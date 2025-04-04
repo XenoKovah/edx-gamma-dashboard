@@ -88,7 +88,12 @@ const messages = defineMessages({
   },
   performanceSectionCounterText: {
     id: 'performance.section.counter.text',
-    defaultMessage: '{previewBadgeItemsLength} of {badgeItemsLength}',
+    defaultMessage: '{completedStatuses} of {totalStatuses}',
+    description: 'Text displaying a count of completed statuses and total statuses, with placeholders for dynamic values',
+  },
+  badgesSectionCounterText: {
+    id: 'badges.section.counter.text',
+    defaultMessage: '{completedBadgeItemsLength} of {badgeItemsLength}',
     description: 'Text displaying a count of items or badges, with placeholders for dynamic values',
   },
   performanceBadgesEmptyMessageText: {
@@ -98,8 +103,18 @@ const messages = defineMessages({
   },
   performanceBadgesSectionDescriptionText: {
     id: 'performance.badges.section.description.text',
-    defaultMessage: 'You get badges for specific combo actions on the platform. Hover on a badge what to do to get one.',
+    defaultMessage: 'Build your badge collection with masterful combo actions on the platform! Hover over a badge to learn how to add it to your collection.',
     description: 'Text explaining how users can earn badges and how to view instructions by hovering over badges',
+  },
+  performanceBadgesSectionAlertNoBadgesTitle: {
+    id: 'performance.badges.section.alert.no-badges.title',
+    defaultMessage: 'Your rewards are on their way!',
+    description: 'Title for the alert message when no badges are available',
+  },
+  performanceBadgesSectionAlertNoBadgesDescription: {
+    id: 'performance.badges.section.alert.no-badges.description',
+    defaultMessage: "Your well-earned badges are inbound. Please wait a moment, and they'll appear in your inventory, ready to showcase your achievements!",
+    description: "Please wait a moment, and they'll appear in your inventory, ready to showcase your achievements!",
   },
   performanceBadgesSectionBadgesButtonText: {
     id: 'performance.badges.section.badges.button.text',
@@ -120,6 +135,16 @@ const messages = defineMessages({
     id: 'performance.badges.section.total.badges.button.text',
     defaultMessage: 'Total badges',
     description: 'Label text for all available badges in the performance section',
+  },
+  dashboardProgressBadgeModalEmptyBadgesListTitle: {
+    id: 'performance.badges.section.badges.modal.alert.empty-badges-list.title',
+    defaultMessage: 'Badges are on their way!',
+    description: 'Title for the alert message when no badges are available in the modal',
+  },
+  dashboardProgressBadgeModalEmptyBadgesListDescription: {
+    id: 'performance.badges.section.badges.modal.alert.empty-badges-list.description',
+    defaultMessage: "Your rewards are almost here! The administrator is preparing special badges to celebrate your accomplishments. Hang tight, and they'll appear in your inventory, ready for action!",
+    description: 'Text for the alert message when no badges are available in the modal',
   },
   performanceAvatarSectionTotalAvatarSetsButtonText: {
     id: 'performance.avatar.section.total.avatar-sets.button.text',

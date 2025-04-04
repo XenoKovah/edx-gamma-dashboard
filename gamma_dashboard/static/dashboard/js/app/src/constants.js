@@ -2,8 +2,7 @@ import { getCssVariableValue } from './utils/other';
 
 export const BASE_ROOT = '/gamma_dashboard';
 
-// TODO: Remove https://gamma.nau-dev.raccoongang.net after setting up environment variable transfer in tutor deployment
-export const GAMMA_ADMIN_BASE_URL = process.env.REACT_APP_API_HOST || 'https://gamma.nau-dev.raccoongang.net';
+export const GAMMA_ADMIN_BASE_URL = process.env.REACT_APP_API_HOST || '';
 
 export const isRtl = document.querySelector('body').classList.contains('rtl');
 

@@ -43,6 +43,10 @@ const ProgressAvatar = ({
     onSelect();
   };
 
+  if (!avatarSetData) {
+    return null;
+  }
+
   return (
     <BaseCard
       className={classNames('progress-avatar', {

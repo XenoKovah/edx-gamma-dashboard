@@ -15,12 +15,15 @@ const ProgressBadge = ({ data, center, children }) => {
 
   const {
     title,
-    url: imageSrc,
+    image: badgeImageUrl,
+    objectUri: achievedBadgeImageUrl,
     progress,
     points,
     statusPoints,
     dependencies = [],
   } = data;
+
+  const imageSrc = badgeImageUrl || achievedBadgeImageUrl;
 
   const { hasPopup, totalProgressPercent } = getTotalProgress(data);
 
@@ -135,10 +138,10 @@ ProgressBadge.propTypes = {
   slug: PropTypes.string,
   data: PropTypes.shape({
     title: PropTypes.string,
-    url: PropTypes.string,
+    image: PropTypes.string,
+    objectUri: PropTypes.string,
     progress: PropTypes.shape(ProgressPropType),
     done: PropTypes.bool,
-    active: PropTypes.bool,
     points: PropTypes.number,
     statusPoints: PropTypes.number,
     dependencies: PropTypes.arrayOf(PropTypes.string),
@@ -152,10 +155,9 @@ ProgressBadge.defaultProps = {
   slug: '',
   data: {
     title: '',
-    url: '',
+    image: '',
     progress: {},
     done: false,
-    active: false,
     points: -1,
     statusPoints: 0,
   },

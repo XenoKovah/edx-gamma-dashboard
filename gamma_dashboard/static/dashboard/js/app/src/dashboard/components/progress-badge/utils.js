@@ -29,7 +29,7 @@ export const calculateStatusProgress = (points, statusPoints) => Math.floor((poi
  *
  * @param {Object} data - The data object containing progress information.
  * @param {boolean} [data.done] - Indicates whether the badge is completed.
- * @param {boolean} [data.active] - Indicates whether the status is active.
+ * @param {boolean} [data.isActive] - Indicates whether the status is active.
  * @param {number} [data.points] - The current points for the status.
  * @param {number} [data.statusPoints] - The total points required to complete the status.
  * @param {Object} [data.progress] - The progress object for badges.
@@ -45,9 +45,9 @@ export const getTotalProgress = (data) => {
     };
   }
 
-  if (data.active !== undefined) {
+  if (data.isActive !== undefined) {
     return {
-      hasPopup: !data.active || data.points < data.statusPoints,
+      hasPopup: !data.isActive || data.points < data.statusPoints,
       totalProgressPercent: calculateStatusProgress(data.points, data.statusPoints),
     };
   }

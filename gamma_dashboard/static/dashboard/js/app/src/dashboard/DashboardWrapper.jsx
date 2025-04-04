@@ -1,10 +1,9 @@
-import React, { useState, useMemo } from 'react';
-import { useIntl } from 'react-intl';
+import React from 'react';
 import PropTypes from 'prop-types';
-import { Info as InfoIcon, Warning as WarningIcon } from '@openedx/paragon/icons';
 import { ErrorBoundary } from 'react-error-boundary';
+import { Info as InfoIcon, Warning as WarningIcon } from '@openedx/paragon/icons';
 
-import { SubHeader, Alert, ErrorFallback } from '../generic';
+import { SubHeader, ErrorFallback, Alert } from '../generic';
 import {
   DashboardSection,
   DashboardSectionSlider,
@@ -18,7 +17,6 @@ import { CORNER_BOTTOM, CORNER_TOP } from './components/constants';
 import {
   SHOW_STATUS_BLOCK,
   SHOW_PROGRESS_CHART,
-  SHOW_PROGRESS_BADGES,
   SHOW_POINTS_DISTRIBUTION_CHART,
 } from '../featureFlags';
 import {
@@ -26,10 +24,12 @@ import {
   StatusPropType, AvatarProcessingStatesPropType, AvatarSetsPropType,
 } from './propTypes';
 import { PointsDistributionChart, ProgressChart } from './charts';
+import { useDashboardWrapper } from './hooks';
 
-import messages from '../i18n';
-
-const PREVIEW_BADGES_ITEMS_COUNT = 3;
+const WIDGETS = {
+  BADGES: 'badges',
+  AVATAR: 'avatar',
+};
 
 const DashboardWrapper = ({
   chart,
@@ -37,73 +37,93 @@ const DashboardWrapper = ({
   badgeItems,
   avatarSets,
   statusItems,
-  avatarProcessingStates,
-  avatarResetProcessingMutations,
   gammaUserInfo,
-  handleSelectAvatarSet,
-  handleUpdateSelectedAvatarSet,
+  avatarHandlers,
 }) => {
-  const intl = useIntl();
+  const {
+    handleSelectAvatarSet,
+    avatarProcessingStates,
+    handleUpdateSelectedAvatarSet,
+    avatarResetProcessingMutations,
+  } = avatarHandlers;
 
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [isAvatarModalOpen, setIsAvatarModalOpen] = useState(false);
-  const [modalData, setModalData] = useState([]);
-  const [selectedAvatarSetId, setSelectedAvatarSetId] = useState(null);
+  const {
+    modalData,
+    isModalOpen,
+    translations,
+    setIsModalOpen,
+    completedAvatar,
+    handleOpenModal,
+    isAvatarModalOpen,
+    previewBadgeItems,
+    selectedAvatarSetId,
+    hasSelectedAvatarSet,
+    hasCompletedAvatarSet,
+    setSelectedAvatarSetId,
+    savedSelectedAvatarSetId,
+    handleCloseProgressAvatarModal,
+  } = useDashboardWrapper({
+    badgeItems,
+    statusItems,
+    avatarSets,
+    gammaUserInfo,
+    avatarResetProcessingMutations,
+  });
 
-  const previewBadgeItems = badgeItems.slice(0, PREVIEW_BADGES_ITEMS_COUNT);
-  const points = statusItems[0]?.points;
-  const doneStatuses = statusItems.filter((item) => points >= item.statusPoints);
-  const hasSelectedAvatarSet = Boolean(gammaUserInfo.userAvatarConfig);
-  const hasCompletedAvatarSet = Boolean(gammaUserInfo.userAvatarConfig?.selectedAvatarId);
+  const renderErrorBoundary = (children) => (
+    <ErrorBoundary FallbackComponent={ErrorFallback} onReset={() => window.location.reload()}>
+      {children}
+    </ErrorBoundary>
+  );
 
-  const savedSelectedAvatarSetId = gammaUserInfo.userAvatarConfig?.selectedAvatarSetId;
-  const selectedAvatarId = gammaUserInfo.userAvatarConfig?.selectedAvatarId;
+  const renderItems = (type, options) => {
+    switch (type) {
+      case WIDGETS.BADGES: {
+        if (!options.items.length) {
+          return (
+            <Alert
+              className="mb-0 mx-3"
+              variant="info"
+              icon={InfoIcon}
+              title={options.emptyTitle}
+            >
+              <p>{options.emptyDescription}</p>
+            </Alert>
+          );
+        }
 
-  const completedAvatar = useMemo(() => {
-    if (!avatarSets || !savedSelectedAvatarSetId || !selectedAvatarId) { return null; }
-
-    for (const set of avatarSets) {
-      if (set.id === savedSelectedAvatarSetId) {
-        return set.avatars?.find(avatar => avatar.id === selectedAvatarId) || null;
+        return options.items.map((item) => <ProgressBadge key={item[0]} data={item[1]} />);
       }
+
+      case WIDGETS.AVATAR: {
+        if (options.hasCompletedAvatarSet) {
+          return <ProgressAvatar avatarSetData={options.completedAvatar} />;
+        }
+
+        return (
+          <Alert
+            className="mb-0 mx-3"
+            variant={options.hasSelectedAvatarSet ? 'warning' : 'info'}
+            icon={options.hasSelectedAvatarSet ? WarningIcon : InfoIcon}
+            title={
+              options.hasSelectedAvatarSet
+                ? options.translations.alertAvatarSetNotCompletedTitle
+                : options.translations.alertAvatarSetNotSelectedTitle
+            }
+          >
+            <p>
+              {options.hasSelectedAvatarSet
+                ? options.translations.alertAvatarSetNotCompletedText
+                : options.translations.alertAvatarSetNotSelectedText}
+            </p>
+          </Alert>
+        );
+      }
+
+      default:
+        console.warn(`Unknown render type: ${type}`); // eslint-disable-line no-console
+        return null;
     }
-
-    return null;
-  }, [avatarSets, savedSelectedAvatarSetId, selectedAvatarId]);
-
-  const translations = {
-    subHeaderTitle: intl.formatMessage(messages.performanceHeadingText),
-    performanceSectionCounter: intl.formatMessage(messages.performanceSectionCounterText, {
-      previewBadgeItemsLength: doneStatuses.length,
-      badgeItemsLength: statusItems.length,
-    }),
-    badgesSectionTitle: intl.formatMessage(messages.performanceBadgesSectionHeadingText),
-    badgesSectionDescription: intl.formatMessage(messages.performanceBadgesSectionDescriptionText),
-    badgesSectionBtnTitle: intl.formatMessage(messages.performanceBadgesSectionBadgesButtonText),
-    badgesSectionAllBadgesBtnTitle: intl.formatMessage(messages.performanceBadgesSectionAllBadgesButtonText),
-    avatarSectionTitle: intl.formatMessage(messages.performanceAvatarSectionTitleText),
-    avatarSectionDescription: intl.formatMessage(messages.performanceAvatarSectionDescriptionText),
-    avatarSectionBtnTitle: intl.formatMessage(messages.performanceAvatarSectionAvatarSetsButtonText),
-    avatarSetsModalTitle: intl.formatMessage(messages.dashboardProgressAvatarSetModalTitle),
-    alertAvatarSetNotCompletedTitle: intl.formatMessage(
-      messages.dashboardProgressAvatarSetModalAlertAvatarSetNotCompletedTitle,
-    ),
-    alertAvatarSetNotCompletedText: intl.formatMessage(
-      messages.dashboardProgressAvatarSetModalAlertAvatarSetNotCompletedText,
-    ),
-    alertAvatarSetNotSelectedTitle: intl.formatMessage(
-      messages.dashboardProgressAvatarSetModalAlertAvatarSetNotSelectedTitle,
-    ),
-    alertAvatarSetNotSelectedText: intl.formatMessage(
-      messages.dashboardProgressAvatarSetModalAlertAvatarSetNotSelectedText,
-    ),
-  };
-
-  const handleCloseProgressAvatarModal = () => {
-    setIsAvatarModalOpen(false);
-    setSelectedAvatarSetId(null);
-
-    avatarResetProcessingMutations.all();
   };
 
   return (
@@ -114,108 +134,67 @@ const DashboardWrapper = ({
           title={translations.subHeaderTitle}
         />
         <div className="dashboard-page-body">
-
           <DashboardSectionContainer>
-            <ErrorBoundary
-              FallbackComponent={ErrorFallback}
-              onReset={() => window.location.reload()}
-            >
+            {renderErrorBoundary(
               <DashboardSectionAvatar
                 title={translations.avatarSectionTitle}
                 content={translations.avatarSectionDescription}
-                items={
-                    hasCompletedAvatarSet ? (
-                      <ProgressAvatar avatarSetData={completedAvatar} />
-                    ) : (
-                      <Alert
-                        className="mb-0"
-                        variant={hasSelectedAvatarSet ? 'warning' : 'info'}
-                        icon={hasSelectedAvatarSet ? WarningIcon : InfoIcon}
-                        title={
-                          hasSelectedAvatarSet
-                            ? translations.alertAvatarSetNotCompletedTitle
-                            : translations.alertAvatarSetNotSelectedTitle
-                        }
-                      >
-                        <p>
-                          {hasSelectedAvatarSet
-                            ? translations.alertAvatarSetNotCompletedText
-                            : translations.alertAvatarSetNotSelectedText}
-                        </p>
-                      </Alert>
-                    )
-                  }
+                items={renderItems(WIDGETS.AVATAR, {
+                  hasCompletedAvatarSet,
+                  completedAvatar,
+                  hasSelectedAvatarSet,
+                  translations,
+                })}
                 buttonData={{
                   title: translations.avatarSectionBtnTitle,
-                  onClick: () => {
-                    setModalData(badgeItems);
-                    setIsAvatarModalOpen(true);
-                  },
+                  onClick: () => handleOpenModal(WIDGETS.AVATAR),
                 }}
-              />
-            </ErrorBoundary>
-            {SHOW_POINTS_DISTRIBUTION_CHART && (
-              <ErrorBoundary
-                FallbackComponent={ErrorFallback}
-                onReset={() => window.location.reload()}
-              >
-                <DashboardSection>
-                  <PointsDistributionChart data={chart} />
-                </DashboardSection>
-              </ErrorBoundary>
+              />,
+            )}
+            {SHOW_POINTS_DISTRIBUTION_CHART && renderErrorBoundary(
+              <DashboardSection>
+                <PointsDistributionChart data={chart} />
+              </DashboardSection>,
             )}
           </DashboardSectionContainer>
-
-          {SHOW_PROGRESS_BADGES && (
-            <DashboardSectionContainer>
-              <ErrorBoundary
-                FallbackComponent={ErrorFallback}
-                onReset={() => window.location.reload()}
-              >
-                <DashboardSectionSlider
-                  fullWidth
-                  title={translations.badgesSectionTitle}
-                  status={translations.performanceSectionCounter}
-                  content={translations.badgesSectionDescription}
-                  items={previewBadgeItems.map((item) => (
-                    <ProgressBadge key={item} data={item[1]} />
-                  ))}
-                  buttonData={{
-                    title: translations.badgesSectionBtnTitle,
-                    onClick: () => {
-                      setModalData(badgeItems);
-                      setIsModalOpen(true);
-                    },
-                  }}
-                />
-              </ErrorBoundary>
-            </DashboardSectionContainer>
-          )}
+          <DashboardSectionContainer>
+            {renderErrorBoundary(
+              <DashboardSectionSlider
+                fullWidth
+                title={translations.badgesSectionTitle}
+                status={translations.badgeSectionCounter}
+                content={translations.badgesSectionDescription}
+                items={renderItems(WIDGETS.BADGES, {
+                  items: previewBadgeItems,
+                  emptyTitle: translations.alertBadgesEmptyListTitle,
+                  emptyDescription: translations.alertBadgesEmptyListDescription,
+                })}
+                buttonData={{
+                  title: translations.badgesSectionBtnTitle,
+                  onClick: () => handleOpenModal(WIDGETS.BADGES),
+                }}
+              />,
+            )}
+          </DashboardSectionContainer>
           {SHOW_STATUS_BLOCK && (
             <DashboardSectionContainer>
-              <ErrorBoundary
-                FallbackComponent={ErrorFallback}
-                onReset={() => window.location.reload()}
-              >
+              {renderErrorBoundary(
                 <DashboardSection fullWidth corner={CORNER_TOP}>
                   <SliderStatusesBlock
                     status={translations.performanceSectionCounter}
                     statusItems={statusItems}
                   />
-                </DashboardSection>
-              </ErrorBoundary>
+                </DashboardSection>,
+              )}
             </DashboardSectionContainer>
           )}
           {SHOW_PROGRESS_CHART && (
             <DashboardSectionContainer>
-              <ErrorBoundary
-                FallbackComponent={ErrorFallback}
-                onReset={() => window.location.reload()}
-              >
+              {renderErrorBoundary(
                 <DashboardSection fullWidth corner={CORNER_BOTTOM}>
                   <ProgressChart data={progress} />
-                </DashboardSection>
-              </ErrorBoundary>
+                </DashboardSection>,
+              )}
             </DashboardSectionContainer>
           )}
         </div>
@@ -245,32 +224,35 @@ const DashboardWrapper = ({
 };
 
 DashboardWrapper.propTypes = {
-  statusItems: PropTypes.arrayOf(PropTypes.shape(StatusPropType)),
-  badgeItems: PropTypes.arrayOf(BadgeItemPropType),
-  progress: ProgressDataPropType,
   chart: ChartDataPropType,
-  avatarSets: AvatarSetsPropType,
+  progress: ProgressDataPropType,
+  badgeItems: PropTypes.arrayOf(BadgeItemPropType),
+  avatarSets: PropTypes.arrayOf(AvatarSetsPropType),
+  statusItems: PropTypes.arrayOf(PropTypes.shape(StatusPropType)),
   gammaUserInfo: PropTypes.shape({
     userAvatarConfig: PropTypes.shape({
       selectedAvatarId: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
       selectedAvatarSetId: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     }),
   }).isRequired,
-  avatarProcessingStates: AvatarProcessingStatesPropType,
-  avatarResetProcessingMutations: PropTypes.shape({
-    all: PropTypes.func.isRequired,
-    update: PropTypes.func.isRequired,
-    select: PropTypes.func.isRequired,
+  avatarHandlers: PropTypes.shape({
+    handleSelectAvatarSet: PropTypes.func.isRequired,
+    avatarProcessingStates: AvatarProcessingStatesPropType,
+    handleUpdateSelectedAvatarSet: PropTypes.func.isRequired,
+    avatarResetProcessingMutations: PropTypes.shape({
+      all: PropTypes.func.isRequired,
+      update: PropTypes.func.isRequired,
+      select: PropTypes.func.isRequired,
+    }).isRequired,
   }).isRequired,
-  handleUpdateSelectedAvatarSet: PropTypes.func.isRequired,
-  handleSelectAvatarSet: PropTypes.func.isRequired,
 };
 
 DashboardWrapper.defaultProps = {
-  statusItems: [],
-  badgeItems: [],
-  progress: {},
   chart: {},
+  progress: {},
+  badgeItems: [],
+  avatarSets: [],
+  statusItems: [],
 };
 
 export default DashboardWrapper;

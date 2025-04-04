@@ -55,32 +55,77 @@ export const gameProfileData = {
     },
   ],
   points: 180,
-  badges: {
-    10: {
-      url: 'https://gamma-url.com/badge10.png',
-      progress: {
-
-      },
+  badges: [
+    {
+      title: 'Badge 1',
+      slug: 'badge-1',
+      description: 'Some description...',
       done: true,
-      title: '10',
+      progress: [
+        {
+          events: {
+            edx_bookmark_added: {
+              goal: 1,
+              last: '2025-03-25T16:36:11.868189+00:00',
+              count: 1,
+            },
+          },
+        },
+      ],
+      object_id: 243,
+      object_uri: '/media/uploads/badges/7a6128e584b04ba7a278688f8ac3095a.png',
+      is_active: true,
     },
-    'new-shiny-badge-20': {
-      url: 'https://gamma-url.com/badge-new-shiny-badge-20.png',
-      progress: {
-
-      },
-      done: true,
-      title: 'new shiny BADGE 2.0',
+    {
+      title: 'Badge 2',
+      slug: 'badge-2',
+      description: 'Some description...',
+      done: false,
+      progress: [
+        {
+          events: {
+            edx_bookmark_added: {
+              goal: 2,
+              last: '2025-03-25T16:36:11.868189+00:00',
+              count: 1,
+            },
+          },
+        },
+      ],
+      object_id: 244,
+      object_uri: '/media/uploads/badges/64913be5a85749cd9355faaa928c25cf.png',
+      is_active: true,
     },
-    'badge-badge': {
-      url: 'https://gamma-url.com/badge-badge-for-badge.png',
-      progress: {
-
-      },
-      done: true,
-      title: 'Badge for badge',
+    {
+      title: 'Badge 3',
+      slug: 'badge-3',
+      description: 'Some description...',
+      done: false,
+      progress: [
+        {
+          events: {
+            edx_bookmark_added: {
+              goal: 3,
+              last: '2025-03-25T16:36:11.868189+00:00',
+              count: 1,
+            },
+          },
+        },
+        {
+          events: {
+            status_badge: {
+              goal: 1,
+              last: null,
+              count: 0,
+            },
+          },
+        },
+      ],
+      object_id: 245,
+      object_uri: '/media/uploads/badges/0feddbbaf67b4068b7e23e004bf3d216.png',
+      is_active: true,
     },
-  },
+  ],
   progress: {
     2020: [
       {
@@ -153,90 +198,73 @@ export const gameProfileData = {
   ],
   system_badges: [
     {
-      title: '10',
-      url: 'https://gamma-url.com/badge10.png',
-      rules: {
-        actions: {
-          stop_video: 1,
+      id: 243,
+      title: 'Badge 1',
+      description: 'Some description...',
+      image: '/media/uploads/badges/7a6128e584b04ba7a278688f8ac3095a.png',
+      is_active: true,
+      slug: 'badge-1',
+      rules: [
+        {
+          id: 212,
+          event_configuration: 5,
+          action: {
+            edx_bookmark_added: 1,
+          },
+          filters: {},
+          created_at: '2025-03-25T16:34:08.013434Z',
         },
-      },
-      active: true,
-      badge_uid: '10',
-      slug: '10',
+      ],
+      created_at: '2025-04-03T16:01:35.224832Z',
     },
     {
-      title: '6',
-      url: 'https://gamma-url.com/badge6.png',
-      rules: {
-        actions: {
-          stop_video: 1,
+      id: 244,
+      title: 'Badge 2',
+      description: 'Some description...',
+      image: '/media/uploads/badges/64913be5a85749cd9355faaa928c25cf.png',
+      is_active: true,
+      slug: 'badge-2',
+      rules: [
+        {
+          id: 213,
+          event_configuration: 5,
+          action: {
+            edx_bookmark_added: 2,
+          },
+          filters: {},
+          created_at: '2025-03-25T16:34:16.355746Z',
         },
-      },
-      active: true,
-      badge_uid: '6',
-      slug: '6',
+      ],
+      created_at: '2025-04-03T16:02:13.578451Z',
     },
     {
-      title: '5',
-      url: 'https://gamma-url.com/badge5.png',
-      rules: {
-        filters: {
-          course: 'course-v1:RaccoonGang+AP101+2018_t2',
+      id: 245,
+      title: 'Badge 3',
+      description: 'Some description...',
+      image: '/media/uploads/badges/0feddbbaf67b4068b7e23e004bf3d216.png',
+      is_active: true,
+      slug: 'badge-3',
+      rules: [
+        {
+          id: 214,
+          event_configuration: 5,
+          action: {
+            edx_bookmark_added: 3,
+          },
+          filters: {},
+          created_at: '2025-03-26T06:26:31.358713Z',
         },
-        badges: [
-          '6',
-          '10',
-          '5',
-        ],
-        actions: {
-          problem_graded: 1,
-          edx_forum_response_created: 1,
-          edx_grades_problem_submitted: 1,
-          problem_check: 1,
-          edx_bookmark_added: 1,
-          edx_forum_thread_created: 1,
-          edx_course_student_notes_added: 1,
-          edx_course_enrollment_activated: 1,
-          edx_forum_comment_created: 1,
-          edx_forum_thread_voted: 1,
-          stop_video: 1,
-          openassessmentblock_save_submission: 1,
+        {
+          id: 217,
+          event_configuration: 3,
+          action: {
+            status_badge: 1,
+          },
+          filters: {},
+          created_at: '2025-04-03T09:26:04.766338Z',
         },
-        status_badge: 'platinum',
-      },
-      active: true,
-      badge_uid: '5',
-      slug: '5',
-    },
-    {
-      title: 'Badge for badge',
-      url: 'https://gamma-url.com/badge4.png',
-      rules: {
-        status_badge: 'gold',
-        badges: [
-          '10',
-          'badge-badge',
-        ],
-      },
-      active: true,
-      badge_uid: '4',
-      slug: '4',
-    },
-    {
-      title: 'Badge for submite',
-      url: 'https://gamma-url.com/badge3.png',
-      rules: {
-        filters: {
-          frequency: 1,
-        },
-        status_badge: 'new-status',
-        actions: {
-          problem_graded: 1,
-        },
-      },
-      active: true,
-      badge_uid: '3',
-      slug: '3',
+      ],
+      created_at: '2025-04-03T16:02:40.179193Z',
     },
   ],
   gamma_user_info: {

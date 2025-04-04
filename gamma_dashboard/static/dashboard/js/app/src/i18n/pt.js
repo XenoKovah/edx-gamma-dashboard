@@ -88,7 +88,12 @@ const messages = defineMessages({
   },
   performanceSectionCounterText: {
     id: 'performance.section.counter.text',
-    defaultMessage: '{previewBadgeItemsLength} de {badgeItemsLength}',
+    defaultMessage: '{completedStatuses} de {totalStatuses}',
+    description: 'Texto exibindo uma contagem de itens ou emblemas, com espaços reservados para valores dinâmicos',
+  },
+  badgesSectionCounterText: {
+    id: 'badges.section.counter.text',
+    defaultMessage: '{completedBadgeItemsLength} de {badgeItemsLength}',
     description: 'Texto exibindo uma contagem de itens ou emblemas, com espaços reservados para valores dinâmicos',
   },
   performanceBadgesEmptyMessageText: {
@@ -100,6 +105,16 @@ const messages = defineMessages({
     id: 'performance.badges.section.description.text',
     defaultMessage: 'Você ganha emblemas por ações combinadas específicas na plataforma. Passe o mouse sobre um emblema para saber o que fazer para obter um.',
     description: 'Texto explicando como os usuários podem ganhar emblemas e como visualizar instruções passando o mouse sobre os emblemas',
+  },
+  performanceBadgesSectionAlertNoBadgesTitle: {
+    id: 'performance.badges.section.alert.no-badges.title',
+    defaultMessage: 'Suas recompensas estão a caminho!',
+    description: 'Título para a mensagem de alerta quando nenhum emblema está disponível',
+  },
+  performanceBadgesSectionAlertNoBadgesDescription: {
+    id: 'performance.badges.section.alert.no-badges.description',
+    defaultMessage: 'Seus emblemas bem merecidos estão chegando. Por favor, espere um momento, e eles aparecerão em seu inventário, prontos para exibir suas conquistas!',
+    description: 'Por favor, espere um momento, e eles aparecerão em seu inventário, prontos para exibir suas conquistas!',
   },
   performanceBadgesSectionBadgesButtonText: {
     id: 'performance.badges.section.badges.button.text',
@@ -120,6 +135,16 @@ const messages = defineMessages({
     id: 'performance.badges.section.total.badges.button.text',
     defaultMessage: 'Total de emblemas',
     description: 'Texto do rótulo para todos os emblemas disponíveis na seção de desempenho',
+  },
+  dashboardProgressBadgeModalEmptyBadgesListTitle: {
+    id: 'performance.badges.section.badges.modal.alert.empty-badges-list.title',
+    defaultMessage: 'Emblemas estão a caminho!',
+    description: 'Título para a mensagem de alerta quando nenhum emblema está disponível no modal',
+  },
+  dashboardProgressBadgeModalEmptyBadgesListDescription: {
+    id: 'performance.badges.section.badges.modal.alert.empty-badges-list.description',
+    defaultMessage: 'Suas recompensas estão quase aqui! O administrador está preparando emblemas especiais para celebrar suas conquistas. Aguente firme, e eles aparecerão em seu inventário, prontos para a ação!',
+    description: 'Texto para a mensagem de alerta quando nenhum emblema está disponível no modal',
   },
   performanceAvatarSectionTotalAvatarSetsButtonText: {
     id: 'performance.avatar.section.total.avatar-sets.button.text',

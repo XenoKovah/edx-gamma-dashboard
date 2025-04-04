@@ -15,7 +15,7 @@ describe('<ProgressBadge>', () => {
       id: '3',
       progress: {},
       title: 'Badge for filter 1',
-      url: 'https://gamma-url.com/badge3.png',
+      imageSrc: 'https://gamma-url.com/badge3.png',
     };
 
     const { getByTestId, queryByTestId } = renderWithProviders(
@@ -44,7 +44,7 @@ describe('<ProgressBadge>', () => {
       id: '3',
       progress: {},
       title: 'Badge for filter 1',
-      url: 'https://gamma-url.com/badge3.png',
+      imageSrc: 'https://gamma-url.com/badge3.png',
     };
 
     const { getByTestId } = renderWithProviders(<ProgressBadge data={data} />);
@@ -71,14 +71,14 @@ describe('<ProgressBadge>', () => {
 
   it('renders with correct `complete status` data', () => {
     const data = {
-      active: true,
+      isActive: true,
       color: '',
       points: 180,
       slug: 'test-status',
       statusPoints: 150,
       status_uid: 'test-status',
       title: 'Test status',
-      url: 'https://gamma-url.com/status-test-status.png',
+      imageSrc: 'https://gamma-url.com/status-test-status.png',
     };
 
     const { getByTestId, queryByTestId } = renderWithProviders(<ProgressBadge data={data} />);
@@ -101,14 +101,14 @@ describe('<ProgressBadge>', () => {
 
   it('renders with correct `incomplete status` data', () => {
     const data = {
-      active: true,
+      isActive: true,
       color: '',
       points: 180,
       slug: 'test-status',
       statusPoints: 250,
       status_uid: 'test-status',
       title: 'Test status',
-      url: 'https://gamma-url.com/status-test-status.png',
+      imageSrc: 'https://gamma-url.com/status-test-status.png',
     };
 
     const { getByTestId } = renderWithProviders(<ProgressBadge data={data} />);
@@ -135,14 +135,14 @@ describe('<ProgressBadge>', () => {
 
   it('renders with correct but zeroed `incomplete status` data', () => {
     const data = {
-      active: true,
+      isActive: true,
       color: '',
       points: 0,
       slug: 'test-status',
       statusPoints: 669,
       status_uid: 'test-status',
       title: 'Test status',
-      url: 'https://gamma-url.com/status-test-status.png',
+      imageSrc: 'https://gamma-url.com/status-test-status.png',
     };
     const progressString = `${data.points}/${data.statusPoints}`;
     const { getByTestId } = renderWithProviders(<ProgressBadge data={data} />);
@@ -164,14 +164,14 @@ describe('<ProgressBadge>', () => {
 
   it('renders with `center` prop defined', () => {
     const data = {
-      active: true,
+      isActive: true,
       color: '',
       points: 180,
       slug: 'test-status',
       statusPoints: 150,
       status_uid: 'test-status',
       title: 'Test status',
-      url: 'https://gamma-url.com/status-test-status.png',
+      imageSrc: 'https://gamma-url.com/status-test-status.png',
     };
 
     const { getByTestId } = renderWithProviders(
@@ -219,7 +219,7 @@ describe('<ProgressBadge>', () => {
         },
       },
       title: 'Badge 3',
-      url: 'https://gamma.com/badge3.png',
+      imageSrc: 'https://gamma.com/badge3.png',
     };
 
     const { getByTestId } = renderWithProviders(<ProgressBadge data={data} />);
@@ -245,7 +245,7 @@ describe('<ProgressBadge>', () => {
         },
       },
       title: 'Badge 3',
-      url: 'https://gamma.com/badge3.png',
+      imageSrc: 'https://gamma.com/badge3.png',
     };
 
     const { getByTestId } = renderWithProviders(<ProgressBadge data={data} />);

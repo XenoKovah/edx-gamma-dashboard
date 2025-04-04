@@ -1,9 +1,10 @@
 import React from 'react';
 import { useIntl } from 'react-intl';
 import PropTypes from 'prop-types';
+import { Info as InfoIcon } from '@openedx/paragon/icons';
 
 import { isRtl } from '../../../constants';
-import { Modal } from '../../../generic';
+import { Modal, Alert } from '../../../generic';
 import ProgressBadge from './ProgressBadge';
 
 import messages from '../../../i18n';
@@ -16,9 +17,15 @@ const ProgressBadgesModal = ({
   const translations = {
     modalBtnCloseTitle: intl.formatMessage(messages.dashboardProgressBadgeModalButtonCloseText),
     counterText: intl.formatMessage(messages.performanceBadgesSectionTotalBadgesButtonText),
+    alertModalEmptyBadgesListTitle: intl.formatMessage(messages.dashboardProgressBadgeModalEmptyBadgesListTitle),
+    alertModalEmptyBadgesListDescription: intl.formatMessage(
+      messages.dashboardProgressBadgeModalEmptyBadgesListDescription,
+    ),
   };
 
   const counterLabelText = isRtl ? `:${translations.counterText}` : `${translations.counterText}:`;
+
+  const filteredActiveBadges = items.filter((item) => getItemDataFunction(item).isActive);
 
   return (
     <Modal
@@ -28,20 +35,30 @@ const ProgressBadgesModal = ({
       size="xl"
       hasCloseButton
       closeBtnTitle={translations.modalBtnCloseTitle}
-      footerText={`${counterLabelText} ${items.length}`}
+      footerText={filteredActiveBadges.length ? `${counterLabelText} ${items.length}` : null}
     >
-      <ul
-        className="d-flex flex-wrap justify-content-center p-0"
-        data-testid="dashboard-modal-window-items-list"
-      >
-        {items.map((item) => (
-          <ProgressBadge
-            key={getItemDataFunction(item).title}
-            data={getItemDataFunction(item)}
-            center
-          />
-        ))}
-      </ul>
+      {filteredActiveBadges.length ? (
+        <ul
+          className="d-flex flex-wrap justify-content-center p-0"
+          data-testid="dashboard-modal-window-items-list"
+        >
+          {filteredActiveBadges.map((item) => (
+            <ProgressBadge
+              key={getItemDataFunction(item).title}
+              data={getItemDataFunction(item)}
+              center
+            />
+          ))}
+        </ul>
+      ) : (
+        <Alert
+          variant="info"
+          icon={InfoIcon}
+          title={translations.alertModalEmptyBadgesListTitle}
+        >
+          <p>{translations.alertModalEmptyBadgesListDescription}</p>
+        </Alert>
+      )}
     </Modal>
   );
 };

@@ -88,10 +88,14 @@ const messages = defineMessages({
   },
   performanceSectionCounterText: {
     id: 'performance.section.counter.text',
-    defaultMessage: '{previewBadgeItemsLength} з {badgeItemsLength}',
+    defaultMessage: '{completedStatuses} з {totalStatuses}',
+    description: 'Текст, що відображає кількість статусів, з заповнювачами для динамічних значень',
+  },
+  badgesSectionCounterText: {
+    id: 'badges.section.counter.text',
+    defaultMessage: '{completedBadgeItemsLength} з {badgeItemsLength}',
     description: 'Текст, що відображає кількість елементів або бейджів, з заповнювачами для динамічних значень',
   },
-
   performanceBadgesEmptyMessageText: {
     id: 'performance.badges.empty.message.text',
     defaultMessage: 'Поки що немає бейджів...',
@@ -101,6 +105,16 @@ const messages = defineMessages({
     id: 'performance.badges.section.description.text',
     defaultMessage: 'Ви отримуєте бейджі за певні комбо-дії на платформі. Наведіть курсор на бейдж, щоб дізнатися, що потрібно зробити для його отримання.',
     description: 'Текст, що пояснює, як користувачі можуть заробляти бейджі та як переглядати інструкції, навівши курсор на бейджі',
+  },
+  performanceBadgesSectionAlertNoBadgesTitle: {
+    id: 'performance.badges.section.alert.no-badges.title',
+    defaultMessage: 'Ваші нагороди вже в дорозі!',
+    description: 'Заголовок для повідомлення-попередження, коли немає доступних бейджів',
+  },
+  performanceBadgesSectionAlertNoBadgesDescription: {
+    id: 'performance.badges.section.alert.no-badges.description',
+    defaultMessage: "Ваші заслужені бейджі вже на підході. Будь ласка, зачекайте трохи, і вони з'являться у вашому інвентарі, готові продемонструвати ваші досягнення!",
+    description: "Будь ласка, зачекайте трохи, і вони з'являться у вашому інвентарі, готові продемонструвати ваші досягнення!",
   },
   performanceBadgesSectionBadgesButtonText: {
     id: 'performance.badges.section.badges.button.text',
@@ -121,6 +135,16 @@ const messages = defineMessages({
     id: 'performance.badges.section.total.badges.button.text',
     defaultMessage: 'Загальна кількість бейджів',
     description: 'Текст мітки для всіх доступних бейджів у розділі продуктивності',
+  },
+  dashboardProgressBadgeModalEmptyBadgesListTitle: {
+    id: 'performance.badges.section.badges.modal.alert.empty-badges-list.title',
+    defaultMessage: 'Бейджі вже в дорозі!',
+    description: 'Заголовок для повідомлення-попередження, коли в модальному вікні немає доступних бейджів',
+  },
+  dashboardProgressBadgeModalEmptyBadgesListDescription: {
+    id: 'performance.badges.section.badges.modal.alert.empty-badges-list.description',
+    defaultMessage: 'Ваші нагороди майже тут! Адміністратор готує для вас особливі бейджі, щоб відзначити ваші досягнення. Зачекайте трохи, і вони з\'являться у вашому інвентарі, готові до використання!',
+    description: 'Текст для повідомлення-попередження, коли в модальному вікні немає доступних бейджів',
   },
   performanceAvatarSectionTotalAvatarSetsButtonText: {
     id: 'performance.avatar.section.total.avatar-sets.button.text',

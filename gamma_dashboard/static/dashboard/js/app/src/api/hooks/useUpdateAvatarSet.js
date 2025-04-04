@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { useMutation, useQueryClient } from 'react-query';
 
-import { getDefaultHeaders } from '../utils/dashboard';
+import { getDefaultHeaders } from '../helpers/utils';
 import { DASHBOARD_URLS } from '../constants';
 
 export function useUpdateAvatarSet() {

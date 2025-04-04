@@ -1,3 +1,5 @@
+import { resolveUrl } from '../../../utils/urlTools';
+
 /**
  * Returns the actual image URL for an avatar or avatar set.
  *
@@ -25,9 +27,7 @@ export const getActualImageUrl = (
     return fallback;
   }
 
-  // Handles relative URLs in local dev; server always returns absolute URLs.
-  const isAbsoluteUrl = /^https?:\/\//i.test(avatarOrSetImage);
-  return isAbsoluteUrl ? avatarOrSetImage : `${gammaAdminBaseUrl}${avatarOrSetImage}`;
+  return resolveUrl(avatarOrSetImage, gammaAdminBaseUrl);
 };
 
 /**

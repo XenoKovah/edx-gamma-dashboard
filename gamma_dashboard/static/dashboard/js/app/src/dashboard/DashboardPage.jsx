@@ -3,7 +3,7 @@ import { useIntl } from 'react-intl';
 import { Error as ErrorIcon } from '@openedx/paragon/icons';
 
 import { useScrollToContent } from '../generic/hooks';
-import { useDashboardPageData } from './hooks/useDashboardPageData';
+import { useDashboardPageData } from './hooks';
 import { Loader, Alert } from '../generic';
 import DashboardWrapper from './DashboardWrapper';
 
@@ -47,10 +47,12 @@ const DashboardPage = () => {
 
   return (
     <DashboardWrapper
-      avatarProcessingStates={avatarProcessingStates}
-      avatarResetProcessingMutations={avatarResetProcessingMutations}
-      handleSelectAvatarSet={handleSelectAvatarSet}
-      handleUpdateSelectedAvatarSet={handleUpdateSelectedAvatarSet}
+      avatarHandlers={{
+        avatarProcessingStates,
+        avatarResetProcessingMutations,
+        handleSelectAvatarSet,
+        handleUpdateSelectedAvatarSet,
+      }}
       {...gameProfileData}
     />
   );

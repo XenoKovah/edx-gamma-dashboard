@@ -1,5 +1,7 @@
-import { mapStatusTitles, mapEventTitles } from './mappers';
-import { mergeBadges, convertKeysToCamelCase } from './badges';
+import {
+  mapStatusTitles, mapEventTitles, mapStatusItems, mapKeysToCamelCase,
+} from './mappers';
+import { mergeBadges } from './badges';
 
 /**
  * Parses input data to prepare a unified structure for UI components.
@@ -29,20 +31,19 @@ export const prepareDashboardData = (data = {}) => {
     gamma_user_info: gammaUserInfo = {},
   } = data;
 
+  const {
+    gammaUserInfo: convertedToCamelCaseGammaUserInfo,
+    avatarSets: convertedToCamelCaseAvatarSets,
+    systemBadges: convertedSystemBadges,
+    badges: convertedBadges,
+  } = mapKeysToCamelCase({
+    gammaUserInfo, avatarSets, systemBadges, badges,
+  });
+
   const statusTitles = mapStatusTitles(systemStatuses);
   const eventTitles = mapEventTitles(systemEvents);
-
-  const mergedBadges = mergeBadges(statusTitles, eventTitles, badges, systemBadges);
-
-  const statusItems = systemStatuses.map(({ status_points, ...rest }) => ({ // eslint-disable-line camelcase
-    ...rest,
-    statusPoints: status_points, // eslint-disable-line camelcase
-    points,
-  }));
-
-  // Prep for React Query migration: normalize GammaUserInfo and AvatarSets
-  const convertedToCamelCaseGammaUserInfo = convertKeysToCamelCase(gammaUserInfo);
-  const convertedToCamelCaseAvatarSets = convertKeysToCamelCase(avatarSets);
+  const statusItems = mapStatusItems(systemStatuses, points);
+  const mergedBadges = mergeBadges(statusTitles, eventTitles, convertedBadges, convertedSystemBadges);
 
   return {
     statusItems,
@@ -57,22 +58,3 @@ export const prepareDashboardData = (data = {}) => {
     gammaUserInfo: convertedToCamelCaseGammaUserInfo,
   };
 };
-
-/**
- * Extracts the CSRF token from the browser's cookies.
- *
- * @returns {string|undefined} The CSRF token if found, otherwise undefined.
- */
-export const getCsrfToken = () => document.cookie.match('(^|;)\\s*csrftoken\\s*=\\s*([^;]+)')?.pop();
-
-/**
- * Returns the default headers for HTTP requests, including the CSRF token.
- *
- * @returns {Object} An object containing HTTP headers.
- * @returns {string} return['Content-Type'] - The MIME type of the request body.
- * @returns {string|undefined} return['X-CSRFToken'] - The CSRF token, if available.
- */
-export const getDefaultHeaders = () => ({
-  'Content-Type': 'application/json',
-  'X-CSRFToken': getCsrfToken(),
-});
