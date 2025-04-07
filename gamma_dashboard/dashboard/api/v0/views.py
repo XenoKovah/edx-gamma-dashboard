@@ -12,12 +12,11 @@ from common.djangoapps.student.views import get_org_black_and_whitelist_for_site
 from opaque_keys.edx.keys import CourseKey
 from openedx.core.djangoapps.user_api.accounts.image_helpers import get_profile_image_urls_for_user
 
+from course_leaderboard.toggles import show_course_leaderboard_tab
 from gamma_dashboard.dashboard.core.gamma.api.settings import DEFAULT_API_VERSION
 from gamma_dashboard.dashboard.core.gamma.api.wrapper import GammaApiWrapper
 from gamma_dashboard.toggles import show_gamma_leaderboard
 from ..utils import site_badge_filter, is_main_site
-
-from .temporary_mock_data import COURSE_LEADERBOARD_MOCK
 
 MAIN_SITE_NAME = 'main'
 
@@ -36,18 +35,15 @@ class LeaderboardApiView(APIView):
         """
         course_id = kwargs.get("course_id")
 
-        if not show_gamma_leaderboard() and not course_id:
+        if course_id and not show_course_leaderboard_tab() or not course_id and not show_gamma_leaderboard():
             return Response({"error": "Gamma Leaderboard is disabled."}, status=status.HTTP_404_NOT_FOUND)
 
         signup_source = request.user.usersignupsource_set.first()
         user_signup_source = signup_source.site if signup_source else MAIN_SITE_NAME
 
-        if course_id:
-            leaderboard_info = COURSE_LEADERBOARD_MOCK
-        else:
-            leaderboard_info = GammaApiWrapper(
-                version=DEFAULT_API_VERSION
-            ).get_leaderboard_info(request.user.username, user_signup_source, course_id)
+        leaderboard_info = GammaApiWrapper(
+            version=DEFAULT_API_VERSION
+        ).get_leaderboard_info(request.user.username, user_signup_source, course_id)
 
         if leaderboard_info:
             updated_leaderboard_info = self._update_leaderboard_info(request.user, leaderboard_info)

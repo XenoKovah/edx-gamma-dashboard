@@ -4,7 +4,6 @@ import pytest
 
 from rest_framework import status
 
-from gamma_dashboard.dashboard.api.v0.temporary_mock_data import COURSE_LEADERBOARD_MOCK
 from gamma_dashboard.dashboard.api.v0.views import LeaderboardApiView
 from gamma_dashboard.dashboard.core.gamma.api.wrapper import GammaApiWrapper
 
@@ -82,11 +81,34 @@ class TestLeaderboardApiView:
     """
 
     @pytest.mark.django_db
-    def test_leaderboard_toggle_enabled_and_leaderboard_info_exist(self, mocker):
+    @pytest.mark.parametrize(
+        "show_gamma_leaderboard,show_course_leaderboard_tab,view_kwargs,gamma_api_wrapper_call_course_id_arg",
+        (
+            (True, False, {}, None),
+            (True, True, {}, None),
+            (False, True, {"course_id": "course-v1:OpenedX+DemoX+DemoCourse"}, "course-v1:OpenedX+DemoX+DemoCourse"),
+            (True, True, {"course_id": "course-v1:OpenedX+DemoX+DemoCourse"}, "course-v1:OpenedX+DemoX+DemoCourse"),
+        ),
+    )
+    def test_leaderboard_toggle_enabled_and_leaderboard_info_exist(
+        self,
+        mocker,
+        show_gamma_leaderboard,
+        show_course_leaderboard_tab,
+        view_kwargs,
+        gamma_api_wrapper_call_course_id_arg,
+    ):
         view = LeaderboardApiView()
         request_mock = mocker.MagicMock()
         leaderboard_info_mock = {"rank": 1, "score": 100}
-        toggle_mock = mocker.patch("gamma_dashboard.dashboard.api.v0.views.show_gamma_leaderboard", return_value=True)
+        mocker.patch(
+            "gamma_dashboard.dashboard.api.v0.views.show_gamma_leaderboard",
+            return_value=show_gamma_leaderboard,
+        )
+        mocker.patch(
+            "gamma_dashboard.dashboard.api.v0.views.show_course_leaderboard_tab",
+            return_value=show_course_leaderboard_tab,
+        )
         gamma_api_wrapper_mock = mocker.patch.object(
             GammaApiWrapper, "get_leaderboard_info", return_value=leaderboard_info_mock
         )
@@ -95,67 +117,87 @@ class TestLeaderboardApiView:
             return_value=leaderboard_info_mock
         )
 
-        response = view.get(request_mock)
+        response = view.get(request_mock, **view_kwargs)
 
-        toggle_mock.assert_called_once_with()
         gamma_api_wrapper_mock.assert_called_once_with(
             request_mock.user.username,
             request_mock.user.usersignupsource_set.first.return_value.site,
-            None
+            gamma_api_wrapper_call_course_id_arg,
         )
         update_leaderboard_info_mock.assert_called_once_with(request_mock.user, leaderboard_info_mock)
         assert response.status_code == status.HTTP_200_OK
         assert response.data == leaderboard_info_mock
 
     @pytest.mark.django_db
-    def test_leaderboard_toggle_enabled_and_not_leaderboard_info(self, mocker):
+    @pytest.mark.parametrize(
+        "show_gamma_leaderboard,show_course_leaderboard_tab,view_kwargs,gamma_api_wrapper_call_course_id_arg",
+        (
+            (True, False, {}, None),
+            (True, True, {}, None),
+            (False, True, {"course_id": "course-v1:OpenedX+DemoX+DemoCourse"}, "course-v1:OpenedX+DemoX+DemoCourse"),
+            (True, True, {"course_id": "course-v1:OpenedX+DemoX+DemoCourse"}, "course-v1:OpenedX+DemoX+DemoCourse"),
+        ),
+    )
+    def test_leaderboard_toggle_enabled_and_not_leaderboard_info(
+        self,
+        mocker,
+        show_gamma_leaderboard,
+        show_course_leaderboard_tab,
+        view_kwargs,
+        gamma_api_wrapper_call_course_id_arg,
+    ):
         view = LeaderboardApiView()
         request_mock = mocker.MagicMock()
-        toggle_mock = mocker.patch("gamma_dashboard.dashboard.api.v0.views.show_gamma_leaderboard", return_value=True)
+        mocker.patch(
+            "gamma_dashboard.dashboard.api.v0.views.show_gamma_leaderboard",
+            return_value=show_gamma_leaderboard,
+        )
+        mocker.patch(
+            "gamma_dashboard.dashboard.api.v0.views.show_course_leaderboard_tab",
+            return_value=show_course_leaderboard_tab,
+        )
         gamma_api_wrapper_mock = mocker.patch.object(GammaApiWrapper, "get_leaderboard_info", return_value=None)
 
-        response = view.get(request_mock)
+        response = view.get(request_mock, **view_kwargs)
 
-        toggle_mock.assert_called_once_with()
         gamma_api_wrapper_mock.assert_called_once_with(
             request_mock.user.username,
             request_mock.user.usersignupsource_set.first.return_value.site,
-            None
+            gamma_api_wrapper_call_course_id_arg,
         )
         assert response.status_code == status.HTTP_422_UNPROCESSABLE_ENTITY
         assert response.data == {"error": "No data received from Gamma server."}
 
     @pytest.mark.django_db
-    def test_leaderboard_toggle_disabled(self, mocker):
+    @pytest.mark.parametrize(
+        "show_gamma_leaderboard,show_course_leaderboard_tab,view_kwargs",
+        (
+            (False, True, {}),
+            (False, False, {}),
+            (True, False, {"course_id": "course-v1:OpenedX+DemoX+DemoCourse"}),
+            (False, False, {"course_id": "course-v1:OpenedX+DemoX+DemoCourse"}),
+        ),
+    )
+    def test_leaderboard_toggle_disabled_during_leaderboard_retrieving(
+        self,
+        mocker,
+        show_gamma_leaderboard,
+        show_course_leaderboard_tab,
+        view_kwargs,
+    ):
         view = LeaderboardApiView()
         request_mock = mocker.MagicMock()
-        toggle_mock = mocker.patch("gamma_dashboard.dashboard.api.v0.views.show_gamma_leaderboard", return_value=False)
 
-        response = view.get(request_mock)
+        mocker.patch(
+            "gamma_dashboard.dashboard.api.v0.views.show_gamma_leaderboard",
+            return_value=show_gamma_leaderboard,
+        )
+        mocker.patch(
+            "gamma_dashboard.dashboard.api.v0.views.show_course_leaderboard_tab",
+            return_value=show_course_leaderboard_tab,
+        )
 
-        toggle_mock.assert_called_once_with()
+        response = view.get(request_mock, **view_kwargs)
+
         assert response.status_code == status.HTTP_404_NOT_FOUND
         assert response.data == {"error": "Gamma Leaderboard is disabled."}
-
-    @pytest.mark.django_db
-    def test_leaderboard_toggle_enabled_with_course_id(self, mocker):
-        view = LeaderboardApiView()
-        request_mock = mocker.MagicMock()
-        course_id_mock = "course-v1:mock+mock+mock"
-        leaderboard_info_mock = {"rank": 1, "score": 100}
-        toggle_mock = mocker.patch("gamma_dashboard.dashboard.api.v0.views.show_gamma_leaderboard", return_value=True)
-        gamma_api_wrapper_mock = mocker.patch.object(
-            GammaApiWrapper, "get_leaderboard_info", return_value=leaderboard_info_mock
-        )
-        update_leaderboard_info_mock = mocker.patch(
-            "gamma_dashboard.dashboard.api.v0.views.LeaderboardApiView._update_leaderboard_info",
-            return_value=leaderboard_info_mock
-        )
-
-        response = view.get(request_mock, course_id=course_id_mock)
-
-        toggle_mock.assert_called_once_with()
-        gamma_api_wrapper_mock.assert_not_called()
-        update_leaderboard_info_mock.assert_called_once_with(request_mock.user, COURSE_LEADERBOARD_MOCK)
-        assert response.status_code == status.HTTP_200_OK
-        assert response.data == leaderboard_info_mock
