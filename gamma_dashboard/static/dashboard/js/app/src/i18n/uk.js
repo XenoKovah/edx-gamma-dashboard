@@ -256,11 +256,6 @@ const messages = defineMessages({
     defaultMessage: 'Таблиця лідерів',
     description: 'Заголовок сторінки таблиці лідерів',
   },
-  leaderboardStatusEmptyText: {
-    id: 'leaderboard.status.empty.text',
-    defaultMessage: 'Поки що немає статусів',
-    description: 'Текст, що відображається, коли в таблиці лідерів немає доступних статусів',
-  },
   leaderboardAvatarAltText: {
     id: 'leaderboard.avatar.alt.text',
     defaultMessage: 'Зображення профілю {username}',

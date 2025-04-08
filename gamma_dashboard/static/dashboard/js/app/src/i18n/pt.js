@@ -256,11 +256,6 @@ const messages = defineMessages({
     defaultMessage: 'Quadro de líderes',
     description: 'Texto do cabeçalho da página do quadro de líderes',
   },
-  leaderboardStatusEmptyText: {
-    id: 'leaderboard.status.empty.text',
-    defaultMessage: 'Nenhum status até agora',
-    description: 'Texto exibido quando não há statuses disponíveis no quadro de líderes',
-  },
   leaderboardAvatarAltText: {
     id: 'leaderboard.avatar.alt.text',
     defaultMessage: 'Imagem de perfil de {username}',

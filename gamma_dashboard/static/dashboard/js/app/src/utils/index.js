@@ -5,5 +5,6 @@ export {
   capitalizeFirstLetter,
   getCookieByName,
 } from './other';
-export { getUserStatus } from './statusTools';
-export { trimStartSlash, trimTrailingSlash, buildURL } from './urlTools';
+export {
+  trimStartSlash, trimTrailingSlash, buildURL, resolveUrl,
+} from './urlTools';

@@ -256,11 +256,6 @@ const messages = defineMessages({
     defaultMessage: 'Leaderboard',
     description: 'Leaderboard page heading text',
   },
-  leaderboardStatusEmptyText: {
-    id: 'leaderboard.status.empty.text',
-    defaultMessage: 'No status so far',
-    description: 'Text displayed when there are no available statuses in the leaderboard',
-  },
   leaderboardAvatarAltText: {
     id: 'leaderboard.avatar.alt.text',
     defaultMessage: '{username} profile image',

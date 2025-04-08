@@ -6,8 +6,10 @@ import { renderWithProviders } from '../../../setupTests';
 import DataLeaderboardCard from '../../__tests__/__mock__/DataLeaderboardCard.json';
 import LeaderboardCard from '../LeaderboardCard';
 
+import { convertKeysToCamelCase } from '../../../api/helpers/utils';
+
 const BADGES_IN_FULL_LINE = 17;
-const { profile, status, rank } = DataLeaderboardCard;
+const { profile, rank } = convertKeysToCamelCase(DataLeaderboardCard);
 
 afterEach(cleanup);
 
@@ -16,7 +18,6 @@ describe('<LeaderboardCard>', () => {
     const { getByTestId } = renderWithProviders(
       <LeaderboardCard
         profile={profile}
-        status={status}
         rank={rank}
       />,
     );
@@ -28,24 +29,22 @@ describe('<LeaderboardCard>', () => {
     const { getAllByTestId, getAllByText } = renderWithProviders(
       <LeaderboardCard
         profile={profile}
-        status={status}
         rank={rank}
       />,
     );
 
     const avatars = getAllByTestId('avatar');
-    const usernames = getAllByText(profile.user_uid);
+    const usernames = getAllByText(profile.userUid);
 
     expect(avatars.length).toBe(1);
     expect(usernames.length).toBe(1);
-    expect(usernames[0].textContent).toBe(profile.user_uid);
+    expect(usernames[0].textContent).toBe(profile.userUid);
   });
 
   it('renders with correct `points` value', () => {
     const { getByTestId } = renderWithProviders(
       <LeaderboardCard
         profile={profile}
-        status={status}
         rank={rank}
       />,
     );
@@ -60,7 +59,6 @@ describe('<LeaderboardCard>', () => {
     const { getAllByTestId } = renderWithProviders(
       <LeaderboardCard
         profile={profile}
-        status={status}
         rank={rank}
       />,
     );
@@ -71,17 +69,14 @@ describe('<LeaderboardCard>', () => {
   });
 
   it('renders with status', () => {
-    const testStatus = 'Test Status';
     const { getByText } = renderWithProviders(
       <LeaderboardCard
         profile={profile}
-        status={testStatus}
         rank={rank}
       />,
     );
 
     expect(getByText(profile.position)).toBeInTheDocument();
-    expect(getByText(testStatus)).toBeInTheDocument();
   });
 
   it('renders without `points` data', () => {
@@ -92,7 +87,6 @@ describe('<LeaderboardCard>', () => {
     const { getByTestId } = renderWithProviders(
       <LeaderboardCard
         profile={profileWithoutPointsData}
-        status={status}
         rank={rank}
       />,
     );
@@ -111,7 +105,6 @@ describe('<LeaderboardCard>', () => {
     const { queryAllByTestId } = renderWithProviders(
       <LeaderboardCard
         profile={profileWithoutBadgesData}
-        status={status}
         rank={rank}
       />,
     );

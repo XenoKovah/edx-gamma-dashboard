@@ -7,9 +7,11 @@ import { ProfilePropType } from '../propTypes';
 import Avatar from './Avatar';
 import BadgeList from './BadgeList';
 
-const LeaderboardCard = ({ profile, status, rank }) => {
+import defaultProfileImg from '../../assets/images/default-profile-image.png';
+
+const LeaderboardCard = ({ profile, rank }) => {
   const {
-    user_uid: username = '',
+    userUid: username = '',
     points = 0,
     badges = {},
     position,
@@ -29,7 +31,7 @@ const LeaderboardCard = ({ profile, status, rank }) => {
     >
       <Avatar
         username={username}
-        urlProfileImage={profile.url_profile_image}
+        urlProfileImage={profile.urlProfileImage || defaultProfileImg}
         position={profile.position}
       />
       <Card.Body
@@ -38,7 +40,6 @@ const LeaderboardCard = ({ profile, status, rank }) => {
       >
         <Card.Header
           title={username}
-          subtitle={status}
           size="sm"
         />
         <span
@@ -57,7 +58,6 @@ const LeaderboardCard = ({ profile, status, rank }) => {
 
 LeaderboardCard.propTypes = {
   profile: PropTypes.shape(ProfilePropType).isRequired,
-  status: PropTypes.string.isRequired,
   rank: PropTypes.number.isRequired,
 };
 

@@ -4,7 +4,7 @@ export const BASE_URL = `/gamma_dashboard/api/v${API_VERSION}/`;
 
 export const USER_AVATAR_CONFIG_URL = `${BASE_URL}user-avatar-config`;
 
-export const LEADERBOARD_URLS = (courseId) => ({
+export const LEADERBOARD_URLS = (courseId = '') => ({
   getInfo: `${BASE_URL}leaderboard/${courseId}`,
 });
 

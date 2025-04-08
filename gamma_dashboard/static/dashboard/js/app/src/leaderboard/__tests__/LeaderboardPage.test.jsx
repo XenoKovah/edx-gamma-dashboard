@@ -1,76 +1,124 @@
 import React from 'react';
 import axios from 'axios';
-import { IntlProvider } from 'react-intl';
 import '@testing-library/jest-dom';
-import '@testing-library/jest-dom/extend-expect';
-import { screen, cleanup } from '@testing-library/react';
-import { act } from 'react-dom/test-utils';
-import renderer from 'react-test-renderer';
+import { waitFor, cleanup } from '@testing-library/react';
 
+import DataLeaderboardPage from './__mock__/DataLeaderboardPage.json';
+import { LEADERBOARD_URLS } from '../../api/constants';
 import { renderWithProviders } from '../../setupTests';
 import LeaderboardPage from '../LeaderboardPage';
-import DataLeaderboardPage from './__mock__/DataLeaderboardPage.json';
+
+import messages from '../../i18n';
 
 jest.mock('axios');
-afterEach(cleanup);
 
 describe('<LeaderboardPage>', () => {
-  it.each(DataLeaderboardPage)('renders', async ({ state }) => {
-    axios.get.mockResolvedValue({
-      data: {
-        top10: state.top10,
-        competitors: state.competitors,
-        rank: state.rank,
-        user_uid: state.user_uid,
-        systemStatuses: state.systemStatuses,
-      },
+  beforeEach(cleanup);
+
+  const renderComponent = () => renderWithProviders(<LeaderboardPage />);
+
+  describe('Rendering', () => {
+    it('should render the page title correctly', async () => {
+      axios.get.mockResolvedValueOnce({ data: DataLeaderboardPage[0].state });
+
+      const { getByTestId } = renderComponent();
+
+      await waitFor(() => {
+        const pageTitle = getByTestId('leaderboard-page-title');
+        expect(pageTitle).toBeInTheDocument();
+        expect(pageTitle).toHaveTextContent('Leaderboard');
+      });
     });
 
-    let component;
+    it('should render loading state initially', () => {
+      axios.get.mockImplementation(() => new Promise(() => {}));
 
-    await act(async () => {
-      component = renderer.create(
-        <IntlProvider locale="en">
-          <LeaderboardPage />
-        </IntlProvider>,
-      );
+      const { getByRole } = renderComponent();
+
+      expect(getByRole('status')).toBeInTheDocument();
     });
-
-    const tree = component.toJSON();
-
-    expect(axios.get).toBeCalled();
-    expect(axios.get.mock.calls[0][0]).toBe('/gamma_dashboard/api/v0/leaderboard/');
-    expect(tree).toMatchSnapshot();
   });
 
-  it('renders with correct title', () => {
-    const title = 'Leaderboard';
+  describe('Data fetching and display', () => {
+    describe('Leaderboard data rendering', () => {
+      it('should render leaderboard with top 10 players and user rank', async () => {
+        const mockData = {
+          top10: [
+            { user_uid: 'player1', points: 100 },
+            { user_uid: 'player2', points: 90 },
+            { user_uid: 'player3', points: 80 },
+          ],
+          competitors: [],
+          rank: 1,
+          user_uid: 'player1',
+          systemStatuses: [],
+        };
+        axios.get.mockResolvedValueOnce({ data: mockData });
 
-    act(() => {
-      renderWithProviders(<LeaderboardPage />);
+        const { getByTestId, getByText } = renderComponent();
+
+        await waitFor(() => {
+          expect(axios.get).toHaveBeenCalledWith(LEADERBOARD_URLS().getInfo);
+          expect(getByTestId('leaderboard-table')).toBeInTheDocument();
+
+          mockData.top10.forEach(player => {
+            expect(getByText(player.user_uid)).toBeInTheDocument();
+            expect(getByText(player.points.toString())).toBeInTheDocument();
+          });
+        });
+      });
+
+      it('should render leaderboard with empty top 10', async () => {
+        const mockData = {
+          top10: [],
+          competitors: [],
+          rank: null,
+          user_uid: 'player1',
+          systemStatuses: [],
+        };
+        axios.get.mockResolvedValueOnce({ data: mockData });
+
+        const { getByTestId } = renderComponent();
+
+        await waitFor(() => {
+          expect(getByTestId('leaderboard-table')).toBeInTheDocument();
+        });
+      });
+
+      it('should render user profile image when available', async () => {
+        const mockData = {
+          top10: [{
+            user_uid: 'player1',
+            points: 100,
+            url_profile_image: '/path/to/image.jpg',
+          }],
+          competitors: [],
+          rank: 1,
+          user_uid: 'player1',
+          url_profile_image: '/path/to/image.jpg',
+          systemStatuses: [],
+        };
+        axios.get.mockResolvedValueOnce({ data: mockData });
+
+        const { getByAltText } = renderComponent();
+
+        await waitFor(() => {
+          const profileImage = getByAltText(`${mockData.user_uid} profile image`);
+          expect(profileImage).toBeInTheDocument();
+          expect(profileImage).toHaveAttribute('src', mockData.url_profile_image);
+        });
+      });
     });
-    const windowTitle = screen.getByTestId('leaderboard-page-title');
 
-    expect(windowTitle).toBeInTheDocument();
-    expect(windowTitle).toHaveTextContent(title);
-  });
+    it('should handle API errors gracefully', async () => {
+      const errorMessage = 'Failed to fetch leaderboard data';
+      axios.get.mockRejectedValueOnce(new Error(errorMessage));
 
-  it.each`
-        data
-        ${{ profiles: null }}
-        ${{ profiles: [] }}
-        ${null}
-    `('renders with inconsistent data `$data`', ({ data }) => {
-    axios.get.mockResolvedValue({ data });
+      const { getByText } = renderComponent();
 
-    act(() => {
-      renderWithProviders(<LeaderboardPage />);
+      await waitFor(() => {
+        expect(getByText(messages.genericErrorFallbackTitle.defaultMessage)).toBeInTheDocument();
+      });
     });
-
-    const pageTitle = screen.getByTestId('leaderboard-page-title');
-    const leaderboardTable = screen.getByTestId('leaderboard-table');
-
-    expect(pageTitle).toBeInTheDocument();
-    expect(leaderboardTable).toBeInTheDocument();
   });
 });

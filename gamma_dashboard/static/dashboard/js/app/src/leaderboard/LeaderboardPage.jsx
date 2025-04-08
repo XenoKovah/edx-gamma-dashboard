@@ -1,69 +1,50 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { useIntl } from 'react-intl';
 import { useParams } from 'react-router-dom';
 import { Info as InfoIcon } from '@openedx/paragon/icons';
 
-import { gammaApi } from '../api';
 import { useScrollToContent } from '../generic/hooks';
-import { SubHeader, Alert } from '../generic';
+import { SubHeader, Alert, Loader } from '../generic';
 import { getLeaderboardTableProps } from './utils';
 import { LeaderboardTable } from './components';
+
+import { useLeaderboard } from '../api/hooks/useLeaderboard';
 
 import messages from '../i18n';
 
 const LeaderboardPage = () => {
   const intl = useIntl();
   const { courseId } = useParams();
-  const [data, setData] = useState({
-    top10: [],
-    competitors: [],
-    rank: 0,
-    userUid: null,
-    urlProfileImage: '',
-    systemStatuses: [],
-  });
-  const [error, setError] = useState(null);
+  const { data: leaderboardData, isLoading, isError } = useLeaderboard(courseId);
 
   const translations = {
     alertTitle: intl.formatMessage(messages.leaderboardHeadingText),
+    errorTitle: intl.formatMessage(messages.genericErrorFallbackTitle),
   };
 
   useScrollToContent('leaderboard-page-title', 'a[href="#main"]');
 
-  useEffect(() => {
-    gammaApi.leaderboard.getInfo((res) => {
-      if (res.error) {
-        setError(res.error);
-      } else {
-        setData({
-          top10: res.top10 || [],
-          competitors: res.competitors || [],
-          rank: res.rank || null,
-          userUid: res.user_uid || null,
-          urlProfileImage: res.url_profile_image || null,
-          systemStatuses: res.system_statuses || [],
-        });
-      }
-    }, courseId);
-  }, [courseId]);
+  if (isLoading) {
+    return <Loader className="text-center" />;
+  }
+
+  if (isError) {
+    return (
+      <Alert
+        className="mt-6"
+        title={translations.errorTitle}
+        variant="danger"
+        icon={InfoIcon}
+      />
+    );
+  }
 
   const {
     rank,
     profiles,
     delimiter,
     systemStatuses,
-  } = getLeaderboardTableProps(data);
-
-  if (error) {
-    return (
-      <Alert
-        className="mt-6"
-        title={error}
-        variant="danger"
-        icon={InfoIcon}
-      />
-    );
-  }
+  } = getLeaderboardTableProps(leaderboardData);
 
   return (
     <>
