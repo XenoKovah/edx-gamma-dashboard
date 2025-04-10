@@ -13,12 +13,6 @@ import DashboardWrapper from '../DashboardWrapper';
 
 import messages from '../../i18n';
 
-jest.mock('../../featureFlags', () => ({
-  SHOW_STATUS_BLOCK: true,
-  SHOW_PROGRESS_CHART: true,
-  SHOW_POINTS_DISTRIBUTION_CHART: true,
-}));
-
 jest.mock('echarts-for-react', () => jest.fn((props) => (
   <div
     data-testid="echarts-instance"
@@ -377,24 +371,6 @@ describe('<DashboardWrapper>', () => {
     const closeButton = getByRole('button', { name: 'Close' });
     userEvent.click(closeButton);
     expect(queryByTestId('modal-backdrop')).not.toBeInTheDocument();
-  });
-
-  it('renders with feature flags disabled', () => {
-    jest.mock('../../featureFlags', () => ({
-      SHOW_STATUS_BLOCK: false,
-      SHOW_PROGRESS_CHART: false,
-      SHOW_POINTS_DISTRIBUTION_CHART: false,
-    }));
-
-    const { queryByTestId } = renderWithProviders(
-      <DashboardWrapper {...defaultProps} />,
-    );
-
-    expect(queryByTestId('slider-statuses-block')).not.toBeInTheDocument();
-    expect(queryByTestId('progress-chart')).not.toBeInTheDocument();
-    expect(queryByTestId('points-distribution-chart')).not.toBeInTheDocument();
-
-    jest.resetModules();
   });
 
   it('displays correct number of badges in the badges section', () => {

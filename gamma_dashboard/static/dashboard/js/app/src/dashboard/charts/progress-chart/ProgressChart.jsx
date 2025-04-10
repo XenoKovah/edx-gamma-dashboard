@@ -16,7 +16,7 @@ const ProgressChart = ({ data }) => {
   const chartWidth = useElementWidth(chartRef);
   const isSmall = useMediaQuery({ maxWidth: breakpoints.extraSmall.maxWidth });
   const { pointsByDay, accumulativeData } = useMemo(() => processChartData(data), [data]);
-  const { dates, values: points } = transformData(pointsByDay);
+  const { dates, values: points, years } = transformData(pointsByDay);
   const { values: progress } = transformData(accumulativeData);
 
   const translations = {
@@ -38,7 +38,7 @@ const ProgressChart = ({ data }) => {
   return (
     <div ref={chartRef}>
       <ReactECharts
-        option={getConfig(dates, points, progress, translations, chartWidth, isSmall)}
+        option={getConfig(dates, points, progress, translations, chartWidth, isSmall, years)}
         style={{ height: '400px' }}
       />
     </div>

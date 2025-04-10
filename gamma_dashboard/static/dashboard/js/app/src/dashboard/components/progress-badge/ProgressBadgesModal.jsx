@@ -63,30 +63,35 @@ const ProgressBadgesModal = ({
   );
 };
 
-const ProgressPropType = PropTypes.shape({
-  count: PropTypes.number.isRequired,
-  goal: PropTypes.number.isRequired,
-  title: PropTypes.string,
-});
-
-const ItemPropType = PropTypes.shape({
-  id: PropTypes.string,
-  url: PropTypes.string.isRequired,
-  title: PropTypes.string.isRequired,
-  description: PropTypes.string,
-  progress: PropTypes.objectOf(ProgressPropType).isRequired,
-  dependencies: PropTypes.arrayOf(PropTypes.string),
-  statusDependency: PropTypes.string,
-  done: PropTypes.bool.isRequired,
-});
-
 ProgressBadgesModal.propTypes = {
   title: PropTypes.string,
   items: PropTypes.arrayOf(
     PropTypes.arrayOf(
       PropTypes.oneOfType([
         PropTypes.string,
-        ItemPropType,
+        PropTypes.shape({
+          id: PropTypes.string,
+          image: PropTypes.string,
+          title: PropTypes.string.isRequired,
+          progress: PropTypes.oneOfType([
+            PropTypes.objectOf(PropTypes.shape({
+              count: PropTypes.number.isRequired,
+              goal: PropTypes.number.isRequired,
+              title: PropTypes.string,
+            })),
+            PropTypes.arrayOf(PropTypes.shape({
+              events: PropTypes.objectOf(PropTypes.shape({
+                goal: PropTypes.number.isRequired,
+                last: PropTypes.string,
+                count: PropTypes.number.isRequired,
+              })),
+            })),
+          ]).isRequired,
+          dependencies: PropTypes.arrayOf(PropTypes.string),
+          statusDependency: PropTypes.string,
+          done: PropTypes.bool.isRequired,
+          isActive: PropTypes.bool.isRequired,
+        }),
       ]),
     ),
   ),

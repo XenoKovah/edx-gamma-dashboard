@@ -128,7 +128,7 @@ const messages = defineMessages({
   },
   performanceBadgesSectionAllBadgesButtonText: {
     id: 'performance.badges.section.all.badges.button.text',
-    defaultMessage: 'Todos os Emblemas',
+    defaultMessage: 'Todos os emblemas',
     description: 'Texto do botão para visualizar todos os emblemas disponíveis na seção de desempenho',
   },
   performanceBadgesSectionTotalBadgesButtonText: {

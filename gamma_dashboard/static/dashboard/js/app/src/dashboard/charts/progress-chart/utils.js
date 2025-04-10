@@ -32,20 +32,25 @@ export const processChartData = (data) => Object.entries(data).reduce(
 );
 
 /**
- * Processes an array of timestamp-value pairs into formatted dates and their corresponding values.
+ * Processes an array of timestamp-value pairs into formatted dates, years, and their corresponding values.
  *
  * @param {Array.<[number, number]>} data - An array of data points where each item is a tuple [timestamp, value].
- * @returns {{ dates: string[], values: number[] }} An object containing:
+ * @returns {{ dates: string[], years: number[], values: number[] }} An object containing:
  *  - `dates`: An array of formatted date strings (e.g., "1 Jan", "2 Feb").
+ *  - `years`: An array of years extracted from the timestamps.
  *  - `values`: An array of corresponding numeric values.
  */
 export const transformData = (data) => {
-  const dates = data.map(([timestamp]) => {
+  const dates = [];
+  const years = [];
+  const values = [];
+
+  data.forEach(([timestamp, value]) => {
     const date = new Date(timestamp);
-    return date.toLocaleDateString('en-US', { day: 'numeric', month: 'short' });
+    dates.push(date.toLocaleDateString('en-US', { day: 'numeric', month: 'short' }));
+    years.push(date.getFullYear());
+    values.push(value);
   });
 
-  const values = data.map(([, value]) => value);
-
-  return { dates, values };
+  return { dates, years, values };
 };

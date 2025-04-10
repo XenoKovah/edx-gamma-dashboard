@@ -22,20 +22,44 @@ const ChartDataPropType = PropTypes.objectOf(
 );
 
 const BadgeItemPropType = PropTypes.arrayOf(
-  PropTypes.shape({
-    title: PropTypes.string,
-    url: PropTypes.string,
-    progress: PropTypes.objectOf(
+  PropTypes.arrayOf(
+    PropTypes.oneOfType([
+      PropTypes.string,
       PropTypes.shape({
-        count: PropTypes.number.isRequired,
-        goal: PropTypes.number.isRequired,
+        title: PropTypes.string.isRequired,
+        slug: PropTypes.string,
+        description: PropTypes.string,
+        done: PropTypes.bool,
+        progress: PropTypes.oneOfType([
+          PropTypes.arrayOf(
+            PropTypes.shape({
+              events: PropTypes.objectOf(
+                PropTypes.shape({
+                  goal: PropTypes.number.isRequired,
+                  last: PropTypes.string,
+                  count: PropTypes.number.isRequired,
+                }),
+              ),
+            }),
+          ),
+          PropTypes.objectOf(
+            PropTypes.shape({
+              count: PropTypes.number.isRequired,
+              goal: PropTypes.number.isRequired,
+              title: PropTypes.string,
+            }),
+          ),
+        ]),
+        objectId: PropTypes.number,
+        objectUri: PropTypes.string,
+        isActive: PropTypes.bool,
+        id: PropTypes.string,
+        image: PropTypes.string,
+        dependencies: PropTypes.arrayOf(PropTypes.string),
+        statusDependency: PropTypes.arrayOf(PropTypes.string),
       }),
-    ),
-    done: PropTypes.bool,
-    active: PropTypes.bool,
-    points: PropTypes.number,
-    statusPoints: PropTypes.number,
-  }),
+    ]),
+  ),
 );
 
 const ProcessingStatePropType = PropTypes.shape({
@@ -62,22 +86,31 @@ const AvatarRulePropType = PropTypes.shape({
 });
 
 const AvatarPropType = PropTypes.shape({
-  id: IdPropType.isRequired,
-  title: PropTypes.string,
-  description: PropTypes.string,
+  id: PropTypes.number.isRequired,
+  title: PropTypes.string.isRequired,
+  description: PropTypes.string.isRequired,
   image: PropTypes.string.isRequired,
-  rules: PropTypes.arrayOf(AvatarRulePropType),
+  rules: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.number.isRequired,
+      eventConfiguration: PropTypes.number.isRequired,
+      action: PropTypes.objectOf(PropTypes.oneOfType([PropTypes.string, PropTypes.number])).isRequired,
+      filters: PropTypes.object, // eslint-disable-line react/forbid-prop-types
+      createdAt: PropTypes.string,
+    }),
+  ).isRequired,
   stage: PropTypes.number,
-  created_at: PropTypes.string,
+  createdAt: PropTypes.string.isRequired,
 });
 
-const AvatarSetsPropType = PropTypes.arrayOf(
-  PropTypes.shape({
-    id: IdPropType.isRequired,
-    title: PropTypes.string,
-    avatars: PropTypes.arrayOf(AvatarPropType).isRequired,
-  }),
-).isRequired;
+const AvatarSetsPropType = PropTypes.shape({
+  id: PropTypes.number.isRequired,
+  title: PropTypes.string.isRequired,
+  avatars: PropTypes.arrayOf(AvatarPropType).isRequired,
+  useInCourses: PropTypes.arrayOf(PropTypes.number).isRequired,
+  isDraft: PropTypes.bool.isRequired,
+  createdAt: PropTypes.string.isRequired,
+});
 
 export {
   ProgressDataPropType,

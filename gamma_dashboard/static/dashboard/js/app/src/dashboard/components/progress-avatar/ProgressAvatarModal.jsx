@@ -133,7 +133,7 @@ ProgressAvatarModal.propTypes = {
   title: PropTypes.string,
   isOpen: PropTypes.bool.isRequired,
   closeCallback: PropTypes.func.isRequired,
-  avatarSets: AvatarSetsPropType,
+  avatarSets: PropTypes.arrayOf(AvatarSetsPropType),
   avatarProcessingStates: AvatarProcessingStatesPropType,
   selectedAvatarSetId: PropTypes.oneOfType([
     PropTypes.string,

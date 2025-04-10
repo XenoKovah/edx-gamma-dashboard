@@ -140,7 +140,10 @@ ProgressBadge.propTypes = {
     title: PropTypes.string,
     image: PropTypes.string,
     objectUri: PropTypes.string,
-    progress: PropTypes.shape(ProgressPropType),
+    progress: PropTypes.oneOfType([
+      PropTypes.shape(ProgressPropType),
+      PropTypes.arrayOf(PropTypes.shape(ProgressPropType)),
+    ]),
     done: PropTypes.bool,
     points: PropTypes.number,
     statusPoints: PropTypes.number,

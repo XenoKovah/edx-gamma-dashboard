@@ -8,6 +8,11 @@
     }
   }
 
+  .pgn__modal-body:after,
+  .pgn__modal-body:before {
+    z-index: $zindex-fixed;
+  }
+
   .pgn__modal-body-content {
     .pgn__form-label {
       font-size: $font-size-xs;

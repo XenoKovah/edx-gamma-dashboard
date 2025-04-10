@@ -15,21 +15,12 @@ import { ProgressAvatar, ProgressAvatarModal } from './components/progress-avata
 import { SliderStatusesBlock } from './components/slider-statuses-block';
 import { CORNER_BOTTOM, CORNER_TOP } from './components/constants';
 import {
-  SHOW_STATUS_BLOCK,
-  SHOW_PROGRESS_CHART,
-  SHOW_POINTS_DISTRIBUTION_CHART,
-} from '../featureFlags';
-import {
   BadgeItemPropType, ChartDataPropType, ProgressDataPropType,
   StatusPropType, AvatarProcessingStatesPropType, AvatarSetsPropType,
 } from './propTypes';
 import { PointsDistributionChart, ProgressChart } from './charts';
 import { useDashboardWrapper } from './hooks';
-
-const WIDGETS = {
-  BADGES: 'badges',
-  AVATAR: 'avatar',
-};
+import { WIDGETS, SHOW_STATUS_BLOCK } from './constants';
 
 const DashboardWrapper = ({
   chart,
@@ -151,7 +142,7 @@ const DashboardWrapper = ({
                 }}
               />,
             )}
-            {SHOW_POINTS_DISTRIBUTION_CHART && renderErrorBoundary(
+            {renderErrorBoundary(
               <DashboardSection>
                 <PointsDistributionChart data={chart} />
               </DashboardSection>,
@@ -188,15 +179,13 @@ const DashboardWrapper = ({
               )}
             </DashboardSectionContainer>
           )}
-          {SHOW_PROGRESS_CHART && (
-            <DashboardSectionContainer>
-              {renderErrorBoundary(
-                <DashboardSection fullWidth corner={CORNER_BOTTOM}>
-                  <ProgressChart data={progress} />
-                </DashboardSection>,
-              )}
-            </DashboardSectionContainer>
-          )}
+          <DashboardSectionContainer>
+            {renderErrorBoundary(
+              <DashboardSection fullWidth corner={CORNER_BOTTOM}>
+                <ProgressChart data={progress} />
+              </DashboardSection>,
+            )}
+          </DashboardSectionContainer>
         </div>
       </div>
       <ProgressBadgesModal
@@ -226,7 +215,7 @@ const DashboardWrapper = ({
 DashboardWrapper.propTypes = {
   chart: ChartDataPropType,
   progress: ProgressDataPropType,
-  badgeItems: PropTypes.arrayOf(BadgeItemPropType),
+  badgeItems: BadgeItemPropType,
   avatarSets: PropTypes.arrayOf(AvatarSetsPropType),
   statusItems: PropTypes.arrayOf(PropTypes.shape(StatusPropType)),
   gammaUserInfo: PropTypes.shape({

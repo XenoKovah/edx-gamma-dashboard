@@ -15,7 +15,7 @@ const Alert = ({
 
 Alert.propTypes = {
   variant: PropTypes.string.isRequired,
-  icon: PropTypes.element,
+  icon: PropTypes.func,
   title: PropTypes.string.isRequired,
   className: PropTypes.string,
   children: PropTypes.node,

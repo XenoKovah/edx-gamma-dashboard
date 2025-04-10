@@ -3,13 +3,12 @@ import { useIntl } from 'react-intl';
 import { Error as ErrorIcon } from '@openedx/paragon/icons';
 
 import { useScrollToContent } from '../generic/hooks';
-import { useDashboardPageData } from './hooks';
 import { Loader, Alert } from '../generic';
 import DashboardWrapper from './DashboardWrapper';
+import { useDashboardPageData } from './hooks';
+import { MAIN_CONTENT_ID } from './constants';
 
 import messages from '../i18n';
-
-const MAIN_CONTENT_ID = 'dashboard-page-title';
 
 const DashboardPage = () => {
   const intl = useIntl();
