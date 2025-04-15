@@ -361,6 +361,21 @@ const messages = defineMessages({
     defaultMessage: 'Avatar sets',
     description: 'Title for the progress avatar set modal.',
   },
+  dashboardPointsVaultSectionTitle: {
+    id: 'dashboard.points-vault.section.title',
+    defaultMessage: 'Your Vault',
+    description: 'Title for the points vault section.',
+  },
+  dashboardPointsVaultSectionDescription: {
+    id: 'dashboard.points-vault.section.description',
+    defaultMessage: 'Every quest completed, every challenge conquered! Earn valuable Points by taking action across the platform. This secure Vault safeguards your growing treasure, marking every step of your journey!',
+    description: 'Description for the points vault section.',
+  },
+  dashboardPointsVaultSectionTotalPoints: {
+    id: 'dashboard.points-vault.section.total.points',
+    defaultMessage: 'Total points:',
+    description: 'Label for the total points in the points vault section.',
+  },
   genericErrorFallbackBtnText: {
     id: 'generic.error.fallback.btn.text',
     defaultMessage: 'Try again',

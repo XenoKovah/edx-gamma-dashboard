@@ -9,6 +9,7 @@ import {
   DashboardSectionSlider,
   DashboardSectionContainer,
   DashboardSectionAvatar,
+  DashboardSectionPointsVault,
 } from './components/sections';
 import { ProgressBadge, ProgressBadgesModal } from './components/progress-badge';
 import { ProgressAvatar, ProgressAvatarModal } from './components/progress-avatar';
@@ -30,6 +31,7 @@ const DashboardWrapper = ({
   statusItems,
   gammaUserInfo,
   avatarHandlers,
+  statusRoadmap,
 }) => {
   const {
     handleSelectAvatarSet,
@@ -143,15 +145,12 @@ const DashboardWrapper = ({
               />,
             )}
             {renderErrorBoundary(
-              <DashboardSection>
-                <PointsDistributionChart data={chart} />
-              </DashboardSection>,
+              <DashboardSectionPointsVault points={statusRoadmap?.points} />,
             )}
           </DashboardSectionContainer>
           <DashboardSectionContainer>
             {renderErrorBoundary(
               <DashboardSectionSlider
-                fullWidth
                 title={translations.badgesSectionTitle}
                 status={translations.badgeSectionCounter}
                 content={translations.badgesSectionDescription}
@@ -165,6 +164,11 @@ const DashboardWrapper = ({
                   onClick: () => handleOpenModal(WIDGETS.BADGES),
                 }}
               />,
+            )}
+            {renderErrorBoundary(
+              <DashboardSection>
+                <PointsDistributionChart data={chart} />
+              </DashboardSection>,
             )}
           </DashboardSectionContainer>
           {SHOW_STATUS_BLOCK && (
@@ -233,6 +237,9 @@ DashboardWrapper.propTypes = {
       update: PropTypes.func.isRequired,
       select: PropTypes.func.isRequired,
     }).isRequired,
+  }).isRequired,
+  statusRoadmap: PropTypes.shape({
+    points: PropTypes.number.isRequired,
   }).isRequired,
 };
 

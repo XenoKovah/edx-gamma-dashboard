@@ -361,6 +361,21 @@ const messages = defineMessages({
     defaultMessage: 'Набори аватарів',
     description: 'Заголовок модального вікна набору аватара прогресу.',
   },
+  dashboardPointsVaultSectionTitle: {
+    id: 'dashboard.points-vault.section.title',
+    defaultMessage: 'Ваша скарбничка',
+    description: 'Заголовок розділу скарбнички балів.',
+  },
+  dashboardPointsVaultSectionDescription: {
+    id: 'dashboard.points-vault.section.description',
+    defaultMessage: 'Кожний квест завершено, кожний виклик подолано! Заробіть цінні бали, виконуючи дії на платформі. Ця безпечна скарбничка захищає ваші зростаючі скарби, відзначаючи кожен крок вашого шляху!',
+    description: 'Опис розділу скарбнички балів.',
+  },
+  dashboardPointsVaultSectionTotalPoints: {
+    id: 'dashboard.points-vault.section.total.points',
+    defaultMessage: 'Загальна кількість балів:',
+    description: 'Мітка для загальної кількості балів у розділі скарбнички балів.',
+  },
   genericErrorFallbackBtnText: {
     id: 'generic.error.fallback.btn.text',
     defaultMessage: 'Спробувати знову',

@@ -3,3 +3,4 @@ export { default as DashboardSectionHeader } from './DashboardSectionHeader';
 export { default as DashboardSectionSlider } from './DashboardSectionSlider';
 export { default as DashboardSectionContainer } from './DashboardSectionContainer';
 export { default as DashboardSectionAvatar } from './DashboardSectionAvatar';
+export { default as DashboardSectionPointsVault } from './DashboardSectionPointsVault';

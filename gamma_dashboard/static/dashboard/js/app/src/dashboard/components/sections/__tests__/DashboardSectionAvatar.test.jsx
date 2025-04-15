@@ -50,7 +50,7 @@ describe('<DashboardSectionAvatar />', () => {
   it('renders with default props without crashing', () => {
     const { getByTestId } = renderWithProviders(<DashboardSectionAvatar />);
 
-    expect(getByTestId('slider-statuses-block-description')).toBeInTheDocument();
+    expect(getByTestId('avatar-section-block-description')).toBeInTheDocument();
     expect(getByTestId('progress-avatar-list')).toBeInTheDocument();
     expect(getByTestId('progress-avatar-details-btn-wrapper')).toBeInTheDocument();
   });

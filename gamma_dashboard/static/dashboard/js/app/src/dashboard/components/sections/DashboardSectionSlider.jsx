@@ -24,7 +24,7 @@ const DashboardSectionSlider = ({
       description={description}
     />
     <p
-      className="slider-statuses-block-description"
+      className="block-description"
       data-testid="slider-statuses-block-description"
     >
       {content}

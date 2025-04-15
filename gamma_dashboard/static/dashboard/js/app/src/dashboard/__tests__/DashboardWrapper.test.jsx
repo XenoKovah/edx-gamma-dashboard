@@ -94,6 +94,10 @@ describe('<DashboardWrapper>', () => {
     },
   };
 
+  const mockStatusRoadmap = {
+    points: 100,
+  };
+
   const defaultProps = {
     badgeItems: parsedBadgeItems,
     statusItems: parsedStatusItems,
@@ -101,6 +105,7 @@ describe('<DashboardWrapper>', () => {
     chart: gameProfileData,
     gammaUserInfo: mockGammaUserInfo,
     avatarHandlers: mockAvatarHandlers,
+    statusRoadmap: mockStatusRoadmap,
   };
 
   it('renders', () => {

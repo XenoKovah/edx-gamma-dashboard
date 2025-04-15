@@ -1,0 +1,16 @@
+.points-vault-img {
+  color: $accent-color;
+  width: $points-vault-img-size;
+  height: $points-vault-img-size;
+}
+
+.points-vault-total {
+  font: $font-weight-bold #{$font-size-sm}/normal $font;
+  text-transform: uppercase;
+  color: $main-text-color;
+
+  span {
+    color: $accent-color;
+    text-decoration: underline;
+  }
+}

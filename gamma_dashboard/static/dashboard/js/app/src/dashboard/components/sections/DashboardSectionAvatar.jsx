@@ -23,8 +23,8 @@ const DashboardSectionAvatar = ({
       description={description}
     />
     <p
-      className="slider-statuses-block-description"
-      data-testid="slider-statuses-block-description"
+      className="block-description"
+      data-testid="avatar-section-block-description"
     >
       {content}
     </p>

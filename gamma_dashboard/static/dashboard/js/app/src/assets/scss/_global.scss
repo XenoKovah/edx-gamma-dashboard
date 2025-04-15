@@ -61,3 +61,11 @@
     }
   }
 }
+
+.block-description {
+  font-size: 1rem;
+  line-height: 1.25rem;
+  color: $main-text-color;
+  padding: $spacer 0.875rem map-get($spacers, 0);
+  margin: map-get($spacers, 0);
+}

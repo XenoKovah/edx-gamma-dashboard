@@ -361,6 +361,21 @@ const messages = defineMessages({
     defaultMessage: 'Conjuntos de avatar',
     description: 'Título para o modal do conjunto de avatar de progresso.',
   },
+  dashboardPointsVaultSectionTitle: {
+    id: 'dashboard.points-vault.section.title',
+    defaultMessage: 'Seu cofre',
+    description: 'Título para o roteiro de pontos.',
+  },
+  dashboardPointsVaultSectionDescription: {
+    id: 'dashboard.points-vault.section.description',
+    defaultMessage: 'Cada quest concluída, cada desafio superado! Ganhe pontos valiosos ao agir na plataforma. Este cofre seguro protege seu tesouro em crescimento, marcando cada passo do seu caminho!',
+    description: 'Descrição para o roteiro de pontos.',
+  },
+  dashboardPointsVaultSectionTotalPoints: {
+    id: 'dashboard.points-vault.section.total.points',
+    defaultMessage: 'Total de pontos:',
+    description: 'Rótulo para o total de pontos na seção do cofre de pontos.',
+  },
   genericErrorFallbackBtnText: {
     id: 'generic.error.fallback.btn.text',
     defaultMessage: 'Tentar novamente',

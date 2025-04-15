@@ -24,7 +24,7 @@ const SliderStatusesBlock = ({ status, statusItems }) => {
         title={intl.formatMessage(messages.performanceStatusesSectionHeadingText)}
         status={status}
       />
-      <p className="slider-statuses-block-description" data-testid="slider-statuses-block-description">
+      <p className="block-description" data-testid="slider-statuses-block-description">
         {intl.formatMessage(messages.performanceStatusesSectionDescriptionText)}
       </p>
       {statusItems.length ? (
