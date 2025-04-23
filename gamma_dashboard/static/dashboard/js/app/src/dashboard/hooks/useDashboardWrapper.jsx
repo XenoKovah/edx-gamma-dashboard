@@ -42,11 +42,11 @@ export const useDashboardWrapper = ({
     [statusItems, points],
   );
 
-  const hasSelectedAvatarSet = Boolean(gammaUserInfo.userAvatarConfig);
-  const hasCompletedAvatarSet = Boolean(gammaUserInfo.userAvatarConfig?.selectedAvatarId);
+  const hasSelectedAvatarSet = Boolean(gammaUserInfo.avatarSet);
+  const hasCompletedAvatarSet = Boolean(gammaUserInfo.avatar);
 
-  const savedSelectedAvatarSetId = gammaUserInfo.userAvatarConfig?.selectedAvatarSetId;
-  const selectedAvatarId = gammaUserInfo.userAvatarConfig?.selectedAvatarId;
+  const savedSelectedAvatarSetId = gammaUserInfo.avatarSet;
+  const selectedAvatarId = gammaUserInfo?.avatar?.id;
 
   const completedAvatar = useMemo(() => {
     if (!avatarSets || !savedSelectedAvatarSetId || !selectedAvatarId) { return null; }

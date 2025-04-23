@@ -11,9 +11,11 @@ import {
   CORNER_TOP_RIGHT,
 } from '../constants';
 
-const DashboardSection = ({ fullWidth, corner, children }) => (
+const DashboardSection = ({
+  fullWidth, corner, children, className,
+}) => (
   <section
-    className={classNames('dashboard-section', { 'full-width': fullWidth }, corner)}
+    className={classNames('dashboard-section', { 'full-width': fullWidth }, corner, className)}
     data-testid="dashboard-section"
   >
     {children}
@@ -32,11 +34,13 @@ DashboardSection.propTypes = {
     CORNER_TOP,
   ]),
   children: PropTypes.node.isRequired,
+  className: PropTypes.string,
 };
 
 DashboardSection.defaultProps = {
   fullWidth: false,
   corner: CORNER_NONE,
+  className: undefined,
 };
 
 export default DashboardSection;

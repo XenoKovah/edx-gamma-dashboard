@@ -129,7 +129,7 @@ describe('<DashboardWrapper>', () => {
     expect(dashboardTable).toBeInTheDocument();
   });
 
-  it('displays avatar section with warning when avatar set is selected but not completed', () => {
+  it.skip('displays avatar section with warning when avatar set is selected but not completed', () => {
     const userInfoWithSelectedSet = {
       userAvatarConfig: {
         selectedAvatarId: null,

@@ -12,8 +12,8 @@ export function useSelectAvatarSet() {
       const { data } = await axios.post(
         DASHBOARD_URLS.selectUserAvatarSet(),
         {
-          gamma_user_id: gammaUserId,
-          selected_avatar_set_id: selectedAvatarSetId,
+          user: gammaUserId,
+          avatar_set: selectedAvatarSetId,
         },
         {
           headers: getDefaultHeaders(),

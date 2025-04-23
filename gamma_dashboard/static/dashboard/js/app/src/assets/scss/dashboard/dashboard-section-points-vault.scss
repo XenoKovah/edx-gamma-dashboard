@@ -1,3 +1,17 @@
+.points-vault-section {
+  display: flex;
+  flex-direction: column;
+  // height: 100vh;
+
+  .points-vault {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    flex-grow: 1;
+  }
+}
+
 .points-vault-img {
   color: $accent-color;
   width: $points-vault-img-size;

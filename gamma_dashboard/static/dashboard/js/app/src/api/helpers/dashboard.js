@@ -16,7 +16,7 @@ import { mergeBadges } from './badges';
  * @param {Object} [data.progress={}] - Progress data for the user.
  * @param {Object} [data.chart={}] - Chart data for visualizations.
  * @param {Array<Object>} [data.avatar_sets=[]] - Raw avatar sets data.
- * @param {Object} [data.gamma_user_info={}] - Raw user info data.
+ * @param {Object} [data.user_avatar_config={}] - Raw user info data.
  */
 export const prepareDashboardData = (data = {}) => {
   const {
@@ -28,16 +28,16 @@ export const prepareDashboardData = (data = {}) => {
     progress = {},
     chart = {},
     avatar_sets: avatarSets = [],
-    gamma_user_info: gammaUserInfo = {},
+    user_avatar_config: userAvatarConfig = {},
   } = data;
 
   const {
-    gammaUserInfo: convertedToCamelCaseGammaUserInfo,
+    userAvatarConfig: convertedToCamelCaseUserAvatarConfig,
     avatarSets: convertedToCamelCaseAvatarSets,
     systemBadges: convertedSystemBadges,
     badges: convertedBadges,
   } = mapKeysToCamelCase({
-    gammaUserInfo, avatarSets, systemBadges, badges,
+    userAvatarConfig, avatarSets, systemBadges, badges,
   });
 
   const statusTitles = mapStatusTitles(systemStatuses);
@@ -55,6 +55,6 @@ export const prepareDashboardData = (data = {}) => {
     progress,
     chart,
     avatarSets: convertedToCamelCaseAvatarSets,
-    gammaUserInfo: convertedToCamelCaseGammaUserInfo,
+    gammaUserInfo: convertedToCamelCaseUserAvatarConfig,
   };
 };
