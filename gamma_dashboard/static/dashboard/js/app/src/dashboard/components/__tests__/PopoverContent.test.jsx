@@ -48,12 +48,12 @@ describe('<PopoverContent>', () => {
       progress: {
         edx_bookmark_added: {
           count: 0,
-          goal: 1,
+          goal: { count: 1 },
           title: 'edx bookmark added',
         },
         problem_graded: {
           count: 0,
-          goal: 2,
+          goal: { count: 2 },
           title: 'problem graded',
         },
       },
@@ -66,7 +66,7 @@ describe('<PopoverContent>', () => {
       if (Object.hasOwn(data.progress, progressItemName)) {
         const { count: progressCount, goal: progressGoal, title } = progressItem;
 
-        const itemProgressString = `${progressCount}/${progressGoal}`;
+        const itemProgressString = `${progressCount}/${progressGoal.count}`;
         const itemTitle = capitalizeFirstLetter(title);
 
         expect(getByText(itemProgressString)).toBeInTheDocument();
@@ -101,7 +101,7 @@ describe('<PopoverContent>', () => {
       progress: {
         problem_graded: {
           count: 4,
-          goal: 4,
+          goal: { count: 4 },
           title: 'problem graded',
         },
       },
@@ -118,7 +118,7 @@ describe('<PopoverContent>', () => {
       progress: {
         problem_graded: {
           count: 5,
-          goal: 4,
+          goal: { count: 4 },
           title: 'problem graded',
         },
       },
@@ -136,7 +136,7 @@ describe('<PopoverContent>', () => {
       progress: {
         problem_graded: {
           count: 0,
-          goal: 4,
+          goal: { count: 4 },
           title: 'problem graded',
         },
       },
@@ -154,7 +154,7 @@ describe('<PopoverContent>', () => {
       progress: {
         problem_graded: {
           count: 1,
-          goal: 4,
+          goal: { count: 4 },
           title: 'problem graded',
         },
       },

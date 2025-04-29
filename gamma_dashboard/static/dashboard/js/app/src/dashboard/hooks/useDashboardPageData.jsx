@@ -15,9 +15,9 @@ export const useDashboardPageData = () => {
   } = useAvatarMutations();
 
   const handleSelectAvatarSet = (targetAvatarSetId) => {
-    const { user: gammaUserId } = gameProfileData.gammaUserInfo;
+    const { id: userId } = gameProfileData.userProfile;
     mutations.selectAvatarSet({
-      gammaUserId,
+      gammaUserId: userId || null,
       selectedAvatarSetId: targetAvatarSetId,
     });
   };

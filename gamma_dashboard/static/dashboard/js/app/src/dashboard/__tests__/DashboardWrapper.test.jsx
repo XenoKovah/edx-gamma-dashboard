@@ -129,6 +129,7 @@ describe('<DashboardWrapper>', () => {
     expect(dashboardTable).toBeInTheDocument();
   });
 
+  // TODO: Fix this test when the avatar set is selected but not completed
   it.skip('displays avatar section with warning when avatar set is selected but not completed', () => {
     const userInfoWithSelectedSet = {
       userAvatarConfig: {

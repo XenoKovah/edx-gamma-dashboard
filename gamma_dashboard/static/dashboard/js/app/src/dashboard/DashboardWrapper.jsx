@@ -223,11 +223,32 @@ DashboardWrapper.propTypes = {
   avatarSets: PropTypes.arrayOf(AvatarSetsPropType),
   statusItems: PropTypes.arrayOf(PropTypes.shape(StatusPropType)),
   gammaUserInfo: PropTypes.shape({
-    userAvatarConfig: PropTypes.shape({
-      selectedAvatarId: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-      selectedAvatarSetId: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+    id: PropTypes.number.isRequired,
+    user: PropTypes.number.isRequired,
+    avatarSet: PropTypes.number.isRequired,
+    avatar: PropTypes.shape({
+      id: PropTypes.number.isRequired,
+      title: PropTypes.string.isRequired,
+      description: PropTypes.string.isRequired,
+      image: PropTypes.string.isRequired,
+      rules: PropTypes.arrayOf(PropTypes.shape({
+        id: PropTypes.number.isRequired,
+        action: PropTypes.objectOf(PropTypes.oneOfType([PropTypes.string, PropTypes.number])),
+        filters: PropTypes.oneOfType([
+          PropTypes.objectOf(PropTypes.string),
+          PropTypes.shape({
+            interval: PropTypes.shape({
+              start: PropTypes.string.isRequired,
+              end: PropTypes.string.isRequired,
+            }),
+          }),
+        ]),
+        createdAt: PropTypes.string.isRequired,
+      })).isRequired,
+      stage: PropTypes.number.isRequired,
+      createdAt: PropTypes.string.isRequired,
     }),
-  }).isRequired,
+  }),
   avatarHandlers: PropTypes.shape({
     handleSelectAvatarSet: PropTypes.func.isRequired,
     avatarProcessingStates: AvatarProcessingStatesPropType,
@@ -249,6 +270,7 @@ DashboardWrapper.defaultProps = {
   badgeItems: [],
   avatarSets: [],
   statusItems: [],
+  gammaUserInfo: null,
 };
 
 export default DashboardWrapper;

@@ -35,7 +35,7 @@ const ProgressBadgesModal = ({
       size="xl"
       hasCloseButton
       closeBtnTitle={translations.modalBtnCloseTitle}
-      footerText={filteredActiveBadges.length ? `${counterLabelText} ${items.length}` : null}
+      footerText={filteredActiveBadges.length ? `${counterLabelText} ${filteredActiveBadges.length}` : null}
     >
       {filteredActiveBadges.length ? (
         <ul

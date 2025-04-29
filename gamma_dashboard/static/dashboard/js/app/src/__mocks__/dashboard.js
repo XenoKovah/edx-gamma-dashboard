@@ -372,6 +372,12 @@ export const gameProfileData = {
       created_at: '2025-03-25T16:30:09.225473Z',
     },
   ],
+  user_profile: {
+    id: 1,
+    user_uid: 'openedx',
+    username: null,
+    signup_source: null,
+  },
 };
 
 export const statusRoadmap = {

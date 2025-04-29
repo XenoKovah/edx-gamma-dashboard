@@ -26,37 +26,26 @@ const BadgeItemPropType = PropTypes.arrayOf(
     PropTypes.oneOfType([
       PropTypes.string,
       PropTypes.shape({
+        id: PropTypes.string.isRequired,
+        image: PropTypes.string.isRequired,
         title: PropTypes.string.isRequired,
-        slug: PropTypes.string,
-        description: PropTypes.string,
-        done: PropTypes.bool,
-        progress: PropTypes.oneOfType([
-          PropTypes.arrayOf(
-            PropTypes.shape({
-              events: PropTypes.objectOf(
-                PropTypes.shape({
-                  goal: PropTypes.number.isRequired,
-                  last: PropTypes.string,
-                  count: PropTypes.number.isRequired,
-                }),
-              ),
+        progress: PropTypes.objectOf(
+          PropTypes.shape({
+            count: PropTypes.number.isRequired,
+            goal: PropTypes.shape({
+              points: PropTypes.string,
+              count: PropTypes.string,
             }),
-          ),
-          PropTypes.objectOf(
-            PropTypes.shape({
-              count: PropTypes.number.isRequired,
-              goal: PropTypes.number.isRequired,
-              title: PropTypes.string,
-            }),
-          ),
-        ]),
-        objectId: PropTypes.number,
-        objectUri: PropTypes.string,
-        isActive: PropTypes.bool,
-        id: PropTypes.string,
-        image: PropTypes.string,
+            title: PropTypes.string.isRequired,
+          }),
+        ),
         dependencies: PropTypes.arrayOf(PropTypes.string),
-        statusDependency: PropTypes.arrayOf(PropTypes.string),
+        statusDependency: PropTypes.oneOfType([
+          PropTypes.arrayOf(PropTypes.string),
+          PropTypes.oneOf([null]),
+        ]),
+        done: PropTypes.bool.isRequired,
+        isActive: PropTypes.bool.isRequired,
       }),
     ]),
   ),
@@ -79,8 +68,13 @@ const IdPropType = PropTypes.oneOfType([PropTypes.string, PropTypes.number]);
 
 const AvatarRulePropType = PropTypes.shape({
   id: IdPropType.isRequired,
-  eventConfiguration: PropTypes.number,
-  action: PropTypes.objectOf(PropTypes.oneOfType([PropTypes.string, PropTypes.number])),
+  action: PropTypes.objectOf(
+    PropTypes.oneOfType([
+      PropTypes.string,
+      PropTypes.number,
+      PropTypes.objectOf(PropTypes.oneOfType([PropTypes.string, PropTypes.number])),
+    ]),
+  ),
   filters: PropTypes.object, // eslint-disable-line react/forbid-prop-types
   createdAt: PropTypes.string,
 });
@@ -90,15 +84,7 @@ const AvatarPropType = PropTypes.shape({
   title: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,
   image: PropTypes.string.isRequired,
-  rules: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.number.isRequired,
-      eventConfiguration: PropTypes.number.isRequired,
-      action: PropTypes.objectOf(PropTypes.oneOfType([PropTypes.string, PropTypes.number])).isRequired,
-      filters: PropTypes.object, // eslint-disable-line react/forbid-prop-types
-      createdAt: PropTypes.string,
-    }),
-  ).isRequired,
+  rules: PropTypes.arrayOf(AvatarRulePropType).isRequired,
   stage: PropTypes.number,
   createdAt: PropTypes.string.isRequired,
 });

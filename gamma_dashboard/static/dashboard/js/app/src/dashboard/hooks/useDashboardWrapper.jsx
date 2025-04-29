@@ -27,7 +27,7 @@ export const useDashboardWrapper = ({
         acc.previewBadgeItems.push([key, badge]);
       }
 
-      if (done) {
+      if (done && isActive) {
         acc.doneBadgeItems.push([key, badge]);
       }
 
@@ -42,10 +42,10 @@ export const useDashboardWrapper = ({
     [statusItems, points],
   );
 
-  const hasSelectedAvatarSet = Boolean(gammaUserInfo.avatarSet);
-  const hasCompletedAvatarSet = Boolean(gammaUserInfo.avatar);
+  const hasSelectedAvatarSet = Boolean(gammaUserInfo?.avatarSet);
+  const hasCompletedAvatarSet = Boolean(gammaUserInfo?.avatar);
 
-  const savedSelectedAvatarSetId = gammaUserInfo.avatarSet;
+  const savedSelectedAvatarSetId = gammaUserInfo?.avatarSet;
   const selectedAvatarId = gammaUserInfo?.avatar?.id;
 
   const completedAvatar = useMemo(() => {
@@ -79,7 +79,7 @@ export const useDashboardWrapper = ({
     }),
     badgeSectionCounter: intl.formatMessage(messages.badgesSectionCounterText, {
       completedBadgeItemsLength: doneBadgeItems.length,
-      badgeItemsLength: badgeItems.length,
+      badgeItemsLength: previewBadgeItems.length,
     }),
     badgesSectionTitle: intl.formatMessage(messages.performanceBadgesSectionHeadingText),
     badgesSectionDescription: intl.formatMessage(messages.performanceBadgesSectionDescriptionText),

@@ -78,6 +78,7 @@ describe('Badge API', () => {
         chart: expect.any(Object),
         avatarSets: expect.any(Array),
         gammaUserInfo: expect.any(Object),
+        userProfile: expect.any(Object),
       });
 
       expect(axios.get).toHaveBeenCalledWith(DASHBOARD_URLS.getGameProfile);

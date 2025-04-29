@@ -210,12 +210,12 @@ describe('<ProgressBadge>', () => {
         stop_video: {
           title: 'Stop Video',
           count: 5,
-          goal: 10,
+          goal: { count: 10 },
         },
         problem_check: {
           title: 'Problem Check',
           count: 0,
-          goal: 10,
+          goal: { count: 10 },
         },
       },
       title: 'Badge 3',
@@ -236,12 +236,12 @@ describe('<ProgressBadge>', () => {
         stop_video: {
           title: 'Stop Video',
           count: 30,
-          goal: 10,
+          goal: { count: 10 },
         },
         problem_check: {
           title: 'Problem Check',
           count: 0,
-          goal: 10,
+          goal: { count: 10 },
         },
       },
       title: 'Badge 3',

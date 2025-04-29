@@ -36,12 +36,13 @@ const DashboardSectionHeader = ({ title, status, description }) => (
 
 DashboardSectionHeader.propTypes = {
   title: PropTypes.string.isRequired,
-  status: PropTypes.string.isRequired,
+  status: PropTypes.string,
   description: PropTypes.string,
 };
 
 DashboardSectionHeader.defaultProps = {
   description: null,
+  status: null,
 };
 
 export default DashboardSectionHeader;

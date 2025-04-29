@@ -10,7 +10,10 @@
 export const calculateBadgeProgress = (progress) => {
   const percentageOneEvent = 100 / Object.keys(progress).length;
   return Object.values(progress).reduce(
-    (total, { count, goal }) => total + Math.floor((Math.min(count, goal) / goal) * percentageOneEvent),
+    (total, { count, goal }) => {
+      const targetValue = goal?.count || goal?.points;
+      return total + Math.floor((Math.min(count, targetValue) / targetValue) * percentageOneEvent);
+    },
     0,
   );
 };

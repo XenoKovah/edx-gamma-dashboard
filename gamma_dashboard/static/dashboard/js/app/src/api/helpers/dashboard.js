@@ -29,15 +29,17 @@ export const prepareDashboardData = (data = {}) => {
     chart = {},
     avatar_sets: avatarSets = [],
     user_avatar_config: userAvatarConfig = {},
+    user_profile: userProfile = {},
   } = data;
 
   const {
+    userProfile: convertedToCamelCaseUserProfile,
     userAvatarConfig: convertedToCamelCaseUserAvatarConfig,
     avatarSets: convertedToCamelCaseAvatarSets,
     systemBadges: convertedSystemBadges,
     badges: convertedBadges,
   } = mapKeysToCamelCase({
-    userAvatarConfig, avatarSets, systemBadges, badges,
+    userProfile, userAvatarConfig, avatarSets, systemBadges, badges,
   });
 
   const statusTitles = mapStatusTitles(systemStatuses);
@@ -56,5 +58,6 @@ export const prepareDashboardData = (data = {}) => {
     chart,
     avatarSets: convertedToCamelCaseAvatarSets,
     gammaUserInfo: convertedToCamelCaseUserAvatarConfig,
+    userProfile: convertedToCamelCaseUserProfile,
   };
 };
