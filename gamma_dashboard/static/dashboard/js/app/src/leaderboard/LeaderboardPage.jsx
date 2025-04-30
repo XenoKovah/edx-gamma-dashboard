@@ -15,7 +15,9 @@ import messages from '../i18n';
 const LeaderboardPage = () => {
   const intl = useIntl();
   const { courseId } = useParams();
-  const { data: leaderboardData, isLoading, isError } = useLeaderboard(courseId);
+  const {
+    data: leaderboardData, isLoading, error, isError,
+  } = useLeaderboard(courseId);
 
   const translations = {
     alertTitle: intl.formatMessage(messages.leaderboardHeadingText),
@@ -29,14 +31,28 @@ const LeaderboardPage = () => {
   }
 
   if (isError) {
-    return (
-      <Alert
-        className="mt-6"
-        title={translations.errorTitle}
-        variant="danger"
-        icon={InfoIcon}
-      />
-    );
+    switch (error.status) {
+      case 404:
+        return (
+          <Alert
+            className="mt-6"
+            title={error.message}
+            variant="danger"
+            icon={InfoIcon}
+          >
+            <p>{error.description || translations.errorTitle}</p>
+          </Alert>
+        );
+      default:
+        return (
+          <Alert
+            className="mt-6"
+            title={translations.errorTitle}
+            variant="danger"
+            icon={InfoIcon}
+          />
+        );
+    }
   }
 
   const {

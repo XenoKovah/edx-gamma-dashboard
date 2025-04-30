@@ -8,8 +8,16 @@ export function useLeaderboard(courseId = '') {
   return useQuery(
     ['leaderboard', courseId],
     async () => {
-      const { data } = await axios.get(LEADERBOARD_URLS(courseId).getInfo);
-      return convertKeysToCamelCase(data) || {};
+      try {
+        const { data } = await axios.get(LEADERBOARD_URLS(courseId).getInfo);
+        return convertKeysToCamelCase(data) || {};
+      } catch (error) {
+        const { response, message } = error;
+        const enhancedError = new Error(response?.data?.message || message);
+        enhancedError.status = response?.status;
+        enhancedError.description = response?.data?.error;
+        throw enhancedError;
+      }
     },
     {
       onError: (error) => {
