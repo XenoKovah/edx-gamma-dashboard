@@ -16,10 +16,13 @@ class DashboardView(View):
 
     @method_decorator(login_required)
     def get(self, request):
+        is_leaderboard_page = 'leaderboard' in request.path
+
         context = {
             'user': request.user,
             'show_dashboard_tabs': True,
             'show_program_listing': ProgramsApiConfig.is_enabled(),
+            'is_leaderboard_page': is_leaderboard_page,
         }
 
         return render_to_response('dashboard/dashboard_page.html', context)
