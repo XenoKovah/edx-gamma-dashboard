@@ -16,7 +16,6 @@ export const useDashboardWrapper = ({
 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isAvatarModalOpen, setIsAvatarModalOpen] = useState(false);
-  const [modalData, setModalData] = useState([]);
   const [selectedAvatarSetId, setSelectedAvatarSetId] = useState(null);
 
   const { previewBadgeItems, doneBadgeItems } = useMemo(() => badgeItems.reduce(
@@ -48,6 +47,10 @@ export const useDashboardWrapper = ({
   const savedSelectedAvatarSetId = gammaUserInfo?.avatarSet;
   const selectedAvatarId = gammaUserInfo?.avatar?.id;
 
+  const getItemDataFunction = (item) => item[1];
+
+  const filteredActiveBadges = badgeItems.filter((item) => getItemDataFunction(item).isActive);
+
   const completedAvatar = useMemo(() => {
     if (!avatarSets || !savedSelectedAvatarSetId || !selectedAvatarId) { return null; }
 
@@ -56,8 +59,6 @@ export const useDashboardWrapper = ({
   }, [avatarSets, savedSelectedAvatarSetId, selectedAvatarId]);
 
   const handleOpenModal = useCallback((type) => {
-    setModalData(badgeItems);
-
     switch (type) {
       case 'avatar':
         setIsAvatarModalOpen(true);
@@ -79,7 +80,7 @@ export const useDashboardWrapper = ({
     }),
     badgeSectionCounter: intl.formatMessage(messages.badgesSectionCounterText, {
       completedBadgeItemsLength: doneBadgeItems.length,
-      badgeItemsLength: previewBadgeItems.length,
+      badgeItemsLength: filteredActiveBadges.length,
     }),
     badgesSectionTitle: intl.formatMessage(messages.performanceBadgesSectionHeadingText),
     badgesSectionDescription: intl.formatMessage(messages.performanceBadgesSectionDescriptionText),
@@ -116,7 +117,6 @@ export const useDashboardWrapper = ({
   };
 
   return {
-    modalData,
     isModalOpen,
     translations,
     setIsModalOpen,
@@ -124,6 +124,8 @@ export const useDashboardWrapper = ({
     handleOpenModal,
     isAvatarModalOpen,
     previewBadgeItems,
+    getItemDataFunction,
+    filteredActiveBadges,
     selectedAvatarSetId,
     hasSelectedAvatarSet,
     hasCompletedAvatarSet,

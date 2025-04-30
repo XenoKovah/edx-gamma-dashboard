@@ -5,10 +5,10 @@ import userEvent from '@testing-library/user-event';
 
 import { renderWithProviders } from '../../setupTests';
 import {
-  parsedBadgeItems,
   parsedStatusItems,
   gameProfileData,
 } from '../../__mocks__/dashboard';
+import { convertKeysToCamelCase } from '../../api/helpers/utils';
 import DashboardWrapper from '../DashboardWrapper';
 
 import messages from '../../i18n';
@@ -99,7 +99,7 @@ describe('<DashboardWrapper>', () => {
   };
 
   const defaultProps = {
-    badgeItems: parsedBadgeItems,
+    badgeItems: convertKeysToCamelCase(gameProfileData).system_badges,
     statusItems: parsedStatusItems,
     progress: mockProgress,
     chart: gameProfileData,

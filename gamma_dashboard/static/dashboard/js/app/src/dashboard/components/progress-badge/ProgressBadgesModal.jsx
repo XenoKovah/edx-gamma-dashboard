@@ -10,7 +10,7 @@ import ProgressBadge from './ProgressBadge';
 import messages from '../../../i18n';
 
 const ProgressBadgesModal = ({
-  title, items, getItemDataFunction, isOpen, closeCallback,
+  title, filteredActiveBadges, getItemDataFunction, isOpen, closeCallback,
 }) => {
   const intl = useIntl();
 
@@ -24,8 +24,6 @@ const ProgressBadgesModal = ({
   };
 
   const counterLabelText = isRtl ? `:${translations.counterText}` : `${translations.counterText}:`;
-
-  const filteredActiveBadges = items.filter((item) => getItemDataFunction(item).isActive);
 
   return (
     <Modal
@@ -65,7 +63,7 @@ const ProgressBadgesModal = ({
 
 ProgressBadgesModal.propTypes = {
   title: PropTypes.string,
-  items: PropTypes.arrayOf(
+  filteredActiveBadges: PropTypes.arrayOf(
     PropTypes.arrayOf(
       PropTypes.oneOfType([
         PropTypes.string,
@@ -102,7 +100,7 @@ ProgressBadgesModal.propTypes = {
 
 ProgressBadgesModal.defaultProps = {
   title: '',
-  items: [],
+  filteredActiveBadges: [],
   getItemDataFunction: null,
 };
 

@@ -41,7 +41,6 @@ const DashboardWrapper = ({
   } = avatarHandlers;
 
   const {
-    modalData,
     isModalOpen,
     translations,
     setIsModalOpen,
@@ -49,6 +48,8 @@ const DashboardWrapper = ({
     handleOpenModal,
     isAvatarModalOpen,
     previewBadgeItems,
+    getItemDataFunction,
+    filteredActiveBadges,
     selectedAvatarSetId,
     hasSelectedAvatarSet,
     hasCompletedAvatarSet,
@@ -196,8 +197,8 @@ const DashboardWrapper = ({
         isOpen={isModalOpen}
         closeCallback={() => setIsModalOpen(false)}
         title={translations.badgesSectionAllBadgesBtnTitle}
-        items={modalData}
-        getItemDataFunction={(item) => item[1]}
+        filteredActiveBadges={filteredActiveBadges}
+        getItemDataFunction={getItemDataFunction}
       />
       <ProgressAvatarModal
         isOpen={isAvatarModalOpen}

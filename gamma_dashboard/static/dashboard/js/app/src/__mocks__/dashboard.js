@@ -413,56 +413,6 @@ export const statusRoadmap = {
   ],
 };
 
-export const parsedBadgeItems = [
-  [
-    '3',
-    {
-      id: '4',
-      url: 'https://gamma-url.com/badge3.png',
-      title: 'Badge for submite',
-      progress: {
-        edx_bookmark_added: {
-          count: 0,
-          goal: 1,
-          title: 'Bookmark',
-        },
-        problem_graded: {
-          count: 1,
-          goal: 1,
-          title: 'Problem Graded',
-        },
-        stop_video: {
-          count: 1,
-          goal: 1,
-          title: 'Stop Video',
-        },
-      },
-      dependencies: [],
-      statusDependency: 'New status',
-      done: false,
-      status_dependency: 'new-status',
-    },
-  ],
-  [
-    '10',
-    {
-      url: 'https://gamma-url.com/badge10.png',
-      progress: {},
-      done: true,
-      title: '10',
-    },
-  ],
-  [
-    'new-shiny-badge-20',
-    {
-      url: 'https://gamma-url.com/badge-new-shiny-badge-20.png',
-      progress: {},
-      done: true,
-      title: 'new shiny BADGE 2.0',
-    },
-  ],
-];
-
 export const parsedStatusItems = [
   {
     title: 'Platinum1',

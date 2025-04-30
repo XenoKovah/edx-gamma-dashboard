@@ -4,9 +4,8 @@ import { cleanup, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
 import { renderWithProviders } from '../../setupTests';
-import {
-  parsedBadgeItems,
-} from '../../__mocks__/dashboard';
+import { convertKeysToCamelCase } from '../../api/helpers/utils';
+import { gameProfileData } from '../../__mocks__/dashboard';
 import ProgressBadgesModal from '../components/progress-badge/ProgressBadgesModal';
 import messages from '../../i18n';
 
@@ -42,7 +41,7 @@ describe('<ProgressBadgesModal>', () => {
 
     const { getAllByTestId, getByRole } = renderWithProviders(
       <ProgressBadgesModal
-        items={parsedBadgeItems}
+        filteredActiveBadges={convertKeysToCamelCase(gameProfileData).systemBadges}
         isOpen
         getItemDataFunction={getItemDataFunction}
         closeCallback={mockCloseCallback}
@@ -61,7 +60,7 @@ describe('<ProgressBadgesModal>', () => {
 
     const { getByText } = renderWithProviders(
       <ProgressBadgesModal
-        items={parsedBadgeItems}
+        filteredActiveBadges={[]}
         isOpen
         getItemDataFunction={getItemDataFunction}
         closeCallback={mockCloseCallback}
@@ -81,7 +80,7 @@ describe('<ProgressBadgesModal>', () => {
 
     const { getByText } = renderWithProviders(
       <ProgressBadgesModal
-        items={parsedBadgeItems}
+        filteredActiveBadges={convertKeysToCamelCase(gameProfileData).systemBadges}
         isOpen
         getItemDataFunction={getItemDataFunction}
         closeCallback={mockCloseCallback}
@@ -89,7 +88,9 @@ describe('<ProgressBadgesModal>', () => {
     );
 
     const footerText = getByText(
-      new RegExp(`${messages.performanceBadgesSectionTotalBadgesButtonText.defaultMessage}: ${parsedBadgeItems.length}`),
+      new RegExp(
+        `${messages.performanceBadgesSectionTotalBadgesButtonText.defaultMessage}: ${convertKeysToCamelCase(gameProfileData).systemBadges.length}`,
+      ),
     );
     expect(footerText).toBeInTheDocument();
   });
