@@ -4,10 +4,6 @@
   flex: 0 0 7.188rem;
   margin-top: map-get($spacers, 6);
 
-  @media screen and (max-width: map-get($grid-breakpoints, "lg")) {
-    justify-content: space-between;
-  }
-
   @media screen and (max-width: map-get($grid-breakpoints, "sm")) {
     flex-direction: column;
     align-items: center;
