@@ -18,7 +18,7 @@ describe('<LeaderboardTable>', () => {
 
     expect(getByTestId('leaderboard-table')).toBeInTheDocument();
     expect(queryByTestId('leaderboard-card')).not.toBeInTheDocument();
-    expect(getByRole('status')).toBeInTheDocument();
+    expect(getByRole('alert')).toBeInTheDocument();
   });
 
   it.each(DataLeaderboardTable)('renders with correct number of rows', ({

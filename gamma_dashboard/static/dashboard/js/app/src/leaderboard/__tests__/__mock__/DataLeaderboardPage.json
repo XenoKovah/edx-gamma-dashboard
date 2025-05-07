@@ -263,19 +263,8 @@
             "competitors": []
         },
         "expectedProps": {
-            "delimiter": 8,
-            "profiles": [
-                { "user_uid": "username1", "url_profile_image": "/images/default.png", "points": 100000, "position": 1, "system_statuses": [] },
-                { "user_uid": "username2", "url_profile_image": "/images/default.png", "points": 99999, "position": 2, "system_statuses": [] },
-                { "user_uid": "username3", "url_profile_image": "/images/default.png", "points": 88888, "position": 3, "system_statuses": [] },
-                { "user_uid": "username4", "url_profile_image": "/images/default.png", "points": 77777, "position": 4, "system_statuses": [] },
-                { "user_uid": "username5", "url_profile_image": "/images/default.png", "points": 66666, "position": 5, "system_statuses": [] },
-                { "user_uid": "username6", "url_profile_image": "/images/default.png", "points": 55555, "position": 6, "system_statuses": [] },
-                { "user_uid": "username7", "url_profile_image": "/images/default.png", "points": 44444, "position": 7, "system_statuses": [] },
-                { "user_uid": "username8", "url_profile_image": "/images/default.png", "points": 33333, "position": 8, "system_statuses": [] },
-                { "user_uid": "username9", "url_profile_image": "/images/default.png", "points": 22222, "position": 9, "system_statuses": [] },
-                { "user_uid": null, "url_profile_image": "", "points": 0, "position": null, "system_statuses": [], "system_events": [], "badges": {}, "signup_source": null }
-            ],
+            "delimiter": null,
+            "profiles": [],
             "rank": null,
             "systemStatuses": []
         }
@@ -324,9 +313,7 @@
         },
         "expectedProps": {
             "delimiter": null,
-            "profiles": [
-                { "user_uid": "current_user", "url_profile_image": "/images/default_0.png", "points": 0, "position": null, "system_statuses": [], "system_events": [], "badges": {}, "signup_source": null }
-            ],
+            "profiles": [],
             "rank": null,
             "systemStatuses": []
         }

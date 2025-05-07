@@ -22,8 +22,9 @@ export const getLeaderboardTableProps = (data) => {
   const delimiterPosition = profilesTop10.length < 10 ? profilesTop10.length - 1 : DELIMITER_POSITION_FOR_TOP_9;
 
   switch (true) {
-    case top10.length === 0 && !userUid:
+    case top10.length === 0 || !userUid:
       // for the initial render
+      propsObj.profiles = [];
       break;
     case !rank: {
       // user is not ranked yet

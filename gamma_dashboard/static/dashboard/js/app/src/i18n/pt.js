@@ -391,6 +391,16 @@ const messages = defineMessages({
     defaultMessage: 'Ocorreu um erro:',
     description: 'Descrição para o componente de fallback de erro.',
   },
+  leaderboardEmptyTitle: {
+    id: 'leaderboard.empty.title',
+    defaultMessage: 'O Quadro de Líderes está vazio',
+    description: 'Título para o estado vazio do quadro de líderes.',
+  },
+  leaderboardEmptyDescription: {
+    id: 'leaderboard.empty.description',
+    defaultMessage: 'Não há usuários para exibir no quadro de líderes. Quando os participantes interagem, os rankings aparecerão aqui.',
+    description: 'Descrição para o estado vazio do quadro de líderes.',
+  },
 });
 
 export default messages;

@@ -391,6 +391,16 @@ const messages = defineMessages({
     defaultMessage: 'Сталася помилка:',
     description: 'Опис для компонента обробки помилок.',
   },
+  leaderboardEmptyTitle: {
+    id: 'leaderboard.empty.title',
+    defaultMessage: 'Таблиця лідерів порожня',
+    description: 'Заголовок для порожнього стану таблиці лідерів.',
+  },
+  leaderboardEmptyDescription: {
+    id: 'leaderboard.empty.description',
+    defaultMessage: 'Наразі немає користувачів для відображення в таблиці лідерів. Коли користувачі почнуть взаємодіяти, рейтинги з\'явитимуться тут.',
+    description: 'Опис для порожнього стану таблиці лідерів.',
+  },
 });
 
 export default messages;

@@ -391,6 +391,16 @@ const messages = defineMessages({
     defaultMessage: 'There was an error:',
     description: 'Description for the error fallback component.',
   },
+  leaderboardEmptyTitle: {
+    id: 'leaderboard.empty.title',
+    defaultMessage: 'The Leaderboard is Empty',
+    description: 'Title for the leaderboard empty state.',
+  },
+  leaderboardEmptyDescription: {
+    id: 'leaderboard.empty.description',
+    defaultMessage: 'There are currently no users to display on the leaderboard. Once participants engage, the rankings will appear here.',
+    description: 'Description for the leaderboard empty state.',
+  },
 });
 
 export default messages;
