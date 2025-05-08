@@ -2,6 +2,20 @@
 
 ## [Unreleased]
 ## Changed
+- [NAU-488] Added alert for empty leaderboard list
+- [NAU-499] Changed badges counter value in section header
+- [NAU-442, NAU-475] User config refactoring
+- [NAU-433] Created points vault on the Performance page
+- [NAU-358] Charts refactoring
+- [NAU-407] Leaderboard page refactoring
+- [NAU-404] Course leaderboard is implemented
+- [NAU-397] Apply s2s requests for Avatars Config
+- [NAU-357] Gamma leaderboard API version is updated
+- [NAU-314] Translations refactoring
+- [NAU-312] Change gamma-profile endpoint
+- [NAU-298] Added avatar widget
+- [NAU-298] Added React Query
+- [NAU-170] Implement Course Leaderboard Toggle
 - [NAU-153] Added optional parameter courseId to Leaderboard Page which handles API.
 - Refactoring React application structure to align with best practices for improved maintainability and scalability.
 - [NAU-130] Replace highcharts with echarts graphics.
@@ -32,8 +46,17 @@
 - [NAU-93] Introduced new Makefile commands: lint-js and lint-styles.
 - [NAU-93] Added CI tasks to execute lint-js and lint-styles.
 - [NAU-93] Resolved syntax issues in the React application.
+- [NAU-56] Implement RGG Leaderboard toggle.
+- [NAU-92] Refactor Leaderboard API.
+- [NAU-83] Add course leaderboard tab to course home.
 
 ## Fixed
+- [NAU-510] fixed avatar card styles for mobile screens
+- [NAU-405] Fixed messages for disabled Leaderboards pages
+- [NAU-450] Corrected Leaderboard page title
+- [NAU-450] Corrected Performance page title
+- [NAU-240] Fix toggles separately working
+- [NAU-184] Fix Course Leaderboard tab 500 error
 - [NAU-168] fix responsive on the leaderboard page
 - [NAU-139] fixed tooltip position on focus when progress at the beginning of status bar
 
