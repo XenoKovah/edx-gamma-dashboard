@@ -28,7 +28,7 @@ const loadTranslations = () => {
   const translations = {};
 
   translationsFiles.keys().forEach((filePath) => {
-    const [, locale] = filePath.match(/(\w+)\.js$/) || [];
+    const [, locale] = filePath.match(/([\w-]+)\.js$/) || [];
 
     if (locale) {
       const coreMessages = translationsFiles(filePath).default;
