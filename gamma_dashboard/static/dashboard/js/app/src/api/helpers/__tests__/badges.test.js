@@ -66,10 +66,18 @@ describe('mergeBadges', () => {
             action: {
               edx_bookmark_added: 3,
             },
+            eventConfiguration: {
+              eventType: 'edx_bookmark_added',
+              title: 'Bookmark Added',
+            },
           },
           {
             action: {
               status_badge: 1,
+            },
+            eventConfiguration: {
+              eventType: 'status_badge',
+              title: 'Status Badge',
             },
           },
         ],
@@ -87,7 +95,7 @@ describe('mergeBadges', () => {
       status_badge: {
         count: 0,
         goal: 1,
-        title: 'status_badge',
+        title: 'Status Badge',
       },
     });
   });

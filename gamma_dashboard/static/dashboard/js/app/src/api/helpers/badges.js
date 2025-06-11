@@ -53,6 +53,24 @@ const mergeUserProgress = (userProgress) => convertKeysToSnakeCase(
 );
 
 /**
+ * Extracts event titles from rules configuration.
+ *
+ * @param {Array<{
+ *   eventConfiguration?: {
+ *     title: string,
+ *     eventType: string
+ *   }
+ * }>} rules - Array of badge rules
+ * @returns {Object<string, string>} Map of event slugs to their titles
+ */
+const extractEventTitles = (rules) => rules.reduce((titles, { eventConfiguration }) => {
+  if (eventConfiguration?.title && eventConfiguration?.eventType) {
+    return { ...titles, [eventConfiguration.eventType]: eventConfiguration.title };
+  }
+  return titles;
+}, {});
+
+/**
  * Merges user and system badges into a single structure.
  *
  * @param {Object<string, string>} statusTitles - A map of status slugs to their titles.
@@ -112,6 +130,7 @@ export const mergeBadges = (
       const allActions = {};
       const allDependencies = new Set();
       const allStatusDependencies = new Set();
+      const eventTitlesMap = extractEventTitles(rules);
 
       for (const { action = {} } of rules) {
         for (const [slug, goal] of Object.entries(action)) {
@@ -121,7 +140,7 @@ export const mergeBadges = (
         }
       }
 
-      const progressDetails = createProgressDetails(allActions, eventTitles);
+      const progressDetails = createProgressDetails(allActions, eventTitlesMap);
       const allDependenciesArray = Array.from(allDependencies);
       const allStatusDependenciesArray = Array.from(allStatusDependencies);
 

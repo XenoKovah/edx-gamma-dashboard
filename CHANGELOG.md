@@ -1,7 +1,10 @@
 # Changelog
 
 ## [Unreleased]
+
 ## Changed
+
+- [NAU-478] Changed badge event titles
 - [NAU-488] Added alert for empty leaderboard list
 - [NAU-499] Changed badges counter value in section header
 - [NAU-442, NAU-475] User config refactoring
