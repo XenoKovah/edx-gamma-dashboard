@@ -3,6 +3,7 @@ import {
   CHART_SIDE_INDENT,
   CHART_COLOR_SCHEME,
   CHART_ICON_STYLES,
+  CHART_ICON_EMPHASIS_STYLES,
   CHART_SUBTITLE_STYLES,
   CHART_TITLE_STYLES,
 } from '../constants';
@@ -65,6 +66,9 @@ export const getConfig = (dates, points, progress, messages, containerWidth, isS
           type: 'png',
           title: messages.controls.saveAsImage,
           iconStyle: CHART_ICON_STYLES,
+          emphasis: {
+            iconStyle: CHART_ICON_EMPHASIS_STYLES,
+          },
         },
         dataZoom: {
           title: {
@@ -72,6 +76,9 @@ export const getConfig = (dates, points, progress, messages, containerWidth, isS
             back: messages.controls.zoomOut,
           },
           iconStyle: CHART_ICON_STYLES,
+          emphasis: {
+            iconStyle: CHART_ICON_EMPHASIS_STYLES,
+          },
         },
         magicType: {
           type: ['line', 'bar'],
@@ -80,6 +87,9 @@ export const getConfig = (dates, points, progress, messages, containerWidth, isS
             bar: messages.controls.barChart,
           },
           iconStyle: CHART_ICON_STYLES,
+          emphasis: {
+            iconStyle: CHART_ICON_EMPHASIS_STYLES,
+          },
         },
       },
     },

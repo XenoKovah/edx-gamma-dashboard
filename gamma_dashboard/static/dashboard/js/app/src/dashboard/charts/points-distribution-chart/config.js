@@ -3,6 +3,7 @@ import {
   CHART_SIDE_INDENT,
   CHART_COLOR_SCHEME,
   CHART_ICON_STYLES,
+  CHART_ICON_EMPHASIS_STYLES,
   CHART_SERIES_ITEM_STYLES,
   CHART_SUBTITLE_STYLES,
   CHART_TITLE_STYLES,
@@ -52,6 +53,9 @@ export const getConfig = (events, messages, containerWidth, isSmall) => ({
         show: true,
         title: messages.controls.saveAsImage,
         iconStyle: CHART_ICON_STYLES,
+        emphasis: {
+          iconStyle: CHART_ICON_EMPHASIS_STYLES,
+        },
       },
     },
   },

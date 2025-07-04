@@ -38,6 +38,10 @@ export const CHART_ICON_STYLES = {
   borderColor: COLOR_PALETTE.primary,
 };
 
+export const CHART_ICON_EMPHASIS_STYLES = {
+  borderColor: COLOR_PALETTE.primaryTransparent,
+};
+
 export const CHART_SERIES_ITEM_STYLES = {
   borderRadius: 10,
   borderColor: 'white',

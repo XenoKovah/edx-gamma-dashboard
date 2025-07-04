@@ -2,6 +2,18 @@
 
 ## [Unreleased]
 
+### Breaking Changes
+
+- [TEA-140] Make RGG Dashboard and Leaderboard brand aware
+  - CSS variable key prefixes were changed from `--rgg-` to `--pgn-rgg-`.  
+    If your project or custom styles depend on these variables, you **must update the keys**.
+
+    #### Example:
+
+    ```diff
+    - var(--rgg-accent-color)
+    + var(--pgn-rgg-accent-color)
+
 ## Changed
 
 - [NAU-478] Changed badge event titles
