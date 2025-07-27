@@ -30,33 +30,40 @@ def site_badge_filter(badges, is_main_site, whitelist, blacklist, course_key_par
     # nothing to filter if we have only one site
     if is_main_site and not blacklist:
         return badges
-    
+
     result = []
 
     for badge in badges:
+        rules_filters = [rule['filters'] for rule in badge.get('rules', []) if 'filters' in rule]
+
         # In the case when the badge has no filter, then add this badge to the result list.
-        if not (filters := badge.get('rules', {}).get('filters')):
+        if not rules_filters:
             result.append(badge)
             continue
 
-        course_org = filters.get('course') and course_key_parser(filters['course']).org
-        org = course_org or filters.get('org')
-        # Only the "org"/"course" filters are used for filtering
-        if not (org := course_org or filters.get('org')):
-            result.append(badge)
-            continue
+        for rule_filters in rules_filters:
+            course_org = rule_filters.get('course') and course_key_parser(rule_filters['course']).org
 
-        # Filter out badges with invalid filters set up.
-        # If both `org` and `course` filters exist - the course's organization should
-        # match the org from the filter.
-        if filters.get('org') and course_org and course_org != filters.get('org'):
-            LOGGER.error(
-                f"The badge {badge.get('title')} has invalid filters: course's "
-                "organization {course_org} doesn't match the `org` filter {filters.get('org')}."
-            )
-            continue
+            # Only the "org"/"course" filters are used for filtering
+            if not (org := course_org or rule_filters.get('org')):
+                continue
 
-        if (is_main_site and org not in blacklist) or (not is_main_site and org in whitelist):
+            # Filter out badges with invalid filters set up.
+            # If both `org` and `course` filters exist - the course's organization should
+            # match the org from the filter.
+            if rule_filters.get('org') and course_org and course_org != rule_filters['org']:
+                LOGGER.error(
+                    f"The badge {badge.get('title')} has invalid filters: course's "
+                    f"organization {course_org} doesn't match the `org` filter {rule_filters['org']}."
+                )
+                break
+
+            is_allowed_main_site_org = is_main_site and org not in blacklist
+            is_allowed_tenant_org = not is_main_site and org in whitelist
+
+            if not(is_allowed_main_site_org or is_allowed_tenant_org):
+                break
+        else:
             result.append(badge)
 
     return result

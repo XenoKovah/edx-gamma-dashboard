@@ -4,25 +4,50 @@
         "system_badges": [
             {
                 "title": "Test Badge 1",
-                "rules": {"status_badge": "test_status_badge", "filters": {"org": "RG"}}
+                "rules": [
+                    {
+                        "action": {"edx_bookmark_added": {"count": 1}},
+                        "filters": {"org": "RG"}
+                    }
+                ]
             },
             {
                 "title": "Test Badge 2",
-                "rules": {"status_badge": "test_status_badge", "filters": {"org": "edX"}}
+                "rules": [
+                    {
+                        "action": {"edx_bookmark_added": {"count": 2}},
+                        "filters": {"org": "edX"}
+                    }
+                ]
             },
             {
                 "title": "Test Badge 3",
-                "rules": {"status_badge": "test_status_badge"}
+                "rules": [
+                    {
+                        "action": {"edx_bookmark_added": {"count": 1}},
+                        "filters": {}
+                    }
+                ]
             }
         ],
         "expected_badges": [
             {
                 "title": "Test Badge 2",
-                "rules": {"status_badge": "test_status_badge", "filters": {"org": "edX"}}
+                "rules": [
+                    {
+                        "action": {"edx_bookmark_added": {"count": 2}},
+                        "filters": {"org": "edX"}
+                    }
+                ]
             },
             {
                 "title": "Test Badge 3",
-                "rules": {"status_badge": "test_status_badge"}
+                "rules": [
+                    {
+                        "action": {"edx_bookmark_added": {"count": 1}},
+                        "filters": {}
+                    }
+                ]
             }
         ],
         "is_main_site": true,
@@ -36,29 +61,59 @@
         "system_badges": [
             {
                 "title": "Test Badge 1",
-                "rules": {"status_badge": "test_status_badge", "filters": {"org": "RG"}}
+                "rules": [
+                    {
+                        "action": {"edx_bookmark_added": {"count": 1}},
+                        "filters": {"org": "RG"}
+                    }
+                ]
             },
             {
                 "title": "Test Badge 2",
-                "rules": {"status_badge": "test_status_badge", "filters": {"org": "edX"}}
+                "rules": [
+                    {
+                        "action": {"edx_bookmark_added": {"count": 1}},
+                        "filters": {"org": "edX"}
+                    }
+                ]
             },
             {
                 "title": "Test Badge 3",
-                "rules": {"status_badge": "test_status_badge", "filters": {"course": "course-v1:RG+DemoRG+Demo_CourseRG"}}
+                "rules": [
+                    {
+                        "action": {"edx_bookmark_added": {"count": 1}},
+                        "filters": {"course": "course-v1:RG+DemoRG+Demo_CourseRG"}
+                    }
+                ]
             },
             {
                 "title": "Test Badge 4",
-                "rules": {"status_badge": "test_status_badge"}
+                "rules": [
+                    {
+                        "action": {"edx_bookmark_added": {"count": 1}},
+                        "filters": {}
+                    }
+                ]
             }
         ],
         "expected_badges": [
             {
                 "title": "Test Badge 2",
-                "rules": {"status_badge": "test_status_badge", "filters": {"org": "edX"}}
+                "rules": [
+                    {
+                        "action": {"edx_bookmark_added": {"count": 1}},
+                        "filters": {"org": "edX"}
+                    }
+                ]
             },
             {
                 "title": "Test Badge 4",
-                "rules": {"status_badge": "test_status_badge"}
+                "rules": [
+                    {
+                        "action": {"edx_bookmark_added": {"count": 1}},
+                        "filters": {}
+                    }
+                ]
             }
         ],
         "is_main_site": true,
@@ -72,33 +127,68 @@
         "system_badges": [
             {
                 "title": "Test Badge 1",
-                "rules": {"status_badge": "test_status_badge", "filters": {"org": "RG"}}
+                "rules": [
+                    {
+                        "action": {"edx_bookmark_added": {"count": 3}},
+                        "filters": {"org": "RG"}
+                    }
+                ]
             },
             {
                 "title": "Test Badge 2",
-                "rules": {"status_badge": "test_status_badge", "filters": {"org": "edX"}}
+                "rules": [
+                    {
+                        "action": {"edx_bookmark_added": {"count": 1}},
+                        "filters": {"org": "edX"}
+                    }
+                ]
             },
             {
                 "title": "Test Badge 3",
-                "rules": {"status_badge": "test_status_badge", "filters": {"course": "course-v1:edX+Demo+Demo_Course"}}
+                "rules": [
+                    {
+                        "action": {"edx_bookmark_added": {"count": 5}},
+                        "filters": {"course": "course-v1:edX+Demo+Demo_Course"}
+                    }
+                ]
             },
             {
                 "title": "Test Badge 4",
-                "rules": {"status_badge": "test_status_badge"}
+                "rules": [
+                    {
+                        "action": {"edx_bookmark_added": {"count": 1}},
+                        "filters": {}
+                    }
+                ]
             }
         ],
         "expected_badges": [
             {
                 "title": "Test Badge 2",
-                "rules": {"status_badge": "test_status_badge", "filters": {"org": "edX"}}
+                "rules": [
+                    {
+                        "action": {"edx_bookmark_added": {"count": 1}},
+                        "filters": {"org": "edX"}
+                    }
+                ]
             },
             {
                 "title": "Test Badge 3",
-                "rules": {"status_badge": "test_status_badge", "filters": {"course": "course-v1:edX+Demo+Demo_Course"}}
+                "rules": [
+                    {
+                        "action": {"edx_bookmark_added": {"count": 5}},
+                        "filters": {"course": "course-v1:edX+Demo+Demo_Course"}
+                    }
+                ]
             },
             {
                 "title": "Test Badge 4",
-                "rules": {"status_badge": "test_status_badge"}
+                "rules": [
+                    {
+                        "action": {"edx_bookmark_added": {"count": 1}},
+                        "filters": {}
+                    }
+                ]
             }
         ],
         "is_main_site": true,
@@ -109,20 +199,35 @@
 
     {
         "description": "4. Check on the main site if the badges contain filter for blacklisted orgs, and a one badge with a course filter from a non blacklisted org and course filter from a non blacklisted orgs.",
-        "system_badges": [    
+        "system_badges": [
             {
                 "title": "Test Badge 1",
-                "rules": {"status_badge": "test_status_badge", "filters": {"org": "RG"}}
+                "rules": [
+                    {
+                        "action": {"edx_bookmark_added": {"count": 1}},
+                        "filters": {"org": "RG"}
+                    }
+                ]
             },
             {
                 "title": "Test Badge 2",
-                "rules": {"status_badge": "test_status_badge", "filters": {"org": "edX", "course": "course-v1:edX+Demo+Demo_Course"}}
+                "rules": [
+                    {
+                        "action": {"edx_bookmark_added": {"count": 1}},
+                        "filters": {"org": "edX", "course": "course-v1:edX+Demo+Demo_Course"}
+                    }
+                ]
             }
         ],
         "expected_badges": [
             {
                 "title": "Test Badge 2",
-                "rules": {"status_badge": "test_status_badge", "filters": {"org": "edX", "course": "course-v1:edX+Demo+Demo_Course"}}
+                "rules": [
+                    {
+                        "action": {"edx_bookmark_added": {"count": 1}},
+                        "filters": {"org": "edX", "course": "course-v1:edX+Demo+Demo_Course"}
+                    }
+                ]
             }
         ],
         "is_main_site": true,
@@ -136,17 +241,32 @@
         "system_badges": [
             {
                 "title": "Test Badge 1",
-                "rules": {"status_badge": "test_status_badge", "filters": {"org": "RG", "course": "course-v1:edX+Demo+Demo_Course"}}
+                "rules": [
+                    {
+                        "action": {"edx_bookmark_added": {"count": 1}},
+                        "filters": {"org": "RG", "course": "course-v1:edX+Demo+Demo_Course"}
+                    }
+                ]
             },
             {
                 "title": "Test Badge 2",
-                "rules": {"status_badge": "test_status_badge", "filters": {"org": "edX"}}
+                "rules": [
+                    {
+                        "action": {"edx_bookmark_added": {"count": 1}},
+                        "filters": {"org": "edX"}
+                    }
+                ]
             }
         ],
         "expected_badges": [
             {
                 "title": "Test Badge 2",
-                "rules": {"status_badge": "test_status_badge", "filters": {"org": "edX"}}
+                "rules": [
+                    {
+                        "action": {"edx_bookmark_added": {"count": 1}},
+                        "filters": {"org": "edX"}
+                    }
+                ]
             }
         ],
         "is_main_site": true,
@@ -160,11 +280,21 @@
         "system_badges": [
             {
                 "title": "Test Badge 1",
-                "rules": {"status_badge": "test_status_badge", "filters": {"org": "edX", "course": "course-v1:RG+Demo+Demo_CourseRG"}}
+                "rules": [
+                    {
+                        "action": {"edx_bookmark_added": {"count": 1}},
+                        "filters": {"org": "edX", "course": "course-v1:RG+Demo+Demo_CourseRG"}
+                    }
+                ]
             },
             {
                 "title": "Test Badge 2",
-                "rules": {"status_badge": "test_status_badge", "filters": {"org": "RG"}}
+                "rules": [
+                    {
+                        "action": {"edx_bookmark_added": {"count": 1}},
+                        "filters": {"org": "RG"}
+                    }
+                ]
             }
         ],
         "expected_badges": [],
@@ -179,37 +309,77 @@
         "system_badges": [
             {
                 "title": "Test Badge 1",
-                "rules": {"status_badge": "test_status_badge", "filters": {"org": "RG"}}
+                "rules": [
+                    {
+                        "action": {"edx_bookmark_added": {"count": 1}},
+                        "filters": {"org": "RG"}
+                    }
+                ]
             },
             {
                 "title": "Test Badge 2",
-                "rules": {"status_badge": "test_status_badge", "filters": {"org": "edX"}}
+                "rules": [
+                    {
+                        "action": {"edx_bookmark_added": {"count": 1}},
+                        "filters": {"org": "edX"}
+                    }
+                ]
             },
             {
                 "title": "Test Badge 3",
-                "rules": {"status_badge": "test_status_badge", "filters": {"course": "course-v1:edX+Demo+Demo_Course"}}
+                "rules": [
+                    {
+                        "action": {"edx_bookmark_added": {"count": 1}},
+                        "filters": {"course": "course-v1:edX+Demo+Demo_Course"}
+                    }
+                ]
             },
             {
                 "title": "Test Badge 4",
-                "rules": {"status_badge": "test_status_badge"}
+                "rules": [
+                    {
+                        "action": {"edx_bookmark_added": {"count": 1}},
+                        "filters": {}
+                    }
+                ]
             }
         ],
         "expected_badges": [
             {
                 "title": "Test Badge 1",
-                "rules": {"status_badge": "test_status_badge", "filters": {"org": "RG"}}
+                "rules": [
+                    {
+                        "action": {"edx_bookmark_added": {"count": 1}},
+                        "filters": {"org": "RG"}
+                    }
+                ]
             },
             {
                 "title": "Test Badge 2",
-                "rules": {"status_badge": "test_status_badge", "filters": {"org": "edX"}}
+                "rules": [
+                    {
+                        "action": {"edx_bookmark_added": {"count": 1}},
+                        "filters": {"org": "edX"}
+                    }
+                ]
             },
             {
                 "title": "Test Badge 3",
-                "rules": {"status_badge": "test_status_badge", "filters": {"course": "course-v1:edX+Demo+Demo_Course"}}
+                "rules": [
+                    {
+                        "action": {"edx_bookmark_added": {"count": 1}},
+                        "filters": {"course": "course-v1:edX+Demo+Demo_Course"}
+                    }
+                ]
             },
             {
                 "title": "Test Badge 4",
-                "rules": {"status_badge": "test_status_badge"}
+                "rules": [
+                    {
+                        "action": {"edx_bookmark_added": {"count": 1}},
+                        "filters": {}
+                    }
+                ]
             }
         ],
         "is_main_site": true,
@@ -223,17 +393,32 @@
         "system_badges": [
             {
                 "title": "Test Badge 1",
-                "rules": {"status_badge": "test_status_badge", "filters": {"org": "RG"}}
+                "rules": [
+                    {
+                        "action": {"edx_bookmark_added": {"count": 1}},
+                        "filters": {"org": "RG"}
+                    }
+                ]
             },
             {
                 "title": "Test Badge 2",
-                "rules": {"status_badge": "test_status_badge", "filters": {"org": "edX"}}
+                "rules": [
+                    {
+                        "action": {"edx_bookmark_added": {"count": 1}},
+                        "filters": {"org": "edX"}
+                    }
+                ]
             }
         ],
         "expected_badges": [
             {
                 "title": "Test Badge 1",
-                "rules": {"status_badge": "test_status_badge", "filters": {"org": "RG"}}
+                "rules": [
+                    {
+                        "action": {"edx_bookmark_added": {"count": 1}},
+                        "filters": {"org": "RG"}
+                    }
+                ]
             }
         ],
         "is_main_site": false,
@@ -247,33 +432,68 @@
         "system_badges": [
             {
                 "title": "Test Badge 1",
-                "rules": {"status_badge": "test_status_badge", "filters": {"org": "RG"}}
+                "rules": [
+                    {
+                        "action": {"edx_bookmark_added": {"count": 1}},
+                        "filters": {"org": "RG"}
+                    }
+                ]
             },
             {
                 "title": "Test Badge 2",
-                "rules": {"status_badge": "test_status_badge", "filters": {"org": "edX"}}
+                "rules": [
+                    {
+                        "action": {"edx_bookmark_added": {"count": 1}},
+                        "filters": {"org": "edX"}
+                    }
+                ]
             },
             {
                 "title": "Test Badge 3",
-                "rules": {"status_badge": "test_status_badge", "filters": {"course": "course-v1:RG+DemoRG+Demo_CourseRG"}}
+                "rules": [
+                    {
+                        "action": {"edx_bookmark_added": {"count": 1}},
+                        "filters": {"course": "course-v1:RG+DemoRG+Demo_CourseRG"}
+                    }
+                ]
             },
             {
                 "title": "Test Badge 4",
-                "rules": {"status_badge": "test_status_badge"}
+                "rules": [
+                    {
+                        "action": {"edx_bookmark_added": {"count": 1}},
+                        "filters": {}
+                    }
+                ]
             }
         ],
         "expected_badges": [
             {
                 "title": "Test Badge 1",
-                "rules": {"status_badge": "test_status_badge", "filters": {"org": "RG"}}
+                "rules": [
+                    {
+                        "action": {"edx_bookmark_added": {"count": 1}},
+                        "filters": {"org": "RG"}
+                    }
+                ]
             },
             {
                 "title": "Test Badge 3",
-                "rules": {"status_badge": "test_status_badge", "filters": {"course": "course-v1:RG+DemoRG+Demo_CourseRG"}}
+                "rules": [
+                    {
+                        "action": {"edx_bookmark_added": {"count": 1}},
+                        "filters": {"course": "course-v1:RG+DemoRG+Demo_CourseRG"}
+                    }
+                ]
             },
             {
                 "title": "Test Badge 4",
-                "rules": {"status_badge": "test_status_badge"}
+                "rules": [
+                    {
+                        "action": {"edx_bookmark_added": {"count": 1}},
+                        "filters": {}
+                    }
+                ]
             }
         ],
         "is_main_site": false,
@@ -287,29 +507,59 @@
         "system_badges": [
             {
                 "title": "Test Badge 1",
-                "rules": {"status_badge": "test_status_badge", "filters": {"org": "RG"}}
+                "rules": [
+                    {
+                        "action": {"edx_bookmark_added": {"count": 1}},
+                        "filters": {"org": "RG"}
+                    }
+                ]
             },
             {
                 "title": "Test Badge 2",
-                "rules": {"status_badge": "test_status_badge", "filters": {"org": "edX"}}
+                "rules": [
+                    {
+                        "action": {"edx_bookmark_added": {"count": 1}},
+                        "filters": {"org": "edX"}
+                    }
+                ]
             },
             {
                 "title": "Test Badge 3",
-                "rules": {"status_badge": "test_status_badge", "filters": {"course": "course-v1:edX+Demo+Demo_Course"}}
+                "rules": [
+                    {
+                        "action": {"edx_bookmark_added": {"count": 1}},
+                        "filters": {"course": "course-v1:edX+Demo+Demo_Course"}
+                    }
+                ]
             },
             {
                 "title": "Test Badge 4",
-                "rules": {"status_badge": "test_status_badge"}
+                "rules": [
+                    {
+                        "action": {"edx_bookmark_added": {"count": 1}},
+                        "filters": {}
+                    }
+                ]
             }
         ],
         "expected_badges": [
             {
                 "title": "Test Badge 1",
-                "rules": {"status_badge": "test_status_badge", "filters": {"org": "RG"}}
+                "rules": [
+                    {
+                        "action": {"edx_bookmark_added": {"count": 1}},
+                        "filters": {"org": "RG"}
+                    }
+                ]
             },
             {
                 "title": "Test Badge 4",
-                "rules": {"status_badge": "test_status_badge"}
+                "rules": [
+                    {
+                        "action": {"edx_bookmark_added": {"count": 1}},
+                        "filters": {}
+                    }
+                ]
             }
         ],
         "is_main_site": false,
@@ -323,17 +573,32 @@
         "system_badges": [
             {
                 "title": "Test Badge 1",
-                "rules": {"status_badge": "test_status_badge", "filters": {"org": "RG", "course": "course-v1:RG+Demo+Demo_CourseRG"}}
+                "rules": [
+                    {
+                        "action": {"edx_bookmark_added": {"count": 1}},
+                        "filters": {"org": "RG", "course": "course-v1:RG+Demo+Demo_CourseRG"}
+                    }
+                ]
             },
             {
                 "title": "Test Badge 2",
-                "rules": {"status_badge": "test_status_badge", "filters": {"org": "edX"}}
+                "rules": [
+                    {
+                        "action": {"edx_bookmark_added": {"count": 1}},
+                        "filters": {"org": "edX"}
+                    }
+                ]
             }
         ],
         "expected_badges": [
             {
                 "title": "Test Badge 1",
-                "rules": {"status_badge": "test_status_badge", "filters": {"org": "RG", "course": "course-v1:RG+Demo+Demo_CourseRG"}}
+                "rules": [
+                    {
+                        "action": {"edx_bookmark_added": {"count": 1}},
+                        "filters": {"org": "RG", "course": "course-v1:RG+Demo+Demo_CourseRG"}
+                    }
+                ]
             }
         ],
         "is_main_site": false,
@@ -347,11 +612,21 @@
         "system_badges": [
             {
                 "title": "Test Badge 1",
-                "rules": {"status_badge": "test_status_badge", "filters": {"org": "RG", "course": "course-v1:edX+Demo+Demo_Course"}}
+                "rules": [
+                    {
+                        "action": {"edx_bookmark_added": {"count": 1}},
+                        "filters": {"org": "RG", "course": "course-v1:edX+Demo+Demo_Course"}
+                    }
+                ]
             },
             {
                 "title": "Test Badge 2",
-                "rules": {"status_badge": "test_status_badge", "filters": {"org": "edX"}}
+                "rules": [
+                    {
+                        "action": {"edx_bookmark_added": {"count": 1}},
+                        "filters": {"org": "edX"}
+                    }
+                ]
             }
         ],
         "expected_badges": [],
@@ -366,17 +641,32 @@
         "system_badges": [
             {
                 "title": "Test Badge 1",
-                "rules": {"status_badge": "test_status_badge", "filters": {"org": "edX", "course": "course-v1:RG+Demo+Demo_CourseRG"}}
+                "rules": [
+                    {
+                        "action": {"edx_bookmark_added": {"count": 1}},
+                        "filters": {"org": "edX", "course": "course-v1:RG+Demo+Demo_CourseRG"}
+                    }
+                ]
             },
             {
                 "title": "Test Badge 2",
-                "rules": {"status_badge": "test_status_badge", "filters": {"org": "RG"}}
+                "rules": [
+                    {
+                        "action": {"edx_bookmark_added": {"count": 1}},
+                        "filters": {"org": "RG"}
+                    }
+                ]
             }
         ],
         "expected_badges": [
             {
                 "title": "Test Badge 2",
-                "rules": {"status_badge": "test_status_badge", "filters": {"org": "RG"}}
+                "rules": [
+                    {
+                        "action": {"edx_bookmark_added": {"count": 1}},
+                        "filters": {"org": "RG"}
+                    }
+                ]
             }
         ],
         "is_main_site": false,
@@ -390,11 +680,21 @@
         "system_badges": [
             {
                 "title": "Test Badge 1",
-                "rules": {"status_badge": "test_status_badge", "filters": {"course": "course-v1:edX+Demo+Demo_Course"}}
+                "rules": [
+                    {
+                        "action": {"edx_bookmark_added": {"count": 1}},
+                        "filters": {"course": "course-v1:edX+Demo+Demo_Course"}
+                    }
+                ]
             },
             {
                 "title": "Test Badge 2",
-                "rules": {"status_badge": "test_status_badge", "filters": {"org": "RG"}}
+                "rules": [
+                    {
+                        "action": {"edx_bookmark_added": {"count": 1}},
+                        "filters": {"org": "RG"}
+                    }
+                ]
             }
         ],
         "expected_badges": [],
@@ -409,11 +709,21 @@
         "system_badges": [
             {
                 "title": "Test Badge 1",
-                "rules": {"status_badge": "test_status_badge", "filters": {"org": "edX"}}
+                "rules": [
+                    {
+                        "action": {"edx_bookmark_added": {"count": 7}},
+                        "filters": {"org": "edX"}
+                    }
+                ]
             },
             {
                 "title": "Test Badge 2",
-                "rules": {"status_badge": "test_status_badge", "filters": {"org": "RG"}}
+                "rules": [
+                    {
+                        "action": {"edx_bookmark_added": {"count": 7}},
+                        "filters": {"org": "RG"}
+                    }
+                ]
             }
         ],
         "expected_badges": [],
@@ -421,5 +731,267 @@
         "whitelist": [],
         "blacklist": [],
         "course_key_org": null
+    },
+
+    {
+        "description": "16. Check on the main site if badges have several rules. The first badge contains a rule with filter for non blacklisted orgs and course, and a rule with filter from blacklisted orgs. The second badge contains a rule with filter for non blacklisted orgs and course, and a rule with filter from non blacklisted orgs.",
+        "system_badges": [
+            {
+                "title": "Test Badge 1",
+                "rules": [
+                    {
+                        "action": {"edx_bookmark_added": {"count": 7}},
+                        "filters": {"org": "edX", "course": "course-v1:edX+Demo+Demo_Course"}
+                    },
+                    {
+                        "action": {"edx_grades_problem_submitted": {"count": 3}},
+                        "filters": {"org": "RG"}
+                    }
+                ]
+            },
+            {
+                "title": "Test Badge 2",
+                "rules": [
+                    {
+                        "action": {"edx_bookmark_added": {"count": 7}},
+                        "filters": {"org": "edX", "course": "course-v1:edX+Demo+Demo_Course"}
+                    },
+                    {
+                        "action": {"edx_grades_problem_submitted": {"count": 3}},
+                        "filters": {"org": "ABC"}
+                    }
+                ]
+            }
+        ],
+        "expected_badges": [
+            {
+                "title": "Test Badge 2",
+                "rules": [
+                    {
+                        "action": {"edx_bookmark_added": {"count": 7}},
+                        "filters": {"org": "edX", "course": "course-v1:edX+Demo+Demo_Course"}
+                    },
+                    {
+                        "action": {"edx_grades_problem_submitted": {"count": 3}},
+                        "filters": {"org": "ABC"}
+                    }
+                ]
+            }
+        ],
+        "is_main_site": true,
+        "whitelist": [],
+        "blacklist": ["RG"],
+        "course_key_org": "edX"
+    },
+
+    {
+        "description": "17. Check on the main site if badges have several rules. The first badge contains a rule with filter for non blacklisted orgs and course, and a rule without filters. The second badge contains a two rules without filters.",
+        "system_badges": [
+            {
+                "title": "Test Badge 1",
+                "rules": [
+                    {
+                        "action": {"edx_bookmark_added": {"count": 7}},
+                        "filters": {"org": "edX", "course": "course-v1:edX+Demo+Demo_Course"}
+                    },
+                    {
+                        "action": {"edx_grades_problem_submitted": {"count": 3}},
+                        "filters": {}
+                    }
+                ]
+            },
+            {
+                "title": "Test Badge 2",
+                "rules": [
+                    {
+                        "action": {"edx_bookmark_added": {"count": 7}},
+                        "filters": {}
+                    },
+                    {
+                        "action": {"edx_grades_problem_submitted": {"count": 3}},
+                        "filters": {}
+                    }
+                ]
+            }
+        ],
+        "expected_badges": [
+            {
+                "title": "Test Badge 1",
+                "rules": [
+                    {
+                        "action": {"edx_bookmark_added": {"count": 7}},
+                        "filters": {"org": "edX", "course": "course-v1:edX+Demo+Demo_Course"}
+                    },
+                    {
+                        "action": {"edx_grades_problem_submitted": {"count": 3}},
+                        "filters": {}
+                    }
+                ]
+            },
+            {
+                "title": "Test Badge 2",
+                "rules": [
+                    {
+                        "action": {"edx_bookmark_added": {"count": 7}},
+                        "filters": {}
+                    },
+                    {
+                        "action": {"edx_grades_problem_submitted": {"count": 3}},
+                        "filters": {}
+                    }
+                ]
+            }
+        ],
+        "is_main_site": true,
+        "whitelist": [],
+        "blacklist": ["RG", "TEST"],
+        "course_key_org": "edX"
+    },
+
+    {
+        "description": "18. Check on the main site if a badge contains a rule without filters, a rule with a course filter from a blacklisted org, and a rule with filter from blacklisted orgs.",
+        "system_badges": [
+            {
+                "title": "Test Badge 1",
+                "rules": [
+                    {
+                        "action": {"edx_bookmark_added": {"count": 7}},
+                        "filters": {}
+                    },
+                    {
+                        "action": {"edx_grades_problem_submitted": {"count": 3}},
+                        "filters": {"course": "course-v1:RG+Demo+Demo_CourseRG"}
+                    },
+                    {
+                        "action": {"stop_video": {"count": 4}},
+                        "filters": {"org": "RG"}
+                    }
+                ]
+            }
+        ],
+        "expected_badges": [],
+        "is_main_site": true,
+        "whitelist": [],
+        "blacklist": ["RG"],
+        "course_key_org": "RG"
+    },
+
+    {
+        "description": "19. Check on the main site if a badge contains a rule with course filter org and org filter mismatch, and a rule with filter for non blacklisted orgs.",
+        "system_badges": [
+            {
+                "title": "Test Badge 1",
+                "rules": [
+                    {
+                        "action": {"edx_bookmark_added": {"count": 7}},
+                        "filters": {"org": "ABC", "course": "course-v1:edX+Demo+Demo_Course"}
+                    },
+                    {
+                        "action": {"edx_grades_problem_submitted": {"count": 3}},
+                        "filters": {"org": "edX"}
+                    }
+                ]
+            }
+        ],
+        "expected_badges": [],
+        "is_main_site": true,
+        "whitelist": [],
+        "blacklist": ["RG"],
+        "course_key_org": "edX"
+    },
+
+    {
+        "description": "20. Check on the microsite if badges have several rules. The first badge contains a rule with filter for non whitelisted orgs and course from whitelisted orgs, and a rule without filters. The second badge contains a rule with filter for whitelisted orgs and course from whitelisted orgs, and a rule with filter for whitelisted orgs.",
+        "system_badges": [
+            {
+                "title": "Test Badge 1",
+                "rules": [
+                    {
+                        "action": {"edx_bookmark_added": {"count": 1}},
+                        "filters": {"org": "RG", "course": "course-v1:edX+Demo+Demo_Course"}
+                    },
+                    {
+                        "action": {"stop_video": {"count": 1}},
+                        "filters": {}
+                    }
+                ]
+            },
+            {
+                "title": "Test Badge 2",
+                 "rules": [
+                    {
+                        "action": {"edx_bookmark_added": {"count": 1}},
+                        "filters": {"org": "edX", "course": "course-v1:edX+Demo+Demo_Course"}
+                    },
+                    {
+                        "action": {"stop_video": {"count": 1}},
+                        "filters": {"org": "ABC"}
+                    }
+                ]
+            }
+        ],
+        "expected_badges": [
+            {
+                "title": "Test Badge 2",
+                 "rules": [
+                    {
+                        "action": {"edx_bookmark_added": {"count": 1}},
+                        "filters": {"org": "edX", "course": "course-v1:edX+Demo+Demo_Course"}
+                    },
+                    {
+                        "action": {"stop_video": {"count": 1}},
+                        "filters": {"org": "ABC"}
+                    }
+                ]
+            }
+        ],
+        "is_main_site": false,
+        "whitelist": ["edX", "ABC"],
+        "blacklist": [],
+        "course_key_org": "edX"
+    },
+
+    {
+        "description": "21. Check on the main site if one badge does not contain 'rules' key, and one badge does not contain 'filters' rule key.",
+        "system_badges": [
+            {"title": "Test Badge 1"},
+            {
+                "title": "Test Badge 2",
+                "rules": [{"action": {"edx_bookmark_added": {"count": 1}}}]
+            }
+        ],
+        "expected_badges": [
+            {"title": "Test Badge 1"},
+            {
+                "title": "Test Badge 2",
+                "rules": [{"action": {"edx_bookmark_added": {"count": 1}}}]
+            }
+        ],
+        "is_main_site": true,
+        "whitelist": [],
+        "blacklist": ["RG", "TEST"],
+        "course_key_org": "RG"
+    },
+
+    {
+        "description": "22. Check on the microsite if one badge does not contain 'rules' key, and one badge does not contain 'filters' rule key.",
+        "system_badges": [
+            {"title": "Test Badge 1"},
+            {
+                "title": "Test Badge 2",
+                "rules": [{"action": {"edx_bookmark_added": {"count": 1}}}]
+            }
+        ],
+        "expected_badges": [
+            {"title": "Test Badge 1"},
+            {
+                "title": "Test Badge 2",
+                "rules": [{"action": {"edx_bookmark_added": {"count": 1}}}]
+            }
+        ],
+        "is_main_site": false,
+        "whitelist": ["RG", "TEST"],
+        "blacklist": [],
+        "course_key_org": "RG"
     }
 ]
