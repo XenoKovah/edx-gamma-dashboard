@@ -2,6 +2,11 @@
 
 ## [Unreleased]
 
+## 2.0.0 (2025-08-07)
+### Maintenance
+- Update Author contact information
+- Update Development Status classifier
+
 ### Breaking Changes
 
 - [TEA-140] Make RGG Dashboard and Leaderboard brand aware
