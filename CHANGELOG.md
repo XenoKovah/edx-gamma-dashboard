@@ -10,7 +10,7 @@
 ### Breaking Changes
 
 - [TEA-140] Make RGG Dashboard and Leaderboard brand aware
-  - CSS variable key prefixes were changed from `--rgg-` to `--pgn-rgg-`.  
+  - CSS variable key prefixes were changed from `--rgg-` to `--pgn-rgg-`.
     If your project or custom styles depend on these variables, you **must update the keys**.
 
     #### Example:
@@ -71,6 +71,7 @@
 - [NAU-83] Add course leaderboard tab to course home.
 
 ## Fixed
+- [TEA-289] fixed custom fonts loading from rg-branding-plugin
 - [NAU-510] fixed avatar card styles for mobile screens
 - [NAU-405] Fixed messages for disabled Leaderboards pages
 - [NAU-450] Corrected Leaderboard page title

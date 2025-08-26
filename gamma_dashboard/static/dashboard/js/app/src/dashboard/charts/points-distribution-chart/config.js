@@ -7,6 +7,7 @@ import {
   CHART_SERIES_ITEM_STYLES,
   CHART_SUBTITLE_STYLES,
   CHART_TITLE_STYLES,
+  CHART_LABEL_STYLES,
 } from '../constants';
 
 export const getConfig = (events, messages, containerWidth, isSmall) => ({
@@ -23,6 +24,7 @@ export const getConfig = (events, messages, containerWidth, isSmall) => ({
   tooltip: {
     trigger: 'item',
     formatter: '{b} <br/> {a}: <strong>{d}%</strong>',
+    textStyle: CHART_LABEL_STYLES,
   },
   legend: {
     show: false,
@@ -40,6 +42,7 @@ export const getConfig = (events, messages, containerWidth, isSmall) => ({
         show: true,
         position: isSmall ? 'inside' : 'outside',
         formatter: '{d}%',
+        ...CHART_LABEL_STYLES,
       },
       data: events,
     },
