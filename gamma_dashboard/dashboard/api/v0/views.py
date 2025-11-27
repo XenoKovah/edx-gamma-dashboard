@@ -81,7 +81,10 @@ class LeaderboardApiView(APIView):
                     item["url_profile_image"] = get_profile_image_urls_for_user(user)["medium"]
                 else:
                     # If the user is not found on the platform, change their Gamma-sourced username
-                    item["user_uid"] = "unknown user"
+                    if item.get("is_demo_user"):
+                        item["user_uid"] = item["user_uid"] + " (Demo User)"
+                    else:    
+                        item["user_uid"] = "unknown user"
 
         return leaderboard_info
 
