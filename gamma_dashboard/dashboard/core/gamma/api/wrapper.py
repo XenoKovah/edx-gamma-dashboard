@@ -131,3 +131,9 @@ class GammaApiWrapper:
         return self.request_api_endpoint(
             f'user_avatar_config/{config_id}/', method='PATCH', data=data, **kwargs
         )
+
+    def get_avatar_progress(self, config_id, **kwargs):
+        """
+        Return avatar progress for given UserAvatarConfig.
+        """
+        return self.request_api_endpoint(f'user_avatar_config/{config_id}/progress/', **kwargs)

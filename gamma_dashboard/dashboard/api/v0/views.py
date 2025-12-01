@@ -156,3 +156,20 @@ class GameUserAvatarConfigApiView(APIView):
         ).update_gamma_user_avatar_config(config_id=config_id, data=request.data)
 
         return Response(gamma_user_avatar_config)
+
+
+class AvatarProgressApiView(APIView):
+    """
+    Dedicated endpoint to fetch avatar progress for a given UserAvatarConfig.
+    """
+
+    permission_classes = (IsAuthenticated,)
+    authentication_classes = (SessionAuthenticationAllowInactiveUser,)
+
+    def get(self, request):
+        """
+        Get User's Avatar Set Config by `config_id`.
+        """
+        config_id = request.query_params.get('config_id')
+        avatar_progress = GammaApiWrapper(version=DEFAULT_API_VERSION).get_avatar_progress(config_id=config_id)
+        return Response(avatar_progress)

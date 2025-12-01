@@ -4,6 +4,8 @@ export const BASE_URL = `/gamma_dashboard/api/v${API_VERSION}/`;
 
 export const USER_AVATAR_CONFIG_URL = `${BASE_URL}user-avatar-config`;
 
+export const AVATAR_PROGRESS_URL = `${BASE_URL}avatar-progress/`;
+
 export const LEADERBOARD_URLS = (courseId = '') => ({
   getInfo: `${BASE_URL}leaderboard/${courseId}`,
 });
@@ -12,6 +14,10 @@ export const DASHBOARD_URLS = {
   getGameProfile: `${BASE_URL}game-profile/`,
   selectUserAvatarSet: () => USER_AVATAR_CONFIG_URL,
   updateUserAvatarSet: (userConfigurationId) => `${USER_AVATAR_CONFIG_URL}?config_id=${userConfigurationId}`,
+};
+
+export const AVATAR_PROGRESS_URLS = {
+  getUserAvatarProgress: (configId) => `${AVATAR_PROGRESS_URL}?config_id=${configId}`,
 };
 
 export const FEEDBACK_FORM_URL = `/rg_products_toolkit/api/v${API_VERSION}/submit_feedback/`;
