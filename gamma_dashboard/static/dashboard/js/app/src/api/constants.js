@@ -2,7 +2,7 @@ export const API_VERSION = 0;
 
 export const BASE_URL = `/gamma_dashboard/api/v${API_VERSION}/`;
 
-export const USER_AVATAR_CONFIG_URL = `${BASE_URL}user-avatar-config`;
+export const USER_AVATAR_CONFIG_URL = `${BASE_URL}user-avatar-config/`;
 
 export const AVATAR_PROGRESS_URL = `${BASE_URL}avatar-progress/`;
 
@@ -17,7 +17,7 @@ export const DASHBOARD_URLS = {
 };
 
 export const AVATAR_PROGRESS_URLS = {
-  getUserAvatarProgress: (configId) => `${AVATAR_PROGRESS_URL}?config_id=${configId}`,
+  getUserAvatarProgress: (username) => `${AVATAR_PROGRESS_URL}${username}`,
 };
 
 export const FEEDBACK_FORM_URL = `/rg_products_toolkit/api/v${API_VERSION}/submit_feedback/`;

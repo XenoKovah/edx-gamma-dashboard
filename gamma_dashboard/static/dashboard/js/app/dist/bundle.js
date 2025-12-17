@@ -22284,7 +22284,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 var API_VERSION = 0;
 var BASE_URL = "/gamma_dashboard/api/v".concat(API_VERSION, "/");
-var USER_AVATAR_CONFIG_URL = "".concat(BASE_URL, "user-avatar-config");
+var USER_AVATAR_CONFIG_URL = "".concat(BASE_URL, "user-avatar-config/");
 var AVATAR_PROGRESS_URL = "".concat(BASE_URL, "avatar-progress/");
 var LEADERBOARD_URLS = function LEADERBOARD_URLS() {
   var courseId = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '';
@@ -22302,8 +22302,8 @@ var DASHBOARD_URLS = {
   }
 };
 var AVATAR_PROGRESS_URLS = {
-  getUserAvatarProgress: function getUserAvatarProgress(configId) {
-    return "".concat(AVATAR_PROGRESS_URL, "?config_id=").concat(configId);
+  getUserAvatarProgress: function getUserAvatarProgress(username) {
+    return "".concat(AVATAR_PROGRESS_URL).concat(username);
   }
 };
 var FEEDBACK_FORM_URL = "/rg_products_toolkit/api/v".concat(API_VERSION, "/submit_feedback/");

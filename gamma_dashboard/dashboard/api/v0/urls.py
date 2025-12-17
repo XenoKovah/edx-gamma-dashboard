@@ -16,5 +16,5 @@ urlpatterns = [
     re_path(rf"^leaderboard(?:/{COURSE_ID_PATTERN})?/?$", LeaderboardApiView.as_view(), name="api-leaderboard"),
     path("game-profile/", GameProfileApiView.as_view(), name="api-game-profile"),
     path("user-avatar-config/", GameUserAvatarConfigApiView.as_view(), name="api-user-avatar-config"),
-    path("avatar-progress/", AvatarProgressApiView.as_view(), name="api-avatar-progress"),
+    path("avatar-progress/<str:username>/", AvatarProgressApiView.as_view(), name="api-avatar-progress"),
 ]

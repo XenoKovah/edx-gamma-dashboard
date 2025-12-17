@@ -63,12 +63,19 @@ class GammaApiWrapper:
                 self._inject_authentication_headers(kwargs)
                 response = request_executor(url, **kwargs)
 
-                if response.ok:
-                    try:
-                        result = response.json()
+                try:
+                    result = response.json()
+                except ValueError:
+                    result = None
 
-                    except ValueError:
-                        pass
+                if response.ok:
+                    return result
+
+                return {
+                    'error': 'http_error',
+                    'status': response.status_code,
+                    'detail': result,
+                }
 
         return result
 
@@ -132,8 +139,8 @@ class GammaApiWrapper:
             f'user_avatar_config/{config_id}/', method='PATCH', data=data, **kwargs
         )
 
-    def get_avatar_progress(self, config_id, **kwargs):
+    def get_avatar_progress(self, username, **kwargs):
         """
-        Return avatar progress for given UserAvatarConfig.
+        Return avatar progress for given username.
         """
-        return self.request_api_endpoint(f'user_avatar_config/{config_id}/progress/', **kwargs)
+        return self.request_api_endpoint(f'avatar-progress/{username}/', **kwargs)
