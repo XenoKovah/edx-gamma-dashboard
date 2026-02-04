@@ -3,6 +3,7 @@ graft gamma_dashboard/templates
 prune gamma_dashboard/static
 graft gamma_dashboard/static/dashboard/js/app/dist
 graft course_leaderboard/templates
+graft course_leaderboard/locale
 
 global-exclude __pycache__
 global-exclude *.py[co]
