@@ -2,6 +2,11 @@
 
 ## [Unreleased]
 
+## 2.1.0 (2026-03-13)
+### Added
+
+- Add fr-ca translations
+
 ## 2.0.0 (2025-08-07)
 ### Maintenance
 - Update Author contact information
