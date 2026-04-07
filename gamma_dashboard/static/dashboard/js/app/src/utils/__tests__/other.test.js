@@ -9,16 +9,16 @@ import {
 describe('addPositionInCompetitors', () => {
   it('should correctly add positions to competitors list', () => {
     const listUsers = [
-      { user_uid: 'user1' },
-      { user_uid: 'user2' },
-      { user_uid: 'user3' },
+      { userUid: 'user1' },
+      { userUid: 'user2' },
+      { userUid: 'user3' },
     ];
     const userUid = 'user2';
     const rank = 235;
     const expectedListUsers = [
-      { user_uid: 'user1', position: 234 },
-      { user_uid: 'user2', position: 235 },
-      { user_uid: 'user3', position: 236 },
+      { userUid: 'user1', position: 234 },
+      { userUid: 'user2', position: 235 },
+      { userUid: 'user3', position: 236 },
     ];
 
     const result = addPositionInCompetitors(listUsers, userUid, rank);
@@ -30,9 +30,9 @@ describe('addPositionInCompetitors', () => {
 describe('findIndexByUserUid', () => {
   it('should return the correct index of the user with the specified userUid', () => {
     const listUsers = [
-      { user_uid: 'user1' },
-      { user_uid: 'user2' },
-      { user_uid: 'user3' },
+      { userUid: 'user1' },
+      { userUid: 'user2' },
+      { userUid: 'user3' },
     ];
     const userUid = 'user2';
     const expectedIndex = 1;
@@ -44,9 +44,9 @@ describe('findIndexByUserUid', () => {
 
   it('should return -1 if no user with the specified userUid is found', () => {
     const listUsers = [
-      { user_uid: 'user1' },
-      { user_uid: 'user2' },
-      { user_uid: 'user3' },
+      { userUid: 'user1' },
+      { userUid: 'user2' },
+      { userUid: 'user3' },
     ];
     const userUid = 'user5';
     const expectedIndex = -1;

@@ -16,7 +16,7 @@ export const addPositionInTop10 = (listUsers) => listUsers.map((user, index) => 
  * @param {string} userUid - The unique identifier of the user to find.
  * @returns {number} The index of the user in the list, or -1 if not found.
  */
-export const findIndexByUserUid = (listUsers, userUid) => listUsers.findIndex(user => user.user_uid === userUid);
+export const findIndexByUserUid = (listUsers, userUid) => listUsers.findIndex(user => user.userUid === userUid);
 
 /**
  * Adds a `position` property to each user in a competitors list relative to the specified user's rank.

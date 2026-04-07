@@ -50,7 +50,7 @@
                 { "user_uid": "username7", "url_profile_image": "/images/default.png", "points": 44444, "position": 7, "system_statuses": [] },
                 { "user_uid": "username8", "url_profile_image": "/images/default.png", "points": 33333, "position": 8, "system_statuses": [] },
                 { "user_uid": "username9", "url_profile_image": "/images/default.png", "points": 22222, "position": 9, "system_statuses": [] },
-                { "user_uid": "current_user", "url_profile_image": "/images/default_0.png", "points": 0, "position": null, "system_statuses": [], "system_events": [], "badges": {}, "signup_source": null }
+                { "userUid": "current_user", "urlProfileImage": "/images/default_0.png", "points": 0, "position": null, "systemStatuses": [], "systemEvents": [], "badges": {}, "signupSource": null }
             ],
             "rank": null,
             "systemStatuses": []
@@ -77,13 +77,13 @@
             "userUid": "current_user",
             "urlProfileImage": "/images/default_0.png",
             "competitors": [
-                { "user_uid": "username101", "url_profile_image": "/images/default.png", "points": 900, "system_statuses": [] },
-                { "user_uid": "username102", "url_profile_image": "/images/default.png", "points": 850, "system_statuses": [] },
-                { "user_uid": "username103", "url_profile_image": "/images/default.png", "points": 750, "system_statuses": [] },
-                { "user_uid": "username104", "url_profile_image": "/images/default.png", "points": 650, "system_statuses": [] },
-                { "user_uid": "current_user", "url_profile_image": "/images/default_0.png", "points": 550, "system_statuses": [] },
-                { "user_uid": "username106", "url_profile_image": "/images/default.png", "points": 450, "system_statuses": [] },
-                { "user_uid": "username107", "url_profile_image": "/images/default.png", "points": 350, "system_statuses": [] }
+                { "userUid": "username101", "url_profile_image": "/images/default.png", "points": 900, "system_statuses": [] },
+                { "userUid": "username102", "url_profile_image": "/images/default.png", "points": 850, "system_statuses": [] },
+                { "userUid": "username103", "url_profile_image": "/images/default.png", "points": 750, "system_statuses": [] },
+                { "userUid": "username104", "url_profile_image": "/images/default.png", "points": 650, "system_statuses": [] },
+                { "userUid": "current_user", "url_profile_image": "/images/default_0.png", "points": 550, "system_statuses": [] },
+                { "userUid": "username106", "url_profile_image": "/images/default.png", "points": 450, "system_statuses": [] },
+                { "userUid": "username107", "url_profile_image": "/images/default.png", "points": 350, "system_statuses": [] }
             ]
         },
         "expectedProps": {
@@ -92,13 +92,13 @@
                 { "user_uid": "username1", "url_profile_image": "/images/default.png", "points": 100000, "position": 1, "system_statuses": [] },
                 { "user_uid": "username2", "url_profile_image": "/images/default.png", "points": 99999, "position": 2, "system_statuses": [] },
                 { "user_uid": "username3", "url_profile_image": "/images/default.png", "points": 88888, "position": 3, "system_statuses": [] },
-                { "user_uid": "username101", "url_profile_image": "/images/default.png", "points": 900, "position": 101, "system_statuses": [] },
-                { "user_uid": "username102", "url_profile_image": "/images/default.png", "points": 850, "position": 102, "system_statuses": [] },
-                { "user_uid": "username103", "url_profile_image": "/images/default.png", "points": 750, "position": 103, "system_statuses": [] },
-                { "user_uid": "username104", "url_profile_image": "/images/default.png", "points": 650, "position": 104, "system_statuses": [] },
-                { "user_uid": "current_user", "url_profile_image": "/images/default_0.png", "points": 550, "position": 105, "system_statuses": [] },
-                { "user_uid": "username106", "url_profile_image": "/images/default.png", "points": 450, "position": 106, "system_statuses": [] },
-                { "user_uid": "username107", "url_profile_image": "/images/default.png", "points": 350, "position": 107, "system_statuses": [] }
+                { "userUid": "username101", "url_profile_image": "/images/default.png", "points": 900, "position": 101, "system_statuses": [] },
+                { "userUid": "username102", "url_profile_image": "/images/default.png", "points": 850, "position": 102, "system_statuses": [] },
+                { "userUid": "username103", "url_profile_image": "/images/default.png", "points": 750, "position": 103, "system_statuses": [] },
+                { "userUid": "username104", "url_profile_image": "/images/default.png", "points": 650, "position": 104, "system_statuses": [] },
+                { "userUid": "current_user", "url_profile_image": "/images/default_0.png", "points": 550, "position": 105, "system_statuses": [] },
+                { "userUid": "username106", "url_profile_image": "/images/default.png", "points": 450, "position": 106, "system_statuses": [] },
+                { "userUid": "username107", "url_profile_image": "/images/default.png", "points": 350, "position": 107, "system_statuses": [] }
             ],
             "rank": 105,
             "systemStatuses": []
@@ -165,13 +165,13 @@
             "userUid": "current_user",
             "urlProfileImage": "/images/default_0.png",
             "competitors": [
-                { "user_uid": "username101", "url_profile_image": "/images/default.png", "points": 900, "system_statuses": [] },
-                { "user_uid": "username102", "url_profile_image": "/images/default.png", "points": 850, "system_statuses": [] },
-                { "user_uid": "username103", "url_profile_image": "/images/default.png", "points": 750, "system_statuses": [] },
-                { "user_uid": "username104", "url_profile_image": "/images/default.png", "points": 650, "system_statuses": [] },
-                { "user_uid": "username105", "url_profile_image": "/images/default.png", "points": 550, "system_statuses": [] },
-                { "user_uid": "current_user", "url_profile_image": "/images/default_0.png", "points": 450, "system_statuses": [] },
-                { "user_uid": "username107", "url_profile_image": "/images/default.png", "points": 350, "system_statuses": [] }
+                { "userUid": "username101", "url_profile_image": "/images/default.png", "points": 900, "system_statuses": [] },
+                { "userUid": "username102", "url_profile_image": "/images/default.png", "points": 850, "system_statuses": [] },
+                { "userUid": "username103", "url_profile_image": "/images/default.png", "points": 750, "system_statuses": [] },
+                { "userUid": "username104", "url_profile_image": "/images/default.png", "points": 650, "system_statuses": [] },
+                { "userUid": "username105", "url_profile_image": "/images/default.png", "points": 550, "system_statuses": [] },
+                { "userUid": "current_user", "url_profile_image": "/images/default_0.png", "points": 450, "system_statuses": [] },
+                { "userUid": "username107", "url_profile_image": "/images/default.png", "points": 350, "system_statuses": [] }
             ]
         },
         "expectedProps": {
@@ -180,13 +180,13 @@
                 { "user_uid": "username1", "url_profile_image": "/images/default.png", "points": 100000, "position": 1, "system_statuses": [] },
                 { "user_uid": "username2", "url_profile_image": "/images/default.png", "points": 99999, "position": 2, "system_statuses": [] },
                 { "user_uid": "username3", "url_profile_image": "/images/default.png", "points": 88888, "position": 3, "system_statuses": [] },
-                { "user_uid": "username101", "url_profile_image": "/images/default.png", "points": 900, "position": 101, "system_statuses": [] },
-                { "user_uid": "username102", "url_profile_image": "/images/default.png", "points": 850, "position": 102, "system_statuses": [] },
-                { "user_uid": "username103", "url_profile_image": "/images/default.png", "points": 750, "position": 103, "system_statuses": [] },
-                { "user_uid": "username104", "url_profile_image": "/images/default.png", "points": 650, "position": 104, "system_statuses": [] },
-                { "user_uid": "username105", "url_profile_image": "/images/default.png", "points": 550, "position": 105, "system_statuses": [] },
-                { "user_uid": "current_user", "url_profile_image": "/images/default_0.png", "points": 450, "position": 106, "system_statuses": [] },
-                { "user_uid": "username107", "url_profile_image": "/images/default.png", "points": 350, "position": 107, "system_statuses": [] }
+                { "userUid": "username101", "url_profile_image": "/images/default.png", "points": 900, "position": 101, "system_statuses": [] },
+                { "userUid": "username102", "url_profile_image": "/images/default.png", "points": 850, "position": 102, "system_statuses": [] },
+                { "userUid": "username103", "url_profile_image": "/images/default.png", "points": 750, "position": 103, "system_statuses": [] },
+                { "userUid": "username104", "url_profile_image": "/images/default.png", "points": 650, "position": 104, "system_statuses": [] },
+                { "userUid": "username105", "url_profile_image": "/images/default.png", "points": 550, "position": 105, "system_statuses": [] },
+                { "userUid": "current_user", "url_profile_image": "/images/default_0.png", "points": 450, "position": 106, "system_statuses": [] },
+                { "userUid": "username107", "url_profile_image": "/images/default.png", "points": 350, "position": 107, "system_statuses": [] }
             ],
             "rank": 106,
             "systemStatuses": []
@@ -213,13 +213,13 @@
             "userUid": "current_user",
             "urlProfileImage": "/images/default_0.png",
             "competitors": [
-                { "user_uid": "username101", "url_profile_image": "/images/default.png", "points": 900, "system_statuses": [] },
-                { "user_uid": "username102", "url_profile_image": "/images/default.png", "points": 850, "system_statuses": [] },
-                { "user_uid": "username103", "url_profile_image": "/images/default.png", "points": 750, "system_statuses": [] },
-                { "user_uid": "username104", "url_profile_image": "/images/default.png", "points": 650, "system_statuses": [] },
-                { "user_uid": "username105", "url_profile_image": "/images/default.png", "points": 550, "system_statuses": [] },
-                { "user_uid": "username106", "url_profile_image": "/images/default.png", "points": 450, "system_statuses": [] },
-                { "user_uid": "current_user", "url_profile_image": "/images/default_0.png", "points": 350, "system_statuses": [] }
+                { "userUid": "username101", "url_profile_image": "/images/default.png", "points": 900, "system_statuses": [] },
+                { "userUid": "username102", "url_profile_image": "/images/default.png", "points": 850, "system_statuses": [] },
+                { "userUid": "username103", "url_profile_image": "/images/default.png", "points": 750, "system_statuses": [] },
+                { "userUid": "username104", "url_profile_image": "/images/default.png", "points": 650, "system_statuses": [] },
+                { "userUid": "username105", "url_profile_image": "/images/default.png", "points": 550, "system_statuses": [] },
+                { "userUid": "username106", "url_profile_image": "/images/default.png", "points": 450, "system_statuses": [] },
+                { "userUid": "current_user", "url_profile_image": "/images/default_0.png", "points": 350, "system_statuses": [] }
             ]
         },
         "expectedProps": {
@@ -228,13 +228,13 @@
                 { "user_uid": "username1", "url_profile_image": "/images/default.png", "points": 100000, "position": 1, "system_statuses": [] },
                 { "user_uid": "username2", "url_profile_image": "/images/default.png", "points": 99999, "position": 2, "system_statuses": [] },
                 { "user_uid": "username3", "url_profile_image": "/images/default.png", "points": 88888, "position": 3, "system_statuses": [] },
-                { "user_uid": "username101", "url_profile_image": "/images/default.png", "points": 900, "position": 101, "system_statuses": [] },
-                { "user_uid": "username102", "url_profile_image": "/images/default.png", "points": 850, "position": 102, "system_statuses": [] },
-                { "user_uid": "username103", "url_profile_image": "/images/default.png", "points": 750, "position": 103, "system_statuses": [] },
-                { "user_uid": "username104", "url_profile_image": "/images/default.png", "points": 650, "position": 104, "system_statuses": [] },
-                { "user_uid": "username105", "url_profile_image": "/images/default.png", "points": 550, "position": 105, "system_statuses": [] },
-                { "user_uid": "username106", "url_profile_image": "/images/default.png", "points": 450, "position": 106, "system_statuses": [] },
-                { "user_uid": "current_user", "url_profile_image": "/images/default_0.png", "points": 350, "position": 107, "system_statuses": [] }
+                { "userUid": "username101", "url_profile_image": "/images/default.png", "points": 900, "position": 101, "system_statuses": [] },
+                { "userUid": "username102", "url_profile_image": "/images/default.png", "points": 850, "position": 102, "system_statuses": [] },
+                { "userUid": "username103", "url_profile_image": "/images/default.png", "points": 750, "position": 103, "system_statuses": [] },
+                { "userUid": "username104", "url_profile_image": "/images/default.png", "points": 650, "position": 104, "system_statuses": [] },
+                { "userUid": "username105", "url_profile_image": "/images/default.png", "points": 550, "position": 105, "system_statuses": [] },
+                { "userUid": "username106", "url_profile_image": "/images/default.png", "points": 450, "position": 106, "system_statuses": [] },
+                { "userUid": "current_user", "url_profile_image": "/images/default_0.png", "points": 350, "position": 107, "system_statuses": [] }
             ],
             "rank": 107,
             "systemStatuses": []
@@ -294,7 +294,7 @@
                 { "user_uid": "username3", "url_profile_image": "/images/default.png", "points": 88888, "position": 3, "system_statuses": [] },
                 { "user_uid": "username4", "url_profile_image": "/images/default.png", "points": 77777, "position": 4, "system_statuses": [] },
                 { "user_uid": "username5", "url_profile_image": "/images/default.png", "points": 66666, "position": 5, "system_statuses": [] },
-                { "user_uid": "current_user", "url_profile_image": "/images/default_0.png", "points": 0, "position": null, "system_statuses": [], "system_events": [], "badges": {}, "signup_source": null }
+                { "userUid": "current_user", "urlProfileImage": "/images/default_0.png", "points": 0, "position": null, "systemStatuses": [], "systemEvents": [], "badges": {}, "signupSource": null }
             ],
             "rank": null,
             "systemStatuses": []
@@ -335,7 +335,7 @@
             "delimiter": 0,
             "profiles": [
                 { "user_uid": "username1", "url_profile_image": "/images/default.png", "points": 100000, "position": 1, "system_statuses": [] },
-                { "user_uid": "current_user", "url_profile_image": "/images/default_0.png", "points": 0, "position": null, "system_statuses": [], "system_events": [], "badges": {}, "signup_source": null }
+                { "userUid": "current_user", "urlProfileImage": "/images/default_0.png", "points": 0, "position": null, "systemStatuses": [], "systemEvents": [], "badges": {}, "signupSource": null }
             ],
             "rank": null,
             "systemStatuses": []
