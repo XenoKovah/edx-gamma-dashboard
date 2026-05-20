@@ -13,7 +13,7 @@ export const CHART_COLOR_SCHEME = [
 ];
 
 export const FONT_FAMILIES = {
-  primary: getCssVariableValue('--rgg-primary-font-family', '"Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif'),
+  primary: getCssVariableValue('--pgn-rgg-primary-font-family-base', '"Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif'),
 };
 
 export const CHART_TITLE_STYLES = {
@@ -49,3 +49,7 @@ export const CHART_SERIES_ITEM_STYLES = {
 };
 
 export const CHART_SIDE_INDENT = 20;
+
+export const CHART_LABEL_STYLES = {
+  fontFamily: FONT_FAMILIES.primary,
+};

@@ -6,6 +6,7 @@ import {
   CHART_ICON_EMPHASIS_STYLES,
   CHART_SUBTITLE_STYLES,
   CHART_TITLE_STYLES,
+  CHART_LABEL_STYLES,
 } from '../constants';
 
 export const getConfig = (dates, points, progress, messages, containerWidth, isSmall, years) => {
@@ -29,13 +30,18 @@ export const getConfig = (dates, points, progress, messages, containerWidth, isS
         Progress: true,
         Points: true,
       },
+      textStyle: CHART_LABEL_STYLES,
     },
     xAxis: {
       type: 'category',
       data: labels,
+      axisLabel: CHART_LABEL_STYLES,
+      nameTextStyle: CHART_LABEL_STYLES,
     },
     yAxis: {
       type: 'value',
+      axisLabel: CHART_LABEL_STYLES,
+      nameTextStyle: CHART_LABEL_STYLES,
     },
     grid: {
       top: isSmall ? 120 : 100,
@@ -49,12 +55,14 @@ export const getConfig = (dates, points, progress, messages, containerWidth, isS
         type: 'line',
         data: progress,
         areaStyle: {},
+        label: CHART_LABEL_STYLES,
       },
       {
         clockwise: !isRtl,
         name: messages.legend.points,
         type: 'line',
         data: points,
+        label: CHART_LABEL_STYLES,
       },
     ],
     toolbox: {
@@ -109,6 +117,7 @@ export const getConfig = (dates, points, progress, messages, containerWidth, isS
     ],
     tooltip: {
       trigger: 'axis',
+      textStyle: CHART_LABEL_STYLES,
       formatter(params) {
         let tooltipContent = '<div>';
         tooltipContent += `${params[0].axisValue}<br/>`;

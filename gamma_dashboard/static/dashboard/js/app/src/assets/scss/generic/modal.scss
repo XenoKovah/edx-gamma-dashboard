@@ -4,7 +4,6 @@
 
     .pgn__modal-title {
       color: $secondary-text-color;
-      font-family: $font;
     }
   }
 
@@ -23,7 +22,6 @@
       border: 1px solid $secondary-text-color !important;
       border-radius: 0.188rem;
       font-size: $font-size-base;
-      font-family: $font;
       color: $secondary-text-color;
       letter-spacing: normal;
       width: 100%;
@@ -72,12 +70,13 @@
     textarea.form-control {
       height: 7.625rem;
       font-style: normal;
-      font-family: $font;
     }
 
     .pgn__form-control-floating-label-text {
       color: $secondary-text-color;
-      font: $font-weight-normal #{$font-size-base}/1.2rem $font;
+      font-weight: $font-weight-normal;
+      font-size: $font-size-base;
+      line-height: 1.2rem;
     }
   }
 
