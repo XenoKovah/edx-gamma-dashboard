@@ -2,6 +2,10 @@
 
 ## [Unreleased]
 
+## Fixed
+- [OST-68] custom fonts loading from rg-branding-plugin
+- use camelCase keys in leaderboard utils after API response conversion
+
 ## 2.1.0 (2026-03-13)
 ### Added
 
