@@ -8,6 +8,7 @@ from django.contrib.staticfiles.storage import staticfiles_storage
 from django.urls import reverse
 from django.utils.translation import gettext as _
 
+from openedx.core.djangoapps.site_configuration import helpers as configuration_helpers
 from openedx.core.djangolib.js_utils import js_escaped_string
 %>
 
@@ -54,7 +55,13 @@ from openedx.core.djangolib.js_utils import js_escaped_string
 
 <div id="app"></div>
 
+<%
+gamification_base_url = configuration_helpers.get_value(
+    'GAMIFICATION_BASE_URL', settings.FEATURES.get('RG_GAMIFICATION', {}).get('RG_GAMIFICATION_ENDPOINT')
+)
+%>
+
 <script type="text/javascript">
-    window.GAMIFICATION_BASE_URL="${settings.FEATURES.get('RG_GAMIFICATION', {}).get('RG_GAMIFICATION_ENDPOINT')}";
+    window.GAMIFICATION_BASE_URL="${gamification_base_url}";
 </script>
 <script src="${staticfiles_storage.url('dashboard/js/app/dist/bundle.js')}"></script>

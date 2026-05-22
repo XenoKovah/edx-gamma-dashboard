@@ -30,13 +30,13 @@ export const getLeaderboardTableProps = (data) => {
       // user is not ranked yet
       const profilesTop9 = profilesTop10.slice(0, 9);
       const currentUser = {
-        user_uid: userUid,
-        url_profile_image: urlProfileImage,
-        signup_source: null,
+        userUid,
+        urlProfileImage,
+        signupSource: null,
         points: 0,
         badges: {},
-        system_statuses: [],
-        system_events: [],
+        systemStatuses: [],
+        systemEvents: [],
         position: null,
       };
       propsObj.profiles = [...profilesTop9, currentUser];

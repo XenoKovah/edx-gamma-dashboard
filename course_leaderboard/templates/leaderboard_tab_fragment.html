@@ -5,6 +5,7 @@ from django.utils.translation import gettext as _
 from django.contrib.staticfiles.storage import staticfiles_storage
 from openedx.core.djangolib.js_utils import js_escaped_string
 from openedx.core.djangolib.markup import HTML
+from openedx.core.djangoapps.site_configuration import helpers as configuration_helpers
 %>
 
 <%namespace name='static' file='/static_content.html'/>
@@ -55,9 +56,15 @@ from openedx.core.djangolib.markup import HTML
   <div id="app" style="height: 100%;"></div>
 </%block>
 
+<%
+gamification_base_url = configuration_helpers.get_value(
+    'GAMIFICATION_BASE_URL', settings.FEATURES.get('RG_GAMIFICATION', {}).get('RG_GAMIFICATION_ENDPOINT')
+)
+%>
+
 <%block name="js_extra">
   <script type="text/javascript">
-    window.GAMIFICATION_BASE_URL="${settings.FEATURES.get('RG_GAMIFICATION', {}).get('RG_GAMIFICATION_ENDPOINT')}";
+    window.GAMIFICATION_BASE_URL="${gamification_base_url}";
   </script>
   <script src="${staticfiles_storage.url('dashboard/js/app/dist/bundle.js')}"></script>
 </%block>

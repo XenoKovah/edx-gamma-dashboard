@@ -2,13 +2,13 @@ import { getCssVariableValue } from './utils/other';
 
 export const BASE_ROOT = '/gamma_dashboard';
 
-export const GAMMA_ADMIN_BASE_URL = process.env.REACT_APP_API_HOST || '';
+export const GAMMA_ADMIN_BASE_URL = window.GAMIFICATION_BASE_URL || '';
 
 export const isRtl = document.querySelector('body').classList.contains('rtl');
 
 export const COLOR_PALETTE = {
-  primary: getCssVariableValue('--pgn-rgg-primary-color', '#006a00'),
-  primaryTransparent: getCssVariableValue('--pgn-rgg-accent-transparent-bg-color', '#006a008c'),
+  primary: getCssVariableValue('--pgn-rgg-accent-color', '#0a3055'),
+  primaryTransparent: getCssVariableValue('--pgn-rgg-accent-transparent-bg-color', 'rgba(10, 48, 85, 0.4)'),
   quaternary: getCssVariableValue('--pgn-rgg-quaternary-color', '#00abd9'),
   neutralGray: getCssVariableValue('--pgn-rgg-neutral-gray-color', '#bcbcbc'),
   mutedGray: getCssVariableValue('--pgn-rgg-muted-gray-color', '#aaa'),

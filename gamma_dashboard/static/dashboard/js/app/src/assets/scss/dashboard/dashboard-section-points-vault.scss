@@ -1,7 +1,6 @@
 .points-vault-section {
   display: flex;
   flex-direction: column;
-  // height: 100vh;
 
   .points-vault {
     display: flex;
@@ -13,13 +12,15 @@
 }
 
 .points-vault-img {
-  color: $accent-color;
+  color: $accent-transparent-bg-color; 
   width: $points-vault-img-size;
   height: $points-vault-img-size;
 }
 
 .points-vault-total {
-  font: $font-weight-bold #{$font-size-sm}/normal $font;
+  font-weight: $font-weight-bold;
+  font-size: $font-size-sm;
+  line-height: normal;
   text-transform: uppercase;
   color: $main-text-color;
 

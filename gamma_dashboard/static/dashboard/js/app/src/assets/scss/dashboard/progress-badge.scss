@@ -108,7 +108,9 @@
 }
 
 .progress-badge-title {
-  font: $font-weight-bold #{$font-size-xs}/normal $font;
+  font-weight: $font-weight-bold;
+  font-size: $font-size-xs;
+  line-height: normal;
   text-transform: uppercase;
   color: $main-text-color;
   display: -webkit-box;
@@ -195,5 +197,4 @@
 
 h3.popover-header strong {
   font-size: 1rem;
-  font-family: $font;
 }
