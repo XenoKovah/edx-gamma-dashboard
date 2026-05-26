@@ -3,6 +3,10 @@
 ## [Unreleased]
 
 ## Fixed
+- [OST-75] scope gamification_base_url inside js_extra Mako block
+
+## 2.2.0 (2026-05-22)
+## Fixed
 - [OST-68] custom fonts loading from rg-branding-plugin
 - use camelCase keys in leaderboard utils after API response conversion
 
