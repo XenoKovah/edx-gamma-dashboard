@@ -56,13 +56,12 @@ from openedx.core.djangoapps.site_configuration import helpers as configuration_
   <div id="app" style="height: 100%;"></div>
 </%block>
 
-<%
-gamification_base_url = configuration_helpers.get_value(
-    'GAMIFICATION_BASE_URL', settings.FEATURES.get('RG_GAMIFICATION', {}).get('RG_GAMIFICATION_ENDPOINT')
-)
-%>
-
 <%block name="js_extra">
+  <%
+  gamification_base_url = configuration_helpers.get_value(
+      'GAMIFICATION_BASE_URL', settings.FEATURES.get('RG_GAMIFICATION', {}).get('RG_GAMIFICATION_ENDPOINT')
+  )
+  %>
   <script type="text/javascript">
     window.GAMIFICATION_BASE_URL="${gamification_base_url}";
   </script>
