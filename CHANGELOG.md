@@ -2,6 +2,7 @@
 
 ## [Unreleased]
 
+## 2.2.1 (2026-06-05)
 ## Fixed
 - [OST-75] scope gamification_base_url inside js_extra Mako block
 
