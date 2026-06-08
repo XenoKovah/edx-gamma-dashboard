@@ -2,7 +2,7 @@ import { addPositionInCompetitors, addPositionInTop10 } from '../utils';
 
 export const getLeaderboardTableProps = (data) => {
   const {
-    top10, systemStatuses, rank, userUid, urlProfileImage, competitors,
+    top10, systemStatuses, rank, userUid, urlProfileImage, profileUrl, competitors,
   } = data;
   const profilesTop10 = addPositionInTop10(top10);
   const propsObj = {
@@ -32,6 +32,7 @@ export const getLeaderboardTableProps = (data) => {
       const currentUser = {
         userUid,
         urlProfileImage,
+        profileUrl,
         signupSource: null,
         points: 0,
         badges: {},

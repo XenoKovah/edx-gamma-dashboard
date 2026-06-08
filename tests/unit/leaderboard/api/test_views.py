@@ -201,3 +201,75 @@ class TestLeaderboardApiView:
 
         assert response.status_code == status.HTTP_404_NOT_FOUND
         assert response.data == {"error": "Gamma Leaderboard is disabled."}
+
+
+class TestGetProfileUrl:
+    """
+    Test the `_get_profile_url` helper of `LeaderboardApiView`.
+    """
+
+    @pytest.mark.parametrize(
+        "profile_mfe_base,username,expected",
+        (
+            (
+                "https://apps.example.com/profile/u/",
+                "XenoPublic",
+                "https://apps.example.com/profile/u/XenoPublic",
+            ),
+            (None, "XenoPublic", "/u/XenoPublic"),
+            ("", "XenoPublic", "/u/XenoPublic"),
+        ),
+    )
+    def test_get_profile_url(self, settings, profile_mfe_base, username, expected):
+        settings.PROFILE_MICROFRONTEND_URL = profile_mfe_base
+
+        assert LeaderboardApiView._get_profile_url(username) == expected
+
+
+class TestUpdateLeaderboardInfo:
+    """
+    Test the `_update_leaderboard_info` method of `LeaderboardApiView`.
+    """
+
+    @pytest.mark.django_db
+    def test_adds_profile_url_for_known_users_and_none_for_unknown(self, mocker, settings):
+        settings.PROFILE_MICROFRONTEND_URL = "https://apps.example.com/profile/u/"
+
+        def make_user(username, name):
+            user = mocker.MagicMock()
+            user.username = username
+            user.profile.name = name
+            return user
+
+        current_user = make_user("current_user", "Current Full Name")
+        alice = make_user("alice", "Alice Liddell")
+        bob = make_user("bob", "")  # empty profile name falls back to the username
+
+        mocker.patch(
+            "gamma_dashboard.dashboard.api.v0.views.get_profile_image_urls_for_user",
+            return_value={"medium": "/images/default.png"},
+        )
+        mocker.patch(
+            "django.contrib.auth.models.User.objects.filter",
+            return_value=[alice, bob],
+        )
+
+        leaderboard_info = {
+            "top10": [{"user_uid": "alice"}, {"user_uid": "ghost"}],
+            "competitors": [{"user_uid": "bob"}],
+        }
+
+        result = LeaderboardApiView._update_leaderboard_info(current_user, leaderboard_info)
+
+        # The current (top-level) user gets a profile URL built from their username.
+        assert result["user_uid"] == "Current Full Name"
+        assert result["profile_url"] == "https://apps.example.com/profile/u/current_user"
+
+        top10_by_name = {item["user_uid"]: item for item in result["top10"]}
+        assert top10_by_name["Alice Liddell"]["profile_url"] == "https://apps.example.com/profile/u/alice"
+        # Users not found on the platform become "unknown user" with no profile link.
+        assert top10_by_name["unknown user"]["profile_url"] is None
+
+        bob_item = result["competitors"][0]
+        assert bob_item["user_uid"] == "bob"
+        assert bob_item["profile_url"] == "https://apps.example.com/profile/u/bob"

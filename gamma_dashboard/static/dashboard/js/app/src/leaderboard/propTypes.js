@@ -15,6 +15,7 @@ const ProfilePropType = {
   signup_source: PropTypes.string,
   points: PropTypes.number,
   url_profile_image: PropTypes.string,
+  profileUrl: PropTypes.string,
   badges: PropTypes.objectOf(PropTypes.shape(BadgePropType)),
   systemStatuses: PropTypes.arrayOf(PropTypes.shape(StatusPropType)),
   system_events: PropTypes.arrayOf(EventPropType).isRequired,

@@ -2,6 +2,9 @@
 
 ## [Unreleased]
 
+### Added
+- Link each leaderboard username to that user's profile page (Profile MFE)
+
 ## Fixed
 - [OST-75] scope gamification_base_url inside js_extra Mako block
 

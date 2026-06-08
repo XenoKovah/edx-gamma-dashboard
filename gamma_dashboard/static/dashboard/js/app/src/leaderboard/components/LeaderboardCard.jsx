@@ -1,24 +1,41 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
+import { useIntl } from 'react-intl';
 import { breakpoints, Card, useMediaQuery } from '@openedx/paragon';
 
 import { ProfilePropType } from '../propTypes';
 import Avatar from './Avatar';
 import BadgeList from './BadgeList';
 
+import messages from '../../i18n';
 import defaultProfileImg from '../../assets/images/default-profile-image.png';
 
 const LeaderboardCard = ({ profile, rank }) => {
+  const intl = useIntl();
   const {
     userUid: username = '',
     points = 0,
     badges = {},
     position,
+    profileUrl,
   } = profile;
 
   const selfPosition = position === rank;
   const isSmall = useMediaQuery({ maxWidth: breakpoints.small.maxWidth });
+
+  // When the backend resolves a platform user, it provides a link to their profile page.
+  // Render the username as that link; otherwise (e.g. an unknown user) keep it as plain text.
+  const usernameNode = profileUrl ? (
+    <a
+      className="leaderboard-card-username-link"
+      href={profileUrl}
+      data-testid="leaderboard-card-username-link"
+      aria-label={intl.formatMessage(messages.leaderboardProfileLinkLabel, { username })}
+    >
+      {username}
+    </a>
+  ) : username;
 
   return (
     <Card
@@ -39,7 +56,7 @@ const LeaderboardCard = ({ profile, rank }) => {
         className="d-flex align-items-center"
       >
         <Card.Header
-          title={username}
+          title={usernameNode}
           size="sm"
         />
         <span

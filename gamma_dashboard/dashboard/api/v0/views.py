@@ -1,6 +1,7 @@
 """
 Gamma leaderboard API views.
 """
+from django.conf import settings
 from django.contrib.auth.models import User
 from edx_rest_framework_extensions.auth.session.authentication import SessionAuthenticationAllowInactiveUser
 from rest_framework import status
@@ -56,18 +57,41 @@ class LeaderboardApiView(APIView):
         return response
 
     @staticmethod
+    def _get_profile_url(username):
+        """
+        Build the URL of a user's profile page.
+
+        When the Profile MFE is configured (``PROFILE_MICROFRONTEND_URL``) the link points
+        straight at it, mirroring how edx-platform itself builds learner profile links.
+        Otherwise it falls back to the LMS ``/u/<username>`` route, which redirects to the
+        Profile MFE when it is enabled.
+
+        Arguments:
+            username (str): the platform username to link to.
+        Return:
+            str: an absolute (or LMS-relative) URL to the user's profile page.
+        """
+        profile_mfe_base = getattr(settings, "PROFILE_MICROFRONTEND_URL", None)
+        if profile_mfe_base:
+            return f"{profile_mfe_base}{username}"
+        return f"/u/{username}"
+
+    @staticmethod
     def _update_leaderboard_info(user, leaderboard_info):
         """
-        Updates the leaderboard_info with profile image URLs and updated user_uid field for each user.
+        Updates the leaderboard_info with profile image URLs, profile page URLs and the
+        updated user_uid field for each user.
 
         Arguments:
             user (User): current user instance.
             leaderboard_info (dict):dictionary containing leaderboard information.
         Return:
-            leaderboard_info (dict): Updated leaderboard_info with profile image URLs and new user_uid.
+            leaderboard_info (dict): Updated leaderboard_info with profile image URLs,
+            profile page URLs and new user_uid.
         """
         leaderboard_info["url_profile_image"] = get_profile_image_urls_for_user(user)["medium"]
         leaderboard_info["user_uid"] = user.profile.name if user.profile.name else user.username
+        leaderboard_info["profile_url"] = LeaderboardApiView._get_profile_url(user.username)
 
         all_users = leaderboard_info.get("top10") + leaderboard_info.get("competitors")
         user_uids = set(item["user_uid"] for item in all_users)
@@ -77,11 +101,14 @@ class LeaderboardApiView(APIView):
         for key in ("top10", "competitors"):
             for item in leaderboard_info[key]:
                 if user := users_dict.get(item["user_uid"]):
+                    item["profile_url"] = LeaderboardApiView._get_profile_url(user.username)
                     item["user_uid"] = user.profile.name if user.profile.name else user.username
                     item["url_profile_image"] = get_profile_image_urls_for_user(user)["medium"]
                 else:
                     # If the user is not found on the platform, change their Gamma-sourced username
+                    # and leave them without a profile link.
                     item["user_uid"] = "unknown user"
+                    item["profile_url"] = None
 
         return leaderboard_info
 

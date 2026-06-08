@@ -261,6 +261,11 @@ const messages = defineMessages({
     defaultMessage: '{username} profile image',
     description: 'Alternative text for user profile image in the leaderboard',
   },
+  leaderboardProfileLinkLabel: {
+    id: 'leaderboard.profile.link.label',
+    defaultMessage: "View {username}'s profile",
+    description: "Accessible label for the link from a leaderboard entry to that user's profile page",
+  },
   genericLoaderScreenReaderText: {
     id: 'generic.loader.screenReader.text',
     defaultMessage: 'Loading...',
