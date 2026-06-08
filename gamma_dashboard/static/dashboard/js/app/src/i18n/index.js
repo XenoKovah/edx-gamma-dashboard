@@ -406,6 +406,11 @@ const messages = defineMessages({
     defaultMessage: 'There are currently no users to display on the leaderboard. Once participants engage, the rankings will appear here.',
     description: 'Description for the leaderboard empty state.',
   },
+  badgeLeaderboardImageAltText: {
+    id: 'badge.leaderboard.image.alt.text',
+    defaultMessage: '{title} badge',
+    description: 'Alternative text for the large badge image shown at the top of the per-badge leaderboard page.',
+  },
 });
 
 export default messages;

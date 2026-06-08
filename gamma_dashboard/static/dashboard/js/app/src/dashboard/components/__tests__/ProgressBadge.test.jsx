@@ -253,4 +253,23 @@ describe('<ProgressBadge>', () => {
     const totalProgressElement = getByTestId('total-progress-percent');
     expect(totalProgressElement).toHaveTextContent('50%');
   });
+
+  it('links the badge to its per-badge leaderboard page, wrapping the figure and title', () => {
+    const data = {
+      done: true,
+      id: 'firmware-master-level-1',
+      progress: {},
+      title: 'Firmware Master Level 1',
+      imageSrc: 'https://gamma-url.com/badge.png',
+    };
+
+    const { getByTestId } = renderWithProviders(
+      <ProgressBadge slug="firmware-master-level-1" data={data} />,
+    );
+
+    const link = getByTestId('progress-badge-link');
+    expect(link).toHaveAttribute('href', '/gamma_dashboard/leaderboard/badge/firmware-master-level-1');
+    expect(within(link).getByTestId('progress-badge-title')).toHaveTextContent(data.title);
+    expect(within(link).getByTestId('progress-badge-figure')).toBeInTheDocument();
+  });
 });

@@ -43,6 +43,7 @@ const ProgressBadgesModal = ({
           {filteredActiveBadges.map((item) => (
             <ProgressBadge
               key={getItemDataFunction(item).title}
+              slug={item[0]}
               data={getItemDataFunction(item)}
               center
             />

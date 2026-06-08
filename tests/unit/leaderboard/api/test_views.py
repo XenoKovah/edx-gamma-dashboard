@@ -4,7 +4,11 @@ import pytest
 
 from rest_framework import status
 
-from gamma_dashboard.dashboard.api.v0.views import LeaderboardApiView, UserBadgesApiView
+from gamma_dashboard.dashboard.api.v0.views import (
+    BadgeLeaderboardApiView,
+    LeaderboardApiView,
+    UserBadgesApiView,
+)
 from gamma_dashboard.dashboard.core.gamma.api.wrapper import GammaApiWrapper
 
 # from tests.utils import load_params_from_json
@@ -198,6 +202,141 @@ class TestLeaderboardApiView:
         )
 
         response = view.get(request_mock, **view_kwargs)
+
+        assert response.status_code == status.HTTP_404_NOT_FOUND
+        assert response.data == {"error": "Gamma Leaderboard is disabled."}
+
+
+class TestBadgeLeaderboardApiView:
+    """
+    Test Case for the testing BadgeLeaderboardApiView.
+    """
+
+    BADGE_SLUG = "firmware-master-level-1"
+
+    @pytest.mark.django_db
+    @pytest.mark.parametrize(
+        "show_gamma_leaderboard,show_course_leaderboard_tab,view_kwargs,gamma_api_wrapper_call_course_id_arg",
+        (
+            (True, False, {}, None),
+            (True, True, {}, None),
+            (False, True, {"course_id": "course-v1:OpenedX+DemoX+DemoCourse"}, "course-v1:OpenedX+DemoX+DemoCourse"),
+            (True, True, {"course_id": "course-v1:OpenedX+DemoX+DemoCourse"}, "course-v1:OpenedX+DemoX+DemoCourse"),
+        ),
+    )
+    def test_badge_leaderboard_toggle_enabled_and_info_exist(
+        self,
+        mocker,
+        show_gamma_leaderboard,
+        show_course_leaderboard_tab,
+        view_kwargs,
+        gamma_api_wrapper_call_course_id_arg,
+    ):
+        view = BadgeLeaderboardApiView()
+        request_mock = mocker.MagicMock()
+        badge_leaderboard_info_mock = {
+            "badge": {"slug": self.BADGE_SLUG, "title": "Firmware Master Level 1"},
+            "top10": [],
+            "competitors": [],
+            "rank": None,
+        }
+        mocker.patch(
+            "gamma_dashboard.dashboard.api.v0.views.show_gamma_leaderboard",
+            return_value=show_gamma_leaderboard,
+        )
+        mocker.patch(
+            "gamma_dashboard.dashboard.api.v0.views.show_course_leaderboard_tab",
+            return_value=show_course_leaderboard_tab,
+        )
+        gamma_api_wrapper_mock = mocker.patch.object(
+            GammaApiWrapper, "get_badge_leaderboard_info", return_value=badge_leaderboard_info_mock
+        )
+        update_leaderboard_info_mock = mocker.patch(
+            "gamma_dashboard.dashboard.api.v0.views.LeaderboardApiView._update_leaderboard_info",
+            return_value=badge_leaderboard_info_mock,
+        )
+
+        response = view.get(request_mock, self.BADGE_SLUG, **view_kwargs)
+
+        gamma_api_wrapper_mock.assert_called_once_with(
+            request_mock.user.username,
+            request_mock.user.usersignupsource_set.first.return_value.site,
+            self.BADGE_SLUG,
+            gamma_api_wrapper_call_course_id_arg,
+        )
+        update_leaderboard_info_mock.assert_called_once_with(request_mock.user, badge_leaderboard_info_mock)
+        assert response.status_code == status.HTTP_200_OK
+        assert response.data == badge_leaderboard_info_mock
+
+    @pytest.mark.django_db
+    @pytest.mark.parametrize(
+        "show_gamma_leaderboard,show_course_leaderboard_tab,view_kwargs,gamma_api_wrapper_call_course_id_arg",
+        (
+            (True, False, {}, None),
+            (True, True, {"course_id": "course-v1:OpenedX+DemoX+DemoCourse"}, "course-v1:OpenedX+DemoX+DemoCourse"),
+        ),
+    )
+    def test_badge_leaderboard_toggle_enabled_and_no_info_returns_404(
+        self,
+        mocker,
+        show_gamma_leaderboard,
+        show_course_leaderboard_tab,
+        view_kwargs,
+        gamma_api_wrapper_call_course_id_arg,
+    ):
+        view = BadgeLeaderboardApiView()
+        request_mock = mocker.MagicMock()
+        mocker.patch(
+            "gamma_dashboard.dashboard.api.v0.views.show_gamma_leaderboard",
+            return_value=show_gamma_leaderboard,
+        )
+        mocker.patch(
+            "gamma_dashboard.dashboard.api.v0.views.show_course_leaderboard_tab",
+            return_value=show_course_leaderboard_tab,
+        )
+        gamma_api_wrapper_mock = mocker.patch.object(
+            GammaApiWrapper, "get_badge_leaderboard_info", return_value=None
+        )
+
+        response = view.get(request_mock, self.BADGE_SLUG, **view_kwargs)
+
+        gamma_api_wrapper_mock.assert_called_once_with(
+            request_mock.user.username,
+            request_mock.user.usersignupsource_set.first.return_value.site,
+            self.BADGE_SLUG,
+            gamma_api_wrapper_call_course_id_arg,
+        )
+        assert response.status_code == status.HTTP_404_NOT_FOUND
+        assert response.data == {"error": "Badge not found."}
+
+    @pytest.mark.django_db
+    @pytest.mark.parametrize(
+        "show_gamma_leaderboard,show_course_leaderboard_tab,view_kwargs",
+        (
+            (False, True, {}),
+            (False, False, {}),
+            (True, False, {"course_id": "course-v1:OpenedX+DemoX+DemoCourse"}),
+        ),
+    )
+    def test_badge_leaderboard_toggle_disabled(
+        self,
+        mocker,
+        show_gamma_leaderboard,
+        show_course_leaderboard_tab,
+        view_kwargs,
+    ):
+        view = BadgeLeaderboardApiView()
+        request_mock = mocker.MagicMock()
+        mocker.patch(
+            "gamma_dashboard.dashboard.api.v0.views.show_gamma_leaderboard",
+            return_value=show_gamma_leaderboard,
+        )
+        mocker.patch(
+            "gamma_dashboard.dashboard.api.v0.views.show_course_leaderboard_tab",
+            return_value=show_course_leaderboard_tab,
+        )
+
+        response = view.get(request_mock, self.BADGE_SLUG, **view_kwargs)
 
         assert response.status_code == status.HTTP_404_NOT_FOUND
         assert response.data == {"error": "Gamma Leaderboard is disabled."}

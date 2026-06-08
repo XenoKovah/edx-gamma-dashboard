@@ -86,7 +86,7 @@ const DashboardWrapper = ({
           );
         }
 
-        return options.items.map((item) => <ProgressBadge key={item[0]} data={item[1]} />);
+        return options.items.map((item) => <ProgressBadge key={item[0]} slug={item[0]} data={item[1]} />);
       }
 
       case WIDGETS.AVATAR: {

@@ -8,6 +8,10 @@ export const LEADERBOARD_URLS = (courseId = '') => ({
   getInfo: `${BASE_URL}leaderboard/${courseId}`,
 });
 
+export const BADGE_LEADERBOARD_URLS = (badgeSlug = '', courseId = '') => ({
+  getInfo: `${BASE_URL}leaderboard/badge/${badgeSlug}${courseId ? `/${courseId}` : ''}`,
+});
+
 export const DASHBOARD_URLS = {
   getGameProfile: `${BASE_URL}game-profile/`,
   selectUserAvatarSet: () => USER_AVATAR_CONFIG_URL,

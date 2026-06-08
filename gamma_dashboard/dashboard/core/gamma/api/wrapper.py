@@ -93,6 +93,19 @@ class GammaApiWrapper:
             **kwargs
         )
 
+    def get_badge_leaderboard_info(self, username, user_signup_source, badge_slug, course_id=None, **kwargs):
+        """
+        Return leaderboard data limited to the users who earned a specific badge.
+
+        Returns:
+            dict: parsed badge leaderboard information.
+        """
+        return self.request_api_endpoint(
+            f'leaderboard/badge/{badge_slug}',
+            params={'username': username, 'signup_source': user_signup_source, 'course_id': course_id},
+            **kwargs
+        )
+
     def get_game_profile(self, username, **kwargs):
         """
         Return game profile data for user.

@@ -1,5 +1,27 @@
 import { addPositionInCompetitors, addPositionInTop10 } from '../utils';
 
+/**
+ * Build the LeaderboardTable props for the per-badge (filtered) leaderboard page.
+ *
+ * Unlike the personalized leaderboard, the badge leaderboard is a flat list of
+ * up to the top 100 earners already ranked by points, so positions are simply
+ * 1..N with no competitor delimiter. The current user (when among the earners)
+ * is highlighted via the `rank` returned by the backend.
+ *
+ * @param {Object} data - The badge leaderboard response.
+ * @param {Array<Object>} [data.top10] - The ranked badge earners.
+ * @param {number|null} [data.rank] - The requesting user's rank among earners.
+ * @returns {{ rank: number, profiles: Array<Object>, delimiter: null }}
+ */
+export const getBadgeLeaderboardTableProps = (data = {}) => {
+  const { top10 = [], rank = null } = data;
+  return {
+    rank: rank || 0,
+    profiles: addPositionInTop10(top10),
+    delimiter: null,
+  };
+};
+
 export const getLeaderboardTableProps = (data) => {
   const {
     top10, systemStatuses, rank, userUid, urlProfileImage, profileUrl, competitors,

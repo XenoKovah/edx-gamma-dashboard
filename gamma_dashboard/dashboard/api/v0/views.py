@@ -120,6 +120,46 @@ class LeaderboardApiView(APIView):
         return leaderboard_info
 
 
+class BadgeLeaderboardApiView(APIView):
+    """
+    Badge leaderboard API view.
+
+    Returns a leaderboard limited to the users who earned a specific badge, in
+    the same shape as :class:`LeaderboardApiView` plus the badge's display data
+    (``badge``: title, description, slug and image url).
+    """
+    permission_classes = (IsAuthenticated,)
+    authentication_classes = (SessionAuthenticationAllowInactiveUser,)
+
+    def get(self, request, badge_slug, *args, **kwargs):
+        """
+        Get badge leaderboard info for the given badge slug.
+        """
+        course_id = kwargs.get("course_id")
+
+        if course_id and not show_course_leaderboard_tab() or not course_id and not show_gamma_leaderboard():
+            return Response({"error": "Gamma Leaderboard is disabled."}, status=status.HTTP_404_NOT_FOUND)
+
+        signup_source = request.user.usersignupsource_set.first()
+        user_signup_source = signup_source.site if signup_source else MAIN_SITE_NAME
+
+        badge_leaderboard_info = GammaApiWrapper(
+            version=DEFAULT_API_VERSION
+        ).get_badge_leaderboard_info(request.user.username, user_signup_source, badge_slug, course_id)
+
+        if badge_leaderboard_info:
+            # The member enrichment (profile images, profile links, display names) is identical
+            # to the regular leaderboard; the empty ``competitors`` list is handled transparently.
+            updated_leaderboard_info = LeaderboardApiView._update_leaderboard_info(  # pylint: disable=protected-access
+                request.user, badge_leaderboard_info
+            )
+            response = Response(updated_leaderboard_info)
+        else:
+            response = Response({"error": "Badge not found."}, status=status.HTTP_404_NOT_FOUND)
+
+        return response
+
+
 class GameProfileApiView(APIView):
     """
     Game Profile API view.

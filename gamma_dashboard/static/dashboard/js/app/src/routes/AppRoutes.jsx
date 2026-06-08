@@ -9,7 +9,7 @@ import { IntlProvider } from 'react-intl';
 
 import { getMessages } from '../i18n/utils';
 import { getCookieByName } from '../utils';
-import { LeaderboardPage } from '../leaderboard';
+import { LeaderboardPage, BadgeLeaderboardPage } from '../leaderboard';
 import { DashboardPage } from '../dashboard';
 import { URLS, EXTERNAL_URLS } from './constants';
 
@@ -23,6 +23,7 @@ const AppRoutes = () => {
         <Routes>
           <Route exact path={URLS.dashboardPage} element={<DashboardPage />} />
           <Route exact path={URLS.leaderboardPage} element={<LeaderboardPage />} />
+          <Route exact path={URLS.badgeLeaderboardPage} element={<BadgeLeaderboardPage />} />
           <Route path={EXTERNAL_URLS.leaderboardTabPage} element={<LeaderboardPage />} />
         </Routes>
       </Router>
