@@ -417,4 +417,16 @@ describe('<DashboardWrapper>', () => {
       expect(block.textContent).toBeTruthy();
     });
   });
+
+  it('renders the Your Statuses block (slider) when the feature is enabled', () => {
+    const { getAllByTestId } = renderWithProviders(
+      <DashboardWrapper {...defaultProps} />,
+    );
+
+    // `slider-item-status-image` is rendered once per status and is unique to
+    // SliderStatusesBlock (unlike `slider-statuses-block-description`, which the
+    // badges section also uses), so it actually asserts the status block renders.
+    const statusImages = getAllByTestId('slider-item-status-image');
+    expect(statusImages.length).toBe(parsedStatusItems.length);
+  });
 });
