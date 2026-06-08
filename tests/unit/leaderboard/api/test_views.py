@@ -6,6 +6,7 @@ from rest_framework import status
 
 from gamma_dashboard.dashboard.api.v0.views import (
     BadgeLeaderboardApiView,
+    CourseLeaderboardApiView,
     LeaderboardApiView,
     UserBadgesApiView,
 )
@@ -340,6 +341,53 @@ class TestBadgeLeaderboardApiView:
 
         assert response.status_code == status.HTTP_404_NOT_FOUND
         assert response.data == {"error": "Gamma Leaderboard is disabled."}
+
+
+class TestCourseLeaderboardApiView:
+    """
+    Test Case for the testing CourseLeaderboardApiView.
+
+    The section assembly reads LMS certificate/grade/enrollment models, so it is
+    verified end-to-end against a real course rather than unit-tested here; these
+    cover the toggle gate and the member-shape helper.
+    """
+
+    @pytest.mark.django_db
+    def test_disabled_returns_404(self, mocker):
+        view = CourseLeaderboardApiView()
+        request_mock = mocker.MagicMock()
+        mocker.patch(
+            "gamma_dashboard.dashboard.api.v0.views.show_course_leaderboard_tab",
+            return_value=False,
+        )
+
+        response = view.get(request_mock, course_id="course-v1:OpenedX+DemoX+DemoCourse")
+
+        assert response.status_code == status.HTTP_404_NOT_FOUND
+        assert response.data == {"error": "Gamma Leaderboard is disabled."}
+
+    def test_build_member_completed_and_in_progress_shapes(self, mocker, settings):
+        settings.PROFILE_MICROFRONTEND_URL = "https://apps.example.com/profile/u/"
+        mocker.patch(
+            "gamma_dashboard.dashboard.api.v0.views.get_profile_image_urls_for_user",
+            return_value={"medium": "/images/default.png"},
+        )
+
+        user = mocker.MagicMock()
+        user.username = "alice"
+        user.profile.name = "Alice Liddell"
+
+        completed = CourseLeaderboardApiView._build_member(user, points=120)
+        assert completed["user_uid"] == "Alice Liddell"
+        assert completed["profile_url"] == "https://apps.example.com/profile/u/alice"
+        assert completed["url_profile_image"] == "/images/default.png"
+        assert completed["points"] == 120
+        assert "progress_percent" not in completed
+
+        in_progress = CourseLeaderboardApiView._build_member(user, progress_percent=9)
+        assert in_progress["user_uid"] == "Alice Liddell"
+        assert in_progress["progress_percent"] == 9
+        assert "points" not in in_progress
 
 
 class TestGetProfileUrl:
