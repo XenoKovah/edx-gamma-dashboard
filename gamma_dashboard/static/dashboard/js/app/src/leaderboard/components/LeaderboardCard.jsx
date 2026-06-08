@@ -19,9 +19,12 @@ const LeaderboardCard = ({ profile, rank, showProgress }) => {
     badges = {},
     position,
     profileUrl,
-    progressPercent = 0,
+    progressPercent = null,
   } = profile;
 
+  // Show the percentage when one is provided (in-progress members, and completed
+  // members who have no course points -> 100%); otherwise show the points score.
+  const hasProgressPercent = progressPercent !== null && progressPercent !== undefined;
   const selfPosition = position === rank;
   const isSmall = useMediaQuery({ maxWidth: breakpoints.small.maxWidth });
 
@@ -65,7 +68,7 @@ const LeaderboardCard = ({ profile, rank, showProgress }) => {
           className="leaderboard-card-progress"
           data-testid="progress-cell"
         >
-          {showProgress ? `${progressPercent}%` : points}
+          {hasProgressPercent ? `${progressPercent}%` : points}
         </span>
       </Card.Body>
       <Card.Footer className="p-0 mt-3 mt-md-0 overflow-auto">

@@ -24,7 +24,7 @@ from course_leaderboard.toggles import show_course_leaderboard_tab
 from gamma_dashboard.dashboard.core.gamma.api.settings import DEFAULT_API_VERSION
 from gamma_dashboard.dashboard.core.gamma.api.wrapper import GammaApiWrapper
 from gamma_dashboard.toggles import show_gamma_leaderboard
-from ..utils import site_badge_filter, is_main_site
+from ..utils import repair_mojibake_text, site_badge_filter, is_main_site
 
 MAIN_SITE_NAME = 'main'
 
@@ -97,7 +97,7 @@ class LeaderboardApiView(APIView):
             profile page URLs and new user_uid.
         """
         leaderboard_info["url_profile_image"] = get_profile_image_urls_for_user(user)["medium"]
-        leaderboard_info["user_uid"] = user.profile.name if user.profile.name else user.username
+        leaderboard_info["user_uid"] = repair_mojibake_text(user.profile.name) if user.profile.name else user.username
         leaderboard_info["profile_url"] = LeaderboardApiView._get_profile_url(user.username)
 
         # ``in_progress`` is only present for the per-badge leaderboard; the regular
@@ -113,7 +113,7 @@ class LeaderboardApiView(APIView):
             for item in leaderboard_info.get(key) or []:
                 if user := users_dict.get(item["user_uid"]):
                     item["profile_url"] = LeaderboardApiView._get_profile_url(user.username)
-                    item["user_uid"] = user.profile.name if user.profile.name else user.username
+                    item["user_uid"] = repair_mojibake_text(user.profile.name) if user.profile.name else user.username
                     item["url_profile_image"] = get_profile_image_urls_for_user(user)["medium"]
                 else:
                     # If the user is not found on the platform, change their Gamma-sourced username
@@ -229,10 +229,16 @@ class CourseLeaderboardApiView(APIView):
 
         ranked = sorted(cert_users, key=lambda user: points_by_username.get(user.username, 0), reverse=True)
         rank = next((index + 1 for index, user in enumerate(ranked) if user.id == current_user_id), None)
-        members = [
-            self._build_member(user, points=points_by_username.get(user.username, 0))
-            for user in ranked[:self.MEMBERS_LIMIT]
-        ]
+
+        members = []
+        for user in ranked[:self.MEMBERS_LIMIT]:
+            member_points = points_by_username.get(user.username, 0)
+            if member_points:
+                members.append(self._build_member(user, points=member_points))
+            else:
+                # Certificate earned but no course points recorded: show 100%, consistent
+                # with the in-progress column (and they are, after all, complete).
+                members.append(self._build_member(user, progress_percent=100))
         return members, rank
 
     def _build_in_progress_section(self, course_key, cert_user_id_set, current_user_id):
@@ -283,7 +289,7 @@ class CourseLeaderboardApiView(APIView):
         Build a leaderboard-member dict (matching the regular leaderboard shape).
         """
         member = {
-            "user_uid": CourseLeaderboardApiView._display_name(user),
+            "user_uid": repair_mojibake_text(CourseLeaderboardApiView._display_name(user)),
             "signup_source": None,
             "url_profile_image": get_profile_image_urls_for_user(user)["medium"],
             "profile_url": LeaderboardApiView._get_profile_url(user.username),  # pylint: disable=protected-access

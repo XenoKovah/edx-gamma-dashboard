@@ -22,6 +22,9 @@ describe('<CourseLeaderboardPage>', () => {
           {
             userUid: 'finisher', points: 900, badges: {}, systemEvents: [],
           },
+          {
+            userUid: 'certnopoints', progressPercent: 100, badges: {}, systemEvents: [],
+          },
         ],
         competitors: [],
         rank: null,
@@ -46,8 +49,10 @@ describe('<CourseLeaderboardPage>', () => {
       messages.badgeLeaderboardInProgressSectionTitle.defaultMessage,
     );
     expect(getAllByTestId('leaderboard-table')).toHaveLength(2);
-    // Completed shows points; in-progress shows the grade percentage.
+    // Completed shows points, or 100% when the earner has no course points.
     expect(getByText('900')).toBeInTheDocument();
+    expect(getByText('100%')).toBeInTheDocument();
+    // In-progress shows the grade percentage.
     expect(getByText('42%')).toBeInTheDocument();
     expect(getByText('9%')).toBeInTheDocument();
     expect(getByText('finisher')).toBeInTheDocument();

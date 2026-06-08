@@ -3,7 +3,7 @@
 ## [Unreleased]
 
 ### Added
-- Course leaderboard now shows two sections like the per-badge page: "Completed" (learners who earned the course certificate, ranked by their course points) and "In progress" (active, not-yet-certified learners ranked by their course grade %, the value shown on the Progress page). Adds the `leaderboard/course/<course_id>/` API.
+- Course leaderboard now shows two sections like the per-badge page: "Completed" (learners who earned the course certificate, ranked by their course points — or 100% when they have no course points) and "In progress" (active, not-yet-certified learners ranked by their course grade %, the value shown on the Progress page). Adds the `leaderboard/course/<course_id>/` API.
 - Make each badge clickable (on the Performance dashboard preview and in the All-badges modal): it opens a per-badge leaderboard page that lists the top 100 users who earned that badge, ranked like the Leaderboard, with the badge image (4x), title and description shown at the top. Hover still shows the existing "how to earn" popover.
 - On the per-badge page, list in-progress users below the earners: a separate "In progress" section showing everyone with non-zero progress toward the badge, ranked by their progress percentage (e.g. 30/1000 -> 3%).
 - Add `leaderboard/badge/<slug>/` (optionally course-scoped) API returning a badge's top-100 earners plus its in-progress members (ranked by progress %), in leaderboard shape, plus the badge's display data
@@ -11,6 +11,7 @@
 - Add `user-badges/<username>/` API returning a user's earned badges (for the profile page), honoring profile visibility
 
 ## Fixed
+- Repair double-encoded ("mojibake") display names on the leaderboards (e.g. "Piotr KrÃ³l" -> "Piotr Król", "MikoÅ‚aj" -> "Mikołaj") at render time; the underlying profile data is left untouched
 - [OST-75] scope gamification_base_url inside js_extra Mako block
 
 ## 2.2.0 (2026-05-22)

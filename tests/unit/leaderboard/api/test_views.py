@@ -10,6 +10,7 @@ from gamma_dashboard.dashboard.api.v0.views import (
     LeaderboardApiView,
     UserBadgesApiView,
 )
+from gamma_dashboard.dashboard.api.utils import repair_mojibake_text
 from gamma_dashboard.dashboard.core.gamma.api.wrapper import GammaApiWrapper
 
 # from tests.utils import load_params_from_json
@@ -374,20 +375,41 @@ class TestCourseLeaderboardApiView:
         )
 
         user = mocker.MagicMock()
-        user.username = "alice"
-        user.profile.name = "Alice Liddell"
+        user.username = "pietrushnic"
+        user.profile.name = "Piotr KrÃ³l"  # double-encoded; should be repaired on output
 
         completed = CourseLeaderboardApiView._build_member(user, points=120)
-        assert completed["user_uid"] == "Alice Liddell"
-        assert completed["profile_url"] == "https://apps.example.com/profile/u/alice"
+        assert completed["user_uid"] == "Piotr Król"  # mojibake repaired
+        assert completed["profile_url"] == "https://apps.example.com/profile/u/pietrushnic"
         assert completed["url_profile_image"] == "/images/default.png"
         assert completed["points"] == 120
         assert "progress_percent" not in completed
 
         in_progress = CourseLeaderboardApiView._build_member(user, progress_percent=9)
-        assert in_progress["user_uid"] == "Alice Liddell"
+        assert in_progress["user_uid"] == "Piotr Król"
         assert in_progress["progress_percent"] == 9
         assert "points" not in in_progress
+
+
+class TestRepairMojibakeText:
+    """
+    Test the ``repair_mojibake_text`` helper used to fix double-encoded display names.
+    """
+
+    @pytest.mark.parametrize(
+        "value,expected",
+        (
+            ("Piotr KrÃ³l", "Piotr Król"),
+            ("ZoltÃ¡n RusnÃ¡k", "Zoltán Rusnák"),
+            ("MikoÅ‚aj PlewiÅ„ski", "Mikołaj Plewiński"),
+            ("Bob Bob", "Bob Bob"),  # ASCII is unchanged
+            ("Zoltán", "Zoltán"),  # already-correct text is preserved
+            ("", ""),
+            (None, None),
+        ),
+    )
+    def test_repairs_only_double_encoded_values(self, value, expected):
+        assert repair_mojibake_text(value) == expected
 
 
 class TestGetProfileUrl:
