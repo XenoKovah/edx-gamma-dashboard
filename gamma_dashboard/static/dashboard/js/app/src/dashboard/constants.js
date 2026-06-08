@@ -3,6 +3,6 @@ export const WIDGETS = {
   AVATAR: 'avatar',
 };
 
-export const SHOW_STATUS_BLOCK = false;
+export const SHOW_STATUS_BLOCK = true;
 
 export const MAIN_CONTENT_ID = 'dashboard-page-title';
