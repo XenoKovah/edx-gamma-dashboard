@@ -7,10 +7,6 @@ import SubHeader from './SubHeader';
 
 afterEach(cleanup);
 
-jest.mock('../../generic/logo-dropdown/LogoDropdown', () => (
-  jest.fn(() => <div data-testid="logo-dropdown" />)
-));
-
 describe('SubHeader', () => {
   it('renders the title correctly', () => {
     const { getByRole } = renderWithProviders(<SubHeader title="Test Title" />);
@@ -30,12 +26,6 @@ describe('SubHeader', () => {
     const { getByRole } = renderWithProviders(<SubHeader className="custom-class" title="Test Title" />);
     const titleElement = getByRole('heading', { level: 1 });
     expect(titleElement).toHaveClass('custom-class');
-  });
-
-  it('renders the LogoDropdown component', () => {
-    const { getByTestId } = renderWithProviders(<SubHeader title="Test Title" />);
-    const dropdownElement = getByTestId('logo-dropdown');
-    expect(dropdownElement).toBeInTheDocument();
   });
 
   it('passes additional props to the heading', () => {
