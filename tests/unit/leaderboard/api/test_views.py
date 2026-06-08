@@ -322,11 +322,13 @@ class TestUserBadgesApiView:
         return request
 
     @pytest.mark.django_db
-    def test_returns_only_completed_badges_with_current_config(self, mocker, settings):
+    @pytest.mark.parametrize("account_privacy", ["all_users", "custom"])
+    def test_returns_only_completed_badges_with_current_config(self, mocker, settings, account_privacy):
+        # Badges show on both fully-public ("all_users") and per-field ("custom") profiles.
         settings.FEATURES = {"RG_GAMIFICATION": {"RG_GAMIFICATION_ENDPOINT": "http://rgg:8000"}}
         mocker.patch(
             "gamma_dashboard.dashboard.api.v0.views.get_account_settings",
-            return_value=[{"account_privacy": "all_users"}],
+            return_value=[{"account_privacy": account_privacy}],
         )
         mocker.patch(
             "gamma_dashboard.dashboard.api.v0.views.configuration_helpers.get_value",

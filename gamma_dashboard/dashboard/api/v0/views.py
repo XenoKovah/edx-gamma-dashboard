@@ -15,7 +15,7 @@ from rest_framework.views import APIView
 from common.djangoapps.student.views import get_org_black_and_whitelist_for_site
 from opaque_keys.edx.keys import CourseKey
 from openedx.core.djangoapps.site_configuration import helpers as configuration_helpers
-from openedx.core.djangoapps.user_api.accounts import ALL_USERS_VISIBILITY
+from openedx.core.djangoapps.user_api.accounts import PRIVATE_VISIBILITY
 from openedx.core.djangoapps.user_api.accounts.api import get_account_settings
 from openedx.core.djangoapps.user_api.accounts.image_helpers import get_profile_image_urls_for_user
 from openedx.core.djangoapps.user_api.errors import UserNotFound
@@ -209,7 +209,9 @@ class UserBadgesApiView(APIView):
         Return whether ``request.user`` may view ``username``'s profile.
 
         Mirrors Open edX account visibility: a profile is visible to its owner, to
-        staff, or when its effective privacy is set to "all users".
+        staff, or unless its effective privacy is fully "private". A "custom"
+        privacy profile still exposes a subset of fields and remains viewable, so
+        its badges are shown.
         """
         if request.user.username == username or request.user.is_staff:
             return True
@@ -219,7 +221,7 @@ class UserBadgesApiView(APIView):
         except (UserNotFound, IndexError):
             return False
 
-        return account_settings.get("account_privacy") == ALL_USERS_VISIBILITY
+        return account_settings.get("account_privacy") != PRIVATE_VISIBILITY
 
     @staticmethod
     def _gamma_public_base_url():
