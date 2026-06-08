@@ -4,7 +4,7 @@ import pytest
 
 from rest_framework import status
 
-from gamma_dashboard.dashboard.api.v0.views import LeaderboardApiView
+from gamma_dashboard.dashboard.api.v0.views import LeaderboardApiView, UserBadgesApiView
 from gamma_dashboard.dashboard.core.gamma.api.wrapper import GammaApiWrapper
 
 # from tests.utils import load_params_from_json
@@ -273,3 +273,105 @@ class TestUpdateLeaderboardInfo:
         bob_item = result["competitors"][0]
         assert bob_item["user_uid"] == "bob"
         assert bob_item["profile_url"] == "https://apps.example.com/profile/u/bob"
+
+
+class TestUserBadgesApiView:
+    """
+    Test Case for `UserBadgesApiView`.
+    """
+
+    PROFILE_INFO = {
+        "badges": [
+            {
+                "title": "Answerer (stale)",
+                "slug": "answerer",
+                "description": "stale snapshot description",
+                "done": True,
+                "object_uri": "/media/uploads/badges/answerer.png",
+            },
+            {
+                "title": "In Progress",
+                "slug": "in-progress",
+                "description": "not earned yet",
+                "done": False,
+                "object_uri": "/media/uploads/badges/in_progress.png",
+            },
+            {
+                "title": "Orphan",
+                "slug": "orphan",
+                "description": "fallback description",
+                "done": True,
+                "object_uri": "https://cdn.example.com/orphan.png",
+            },
+        ],
+        "system_badges": [
+            {
+                "slug": "answerer",
+                "title": "Answerer",
+                "description": "Answered a question in the Discussions section...",
+                "image": "/media/uploads/badges/answerer.png",
+            },
+        ],
+    }
+
+    @staticmethod
+    def _request(mocker, *, username="viewer", is_staff=False):
+        request = mocker.MagicMock()
+        request.user.username = username
+        request.user.is_staff = is_staff
+        return request
+
+    @pytest.mark.django_db
+    def test_returns_only_completed_badges_with_current_config(self, mocker, settings):
+        settings.FEATURES = {"RG_GAMIFICATION": {"RG_GAMIFICATION_ENDPOINT": "http://rgg:8000"}}
+        mocker.patch(
+            "gamma_dashboard.dashboard.api.v0.views.get_account_settings",
+            return_value=[{"account_privacy": "all_users"}],
+        )
+        mocker.patch(
+            "gamma_dashboard.dashboard.api.v0.views.configuration_helpers.get_value",
+            return_value="https://gamma.example.com",
+        )
+        mocker.patch.object(GammaApiWrapper, "get_game_profile", return_value=self.PROFILE_INFO)
+
+        response = UserBadgesApiView().get(self._request(mocker), username="target")
+
+        assert response.status_code == status.HTTP_200_OK
+        assert response.data == [
+            {
+                "title": "Answerer",  # current config wins over the achievement snapshot
+                "description": "Answered a question in the Discussions section...",
+                "image": "https://gamma.example.com/media/uploads/badges/answerer.png",
+            },
+            {
+                "title": "Orphan",  # no system badge -> fall back to achievement fields
+                "description": "fallback description",
+                "image": "https://cdn.example.com/orphan.png",  # already absolute -> untouched
+            },
+        ]
+
+    @pytest.mark.django_db
+    def test_private_profile_returns_empty_list(self, mocker):
+        mocker.patch(
+            "gamma_dashboard.dashboard.api.v0.views.get_account_settings",
+            return_value=[{"account_privacy": "private"}],
+        )
+        gamma_mock = mocker.patch.object(GammaApiWrapper, "get_game_profile")
+
+        response = UserBadgesApiView().get(self._request(mocker), username="target")
+
+        assert response.status_code == status.HTTP_200_OK
+        assert response.data == []
+        gamma_mock.assert_not_called()  # gamma is not even queried for hidden profiles
+
+    @pytest.mark.django_db
+    def test_no_gamma_data_returns_422(self, mocker):
+        mocker.patch(
+            "gamma_dashboard.dashboard.api.v0.views.get_account_settings",
+            return_value=[{"account_privacy": "all_users"}],
+        )
+        mocker.patch.object(GammaApiWrapper, "get_game_profile", return_value=None)
+
+        response = UserBadgesApiView().get(self._request(mocker), username="target")
+
+        assert response.status_code == status.HTTP_422_UNPROCESSABLE_ENTITY

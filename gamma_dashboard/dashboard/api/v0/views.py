@@ -1,8 +1,11 @@
 """
 Gamma leaderboard API views.
 """
+from urllib.parse import urljoin
+
 from django.conf import settings
 from django.contrib.auth.models import User
+from edx_rest_framework_extensions.auth.jwt.authentication import JwtAuthentication
 from edx_rest_framework_extensions.auth.session.authentication import SessionAuthenticationAllowInactiveUser
 from rest_framework import status
 from rest_framework.permissions import IsAuthenticated
@@ -11,7 +14,11 @@ from rest_framework.views import APIView
 
 from common.djangoapps.student.views import get_org_black_and_whitelist_for_site
 from opaque_keys.edx.keys import CourseKey
+from openedx.core.djangoapps.site_configuration import helpers as configuration_helpers
+from openedx.core.djangoapps.user_api.accounts import ALL_USERS_VISIBILITY
+from openedx.core.djangoapps.user_api.accounts.api import get_account_settings
 from openedx.core.djangoapps.user_api.accounts.image_helpers import get_profile_image_urls_for_user
+from openedx.core.djangoapps.user_api.errors import UserNotFound
 
 from course_leaderboard.toggles import show_course_leaderboard_tab
 from gamma_dashboard.dashboard.core.gamma.api.settings import DEFAULT_API_VERSION
@@ -142,6 +149,102 @@ class GameProfileApiView(APIView):
         )
 
         return Response(user_info)
+
+
+class UserBadgesApiView(APIView):
+    """
+    Returns the badges a given user has earned (completed), for display on their
+    Open edX profile page. Honors the target user's profile-visibility setting.
+    """
+
+    permission_classes = (IsAuthenticated,)
+    # JWT is listed first because this endpoint is called cross-origin from the
+    # Profile MFE (apps.<host>); the other gamma_dashboard views are same-origin only.
+    authentication_classes = (JwtAuthentication, SessionAuthenticationAllowInactiveUser)
+
+    def get(self, request, username):
+        """
+        Get the list of completed badges for ``username``.
+        """
+        if not self._is_profile_visible(request, username):
+            return Response([])
+
+        profile_info = GammaApiWrapper(version=DEFAULT_API_VERSION).get_game_profile(username)
+
+        if not profile_info:
+            return Response(
+                {"error": "No data received from Gamma server."},
+                status=status.HTTP_422_UNPROCESSABLE_ENTITY,
+            )
+
+        gamma_base = self._gamma_public_base_url()
+        # Index the current badge configuration by slug so we can show the up-to-date
+        # title/description/image rather than the snapshot stored on the achievement
+        # at award time.
+        system_badges_by_slug = {
+            badge["slug"]: badge
+            for badge in (profile_info.get("system_badges") or [])
+            if badge.get("slug")
+        }
+
+        earned_badges = []
+        for badge in profile_info.get("badges") or []:
+            if not badge.get("done"):
+                continue
+
+            current = system_badges_by_slug.get(badge.get("slug"), {})
+            earned_badges.append({
+                "title": current.get("title") or badge.get("title"),
+                "description": current.get("description") or badge.get("description") or "",
+                "image": self._absolute_media_url(
+                    current.get("image") or badge.get("object_uri"), gamma_base
+                ),
+            })
+
+        return Response(earned_badges)
+
+    @staticmethod
+    def _is_profile_visible(request, username):
+        """
+        Return whether ``request.user`` may view ``username``'s profile.
+
+        Mirrors Open edX account visibility: a profile is visible to its owner, to
+        staff, or when its effective privacy is set to "all users".
+        """
+        if request.user.username == username or request.user.is_staff:
+            return True
+
+        try:
+            account_settings = get_account_settings(request, usernames=[username])[0]
+        except (UserNotFound, IndexError):
+            return False
+
+        return account_settings.get("account_privacy") == ALL_USERS_VISIBILITY
+
+    @staticmethod
+    def _gamma_public_base_url():
+        """
+        Public base URL of the Gamma service that serves badge media.
+
+        Uses the same source as the dashboard page's ``window.GAMIFICATION_BASE_URL``.
+        """
+        return configuration_helpers.get_value(
+            "GAMIFICATION_BASE_URL",
+            settings.FEATURES.get("RG_GAMIFICATION", {}).get("RG_GAMIFICATION_ENDPOINT", ""),
+        )
+
+    @staticmethod
+    def _absolute_media_url(uri, base_url):
+        """
+        Resolve a possibly-relative badge image URI to an absolute, browser-reachable URL.
+        """
+        if not uri:
+            return None
+        if uri.startswith(("http://", "https://")):
+            return uri
+        if not base_url:
+            return uri
+        return urljoin(f"{base_url.rstrip('/')}/", uri.lstrip("/"))
 
 
 class GameUserAvatarConfigApiView(APIView):

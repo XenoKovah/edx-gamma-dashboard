@@ -4,6 +4,7 @@
 
 ### Added
 - Link each leaderboard username to that user's profile page (Profile MFE)
+- Add `user-badges/<username>/` API returning a user's earned badges (for the profile page), honoring profile visibility
 
 ## Fixed
 - [OST-75] scope gamification_base_url inside js_extra Mako block
