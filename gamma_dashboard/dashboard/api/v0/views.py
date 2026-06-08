@@ -100,13 +100,17 @@ class LeaderboardApiView(APIView):
         leaderboard_info["user_uid"] = user.profile.name if user.profile.name else user.username
         leaderboard_info["profile_url"] = LeaderboardApiView._get_profile_url(user.username)
 
-        all_users = leaderboard_info.get("top10") + leaderboard_info.get("competitors")
+        # ``in_progress`` is only present for the per-badge leaderboard; the regular
+        # leaderboard has just top10/competitors. Missing keys resolve to [] so this
+        # stays backward compatible.
+        profile_list_keys = ("top10", "competitors", "in_progress")
+        all_users = [item for key in profile_list_keys for item in (leaderboard_info.get(key) or [])]
         user_uids = set(item["user_uid"] for item in all_users)
         users = User.objects.filter(username__in=user_uids)
         users_dict = {user.username: user for user in users}
 
-        for key in ("top10", "competitors"):
-            for item in leaderboard_info[key]:
+        for key in profile_list_keys:
+            for item in leaderboard_info.get(key) or []:
                 if user := users_dict.get(item["user_uid"]):
                     item["profile_url"] = LeaderboardApiView._get_profile_url(user.username)
                     item["user_uid"] = user.profile.name if user.profile.name else user.username

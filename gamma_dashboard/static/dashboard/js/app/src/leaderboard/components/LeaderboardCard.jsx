@@ -11,7 +11,7 @@ import BadgeList from './BadgeList';
 import messages from '../../i18n';
 import defaultProfileImg from '../../assets/images/default-profile-image.png';
 
-const LeaderboardCard = ({ profile, rank }) => {
+const LeaderboardCard = ({ profile, rank, showProgress }) => {
   const intl = useIntl();
   const {
     userUid: username = '',
@@ -19,6 +19,7 @@ const LeaderboardCard = ({ profile, rank }) => {
     badges = {},
     position,
     profileUrl,
+    progressPercent = 0,
   } = profile;
 
   const selfPosition = position === rank;
@@ -50,6 +51,7 @@ const LeaderboardCard = ({ profile, rank }) => {
         username={username}
         urlProfileImage={profile.urlProfileImage || defaultProfileImg}
         position={profile.position}
+        plainPosition={showProgress}
       />
       <Card.Body
         size="sm"
@@ -63,7 +65,7 @@ const LeaderboardCard = ({ profile, rank }) => {
           className="leaderboard-card-progress"
           data-testid="progress-cell"
         >
-          {points}
+          {showProgress ? `${progressPercent}%` : points}
         </span>
       </Card.Body>
       <Card.Footer className="p-0 mt-3 mt-md-0 overflow-auto">
@@ -76,6 +78,11 @@ const LeaderboardCard = ({ profile, rank }) => {
 LeaderboardCard.propTypes = {
   profile: PropTypes.shape(ProfilePropType).isRequired,
   rank: PropTypes.number.isRequired,
+  showProgress: PropTypes.bool,
+};
+
+LeaderboardCard.defaultProps = {
+  showProgress: false,
 };
 
 export default LeaderboardCard;

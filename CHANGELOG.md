@@ -4,7 +4,8 @@
 
 ### Added
 - Make each badge clickable (on the Performance dashboard preview and in the All-badges modal): it opens a per-badge leaderboard page that lists the top 100 users who earned that badge, ranked like the Leaderboard, with the badge image (4x), title and description shown at the top. Hover still shows the existing "how to earn" popover.
-- Add `leaderboard/badge/<slug>/` (optionally course-scoped) API returning a badge's top-100 earners in leaderboard shape plus the badge's display data
+- On the per-badge page, list in-progress users below the earners: a separate "In progress" section showing everyone with non-zero progress toward the badge, ranked by their progress percentage (e.g. 30/1000 -> 3%).
+- Add `leaderboard/badge/<slug>/` (optionally course-scoped) API returning a badge's top-100 earners plus its in-progress members (ranked by progress %), in leaderboard shape, plus the badge's display data
 - Link each leaderboard username to that user's profile page (Profile MFE)
 - Add `user-badges/<username>/` API returning a user's earned badges (for the profile page), honoring profile visibility
 

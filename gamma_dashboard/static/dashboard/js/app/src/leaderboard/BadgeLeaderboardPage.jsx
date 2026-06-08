@@ -5,7 +5,7 @@ import { Info as InfoIcon } from '@openedx/paragon/icons';
 
 import { useScrollToContent } from '../generic/hooks';
 import { SubHeader, Alert, Loader } from '../generic';
-import { getBadgeLeaderboardTableProps } from './utils';
+import { getBadgeLeaderboardTableProps, getBadgeInProgressProps } from './utils';
 import { LeaderboardTable, BadgeLeaderboardHeader } from './components';
 
 import { useBadgeLeaderboard } from '../api/hooks/useBadgeLeaderboard';
@@ -13,9 +13,10 @@ import { useBadgeLeaderboard } from '../api/hooks/useBadgeLeaderboard';
 import messages from '../i18n';
 
 /**
- * Per-badge leaderboard page: the Leaderboard page filtered down to the users
- * who earned a specific badge. It shows the badge (title, large image and
- * description) at the top, then the ranked list of earners.
+ * Per-badge leaderboard page: the Leaderboard page filtered down to a specific
+ * badge. It shows the badge (title, large image and description) at the top, then
+ * the users who earned it (ranked by points) and, below, the users still making
+ * progress toward it (ranked by their progress percentage).
  */
 const BadgeLeaderboardPage = () => {
   const intl = useIntl();
@@ -26,6 +27,8 @@ const BadgeLeaderboardPage = () => {
 
   const translations = {
     leaderboardTitle: intl.formatMessage(messages.leaderboardHeadingText),
+    earnedTitle: intl.formatMessage(messages.badgeLeaderboardEarnedSectionTitle),
+    inProgressTitle: intl.formatMessage(messages.badgeLeaderboardInProgressSectionTitle),
     errorTitle: intl.formatMessage(messages.genericErrorFallbackTitle),
   };
 
@@ -61,6 +64,13 @@ const BadgeLeaderboardPage = () => {
   }
 
   const { rank, profiles, delimiter } = getBadgeLeaderboardTableProps(badgeLeaderboardData);
+  const {
+    rank: inProgressRank,
+    profiles: inProgressProfiles,
+  } = getBadgeInProgressProps(badgeLeaderboardData);
+
+  const hasEarners = profiles.length > 0;
+  const hasInProgress = inProgressProfiles.length > 0;
 
   return (
     <>
@@ -69,11 +79,38 @@ const BadgeLeaderboardPage = () => {
         title={translations.leaderboardTitle}
       />
       <BadgeLeaderboardHeader badge={badgeLeaderboardData?.badge || {}} />
-      <LeaderboardTable
-        rank={rank}
-        profiles={profiles}
-        delimiter={delimiter}
-      />
+
+      {hasEarners && (
+        <>
+          {hasInProgress && (
+            <h2 className="badge-leaderboard-section-title" data-testid="badge-leaderboard-earned-title">
+              {translations.earnedTitle}
+            </h2>
+          )}
+          <LeaderboardTable
+            rank={rank}
+            profiles={profiles}
+            delimiter={delimiter}
+          />
+        </>
+      )}
+
+      {hasInProgress && (
+        <>
+          <h2 className="badge-leaderboard-section-title" data-testid="badge-leaderboard-in-progress-title">
+            {translations.inProgressTitle}
+          </h2>
+          <LeaderboardTable
+            rank={inProgressRank}
+            profiles={inProgressProfiles}
+            showProgress
+          />
+        </>
+      )}
+
+      {!hasEarners && !hasInProgress && (
+        <LeaderboardTable rank={0} profiles={[]} />
+      )}
     </>
   );
 };

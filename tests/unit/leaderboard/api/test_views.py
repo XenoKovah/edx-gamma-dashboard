@@ -413,6 +413,43 @@ class TestUpdateLeaderboardInfo:
         assert bob_item["user_uid"] == "bob"
         assert bob_item["profile_url"] == "https://apps.example.com/profile/u/bob"
 
+    @pytest.mark.django_db
+    def test_enriches_in_progress_list_and_preserves_progress_percent(self, mocker, settings):
+        settings.PROFILE_MICROFRONTEND_URL = "https://apps.example.com/profile/u/"
+
+        current_user = mocker.MagicMock()
+        current_user.username = "current_user"
+        current_user.profile.name = "Current Full Name"
+
+        carol = mocker.MagicMock()
+        carol.username = "carol"
+        carol.profile.name = "Carol Danvers"
+
+        mocker.patch(
+            "gamma_dashboard.dashboard.api.v0.views.get_profile_image_urls_for_user",
+            return_value={"medium": "/images/default.png"},
+        )
+        mocker.patch(
+            "django.contrib.auth.models.User.objects.filter",
+            return_value=[carol],
+        )
+
+        # The per-badge response carries an extra ``in_progress`` list that must be
+        # enriched just like top10/competitors, without dropping ``progress_percent``.
+        leaderboard_info = {
+            "top10": [],
+            "competitors": [],
+            "in_progress": [{"user_uid": "carol", "progress_percent": 42}],
+        }
+
+        result = LeaderboardApiView._update_leaderboard_info(current_user, leaderboard_info)
+
+        in_progress_item = result["in_progress"][0]
+        assert in_progress_item["user_uid"] == "Carol Danvers"
+        assert in_progress_item["profile_url"] == "https://apps.example.com/profile/u/carol"
+        assert in_progress_item["url_profile_image"] == "/images/default.png"
+        assert in_progress_item["progress_percent"] == 42
+
 
 class TestUserBadgesApiView:
     """
