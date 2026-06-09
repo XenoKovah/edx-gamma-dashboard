@@ -76,6 +76,11 @@ const messages = defineMessages({
     defaultMessage: 'Depends on status',
     description: 'Label indicating that a certain feature or element depends on a specific status.',
   },
+  dashboardBadgesManualCriteriaText: {
+    id: 'dashboard.badges.manual.criteria.text',
+    defaultMessage: 'Manual assignment criteria',
+    description: 'Label prefacing the manual assignment criteria shown on hover for manual-only badges.',
+  },
   performanceHeadingText: {
     id: 'performance.heading.text',
     defaultMessage: 'Performance',

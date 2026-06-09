@@ -164,4 +164,21 @@ describe('<PopoverContent>', () => {
 
     expect(getByText('1/4')).toBeInTheDocument();
   });
+
+  it('renders the badge description when provided', () => {
+    const data = { description: 'Awarded for fixing subtitles' };
+
+    const { getByText } = renderWithProviders(<PopoverContent data={data} />);
+
+    expect(getByText('Awarded for fixing subtitles')).toBeInTheDocument();
+  });
+
+  it('renders the manual assignment criteria with its label when provided', () => {
+    const data = { manualCriteria: 'Granted by an admin to course instructors' };
+
+    const { getByText } = renderWithProviders(<PopoverContent data={data} />);
+
+    expect(getByText(`${messages.dashboardBadgesManualCriteriaText.defaultMessage}:`)).toBeInTheDocument();
+    expect(getByText('Granted by an admin to course instructors')).toBeInTheDocument();
+  });
 });
