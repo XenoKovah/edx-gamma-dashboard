@@ -133,7 +133,7 @@ describe('<DashboardWrapper>', () => {
     );
 
     const badgesList = getByTestId('progress-badges-list');
-    expect(badgesList.children.length).toBeLessThanOrEqual(3);
+    expect(badgesList.children.length).toBeLessThanOrEqual(10);
   });
 
   it('opens badges modal when clicking badges section button', () => {
@@ -225,7 +225,7 @@ describe('<DashboardWrapper>', () => {
     const badgesList = getByTestId('progress-badges-list');
     const badgeItems = badgesList.querySelectorAll('[data-testid="progress-badge"]');
 
-    expect(badgeItems.length).toBeLessThanOrEqual(3);
+    expect(badgeItems.length).toBeLessThanOrEqual(10);
   });
 
   it('displays correct badge information in the badges section', () => {

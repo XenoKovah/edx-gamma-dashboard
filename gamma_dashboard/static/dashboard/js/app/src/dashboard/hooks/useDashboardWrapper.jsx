@@ -3,7 +3,7 @@ import { useIntl } from 'react-intl';
 
 import messages from '../../i18n';
 
-const PREVIEW_BADGES_ITEMS_COUNT = 3;
+const PREVIEW_BADGES_ITEMS_COUNT = 10;
 
 export const useDashboardWrapper = ({
   badgeItems,
@@ -18,22 +18,28 @@ export const useDashboardWrapper = ({
   const [isAvatarModalOpen, setIsAvatarModalOpen] = useState(false);
   const [selectedAvatarSetId, setSelectedAvatarSetId] = useState(null);
 
-  const { previewBadgeItems, doneBadgeItems } = useMemo(() => badgeItems.reduce(
-    (acc, [key, badge]) => {
-      const { isActive, done } = badge;
+  // Active badges sorted: earned (done) first, then not-yet-earned; alphabetical by title within each group.
+  const sortedActiveBadges = useMemo(
+    () => badgeItems
+      .filter(([, badge]) => badge.isActive)
+      .sort(([, a], [, b]) => {
+        if (Boolean(a.done) !== Boolean(b.done)) {
+          return a.done ? -1 : 1;
+        }
+        return (a.title || '').localeCompare(b.title || '', undefined, { sensitivity: 'base' });
+      }),
+    [badgeItems],
+  );
 
-      if (isActive && acc.previewBadgeItems.length < PREVIEW_BADGES_ITEMS_COUNT) {
-        acc.previewBadgeItems.push([key, badge]);
-      }
+  const previewBadgeItems = useMemo(
+    () => sortedActiveBadges.slice(0, PREVIEW_BADGES_ITEMS_COUNT),
+    [sortedActiveBadges],
+  );
 
-      if (done && isActive) {
-        acc.doneBadgeItems.push([key, badge]);
-      }
-
-      return acc;
-    },
-    { previewBadgeItems: [], doneBadgeItems: [] },
-  ), [badgeItems]);
+  const doneBadgeItems = useMemo(
+    () => sortedActiveBadges.filter(([, badge]) => badge.done),
+    [sortedActiveBadges],
+  );
 
   const points = statusItems[0]?.points || 0;
   const doneStatuses = useMemo(
@@ -49,7 +55,7 @@ export const useDashboardWrapper = ({
 
   const getItemDataFunction = (item) => item[1];
 
-  const filteredActiveBadges = badgeItems.filter((item) => getItemDataFunction(item).isActive);
+  const filteredActiveBadges = sortedActiveBadges;
 
   const completedAvatar = useMemo(() => {
     if (!avatarSets || !savedSelectedAvatarSetId || !selectedAvatarId) { return null; }

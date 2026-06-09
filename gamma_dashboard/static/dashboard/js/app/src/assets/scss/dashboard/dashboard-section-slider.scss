@@ -1,17 +1,16 @@
 .progress-badges-list {
-  display: flex;
-  justify-content: space-around;
-  flex: 0 0 7.188rem;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  justify-items: center;
+  row-gap: 1.875rem;
   margin-top: map-get($spacers, 6);
 
   @media screen and (max-width: map-get($grid-breakpoints, "lg")) {
-    justify-content: space-between;
+    grid-template-columns: repeat(3, 1fr);
   }
 
   @media screen and (max-width: map-get($grid-breakpoints, "sm")) {
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+    grid-template-columns: repeat(2, 1fr);
     margin-top: 2.5rem;
   }
 }

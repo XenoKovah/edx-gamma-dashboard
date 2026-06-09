@@ -123,7 +123,7 @@ const messages = defineMessages({
   },
   performanceBadgesSectionBadgesButtonText: {
     id: 'performance.badges.section.badges.button.text',
-    defaultMessage: 'Badges',
+    defaultMessage: 'All Badges',
     description: 'Button text for viewing badges in the performance section',
   },
   performanceAvatarSectionAvatarSetsButtonText: {
