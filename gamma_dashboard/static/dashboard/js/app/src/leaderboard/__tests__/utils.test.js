@@ -1,4 +1,8 @@
-import { getBadgeLeaderboardTableProps, getLeaderboardTableProps } from '../utils';
+import {
+  getBadgeInProgressProps,
+  getBadgeLeaderboardTableProps,
+  getLeaderboardTableProps,
+} from '../utils';
 import DataLeaderboardPage from './__mock__/DataLeaderboardPage.json';
 
 describe('getLeaderboardTableProps', () => {
@@ -35,6 +39,40 @@ describe('getBadgeLeaderboardTableProps', () => {
   it('handles an empty / missing payload without throwing', () => {
     expect(getBadgeLeaderboardTableProps()).toEqual({ rank: 0, delimiter: null, profiles: [] });
     expect(getBadgeLeaderboardTableProps({ top10: [], rank: null })).toEqual({
+      rank: 0,
+      delimiter: null,
+      profiles: [],
+    });
+  });
+});
+
+describe('getBadgeInProgressProps', () => {
+  it('assigns positions to in-progress members and keeps their rank/percentages', () => {
+    const result = getBadgeInProgressProps({
+      inProgress: [
+        { userUid: 'mariia', points: 151, progressPercent: 15 },
+        { userUid: 'xeno', points: 30, progressPercent: 3 },
+      ],
+      inProgressRank: 2,
+    });
+
+    expect(result).toEqual({
+      rank: 2,
+      delimiter: null,
+      profiles: [
+        {
+          userUid: 'mariia', points: 151, progressPercent: 15, position: 1,
+        },
+        {
+          userUid: 'xeno', points: 30, progressPercent: 3, position: 2,
+        },
+      ],
+    });
+  });
+
+  it('handles an empty / missing payload without throwing', () => {
+    expect(getBadgeInProgressProps()).toEqual({ rank: 0, delimiter: null, profiles: [] });
+    expect(getBadgeInProgressProps({ inProgress: [], inProgressRank: null })).toEqual({
       rank: 0,
       delimiter: null,
       profiles: [],

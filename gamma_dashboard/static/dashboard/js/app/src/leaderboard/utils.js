@@ -22,6 +22,26 @@ export const getBadgeLeaderboardTableProps = (data = {}) => {
   };
 };
 
+/**
+ * Build the LeaderboardTable props for the "In progress" section of the per-badge
+ * page: users with non-zero progress who have not completed the badge yet, already
+ * ranked by their progress percentage (descending). Positions are 1..N and the
+ * requesting user (when present) is highlighted via `inProgressRank`.
+ *
+ * @param {Object} data - The badge leaderboard response.
+ * @param {Array<Object>} [data.inProgress] - The ranked in-progress members.
+ * @param {number|null} [data.inProgressRank] - The requesting user's rank among them.
+ * @returns {{ rank: number, profiles: Array<Object>, delimiter: null }}
+ */
+export const getBadgeInProgressProps = (data = {}) => {
+  const { inProgress = [], inProgressRank = null } = data;
+  return {
+    rank: inProgressRank || 0,
+    profiles: addPositionInTop10(inProgress),
+    delimiter: null,
+  };
+};
+
 export const getLeaderboardTableProps = (data) => {
   const {
     top10, systemStatuses, rank, userUid, urlProfileImage, profileUrl, competitors,

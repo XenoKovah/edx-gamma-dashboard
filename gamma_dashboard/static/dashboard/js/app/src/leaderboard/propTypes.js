@@ -20,6 +20,7 @@ const ProfilePropType = {
   systemStatuses: PropTypes.arrayOf(PropTypes.shape(StatusPropType)),
   system_events: PropTypes.arrayOf(EventPropType).isRequired,
   position: PropTypes.number,
+  progressPercent: PropTypes.number,
 };
 
 export {

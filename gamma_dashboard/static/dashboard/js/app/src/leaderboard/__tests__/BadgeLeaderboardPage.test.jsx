@@ -51,6 +51,78 @@ describe('<BadgeLeaderboardPage>', () => {
     expect(getByText('bob')).toBeInTheDocument();
   });
 
+  it('shows an Earned section and a ranked In-progress section (with %) when both exist', () => {
+    useBadgeLeaderboard.mockReturnValue({
+      isLoading: false,
+      isError: false,
+      data: {
+        badge: {
+          slug: '1000-points', title: '1000 Points', description: 'Points Distribution', url: '/media/p.png',
+        },
+        top10: [
+          {
+            userUid: 'champion', points: 1200, badges: {}, systemEvents: [],
+          },
+        ],
+        competitors: [],
+        rank: null,
+        inProgress: [
+          {
+            userUid: 'mariia', points: 151, badges: {}, systemEvents: [], progressPercent: 15,
+          },
+          {
+            userUid: 'xeno', points: 30, badges: {}, systemEvents: [], progressPercent: 3,
+          },
+        ],
+        inProgressRank: 2,
+      },
+    });
+
+    const { getByTestId, getAllByTestId, getByText } = renderWithProviders(<BadgeLeaderboardPage />);
+
+    expect(getByTestId('badge-leaderboard-earned-title')).toBeInTheDocument();
+    expect(getByTestId('badge-leaderboard-in-progress-title')).toHaveTextContent(
+      messages.badgeLeaderboardInProgressSectionTitle.defaultMessage,
+    );
+    // Two tables: earned + in-progress.
+    expect(getAllByTestId('leaderboard-table')).toHaveLength(2);
+    // In-progress rows are labelled by their percentage; the earner keeps points.
+    expect(getByText('15%')).toBeInTheDocument();
+    expect(getByText('3%')).toBeInTheDocument();
+    expect(getByText('1200')).toBeInTheDocument();
+    expect(getByText('mariia')).toBeInTheDocument();
+  });
+
+  it('shows only the In-progress section (no empty alert) when nobody has earned it yet', () => {
+    useBadgeLeaderboard.mockReturnValue({
+      isLoading: false,
+      isError: false,
+      data: {
+        badge: {
+          slug: '1000-points', title: '1000 Points', description: 'Points Distribution', url: '/media/p.png',
+        },
+        top10: [],
+        competitors: [],
+        rank: null,
+        inProgress: [
+          {
+            userUid: 'mariia', points: 151, badges: {}, systemEvents: [], progressPercent: 15,
+          },
+        ],
+        inProgressRank: null,
+      },
+    });
+
+    const {
+      getByTestId, getByText, queryByText, queryByTestId,
+    } = renderWithProviders(<BadgeLeaderboardPage />);
+
+    expect(getByTestId('badge-leaderboard-in-progress-title')).toBeInTheDocument();
+    expect(queryByTestId('badge-leaderboard-earned-title')).not.toBeInTheDocument();
+    expect(getByText('15%')).toBeInTheDocument();
+    expect(queryByText(messages.leaderboardEmptyTitle.defaultMessage)).not.toBeInTheDocument();
+  });
+
   it('renders the loading state', () => {
     useBadgeLeaderboard.mockReturnValue({ isLoading: true });
 

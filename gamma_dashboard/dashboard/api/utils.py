@@ -4,6 +4,26 @@ from django.conf import settings
 LOGGER = logging.getLogger(__name__)
 
 
+def repair_mojibake_text(value):
+    """
+    Repair display text that was double-encoded on import, where UTF-8 bytes were
+    stored after being decoded as cp1252/latin-1 (e.g. "Piotr KrÃ³l" -> "Piotr Król",
+    "MikoÅ‚aj" -> "Mikołaj").
+
+    The repair is conservative: a correctly-encoded string fails the UTF-8 re-decode
+    and is returned unchanged, so only genuinely double-encoded values are altered.
+    The underlying data is left untouched; this only fixes what is displayed.
+    """
+    if not value:
+        return value
+    for encoding in ('cp1252', 'latin-1'):
+        try:
+            return value.encode(encoding).decode('utf-8')
+        except (UnicodeEncodeError, UnicodeDecodeError):
+            continue
+    return value
+
+
 def is_main_site(request):
     """
     A function to check if the current request is for the main platform site.

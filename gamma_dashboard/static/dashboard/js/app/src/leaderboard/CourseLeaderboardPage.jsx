@@ -6,28 +6,28 @@ import { Info as InfoIcon } from '@openedx/paragon/icons';
 import { useScrollToContent } from '../generic/hooks';
 import { SubHeader, Alert, Loader } from '../generic';
 import { getBadgeLeaderboardTableProps, getBadgeInProgressProps } from './utils';
-import { LeaderboardTable, BadgeLeaderboardHeader } from './components';
+import { LeaderboardTable } from './components';
 
-import { useBadgeLeaderboard } from '../api/hooks/useBadgeLeaderboard';
+import { useCourseLeaderboard } from '../api/hooks/useCourseLeaderboard';
 
 import messages from '../i18n';
 
 /**
- * Per-badge leaderboard page: the Leaderboard page filtered down to a specific
- * badge. It shows the badge (title, large image and description) at the top, then
- * the users who earned it (ranked by points) and, below, the users still making
- * progress toward it (ranked by their progress percentage).
+ * Course leaderboard page. Like the per-badge page, it shows two sections:
+ * "Completed" (learners who earned the course certificate, ranked by their course
+ * points) and "In progress" (active, not-yet-certified learners ranked by their
+ * course grade percentage).
  */
-const BadgeLeaderboardPage = () => {
+const CourseLeaderboardPage = () => {
   const intl = useIntl();
-  const { badgeSlug, courseId } = useParams();
+  const { courseId } = useParams();
   const {
-    data: badgeLeaderboardData, isLoading, error, isError,
-  } = useBadgeLeaderboard(badgeSlug, courseId);
+    data: courseLeaderboardData, isLoading, error, isError,
+  } = useCourseLeaderboard(courseId);
 
   const translations = {
     leaderboardTitle: intl.formatMessage(messages.leaderboardHeadingText),
-    earnedTitle: intl.formatMessage(messages.badgeLeaderboardEarnedSectionTitle),
+    completedTitle: intl.formatMessage(messages.courseLeaderboardCompletedSectionTitle),
     inProgressTitle: intl.formatMessage(messages.badgeLeaderboardInProgressSectionTitle),
     errorTitle: intl.formatMessage(messages.genericErrorFallbackTitle),
   };
@@ -63,13 +63,13 @@ const BadgeLeaderboardPage = () => {
     }
   }
 
-  const { rank, profiles, delimiter } = getBadgeLeaderboardTableProps(badgeLeaderboardData);
+  const { rank, profiles } = getBadgeLeaderboardTableProps(courseLeaderboardData);
   const {
     rank: inProgressRank,
     profiles: inProgressProfiles,
-  } = getBadgeInProgressProps(badgeLeaderboardData);
+  } = getBadgeInProgressProps(courseLeaderboardData);
 
-  const hasEarners = profiles.length > 0;
+  const hasCompleted = profiles.length > 0;
   const hasInProgress = inProgressProfiles.length > 0;
 
   return (
@@ -78,41 +78,30 @@ const BadgeLeaderboardPage = () => {
         id="leaderboard-page-title"
         title={translations.leaderboardTitle}
       />
-      <BadgeLeaderboardHeader badge={badgeLeaderboardData?.badge || {}} />
 
-      {hasEarners && (
+      {hasCompleted && (
         <>
-          {hasInProgress && (
-            <h2 className="badge-leaderboard-section-title" data-testid="badge-leaderboard-earned-title">
-              {translations.earnedTitle}
-            </h2>
-          )}
-          <LeaderboardTable
-            rank={rank}
-            profiles={profiles}
-            delimiter={delimiter}
-          />
+          <h2 className="badge-leaderboard-section-title" data-testid="course-leaderboard-completed-title">
+            {translations.completedTitle}
+          </h2>
+          <LeaderboardTable rank={rank} profiles={profiles} />
         </>
       )}
 
       {hasInProgress && (
         <>
-          <h2 className="badge-leaderboard-section-title" data-testid="badge-leaderboard-in-progress-title">
+          <h2 className="badge-leaderboard-section-title" data-testid="course-leaderboard-in-progress-title">
             {translations.inProgressTitle}
           </h2>
-          <LeaderboardTable
-            rank={inProgressRank}
-            profiles={inProgressProfiles}
-            showProgress
-          />
+          <LeaderboardTable rank={inProgressRank} profiles={inProgressProfiles} showProgress />
         </>
       )}
 
-      {!hasEarners && !hasInProgress && (
+      {!hasCompleted && !hasInProgress && (
         <LeaderboardTable rank={0} profiles={[]} />
       )}
     </>
   );
 };
 
-export default BadgeLeaderboardPage;
+export default CourseLeaderboardPage;

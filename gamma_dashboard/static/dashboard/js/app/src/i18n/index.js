@@ -411,6 +411,21 @@ const messages = defineMessages({
     defaultMessage: '{title} badge',
     description: 'Alternative text for the large badge image shown at the top of the per-badge leaderboard page.',
   },
+  badgeLeaderboardEarnedSectionTitle: {
+    id: 'badge.leaderboard.earned.section.title',
+    defaultMessage: 'Earned',
+    description: 'Heading for the section listing users who have earned the badge on the per-badge leaderboard page.',
+  },
+  badgeLeaderboardInProgressSectionTitle: {
+    id: 'badge.leaderboard.in-progress.section.title',
+    defaultMessage: 'In progress',
+    description: 'Heading for the section listing users who are progressing toward the badge on the per-badge leaderboard page.',
+  },
+  courseLeaderboardCompletedSectionTitle: {
+    id: 'course.leaderboard.completed.section.title',
+    defaultMessage: 'Completed',
+    description: 'Heading for the section listing learners who earned the course certificate on the course leaderboard page.',
+  },
 });
 
 export default messages;

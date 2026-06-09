@@ -106,6 +106,20 @@ class GammaApiWrapper:
             **kwargs
         )
 
+    def get_course_points(self, course_id, user_uids, **kwargs):
+        """
+        Return per-course points for the given users.
+
+        Returns:
+            dict: a mapping of ``user_uid`` to course points (absent users have no points).
+        """
+        return self.request_api_endpoint(
+            'course-points',
+            method='POST',
+            json={'course_id': course_id, 'user_uids': list(user_uids)},
+            **kwargs
+        ) or {}
+
     def get_game_profile(self, username, **kwargs):
         """
         Return game profile data for user.

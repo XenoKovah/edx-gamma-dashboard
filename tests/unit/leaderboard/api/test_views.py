@@ -6,9 +6,11 @@ from rest_framework import status
 
 from gamma_dashboard.dashboard.api.v0.views import (
     BadgeLeaderboardApiView,
+    CourseLeaderboardApiView,
     LeaderboardApiView,
     UserBadgesApiView,
 )
+from gamma_dashboard.dashboard.api.utils import repair_mojibake_text
 from gamma_dashboard.dashboard.core.gamma.api.wrapper import GammaApiWrapper
 
 # from tests.utils import load_params_from_json
@@ -342,6 +344,74 @@ class TestBadgeLeaderboardApiView:
         assert response.data == {"error": "Gamma Leaderboard is disabled."}
 
 
+class TestCourseLeaderboardApiView:
+    """
+    Test Case for the testing CourseLeaderboardApiView.
+
+    The section assembly reads LMS certificate/grade/enrollment models, so it is
+    verified end-to-end against a real course rather than unit-tested here; these
+    cover the toggle gate and the member-shape helper.
+    """
+
+    @pytest.mark.django_db
+    def test_disabled_returns_404(self, mocker):
+        view = CourseLeaderboardApiView()
+        request_mock = mocker.MagicMock()
+        mocker.patch(
+            "gamma_dashboard.dashboard.api.v0.views.show_course_leaderboard_tab",
+            return_value=False,
+        )
+
+        response = view.get(request_mock, course_id="course-v1:OpenedX+DemoX+DemoCourse")
+
+        assert response.status_code == status.HTTP_404_NOT_FOUND
+        assert response.data == {"error": "Gamma Leaderboard is disabled."}
+
+    def test_build_member_completed_and_in_progress_shapes(self, mocker, settings):
+        settings.PROFILE_MICROFRONTEND_URL = "https://apps.example.com/profile/u/"
+        mocker.patch(
+            "gamma_dashboard.dashboard.api.v0.views.get_profile_image_urls_for_user",
+            return_value={"medium": "/images/default.png"},
+        )
+
+        user = mocker.MagicMock()
+        user.username = "pietrushnic"
+        user.profile.name = "Piotr KrÃ³l"  # double-encoded; should be repaired on output
+
+        completed = CourseLeaderboardApiView._build_member(user, points=120)
+        assert completed["user_uid"] == "Piotr Król"  # mojibake repaired
+        assert completed["profile_url"] == "https://apps.example.com/profile/u/pietrushnic"
+        assert completed["url_profile_image"] == "/images/default.png"
+        assert completed["points"] == 120
+        assert "progress_percent" not in completed
+
+        in_progress = CourseLeaderboardApiView._build_member(user, progress_percent=9)
+        assert in_progress["user_uid"] == "Piotr Król"
+        assert in_progress["progress_percent"] == 9
+        assert "points" not in in_progress
+
+
+class TestRepairMojibakeText:
+    """
+    Test the ``repair_mojibake_text`` helper used to fix double-encoded display names.
+    """
+
+    @pytest.mark.parametrize(
+        "value,expected",
+        (
+            ("Piotr KrÃ³l", "Piotr Król"),
+            ("ZoltÃ¡n RusnÃ¡k", "Zoltán Rusnák"),
+            ("MikoÅ‚aj PlewiÅ„ski", "Mikołaj Plewiński"),
+            ("Bob Bob", "Bob Bob"),  # ASCII is unchanged
+            ("Zoltán", "Zoltán"),  # already-correct text is preserved
+            ("", ""),
+            (None, None),
+        ),
+    )
+    def test_repairs_only_double_encoded_values(self, value, expected):
+        assert repair_mojibake_text(value) == expected
+
+
 class TestGetProfileUrl:
     """
     Test the `_get_profile_url` helper of `LeaderboardApiView`.
@@ -412,6 +482,43 @@ class TestUpdateLeaderboardInfo:
         bob_item = result["competitors"][0]
         assert bob_item["user_uid"] == "bob"
         assert bob_item["profile_url"] == "https://apps.example.com/profile/u/bob"
+
+    @pytest.mark.django_db
+    def test_enriches_in_progress_list_and_preserves_progress_percent(self, mocker, settings):
+        settings.PROFILE_MICROFRONTEND_URL = "https://apps.example.com/profile/u/"
+
+        current_user = mocker.MagicMock()
+        current_user.username = "current_user"
+        current_user.profile.name = "Current Full Name"
+
+        carol = mocker.MagicMock()
+        carol.username = "carol"
+        carol.profile.name = "Carol Danvers"
+
+        mocker.patch(
+            "gamma_dashboard.dashboard.api.v0.views.get_profile_image_urls_for_user",
+            return_value={"medium": "/images/default.png"},
+        )
+        mocker.patch(
+            "django.contrib.auth.models.User.objects.filter",
+            return_value=[carol],
+        )
+
+        # The per-badge response carries an extra ``in_progress`` list that must be
+        # enriched just like top10/competitors, without dropping ``progress_percent``.
+        leaderboard_info = {
+            "top10": [],
+            "competitors": [],
+            "in_progress": [{"user_uid": "carol", "progress_percent": 42}],
+        }
+
+        result = LeaderboardApiView._update_leaderboard_info(current_user, leaderboard_info)
+
+        in_progress_item = result["in_progress"][0]
+        assert in_progress_item["user_uid"] == "Carol Danvers"
+        assert in_progress_item["profile_url"] == "https://apps.example.com/profile/u/carol"
+        assert in_progress_item["url_profile_image"] == "/images/default.png"
+        assert in_progress_item["progress_percent"] == 42
 
 
 class TestUserBadgesApiView:
