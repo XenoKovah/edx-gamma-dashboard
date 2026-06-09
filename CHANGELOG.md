@@ -3,6 +3,8 @@
 ## [Unreleased]
 
 ### Added
+- Re-enable the "Your Statuses" block on the Performance dashboard (`SHOW_STATUS_BLOCK = true`) and rebuild the bundle. Renders the points-based status ladder supplied by gamma's `system_statuses` API; requires gamma to have active statuses configured.
+- Hide the "Your Avatar" and "Your Vault" sections on the Performance dashboard behind new `SHOW_AVATAR_BLOCK` / `SHOW_VAULT_BLOCK` feature flags (both default `false`), mirroring `SHOW_STATUS_BLOCK`; set either to `true` to restore.
 - Course leaderboard now shows two sections like the per-badge page: "Completed" (learners who earned the course certificate, ranked by their course points — or 100% when they have no course points) and "In progress" (active, not-yet-certified learners ranked by their course grade %, the value shown on the Progress page). Adds the `leaderboard/course/<course_id>/` API.
 - Make each badge clickable (on the Performance dashboard preview and in the All-badges modal): it opens a per-badge leaderboard page that lists the top 100 users who earned that badge, ranked like the Leaderboard, with the badge image (4x), title and description shown at the top. Hover still shows the existing "how to earn" popover.
 - On the per-badge page, list in-progress users below the earners: a separate "In progress" section showing everyone with non-zero progress toward the badge, ranked by their progress percentage (e.g. 30/1000 -> 3%).
