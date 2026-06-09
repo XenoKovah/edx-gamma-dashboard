@@ -18,6 +18,7 @@ from openedx.core.djangoapps.site_configuration import helpers as configuration_
 from openedx.core.djangoapps.user_api.accounts import PRIVATE_VISIBILITY
 from openedx.core.djangoapps.user_api.accounts.api import get_account_settings
 from openedx.core.djangoapps.user_api.accounts.image_helpers import get_profile_image_urls_for_user
+from openedx.core.djangoapps.user_api.accounts.serializers import _visible_fields
 from openedx.core.djangoapps.user_api.errors import UserNotFound
 
 from course_leaderboard.toggles import show_course_leaderboard_tab
@@ -27,6 +28,21 @@ from gamma_dashboard.toggles import show_gamma_leaderboard
 from ..utils import repair_mojibake_text, site_badge_filter, is_main_site
 
 MAIN_SITE_NAME = 'main'
+
+
+def _public_display_name(user):
+    """Return the learner's real name only when it is shared with everyone.
+
+    Mirrors the profile page's own visibility logic (``_visible_fields``): the
+    real name is shown only when the learner's effective visibility includes
+    ``name`` (in practice, account_privacy='custom' with visibility.name=
+    'all_users'). Otherwise fall back to the username, so a learner who keeps
+    their name private is never exposed on the public leaderboard.
+    """
+    profile = getattr(user, "profile", None)
+    if profile and profile.name and "name" in _visible_fields(profile, user):
+        return repair_mojibake_text(profile.name)
+    return user.username
 
 
 class LeaderboardApiView(APIView):
@@ -97,7 +113,7 @@ class LeaderboardApiView(APIView):
             profile page URLs and new user_uid.
         """
         leaderboard_info["url_profile_image"] = get_profile_image_urls_for_user(user)["medium"]
-        leaderboard_info["user_uid"] = repair_mojibake_text(user.profile.name) if user.profile.name else user.username
+        leaderboard_info["user_uid"] = _public_display_name(user)
         leaderboard_info["profile_url"] = LeaderboardApiView._get_profile_url(user.username)
 
         # ``in_progress`` is only present for the per-badge leaderboard; the regular
@@ -113,7 +129,7 @@ class LeaderboardApiView(APIView):
             for item in leaderboard_info.get(key) or []:
                 if user := users_dict.get(item["user_uid"]):
                     item["profile_url"] = LeaderboardApiView._get_profile_url(user.username)
-                    item["user_uid"] = repair_mojibake_text(user.profile.name) if user.profile.name else user.username
+                    item["user_uid"] = _public_display_name(user)
                     item["url_profile_image"] = get_profile_image_urls_for_user(user)["medium"]
                 else:
                     # If the user is not found on the platform, change their Gamma-sourced username
@@ -279,9 +295,9 @@ class CourseLeaderboardApiView(APIView):
     @staticmethod
     def _display_name(user):
         """
-        The user's public profile name, falling back to their username.
+        The user's real name when public, falling back to their username.
         """
-        return user.profile.name if getattr(user, "profile", None) and user.profile.name else user.username
+        return _public_display_name(user)
 
     @staticmethod
     def _build_member(user, points=None, progress_percent=None):
@@ -289,7 +305,7 @@ class CourseLeaderboardApiView(APIView):
         Build a leaderboard-member dict (matching the regular leaderboard shape).
         """
         member = {
-            "user_uid": repair_mojibake_text(CourseLeaderboardApiView._display_name(user)),
+            "user_uid": _public_display_name(user),
             "signup_source": None,
             "url_profile_image": get_profile_image_urls_for_user(user)["medium"],
             "profile_url": LeaderboardApiView._get_profile_url(user.username),  # pylint: disable=protected-access
