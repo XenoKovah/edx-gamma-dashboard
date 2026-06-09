@@ -18,6 +18,8 @@ const ProgressBadge = ({
 
   const {
     title,
+    description = '',
+    manualCriteria = '',
     image: badgeImageUrl,
     objectUri: achievedBadgeImageUrl,
     progress,
@@ -39,6 +41,8 @@ const ProgressBadge = ({
   const popupProps = hasPopup
     ? {
       data: {
+        description,
+        manualCriteria,
         badgeDependencies: dependencies,
         statusDependency: data.statusDependency || null,
         progress: progress || {},
@@ -135,6 +139,8 @@ ProgressBadge.propTypes = {
     id: PropTypes.string,
     slug: PropTypes.string,
     title: PropTypes.string,
+    description: PropTypes.string,
+    manualCriteria: PropTypes.string,
     image: PropTypes.string,
     objectUri: PropTypes.string,
     progress: PropTypes.oneOfType([
