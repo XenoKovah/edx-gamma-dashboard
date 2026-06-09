@@ -153,9 +153,22 @@ const DashboardWrapper = ({
               )}
             </DashboardSectionContainer>
           )}
+          {SHOW_STATUS_BLOCK && (
+            <DashboardSectionContainer>
+              {renderErrorBoundary(
+                <DashboardSection fullWidth corner={CORNER_TOP}>
+                  <SliderStatusesBlock
+                    status={translations.performanceSectionCounter}
+                    statusItems={statusItems}
+                  />
+                </DashboardSection>,
+              )}
+            </DashboardSectionContainer>
+          )}
           <DashboardSectionContainer>
             {renderErrorBoundary(
               <DashboardSectionSlider
+                fullWidth
                 title={translations.badgesSectionTitle}
                 status={translations.badgeSectionCounter}
                 content={translations.badgesSectionDescription}
@@ -170,24 +183,14 @@ const DashboardWrapper = ({
                 }}
               />,
             )}
+          </DashboardSectionContainer>
+          <DashboardSectionContainer>
             {renderErrorBoundary(
-              <DashboardSection>
+              <DashboardSection fullWidth>
                 <PointsDistributionChart data={chart} />
               </DashboardSection>,
             )}
           </DashboardSectionContainer>
-          {SHOW_STATUS_BLOCK && (
-            <DashboardSectionContainer>
-              {renderErrorBoundary(
-                <DashboardSection fullWidth corner={CORNER_TOP}>
-                  <SliderStatusesBlock
-                    status={translations.performanceSectionCounter}
-                    statusItems={statusItems}
-                  />
-                </DashboardSection>,
-              )}
-            </DashboardSectionContainer>
-          )}
           <DashboardSectionContainer>
             {renderErrorBoundary(
               <DashboardSection fullWidth corner={CORNER_BOTTOM}>
