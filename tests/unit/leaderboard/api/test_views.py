@@ -6,6 +6,7 @@ from rest_framework import status
 
 from gamma_dashboard.dashboard.api.v0.views import (
     BadgeLeaderboardApiView,
+    CountryLeaderboardApiView,
     CourseLeaderboardApiView,
     LeaderboardApiView,
     UserBadgesApiView,
@@ -623,3 +624,118 @@ class TestUserBadgesApiView:
         response = UserBadgesApiView().get(self._request(mocker), username="target")
 
         assert response.status_code == status.HTTP_422_UNPROCESSABLE_ENTITY
+
+
+class TestCountryLeaderboardApiView:
+    """
+    Test Case for `CountryLeaderboardApiView`.
+    """
+
+    @pytest.mark.django_db
+    def test_disabled_returns_404(self, mocker):
+        mocker.patch(
+            "gamma_dashboard.dashboard.api.v0.views.show_gamma_leaderboard",
+            return_value=False,
+        )
+
+        response = CountryLeaderboardApiView().get(mocker.MagicMock(), country_code="JP")
+
+        assert response.status_code == status.HTTP_404_NOT_FOUND
+        assert response.data == {"error": "Gamma Leaderboard is disabled."}
+
+    @pytest.mark.django_db
+    def test_enabled_ranks_public_country_users_and_labels_country(self, mocker):
+        mocker.patch(
+            "gamma_dashboard.dashboard.api.v0.views.show_gamma_leaderboard",
+            return_value=True,
+        )
+        mocker.patch.object(
+            CountryLeaderboardApiView,
+            "_public_country_usernames",
+            return_value=["alice", "bob"],
+        )
+        leaderboard_info = {"top10": [{"user_uid": "alice"}], "competitors": [], "rank": 1}
+        gamma_mock = mocker.patch.object(
+            GammaApiWrapper,
+            "get_country_leaderboard_info",
+            return_value=leaderboard_info,
+        )
+        # The member enrichment is covered by TestUpdateLeaderboardInfo; here it just
+        # passes the gamma payload through unchanged so we can assert the country wrapping.
+        mocker.patch(
+            "gamma_dashboard.dashboard.api.v0.views.LeaderboardApiView._update_leaderboard_info",
+            side_effect=lambda user, info: info,
+        )
+        mocker.patch(
+            "gamma_dashboard.dashboard.api.v0.views.countries.name",
+            return_value="Japan",
+        )
+
+        request = mocker.MagicMock()
+        request.user.username = "viewer"
+
+        # The lower-case path segment must be normalized to the upper-case ISO code.
+        response = CountryLeaderboardApiView().get(request, country_code="jp")
+
+        gamma_mock.assert_called_once_with(
+            "viewer",
+            request.user.usersignupsource_set.first.return_value.site,
+            ["alice", "bob"],
+        )
+        assert response.status_code == status.HTTP_200_OK
+        assert response.data["country_code"] == "JP"
+        assert response.data["country_name"] == "Japan"
+        assert response.data["top10"] == [{"user_uid": "alice"}]
+
+    @pytest.mark.django_db
+    def test_no_gamma_data_returns_422(self, mocker):
+        mocker.patch(
+            "gamma_dashboard.dashboard.api.v0.views.show_gamma_leaderboard",
+            return_value=True,
+        )
+        mocker.patch.object(
+            CountryLeaderboardApiView,
+            "_public_country_usernames",
+            return_value=[],
+        )
+        mocker.patch.object(GammaApiWrapper, "get_country_leaderboard_info", return_value=None)
+
+        response = CountryLeaderboardApiView().get(mocker.MagicMock(), country_code="JP")
+
+        assert response.status_code == status.HTTP_422_UNPROCESSABLE_ENTITY
+        assert response.data == {"error": "No data received from Gamma server."}
+
+    @pytest.mark.django_db
+    def test_public_country_usernames_includes_only_users_sharing_country(self, mocker):
+        # Three learners list the country; only those whose effective visibility
+        # includes "country" (default 'all_users', or 'custom' with country shared)
+        # are returned. 'private' / 'custom-without-country' learners are dropped.
+        def profile_for(username):
+            profile = mocker.MagicMock()
+            profile.user.username = username
+            return profile
+
+        public_a = profile_for("public_a")
+        private_b = profile_for("private_b")
+        public_c = profile_for("public_c")
+
+        filter_mock = mocker.patch(
+            "gamma_dashboard.dashboard.api.v0.views.UserProfile.objects.filter",
+        )
+        filter_mock.return_value.select_related.return_value = [public_a, private_b, public_c]
+
+        def visible_fields(profile, user):
+            return {"country"} if user.username in ("public_a", "public_c") else {"username"}
+
+        mocker.patch(
+            "gamma_dashboard.dashboard.api.v0.views._visible_fields",
+            side_effect=visible_fields,
+        )
+
+        usernames = CountryLeaderboardApiView._public_country_usernames("JP")
+
+        assert usernames == ["public_a", "public_c"]
+        filter_mock.assert_called_once_with(country="JP")
+
+    def test_public_country_usernames_empty_code_returns_empty(self):
+        assert CountryLeaderboardApiView._public_country_usernames("") == []

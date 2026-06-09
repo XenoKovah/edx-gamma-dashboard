@@ -12,6 +12,10 @@ export const BADGE_LEADERBOARD_URLS = (badgeSlug = '', courseId = '') => ({
   getInfo: `${BASE_URL}leaderboard/badge/${badgeSlug}${courseId ? `/${courseId}` : ''}`,
 });
 
+export const COUNTRY_LEADERBOARD_URLS = (country = '') => ({
+  getInfo: `${BASE_URL}leaderboard/country/${country}`,
+});
+
 export const COURSE_LEADERBOARD_URLS = (courseId = '') => ({
   getInfo: `${BASE_URL}leaderboard/course/${courseId}`,
 });

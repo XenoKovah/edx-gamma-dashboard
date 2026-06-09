@@ -431,6 +431,11 @@ const messages = defineMessages({
     defaultMessage: 'Completed',
     description: 'Heading for the section listing learners who earned the course certificate on the course leaderboard page.',
   },
+  countryLeaderboardHeadingText: {
+    id: 'country.leaderboard.heading.text',
+    defaultMessage: '{country} Leaderboard',
+    description: 'Heading for the per-country leaderboard page, with the country name interpolated (e.g. "Japan Leaderboard").',
+  },
 });
 
 export default messages;

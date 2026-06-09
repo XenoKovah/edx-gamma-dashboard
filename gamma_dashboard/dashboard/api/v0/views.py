@@ -5,6 +5,7 @@ from urllib.parse import urljoin
 
 from django.conf import settings
 from django.contrib.auth.models import User
+from django_countries import countries
 from edx_rest_framework_extensions.auth.jwt.authentication import JwtAuthentication
 from edx_rest_framework_extensions.auth.session.authentication import SessionAuthenticationAllowInactiveUser
 from rest_framework import status
@@ -12,6 +13,7 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
+from common.djangoapps.student.models import UserProfile
 from common.djangoapps.student.views import get_org_black_and_whitelist_for_site
 from opaque_keys.edx.keys import CourseKey
 from openedx.core.djangoapps.site_configuration import helpers as configuration_helpers
@@ -178,6 +180,88 @@ class BadgeLeaderboardApiView(APIView):
             response = Response({"error": "Badge not found."}, status=status.HTTP_404_NOT_FOUND)
 
         return response
+
+
+class CountryLeaderboardApiView(APIView):
+    """
+    Leaderboard restricted to the learners who share a given profile country.
+
+    A learner's country and *whether they share it* live on their Open edX profile
+    (``UserProfile.country`` plus their field-visibility preference) — data only the
+    LMS can see — while Gamma holds the points. So this view resolves the set of
+    learners whose country is the requested one **and** publicly shared, asks Gamma to
+    rank just those learners, and enriches the result exactly like the regular
+    leaderboard (profile images, public display names, profile links).
+
+    Privacy is evaluated live on every request via the same ``_visible_fields`` logic
+    the profile page uses, so a learner who later makes their country public starts
+    appearing here immediately — and one who makes it private drops off — with no sync
+    step and no copy of the country stored in Gamma.
+    """
+
+    permission_classes = (IsAuthenticated,)
+    authentication_classes = (SessionAuthenticationAllowInactiveUser,)
+
+    def get(self, request, country_code, *args, **kwargs):
+        """
+        Get the leaderboard for everyone who publicly shares ``country_code``.
+        """
+        if not show_gamma_leaderboard():
+            return Response({"error": "Gamma Leaderboard is disabled."}, status=status.HTTP_404_NOT_FOUND)
+
+        country_code = (country_code or "").upper()
+
+        signup_source = request.user.usersignupsource_set.first()
+        user_signup_source = signup_source.site if signup_source else MAIN_SITE_NAME
+
+        public_usernames = self._public_country_usernames(country_code)
+
+        leaderboard_info = GammaApiWrapper(
+            version=DEFAULT_API_VERSION
+        ).get_country_leaderboard_info(request.user.username, user_signup_source, public_usernames)
+
+        if leaderboard_info is None:
+            return Response(
+                {"error": "No data received from Gamma server."}, status=status.HTTP_422_UNPROCESSABLE_ENTITY
+            )
+
+        updated_leaderboard_info = LeaderboardApiView._update_leaderboard_info(  # pylint: disable=protected-access
+            request.user, leaderboard_info
+        )
+        updated_leaderboard_info["country_code"] = country_code
+        updated_leaderboard_info["country_name"] = countries.name(country_code) or country_code
+
+        return Response(updated_leaderboard_info)
+
+    @staticmethod
+    def _public_country_usernames(country_code):
+        """
+        Usernames of the learners whose profile country is ``country_code`` and who
+        share their country publicly.
+
+        Visibility is resolved with ``_visible_fields`` (the profile page's own logic):
+        'private' learners, and 'custom' learners who did not share their country, are
+        excluded; default 'all_users' learners and 'custom' learners who shared their
+        country are included. The check reads current preferences, so the result always
+        reflects each learner's latest choice.
+
+        This is O(number of learners in the country) preference lookups; fine at the
+        scale this serves. If a single country ever grows large enough to matter, the
+        per-user ``_visible_fields`` call is the thing to batch.
+        """
+        if not country_code:
+            return []
+
+        profiles = (
+            UserProfile.objects
+            .filter(country=country_code)
+            .select_related("user")
+        )
+        return [
+            profile.user.username
+            for profile in profiles
+            if "country" in _visible_fields(profile, profile.user)
+        ]
 
 
 class CourseLeaderboardApiView(APIView):

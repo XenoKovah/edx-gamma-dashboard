@@ -120,6 +120,30 @@ class GammaApiWrapper:
             **kwargs
         ) or {}
 
+    def get_country_leaderboard_info(self, username, user_signup_source, user_uids, **kwargs):
+        """
+        Return a leaderboard restricted to ``user_uids`` (the learners who share a
+        country), ranked by points.
+
+        Country membership and its privacy live on the Open edX profile, which only
+        the caller (running inside the LMS) can see; Gamma just ranks the candidate
+        users it is handed. ``user_uids`` is POSTed because the candidate set can be
+        large for a populous country.
+
+        Returns:
+            dict: parsed leaderboard information (regular leaderboard shape).
+        """
+        return self.request_api_endpoint(
+            'leaderboard/users',
+            method='POST',
+            json={
+                'username': username,
+                'signup_source': user_signup_source,
+                'user_uids': list(user_uids),
+            },
+            **kwargs
+        )
+
     def get_game_profile(self, username, **kwargs):
         """
         Return game profile data for user.
