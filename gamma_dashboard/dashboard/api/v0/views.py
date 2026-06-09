@@ -377,6 +377,7 @@ class UserBadgesApiView(APIView):
 
             current = system_badges_by_slug.get(badge.get("slug"), {})
             earned_badges.append({
+                "slug": badge.get("slug"),
                 "title": current.get("title") or badge.get("title"),
                 "description": current.get("description") or badge.get("description") or "",
                 "image": self._absolute_media_url(
