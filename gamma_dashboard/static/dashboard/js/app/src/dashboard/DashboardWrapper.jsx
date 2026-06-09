@@ -21,7 +21,9 @@ import {
 } from './propTypes';
 import { PointsDistributionChart, ProgressChart } from './charts';
 import { useDashboardWrapper } from './hooks';
-import { WIDGETS, SHOW_STATUS_BLOCK } from './constants';
+import {
+  WIDGETS, SHOW_STATUS_BLOCK, SHOW_AVATAR_BLOCK, SHOW_VAULT_BLOCK,
+} from './constants';
 
 const DashboardWrapper = ({
   chart,
@@ -128,27 +130,29 @@ const DashboardWrapper = ({
           title={translations.subHeaderTitle}
         />
         <div className="dashboard-page-body">
-          <DashboardSectionContainer>
-            {renderErrorBoundary(
-              <DashboardSectionAvatar
-                title={translations.avatarSectionTitle}
-                content={translations.avatarSectionDescription}
-                items={renderItems(WIDGETS.AVATAR, {
-                  hasCompletedAvatarSet,
-                  completedAvatar,
-                  hasSelectedAvatarSet,
-                  translations,
-                })}
-                buttonData={{
-                  title: translations.avatarSectionBtnTitle,
-                  onClick: () => handleOpenModal(WIDGETS.AVATAR),
-                }}
-              />,
-            )}
-            {renderErrorBoundary(
-              <DashboardSectionPointsVault points={statusRoadmap?.points} />,
-            )}
-          </DashboardSectionContainer>
+          {(SHOW_AVATAR_BLOCK || SHOW_VAULT_BLOCK) && (
+            <DashboardSectionContainer>
+              {SHOW_AVATAR_BLOCK && renderErrorBoundary(
+                <DashboardSectionAvatar
+                  title={translations.avatarSectionTitle}
+                  content={translations.avatarSectionDescription}
+                  items={renderItems(WIDGETS.AVATAR, {
+                    hasCompletedAvatarSet,
+                    completedAvatar,
+                    hasSelectedAvatarSet,
+                    translations,
+                  })}
+                  buttonData={{
+                    title: translations.avatarSectionBtnTitle,
+                    onClick: () => handleOpenModal(WIDGETS.AVATAR),
+                  }}
+                />,
+              )}
+              {SHOW_VAULT_BLOCK && renderErrorBoundary(
+                <DashboardSectionPointsVault points={statusRoadmap?.points} />,
+              )}
+            </DashboardSectionContainer>
+          )}
           <DashboardSectionContainer>
             {renderErrorBoundary(
               <DashboardSectionSlider
@@ -200,19 +204,21 @@ const DashboardWrapper = ({
         filteredActiveBadges={filteredActiveBadges}
         getItemDataFunction={getItemDataFunction}
       />
-      <ProgressAvatarModal
-        isOpen={isAvatarModalOpen}
-        closeCallback={handleCloseProgressAvatarModal}
-        title={translations.avatarSetsModalTitle}
-        avatarSets={avatarSets}
-        handleUpdateSelectedAvatarSet={handleUpdateSelectedAvatarSet}
-        handleSelectAvatarSet={handleSelectAvatarSet}
-        hasSelectedAvatarSet={hasSelectedAvatarSet}
-        avatarProcessingStates={avatarProcessingStates}
-        selectedAvatarSetId={selectedAvatarSetId}
-        setSelectedAvatarSetId={setSelectedAvatarSetId}
-        savedSelectedAvatarSetId={savedSelectedAvatarSetId}
-      />
+      {SHOW_AVATAR_BLOCK && (
+        <ProgressAvatarModal
+          isOpen={isAvatarModalOpen}
+          closeCallback={handleCloseProgressAvatarModal}
+          title={translations.avatarSetsModalTitle}
+          avatarSets={avatarSets}
+          handleUpdateSelectedAvatarSet={handleUpdateSelectedAvatarSet}
+          handleSelectAvatarSet={handleSelectAvatarSet}
+          hasSelectedAvatarSet={hasSelectedAvatarSet}
+          avatarProcessingStates={avatarProcessingStates}
+          selectedAvatarSetId={selectedAvatarSetId}
+          setSelectedAvatarSetId={setSelectedAvatarSetId}
+          savedSelectedAvatarSetId={savedSelectedAvatarSetId}
+        />
+      )}
     </>
   );
 };

@@ -4,6 +4,7 @@
 
 ### Added
 - Re-enable the "Your Statuses" block on the Performance dashboard (`SHOW_STATUS_BLOCK = true`) and rebuild the bundle. Renders the points-based status ladder supplied by gamma's `system_statuses` API; requires gamma to have active statuses configured.
+- Hide the "Your Avatar" and "Your Vault" sections on the Performance dashboard behind new `SHOW_AVATAR_BLOCK` / `SHOW_VAULT_BLOCK` feature flags (both default `false`), mirroring `SHOW_STATUS_BLOCK`; set either to `true` to restore.
 - Make each badge clickable (on the Performance dashboard preview and in the All-badges modal): it opens a per-badge leaderboard page that lists the top 100 users who earned that badge, ranked like the Leaderboard, with the badge image (4x), title and description shown at the top. Hover still shows the existing "how to earn" popover.
 - Add `leaderboard/badge/<slug>/` (optionally course-scoped) API returning a badge's top-100 earners in leaderboard shape plus the badge's display data
 - Link each leaderboard username to that user's profile page (Profile MFE)
