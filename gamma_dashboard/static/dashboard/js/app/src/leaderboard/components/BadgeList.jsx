@@ -21,7 +21,12 @@ const BadgeList = ({ badges }) => {
       {badgeKeys.length ? (
         badgeKeys.map((id) => (
           <li key={id}>
-            <Badge key={id} url={badges[id].url} />
+            <Badge
+              key={id}
+              url={badges[id].url}
+              title={badges[id].title}
+              slug={badges[id].slug}
+            />
           </li>
         ))
       ) : (

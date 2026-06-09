@@ -4,6 +4,7 @@ import { EventPropType, ProgressPropType, StatusPropType } from '../generic/prop
 
 const BadgePropType = {
   title: PropTypes.string,
+  slug: PropTypes.string,
   description: PropTypes.string,
   done: PropTypes.bool,
   progress: PropTypes.shape(ProgressPropType),
