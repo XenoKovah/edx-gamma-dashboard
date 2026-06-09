@@ -1,7 +1,7 @@
 import React from 'react';
 import { useIntl } from 'react-intl';
 import PropTypes from 'prop-types';
-import { Image, OverlayTrigger, Tooltip } from '@openedx/paragon';
+import { Image } from '@openedx/paragon';
 
 import { resolveUrl } from '../../utils';
 import { GAMMA_ADMIN_BASE_URL } from '../../constants';
@@ -22,33 +22,32 @@ const Badge = ({ url, title, slug }) => {
     />
   );
 
+  // The title is surfaced via the native `title` attribute rather than a Paragon
+  // tooltip: these icons live inside an `overflow: hidden` leaderboard Card, which
+  // clips/mis-positions an inline popper tooltip. The browser renders the native
+  // tooltip at the cursor, above everything, so it never overlaps the icon.
+  if (!slug) {
+    // No per-badge leaderboard to link to; still surface the title on hover.
+    return (
+      <span className="badge-item-wrapper" title={title || undefined}>
+        {image}
+      </span>
+    );
+  }
+
   // When the badge has a slug, link the icon to its (site-wide) per-badge leaderboard.
   // A plain anchor is used so it works both inside the standalone leaderboard SPA and
   // from the LMS course-leaderboard tab (a full navigation to the dashboard page).
-  const content = slug ? (
+  return (
     <a
       href={buildBadgeLeaderboardUrl(slug)}
       className="badge-item-link"
       data-testid="leaderboard-badge-link"
+      title={title || undefined}
       aria-label={title || undefined}
     >
       {image}
     </a>
-  ) : (
-    <span className="badge-item-wrapper">{image}</span>
-  );
-
-  if (!title) {
-    return content;
-  }
-
-  return (
-    <OverlayTrigger
-      placement="top"
-      overlay={<Tooltip id={`leaderboard-badge-tooltip-${slug || 'badge'}`}>{title}</Tooltip>}
-    >
-      {content}
-    </OverlayTrigger>
   );
 };
 
