@@ -138,11 +138,20 @@
   }
 }
 
-// dashboard/slider-statuses-block.scss: "you are here" knob is a white dot
-// with an accent ring; keep the ring (via custom property), darken the dot.
+// dashboard/slider-statuses-block.scss: the level circle (the "you are here"
+// knob on each track) is a white dot with an accent ring. In light mode the
+// white fill keeps it reading as a solid disc, but the circle has no z-index of
+// its own, while its parent `.slider-item-progress-track` (and the neighbouring
+// slide's track) carries `z-index: 9` - so an adjacent track line paints OVER
+// the circle. With the default light-mode white fill that's masked, but a plain
+// dark fill alone still lets the bright track line cross through it. Give the
+// circle an opaque dark fill (matching the light-mode white-disc intent) AND a
+// z-index above the tracks so it sits cleanly ON TOP of the line, exactly as in
+// light mode. The accent ring comes from the compiled `border` in track colour.
 .slider-statuses-block .slider-statuses-block-item {
   .slider-item-progress-track-end {
     background-color: #0d0d0e;
+    z-index: 10;
   }
 }
 
@@ -152,15 +161,21 @@
 }
 
 // leaderboard Avatar.jsx: members without a photo fall back to the default
-// profile image - a faint grey silhouette on a near-white field that reads as a
-// bright square on the dark leaderboard. Only the placeholder carries
-// `avatar-image_default` (real uploaded photos don't), so invert it and screen
-// it against the dark surface: the near-white field maps to #292a2c and blends
-// into the card, leaving just a muted light silhouette.
+// profile image - a fully-opaque, very-light grayscale silhouette (field ~#fff,
+// silhouette luminance ~215-242) that reads as a bright square on the dark
+// leaderboard. Only the placeholder carries `avatar-image_default` (real
+// uploaded photos don't), so recolor just that one.
+// ---
+// A `mix-blend-mode` approach is fragile: it blends against whatever happens to
+// be painted behind the element (card, hover states, the avatar's own bg), so
+// it leaves halos/artifacts. Because the image is opaque grayscale, a plain
+// `brightness()` is deterministic and backdrop-independent: multiplying every
+// channel by 0.16 maps the near-white field (255) to ~#292929 - imperceptibly
+// equal to the card surface #292a2c, so the bright square disappears - while the
+// slightly-darker silhouette pixels (215-242) map to ~#222, a clearly-visible
+// muted icon sitting flush on the card. No blend mode, no halo.
 .avatar-wrapper .pgn__avatar.avatar-image_default {
-  background-color: #292a2c;
-  filter: invert(1);
-  mix-blend-mode: screen;
+  filter: brightness(0.16);
 }
 
 // generic/modal.scss + Paragon ModalDialog (renders into #paragon-portal-root;
