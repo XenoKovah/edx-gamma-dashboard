@@ -21,3 +21,16 @@
   max-width: 75rem;
   box-sizing: border-box;
 }
+
+// Dark theme: the Indigo theme's light/dark toggle (INDIGO_ENABLE_DARK_TOGGLE)
+// stores the `indigo-toggle-dark` cookie and adds this class to <body>; the
+// theme restyles the page chrome and these rules restyle the app to match.
+body.indigo-dark-theme {
+  #app,
+  #paragon-portal-root,
+  .ReactModalPortal,
+  .progress-badge-popover,
+  .slider-item-progress-track-tooltip {
+    @import "dark-theme";
+  }
+}

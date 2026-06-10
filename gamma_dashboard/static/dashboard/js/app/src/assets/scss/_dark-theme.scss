@@ -1,0 +1,230 @@
+// Dark-theme skin for the gamification dashboard / leaderboards.
+// The Indigo theme's light/dark toggle adds the `indigo-dark-theme` class to
+// <body> (legacy pages: theme dark-theme.js; MFEs: the header toggle), and the
+// page chrome around #app is restyled by the theme. These rules restyle the
+// React app to match, using the Indigo brand dark palette
+// (@edly-io/indigo-brand-openedx themes/dark/_variables.scss):
+//   #0d0d0e page background     #292a2c card/surface
+//   #36383b raised surface      #383938 hover surface
+//   #f8f8f8 text                #dddfe2 secondary text
+//   #777792 borders             #aec7f6 primary/accent
+//   #ffa07a danger
+// This file is imported once per style-scope root (see index.scss), nested
+// under `body.indigo-dark-theme`, so it intentionally uses plain hex values:
+// SCSS variables from the Paragon core import in the light-theme block are
+// scoped to that block and are not visible here.
+
+// Most colors flow through the --pgn-rgg-* custom properties (_variables.scss
+// resolves them at the usage site), so redefining them here flips every rule
+// that uses them - accents, headings, body text, progress tracks.
+& {
+  --pgn-rgg-accent-color: #aec7f6;
+  --pgn-rgg-accent-transparent-bg-color: rgba(174, 199, 246, 0.35);
+  --pgn-rgg-main-text-color: #dddfe2;
+  --pgn-rgg-secondary-text-color: #f8f8f8;
+
+  // Position chip text/border sits on the (now light) accent background.
+  --pgn-rgg-avatar-position-color: #0d0d0e;
+  --pgn-rgg-avatar-border-color: #777792;
+  --pgn-rgg-avatar-position-accent-color: #777792;
+
+  // Status slider: remaining track on dark surface, progress in accent (the
+  // light default #082644 navy would be invisible on the dark background).
+  --pgn-rgg-statuses-progress-bg-color: #36383b;
+  --pgn-rgg-statuses-progress-track-bg-color: #aec7f6;
+}
+
+// --- The rest overrides colors that were compiled as static values ---------
+
+// dashboard/dashboard-section.scss: white section panels -> dark surface.
+.dashboard-section {
+  background: #292a2c;
+}
+
+// Paragon Card (leaderboard rows, progress avatars) defaults to white.
+.pgn__card {
+  background-color: #292a2c;
+  color: #dddfe2;
+}
+
+// generic/loader.scss: $gray-800 spinner on dark background.
+.loader {
+  color: #dddfe2;
+}
+
+// _global.scss button skins.
+.btn:not(.pgn__menu-select button) {
+  &.btn-outline-primary {
+    // Hover/focus fills with the accent, which is light in dark mode.
+    &:hover,
+    &:focus {
+      color: #0d0d0e;
+    }
+  }
+
+  &.btn-tertiary:not(:disabled, .disabled) {
+    color: #dddfe2;
+
+    &:hover,
+    &:focus {
+      background-color: #383938;
+      color: #f8f8f8;
+    }
+  }
+}
+
+// _global.scss: .badge-info background is the accent (light in dark mode), so
+// the default white badge text becomes unreadable.
+.badge-info {
+  color: #0d0d0e;
+
+  &:hover {
+    color: #0d0d0e;
+  }
+}
+
+// slick-carousel: arrows/dots are near-black by default.
+.slick-prev,
+.slick-next {
+  color: #f8f8f8 !important;
+}
+
+.slick-dots {
+  li button:before {
+    color: #f8f8f8;
+  }
+
+  li.slick-active button:before {
+    color: #aec7f6;
+  }
+
+  button {
+    &:hover,
+    &:focus {
+      background-color: #383938;
+    }
+  }
+}
+
+// dashboard/progress-badge.scss: the badge ring and donut hole are white so
+// they blend into the (light) section panel; match the dark panel instead.
+.progress-badge-figure:before {
+  border-color: #292a2c;
+}
+
+.progress-badge-diagram.progress {
+  &:before {
+    background: #292a2c;
+  }
+
+  // Remaining (unearned) slice of the progress donut.
+  .left:before,
+  .right:before {
+    background: #36383b;
+  }
+}
+
+// dashboard/slider-statuses-block.scss: "you are here" knob is a white dot
+// with an accent ring; keep the ring (via custom property), darken the dot.
+.slider-statuses-block .slider-statuses-block-item {
+  .slider-item-progress-track-end {
+    background-color: #0d0d0e;
+  }
+}
+
+// leaderboard/avatar.scss: winner chip has a white background behind its icon.
+.avatar-wrapper .avatar-position_winner {
+  background: #292a2c;
+}
+
+// generic/modal.scss + Paragon ModalDialog (renders into #paragon-portal-root;
+// .pgn__modal carries the white $modal-content-bg).
+.gamification-modal-dialog {
+  background-color: #292a2c;
+  color: #dddfe2;
+
+  .pgn__modal-body-content {
+    .pgn__menu-item {
+      color: #dddfe2;
+
+      &:hover {
+        background: #383938;
+      }
+    }
+
+    .form-control {
+      background-color: #36383b;
+      border-color: #777792;
+      color: #f8f8f8;
+    }
+  }
+
+  .pgn__modal-close-button {
+    &:hover svg {
+      color: #0d0d0e;
+    }
+  }
+}
+
+// Paragon Menu (the course selector popup inside the modal) defaults to white.
+.pgn__menu {
+  background-color: #292a2c;
+  color: #dddfe2;
+}
+
+// _global.scss: floating form label backgrounds (white) over the input edge.
+.form-control:focus ~ .pgn__form-control-floating-label .pgn__form-control-floating-label-text,
+.form-control.has-value ~ .pgn__form-control-floating-label .pgn__form-control-floating-label-text {
+  background-color: #36383b;
+  color: #dddfe2;
+}
+
+// Progress-badge popover (rendered directly under <body>, scoped via its
+// custom class). Bootstrap-4 style .popover with .arrow: only recolor the
+// placement side of each arrow border - the other sides must stay transparent
+// or the triangle becomes a square.
+&.popover {
+  background-color: #292a2c;
+  border-color: #777792;
+
+  .popover-header {
+    background-color: #36383b;
+    border-bottom-color: #777792;
+    color: #f8f8f8;
+  }
+
+  .popover-body {
+    color: #dddfe2;
+  }
+}
+
+&.bs-popover-top,
+&.bs-popover-auto[x-placement^="top"] {
+  .arrow:before { border-top-color: #777792; }
+  .arrow:after { border-top-color: #292a2c; }
+}
+
+&.bs-popover-bottom,
+&.bs-popover-auto[x-placement^="bottom"] {
+  .arrow:before { border-bottom-color: #777792; }
+  .arrow:after { border-bottom-color: #292a2c; }
+}
+
+&.bs-popover-right,
+&.bs-popover-auto[x-placement^="right"] {
+  .arrow:before { border-right-color: #777792; }
+  .arrow:after { border-right-color: #292a2c; }
+}
+
+&.bs-popover-left,
+&.bs-popover-auto[x-placement^="left"] {
+  .arrow:before { border-left-color: #777792; }
+  .arrow:after { border-left-color: #292a2c; }
+}
+
+// Error alerts (Paragon alert-danger is a light pastel block).
+.alert-danger {
+  background-color: #36383b;
+  border-color: #ffa07a;
+  color: #f8f8f8;
+}
