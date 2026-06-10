@@ -13,7 +13,7 @@ const messages = defineMessages({
   },
   dashboardBadgesDependsOnBadgesText: {
     id: 'dashboard.badges.depends.on.badges.text',
-    defaultMessage: 'Залежить від бейджів',
+    defaultMessage: 'Залежить від досягнень',
     description: 'Мітка, що вказує, що певна функція або елемент залежить від конкретних бейджів.',
   },
   dashboardBadgesDependsOnStatusText: {
@@ -28,7 +28,7 @@ const messages = defineMessages({
   },
   performanceBadgesSectionHeadingText: {
     id: 'performance.badges.section.heading.text',
-    defaultMessage: 'Ваші бейджі',
+    defaultMessage: 'Ваші досягнення',
     description: 'Заголовок розділу бейджів на сторінці продуктивності',
   },
   performanceSectionCounterText: {
@@ -43,22 +43,22 @@ const messages = defineMessages({
   },
   performanceBadgesEmptyMessageText: {
     id: 'performance.badges.empty.message.text',
-    defaultMessage: 'Поки що немає бейджів...',
+    defaultMessage: 'Поки що немає досягнень...',
     description: 'Повідомлення про порожній список, коли список бейджів не містить жодних бейджів',
   },
   performanceBadgesSectionDescriptionText: {
     id: 'performance.badges.section.description.text',
-    defaultMessage: 'Збирайте свою колекцію бейджів, навчаючись, діляючись знаннями або волонтерячи! Наведіть курсор на бейдж, щоб дізнатися, як додати його до колекції.',
+    defaultMessage: 'Збирайте свою колекцію досягнень, навчаючись, діляючись знаннями або волонтерячи! Наведіть курсор на досягнення, щоб дізнатися, як додати його до колекції.',
     description: 'Текст, що пояснює, як користувачі можуть заробляти бейджі та як переглядати інструкції, навівши курсор на бейджі',
   },
   performanceBadgesSectionAlertNoBadgesTitle: {
     id: 'performance.badges.section.alert.no-badges.title',
-    defaultMessage: 'Завершуйте навчальні матеріали, щоб отримати бейджі!',
+    defaultMessage: 'Завершуйте навчальні матеріали, щоб отримати досягнення!',
     description: 'Заголовок для повідомлення-попередження, коли немає доступних бейджів',
   },
   performanceBadgesSectionBadgesButtonText: {
     id: 'performance.badges.section.badges.button.text',
-    defaultMessage: 'Бейджі',
+    defaultMessage: 'Досягнення',
     description: 'Текст кнопки для перегляду бейджів у розділі продуктивності',
   },
   performanceAvatarSectionAvatarSetsButtonText: {
@@ -68,22 +68,22 @@ const messages = defineMessages({
   },
   performanceBadgesSectionAllBadgesButtonText: {
     id: 'performance.badges.section.all.badges.button.text',
-    defaultMessage: 'Усі бейджі',
+    defaultMessage: 'Усі досягнення',
     description: 'Текст кнопки для перегляду всіх доступних бейджів у розділі продуктивності',
   },
   performanceBadgesSectionTotalBadgesButtonText: {
     id: 'performance.badges.section.total.badges.button.text',
-    defaultMessage: 'Загальна кількість бейджів',
+    defaultMessage: 'Загальна кількість досягнень',
     description: 'Текст мітки для всіх доступних бейджів у розділі продуктивності',
   },
   dashboardProgressBadgeModalEmptyBadgesListTitle: {
     id: 'performance.badges.section.badges.modal.alert.empty-badges-list.title',
-    defaultMessage: 'Бейджі вже в дорозі!',
+    defaultMessage: 'Досягнення вже в дорозі!',
     description: 'Заголовок для повідомлення-попередження, коли в модальному вікні немає доступних бейджів',
   },
   dashboardProgressBadgeModalEmptyBadgesListDescription: {
     id: 'performance.badges.section.badges.modal.alert.empty-badges-list.description',
-    defaultMessage: 'Ваші нагороди майже тут! Адміністратор готує для вас особливі бейджі, щоб відзначити ваші досягнення. Зачекайте трохи, і вони з\'являться у вашому інвентарі, готові до використання!',
+    defaultMessage: 'Ваші нагороди майже тут! Адміністратор готує для вас особливі досягнення, щоб відзначити ваші успіхи. Зачекайте трохи, і вони з\'являться у вашому інвентарі, готові до використання!',
     description: 'Текст для повідомлення-попередження, коли в модальному вікні немає доступних бейджів',
   },
   performanceAvatarSectionTotalAvatarSetsButtonText: {
@@ -103,7 +103,7 @@ const messages = defineMessages({
   },
   performanceBadgesItemImageAlternativeText: {
     id: 'performance.badges.item.image.alternative.text',
-    defaultMessage: 'Бейдж лідера',
+    defaultMessage: 'Досягнення таблиці лідерів',
     description: 'Альтернативний текст для зображення бейджа в розділі продуктивності',
   },
   performanceStatusesSectionHeadingText: {

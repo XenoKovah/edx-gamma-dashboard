@@ -29,6 +29,6 @@ describe('<BadgeList>', () => {
     const { queryAllByTestId, getByText } = renderWithProviders(<BadgeList badges={{}} />);
 
     expect(queryAllByTestId('leaderboard-badge')).toHaveLength(0);
-    expect(getByText('No badges yet...')).toBeInTheDocument();
+    expect(getByText('No accomplishments yet...')).toBeInTheDocument();
   });
 });

@@ -13,7 +13,7 @@ const messages = defineMessages({
   },
   dashboardBadgesDependsOnBadgesText: {
     id: 'dashboard.badges.depends.on.badges.text',
-    defaultMessage: 'Dépend des badges',
+    defaultMessage: 'Dépend des réussites',
     description: 'Libellé indiquant qu\'une fonctionnalité ou un élément dépend de badges spécifiques.',
   },
   dashboardBadgesDependsOnStatusText: {
@@ -28,7 +28,7 @@ const messages = defineMessages({
   },
   performanceBadgesSectionHeadingText: {
     id: 'performance.badges.section.heading.text',
-    defaultMessage: 'Vos badges',
+    defaultMessage: 'Vos réussites',
     description: 'Texte du titre pour la section des badges sur la page de performance',
   },
   performanceSectionCounterText: {
@@ -43,22 +43,22 @@ const messages = defineMessages({
   },
   performanceBadgesEmptyMessageText: {
     id: 'performance.badges.empty.message.text',
-    defaultMessage: 'Aucun badge pour le moment...',
+    defaultMessage: 'Aucune réussite pour le moment...',
     description: 'Message vide lorsque la liste des badges n\'a aucun badge',
   },
   performanceBadgesSectionDescriptionText: {
     id: 'performance.badges.section.description.text',
-    defaultMessage: 'Construisez votre collection de badges en apprenant, en partageant ou en faisant du bénévolat ! Survolez un badge pour apprendre comment l\'ajouter à votre collection.',
+    defaultMessage: 'Construisez votre collection de réussites en apprenant, en partageant ou en faisant du bénévolat ! Survolez une réussite pour apprendre comment l\'ajouter à votre collection.',
     description: 'Texte expliquant comment les utilisateurs peuvent gagner des badges et comment afficher les instructions en survolant les badges',
   },
   performanceBadgesSectionAlertNoBadgesTitle: {
     id: 'performance.badges.section.alert.no-badges.title',
-    defaultMessage: 'Terminez le matériel de cours pour gagner des badges !',
+    defaultMessage: 'Terminez le matériel de cours pour gagner des réussites !',
     description: 'Titre du message d\'alerte lorsqu\'aucun badge n\'est disponible',
   },
   performanceBadgesSectionBadgesButtonText: {
     id: 'performance.badges.section.badges.button.text',
-    defaultMessage: 'Badges',
+    defaultMessage: 'Réussites',
     description: 'Texte du bouton pour afficher les badges dans la section de performance',
   },
   performanceAvatarSectionAvatarSetsButtonText: {
@@ -68,22 +68,22 @@ const messages = defineMessages({
   },
   performanceBadgesSectionAllBadgesButtonText: {
     id: 'performance.badges.section.all.badges.button.text',
-    defaultMessage: 'Tous les badges',
+    defaultMessage: 'Toutes les réussites',
     description: 'Texte du bouton pour afficher tous les badges disponibles dans la section de performance',
   },
   performanceBadgesSectionTotalBadgesButtonText: {
     id: 'performance.badges.section.total.badges.button.text',
-    defaultMessage: 'Total des badges',
+    defaultMessage: 'Total des réussites',
     description: 'Texte du libellé pour tous les badges disponibles dans la section de performance',
   },
   dashboardProgressBadgeModalEmptyBadgesListTitle: {
     id: 'performance.badges.section.badges.modal.alert.empty-badges-list.title',
-    defaultMessage: 'Les badges arrivent !',
+    defaultMessage: 'Les réussites arrivent !',
     description: 'Titre du message d\'alerte lorsqu\'aucun badge n\'est disponible dans le modal',
   },
   dashboardProgressBadgeModalEmptyBadgesListDescription: {
     id: 'performance.badges.section.badges.modal.alert.empty-badges-list.description',
-    defaultMessage: 'Vos récompenses sont presque là ! L\'administrateur prépare des badges spéciaux pour célébrer vos réalisations. Patientez un peu, et ils apparaîtront dans votre inventaire, prêts à l\'action !',
+    defaultMessage: 'Vos récompenses sont presque là ! L\'administrateur prépare des réussites spéciales pour célébrer vos accomplissements. Patientez un peu, et elles apparaîtront dans votre inventaire, prêtes à l\'action !',
     description: 'Texte du message d\'alerte lorsqu\'aucun badge n\'est disponible dans le modal',
   },
   performanceAvatarSectionTotalAvatarSetsButtonText: {
@@ -103,7 +103,7 @@ const messages = defineMessages({
   },
   performanceBadgesItemImageAlternativeText: {
     id: 'performance.badges.item.image.alternative.text',
-    defaultMessage: 'Badge du classement',
+    defaultMessage: 'Réussite du classement',
     description: 'Texte alternatif pour l\'image du badge dans la section de performance',
   },
   performanceStatusesSectionHeadingText: {

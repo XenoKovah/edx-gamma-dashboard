@@ -13,7 +13,7 @@ const messages = defineMessages({
   },
   dashboardBadgesDependsOnBadgesText: {
     id: 'dashboard.badges.depends.on.badges.text',
-    defaultMessage: 'Depende de emblemas',
+    defaultMessage: 'Depende de conquistas',
     description: 'Rótulo indicando que um determinado recurso ou elemento depende de emblemas específicos.',
   },
   dashboardBadgesDependsOnStatusText: {
@@ -28,7 +28,7 @@ const messages = defineMessages({
   },
   performanceBadgesSectionHeadingText: {
     id: 'performance.badges.section.heading.text',
-    defaultMessage: 'Seus Emblemas',
+    defaultMessage: 'Suas Conquistas',
     description: 'Texto do cabeçalho para a seção de emblemas na página de desempenho',
   },
   performanceSectionCounterText: {
@@ -43,22 +43,22 @@ const messages = defineMessages({
   },
   performanceBadgesEmptyMessageText: {
     id: 'performance.badges.empty.message.text',
-    defaultMessage: 'Nenhum emblema ainda...',
+    defaultMessage: 'Nenhuma conquista ainda...',
     description: 'Mensagem vazia quando a lista de emblemas não tem nenhum emblema',
   },
   performanceBadgesSectionDescriptionText: {
     id: 'performance.badges.section.description.text',
-    defaultMessage: 'Construa sua coleção de emblemas aprendendo, compartilhando ou sendo voluntário! Passe o mouse sobre um emblema para saber como adicioná-lo à sua coleção.',
+    defaultMessage: 'Construa sua coleção de conquistas aprendendo, compartilhando ou sendo voluntário! Passe o mouse sobre uma conquista para saber como adicioná-la à sua coleção.',
     description: 'Texto explicando como os usuários podem ganhar emblemas e como visualizar instruções passando o mouse sobre os emblemas',
   },
   performanceBadgesSectionAlertNoBadgesTitle: {
     id: 'performance.badges.section.alert.no-badges.title',
-    defaultMessage: 'Conclua o material da turma para ganhar emblemas!',
+    defaultMessage: 'Conclua o material da turma para ganhar conquistas!',
     description: 'Título para a mensagem de alerta quando nenhum emblema está disponível',
   },
   performanceBadgesSectionBadgesButtonText: {
     id: 'performance.badges.section.badges.button.text',
-    defaultMessage: 'Emblemas',
+    defaultMessage: 'Conquistas',
     description: 'Texto do botão para visualizar emblemas na seção de desempenho',
   },
   performanceAvatarSectionAvatarSetsButtonText: {
@@ -68,22 +68,22 @@ const messages = defineMessages({
   },
   performanceBadgesSectionAllBadgesButtonText: {
     id: 'performance.badges.section.all.badges.button.text',
-    defaultMessage: 'Todos os emblemas',
+    defaultMessage: 'Todas as conquistas',
     description: 'Texto do botão para visualizar todos os emblemas disponíveis na seção de desempenho',
   },
   performanceBadgesSectionTotalBadgesButtonText: {
     id: 'performance.badges.section.total.badges.button.text',
-    defaultMessage: 'Total de emblemas',
+    defaultMessage: 'Total de conquistas',
     description: 'Texto do rótulo para todos os emblemas disponíveis na seção de desempenho',
   },
   dashboardProgressBadgeModalEmptyBadgesListTitle: {
     id: 'performance.badges.section.badges.modal.alert.empty-badges-list.title',
-    defaultMessage: 'Emblemas estão a caminho!',
+    defaultMessage: 'Conquistas estão a caminho!',
     description: 'Título para a mensagem de alerta quando nenhum emblema está disponível no modal',
   },
   dashboardProgressBadgeModalEmptyBadgesListDescription: {
     id: 'performance.badges.section.badges.modal.alert.empty-badges-list.description',
-    defaultMessage: 'Suas recompensas estão quase aqui! O administrador está preparando emblemas especiais para celebrar suas conquistas. Aguente firme, e eles aparecerão em seu inventário, prontos para a ação!',
+    defaultMessage: 'Suas recompensas estão quase aqui! O administrador está preparando conquistas especiais para celebrar suas realizações. Aguente firme, e elas aparecerão em seu inventário, prontas para a ação!',
     description: 'Texto para a mensagem de alerta quando nenhum emblema está disponível no modal',
   },
   performanceAvatarSectionTotalAvatarSetsButtonText: {
@@ -103,7 +103,7 @@ const messages = defineMessages({
   },
   performanceBadgesItemImageAlternativeText: {
     id: 'performance.badges.item.image.alternative.text',
-    defaultMessage: 'Emblema do quadro de líderes',
+    defaultMessage: 'Conquista do quadro de líderes',
     description: 'Texto alternativo para a imagem do emblema na seção de desempenho',
   },
   performanceStatusesSectionHeadingText: {
