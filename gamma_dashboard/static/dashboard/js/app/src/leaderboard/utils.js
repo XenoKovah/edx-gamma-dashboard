@@ -42,11 +42,17 @@ export const getBadgeInProgressProps = (data = {}) => {
   };
 };
 
+// The backend returns up to the top 100 ranked members (the response key is
+// still `top10` for back-compatibility). Mirror that limit here so a user
+// ranked anywhere in the top 100 sees the full list, and users below it see
+// the whole top 100 followed by their own competitor window.
+const TOP_MEMBERS_LIMIT = 100;
+
 export const getLeaderboardTableProps = (data) => {
   const {
     top10, systemStatuses, rank, userUid, urlProfileImage, profileUrl, competitors,
   } = data;
-  const profilesTop10 = addPositionInTop10(top10);
+  const profilesTop = addPositionInTop10(top10);
   const propsObj = {
     delimiter: null,
     rank,
@@ -54,14 +60,9 @@ export const getLeaderboardTableProps = (data) => {
     systemStatuses,
   };
 
-  // The given delimiter is intended to separate the top 3 users
-  // from the current user and their six closest competitors.
-  const DELIMITER_POSITION_FOR_TOP_3 = 2;
-  // This delimiter is intended to separate the first 9 users
-  // from the current user who doesn't have a rank yet.
-  const DELIMITER_POSITION_FOR_TOP_9 = 8;
-  // there is a possibility that the total number of users will be less than 10.
-  const delimiterPosition = profilesTop10.length < 10 ? profilesTop10.length - 1 : DELIMITER_POSITION_FOR_TOP_9;
+  // Delimiter marks the gap after the last top-list member, before the current
+  // user (when unranked) or their competitor window (when ranked below the list).
+  const topDelimiter = profilesTop.length - 1;
 
   switch (true) {
     case top10.length === 0 || !userUid:
@@ -69,8 +70,7 @@ export const getLeaderboardTableProps = (data) => {
       propsObj.profiles = [];
       break;
     case !rank: {
-      // user is not ranked yet
-      const profilesTop9 = profilesTop10.slice(0, 9);
+      // user is not ranked yet: show the full top list, then the current user.
       const currentUser = {
         userUid,
         urlProfileImage,
@@ -82,19 +82,19 @@ export const getLeaderboardTableProps = (data) => {
         systemEvents: [],
         position: null,
       };
-      propsObj.profiles = [...profilesTop9, currentUser];
-      propsObj.delimiter = delimiterPosition >= 0 ? delimiterPosition : null;
+      propsObj.profiles = [...profilesTop, currentUser];
+      propsObj.delimiter = topDelimiter >= 0 ? topDelimiter : null;
       break;
     }
-    case rank <= 10:
-      // user in top 10
-      propsObj.profiles = profilesTop10;
+    case rank <= TOP_MEMBERS_LIMIT:
+      // user within the top list
+      propsObj.profiles = profilesTop;
       break;
     default: {
-      const profilesTop3 = profilesTop10.slice(0, 3);
+      // user below the top list: show the full top list, then their competitors.
       const competitorsList = addPositionInCompetitors(competitors, userUid, rank);
-      propsObj.profiles = [...profilesTop3, ...competitorsList];
-      propsObj.delimiter = DELIMITER_POSITION_FOR_TOP_3;
+      propsObj.profiles = [...profilesTop, ...competitorsList];
+      propsObj.delimiter = topDelimiter >= 0 ? topDelimiter : null;
     }
   }
   return propsObj;
