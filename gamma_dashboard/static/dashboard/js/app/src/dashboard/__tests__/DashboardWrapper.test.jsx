@@ -256,7 +256,7 @@ describe('<DashboardWrapper>', () => {
     });
   });
 
-  it('renders the Your Statuses block (slider) when the feature is enabled', () => {
+  it('renders the Your Aggregate Accomplishment Level block (slider) when the feature is enabled', () => {
     const { getAllByTestId } = renderWithProviders(
       <DashboardWrapper {...defaultProps} />,
     );

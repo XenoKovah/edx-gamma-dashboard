@@ -100,7 +100,7 @@ describe('<SliderStatusesBlock />', () => {
   it('render SliderStatusesBlock component correctly', () => {
     const { getByText, getAllByTestId } = renderComponent();
 
-    expect(getByText('Your Statuses')).toBeInTheDocument();
+    expect(getByText('Your Aggregate Accomplishment Level')).toBeInTheDocument();
     expect(getByText('3 of 7')).toBeInTheDocument();
     expect(getByText('The more points you have, the higher status you own.')).toBeInTheDocument();
 

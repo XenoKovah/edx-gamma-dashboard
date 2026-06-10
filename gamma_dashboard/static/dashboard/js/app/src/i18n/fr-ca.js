@@ -108,7 +108,7 @@ const messages = defineMessages({
   },
   performanceStatusesSectionHeadingText: {
     id: 'performance.statuses.section.heading.text',
-    defaultMessage: 'Vos statuts',
+    defaultMessage: 'Votre niveau global d\'accomplissement',
     description: 'Texte du titre pour la section des statuts dans la page de performance',
   },
   performanceStatusesSectionProgressTrackItemText: {

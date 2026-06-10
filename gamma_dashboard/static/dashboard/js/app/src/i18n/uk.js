@@ -108,7 +108,7 @@ const messages = defineMessages({
   },
   performanceStatusesSectionHeadingText: {
     id: 'performance.statuses.section.heading.text',
-    defaultMessage: 'Ваші статуси',
+    defaultMessage: 'Ваш загальний рівень досягнень',
     description: 'Заголовок розділу статусів на сторінці продуктивності',
   },
   performanceStatusesSectionProgressTrackItemText: {
