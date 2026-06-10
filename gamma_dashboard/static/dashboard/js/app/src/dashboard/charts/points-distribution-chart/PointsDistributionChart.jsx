@@ -21,6 +21,7 @@ const PointsDistributionChart = ({ data }) => {
     headingText: intl.formatMessage(messages.performancePointsDistributionSectionHeadingText),
     descriptionText: intl.formatMessage(messages.performancePointsDistributionSectionDescriptionText),
     seriesPointsName: intl.formatMessage(messages.performancePointsSeriesName),
+    pointsLabel: intl.formatMessage(messages.performancePointsItemPointsLabel),
     controls: {
       saveAsImage: intl.formatMessage(messages.performancePointsControlsSaveAsImageLabel),
     },

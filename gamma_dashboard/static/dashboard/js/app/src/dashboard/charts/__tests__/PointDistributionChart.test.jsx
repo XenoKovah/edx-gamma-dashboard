@@ -51,6 +51,18 @@ describe('PointsDistributionChart', () => {
     expect(options.series).toBeDefined();
   });
 
+  it('shows both the percentage and the raw points total in the tooltip', () => {
+    renderWithProviders(<PointsDistributionChart data={data} />);
+
+    const options = JSON.parse(screen.getByTestId('echarts-instance').getAttribute('data-options'));
+
+    // {d} renders the percent share, {c} the slice value (the points total).
+    expect(options.tooltip.formatter).toContain('{d}%');
+    expect(options.tooltip.formatter).toContain(
+      `${messages.performancePointsItemPointsLabel.defaultMessage}: <strong>{c}</strong>`,
+    );
+  });
+
   it('updates chartWidth on window resize', () => {
     const { container } = renderWithProviders(
       <div style={{ width: '600px' }}>

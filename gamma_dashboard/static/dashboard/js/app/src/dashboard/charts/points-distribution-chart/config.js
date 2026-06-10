@@ -23,7 +23,8 @@ export const getConfig = (events, messages, containerWidth, isSmall) => ({
   },
   tooltip: {
     trigger: 'item',
-    formatter: '{b} <br/> {a}: <strong>{d}%</strong>',
+    // {b} = slice name, {a} = series name, {d} = percent, {c} = raw value (points).
+    formatter: `{b} <br/> {a}: <strong>{d}%</strong> <br/> ${messages.pointsLabel}: <strong>{c}</strong>`,
     textStyle: CHART_LABEL_STYLES,
   },
   legend: {
