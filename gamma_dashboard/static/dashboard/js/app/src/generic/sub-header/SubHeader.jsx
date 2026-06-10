@@ -1,8 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import LogoDropdown from '../logo-dropdown/LogoDropdown';
-
 const SubHeader = ({ title, ...props }) => (
   <div className="gamification-title-wrapper d-flex justify-content-between align-items-center">
     <h1
@@ -12,7 +10,6 @@ const SubHeader = ({ title, ...props }) => (
     >
       {title}
     </h1>
-    <LogoDropdown />
   </div>
 );
 

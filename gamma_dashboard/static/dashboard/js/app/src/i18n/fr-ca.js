@@ -1,70 +1,15 @@
 import { defineMessages } from 'react-intl';
 
 const messages = defineMessages({
-  logoDropdownGuideItemText: {
-    id: 'logo.dropdown.guide.item.text',
-    defaultMessage: 'Guide utilisateur de gamification',
-    description: 'Texte pour l\'élément du menu déroulant qui lie au guide utilisateur de gamification',
-  },
-  logoDropdownFeedbackItemText: {
-    id: 'logo.dropdown.feedback.item.text',
-    defaultMessage: 'Donner un avis',
-    description: 'Texte pour l\'élément du menu déroulant qui lie au formulaire ou à la page de feedback',
-  },
-  logoDropdownFeedbackFormSubjectQuestionText: {
-    id: 'logo.dropdown.feedback.form.subject.question.text',
-    defaultMessage: 'Poser une question',
-    description: 'Libellé pour l\'option du formulaire de feedback pour poser une question.',
-  },
-  logoDropdownFeedbackFormSubjectCommentText: {
-    id: 'logo.dropdown.feedback.form.subject.comment.text',
-    defaultMessage: 'Laisser un commentaire',
-    description: 'Libellé pour l\'option du formulaire de feedback pour laisser un commentaire.',
-  },
-  logoDropdownFeedbackFormSubjectBugText: {
-    id: 'logo.dropdown.feedback.form.subject.bug.text',
-    defaultMessage: 'Signaler un bogue',
-    description: 'Libellé pour l\'option du formulaire de feedback pour signaler un bogue.',
-  },
-  logoDropdownFeedbackFormSubjectImprovementText: {
-    id: 'logo.dropdown.feedback.form.subject.improvement.text',
-    defaultMessage: 'Suggérer une amélioration',
-    description: 'Libellé pour l\'option du formulaire de feedback pour suggérer une amélioration.',
-  },
-  logoDropdownFeedbackFormAlertSuccessText: {
-    id: 'logo.dropdown.feedback.form.alert.success.text',
-    defaultMessage: 'Votre avis a été pris en compte.',
-    description: 'Message affiché lorsque l\'envoi de feedback est réussi.',
-  },
-  logoDropdownFeedbackFormAlertErrorText: {
-    id: 'logo.dropdown.feedback.form.alert.error.text',
-    defaultMessage: 'Le serveur ne répond pas. Veuillez réessayer plus tard',
-    description: 'Message d\'erreur affiché lorsque l\'envoi de feedback échoue en raison de problèmes de serveur.',
-  },
-  logoDropdownFeedbackFormAlertButtonSubmitText: {
-    id: 'logo.dropdown.feedback.form.alert.button.submit.text',
-    defaultMessage: 'Compris',
-    description: 'Texte pour le bouton pour confirmer les messages d\'alerte de feedback.',
-  },
   logoDropdownFeedbackFormButtonSubmitDefaultText: {
     id: 'logo.dropdown.feedback.form.button.submit.default.text',
     defaultMessage: 'Envoyer',
     description: 'Texte par défaut pour le bouton d\'envoi.',
   },
-  logoDropdownFeedbackFormMessageLabelText: {
-    id: 'logo.dropdown.feedback.form.message.label.text',
-    defaultMessage: 'Dites-nous comment nous pouvons vous aider',
-    description: 'Libellé pour le champ de saisie de message dans le formulaire de feedback.',
-  },
   logoDropdownFeedbackFormButtonCancelText: {
     id: 'logo.dropdown.feedback.form.button.cancel.text',
     defaultMessage: 'Annuler',
     description: 'Texte pour le bouton pour annuler l\'envoi du formulaire de feedback.',
-  },
-  logoDropdownFeedbackFormButtonSubmitText: {
-    id: 'logo.dropdown.feedback.form.button.submit.text',
-    defaultMessage: 'Envoyer un avis',
-    description: 'Texte pour le bouton pour envoyer le feedback dans le formulaire.',
   },
   dashboardBadgesDependsOnBadgesText: {
     id: 'dashboard.badges.depends.on.badges.text',
@@ -266,11 +211,6 @@ const messages = defineMessages({
     defaultMessage: 'Chargement...',
     description: 'Texte pour les lecteurs d\'écran à l\'intérieur du composant Loader.',
   },
-  genericLogoDropdownImageScreenReaderText: {
-    id: 'generic.logo-dropdown.image.screen-reader.text',
-    defaultMessage: 'Logo analytique',
-    description: 'Texte alternatif pour l\'image du logo dans le menu déroulant du logo.',
-  },
   dashboardProgressBadgeFigureImageScreenReaderText: {
     id: 'dashboard.progress-badge.figure.image.screen-reader.text',
     defaultMessage: 'Figure de progression',
@@ -333,12 +273,12 @@ const messages = defineMessages({
   },
   dashboardProgressAvatarSetModalAlertAvatarSetNotCompletedTitle: {
     id: 'dashboard.progress-avatar-set.modal.alert.avatar-set-not-completed.title',
-    defaultMessage: 'Votre ensemble d\'avatar est en route !',
+    defaultMessage: 'Votre avatar apparaîtra une fois que vous aurez gagné des points !',
     description: 'Titre de l\'alerte affichée lorsque l\'ensemble d\'avatar sélectionné n\'est pas complété dans le modal de l\'ensemble d\'avatar de progression.',
   },
   dashboardProgressAvatarSetModalAlertAvatarSetNotCompletedText: {
     id: 'dashboard.progress-avatar-set.modal.alert.avatar-set-not-completed.text',
-    defaultMessage: 'Revenez bientôt pour débloquer votre nouveau look.',
+    defaultMessage: 'Commencez à gagner des points en terminant le matériel de cours.',
     description: 'Texte affiché dans le message d\'alerte lorsque l\'ensemble d\'avatar sélectionné n\'est pas complété dans le modal de l\'ensemble d\'avatar de progression.',
   },
   dashboardProgressAvatarSetModalAlertAvatarSetNotSelectedTitle: {

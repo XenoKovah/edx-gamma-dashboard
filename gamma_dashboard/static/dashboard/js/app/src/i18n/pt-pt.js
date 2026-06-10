@@ -1,70 +1,15 @@
 import { defineMessages } from 'react-intl';
 
 const messages = defineMessages({
-  logoDropdownGuideItemText: {
-    id: 'logo.dropdown.guide.item.text',
-    defaultMessage: 'Guia do usuário de gamificação',
-    description: 'Texto para o item no menu suspenso que liga ao guia do usuário de gamificação',
-  },
-  logoDropdownFeedbackItemText: {
-    id: 'logo.dropdown.feedback.item.text',
-    defaultMessage: 'Enviar feedback',
-    description: 'Texto para o item no menu suspenso que liga ao formulário ou página de feedback',
-  },
-  logoDropdownFeedbackFormSubjectQuestionText: {
-    id: 'logo.dropdown.feedback.form.subject.question.text',
-    defaultMessage: 'Fazer uma pergunta',
-    description: 'Rótulo para a opção do formulário de feedback para fazer uma pergunta.',
-  },
-  logoDropdownFeedbackFormSubjectCommentText: {
-    id: 'logo.dropdown.feedback.form.subject.comment.text',
-    defaultMessage: 'Deixar um comentário',
-    description: 'Rótulo para a opção do formulário de feedback para deixar um comentário.',
-  },
-  logoDropdownFeedbackFormSubjectBugText: {
-    id: 'logo.dropdown.feedback.form.subject.bug.text',
-    defaultMessage: 'Reportar um bug',
-    description: 'Rótulo para a opção do formulário de feedback para reportar um bug.',
-  },
-  logoDropdownFeedbackFormSubjectImprovementText: {
-    id: 'logo.dropdown.feedback.form.subject.improvement.text',
-    defaultMessage: 'Sugerir uma melhoria',
-    description: 'Rótulo para a opção do formulário de feedback para sugerir uma melhoria.',
-  },
-  logoDropdownFeedbackFormAlertSuccessText: {
-    id: 'logo.dropdown.feedback.form.alert.success.text',
-    defaultMessage: 'Seu feedback foi registrado.',
-    description: 'Mensagem exibida quando o envio de feedback é bem-sucedido.',
-  },
-  logoDropdownFeedbackFormAlertErrorText: {
-    id: 'logo.dropdown.feedback.form.alert.error.text',
-    defaultMessage: 'O servidor não está respondendo. Tente novamente mais tarde',
-    description: 'Mensagem de erro exibida quando o envio de feedback falha devido a problemas no servidor.',
-  },
-  logoDropdownFeedbackFormAlertButtonSubmitText: {
-    id: 'logo.dropdown.feedback.form.alert.button.submit.text',
-    defaultMessage: 'Entendi',
-    description: 'Texto para o botão para confirmar mensagens de alerta de feedback.',
-  },
   logoDropdownFeedbackFormButtonSubmitDefaultText: {
     id: 'logo.dropdown.feedback.form.button.submit.default.text',
     defaultMessage: 'Enviar',
     description: 'Texto padrão para o botão de envio.',
   },
-  logoDropdownFeedbackFormMessageLabelText: {
-    id: 'logo.dropdown.feedback.form.message.label.text',
-    defaultMessage: 'Deixe-nos saber como podemos ajudar',
-    description: 'Rótulo para o campo de entrada de mensagem no formulário de feedback.',
-  },
   logoDropdownFeedbackFormButtonCancelText: {
     id: 'logo.dropdown.feedback.form.button.cancel.text',
     defaultMessage: 'Cancelar',
     description: 'Texto para o botão para cancelar o envio do formulário de feedback.',
-  },
-  logoDropdownFeedbackFormButtonSubmitText: {
-    id: 'logo.dropdown.feedback.form.button.submit.text',
-    defaultMessage: 'Enviar feedback',
-    description: 'Texto para o botão para enviar feedback no formulário.',
   },
   dashboardBadgesDependsOnBadgesText: {
     id: 'dashboard.badges.depends.on.badges.text',
@@ -266,11 +211,6 @@ const messages = defineMessages({
     defaultMessage: 'Carregando...',
     description: 'Texto para leitores de tela dentro do componente Loader.',
   },
-  genericLogoDropdownImageScreenReaderText: {
-    id: 'generic.logo-dropdown.image.screen-reader.text',
-    defaultMessage: 'Logotipo de análise',
-    description: 'Texto alternativo para a imagem do logotipo no menu suspenso do logotipo.',
-  },
   dashboardProgressBadgeFigureImageScreenReaderText: {
     id: 'dashboard.progress-badge.figure.image.screen-reader.text',
     defaultMessage: 'Figura de progresso',
@@ -333,12 +273,12 @@ const messages = defineMessages({
   },
   dashboardProgressAvatarSetModalAlertAvatarSetNotCompletedTitle: {
     id: 'dashboard.progress-avatar-set.modal.alert.avatar-set-not-completed.title',
-    defaultMessage: 'Seu conjunto de avatar está a caminho!',
+    defaultMessage: 'Seu avatar aparecerá assim que você ganhar alguns pontos!',
     description: 'Título do alerta exibido quando o conjunto de avatar selecionado não está concluído no modal do conjunto de avatar de progresso.',
   },
   dashboardProgressAvatarSetModalAlertAvatarSetNotCompletedText: {
     id: 'dashboard.progress-avatar-set.modal.alert.avatar-set-not-completed.text',
-    defaultMessage: 'Volte em breve para desbloquear seu novo visual.',
+    defaultMessage: 'Comece a ganhar pontos concluindo o material das aulas.',
     description: 'Texto exibido na mensagem de alerta quando o conjunto de avatar selecionado não está concluído no modal do conjunto de avatar de progresso.',
   },
   dashboardProgressAvatarSetModalAlertAvatarSetNotSelectedTitle: {

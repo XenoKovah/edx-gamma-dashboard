@@ -1,70 +1,15 @@
 import { defineMessages } from 'react-intl';
 
 const messages = defineMessages({
-  logoDropdownGuideItemText: {
-    id: 'logo.dropdown.guide.item.text',
-    defaultMessage: 'Посібник користувача з гейміфікації',
-    description: 'Текст для пункту випадаючого меню, що посилається на посібник користувача з гейміфікації',
-  },
-  logoDropdownFeedbackItemText: {
-    id: 'logo.dropdown.feedback.item.text',
-    defaultMessage: 'Надіслати відгук',
-    description: 'Текст для пункту випадаючого меню, що посилається на форму або сторінку відгуків',
-  },
-  logoDropdownFeedbackFormSubjectQuestionText: {
-    id: 'logo.dropdown.feedback.form.subject.question.text',
-    defaultMessage: 'Задати питання',
-    description: 'Мітка для опції форми відгуків, щоб задати питання.',
-  },
-  logoDropdownFeedbackFormSubjectCommentText: {
-    id: 'logo.dropdown.feedback.form.subject.comment.text',
-    defaultMessage: 'Залишити коментар',
-    description: 'Мітка для опції форми відгуків, щоб залишити коментар.',
-  },
-  logoDropdownFeedbackFormSubjectBugText: {
-    id: 'logo.dropdown.feedback.form.subject.bug.text',
-    defaultMessage: 'Повідомити про помилку',
-    description: 'Мітка для опції форми відгуків, щоб повідомити про помилку.',
-  },
-  logoDropdownFeedbackFormSubjectImprovementText: {
-    id: 'logo.dropdown.feedback.form.subject.improvement.text',
-    defaultMessage: 'Запропонувати покращення',
-    description: 'Мітка для опції форми відгуків, щоб запропонувати покращення.',
-  },
-  logoDropdownFeedbackFormAlertSuccessText: {
-    id: 'logo.dropdown.feedback.form.alert.success.text',
-    defaultMessage: 'Ваш відгук прийнято до уваги.',
-    description: 'Повідомлення, що відображається при успішному надсиланні відгуку.',
-  },
-  logoDropdownFeedbackFormAlertErrorText: {
-    id: 'logo.dropdown.feedback.form.alert.error.text',
-    defaultMessage: 'Сервер не відповідає. Будь ласка, спробуйте пізніше.',
-    description: 'Повідомлення про помилку, що відображається, коли надсилання відгуку не вдається через проблеми з сервером.',
-  },
-  logoDropdownFeedbackFormAlertButtonSubmitText: {
-    id: 'logo.dropdown.feedback.form.alert.button.submit.text',
-    defaultMessage: 'Зрозуміло',
-    description: 'Текст для кнопки підтвердження повідомлень про відгук.',
-  },
   logoDropdownFeedbackFormButtonSubmitDefaultText: {
     id: 'logo.dropdown.feedback.form.button.submit.default.text',
     defaultMessage: 'Надіслати',
     description: 'Стандартний текст для кнопки надсилання.',
   },
-  logoDropdownFeedbackFormMessageLabelText: {
-    id: 'logo.dropdown.feedback.form.message.label.text',
-    defaultMessage: 'Розкажіть, як ми можемо вам допомогти',
-    description: 'Мітка для поля введення повідомлення у формі відгуку.',
-  },
   logoDropdownFeedbackFormButtonCancelText: {
     id: 'logo.dropdown.feedback.form.button.cancel.text',
     defaultMessage: 'Скасувати',
     description: 'Текст для кнопки скасування надсилання форми відгуку.',
-  },
-  logoDropdownFeedbackFormButtonSubmitText: {
-    id: 'logo.dropdown.feedback.form.button.submit.text',
-    defaultMessage: 'Надіслати відгук',
-    description: 'Текст для кнопки надсилання відгуку у формі.',
   },
   dashboardBadgesDependsOnBadgesText: {
     id: 'dashboard.badges.depends.on.badges.text',
@@ -266,11 +211,6 @@ const messages = defineMessages({
     defaultMessage: 'Завантаження...',
     description: 'Текст для програм зчитування з екрана всередині компонента Loader.',
   },
-  genericLogoDropdownImageScreenReaderText: {
-    id: 'generic.logo-dropdown.image.screen-reader.text',
-    defaultMessage: 'Логотип аналітики',
-    description: 'Альтернативний текст для зображення логотипу у випадаючому меню логотипу.',
-  },
   dashboardProgressBadgeFigureImageScreenReaderText: {
     id: 'dashboard.progress-badge.figure.image.screen-reader.text',
     defaultMessage: 'Фігура прогресу',
@@ -333,12 +273,12 @@ const messages = defineMessages({
   },
   dashboardProgressAvatarSetModalAlertAvatarSetNotCompletedTitle: {
     id: 'dashboard.progress-avatar-set.modal.alert.avatar-set-not-completed.title',
-    defaultMessage: 'Ваш набір аватара в дорозі!',
+    defaultMessage: "Ваш аватар з'явиться, щойно ви заробите трохи балів!",
     description: 'Заголовок попередження, що відображається, коли вибраний набір аватара не завершено в модальному вікні набору аватара прогресу.',
   },
   dashboardProgressAvatarSetModalAlertAvatarSetNotCompletedText: {
     id: 'dashboard.progress-avatar-set.modal.alert.avatar-set-not-completed.text',
-    defaultMessage: 'Завітайте пізніше, щоб розблокувати свій новий вигляд.',
+    defaultMessage: 'Почніть заробляти бали, проходячи навчальні матеріали.',
     description: 'Текст, що відображається в повідомленні попередження, коли вибраний набір аватара не завершено в модальному вікні набору аватара прогресу.',
   },
   dashboardProgressAvatarSetModalAlertAvatarSetNotSelectedTitle: {

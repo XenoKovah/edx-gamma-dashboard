@@ -1,70 +1,15 @@
 import { defineMessages } from 'react-intl';
 
 const messages = defineMessages({
-  logoDropdownGuideItemText: {
-    id: 'logo.dropdown.guide.item.text',
-    defaultMessage: 'Gamification user guide',
-    description: 'Text for the item in the dropdown menu linking to the user guide for gamification',
-  },
-  logoDropdownFeedbackItemText: {
-    id: 'logo.dropdown.feedback.item.text',
-    defaultMessage: 'Give feedback',
-    description: 'Text for the item in the dropdown menu linking to feedback form or page',
-  },
-  logoDropdownFeedbackFormSubjectQuestionText: {
-    id: 'logo.dropdown.feedback.form.subject.question.text',
-    defaultMessage: 'Ask a question',
-    description: 'Label for the feedback form option to ask a question.',
-  },
-  logoDropdownFeedbackFormSubjectCommentText: {
-    id: 'logo.dropdown.feedback.form.subject.comment.text',
-    defaultMessage: 'Leave a comment',
-    description: 'Label for the feedback form option to leave a comment.',
-  },
-  logoDropdownFeedbackFormSubjectBugText: {
-    id: 'logo.dropdown.feedback.form.subject.bug.text',
-    defaultMessage: 'Report a bug',
-    description: 'Label for the feedback form option to report a bug.',
-  },
-  logoDropdownFeedbackFormSubjectImprovementText: {
-    id: 'logo.dropdown.feedback.form.subject.improvement.text',
-    defaultMessage: 'Suggest an improvement',
-    description: 'Label for the feedback form option to suggest an improvement.',
-  },
-  logoDropdownFeedbackFormAlertSuccessText: {
-    id: 'logo.dropdown.feedback.form.alert.success.text',
-    defaultMessage: 'Your feedback has been noted.',
-    description: 'Message displayed when feedback submission is successful.',
-  },
-  logoDropdownFeedbackFormAlertErrorText: {
-    id: 'logo.dropdown.feedback.form.alert.error.text',
-    defaultMessage: 'The server is not responding. Please try again later',
-    description: 'Error message displayed when feedback submission fails due to server issues.',
-  },
-  logoDropdownFeedbackFormAlertButtonSubmitText: {
-    id: 'logo.dropdown.feedback.form.alert.button.submit.text',
-    defaultMessage: 'Got it',
-    description: 'Text for the button to acknowledge feedback alert messages.',
-  },
   logoDropdownFeedbackFormButtonSubmitDefaultText: {
     id: 'logo.dropdown.feedback.form.button.submit.default.text',
     defaultMessage: 'Submit',
     description: 'Default text for the submit button.',
   },
-  logoDropdownFeedbackFormMessageLabelText: {
-    id: 'logo.dropdown.feedback.form.message.label.text',
-    defaultMessage: 'Let us know how we can help',
-    description: 'Label for the message input field in the feedback form.',
-  },
   logoDropdownFeedbackFormButtonCancelText: {
     id: 'logo.dropdown.feedback.form.button.cancel.text',
     defaultMessage: 'Cancel',
     description: 'Text for the button to cancel feedback form submission.',
-  },
-  logoDropdownFeedbackFormButtonSubmitText: {
-    id: 'logo.dropdown.feedback.form.button.submit.text',
-    defaultMessage: 'Send feedback',
-    description: 'Text for the button to submit feedback in the form.',
   },
   dashboardBadgesDependsOnBadgesText: {
     id: 'dashboard.badges.depends.on.badges.text',
@@ -276,11 +221,6 @@ const messages = defineMessages({
     defaultMessage: 'Loading...',
     description: 'Text for screen readers inside the component Loader.',
   },
-  genericLogoDropdownImageScreenReaderText: {
-    id: 'generic.logo-dropdown.image.screen-reader.text',
-    defaultMessage: 'Analytics logo',
-    description: 'Alt text for the logo image in the logo dropdown.',
-  },
   dashboardProgressBadgeFigureImageScreenReaderText: {
     id: 'dashboard.progress-badge.figure.image.screen-reader.text',
     defaultMessage: 'Progress figure',
@@ -343,12 +283,12 @@ const messages = defineMessages({
   },
   dashboardProgressAvatarSetModalAlertAvatarSetNotCompletedTitle: {
     id: 'dashboard.progress-avatar-set.modal.alert.avatar-set-not-completed.title',
-    defaultMessage: 'Your avatar set is en route!',
+    defaultMessage: 'Your Avatar will show up once you earn some points!',
     description: 'Title of the alert shown when the selected avatar set is not completed in the progress avatar set modal.',
   },
   dashboardProgressAvatarSetModalAlertAvatarSetNotCompletedText: {
     id: 'dashboard.progress-avatar-set.modal.alert.avatar-set-not-completed.text',
-    defaultMessage: 'Check back soon to unlock your new look.',
+    defaultMessage: 'Start earning points by completing class material.',
     description: 'Text displayed in the alert message when the selected avatar set is not completed in the progress avatar set modal.',
   },
   dashboardProgressAvatarSetModalAlertAvatarSetNotSelectedTitle: {

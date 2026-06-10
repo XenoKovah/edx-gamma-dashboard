@@ -25,5 +25,3 @@ export const DASHBOARD_URLS = {
   selectUserAvatarSet: () => USER_AVATAR_CONFIG_URL,
   updateUserAvatarSet: (userConfigurationId) => `${USER_AVATAR_CONFIG_URL}?config_id=${userConfigurationId}`,
 };
-
-export const FEEDBACK_FORM_URL = `/rg_products_toolkit/api/v${API_VERSION}/submit_feedback/`;
