@@ -7,6 +7,7 @@ import { breakpoints, useMediaQuery } from '@openedx/paragon';
 import { useElementWidth } from '../hooks';
 import { getConfig } from './config';
 import { prepareEvents } from './utils';
+import { getChartTitleColor } from '../constants';
 
 import messages from '../../../i18n';
 
@@ -16,6 +17,11 @@ const PointsDistributionChart = ({ data }) => {
   const chartWidth = useElementWidth(chartRef);
   const events = prepareEvents(data);
   const isSmall = useMediaQuery({ maxWidth: breakpoints.extraSmall.maxWidth });
+  // ECharts paints the title on a <canvas>, so CSS can't recolor it; pick a
+  // light title color in dark mode. The legacy page's dark-theme.js sets the
+  // `indigo-dark-theme` body class before this app mounts, so reading it now
+  // reflects the active theme.
+  const titleColor = getChartTitleColor();
 
   const translations = {
     headingText: intl.formatMessage(messages.performancePointsDistributionSectionHeadingText),
@@ -30,7 +36,7 @@ const PointsDistributionChart = ({ data }) => {
   return (
     <div ref={chartRef}>
       <ReactECharts
-        option={getConfig(events, translations, chartWidth, isSmall)}
+        option={getConfig(events, translations, chartWidth, isSmall, titleColor)}
         style={{ height: '470px' }}
       />
     </div>

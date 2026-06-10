@@ -9,7 +9,9 @@ import {
   CHART_LABEL_STYLES,
 } from '../constants';
 
-export const getConfig = (dates, points, progress, messages, containerWidth, isSmall, years) => {
+// `titleColor` lets the component pass a theme-aware title color (light accent
+// in dark mode); falls back to the standard navy so light mode is unchanged.
+export const getConfig = (dates, points, progress, messages, containerWidth, isSmall, years, titleColor) => {
   const labels = dates.map((date, index) => `${date} (${years[index]})`);
 
   return {
@@ -19,7 +21,7 @@ export const getConfig = (dates, points, progress, messages, containerWidth, isS
       text: `{header|${messages.headingText}}`,
       textStyle: {
         rich: {
-          header: CHART_TITLE_STYLES,
+          header: { ...CHART_TITLE_STYLES, color: titleColor || CHART_TITLE_STYLES.color },
         },
       },
     },

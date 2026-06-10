@@ -7,6 +7,7 @@ import { breakpoints, useMediaQuery } from '@openedx/paragon';
 import { useElementWidth } from '../hooks';
 import { getConfig } from './config';
 import { processChartData, transformData } from './utils';
+import { getChartTitleColor } from '../constants';
 
 import messages from '../../../i18n';
 
@@ -18,6 +19,11 @@ const ProgressChart = ({ data }) => {
   const { pointsByDay, accumulativeData } = useMemo(() => processChartData(data), [data]);
   const { dates, values: points, years } = transformData(pointsByDay);
   const { values: progress } = transformData(accumulativeData);
+  // ECharts paints the title on a <canvas>, so CSS can't recolor it; pick a
+  // light title color in dark mode. The legacy page's dark-theme.js sets the
+  // `indigo-dark-theme` body class before this app mounts, so reading it now
+  // reflects the active theme.
+  const titleColor = getChartTitleColor();
 
   const translations = {
     headingText: intl.formatMessage(messages.performanceProgressTrackerSectionHeadingText),
@@ -38,7 +44,7 @@ const ProgressChart = ({ data }) => {
   return (
     <div ref={chartRef}>
       <ReactECharts
-        option={getConfig(dates, points, progress, translations, chartWidth, isSmall, years)}
+        option={getConfig(dates, points, progress, translations, chartWidth, isSmall, years, titleColor)}
         style={{ height: '400px' }}
       />
     </div>

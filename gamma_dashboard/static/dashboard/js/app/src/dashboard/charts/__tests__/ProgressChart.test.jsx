@@ -6,6 +6,7 @@ import { renderWithProviders } from '../../../setupTests';
 import { gameProfileData } from '../../../__mocks__/dashboard';
 import messages from '../../../i18n';
 import { ProgressChart } from '../progress-chart';
+import { CHART_TITLE_STYLES, CHART_TITLE_DARK_COLOR } from '../constants';
 
 jest.mock('echarts-for-react', () => jest.fn((props) => (
   <div
@@ -14,7 +15,10 @@ jest.mock('echarts-for-react', () => jest.fn((props) => (
   />
 )));
 
-afterEach(cleanup);
+afterEach(() => {
+  cleanup();
+  document.body.classList.remove('indigo-dark-theme');
+});
 
 describe('ProgressChart', () => {
   const data = gameProfileData.progress;
@@ -49,6 +53,23 @@ describe('ProgressChart', () => {
     expect(options.title.text).toBe(CHART_TITLE);
     expect(options.graphic[0].style.text).toBe(CHART_DESCRIPTION);
     expect(options.series).toBeDefined();
+  });
+
+  it('uses the default navy title color in light mode', () => {
+    renderWithProviders(<ProgressChart data={data} />);
+
+    const options = JSON.parse(screen.getByTestId('echarts-instance').getAttribute('data-options'));
+
+    expect(options.title.textStyle.rich.header.color).toBe(CHART_TITLE_STYLES.color);
+  });
+
+  it('uses the light accent title color when dark mode is active', () => {
+    document.body.classList.add('indigo-dark-theme');
+    renderWithProviders(<ProgressChart data={data} />);
+
+    const options = JSON.parse(screen.getByTestId('echarts-instance').getAttribute('data-options'));
+
+    expect(options.title.textStyle.rich.header.color).toBe(CHART_TITLE_DARK_COLOR);
   });
 
   it('updates chartWidth on window resize', () => {

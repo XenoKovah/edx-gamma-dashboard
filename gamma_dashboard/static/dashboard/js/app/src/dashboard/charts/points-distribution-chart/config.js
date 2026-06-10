@@ -10,14 +10,16 @@ import {
   CHART_LABEL_STYLES,
 } from '../constants';
 
-export const getConfig = (events, messages, containerWidth, isSmall) => ({
+// `titleColor` lets the component pass a theme-aware title color (light accent
+// in dark mode); falls back to the standard navy so light mode is unchanged.
+export const getConfig = (events, messages, containerWidth, isSmall, titleColor) => ({
   color: CHART_COLOR_SCHEME,
   title: {
     left: isRtl ? 'right' : 'left',
     text: `{header|${messages.headingText}}`,
     textStyle: {
       rich: {
-        header: CHART_TITLE_STYLES,
+        header: { ...CHART_TITLE_STYLES, color: titleColor || CHART_TITLE_STYLES.color },
       },
     },
   },
@@ -44,6 +46,11 @@ export const getConfig = (events, messages, containerWidth, isSmall) => ({
         position: isSmall ? 'inside' : 'outside',
         formatter: '{d}%',
         ...CHART_LABEL_STYLES,
+        // ECharts auto-applies a thick white outline (~2px) to "attached" pie
+        // labels for legibility; pin a thin 1px white stroke so the percentages
+        // stay readable without the heavy halo. Global (both light and dark).
+        textBorderColor: '#fff',
+        textBorderWidth: 1,
       },
       data: events,
     },

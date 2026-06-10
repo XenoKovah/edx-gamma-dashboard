@@ -6,6 +6,7 @@ import { renderWithProviders } from '../../../setupTests';
 import { gameProfileData } from '../../../__mocks__/dashboard';
 import messages from '../../../i18n';
 import { PointsDistributionChart } from '../points-distribution-chart';
+import { CHART_TITLE_STYLES, CHART_TITLE_DARK_COLOR } from '../constants';
 
 jest.mock('echarts-for-react', () => jest.fn((props) => (
   <div
@@ -14,7 +15,10 @@ jest.mock('echarts-for-react', () => jest.fn((props) => (
   />
 )));
 
-afterEach(cleanup);
+afterEach(() => {
+  cleanup();
+  document.body.classList.remove('indigo-dark-theme');
+});
 
 describe('PointsDistributionChart', () => {
   const data = gameProfileData.chart;
@@ -61,6 +65,32 @@ describe('PointsDistributionChart', () => {
     expect(options.tooltip.formatter).toContain(
       `${messages.performancePointsItemPointsLabel.defaultMessage}: <strong>{c}</strong>`,
     );
+  });
+
+  it('draws a thin 1px white outline on the slice percentage labels', () => {
+    renderWithProviders(<PointsDistributionChart data={data} />);
+
+    const options = JSON.parse(screen.getByTestId('echarts-instance').getAttribute('data-options'));
+
+    expect(options.series[0].label.textBorderColor).toBe('#fff');
+    expect(options.series[0].label.textBorderWidth).toBe(1);
+  });
+
+  it('uses the default navy title color in light mode', () => {
+    renderWithProviders(<PointsDistributionChart data={data} />);
+
+    const options = JSON.parse(screen.getByTestId('echarts-instance').getAttribute('data-options'));
+
+    expect(options.title.textStyle.rich.header.color).toBe(CHART_TITLE_STYLES.color);
+  });
+
+  it('uses the light accent title color when dark mode is active', () => {
+    document.body.classList.add('indigo-dark-theme');
+    renderWithProviders(<PointsDistributionChart data={data} />);
+
+    const options = JSON.parse(screen.getByTestId('echarts-instance').getAttribute('data-options'));
+
+    expect(options.title.textStyle.rich.header.color).toBe(CHART_TITLE_DARK_COLOR);
   });
 
   it('updates chartWidth on window resize', () => {

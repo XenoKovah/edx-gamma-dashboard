@@ -24,6 +24,30 @@ export const CHART_TITLE_STYLES = {
   padding: [4, 10, 6],
 };
 
+// Light accent used for chart titles in dark mode. The CSS section headers flip
+// to this via the --pgn-rgg-accent-color custom prop, but ECharts paints titles
+// on a <canvas> with the value baked into CHART_TITLE_STYLES.color (the navy
+// fallback #0a3055, since --pgn-rgg-accent-color is never set at :root). CSS
+// can't reach canvas text, so the chart components override the color to this
+// when dark mode is active. Matches the dark palette accent in _dark-theme.scss.
+export const CHART_TITLE_DARK_COLOR = '#aec7f6';
+
+/**
+ * Resolves the chart title color for the current theme.
+ *
+ * On the legacy LMS page the Indigo dark-theme.js adds `indigo-dark-theme` to
+ * <body> before the React app mounts, so reading the class at render time is
+ * reliable. Returns the light accent in dark mode and the default navy title
+ * color (CHART_TITLE_STYLES.color) otherwise.
+ *
+ * @returns {string} The title color to feed into the ECharts `title` text style.
+ */
+export const getChartTitleColor = () => (
+  document.body.classList.contains('indigo-dark-theme')
+    ? CHART_TITLE_DARK_COLOR
+    : CHART_TITLE_STYLES.color
+);
+
 export const CHART_SUBTITLE_STYLES = {
   color: COLOR_PALETTE.neutralGray,
   fill: COLOR_PALETTE.neutralGray,
