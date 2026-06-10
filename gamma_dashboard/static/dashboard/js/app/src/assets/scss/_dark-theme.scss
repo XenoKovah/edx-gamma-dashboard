@@ -83,10 +83,24 @@
   }
 }
 
-// slick-carousel: arrows/dots are near-black by default.
-.slick-prev,
-.slick-next {
-  color: #f8f8f8 !important;
+// slick-carousel ("Your Statuses" is the only carousel): arrows/dots are
+// near-black by default. Make the arrows state-aware - slick adds
+// `.slick-disabled` to the arrow that can't navigate, so the enabled direction
+// reads as bright white and the disabled one as a clearly-visible light grey
+// (not a faint 25%-opacity white). Scoped to the statuses carousel arrows.
+.slider-statuses-block .slider-statuses-block-item {
+  .slick-prev:not(.slick-disabled),
+  .slick-next:not(.slick-disabled) {
+    color: #f8f8f8 !important;
+  }
+
+  // Override the light-mode `.slick-disabled { opacity: 0.25 }` so the grey is
+  // solid rather than washed out into faint white.
+  .slick-prev.slick-disabled,
+  .slick-next.slick-disabled {
+    color: #777792 !important;
+    opacity: 1 !important;
+  }
 }
 
 .slick-dots {
