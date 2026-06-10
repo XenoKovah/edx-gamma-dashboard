@@ -53,6 +53,7 @@ const LeaderboardCard = ({ profile, rank, showProgress }) => {
       <Avatar
         username={username}
         urlProfileImage={profile.urlProfileImage || defaultProfileImg}
+        isDefaultImage={!profile.urlProfileImage}
         position={profile.position}
         plainPosition={showProgress}
       />

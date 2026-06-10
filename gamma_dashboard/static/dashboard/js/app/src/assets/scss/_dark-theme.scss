@@ -137,11 +137,35 @@
   background: #292a2c;
 }
 
+// leaderboard Avatar.jsx: members without a photo fall back to the default
+// profile image - a faint grey silhouette on a near-white field that reads as a
+// bright square on the dark leaderboard. Only the placeholder carries
+// `avatar-image_default` (real uploaded photos don't), so invert it and screen
+// it against the dark surface: the near-white field maps to #292a2c and blends
+// into the card, leaving just a muted light silhouette.
+.avatar-wrapper .pgn__avatar.avatar-image_default {
+  background-color: #292a2c;
+  filter: invert(1);
+  mix-blend-mode: screen;
+}
+
 // generic/modal.scss + Paragon ModalDialog (renders into #paragon-portal-root;
 // .pgn__modal carries the white $modal-content-bg).
 .gamification-modal-dialog {
   background-color: #292a2c;
   color: #dddfe2;
+
+  // The header/footer are sticky bars with their own opaque $modal-content-bg
+  // (white); match the dark surface so the whole modal reads as one panel.
+  .pgn__modal-header,
+  .pgn__modal-footer {
+    background-color: #292a2c;
+  }
+
+  // Title ("All badges") and the close button's X icon sit on the dark bar.
+  .pgn__modal-title {
+    color: #f8f8f8;
+  }
 
   .pgn__modal-body-content {
     .pgn__menu-item {
@@ -160,6 +184,13 @@
   }
 
   .pgn__modal-close-button {
+    color: #dddfe2;
+
+    svg {
+      color: #dddfe2;
+    }
+
+    // Hover fills with the accent (light in dark mode), so the X flips dark.
     &:hover svg {
       color: #0d0d0e;
     }

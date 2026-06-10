@@ -1,6 +1,7 @@
 import React from 'react';
 import { useIntl } from 'react-intl';
 import PropTypes from 'prop-types';
+import classNames from 'classnames';
 import { Avatar as AvatarImage } from '@openedx/paragon';
 import { Award as AwardIcon } from '@openedx/paragon/icons';
 
@@ -12,7 +13,7 @@ import messages from '../../i18n';
 const CUP_COLORS = [COLOR_PALETTE.gold, COLOR_PALETTE.silver, COLOR_PALETTE.bronze];
 
 const Avatar = ({
-  username, urlProfileImage, position, plainPosition,
+  username, urlProfileImage, isDefaultImage, position, plainPosition,
 }) => {
   const intl = useIntl();
 
@@ -51,7 +52,9 @@ const Avatar = ({
       {urlProfileImage ? (
         <AvatarImage
           size="md"
-          className="flex-shrink-0"
+          // Flag the placeholder image so the dark theme can recolor only it,
+          // leaving real uploaded photos untouched.
+          className={classNames('flex-shrink-0', { 'avatar-image_default': isDefaultImage })}
           src={urlProfileImage}
           alt={translations.avatarAltText}
         />
@@ -71,6 +74,7 @@ const Avatar = ({
 
 Avatar.propTypes = {
   urlProfileImage: PropTypes.string,
+  isDefaultImage: PropTypes.bool,
   username: PropTypes.string,
   position: PropTypes.number,
   plainPosition: PropTypes.bool,
@@ -78,6 +82,7 @@ Avatar.propTypes = {
 
 Avatar.defaultProps = {
   urlProfileImage: null,
+  isDefaultImage: false,
   username: null,
   position: null,
   plainPosition: false,
