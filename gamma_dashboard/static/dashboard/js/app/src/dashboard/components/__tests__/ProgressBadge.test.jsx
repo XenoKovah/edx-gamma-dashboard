@@ -96,6 +96,57 @@ describe('<ProgressBadge>', () => {
     expect(screen.queryByText(data.manualCriteria)).not.toBeInTheDocument();
   });
 
+  it('renders a completed badge with raw array-shaped progress as an earned figure, never "NaN%"', () => {
+    // Completed badges (done: true) carry the raw achievement progress as an
+    // array, not the goal-keyed object calculateBadgeProgress reads. Before the
+    // fix this rendered the progress ring with a "NaN%" label.
+    const data = {
+      done: true,
+      id: 'fw-master',
+      progress: [{ events: { edx_x: { goal: 1, count: 1 } }, is_achieved: true }],
+      title: 'Firmware Master',
+      imageSrc: 'https://gamma-url.com/badge.png',
+    };
+
+    const { getByTestId, queryByTestId } = renderWithProviders(<ProgressBadge data={data} />);
+
+    // No progress ring/diagram for a completed badge.
+    const diagram = getByTestId('progress-badge').querySelector('.progress-badge-diagram.progress');
+    expect(diagram).not.toBeInTheDocument();
+
+    // Earned figure: the colored (not disabled) figure is shown.
+    const figure = getByTestId('progress-badge-figure');
+    expect(figure).not.toHaveClass('progress-badge-figure-disabled');
+
+    // The percentage element is only rendered for in-progress items.
+    expect(queryByTestId('total-progress-percent')).not.toBeInTheDocument();
+
+    // And nothing renders the dreaded "NaN".
+    expect(getByTestId('progress-badge').textContent).not.toMatch(/NaN/);
+  });
+
+  it('renders an incomplete badge with a numeric progress percentage', () => {
+    const data = {
+      done: false,
+      id: '3',
+      progress: {
+        stop_video: {
+          title: 'Stop Video',
+          count: 5,
+          goal: { count: 10 },
+        },
+      },
+      title: 'Badge 3',
+      imageSrc: 'https://gamma.com/badge3.png',
+    };
+
+    const { getByTestId } = renderWithProviders(<ProgressBadge data={data} />);
+
+    const totalProgressElement = getByTestId('total-progress-percent');
+    expect(totalProgressElement).toHaveTextContent('50%');
+    expect(totalProgressElement.textContent).not.toMatch(/NaN/);
+  });
+
   it('shows completion points alongside the criteria for an incomplete badge', async () => {
     const data = {
       done: false,

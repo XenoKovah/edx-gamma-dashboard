@@ -8,10 +8,22 @@
  * @returns {number} - The total progress as a percentage (0-100).
  */
 export const calculateBadgeProgress = (progress) => {
-  const percentageOneEvent = 100 / Object.keys(progress).length;
-  return Object.values(progress).reduce(
-    (total, { count, goal }) => {
+  const entries = Object.values(progress || {});
+  if (entries.length === 0) {
+    return 0;
+  }
+  const percentageOneEvent = 100 / entries.length;
+  return entries.reduce(
+    (total, entry) => {
+      const goal = entry?.goal;
       const targetValue = goal?.count || goal?.points;
+      // Skip entries that don't carry a usable goal (e.g. the raw
+      // achievement-progress shape on completed badges) so they contribute 0
+      // instead of poisoning the total with NaN.
+      if (!targetValue) {
+        return total;
+      }
+      const count = entry?.count || 0;
       return total + Math.floor((Math.min(count, targetValue) / targetValue) * percentageOneEvent);
     },
     0,
@@ -43,23 +55,22 @@ export const calculateStatusProgress = (points, statusPoints) => Math.floor((poi
 export const getTotalProgress = (data) => {
   if (data.done !== undefined) {
     return {
-      // Completed badges keep an informational popover (description + the
-      // points the badge granted); PopoverContent hides the completion
-      // criteria for them. Skip the popover only when it would be empty.
-      // Completed achievements without rules report progress as null.
-      hasPopup: !data.done || Boolean(data.description || data.points),
-      totalProgressPercent: calculateBadgeProgress(data.progress || {}),
+      // Only in-progress badges show the percentage ring; a completed badge
+      // shows its earned (colored) figure. Its raw achievement progress isn't
+      // the goal-keyed shape calculateBadgeProgress reads, so report 100.
+      showProgressRing: !data.done,
+      totalProgressPercent: data.done ? 100 : calculateBadgeProgress(data.progress || {}),
     };
   }
 
   if (data.isActive !== undefined) {
     return {
-      hasPopup: !data.isActive || data.points < data.statusPoints,
+      showProgressRing: !data.isActive || data.points < data.statusPoints,
       totalProgressPercent: calculateStatusProgress(data.points, data.statusPoints),
     };
   }
 
-  return { hasPopup: false, totalProgressPercent: 0 };
+  return { showProgressRing: false, totalProgressPercent: 0 };
 };
 
 /**

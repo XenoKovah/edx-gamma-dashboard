@@ -36,13 +36,19 @@ const ProgressBadge = ({
   const resolvedSlug = slug || data.slug || data.id;
   const badgeHref = resolvedSlug ? buildBadgeLeaderboardUrl(resolvedSlug) : null;
 
-  const { hasPopup, totalProgressPercent } = getTotalProgress(data);
+  const { showProgressRing, totalProgressPercent } = getTotalProgress(data);
 
   // `done` is only present on badge entries (statuses use `isActive`); for badges
   // `points` is the completion award, for statuses it is the student's points.
   const isBadge = data.done !== undefined;
+  const isCompletedBadge = isBadge && Boolean(data.done);
 
-  const popupProps = hasPopup
+  // In-progress items show their criteria/progress on hover. Completed badges
+  // keep an informational popover (description + points granted), but only when
+  // there's something to say — otherwise they render as a bare earned figure.
+  const hasPopover = showProgressRing || (isCompletedBadge && Boolean(description || points));
+
+  const popupProps = hasPopover
     ? {
       data: {
         description,
@@ -52,7 +58,7 @@ const ProgressBadge = ({
         progress: progress || {},
         points,
         statusPoints,
-        isCompleted: isBadge && Boolean(data.done),
+        isCompleted: isCompletedBadge,
         completionPoints: isBadge ? (points || 0) : 0,
       },
     } : null;
@@ -61,13 +67,14 @@ const ProgressBadge = ({
     updateProgressView(progressElementRef.current, totalProgressPercent);
   }, [totalProgressPercent]);
 
-  if (!hasPopup && !popupProps) {
+  if (!hasPopover) {
     return (
       <ProgressBadgeItem
         title={title}
         imageSrc={imageSrc}
         badgeRef={badgeElementRef}
         center={center}
+        inProgress={showProgressRing}
         progressRef={progressElementRef}
         totalProgressPercent={totalProgressPercent}
         to={badgeHref}
@@ -124,7 +131,7 @@ const ProgressBadge = ({
         imageSrc={imageSrc}
         badgeRef={badgeElementRef}
         center={center}
-        hasPopup
+        inProgress={showProgressRing}
         progressRef={progressElementRef}
         totalProgressPercent={totalProgressPercent}
         to={badgeHref}

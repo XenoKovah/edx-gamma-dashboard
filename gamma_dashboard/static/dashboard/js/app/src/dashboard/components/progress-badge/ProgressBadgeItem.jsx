@@ -10,7 +10,7 @@ import ProgressBadgeFigure from './ProgressBadgeFigure';
 const ProgressBadgeItem = ({
   badgeRef,
   center,
-  hasPopup,
+  inProgress,
   totalProgressPercent,
   progressRef,
   imageSrc,
@@ -25,7 +25,7 @@ const ProgressBadgeItem = ({
 
   const figureAndTitle = (
     <>
-      {hasPopup ? (
+      {inProgress ? (
         <>
           <p className="total-progress-percent" data-testid="total-progress-percent">
             {totalProgressPercent}%
@@ -51,7 +51,7 @@ const ProgressBadgeItem = ({
       ref={badgeRef}
       className={classNames('progress-badge', {
         'progress-badge-center': center,
-        'progress-badge-completed': !hasPopup,
+        'progress-badge-completed': !inProgress,
       })}
       data-testid="progress-badge"
       {...props}
@@ -78,7 +78,7 @@ ProgressBadgeItem.propTypes = {
     PropTypes.shape({ current: PropTypes.instanceOf(Element) }),
   ]),
   center: PropTypes.bool,
-  hasPopup: PropTypes.bool,
+  inProgress: PropTypes.bool,
   totalProgressPercent: PropTypes.number,
   progressRef: PropTypes.oneOfType([
     PropTypes.func,
@@ -95,7 +95,7 @@ ProgressBadgeItem.propTypes = {
 ProgressBadgeItem.defaultProps = {
   badgeRef: null,
   center: false,
-  hasPopup: false,
+  inProgress: false,
   totalProgressPercent: 0,
   progressRef: null,
   to: null,
