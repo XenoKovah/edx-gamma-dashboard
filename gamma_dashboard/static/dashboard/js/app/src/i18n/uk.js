@@ -273,12 +273,12 @@ const messages = defineMessages({
   },
   dashboardProgressAvatarSetModalAlertAvatarSetNotCompletedTitle: {
     id: 'dashboard.progress-avatar-set.modal.alert.avatar-set-not-completed.title',
-    defaultMessage: 'Ваш набір аватара в дорозі!',
+    defaultMessage: "Ваш аватар з'явиться, щойно ви заробите трохи балів!",
     description: 'Заголовок попередження, що відображається, коли вибраний набір аватара не завершено в модальному вікні набору аватара прогресу.',
   },
   dashboardProgressAvatarSetModalAlertAvatarSetNotCompletedText: {
     id: 'dashboard.progress-avatar-set.modal.alert.avatar-set-not-completed.text',
-    defaultMessage: 'Завітайте пізніше, щоб розблокувати свій новий вигляд.',
+    defaultMessage: 'Почніть заробляти бали, проходячи навчальні матеріали.',
     description: 'Текст, що відображається в повідомленні попередження, коли вибраний набір аватара не завершено в модальному вікні набору аватара прогресу.',
   },
   dashboardProgressAvatarSetModalAlertAvatarSetNotSelectedTitle: {

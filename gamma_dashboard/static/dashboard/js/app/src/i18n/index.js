@@ -273,12 +273,12 @@ const messages = defineMessages({
   },
   dashboardProgressAvatarSetModalAlertAvatarSetNotCompletedTitle: {
     id: 'dashboard.progress-avatar-set.modal.alert.avatar-set-not-completed.title',
-    defaultMessage: 'Your avatar set is en route!',
+    defaultMessage: 'Your Avatar will show up once you earn some points!',
     description: 'Title of the alert shown when the selected avatar set is not completed in the progress avatar set modal.',
   },
   dashboardProgressAvatarSetModalAlertAvatarSetNotCompletedText: {
     id: 'dashboard.progress-avatar-set.modal.alert.avatar-set-not-completed.text',
-    defaultMessage: 'Check back soon to unlock your new look.',
+    defaultMessage: 'Start earning points by completing class material.',
     description: 'Text displayed in the alert message when the selected avatar set is not completed in the progress avatar set modal.',
   },
   dashboardProgressAvatarSetModalAlertAvatarSetNotSelectedTitle: {
