@@ -38,6 +38,10 @@ const ProgressBadge = ({
 
   const { hasPopup, totalProgressPercent } = getTotalProgress(data);
 
+  // `done` is only present on badge entries (statuses use `isActive`); for badges
+  // `points` is the completion award, for statuses it is the student's points.
+  const isBadge = data.done !== undefined;
+
   const popupProps = hasPopup
     ? {
       data: {
@@ -48,6 +52,8 @@ const ProgressBadge = ({
         progress: progress || {},
         points,
         statusPoints,
+        isCompleted: isBadge && Boolean(data.done),
+        completionPoints: isBadge ? (points || 0) : 0,
       },
     } : null;
 

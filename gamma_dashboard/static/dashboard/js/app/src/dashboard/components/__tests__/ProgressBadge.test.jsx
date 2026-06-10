@@ -1,6 +1,8 @@
 import React from 'react';
 import '@testing-library/jest-dom';
-import { cleanup, within, waitFor } from '@testing-library/react';
+import {
+  cleanup, screen, within, waitFor,
+} from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
 import { renderWithProviders } from '../../../setupTests';
@@ -67,6 +69,55 @@ describe('<ProgressBadge>', () => {
       const popup = getByTestId('popover-positioned-popover');
       expect(popup).toBeInTheDocument();
     });
+  });
+
+  it('shows an informational popover for a completed badge, without completion criteria', async () => {
+    const data = {
+      done: true,
+      id: '7',
+      progress: {},
+      title: 'Instructor',
+      description: 'Leader in the darkness, giver of light',
+      manualCriteria: 'This badge is only given to people who create classes for OST2!',
+      points: 10000,
+      imageSrc: 'https://gamma-url.com/badge7.png',
+    };
+
+    const { getByTestId } = renderWithProviders(<ProgressBadge data={data} />);
+
+    userEvent.hover(getByTestId('progress-badge'));
+
+    await waitFor(() => {
+      expect(screen.getByText(data.description)).toBeInTheDocument();
+    });
+    expect(screen.getByText('Points for completion: 10,000')).toBeInTheDocument();
+    // Completed badges hide how they were earned.
+    expect(screen.queryByText(/Manual assignment criteria/)).not.toBeInTheDocument();
+    expect(screen.queryByText(data.manualCriteria)).not.toBeInTheDocument();
+  });
+
+  it('shows completion points alongside the criteria for an incomplete badge', async () => {
+    const data = {
+      done: false,
+      id: '8',
+      progress: {},
+      title: 'Instructor',
+      description: 'Leader in the darkness, giver of light',
+      manualCriteria: 'This badge is only given to people who create classes for OST2!',
+      points: 250,
+      imageSrc: 'https://gamma-url.com/badge8.png',
+    };
+
+    const { getByTestId } = renderWithProviders(<ProgressBadge data={data} />);
+
+    userEvent.hover(getByTestId('progress-badge'));
+
+    await waitFor(() => {
+      expect(screen.getByText(data.description)).toBeInTheDocument();
+    });
+    expect(screen.getByText('Points for completion: 250')).toBeInTheDocument();
+    expect(screen.getByText(/Manual assignment criteria/)).toBeInTheDocument();
+    expect(screen.getByText(data.manualCriteria)).toBeInTheDocument();
   });
 
   it('renders with correct `complete status` data', () => {

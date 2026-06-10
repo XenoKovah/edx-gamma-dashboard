@@ -21,12 +21,18 @@ const PopoverContent = ({ data }) => {
     badgeDependencies = [],
     progress: studentProgress = {},
     points: studentPoints = 0,
+    isCompleted = false,
+    completionPoints = 0,
   } = data;
 
   const translations = {
     dependsOnBadgesText: intl.formatMessage(messages.dashboardBadgesDependsOnBadgesText),
     dependsOnStatusesText: intl.formatMessage(messages.dashboardBadgesDependsOnStatusText),
     manualCriteriaText: intl.formatMessage(messages.dashboardBadgesManualCriteriaText),
+    pointsForCompletionText: intl.formatMessage(
+      messages.dashboardBadgesPointsForCompletionText,
+      { points: intl.formatNumber(completionPoints) },
+    ),
   };
 
   const renderProgressItems = () => Object.entries(studentProgress).map(([progressItem, progressValues]) => (
@@ -50,9 +56,9 @@ const PopoverContent = ({ data }) => {
     />
   );
 
-  const bodyItems = [
-    // Shown on hover for every incomplete badge.
-    ...(description ? [<TextBlock key="description" text={description} />] : []),
+  // Completion criteria are only relevant while the badge can still be earned;
+  // completed badges keep the informational parts (description, points granted).
+  const criteriaItems = isCompleted ? [] : [
     // Manual-only (rule-less) badges surface their manual assignment criteria here.
     ...(manualCriteria
       ? [<TextBlock key="manual-criteria" label={translations.manualCriteriaText} text={manualCriteria} />]
@@ -65,6 +71,15 @@ const PopoverContent = ({ data }) => {
       ? [renderDependencyBlock(translations.dependsOnStatusesText, [statusDependency])]
       : []),
     ...(statusPoints ? [renderStatusPoints()] : []),
+  ];
+
+  const bodyItems = [
+    ...(description ? [<TextBlock key="description" text={description} />] : []),
+    ...criteriaItems,
+    // How many points the badge grants when earned (badges only; 0 = unset).
+    ...(completionPoints > 0
+      ? [<TextBlock key="completion-points" text={translations.pointsForCompletionText} />]
+      : []),
   ];
 
   return (
@@ -83,6 +98,8 @@ PopoverContent.propTypes = {
     progress: PropTypes.shape(ProgressPropType),
     points: PropTypes.number,
     statusPoints: PropTypes.number,
+    isCompleted: PropTypes.bool,
+    completionPoints: PropTypes.number,
   }),
 };
 
@@ -95,6 +112,8 @@ PopoverContent.defaultProps = {
     progress: {},
     points: -1,
     statusPoints: 0,
+    isCompleted: false,
+    completionPoints: 0,
   },
 };
 

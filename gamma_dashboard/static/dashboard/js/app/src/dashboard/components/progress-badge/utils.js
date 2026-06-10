@@ -43,8 +43,12 @@ export const calculateStatusProgress = (points, statusPoints) => Math.floor((poi
 export const getTotalProgress = (data) => {
   if (data.done !== undefined) {
     return {
-      hasPopup: !data.done,
-      totalProgressPercent: calculateBadgeProgress(data.progress),
+      // Completed badges keep an informational popover (description + the
+      // points the badge granted); PopoverContent hides the completion
+      // criteria for them. Skip the popover only when it would be empty.
+      // Completed achievements without rules report progress as null.
+      hasPopup: !data.done || Boolean(data.description || data.points),
+      totalProgressPercent: calculateBadgeProgress(data.progress || {}),
     };
   }
 

@@ -26,6 +26,11 @@ const messages = defineMessages({
     defaultMessage: 'Manual assignment criteria',
     description: 'Label prefacing the manual assignment criteria shown on hover for manual-only badges.',
   },
+  dashboardBadgesPointsForCompletionText: {
+    id: 'dashboard.badges.points.for.completion.text',
+    defaultMessage: 'Points for completion: {points}',
+    description: 'Shows how many points a badge grants when it is earned, on the badge hover popover.',
+  },
   performanceHeadingText: {
     id: 'performance.heading.text',
     defaultMessage: 'Performance',
