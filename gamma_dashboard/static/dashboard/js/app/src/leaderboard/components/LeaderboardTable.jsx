@@ -10,7 +10,7 @@ import LeaderboardCard from './LeaderboardCard';
 import messages from '../../i18n';
 
 const LeaderboardTable = ({
-  rank, profiles = [], delimiter,
+  rank, profiles = [], delimiter, showProgress,
 }) => {
   const intl = useIntl();
 
@@ -36,6 +36,7 @@ const LeaderboardTable = ({
             <LeaderboardCard
               rank={rank || 0}
               profile={profile}
+              showProgress={showProgress}
             />
             {index === delimiter && (
             <div className="leaderboard-table-separator" data-testid="leaderboard-table-separator">
@@ -53,12 +54,14 @@ LeaderboardTable.propTypes = {
   profiles: PropTypes.arrayOf(PropTypes.shape(ProfilePropType)),
   rank: PropTypes.number,
   delimiter: PropTypes.number,
+  showProgress: PropTypes.bool,
 };
 
 LeaderboardTable.defaultProps = {
   profiles: [],
   rank: 0,
   delimiter: null,
+  showProgress: false,
 };
 
 export default LeaderboardTable;

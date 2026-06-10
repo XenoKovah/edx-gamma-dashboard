@@ -124,7 +124,7 @@ export const mergeBadges = (
   badgeMap.forEach((systemBadge, badgeSlug) => {
     if (!(badgeSlug in completedUserBadges)) {
       const {
-        image, title, isActive, rules = [],
+        image, title, isActive, rules = [], description = '', manualCriteria = '',
       } = systemBadge;
 
       const allActions = {};
@@ -151,6 +151,8 @@ export const mergeBadges = (
         id: badgeSlug,
         image,
         title,
+        description,
+        manualCriteria,
         progress: progressDetails,
         dependencies: resolvedDependencies,
         statusDependency: resolvedStatusDependencies.length ? resolvedStatusDependencies : null,

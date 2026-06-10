@@ -1,0 +1,42 @@
+.badge-leaderboard-header {
+  @extend .mb-4;
+
+  .badge-leaderboard-header-title {
+    @extend .mb-2;
+
+    font-weight: $font-weight-bold;
+    font-size: 1.5rem;
+    line-height: 1.3;
+    text-transform: uppercase;
+    color: $accent-color;
+  }
+
+  .badge-leaderboard-header-image {
+    // 4x the leaderboard row badge (.badge-item is max-width: 3rem).
+    width: 12rem;
+    max-width: 100%;
+    height: auto;
+    margin: $spacer auto;
+    display: block;
+  }
+
+  .badge-leaderboard-header-description {
+    @extend .mb-0;
+
+    font-size: 1rem;
+    line-height: 1.3;
+    color: $secondary-text-color;
+  }
+}
+
+.badge-leaderboard-section-title {
+  @extend .mt-4;
+  @extend .mb-3;
+  @extend .px-3;
+
+  font-weight: $font-weight-bold;
+  font-size: 1.125rem;
+  line-height: 1.3;
+  text-transform: uppercase;
+  color: $accent-color;
+}

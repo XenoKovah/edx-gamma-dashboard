@@ -99,4 +99,24 @@ describe('mergeBadges', () => {
       },
     });
   });
+
+  it('carries description and manual criteria onto incomplete (manual) badges', () => {
+    const systemBadges = [{
+      slug: 'instructor',
+      image: 'instructor.png',
+      title: 'Instructor',
+      isActive: true,
+      description: 'For course instructors',
+      manualCriteria: 'Granted by an admin to course instructors',
+      rules: [],
+    }];
+
+    const result = mergeBadges(mockStatusTitles, mockEventTitles, [], systemBadges);
+
+    expect(result.instructor).toMatchObject({
+      description: 'For course instructors',
+      manualCriteria: 'Granted by an admin to course instructors',
+      done: false,
+    });
+  });
 });

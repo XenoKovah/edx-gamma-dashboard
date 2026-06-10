@@ -11,8 +11,6 @@ import {
 import { convertKeysToCamelCase } from '../../api/helpers/utils';
 import DashboardWrapper from '../DashboardWrapper';
 
-import messages from '../../i18n';
-
 jest.mock('echarts-for-react', () => jest.fn((props) => (
   <div
     data-testid="echarts-instance"
@@ -129,61 +127,13 @@ describe('<DashboardWrapper>', () => {
     expect(dashboardTable).toBeInTheDocument();
   });
 
-  // TODO: Fix this test when the avatar set is selected but not completed
-  it.skip('displays avatar section with warning when avatar set is selected but not completed', () => {
-    const userInfoWithSelectedSet = {
-      userAvatarConfig: {
-        selectedAvatarId: null,
-        selectedAvatarSetId: '123',
-      },
-    };
-
-    const { getByText } = renderWithProviders(
-      <DashboardWrapper {...defaultProps} gammaUserInfo={userInfoWithSelectedSet} />,
-    );
-
-    expect(getByText(
-      messages.dashboardProgressAvatarSetModalAlertAvatarSetNotCompletedTitle.defaultMessage,
-    )).toBeInTheDocument();
-    expect(getByText(
-      messages.dashboardProgressAvatarSetModalAlertAvatarSetNotCompletedText.defaultMessage,
-    )).toBeInTheDocument();
-  });
-
-  it('displays avatar section with info when no avatar set is selected', () => {
-    const userInfoWithNoSet = {
-      userAvatarSetInfo: null,
-    };
-
-    const { getByText } = renderWithProviders(
-      <DashboardWrapper {...defaultProps} gammaUserInfo={userInfoWithNoSet} />,
-    );
-
-    expect(getByText(
-      messages.dashboardProgressAvatarSetModalAlertAvatarSetNotSelectedTitle.defaultMessage,
-    )).toBeInTheDocument();
-    expect(getByText(
-      messages.dashboardProgressAvatarSetModalAlertAvatarSetNotSelectedText.defaultMessage,
-    )).toBeInTheDocument();
-  });
-
-  it('opens avatar modal when clicking avatar section button', () => {
-    const { getByTestId } = renderWithProviders(
-      <DashboardWrapper {...defaultProps} />,
-    );
-
-    const avatarButton = getByTestId('progress-avatar-details-btn-wrapper');
-    userEvent.click(avatarButton);
-    expect(getByTestId('mock-progress-avatar-modal')).toBeInTheDocument();
-  });
-
   it('displays badges section with correct number of preview badges', () => {
     const { getByTestId } = renderWithProviders(
       <DashboardWrapper {...defaultProps} />,
     );
 
     const badgesList = getByTestId('progress-badges-list');
-    expect(badgesList.children.length).toBeLessThanOrEqual(3);
+    expect(badgesList.children.length).toBeLessThanOrEqual(10);
   });
 
   it('opens badges modal when clicking badges section button', () => {
@@ -214,76 +164,6 @@ describe('<DashboardWrapper>', () => {
     const chartInstances = getAllByTestId('echarts-instance');
     expect(chartInstances.length).toBeGreaterThan(0);
     expect(chartInstances[0].dataset.options).toBeTruthy();
-  });
-
-  it('displays completed avatar when user has completed avatar set', () => {
-    const userAvatarInfo = {
-      userAvatarSetInfo: {
-        selectedAvatarId: 967,
-        selectedAvatarSetId: 309,
-      },
-    };
-
-    const mockCompletedAvatar = {
-      id: 309,
-      title: 'Test Avatar Set',
-      image: 'test-image.jpg',
-      avatars: [
-        { id: 967, image: 'test-avatar.jpg' },
-      ],
-    };
-
-    jest.mock('../hooks', () => ({
-      useDashboardWrapper: () => ({
-        modalData: [],
-        isModalOpen: false,
-        translations: {},
-        setIsModalOpen: jest.fn(),
-        completedAvatar: mockCompletedAvatar,
-        handleOpenModal: jest.fn(),
-        isAvatarModalOpen: false,
-        previewBadgeItems: [],
-        selectedAvatarSetId: null,
-        hasSelectedAvatarSet: true,
-        hasCompletedAvatarSet: true,
-        setSelectedAvatarSetId: jest.fn(),
-        savedSelectedAvatarSetId: null,
-        handleCloseProgressAvatarModal: jest.fn(),
-      }),
-    }));
-
-    const { getByTestId } = renderWithProviders(
-      <DashboardWrapper {...defaultProps} gammaUserInfo={userAvatarInfo} />,
-    );
-
-    const avatarButtonWrapper = getByTestId('progress-avatar-details-btn-wrapper');
-    expect(avatarButtonWrapper).toBeInTheDocument();
-  });
-
-  it('calls avatar reset mutations when closing avatar modal', () => {
-    const mockResetMutations = {
-      all: jest.fn(),
-      update: jest.fn(),
-      select: jest.fn(),
-    };
-
-    const { getByTestId } = renderWithProviders(
-      <DashboardWrapper
-        {...defaultProps}
-        avatarHandlers={{
-          ...mockAvatarHandlers,
-          avatarResetProcessingMutations: mockResetMutations,
-        }}
-      />,
-    );
-
-    const avatarButton = getByTestId('progress-avatar-details-btn-wrapper');
-    userEvent.click(avatarButton);
-
-    const closeButton = getByTestId('mock-avatar-close');
-    userEvent.click(closeButton);
-
-    expect(mockResetMutations.all).toHaveBeenCalled();
   });
 
   it('handles empty badge items gracefully', () => {
@@ -323,48 +203,6 @@ describe('<DashboardWrapper>', () => {
     expect(hasData).toBeFalsy();
   });
 
-  it('calls handleSelectAvatarSet when selecting an avatar', () => {
-    const mockHandleSelectAvatarSet = jest.fn();
-    const { getByTestId } = renderWithProviders(
-      <DashboardWrapper
-        {...defaultProps}
-        avatarHandlers={{
-          ...mockAvatarHandlers,
-          handleSelectAvatarSet: mockHandleSelectAvatarSet,
-        }}
-      />,
-    );
-
-    const avatarButton = getByTestId('progress-avatar-details-btn-wrapper');
-    userEvent.click(avatarButton);
-
-    const selectButton = getByTestId('mock-avatar-select');
-    userEvent.click(selectButton);
-
-    expect(mockHandleSelectAvatarSet).toHaveBeenCalled();
-  });
-
-  it('calls handleUpdateSelectedAvatarSet when updating avatar selection', () => {
-    const mockHandleUpdateSelectedAvatarSet = jest.fn();
-    const { getByTestId } = renderWithProviders(
-      <DashboardWrapper
-        {...defaultProps}
-        avatarHandlers={{
-          ...mockAvatarHandlers,
-          handleUpdateSelectedAvatarSet: mockHandleUpdateSelectedAvatarSet,
-        }}
-      />,
-    );
-
-    const avatarButton = getByTestId('progress-avatar-details-btn-wrapper');
-    userEvent.click(avatarButton);
-
-    const updateButton = getByTestId('mock-avatar-update');
-    userEvent.click(updateButton);
-
-    expect(mockHandleUpdateSelectedAvatarSet).toHaveBeenCalled();
-  });
-
   it('closes badges modal when clicking close button', () => {
     const { getByTestId, queryByTestId, getByRole } = renderWithProviders(
       <DashboardWrapper {...defaultProps} />,
@@ -387,7 +225,7 @@ describe('<DashboardWrapper>', () => {
     const badgesList = getByTestId('progress-badges-list');
     const badgeItems = badgesList.querySelectorAll('[data-testid="progress-badge"]');
 
-    expect(badgeItems.length).toBeLessThanOrEqual(3);
+    expect(badgeItems.length).toBeLessThanOrEqual(10);
   });
 
   it('displays correct badge information in the badges section', () => {
@@ -416,5 +254,17 @@ describe('<DashboardWrapper>', () => {
     statusBlocks.forEach(block => {
       expect(block.textContent).toBeTruthy();
     });
+  });
+
+  it('renders the Your Statuses block (slider) when the feature is enabled', () => {
+    const { getAllByTestId } = renderWithProviders(
+      <DashboardWrapper {...defaultProps} />,
+    );
+
+    // `slider-item-status-image` is rendered once per status and is unique to
+    // SliderStatusesBlock (unlike `slider-statuses-block-description`, which the
+    // badges section also uses), so it actually asserts the status block renders.
+    const statusImages = getAllByTestId('slider-item-status-image');
+    expect(statusImages.length).toBe(parsedStatusItems.length);
   });
 });

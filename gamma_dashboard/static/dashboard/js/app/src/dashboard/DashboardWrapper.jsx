@@ -21,7 +21,9 @@ import {
 } from './propTypes';
 import { PointsDistributionChart, ProgressChart } from './charts';
 import { useDashboardWrapper } from './hooks';
-import { WIDGETS, SHOW_STATUS_BLOCK } from './constants';
+import {
+  WIDGETS, SHOW_STATUS_BLOCK, SHOW_AVATAR_BLOCK, SHOW_VAULT_BLOCK,
+} from './constants';
 
 const DashboardWrapper = ({
   chart,
@@ -86,7 +88,7 @@ const DashboardWrapper = ({
           );
         }
 
-        return options.items.map((item) => <ProgressBadge key={item[0]} data={item[1]} />);
+        return options.items.map((item) => <ProgressBadge key={item[0]} slug={item[0]} data={item[1]} />);
       }
 
       case WIDGETS.AVATAR: {
@@ -128,30 +130,45 @@ const DashboardWrapper = ({
           title={translations.subHeaderTitle}
         />
         <div className="dashboard-page-body">
-          <DashboardSectionContainer>
-            {renderErrorBoundary(
-              <DashboardSectionAvatar
-                title={translations.avatarSectionTitle}
-                content={translations.avatarSectionDescription}
-                items={renderItems(WIDGETS.AVATAR, {
-                  hasCompletedAvatarSet,
-                  completedAvatar,
-                  hasSelectedAvatarSet,
-                  translations,
-                })}
-                buttonData={{
-                  title: translations.avatarSectionBtnTitle,
-                  onClick: () => handleOpenModal(WIDGETS.AVATAR),
-                }}
-              />,
-            )}
-            {renderErrorBoundary(
-              <DashboardSectionPointsVault points={statusRoadmap?.points} />,
-            )}
-          </DashboardSectionContainer>
+          {(SHOW_AVATAR_BLOCK || SHOW_VAULT_BLOCK) && (
+            <DashboardSectionContainer>
+              {SHOW_AVATAR_BLOCK && renderErrorBoundary(
+                <DashboardSectionAvatar
+                  title={translations.avatarSectionTitle}
+                  content={translations.avatarSectionDescription}
+                  items={renderItems(WIDGETS.AVATAR, {
+                    hasCompletedAvatarSet,
+                    completedAvatar,
+                    hasSelectedAvatarSet,
+                    translations,
+                  })}
+                  buttonData={{
+                    title: translations.avatarSectionBtnTitle,
+                    onClick: () => handleOpenModal(WIDGETS.AVATAR),
+                  }}
+                />,
+              )}
+              {SHOW_VAULT_BLOCK && renderErrorBoundary(
+                <DashboardSectionPointsVault points={statusRoadmap?.points} />,
+              )}
+            </DashboardSectionContainer>
+          )}
+          {SHOW_STATUS_BLOCK && (
+            <DashboardSectionContainer>
+              {renderErrorBoundary(
+                <DashboardSection fullWidth corner={CORNER_TOP}>
+                  <SliderStatusesBlock
+                    status={translations.performanceSectionCounter}
+                    statusItems={statusItems}
+                  />
+                </DashboardSection>,
+              )}
+            </DashboardSectionContainer>
+          )}
           <DashboardSectionContainer>
             {renderErrorBoundary(
               <DashboardSectionSlider
+                fullWidth
                 title={translations.badgesSectionTitle}
                 status={translations.badgeSectionCounter}
                 content={translations.badgesSectionDescription}
@@ -166,24 +183,14 @@ const DashboardWrapper = ({
                 }}
               />,
             )}
+          </DashboardSectionContainer>
+          <DashboardSectionContainer>
             {renderErrorBoundary(
-              <DashboardSection>
+              <DashboardSection fullWidth>
                 <PointsDistributionChart data={chart} />
               </DashboardSection>,
             )}
           </DashboardSectionContainer>
-          {SHOW_STATUS_BLOCK && (
-            <DashboardSectionContainer>
-              {renderErrorBoundary(
-                <DashboardSection fullWidth corner={CORNER_TOP}>
-                  <SliderStatusesBlock
-                    status={translations.performanceSectionCounter}
-                    statusItems={statusItems}
-                  />
-                </DashboardSection>,
-              )}
-            </DashboardSectionContainer>
-          )}
           <DashboardSectionContainer>
             {renderErrorBoundary(
               <DashboardSection fullWidth corner={CORNER_BOTTOM}>
@@ -200,19 +207,21 @@ const DashboardWrapper = ({
         filteredActiveBadges={filteredActiveBadges}
         getItemDataFunction={getItemDataFunction}
       />
-      <ProgressAvatarModal
-        isOpen={isAvatarModalOpen}
-        closeCallback={handleCloseProgressAvatarModal}
-        title={translations.avatarSetsModalTitle}
-        avatarSets={avatarSets}
-        handleUpdateSelectedAvatarSet={handleUpdateSelectedAvatarSet}
-        handleSelectAvatarSet={handleSelectAvatarSet}
-        hasSelectedAvatarSet={hasSelectedAvatarSet}
-        avatarProcessingStates={avatarProcessingStates}
-        selectedAvatarSetId={selectedAvatarSetId}
-        setSelectedAvatarSetId={setSelectedAvatarSetId}
-        savedSelectedAvatarSetId={savedSelectedAvatarSetId}
-      />
+      {SHOW_AVATAR_BLOCK && (
+        <ProgressAvatarModal
+          isOpen={isAvatarModalOpen}
+          closeCallback={handleCloseProgressAvatarModal}
+          title={translations.avatarSetsModalTitle}
+          avatarSets={avatarSets}
+          handleUpdateSelectedAvatarSet={handleUpdateSelectedAvatarSet}
+          handleSelectAvatarSet={handleSelectAvatarSet}
+          hasSelectedAvatarSet={hasSelectedAvatarSet}
+          avatarProcessingStates={avatarProcessingStates}
+          selectedAvatarSetId={selectedAvatarSetId}
+          setSelectedAvatarSetId={setSelectedAvatarSetId}
+          savedSelectedAvatarSetId={savedSelectedAvatarSetId}
+        />
+      )}
     </>
   );
 };

@@ -21,6 +21,11 @@ const messages = defineMessages({
     defaultMessage: 'Depends on status',
     description: 'Label indicating that a certain feature or element depends on a specific status.',
   },
+  dashboardBadgesManualCriteriaText: {
+    id: 'dashboard.badges.manual.criteria.text',
+    defaultMessage: 'Manual assignment criteria',
+    description: 'Label prefacing the manual assignment criteria shown on hover for manual-only badges.',
+  },
   performanceHeadingText: {
     id: 'performance.heading.text',
     defaultMessage: 'Performance',
@@ -63,7 +68,7 @@ const messages = defineMessages({
   },
   performanceBadgesSectionBadgesButtonText: {
     id: 'performance.badges.section.badges.button.text',
-    defaultMessage: 'Badges',
+    defaultMessage: 'All Badges',
     description: 'Button text for viewing badges in the performance section',
   },
   performanceAvatarSectionAvatarSetsButtonText: {
@@ -206,6 +211,11 @@ const messages = defineMessages({
     defaultMessage: '{username} profile image',
     description: 'Alternative text for user profile image in the leaderboard',
   },
+  leaderboardProfileLinkLabel: {
+    id: 'leaderboard.profile.link.label',
+    defaultMessage: "View {username}'s profile",
+    description: "Accessible label for the link from a leaderboard entry to that user's profile page",
+  },
   genericLoaderScreenReaderText: {
     id: 'generic.loader.screenReader.text',
     defaultMessage: 'Loading...',
@@ -340,6 +350,31 @@ const messages = defineMessages({
     id: 'leaderboard.empty.description',
     defaultMessage: 'There are currently no users to display on the leaderboard. Once participants engage, the rankings will appear here.',
     description: 'Description for the leaderboard empty state.',
+  },
+  badgeLeaderboardImageAltText: {
+    id: 'badge.leaderboard.image.alt.text',
+    defaultMessage: '{title} badge',
+    description: 'Alternative text for the large badge image shown at the top of the per-badge leaderboard page.',
+  },
+  badgeLeaderboardEarnedSectionTitle: {
+    id: 'badge.leaderboard.earned.section.title',
+    defaultMessage: 'Earned',
+    description: 'Heading for the section listing users who have earned the badge on the per-badge leaderboard page.',
+  },
+  badgeLeaderboardInProgressSectionTitle: {
+    id: 'badge.leaderboard.in-progress.section.title',
+    defaultMessage: 'In progress',
+    description: 'Heading for the section listing users who are progressing toward the badge on the per-badge leaderboard page.',
+  },
+  courseLeaderboardCompletedSectionTitle: {
+    id: 'course.leaderboard.completed.section.title',
+    defaultMessage: 'Completed',
+    description: 'Heading for the section listing learners who earned the course certificate on the course leaderboard page.',
+  },
+  countryLeaderboardHeadingText: {
+    id: 'country.leaderboard.heading.text',
+    defaultMessage: '{country} Leaderboard',
+    description: 'Heading for the per-country leaderboard page, with the country name interpolated (e.g. "Japan Leaderboard").',
   },
 });
 

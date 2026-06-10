@@ -6,8 +6,11 @@ import { ProgressPropType } from '../../propTypes';
 import { PopoverContent } from './popover-content';
 import { getTotalProgress, updateProgressView } from './utils';
 import ProgressBadgeItem from './ProgressBadgeItem';
+import { buildBadgeLeaderboardUrl } from '../../../routes/constants';
 
-const ProgressBadge = ({ data, center, children }) => {
+const ProgressBadge = ({
+  slug, data, center, children,
+}) => {
   const [isPopoverOpen, openPopover, closePopover] = useToggle(false);
   const popoverElementRef = useRef(null);
   const badgeElementRef = useRef(null);
@@ -15,6 +18,8 @@ const ProgressBadge = ({ data, center, children }) => {
 
   const {
     title,
+    description = '',
+    manualCriteria = '',
     image: badgeImageUrl,
     objectUri: achievedBadgeImageUrl,
     progress,
@@ -25,11 +30,19 @@ const ProgressBadge = ({ data, center, children }) => {
 
   const imageSrc = badgeImageUrl || achievedBadgeImageUrl;
 
+  // Each badge links to its own (filtered) leaderboard page showing the users who earned it.
+  // The slug is provided explicitly by the caller; fall back to the slug carried on the badge
+  // data itself (completed badges expose `slug`, in-progress badges expose `id`).
+  const resolvedSlug = slug || data.slug || data.id;
+  const badgeHref = resolvedSlug ? buildBadgeLeaderboardUrl(resolvedSlug) : null;
+
   const { hasPopup, totalProgressPercent } = getTotalProgress(data);
 
   const popupProps = hasPopup
     ? {
       data: {
+        description,
+        manualCriteria,
         badgeDependencies: dependencies,
         statusDependency: data.statusDependency || null,
         progress: progress || {},
@@ -51,23 +64,12 @@ const ProgressBadge = ({ data, center, children }) => {
         center={center}
         progressRef={progressElementRef}
         totalProgressPercent={totalProgressPercent}
+        to={badgeHref}
       >
         {children}
       </ProgressBadgeItem>
     );
   }
-
-  const handleBadgeKeyDown = ({ key }) => {
-    if (key === 'Enter') {
-      openPopover();
-      requestAnimationFrame(() => {
-        const firstElement = popoverElementRef.current?.firstElementChild;
-        if (firstElement) {
-          firstElement.focus({ preventScroll: true });
-        }
-      });
-    }
-  };
 
   const handlePopoverKeyDown = ({ key }) => {
     if (key === 'Escape' || key === 'Tab') {
@@ -119,14 +121,11 @@ const ProgressBadge = ({ data, center, children }) => {
         hasPopup
         progressRef={progressElementRef}
         totalProgressPercent={totalProgressPercent}
-        role="button"
-        aria-haspopup={hasPopup}
-        aria-expanded={isPopoverOpen}
-        tabIndex={0}
+        to={badgeHref}
         onMouseEnter={handlePopoverOpen}
         onMouseLeave={handlePopoverClose}
-        onBlur={handlePopoverClose}
-        onKeyDown={handleBadgeKeyDown}
+        onLinkFocus={handlePopoverOpen}
+        onLinkBlur={handlePopoverClose}
       >
         {children}
       </ProgressBadgeItem>
@@ -137,7 +136,11 @@ const ProgressBadge = ({ data, center, children }) => {
 ProgressBadge.propTypes = {
   slug: PropTypes.string,
   data: PropTypes.shape({
+    id: PropTypes.string,
+    slug: PropTypes.string,
     title: PropTypes.string,
+    description: PropTypes.string,
+    manualCriteria: PropTypes.string,
     image: PropTypes.string,
     objectUri: PropTypes.string,
     progress: PropTypes.oneOfType([

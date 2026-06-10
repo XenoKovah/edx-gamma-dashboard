@@ -93,6 +93,57 @@ class GammaApiWrapper:
             **kwargs
         )
 
+    def get_badge_leaderboard_info(self, username, user_signup_source, badge_slug, course_id=None, **kwargs):
+        """
+        Return leaderboard data limited to the users who earned a specific badge.
+
+        Returns:
+            dict: parsed badge leaderboard information.
+        """
+        return self.request_api_endpoint(
+            f'leaderboard/badge/{badge_slug}',
+            params={'username': username, 'signup_source': user_signup_source, 'course_id': course_id},
+            **kwargs
+        )
+
+    def get_course_points(self, course_id, user_uids, **kwargs):
+        """
+        Return per-course points for the given users.
+
+        Returns:
+            dict: a mapping of ``user_uid`` to course points (absent users have no points).
+        """
+        return self.request_api_endpoint(
+            'course-points',
+            method='POST',
+            json={'course_id': course_id, 'user_uids': list(user_uids)},
+            **kwargs
+        ) or {}
+
+    def get_country_leaderboard_info(self, username, user_signup_source, user_uids, **kwargs):
+        """
+        Return a leaderboard restricted to ``user_uids`` (the learners who share a
+        country), ranked by points.
+
+        Country membership and its privacy live on the Open edX profile, which only
+        the caller (running inside the LMS) can see; Gamma just ranks the candidate
+        users it is handed. ``user_uids`` is POSTed because the candidate set can be
+        large for a populous country.
+
+        Returns:
+            dict: parsed leaderboard information (regular leaderboard shape).
+        """
+        return self.request_api_endpoint(
+            'leaderboard/users',
+            method='POST',
+            json={
+                'username': username,
+                'signup_source': user_signup_source,
+                'user_uids': list(user_uids),
+            },
+            **kwargs
+        )
+
     def get_game_profile(self, username, **kwargs):
         """
         Return game profile data for user.

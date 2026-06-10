@@ -7,12 +7,15 @@ import { ProgressPropType } from '../../../propTypes';
 import DependencyBlock from './DependencyBlock';
 import PointsBlock from './PointsBlock';
 import ProgressBlock from './ProgressBlock';
+import TextBlock from './TextBlock';
 
 import messages from '../../../../i18n';
 
 const PopoverContent = ({ data }) => {
   const intl = useIntl();
   const {
+    description = '',
+    manualCriteria = '',
     statusDependency,
     statusPoints,
     badgeDependencies = [],
@@ -23,6 +26,7 @@ const PopoverContent = ({ data }) => {
   const translations = {
     dependsOnBadgesText: intl.formatMessage(messages.dashboardBadgesDependsOnBadgesText),
     dependsOnStatusesText: intl.formatMessage(messages.dashboardBadgesDependsOnStatusText),
+    manualCriteriaText: intl.formatMessage(messages.dashboardBadgesManualCriteriaText),
   };
 
   const renderProgressItems = () => Object.entries(studentProgress).map(([progressItem, progressValues]) => (
@@ -47,6 +51,12 @@ const PopoverContent = ({ data }) => {
   );
 
   const bodyItems = [
+    // Shown on hover for every incomplete badge.
+    ...(description ? [<TextBlock key="description" text={description} />] : []),
+    // Manual-only (rule-less) badges surface their manual assignment criteria here.
+    ...(manualCriteria
+      ? [<TextBlock key="manual-criteria" label={translations.manualCriteriaText} text={manualCriteria} />]
+      : []),
     ...renderProgressItems(),
     ...(badgeDependencies.length > 0
       ? [renderDependencyBlock(translations.dependsOnBadgesText, badgeDependencies)]
@@ -66,6 +76,8 @@ const PopoverContent = ({ data }) => {
 
 PopoverContent.propTypes = {
   data: PropTypes.shape({
+    description: PropTypes.string,
+    manualCriteria: PropTypes.string,
     badgeDependencies: PropTypes.arrayOf(PropTypes.string),
     statusDependency: PropTypes.string,
     progress: PropTypes.shape(ProgressPropType),
@@ -76,6 +88,8 @@ PopoverContent.propTypes = {
 
 PopoverContent.defaultProps = {
   data: {
+    description: '',
+    manualCriteria: '',
     badgeDependencies: [],
     statusDependency: '',
     progress: {},

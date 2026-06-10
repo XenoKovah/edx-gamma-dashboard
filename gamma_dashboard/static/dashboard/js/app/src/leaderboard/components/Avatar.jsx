@@ -11,7 +11,9 @@ import messages from '../../i18n';
 
 const CUP_COLORS = [COLOR_PALETTE.gold, COLOR_PALETTE.silver, COLOR_PALETTE.bronze];
 
-const Avatar = ({ username, urlProfileImage, position }) => {
+const Avatar = ({
+  username, urlProfileImage, position, plainPosition,
+}) => {
   const intl = useIntl();
 
   const firstLetter = capitalizeFirstLetter(username).charAt(0) || '-';
@@ -21,24 +23,23 @@ const Avatar = ({ username, urlProfileImage, position }) => {
   };
 
   const getPositionForAvatar = () => {
-    switch (position) {
-      case 1:
-      case 2:
-      case 3:
-        return (
-          <span className="avatar-position avatar-position_winner">
-            <AwardIcon style={{ color: CUP_COLORS[position - 1] }} aria-label={position} />
-          </span>
-        );
-      case null:
-        return (
-          <span className="avatar-position avatar-position_undefined">?</span>
-        );
-      default:
-        return (
-          <span className="avatar-position">{position}</span>
-        );
+    if (position === null) {
+      return (
+        <span className="avatar-position avatar-position_undefined">?</span>
+      );
     }
+    // The winner medals (gold/silver/bronze) only make sense for the ranked-by-points
+    // leaderboard; the in-progress list shows plain rank numbers instead.
+    if (!plainPosition && position >= 1 && position <= 3) {
+      return (
+        <span className="avatar-position avatar-position_winner">
+          <AwardIcon style={{ color: CUP_COLORS[position - 1] }} aria-label={position} />
+        </span>
+      );
+    }
+    return (
+      <span className="avatar-position">{position}</span>
+    );
   };
 
   return (
@@ -72,12 +73,14 @@ Avatar.propTypes = {
   urlProfileImage: PropTypes.string,
   username: PropTypes.string,
   position: PropTypes.number,
+  plainPosition: PropTypes.bool,
 };
 
 Avatar.defaultProps = {
   urlProfileImage: null,
   username: null,
   position: null,
+  plainPosition: false,
 };
 
 export default Avatar;

@@ -112,4 +112,31 @@ describe('<LeaderboardCard>', () => {
 
     expect(badges.length).toBe(0);
   });
+
+  it('renders the username as a link to the profile page when `profileUrl` is provided', () => {
+    const profileUrl = 'https://apps.example.com/profile/u/username';
+    const { getByTestId } = renderWithProviders(
+      <LeaderboardCard
+        profile={{ ...profile, profileUrl }}
+        rank={rank}
+      />,
+    );
+
+    const usernameLink = getByTestId('leaderboard-card-username-link');
+
+    expect(usernameLink).toHaveAttribute('href', profileUrl);
+    expect(usernameLink.textContent).toBe(profile.userUid);
+  });
+
+  it('renders the username as plain text when no `profileUrl` is provided', () => {
+    const { queryByTestId, getByText } = renderWithProviders(
+      <LeaderboardCard
+        profile={profile}
+        rank={rank}
+      />,
+    );
+
+    expect(queryByTestId('leaderboard-card-username-link')).not.toBeInTheDocument();
+    expect(getByText(profile.userUid)).toBeInTheDocument();
+  });
 });
