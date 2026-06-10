@@ -48,18 +48,13 @@ const messages = defineMessages({
   },
   performanceBadgesSectionDescriptionText: {
     id: 'performance.badges.section.description.text',
-    defaultMessage: 'Construisez votre collection de badges avec des actions combinées magistrales sur la plateforme ! Survolez un badge pour apprendre comment l\'ajouter à votre collection.',
+    defaultMessage: 'Construisez votre collection de badges en apprenant, en partageant ou en faisant du bénévolat ! Survolez un badge pour apprendre comment l\'ajouter à votre collection.',
     description: 'Texte expliquant comment les utilisateurs peuvent gagner des badges et comment afficher les instructions en survolant les badges',
   },
   performanceBadgesSectionAlertNoBadgesTitle: {
     id: 'performance.badges.section.alert.no-badges.title',
-    defaultMessage: 'Vos récompenses arrivent !',
+    defaultMessage: 'Terminez le matériel de cours pour gagner des badges !',
     description: 'Titre du message d\'alerte lorsqu\'aucun badge n\'est disponible',
-  },
-  performanceBadgesSectionAlertNoBadgesDescription: {
-    id: 'performance.badges.section.alert.no-badges.description',
-    defaultMessage: 'Vos badges bien mérités sont en route. Veuillez patienter un instant, ils apparaîtront dans votre inventaire, prêts à mettre en valeur vos réalisations !',
-    description: 'Veuillez patienter un instant, et ils apparaîtront dans votre inventaire, prêts à mettre en valeur vos réalisations !',
   },
   performanceBadgesSectionBadgesButtonText: {
     id: 'performance.badges.section.badges.button.text',

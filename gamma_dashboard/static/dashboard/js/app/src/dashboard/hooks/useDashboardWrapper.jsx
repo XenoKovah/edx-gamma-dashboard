@@ -111,9 +111,6 @@ export const useDashboardWrapper = ({
     alertBadgesEmptyListTitle: intl.formatMessage(
       messages.performanceBadgesSectionAlertNoBadgesTitle,
     ),
-    alertBadgesEmptyListDescription: intl.formatMessage(
-      messages.performanceBadgesSectionAlertNoBadgesDescription,
-    ),
   }), [intl, doneStatuses, statusItems, doneBadgeItems, badgeItems]);
 
   const handleCloseProgressAvatarModal = () => {

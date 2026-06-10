@@ -48,18 +48,13 @@ const messages = defineMessages({
   },
   performanceBadgesSectionDescriptionText: {
     id: 'performance.badges.section.description.text',
-    defaultMessage: 'Ви отримуєте бейджі за певні комбо-дії на платформі. Наведіть курсор на бейдж, щоб дізнатися, що потрібно зробити для його отримання.',
+    defaultMessage: 'Збирайте свою колекцію бейджів, навчаючись, діляючись знаннями або волонтерячи! Наведіть курсор на бейдж, щоб дізнатися, як додати його до колекції.',
     description: 'Текст, що пояснює, як користувачі можуть заробляти бейджі та як переглядати інструкції, навівши курсор на бейджі',
   },
   performanceBadgesSectionAlertNoBadgesTitle: {
     id: 'performance.badges.section.alert.no-badges.title',
-    defaultMessage: 'Ваші нагороди вже в дорозі!',
+    defaultMessage: 'Завершуйте навчальні матеріали, щоб отримати бейджі!',
     description: 'Заголовок для повідомлення-попередження, коли немає доступних бейджів',
-  },
-  performanceBadgesSectionAlertNoBadgesDescription: {
-    id: 'performance.badges.section.alert.no-badges.description',
-    defaultMessage: "Ваші заслужені бейджі вже на підході. Будь ласка, зачекайте трохи, і вони з'являться у вашому інвентарі, готові продемонструвати ваші досягнення!",
-    description: "Будь ласка, зачекайте трохи, і вони з'являться у вашому інвентарі, готові продемонструвати ваші досягнення!",
   },
   performanceBadgesSectionBadgesButtonText: {
     id: 'performance.badges.section.badges.button.text',

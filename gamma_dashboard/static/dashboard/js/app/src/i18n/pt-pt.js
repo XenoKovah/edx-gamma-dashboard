@@ -48,18 +48,13 @@ const messages = defineMessages({
   },
   performanceBadgesSectionDescriptionText: {
     id: 'performance.badges.section.description.text',
-    defaultMessage: 'Você ganha emblemas por ações combinadas específicas na plataforma. Passe o mouse sobre um emblema para saber o que fazer para obter um.',
+    defaultMessage: 'Construa sua coleção de emblemas aprendendo, compartilhando ou sendo voluntário! Passe o mouse sobre um emblema para saber como adicioná-lo à sua coleção.',
     description: 'Texto explicando como os usuários podem ganhar emblemas e como visualizar instruções passando o mouse sobre os emblemas',
   },
   performanceBadgesSectionAlertNoBadgesTitle: {
     id: 'performance.badges.section.alert.no-badges.title',
-    defaultMessage: 'Suas recompensas estão a caminho!',
+    defaultMessage: 'Conclua o material da turma para ganhar emblemas!',
     description: 'Título para a mensagem de alerta quando nenhum emblema está disponível',
-  },
-  performanceBadgesSectionAlertNoBadgesDescription: {
-    id: 'performance.badges.section.alert.no-badges.description',
-    defaultMessage: 'Seus emblemas bem merecidos estão chegando. Por favor, espere um momento, e eles aparecerão em seu inventário, prontos para exibir suas conquistas!',
-    description: 'Por favor, espere um momento, e eles aparecerão em seu inventário, prontos para exibir suas conquistas!',
   },
   performanceBadgesSectionBadgesButtonText: {
     id: 'performance.badges.section.badges.button.text',

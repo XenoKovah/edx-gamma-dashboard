@@ -82,9 +82,7 @@ const DashboardWrapper = ({
               variant="info"
               icon={InfoIcon}
               title={options.emptyTitle}
-            >
-              <p>{options.emptyDescription}</p>
-            </Alert>
+            />
           );
         }
 
@@ -175,7 +173,6 @@ const DashboardWrapper = ({
                 items={renderItems(WIDGETS.BADGES, {
                   items: previewBadgeItems,
                   emptyTitle: translations.alertBadgesEmptyListTitle,
-                  emptyDescription: translations.alertBadgesEmptyListDescription,
                 })}
                 buttonData={{
                   title: translations.badgesSectionBtnTitle,
