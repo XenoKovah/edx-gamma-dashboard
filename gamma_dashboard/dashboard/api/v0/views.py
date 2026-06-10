@@ -22,6 +22,7 @@ from openedx.core.djangoapps.user_api.accounts.api import get_account_settings
 from openedx.core.djangoapps.user_api.accounts.image_helpers import get_profile_image_urls_for_user
 from openedx.core.djangoapps.user_api.accounts.serializers import _visible_fields
 from openedx.core.djangoapps.user_api.errors import UserNotFound
+from openedx.core.djangoapps.user_api.preferences.api import get_user_preference
 
 from course_leaderboard.toggles import show_course_leaderboard_tab
 from gamma_dashboard.dashboard.core.gamma.api.settings import DEFAULT_API_VERSION
@@ -531,6 +532,87 @@ class UserBadgesApiView(APIView):
         if not base_url:
             return uri
         return urljoin(f"{base_url.rstrip('/')}/", uri.lstrip("/"))
+
+
+# Open edX user-preference key for the "badge earned" pop-up opt-out. Written by the
+# Account Settings toggle (frontend-rgg-widgets BadgeNotificationsToggle) through the
+# standard /api/user/v1/preferences/ API; read here when the widget polls.
+BADGE_NOTIFICATIONS_PREFERENCE_KEY = 'rgg_badge_notifications'
+
+
+def badge_notifications_enabled(user):
+    """
+    Whether the user wants "badge earned" pop-ups.
+
+    Unset means enabled (the feature is opt-out): only the stored literal 'false'
+    disables it.
+    """
+    return get_user_preference(user, BADGE_NOTIFICATIONS_PREFERENCE_KEY) != 'false'
+
+
+class BadgeNotificationsApiView(APIView):
+    """
+    Pending "badge earned" notifications for the requesting user.
+
+    GET returns the user's completed-but-not-yet-shown badge notifications (empty,
+    and marked disabled, when the user has opted out in Account Settings). POST
+    acknowledges shown notifications so they are never returned again.
+    """
+
+    permission_classes = (IsAuthenticated,)
+    # JWT first: polled cross-origin by the BadgeNotifications widget from MFE pages
+    # (apps.<host>), same situation as UserBadgesApiView.
+    authentication_classes = (JwtAuthentication, SessionAuthenticationAllowInactiveUser)
+
+    def get(self, request):
+        """
+        Get the user's pending badge notifications, oldest first.
+        """
+        if not badge_notifications_enabled(request.user):
+            return Response({"enabled": False, "notifications": []})
+
+        pending = GammaApiWrapper(version=DEFAULT_API_VERSION).get_badge_notifications(
+            request.user.username
+        )
+        if pending is None:
+            return Response(
+                {"error": "No data received from Gamma server."},
+                status=status.HTTP_422_UNPROCESSABLE_ENTITY,
+            )
+
+        gamma_base = UserBadgesApiView._gamma_public_base_url()  # pylint: disable=protected-access
+        notifications = [
+            {
+                **notification,
+                "image": UserBadgesApiView._absolute_media_url(  # pylint: disable=protected-access
+                    notification.get("image"), gamma_base
+                ),
+            }
+            for notification in pending
+        ]
+        return Response({"enabled": True, "notifications": notifications})
+
+    def post(self, request):
+        """
+        Mark the given notifications (by achievement uuid) as seen for the user.
+        """
+        uuids = request.data.get("uuids")
+        if not isinstance(uuids, list) or not uuids:
+            return Response(
+                {"error": "uuids must be a non-empty list."},
+                status=status.HTTP_400_BAD_REQUEST,
+            )
+
+        result = GammaApiWrapper(version=DEFAULT_API_VERSION).mark_badge_notifications_seen(
+            request.user.username, uuids
+        )
+        if result is None:
+            return Response(
+                {"error": "No data received from Gamma server."},
+                status=status.HTTP_422_UNPROCESSABLE_ENTITY,
+            )
+
+        return Response({"count": result.get("count", 0)})
 
 
 class GameUserAvatarConfigApiView(APIView):

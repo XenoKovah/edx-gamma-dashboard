@@ -153,6 +153,31 @@ class GammaApiWrapper:
         """
         return self.request_api_endpoint('users/gamma-profile', params={'username': username}, **kwargs)
 
+    def get_badge_notifications(self, username, **kwargs):
+        """
+        Return the user's pending (completed but not yet shown) badge notifications.
+
+        Returns:
+            list: notification dicts (uuid, slug, title, description, image, completed_at).
+        """
+        return self.request_api_endpoint(
+            'users/badge-notifications/', params={'username': username}, **kwargs
+        )
+
+    def mark_badge_notifications_seen(self, username, uuids, **kwargs):
+        """
+        Acknowledge badge notifications that were shown to the user.
+
+        Returns:
+            dict: {'count': <number of notifications newly marked seen>}.
+        """
+        return self.request_api_endpoint(
+            'users/badge-notifications/seen/',
+            method='POST',
+            json={'username': username, 'uuids': list(uuids)},
+            **kwargs
+        )
+
     def get_gamma_user_avatar_config(self, config_id, **kwargs):
         """
         Return User's Avatar Set Config for given `config_id`.
