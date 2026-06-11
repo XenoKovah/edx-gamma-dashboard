@@ -33,7 +33,7 @@ const messages = defineMessages({
   },
   performanceHeadingText: {
     id: 'performance.heading.text',
-    defaultMessage: 'Performance',
+    defaultMessage: 'Your Accomplishments',
     description: 'Performance page heading text',
   },
   performanceBadgesSectionHeadingText: {
