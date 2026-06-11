@@ -153,6 +153,18 @@
     background-color: #0d0d0e;
     z-index: 10;
   }
+
+  // The INACTIVE level circles (the not-yet-reached levels 2..N) are a
+  // different element - `.slider-item-progress-end` - which the track-end fix
+  // above didn't cover, so the bright accent track line still cut a crescent
+  // through them. Lift them above the track line the same way (overriding the
+  // last-slide `z-index: 1 !important`), with an opaque dark fill so the line
+  // can't show through.
+  .slider-item-progress-end,
+  .slick-slide:last-child .slider-item .slider-item-progress-end {
+    background-color: #36383b;
+    z-index: 10 !important;
+  }
 }
 
 // leaderboard/avatar.scss: winner chip has a white background behind its icon.
