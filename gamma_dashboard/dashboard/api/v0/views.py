@@ -586,6 +586,11 @@ class BadgeNotificationsApiView(APIView):
         """
         Get the user's pending badge notifications, oldest first.
         """
+        # Suppressed while the student gamification UI is hidden (staff bypass), so a
+        # learner doesn't get "you earned an Accomplishment" toasts before launch.
+        if not show_student_ui(request):
+            return Response({"enabled": False, "notifications": []})
+
         if not badge_notifications_enabled(request.user):
             return Response({"enabled": False, "notifications": []})
 
