@@ -38,7 +38,7 @@ const messages = defineMessages({
   },
   performanceBadgesSectionHeadingText: {
     id: 'performance.badges.section.heading.text',
-    defaultMessage: 'Your Accomplishments',
+    defaultMessage: 'Accomplishments',
     description: 'Heading text for the badges section on the performance page',
   },
   performanceSectionCounterText: {
@@ -118,7 +118,7 @@ const messages = defineMessages({
   },
   performanceStatusesSectionHeadingText: {
     id: 'performance.statuses.section.heading.text',
-    defaultMessage: 'Your Aggregate Accomplishment Level',
+    defaultMessage: 'R0x0r Level',
     description: 'Heading text for the statuses section in the performance page',
   },
   performanceStatusesSectionProgressTrackItemText: {

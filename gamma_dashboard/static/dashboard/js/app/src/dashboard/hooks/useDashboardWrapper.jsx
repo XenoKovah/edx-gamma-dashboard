@@ -31,14 +31,16 @@ export const useDashboardWrapper = ({
     [badgeItems],
   );
 
-  const previewBadgeItems = useMemo(
-    () => sortedActiveBadges.slice(0, PREVIEW_BADGES_ITEMS_COUNT),
-    [sortedActiveBadges],
-  );
-
   const doneBadgeItems = useMemo(
     () => sortedActiveBadges.filter(([, badge]) => badge.done),
     [sortedActiveBadges],
+  );
+
+  // Main-page preview shows ONLY earned badges; un-earned ones remain available
+  // in the "All Accomplishments" modal (filteredActiveBadges below).
+  const previewBadgeItems = useMemo(
+    () => doneBadgeItems.slice(0, PREVIEW_BADGES_ITEMS_COUNT),
+    [doneBadgeItems],
   );
 
   const points = statusItems[0]?.points || 0;

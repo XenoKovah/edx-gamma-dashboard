@@ -153,6 +153,20 @@
   .slick-slide:last-child .slider-item .slider-item-progress-end {
     z-index: 1 !important;
   }
+
+  // Each level circle (.slider-item-progress-end) sits at the right edge of its
+  // slide and is overlapped by the NEXT slide's track line — a later sibling that
+  // paints on top. Because each .slider-item is its own stacking context (it has
+  // `transform`), bumping z-index on the circle alone can't lift it above the next
+  // slide (that's why earlier z-index fixes failed). Stack the SLIDES instead:
+  // earlier slides above later ones, so every circle fully covers the following
+  // line. Mode-agnostic — fixes both light and dark mode. (Higher specificity
+  // than `.slider-item.with-progress`, so it wins.)
+  @for $i from 0 through 20 {
+    .slick-slide[data-index="#{$i}"] .slider-item {
+      z-index: #{100 - $i};
+    }
+  }
 }
 
 &.tooltip {
