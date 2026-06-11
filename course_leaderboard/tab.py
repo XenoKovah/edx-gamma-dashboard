@@ -4,6 +4,7 @@ from common.djangoapps.student.models import CourseEnrollment
 from xmodule.tabs import CourseTab
 
 from course_leaderboard.toggles import show_course_leaderboard_tab
+from gamma_dashboard.toggles import show_student_ui
 
 
 class CourseLeaderboardTab(CourseTab):
@@ -25,6 +26,8 @@ class CourseLeaderboardTab(CourseTab):
         return all(
             [
                 show_course_leaderboard_tab(),
+                # Hidden from learners until rgg.show_student_ui; staff always see it.
+                (show_student_ui() or bool(user and user.is_staff)),
                 user,
                 user.is_authenticated,
                 CourseEnrollment.is_enrolled(user, course.id)

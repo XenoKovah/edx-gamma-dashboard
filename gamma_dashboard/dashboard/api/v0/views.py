@@ -27,7 +27,7 @@ from openedx.core.djangoapps.user_api.preferences.api import get_user_preference
 from course_leaderboard.toggles import show_course_leaderboard_tab
 from gamma_dashboard.dashboard.core.gamma.api.settings import DEFAULT_API_VERSION
 from gamma_dashboard.dashboard.core.gamma.api.wrapper import GammaApiWrapper
-from gamma_dashboard.toggles import show_gamma_leaderboard
+from gamma_dashboard.toggles import show_gamma_leaderboard, show_student_ui
 from ..utils import repair_mojibake_text, site_badge_filter, is_main_site
 
 MAIN_SITE_NAME = 'main'
@@ -60,6 +60,9 @@ class LeaderboardApiView(APIView):
         """
         Get Leaderboard info.
         """
+        if not show_student_ui(request):
+            return Response({"error": "Gamma UI is disabled."}, status=status.HTTP_404_NOT_FOUND)
+
         course_id = kwargs.get("course_id")
 
         if course_id and not show_course_leaderboard_tab() or not course_id and not show_gamma_leaderboard():
@@ -158,6 +161,9 @@ class BadgeLeaderboardApiView(APIView):
         """
         Get badge leaderboard info for the given badge slug.
         """
+        if not show_student_ui(request):
+            return Response({"error": "Gamma UI is disabled."}, status=status.HTTP_404_NOT_FOUND)
+
         course_id = kwargs.get("course_id")
 
         if course_id and not show_course_leaderboard_tab() or not course_id and not show_gamma_leaderboard():
@@ -207,6 +213,9 @@ class CountryLeaderboardApiView(APIView):
         """
         Get the leaderboard for everyone who publicly shares ``country_code``.
         """
+        if not show_student_ui(request):
+            return Response({"error": "Gamma UI is disabled."}, status=status.HTTP_404_NOT_FOUND)
+
         if not show_gamma_leaderboard():
             return Response({"error": "Gamma Leaderboard is disabled."}, status=status.HTTP_404_NOT_FOUND)
 
@@ -287,6 +296,9 @@ class CourseLeaderboardApiView(APIView):
         """
         Get the course leaderboard (completed + in-progress sections).
         """
+        if not show_student_ui(request):
+            return Response({"error": "Gamma UI is disabled."}, status=status.HTTP_404_NOT_FOUND)
+
         if not show_course_leaderboard_tab():
             return Response({"error": "Gamma Leaderboard is disabled."}, status=status.HTTP_404_NOT_FOUND)
 
@@ -415,6 +427,9 @@ class GameProfileApiView(APIView):
         """
         Get Game Profile of current logged user.
         """
+        if not show_student_ui(request):
+            return Response({"error": "Gamma UI is disabled."}, status=status.HTTP_404_NOT_FOUND)
+
         user_info = GammaApiWrapper(version=DEFAULT_API_VERSION).get_game_profile(request.user.username)
 
         if not user_info:
@@ -450,6 +465,9 @@ class UserBadgesApiView(APIView):
         """
         Get the list of completed badges for ``username``.
         """
+        if not show_student_ui(request):
+            return Response([])
+
         if not self._is_profile_visible(request, username):
             return Response([])
 
@@ -627,6 +645,9 @@ class GameUserAvatarConfigApiView(APIView):
         """
         Get User's Avatar Set Config by `config_id`.
         """
+        if not show_student_ui(request):
+            return Response({"error": "Gamma UI is disabled."}, status=status.HTTP_404_NOT_FOUND)
+
         config_id = request.query_params.get('config_id')
         gamma_user_avatar_config = GammaApiWrapper(
             version=DEFAULT_API_VERSION
