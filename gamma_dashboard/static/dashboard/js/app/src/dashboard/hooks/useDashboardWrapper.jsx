@@ -3,8 +3,6 @@ import { useIntl } from 'react-intl';
 
 import messages from '../../i18n';
 
-const PREVIEW_BADGES_ITEMS_COUNT = 10;
-
 export const useDashboardWrapper = ({
   badgeItems,
   statusItems,
@@ -36,12 +34,9 @@ export const useDashboardWrapper = ({
     [sortedActiveBadges],
   );
 
-  // Main-page preview shows ONLY earned badges; un-earned ones remain available
+  // Main page shows ALL earned badges (no cap); un-earned ones remain available
   // in the "All Accomplishments" modal (filteredActiveBadges below).
-  const previewBadgeItems = useMemo(
-    () => doneBadgeItems.slice(0, PREVIEW_BADGES_ITEMS_COUNT),
-    [doneBadgeItems],
-  );
+  const previewBadgeItems = doneBadgeItems;
 
   const points = statusItems[0]?.points || 0;
   const doneStatuses = useMemo(
