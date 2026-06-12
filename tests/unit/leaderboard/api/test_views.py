@@ -2,6 +2,7 @@
 
 import pytest
 
+from django.contrib.auth.models import User
 from rest_framework import status
 
 from gamma_dashboard.dashboard.api.v0.views import (
@@ -573,9 +574,15 @@ class TestUserBadgesApiView:
     def test_returns_only_completed_badges_with_current_config(self, mocker, settings, account_privacy):
         # Badges show on both fully-public ("all_users") and per-field ("custom") profiles.
         settings.FEATURES = {"RG_GAMIFICATION": {"RG_GAMIFICATION_ENDPOINT": "http://rgg:8000"}}
+        # A "custom" profile shows accomplishments only when explicitly shared.
+        User.objects.create(username="target")
         mocker.patch(
             "gamma_dashboard.dashboard.api.v0.views.get_account_settings",
             return_value=[{"account_privacy": account_privacy}],
+        )
+        mocker.patch(
+            "gamma_dashboard.dashboard.api.v0.views.get_user_preference",
+            return_value="all_users",
         )
         mocker.patch(
             "gamma_dashboard.dashboard.api.v0.views.configuration_helpers.get_value",
@@ -612,6 +619,27 @@ class TestUserBadgesApiView:
         assert response.status_code == status.HTTP_200_OK
         assert response.data == []
         gamma_mock.assert_not_called()  # gamma is not even queried for hidden profiles
+
+    @pytest.mark.django_db
+    def test_custom_profile_hides_unshared_accomplishments(self, mocker):
+        # On a "custom" profile, accomplishments stay hidden unless explicitly shared
+        # (visibility.accomplishments == all_users); mirrors certificate visibility.
+        User.objects.create(username="target")
+        mocker.patch(
+            "gamma_dashboard.dashboard.api.v0.views.get_account_settings",
+            return_value=[{"account_privacy": "custom"}],
+        )
+        mocker.patch(
+            "gamma_dashboard.dashboard.api.v0.views.get_user_preference",
+            return_value="private",
+        )
+        gamma_mock = mocker.patch.object(GammaApiWrapper, "get_game_profile")
+
+        response = UserBadgesApiView().get(self._request(mocker), username="target")
+
+        assert response.status_code == status.HTTP_200_OK
+        assert response.data == []
+        gamma_mock.assert_not_called()
 
     @pytest.mark.django_db
     def test_no_gamma_data_returns_422(self, mocker):
