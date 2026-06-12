@@ -511,14 +511,15 @@ class UserBadgesApiView(APIView):
         """
         Return whether ``request.user`` may view ``username``'s profile.
 
-        Mirrors Open edX per-field visibility (and IsOwnerOrPublicCertificates):
-        always visible to the owner and to staff. For other viewers the learner's
-        effective account privacy decides: "private" hides everything; "all_users"
-        shows everything; "custom" shows accomplishments only when the learner has
-        explicitly shared them (visibility.accomplishments == all_users) -- the
-        account-settings "Who can see your Accomplishments?" control sets this.
+        Mirrors Open edX per-field visibility. Staff may always view (like
+        IsOwnerOrPublicCertificates' IsStaff bypass). Everyone else -- INCLUDING the
+        owner, because the profile is read-only and shows exactly what the public
+        sees -- gets the gated view: "private" hides everything; "all_users" shows
+        everything; "custom" shows accomplishments only when the learner explicitly
+        shared them (visibility.accomplishments == all_users), which the
+        account-settings "Who can see your Accomplishments?" control sets.
         """
-        if request.user.username == username or request.user.is_staff:
+        if request.user.is_staff:
             return True
 
         try:

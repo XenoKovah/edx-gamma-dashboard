@@ -642,6 +642,29 @@ class TestUserBadgesApiView:
         gamma_mock.assert_not_called()
 
     @pytest.mark.django_db
+    def test_owner_sees_the_public_gated_view(self, mocker):
+        # The read-only profile shows the owner exactly what the public sees, so the
+        # owner no longer bypasses: their own "custom + not shared" accomplishments are
+        # hidden from their own profile too (only staff bypass remains).
+        User.objects.create(username="target")
+        mocker.patch(
+            "gamma_dashboard.dashboard.api.v0.views.get_account_settings",
+            return_value=[{"account_privacy": "custom"}],
+        )
+        mocker.patch(
+            "gamma_dashboard.dashboard.api.v0.views.get_user_preference",
+            return_value="private",
+        )
+        gamma_mock = mocker.patch.object(GammaApiWrapper, "get_game_profile")
+
+        # request.user IS the target -> owner viewing their own profile.
+        response = UserBadgesApiView().get(self._request(mocker, username="target"), username="target")
+
+        assert response.status_code == status.HTTP_200_OK
+        assert response.data == []
+        gamma_mock.assert_not_called()
+
+    @pytest.mark.django_db
     def test_no_gamma_data_returns_422(self, mocker):
         mocker.patch(
             "gamma_dashboard.dashboard.api.v0.views.get_account_settings",
