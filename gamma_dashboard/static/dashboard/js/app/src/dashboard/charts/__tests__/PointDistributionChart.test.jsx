@@ -67,13 +67,13 @@ describe('PointsDistributionChart', () => {
     );
   });
 
-  it('draws a thin 1px white outline on the slice percentage labels', () => {
+  it('draws solid percentage labels with no outline', () => {
     renderWithProviders(<PointsDistributionChart data={data} />);
 
     const options = JSON.parse(screen.getByTestId('echarts-instance').getAttribute('data-options'));
 
-    expect(options.series[0].label.textBorderColor).toBe('#fff');
-    expect(options.series[0].label.textBorderWidth).toBe(1);
+    expect(options.series[0].label.textBorderWidth).toBe(0);
+    expect(options.series[0].label.color).toBeTruthy();
   });
 
   it('uses the default navy title color in light mode', () => {

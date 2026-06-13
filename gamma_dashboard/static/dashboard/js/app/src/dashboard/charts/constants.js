@@ -66,6 +66,15 @@ export const CHART_ICON_EMPHASIS_STYLES = {
   borderColor: COLOR_PALETTE.primaryTransparent,
 };
 
+// Theme-aware toolbox-icon hover (emphasis) colour. Light keeps the existing faded
+// navy; dark uses a lighter accent so the icon brightens on hover instead of fading
+// into the dark canvas. (The base icon colour reuses the theme-aware title colour.)
+export const getChartIconEmphasisColor = () => (
+  document.body.classList.contains('indigo-dark-theme')
+    ? '#d6e4ff'
+    : CHART_ICON_EMPHASIS_STYLES.borderColor
+);
+
 export const CHART_SERIES_ITEM_STYLES = {
   borderRadius: 10,
   borderColor: 'white',

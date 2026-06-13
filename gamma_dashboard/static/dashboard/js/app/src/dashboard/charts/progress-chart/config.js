@@ -3,10 +3,10 @@ import {
   CHART_SIDE_INDENT,
   CHART_COLOR_SCHEME,
   CHART_ICON_STYLES,
-  CHART_ICON_EMPHASIS_STYLES,
   CHART_SUBTITLE_STYLES,
   CHART_TITLE_STYLES,
   CHART_LABEL_STYLES,
+  getChartIconEmphasisColor,
 } from '../constants';
 
 // `titleColor` lets the component pass a theme-aware title color (light accent
@@ -32,7 +32,9 @@ export const getConfig = (dates, points, progress, messages, containerWidth, isS
         Progress: true,
         Points: true,
       },
-      textStyle: CHART_LABEL_STYLES,
+      // OST2: theme-aware legend text (navy in light, light accent in dark) -- the
+      // default was a fixed dark colour, invisible on the dark canvas.
+      textStyle: { ...CHART_LABEL_STYLES, color: titleColor || CHART_TITLE_STYLES.color },
     },
     xAxis: {
       type: 'category',
@@ -75,9 +77,9 @@ export const getConfig = (dates, points, progress, messages, containerWidth, isS
         saveAsImage: {
           type: 'png',
           title: messages.controls.saveAsImage,
-          iconStyle: CHART_ICON_STYLES,
+          iconStyle: { borderColor: titleColor || CHART_ICON_STYLES.borderColor },
           emphasis: {
-            iconStyle: CHART_ICON_EMPHASIS_STYLES,
+            iconStyle: { borderColor: getChartIconEmphasisColor() },
           },
         },
         dataZoom: {
@@ -85,9 +87,9 @@ export const getConfig = (dates, points, progress, messages, containerWidth, isS
             zoom: messages.controls.zoomIn,
             back: messages.controls.zoomOut,
           },
-          iconStyle: CHART_ICON_STYLES,
+          iconStyle: { borderColor: titleColor || CHART_ICON_STYLES.borderColor },
           emphasis: {
-            iconStyle: CHART_ICON_EMPHASIS_STYLES,
+            iconStyle: { borderColor: getChartIconEmphasisColor() },
           },
         },
         magicType: {
@@ -96,9 +98,9 @@ export const getConfig = (dates, points, progress, messages, containerWidth, isS
             line: messages.controls.lineChart,
             bar: messages.controls.barChart,
           },
-          iconStyle: CHART_ICON_STYLES,
+          iconStyle: { borderColor: titleColor || CHART_ICON_STYLES.borderColor },
           emphasis: {
-            iconStyle: CHART_ICON_EMPHASIS_STYLES,
+            iconStyle: { borderColor: getChartIconEmphasisColor() },
           },
         },
       },

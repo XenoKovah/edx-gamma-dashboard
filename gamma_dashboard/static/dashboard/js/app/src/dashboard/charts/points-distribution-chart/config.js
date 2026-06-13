@@ -3,11 +3,11 @@ import {
   CHART_SIDE_INDENT,
   CHART_COLOR_SCHEME,
   CHART_ICON_STYLES,
-  CHART_ICON_EMPHASIS_STYLES,
   CHART_SERIES_ITEM_STYLES,
   CHART_SUBTITLE_STYLES,
   CHART_TITLE_STYLES,
   CHART_LABEL_STYLES,
+  getChartIconEmphasisColor,
 } from '../constants';
 
 // `titleColor` lets the component pass a theme-aware title color (light accent
@@ -46,11 +46,11 @@ export const getConfig = (events, messages, containerWidth, isSmall, titleColor)
         position: isSmall ? 'inside' : 'outside',
         formatter: '{d}%',
         ...CHART_LABEL_STYLES,
-        // ECharts auto-applies a thick white outline (~2px) to "attached" pie
-        // labels for legibility; pin a thin 1px white stroke so the percentages
-        // stay readable without the heavy halo. Global (both light and dark).
-        textBorderColor: '#fff',
-        textBorderWidth: 1,
+        // OST2: solid, theme-aware percentage labels (no outline). Colour matches the
+        // title resolver -- navy in light, light accent in dark, like other text.
+        // textBorderWidth:0 overrides ECharts' auto white halo on attached pie labels.
+        color: titleColor || CHART_TITLE_STYLES.color,
+        textBorderWidth: 0,
       },
       data: events,
     },
@@ -63,9 +63,9 @@ export const getConfig = (events, messages, containerWidth, isSmall, titleColor)
       saveAsImage: {
         show: true,
         title: messages.controls.saveAsImage,
-        iconStyle: CHART_ICON_STYLES,
+        iconStyle: { borderColor: titleColor || CHART_ICON_STYLES.borderColor },
         emphasis: {
-          iconStyle: CHART_ICON_EMPHASIS_STYLES,
+          iconStyle: { borderColor: getChartIconEmphasisColor() },
         },
       },
     },
