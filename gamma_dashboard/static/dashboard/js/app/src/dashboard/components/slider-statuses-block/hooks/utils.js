@@ -111,7 +111,14 @@ export const getProgressTrackEndStyles = (isLastItem, isFirstItem, points, curre
  * @returns {string} return.zIndex - The z-index value for the progress end (`99` if complete, `1` if not).
  */
 export const getProgressEndStyles = (isStatusComplete) => ({
-  backgroundColor: isStatusComplete ? COLOR_PALETTE.oliveGreen : COLOR_PALETTE.lightGray,
+  // OST2: the marker dot should be the SAME colour as the line segment it sits on,
+  // not a separate olive-green / light-gray. Completed -> the progress-track (completed)
+  // line colour; incomplete -> the progress (incomplete) line colour. We use the exact
+  // CSS vars the lines use, as inline `var()` so they resolve live in both light and
+  // dark themes (and on theme toggle) -- keeping marker and line in sync.
+  backgroundColor: isStatusComplete
+    ? 'var(--pgn-rgg-statuses-progress-track-bg-color, #082644)'
+    : 'var(--pgn-rgg-statuses-progress-bg-color, #dfe0e8)',
   zIndex: isStatusComplete ? '99' : '1',
 });
 

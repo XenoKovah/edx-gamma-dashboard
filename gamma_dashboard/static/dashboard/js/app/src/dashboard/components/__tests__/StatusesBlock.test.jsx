@@ -137,7 +137,7 @@ describe('<SliderStatusesBlock />', () => {
       expect(statusItem.querySelector('.slider-item-status-image')).toHaveStyle('filter: grayscale(0)');
       expect(statusItem.querySelector('.slider-item-status-image')).toHaveStyle('opacity: 1');
       expect(statusItem.querySelector('.slider-item-progress-track')).toHaveStyle('width: 100%');
-      expect(statusItem.querySelector('.slider-item-progress-end')).toHaveStyle('background-color: rgb(85, 107, 47)');
+      expect(statusItem.querySelector('.slider-item-progress-end')).toHaveStyle('background-color: var(--pgn-rgg-statuses-progress-track-bg-color, #082644)');
       expect(statusItem.querySelector('.slider-item-progress-end')).toHaveStyle('z-index: 99;');
     });
   });
@@ -151,7 +151,7 @@ describe('<SliderStatusesBlock />', () => {
     expect(statusItem.querySelector('.slider-item-status-image')).toHaveStyle('filter: grayscale(0)');
     expect(statusItem.querySelector('.slider-item-status-image')).toHaveStyle('opacity: 1');
     expect(statusItem.querySelector('.slider-item-progress-track')).toHaveStyle('width: 4%');
-    expect(statusItem.querySelector('.slider-item-progress-end')).toHaveStyle('background-color: rgb(223, 224, 232)');
+    expect(statusItem.querySelector('.slider-item-progress-end')).toHaveStyle('background-color: var(--pgn-rgg-statuses-progress-bg-color, #dfe0e8)');
     expect(statusItem.querySelector('.slider-item-progress-end')).toHaveStyle('z-index: 1');
   });
 
@@ -166,7 +166,7 @@ describe('<SliderStatusesBlock />', () => {
       expect(statusItem.querySelector('.slider-item-status-image')).toHaveStyle('filter: grayscale(1)');
       expect(statusItem.querySelector('.slider-item-status-image')).toHaveStyle('opacity: 0.3');
       expect(statusItem.querySelector('.slider-item-progress-track')).toHaveStyle('width: 0%');
-      expect(statusItem.querySelector('.slider-item-progress-end')).toHaveStyle('background-color: rgb(223, 224, 232)');
+      expect(statusItem.querySelector('.slider-item-progress-end')).toHaveStyle('background-color: var(--pgn-rgg-statuses-progress-bg-color, #dfe0e8)');
       expect(statusItem.querySelector('.slider-item-progress-end')).toHaveStyle('z-index: 1');
     });
   });
