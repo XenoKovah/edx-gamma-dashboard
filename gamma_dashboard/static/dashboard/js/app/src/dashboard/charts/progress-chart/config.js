@@ -7,6 +7,7 @@ import {
   CHART_TITLE_STYLES,
   CHART_LABEL_STYLES,
   getChartIconEmphasisColor,
+  getChartSubtitleColor,
 } from '../constants';
 
 // `titleColor` lets the component pass a theme-aware title color (light accent
@@ -115,6 +116,8 @@ export const getConfig = (dates, points, progress, messages, containerWidth, isS
         style: {
           text: messages.descriptionText,
           ...CHART_SUBTITLE_STYLES,
+          color: getChartSubtitleColor(),
+          fill: getChartSubtitleColor(),
           width: Math.max(0, (containerWidth || 0) - CHART_SIDE_INDENT),
         },
       },

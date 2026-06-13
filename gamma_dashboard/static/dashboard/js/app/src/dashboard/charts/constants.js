@@ -58,6 +58,13 @@ export const CHART_SUBTITLE_STYLES = {
   overflow: 'break',
 };
 
+// Theme-aware chart subtitle/description color. The static neutralGray (#bcbcbc)
+// is too light on the white canvas in light mode; switch to near-black/near-white
+// per theme (read at render; the chart components re-render on toggle).
+export const getChartSubtitleColor = () => (
+  document.body.classList.contains('indigo-dark-theme') ? '#f8f8f8' : '#1a1a1a'
+);
+
 export const CHART_ICON_STYLES = {
   borderColor: COLOR_PALETTE.primary,
 };

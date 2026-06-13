@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import ReactECharts from 'echarts-for-react';
 import { breakpoints, useMediaQuery } from '@openedx/paragon';
 
-import { useElementWidth } from '../hooks';
+import { useElementWidth, useIsDarkTheme } from '../hooks';
 import { getConfig } from './config';
 import { processChartData, transformData } from './utils';
 import { getChartTitleColor } from '../constants';
@@ -23,6 +23,10 @@ const ProgressChart = ({ data }) => {
   // light title color in dark mode. The legacy page's dark-theme.js sets the
   // `indigo-dark-theme` body class before this app mounts, so reading it now
   // reflects the active theme.
+  // Re-render when the theme toggles so the canvas re-colors live (ECharts can't
+  // recolor its own canvas on a CSS class change; without this it only updates on
+  // a resize, e.g. after an app-switch).
+  useIsDarkTheme();
   const titleColor = getChartTitleColor();
 
   const translations = {
