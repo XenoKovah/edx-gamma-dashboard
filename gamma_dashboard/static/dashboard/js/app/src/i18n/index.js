@@ -231,10 +231,10 @@ const messages = defineMessages({
     defaultMessage: 'Country',
     description: 'Column header for the country-flag column on the leaderboard',
   },
-  leaderboardHeaderEarnedPoints: {
-    id: 'leaderboard.header.earned.points',
-    defaultMessage: 'Earned points',
-    description: 'Column header for the points column on the leaderboard (the score a learner earned)',
+  leaderboardHeaderTotalPoints: {
+    id: 'leaderboard.header.total.points',
+    defaultMessage: 'Total Points',
+    description: "Column header for the points column on the leaderboard (the learner's lifetime total points)",
   },
   leaderboardHeaderProgress: {
     id: 'leaderboard.header.progress',

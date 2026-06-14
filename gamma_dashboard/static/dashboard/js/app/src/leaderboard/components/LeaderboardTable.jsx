@@ -21,7 +21,7 @@ const LeaderboardTable = ({
     headerCountry: intl.formatMessage(messages.leaderboardHeaderCountry),
     // In-progress sections show a grade percentage, not earned points.
     headerPoints: intl.formatMessage(
-      showProgress ? messages.leaderboardHeaderProgress : messages.leaderboardHeaderEarnedPoints,
+      showProgress ? messages.leaderboardHeaderProgress : messages.leaderboardHeaderTotalPoints,
     ),
     headerAccomplishments: intl.formatMessage(messages.leaderboardHeaderAccomplishments),
   };

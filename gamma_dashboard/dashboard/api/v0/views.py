@@ -246,7 +246,7 @@ class CountryLeaderboardApiView(APIView):
 
         leaderboard_info = GammaApiWrapper(
             version=DEFAULT_API_VERSION
-        ).get_country_leaderboard_info(request.user.username, user_signup_source, public_usernames)
+        ).get_users_leaderboard_info(request.user.username, user_signup_source, public_usernames)
 
         if leaderboard_info is None:
             return Response(
@@ -332,45 +332,47 @@ class CourseLeaderboardApiView(APIView):
             .values_list("user_id", flat=True)
         )
 
-        completed_members, completed_rank = self._build_completed_section(course_id, cert_user_ids, current_user_id)
+        signup_source = request.user.usersignupsource_set.first()
+        user_signup_source = signup_source.site if signup_source else MAIN_SITE_NAME
+
+        completed = self._build_completed_section(cert_user_ids, request.user, user_signup_source)
         in_progress_members, in_progress_rank = self._build_in_progress_section(
             course_key, set(cert_user_ids), current_user_id
         )
 
         return Response({
-            "top10": completed_members,
-            "competitors": [],
-            "rank": completed_rank,
+            "top10": completed.get("top10", []),
+            "competitors": completed.get("competitors", []),
+            "rank": completed.get("rank"),
             "in_progress": in_progress_members,
             "in_progress_rank": in_progress_rank,
-            "user_uid": self._display_name(request.user),
+            "user_uid": completed.get("user_uid") or self._display_name(request.user),
         })
 
-    def _build_completed_section(self, course_id, cert_user_ids, current_user_id):
+    def _build_completed_section(self, cert_user_ids, user, user_signup_source):
         """
-        Certificate earners ranked by their Gamma course points (descending).
+        Certificate earners ranked by their TOTAL (lifetime) points, with badges --
+        the same shape as the main and per-country leaderboards, just restricted to
+        this course's certificate earners. Gamma ranks the supplied usernames by their
+        general-leaderboard points and returns their accomplishments; we add the
+        profile-image / public-display-name / country enrichment on top.
+
+        Returns the leaderboard dict (top10/competitors/rank/user_uid); ``top10`` holds
+        up to 100 earners ranked by total points.
         """
         if not cert_user_ids:
-            return [], None
+            return {"top10": [], "competitors": [], "rank": None}
 
-        cert_users = list(User.objects.filter(id__in=cert_user_ids).select_related("profile"))
-        points_by_username = GammaApiWrapper(version=DEFAULT_API_VERSION).get_course_points(
-            course_id, [user.username for user in cert_users]
+        cert_usernames = list(
+            User.objects.filter(id__in=cert_user_ids).values_list("username", flat=True)
         )
+        completed_info = GammaApiWrapper(version=DEFAULT_API_VERSION).get_users_leaderboard_info(
+            user.username, user_signup_source, cert_usernames
+        )
+        if not completed_info:
+            return {"top10": [], "competitors": [], "rank": None}
 
-        ranked = sorted(cert_users, key=lambda user: points_by_username.get(user.username, 0), reverse=True)
-        rank = next((index + 1 for index, user in enumerate(ranked) if user.id == current_user_id), None)
-
-        members = []
-        for user in ranked[:self.MEMBERS_LIMIT]:
-            member_points = points_by_username.get(user.username, 0)
-            if member_points:
-                members.append(self._build_member(user, points=member_points))
-            else:
-                # Certificate earned but no course points recorded: show 100%, consistent
-                # with the in-progress column (and they are, after all, complete).
-                members.append(self._build_member(user, progress_percent=100))
-        return members, rank
+        return LeaderboardApiView._update_leaderboard_info(user, completed_info)  # pylint: disable=protected-access
 
     def _build_in_progress_section(self, course_key, cert_user_id_set, current_user_id):
         """
