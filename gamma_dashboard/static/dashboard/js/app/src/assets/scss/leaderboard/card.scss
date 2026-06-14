@@ -92,7 +92,9 @@
 // its own fixed-width column between the username and the points, aligned with the
 // "Country" header. Empty when the learner keeps their country private.
 .leaderboard-card-country {
-  width: 3rem;
+  // 5rem (not the flag's natural ~3rem) so the column lines up under the "COUNTRY"
+  // header label, which is ~80px wide; the flag emoji is centered in the column.
+  width: 5rem;
   flex-shrink: 0;
   text-align: center;
   font-size: 1.25rem;
