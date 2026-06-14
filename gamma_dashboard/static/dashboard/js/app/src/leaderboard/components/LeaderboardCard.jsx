@@ -5,6 +5,8 @@ import { useIntl } from 'react-intl';
 import { breakpoints, Card, useMediaQuery } from '@openedx/paragon';
 
 import { ProfilePropType } from '../propTypes';
+import { countryCodeToFlag } from '../utils';
+import { buildCountryLeaderboardUrl } from '../../routes/constants';
 import Avatar from './Avatar';
 import BadgeList from './BadgeList';
 
@@ -19,6 +21,7 @@ const LeaderboardCard = ({ profile, rank, showProgress }) => {
     badges = {},
     position,
     profileUrl,
+    country = '',
     progressPercent = null,
   } = profile;
 
@@ -40,6 +43,21 @@ const LeaderboardCard = ({ profile, rank, showProgress }) => {
       {username}
     </a>
   ) : username;
+
+  // Country flag (only when the learner shares their country publicly): a link to
+  // that country's leaderboard. Null when private/unknown so nothing renders.
+  const flag = countryCodeToFlag(country);
+  const countryNode = flag ? (
+    <a
+      className="leaderboard-card-country-link"
+      href={buildCountryLeaderboardUrl(country)}
+      data-testid="leaderboard-card-country-link"
+      aria-label={intl.formatMessage(messages.leaderboardCountryLinkLabel, { country })}
+      title={intl.formatMessage(messages.leaderboardCountryLinkLabel, { country })}
+    >
+      <span role="img" aria-hidden="true">{flag}</span>
+    </a>
+  ) : null;
 
   return (
     <Card
@@ -65,6 +83,12 @@ const LeaderboardCard = ({ profile, rank, showProgress }) => {
           title={usernameNode}
           size="sm"
         />
+        <span
+          className="leaderboard-card-country"
+          data-testid="country-cell"
+        >
+          {countryNode}
+        </span>
         <span
           className="leaderboard-card-progress"
           data-testid="progress-cell"

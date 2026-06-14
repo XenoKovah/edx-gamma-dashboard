@@ -17,6 +17,13 @@ const LeaderboardTable = ({
   const translations = {
     emptyTitle: intl.formatMessage(messages.leaderboardEmptyTitle),
     emptyDescription: intl.formatMessage(messages.leaderboardEmptyDescription),
+    headerUser: intl.formatMessage(messages.leaderboardHeaderUser),
+    headerCountry: intl.formatMessage(messages.leaderboardHeaderCountry),
+    // In-progress sections show a grade percentage, not earned points.
+    headerPoints: intl.formatMessage(
+      showProgress ? messages.leaderboardHeaderProgress : messages.leaderboardHeaderEarnedPoints,
+    ),
+    headerAccomplishments: intl.formatMessage(messages.leaderboardHeaderAccomplishments),
   };
 
   return (
@@ -31,20 +38,28 @@ const LeaderboardTable = ({
           <p>{translations.emptyDescription}</p>
         </Alert>
       ) : (
-        profiles.map((profile, index) => (
-          <React.Fragment key={profile.userUid}>
-            <LeaderboardCard
-              rank={rank || 0}
-              profile={profile}
-              showProgress={showProgress}
-            />
-            {index === delimiter && (
-            <div className="leaderboard-table-separator" data-testid="leaderboard-table-separator">
-              <span /> <span /> <span />
-            </div>
-            )}
-          </React.Fragment>
-        ))
+        <>
+          <div className="leaderboard-table-header" data-testid="leaderboard-table-header" aria-hidden="true">
+            <span className="lh-user">{translations.headerUser}</span>
+            <span className="lh-country">{translations.headerCountry}</span>
+            <span className="lh-points">{translations.headerPoints}</span>
+            <span className="lh-badges">{translations.headerAccomplishments}</span>
+          </div>
+          {profiles.map((profile, index) => (
+            <React.Fragment key={profile.userUid}>
+              <LeaderboardCard
+                rank={rank || 0}
+                profile={profile}
+                showProgress={showProgress}
+              />
+              {index === delimiter && (
+              <div className="leaderboard-table-separator" data-testid="leaderboard-table-separator">
+                <span /> <span /> <span />
+              </div>
+              )}
+            </React.Fragment>
+          ))}
+        </>
       )}
     </div>
   );

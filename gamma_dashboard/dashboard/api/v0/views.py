@@ -48,6 +48,22 @@ def _public_display_name(user):
     return user.username
 
 
+def _public_country_code(user):
+    """Return the learner's 2-letter ISO country code only when it is shared publicly.
+
+    Mirrors ``_public_display_name`` and the per-country leaderboard's own check
+    (``_visible_fields``): the country is exposed only when 'country' is in the
+    learner's visible fields (default 'all_users', or 'custom' with country shared).
+    Otherwise returns '' so a learner who keeps their country private never gets a
+    flag on the leaderboard. The dashboard turns the code into a flag emoji that
+    links to the per-country leaderboard.
+    """
+    profile = getattr(user, "profile", None)
+    if profile and profile.country and "country" in _visible_fields(profile, user):
+        return profile.country.code or ""
+    return ""
+
+
 class LeaderboardApiView(APIView):
     """
     Leaderboard API view.
@@ -121,6 +137,7 @@ class LeaderboardApiView(APIView):
         leaderboard_info["url_profile_image"] = get_profile_image_urls_for_user(user)["medium"]
         leaderboard_info["user_uid"] = _public_display_name(user)
         leaderboard_info["profile_url"] = LeaderboardApiView._get_profile_url(user.username)
+        leaderboard_info["country"] = _public_country_code(user)
 
         # ``in_progress`` is only present for the per-badge leaderboard; the regular
         # leaderboard has just top10/competitors. Missing keys resolve to [] so this
@@ -137,6 +154,7 @@ class LeaderboardApiView(APIView):
                     item["profile_url"] = LeaderboardApiView._get_profile_url(user.username)
                     item["user_uid"] = _public_display_name(user)
                     item["url_profile_image"] = get_profile_image_urls_for_user(user)["medium"]
+                    item["country"] = _public_country_code(user)
                 else:
                     # If the user is not found on the platform, change their Gamma-sourced username
                     # and leave them without a profile link.
@@ -406,6 +424,7 @@ class CourseLeaderboardApiView(APIView):
             "signup_source": None,
             "url_profile_image": get_profile_image_urls_for_user(user)["medium"],
             "profile_url": LeaderboardApiView._get_profile_url(user.username),  # pylint: disable=protected-access
+            "country": _public_country_code(user),
             "badges": {},
             "system_events": [],
         }

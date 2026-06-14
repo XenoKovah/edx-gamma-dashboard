@@ -139,4 +139,30 @@ describe('<LeaderboardCard>', () => {
     expect(queryByTestId('leaderboard-card-username-link')).not.toBeInTheDocument();
     expect(getByText(profile.userUid)).toBeInTheDocument();
   });
+
+  it('renders a country flag linking to the per-country leaderboard when `country` is set', () => {
+    const { getByTestId } = renderWithProviders(
+      <LeaderboardCard
+        profile={{ ...profile, country: 'US' }}
+        rank={rank}
+      />,
+    );
+
+    const flagLink = getByTestId('leaderboard-card-country-link');
+
+    expect(flagLink).toBeInTheDocument();
+    expect(flagLink).toHaveAttribute('href', expect.stringContaining('/leaderboard/country/US'));
+    expect(flagLink.textContent).toBe('🇺🇸');
+  });
+
+  it('renders no country flag when `country` is absent', () => {
+    const { queryByTestId } = renderWithProviders(
+      <LeaderboardCard
+        profile={{ ...profile, country: '' }}
+        rank={rank}
+      />,
+    );
+
+    expect(queryByTestId('leaderboard-card-country-link')).not.toBeInTheDocument();
+  });
 });

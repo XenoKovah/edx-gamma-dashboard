@@ -87,3 +87,28 @@
     width: 50%;
   }
 }
+
+// Country column: the flag emoji (a link to the per-country leaderboard) sits in
+// its own fixed-width column between the username and the points, aligned with the
+// "Country" header. Empty when the learner keeps their country private.
+.leaderboard-card-country {
+  width: 3rem;
+  flex-shrink: 0;
+  text-align: center;
+  font-size: 1.25rem;
+  line-height: 1;
+
+  @media screen and (max-width: map-get($grid-breakpoints, "md")) {
+    width: auto;
+  }
+
+  .leaderboard-card-country-link {
+    text-decoration: none;
+
+    &:hover,
+    &:focus {
+      text-decoration: none;
+      opacity: 0.85;
+    }
+  }
+}

@@ -99,3 +99,24 @@ export const getLeaderboardTableProps = (data) => {
   }
   return propsObj;
 };
+
+/**
+ * Convert a 2-letter ISO 3166-1 country code to its flag emoji.
+ *
+ * Flag emoji are a pair of Unicode "regional indicator" symbols
+ * (U+1F1E6..U+1F1FF), one per letter (A -> U+1F1E6). Returns '' for a
+ * missing/invalid code so a learner without a public country simply gets no flag.
+ *
+ * @param {string} code - e.g. 'JP'
+ * @returns {string} the flag emoji, or '' when the code is missing/invalid.
+ */
+export const countryCodeToFlag = (code) => {
+  if (typeof code !== 'string') {
+    return '';
+  }
+  const cc = code.trim().toUpperCase();
+  if (!/^[A-Z]{2}$/.test(cc)) {
+    return '';
+  }
+  return String.fromCodePoint(...[...cc].map((char) => 0x1F1E6 + char.charCodeAt(0) - 65));
+};

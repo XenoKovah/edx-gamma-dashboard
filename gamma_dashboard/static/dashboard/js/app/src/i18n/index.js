@@ -216,6 +216,36 @@ const messages = defineMessages({
     defaultMessage: "View {username}'s profile",
     description: "Accessible label for the link from a leaderboard entry to that user's profile page",
   },
+  leaderboardCountryLinkLabel: {
+    id: 'leaderboard.country.link.label',
+    defaultMessage: 'View the {country} leaderboard',
+    description: "Accessible label for the country-flag link from a leaderboard entry to that country's leaderboard",
+  },
+  leaderboardHeaderUser: {
+    id: 'leaderboard.header.user',
+    defaultMessage: 'User',
+    description: 'Column header for the user (avatar + name) column on the leaderboard',
+  },
+  leaderboardHeaderCountry: {
+    id: 'leaderboard.header.country',
+    defaultMessage: 'Country',
+    description: 'Column header for the country-flag column on the leaderboard',
+  },
+  leaderboardHeaderEarnedPoints: {
+    id: 'leaderboard.header.earned.points',
+    defaultMessage: 'Earned points',
+    description: 'Column header for the points column on the leaderboard (the score a learner earned)',
+  },
+  leaderboardHeaderProgress: {
+    id: 'leaderboard.header.progress',
+    defaultMessage: 'Progress',
+    description: 'Column header for the progress-percentage column on the in-progress leaderboard section',
+  },
+  leaderboardHeaderAccomplishments: {
+    id: 'leaderboard.header.accomplishments',
+    defaultMessage: 'Accomplishments',
+    description: 'Column header for the badges/accomplishments column on the leaderboard',
+  },
   genericLoaderScreenReaderText: {
     id: 'generic.loader.screenReader.text',
     defaultMessage: 'Loading...',

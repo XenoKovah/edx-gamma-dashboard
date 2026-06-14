@@ -1,4 +1,5 @@
 import {
+  countryCodeToFlag,
   getBadgeInProgressProps,
   getBadgeLeaderboardTableProps,
   getLeaderboardTableProps,
@@ -77,5 +78,26 @@ describe('getBadgeInProgressProps', () => {
       delimiter: null,
       profiles: [],
     });
+  });
+});
+
+describe('countryCodeToFlag', () => {
+  it('converts a 2-letter ISO code to its flag emoji', () => {
+    expect(countryCodeToFlag('US')).toBe('🇺🇸');
+    expect(countryCodeToFlag('JP')).toBe('🇯🇵');
+  });
+
+  it('is case-insensitive and trims surrounding whitespace', () => {
+    expect(countryCodeToFlag('us')).toBe('🇺🇸');
+    expect(countryCodeToFlag(' jp ')).toBe('🇯🇵');
+  });
+
+  it('returns an empty string for missing or invalid codes', () => {
+    expect(countryCodeToFlag('')).toBe('');
+    expect(countryCodeToFlag(null)).toBe('');
+    expect(countryCodeToFlag(undefined)).toBe('');
+    expect(countryCodeToFlag('U')).toBe('');
+    expect(countryCodeToFlag('USA')).toBe('');
+    expect(countryCodeToFlag('1!')).toBe('');
   });
 });
