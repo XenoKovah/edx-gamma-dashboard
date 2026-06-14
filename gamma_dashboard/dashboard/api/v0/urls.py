@@ -12,6 +12,7 @@ from gamma_dashboard.dashboard.api.v0.views import (
     GameProfileApiView,
     GameUserAvatarConfigApiView,
     LeaderboardApiView,
+    LeaderboardOptOutApiView,
     UserBadgesApiView,
 )
 
@@ -34,6 +35,8 @@ urlpatterns = [
         CountryLeaderboardApiView.as_view(),
         name='api-country-leaderboard',
     ),
+    # Precedes the generic leaderboard pattern (which would otherwise swallow this path).
+    re_path(r'^leaderboard-opt-out/?$', LeaderboardOptOutApiView.as_view(), name='api-leaderboard-opt-out'),
     re_path(fr'^leaderboard(?:/{COURSE_ID_PATTERN})?/?$', LeaderboardApiView.as_view(), name='api-leaderboard'),
     re_path(r'^game-profile/', GameProfileApiView.as_view(), name='api-gameprofile'),
     re_path(r'^user-badges/(?P<username>[\w.@+-]+)/?$', UserBadgesApiView.as_view(), name='api-user-badges'),

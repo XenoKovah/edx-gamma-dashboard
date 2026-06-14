@@ -296,3 +296,59 @@ class TestGammaApiWrapper:
         )
 
         assert user_avatar_config_data == expected_data
+
+    @pytest.mark.unittests
+    def test_get_leaderboard_opt_out(self, gamma_settings, mocker):
+        """
+        Case: Read a user's leaderboard opt-out flag (DEFAULT_API_VERSION).
+        Expect: GET is sent to the opt-out URL with the username and data returned.
+        """
+        opt_out_url = '{}api/v0/users/leaderboard-opt-out/'.format(GAMIFICATION_ENDPOINT)
+        mocked_get = mocker.patch('requests.get')
+        mocked_get.return_value.ok = True
+        mocked_get.return_value.json = mocker.Mock(return_value={'excluded': True})
+
+        api_wrapper = GammaApiWrapper(settings=gamma_settings)
+        api_wrapper_spy = mocker.spy(api_wrapper, '_send_request')
+        result = api_wrapper.get_leaderboard_opt_out('test_username')
+
+        api_wrapper_spy.assert_called_with(opt_out_url, params={'username': 'test_username'})
+        assert result == {'excluded': True}
+
+    @pytest.mark.unittests
+    def test_set_leaderboard_opt_out(self, gamma_settings, mocker):
+        """
+        Case: Set a user's leaderboard opt-out flag (DEFAULT_API_VERSION).
+        Expect: POST is sent to the opt-out URL with the username + excluded payload.
+        """
+        opt_out_url = '{}api/v0/users/leaderboard-opt-out/'.format(GAMIFICATION_ENDPOINT)
+        mocked_post = mocker.patch('requests.post')
+        mocked_post.return_value.ok = True
+        mocked_post.return_value.json = mocker.Mock(return_value={'excluded': True})
+
+        api_wrapper = GammaApiWrapper(settings=gamma_settings)
+        api_wrapper_spy = mocker.spy(api_wrapper, '_send_request')
+        result = api_wrapper.set_leaderboard_opt_out('test_username', True)
+
+        api_wrapper_spy.assert_called_with(
+            opt_out_url, method='POST', json={'username': 'test_username', 'excluded': True}
+        )
+        assert result == {'excluded': True}
+
+    @pytest.mark.unittests
+    def test_get_excluded_user_uids(self, gamma_settings, mocker):
+        """
+        Case: List the user_uids of everyone opted out of ranking (DEFAULT_API_VERSION).
+        Expect: GET is sent to the excluded-uids URL and the data returned.
+        """
+        excluded_url = '{}api/v0/users/leaderboard-excluded-uids/'.format(GAMIFICATION_ENDPOINT)
+        mocked_get = mocker.patch('requests.get')
+        mocked_get.return_value.ok = True
+        mocked_get.return_value.json = mocker.Mock(return_value={'user_uids': ['a', 'b']})
+
+        api_wrapper = GammaApiWrapper(settings=gamma_settings)
+        api_wrapper_spy = mocker.spy(api_wrapper, '_send_request')
+        result = api_wrapper.get_excluded_user_uids()
+
+        api_wrapper_spy.assert_called_with(excluded_url)
+        assert result == {'user_uids': ['a', 'b']}

@@ -393,6 +393,14 @@ class CourseLeaderboardApiView(APIView):
             (user_id, percent) for user_id, percent in graded_rows
             if user_id in active_user_ids and user_id not in cert_user_id_set
         ]
+
+        # Drop learners who opted out of leaderboard ranking. This section is ranked by
+        # the dashboard (grade %), so Gamma can't filter it for us; the point-ranked
+        # sections are filtered in Gamma. Done before ranking so there is no rank gap.
+        excluded_user_ids = self._excluded_user_ids()
+        if excluded_user_ids:
+            rows = [row for row in rows if row[0] not in excluded_user_ids]
+
         rows.sort(key=lambda row: row[1], reverse=True)
         rank = next((index + 1 for index, (user_id, _) in enumerate(rows) if user_id == current_user_id), None)
 
@@ -408,6 +416,21 @@ class CourseLeaderboardApiView(APIView):
             if user := users_by_id.get(user_id):
                 members.append(self._build_member(user, progress_percent=round(percent * 100)))
         return members, rank
+
+    @staticmethod
+    def _excluded_user_ids():
+        """
+        edx user-ids of learners who opted out of leaderboard ranking, so the
+        (dashboard-ranked) in-progress section can drop them; the point-ranked sections
+        are filtered by Gamma itself. Empty set on any Gamma error (fail open, never 500).
+        """
+        info = GammaApiWrapper(version=DEFAULT_API_VERSION).get_excluded_user_uids()
+        excluded_usernames = (info or {}).get("user_uids") or []
+        if not excluded_usernames:
+            return set()
+        return set(
+            User.objects.filter(username__in=excluded_usernames).values_list("id", flat=True)
+        )
 
     @staticmethod
     def _display_name(user):
@@ -715,3 +738,48 @@ class GameUserAvatarConfigApiView(APIView):
         ).update_gamma_user_avatar_config(config_id=config_id, data=request.data)
 
         return Response(gamma_user_avatar_config)
+
+
+class LeaderboardOptOutApiView(APIView):
+    """
+    Read or set whether the signed-in learner is excluded from leaderboard ranking.
+
+    Backs the "Opt out of leaderboard ranking" toggle in Account Settings (Gamification).
+    GET -> {"opted_out": bool}; POST {"opted_out": bool} sets it. The flag lives in Gamma
+    (the single source of truth): opting out removes the learner from every leaderboard --
+    the general/course Redis boards, the per-country and per-course "Completed" lists, and
+    the per-badge boards -- and they are not ranked again until they opt back in. JWT first
+    because Account Settings is served from the cross-origin MFE host.
+    """
+
+    permission_classes = (IsAuthenticated,)
+    authentication_classes = (JwtAuthentication, SessionAuthenticationAllowInactiveUser)
+
+    def get(self, request):
+        info = GammaApiWrapper(version=DEFAULT_API_VERSION).get_leaderboard_opt_out(
+            request.user.username
+        )
+        if info is None:
+            return Response(
+                {"error": "No data received from Gamma server."},
+                status=status.HTTP_422_UNPROCESSABLE_ENTITY,
+            )
+        return Response({"opted_out": bool(info.get("excluded"))})
+
+    def post(self, request):
+        opted_out = request.data.get("opted_out")
+        if not isinstance(opted_out, bool):
+            return Response(
+                {"error": "opted_out (bool) is required."},
+                status=status.HTTP_400_BAD_REQUEST,
+            )
+
+        info = GammaApiWrapper(version=DEFAULT_API_VERSION).set_leaderboard_opt_out(
+            request.user.username, opted_out
+        )
+        if info is None:
+            return Response(
+                {"error": "No data received from Gamma server."},
+                status=status.HTTP_422_UNPROCESSABLE_ENTITY,
+            )
+        return Response({"opted_out": bool(info.get("excluded"))})

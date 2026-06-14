@@ -208,3 +208,39 @@ class GammaApiWrapper:
         return self.request_api_endpoint(
             f'user_avatar_config/{config_id}/', method='PATCH', data=data, **kwargs
         )
+
+    def get_leaderboard_opt_out(self, username, **kwargs):
+        """
+        Return whether the user opted out of leaderboard ranking.
+
+        Returns:
+            dict: ``{'excluded': bool}`` (or None on a Gamma error).
+        """
+        return self.request_api_endpoint(
+            'users/leaderboard-opt-out/', params={'username': username}, **kwargs
+        )
+
+    def set_leaderboard_opt_out(self, username, excluded, **kwargs):
+        """
+        Set the user's leaderboard opt-out flag.
+
+        Returns:
+            dict: ``{'excluded': bool}`` (or None on a Gamma error).
+        """
+        return self.request_api_endpoint(
+            'users/leaderboard-opt-out/',
+            method='POST',
+            json={'username': username, 'excluded': excluded},
+            **kwargs
+        )
+
+    def get_excluded_user_uids(self, **kwargs):
+        """
+        Return the user_uids of everyone who opted out of leaderboard ranking.
+
+        Returns:
+            dict: ``{'user_uids': [...]}`` (empty dict on a Gamma error).
+        """
+        return self.request_api_endpoint(
+            'users/leaderboard-excluded-uids/', **kwargs
+        ) or {}
