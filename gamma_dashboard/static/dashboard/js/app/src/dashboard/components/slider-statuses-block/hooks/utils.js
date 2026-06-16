@@ -34,12 +34,16 @@ export const getProgressWidth = (isStatusComplete, index, points, currentItem, p
     return '100%';
   }
 
+  // Clamp at 0: a learner docked a negative-points (penalty) badge can have a total
+  // below zero, which would otherwise render a negative-width bar. The negative total
+  // is still shown on the leaderboard (the intended penalty) — only the progress bar
+  // is floored to empty.
   if (isFirstItem) {
-    return `${Math.round((points / currentItem.statusPoints) * 100)}%`;
+    return `${Math.round(Math.max(0, (points / currentItem.statusPoints) * 100))}%`;
   }
 
   if (isPartialProgress) {
-    return `${Math.round(((points - prevItem.statusPoints) / (currentItem.statusPoints - prevItem.statusPoints)) * 100)}%`;
+    return `${Math.round(Math.max(0, ((points - prevItem.statusPoints) / (currentItem.statusPoints - prevItem.statusPoints)) * 100))}%`;
   }
 
   return '0%';
