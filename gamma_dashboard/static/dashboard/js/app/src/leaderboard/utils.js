@@ -4,9 +4,9 @@ import { addPositionInCompetitors, addPositionInTop10 } from '../utils';
  * Build the LeaderboardTable props for the per-badge (filtered) leaderboard page.
  *
  * Unlike the personalized leaderboard, the badge leaderboard is a flat list of
- * up to the top 100 earners already ranked by points, so positions are simply
- * 1..N with no competitor delimiter. The current user (when among the earners)
- * is highlighted via the `rank` returned by the backend.
+ * up to the top 100 earners already ranked by points, so positions run 1..N with
+ * no competitor delimiter — but earners tied on points share a position (standard
+ * competition ranking). The current user is highlighted by their uid in the card.
  *
  * @param {Object} data - The badge leaderboard response.
  * @param {Array<Object>} [data.top10] - The ranked badge earners.
@@ -25,8 +25,8 @@ export const getBadgeLeaderboardTableProps = (data = {}) => {
 /**
  * Build the LeaderboardTable props for the "In progress" section of the per-badge
  * page: users with non-zero progress who have not completed the badge yet, already
- * ranked by their progress percentage (descending). Positions are 1..N and the
- * requesting user (when present) is highlighted via `inProgressRank`.
+ * ranked by their progress percentage (descending). Members tied on percentage
+ * share a position; the requesting user is highlighted by their uid in the card.
  *
  * @param {Object} data - The badge leaderboard response.
  * @param {Array<Object>} [data.inProgress] - The ranked in-progress members.
@@ -37,7 +37,9 @@ export const getBadgeInProgressProps = (data = {}) => {
   const { inProgress = [], inProgressRank = null } = data;
   return {
     rank: inProgressRank || 0,
-    profiles: addPositionInTop10(inProgress),
+    // In-progress members are ranked by their progress percentage, so ties (and
+    // therefore shared positions) are decided by that percentage, not points.
+    profiles: addPositionInTop10(inProgress, (user) => user.progressPercent),
     delimiter: null,
   };
 };

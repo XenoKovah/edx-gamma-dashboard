@@ -9,7 +9,7 @@ import LeaderboardCard from '../LeaderboardCard';
 import { convertKeysToCamelCase } from '../../../api/helpers/utils';
 
 const BADGES_IN_FULL_LINE = 17;
-const { profile, rank } = convertKeysToCamelCase(DataLeaderboardCard);
+const { profile } = convertKeysToCamelCase(DataLeaderboardCard);
 
 afterEach(cleanup);
 
@@ -18,7 +18,6 @@ describe('<LeaderboardCard>', () => {
     const { getByTestId } = renderWithProviders(
       <LeaderboardCard
         profile={profile}
-        rank={rank}
       />,
     );
 
@@ -29,7 +28,6 @@ describe('<LeaderboardCard>', () => {
     const { getAllByTestId, getAllByText } = renderWithProviders(
       <LeaderboardCard
         profile={profile}
-        rank={rank}
       />,
     );
 
@@ -45,7 +43,6 @@ describe('<LeaderboardCard>', () => {
     const { getByTestId } = renderWithProviders(
       <LeaderboardCard
         profile={profile}
-        rank={rank}
       />,
     );
 
@@ -59,7 +56,6 @@ describe('<LeaderboardCard>', () => {
     const { getAllByTestId } = renderWithProviders(
       <LeaderboardCard
         profile={profile}
-        rank={rank}
       />,
     );
 
@@ -72,7 +68,6 @@ describe('<LeaderboardCard>', () => {
     const { getByText } = renderWithProviders(
       <LeaderboardCard
         profile={profile}
-        rank={rank}
       />,
     );
 
@@ -87,7 +82,6 @@ describe('<LeaderboardCard>', () => {
     const { getByTestId } = renderWithProviders(
       <LeaderboardCard
         profile={profileWithoutPointsData}
-        rank={rank}
       />,
     );
     const progress = getByTestId('progress-cell');
@@ -105,7 +99,6 @@ describe('<LeaderboardCard>', () => {
     const { queryAllByTestId } = renderWithProviders(
       <LeaderboardCard
         profile={profileWithoutBadgesData}
-        rank={rank}
       />,
     );
     const badges = queryAllByTestId('leaderboard-badge');
@@ -118,7 +111,6 @@ describe('<LeaderboardCard>', () => {
     const { getByTestId } = renderWithProviders(
       <LeaderboardCard
         profile={{ ...profile, profileUrl }}
-        rank={rank}
       />,
     );
 
@@ -132,7 +124,6 @@ describe('<LeaderboardCard>', () => {
     const { queryByTestId, getByText } = renderWithProviders(
       <LeaderboardCard
         profile={profile}
-        rank={rank}
       />,
     );
 
@@ -144,7 +135,6 @@ describe('<LeaderboardCard>', () => {
     const { getByTestId } = renderWithProviders(
       <LeaderboardCard
         profile={{ ...profile, country: 'US' }}
-        rank={rank}
       />,
     );
 
@@ -159,10 +149,33 @@ describe('<LeaderboardCard>', () => {
     const { queryByTestId } = renderWithProviders(
       <LeaderboardCard
         profile={{ ...profile, country: '' }}
-        rank={rank}
       />,
     );
 
     expect(queryByTestId('leaderboard-card-country-link')).not.toBeInTheDocument();
+  });
+
+  it('highlights the row when it belongs to the current user', () => {
+    const { getByTestId } = renderWithProviders(
+      <LeaderboardCard profile={profile} currentUserUid={profile.userUid} />,
+    );
+
+    expect(getByTestId('leaderboard-card')).toHaveClass('highlighted');
+  });
+
+  it('does not highlight a row that belongs to another user', () => {
+    const { getByTestId } = renderWithProviders(
+      <LeaderboardCard profile={profile} currentUserUid="someone-else" />,
+    );
+
+    expect(getByTestId('leaderboard-card')).not.toHaveClass('highlighted');
+  });
+
+  it('does not highlight any row when there is no current user', () => {
+    const { getByTestId } = renderWithProviders(
+      <LeaderboardCard profile={profile} />,
+    );
+
+    expect(getByTestId('leaderboard-card')).not.toHaveClass('highlighted');
   });
 });

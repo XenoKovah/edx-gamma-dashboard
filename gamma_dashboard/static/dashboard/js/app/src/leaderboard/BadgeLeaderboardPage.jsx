@@ -63,11 +63,9 @@ const BadgeLeaderboardPage = () => {
     }
   }
 
-  const { rank, profiles, delimiter } = getBadgeLeaderboardTableProps(badgeLeaderboardData);
-  const {
-    rank: inProgressRank,
-    profiles: inProgressProfiles,
-  } = getBadgeInProgressProps(badgeLeaderboardData);
+  const { profiles, delimiter } = getBadgeLeaderboardTableProps(badgeLeaderboardData);
+  const { profiles: inProgressProfiles } = getBadgeInProgressProps(badgeLeaderboardData);
+  const currentUserUid = badgeLeaderboardData?.userUid;
 
   const hasEarners = profiles.length > 0;
   const hasInProgress = inProgressProfiles.length > 0;
@@ -88,7 +86,7 @@ const BadgeLeaderboardPage = () => {
             </h2>
           )}
           <LeaderboardTable
-            rank={rank}
+            currentUserUid={currentUserUid}
             profiles={profiles}
             delimiter={delimiter}
           />
@@ -101,7 +99,7 @@ const BadgeLeaderboardPage = () => {
             {translations.inProgressTitle}
           </h2>
           <LeaderboardTable
-            rank={inProgressRank}
+            currentUserUid={currentUserUid}
             profiles={inProgressProfiles}
             showProgress
           />
@@ -109,7 +107,7 @@ const BadgeLeaderboardPage = () => {
       )}
 
       {!hasEarners && !hasInProgress && (
-        <LeaderboardTable rank={0} profiles={[]} />
+        <LeaderboardTable profiles={[]} />
       )}
     </>
   );

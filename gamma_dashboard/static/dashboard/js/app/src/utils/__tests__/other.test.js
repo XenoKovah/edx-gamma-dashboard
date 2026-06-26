@@ -25,6 +25,23 @@ describe('addPositionInCompetitors', () => {
 
     expect(result).toEqual(expectedListUsers);
   });
+
+  it('shares a position for competitors tied with the reference user and gaps the next one', () => {
+    // Head competitors are always strictly above the reference user (the backend
+    // builds the window that way); ties can only appear at/below the reference user.
+    const listUsers = [
+      { userUid: 'a', points: 900 },
+      { userUid: 'b', points: 850 },
+      { userUid: 'me', points: 800 },
+      { userUid: 'd', points: 800 },
+      { userUid: 'e', points: 750 },
+    ];
+
+    const result = addPositionInCompetitors(listUsers, 'me', 103);
+
+    // me is anchored at its rank (103); d ties me so it shares 103; e is gapped to 105.
+    expect(result.map((user) => user.position)).toEqual([101, 102, 103, 103, 105]);
+  });
 });
 
 describe('findIndexByUserUid', () => {
@@ -75,6 +92,35 @@ describe('addPositionInTop10', () => {
     const result = addPositionInTop10(listUsers);
 
     expect(result).toEqual(expectedListUsers);
+  });
+
+  it('gives users tied on points the same position (standard competition ranking)', () => {
+    const listUsers = [
+      { userUid: 'a', points: 570 },
+      { userUid: 'b', points: 570 },
+      { userUid: 'c', points: 530 },
+      { userUid: 'd', points: 500 },
+      { userUid: 'e', points: 500 },
+    ];
+
+    const result = addPositionInTop10(listUsers);
+
+    // Tied scores share a rank, then the next distinct score resumes after the gap.
+    expect(result.map((user) => user.position)).toEqual([1, 1, 3, 4, 4]);
+  });
+
+  it('ranks ties by a custom value accessor (e.g. progress percentage)', () => {
+    const listUsers = [
+      { userUid: 'a', progressPercent: 50, points: 999 },
+      { userUid: 'b', progressPercent: 50, points: 1 },
+      { userUid: 'c', progressPercent: 10, points: 500 },
+    ];
+
+    const result = addPositionInTop10(listUsers, (user) => user.progressPercent);
+
+    // a and b share a position because they have the same percentage, despite
+    // differing points; the points are ignored by this accessor.
+    expect(result.map((user) => user.position)).toEqual([1, 1, 3]);
   });
 });
 

@@ -13,13 +13,12 @@ import BadgeList from './BadgeList';
 import messages from '../../i18n';
 import defaultProfileImg from '../../assets/images/default-profile-image.png';
 
-const LeaderboardCard = ({ profile, rank, showProgress }) => {
+const LeaderboardCard = ({ profile, currentUserUid, showProgress }) => {
   const intl = useIntl();
   const {
     userUid: username = '',
     points = 0,
     badges = {},
-    position,
     profileUrl,
     country = '',
     progressPercent = null,
@@ -28,7 +27,11 @@ const LeaderboardCard = ({ profile, rank, showProgress }) => {
   // Show the percentage when one is provided (in-progress members, and completed
   // members who have no course points -> 100%); otherwise show the points score.
   const hasProgressPercent = progressPercent !== null && progressPercent !== undefined;
-  const selfPosition = position === rank;
+  // Highlight the viewer's own row by identity, not by position: with shared ranks
+  // a position number is no longer unique, so matching on it would highlight every
+  // learner tied with the viewer (or, when the viewer's rank differs from their row
+  // index, the wrong learner entirely).
+  const isCurrentUser = !!currentUserUid && username === currentUserUid;
   const isSmall = useMediaQuery({ maxWidth: breakpoints.small.maxWidth });
 
   // When the backend resolves a platform user, it provides a link to their profile page.
@@ -64,7 +67,7 @@ const LeaderboardCard = ({ profile, rank, showProgress }) => {
       orientation={isSmall ? 'vertical' : 'horizontal'}
       className={classNames(
         'leaderboard-card align-items-center py-3 px-4',
-        { highlighted: selfPosition },
+        { highlighted: isCurrentUser },
       )}
       data-testid="leaderboard-card"
     >
@@ -105,11 +108,12 @@ const LeaderboardCard = ({ profile, rank, showProgress }) => {
 
 LeaderboardCard.propTypes = {
   profile: PropTypes.shape(ProfilePropType).isRequired,
-  rank: PropTypes.number.isRequired,
+  currentUserUid: PropTypes.string,
   showProgress: PropTypes.bool,
 };
 
 LeaderboardCard.defaultProps = {
+  currentUserUid: null,
   showProgress: false,
 };
 

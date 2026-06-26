@@ -63,11 +63,9 @@ const CourseLeaderboardPage = () => {
     }
   }
 
-  const { rank, profiles } = getBadgeLeaderboardTableProps(courseLeaderboardData);
-  const {
-    rank: inProgressRank,
-    profiles: inProgressProfiles,
-  } = getBadgeInProgressProps(courseLeaderboardData);
+  const { profiles } = getBadgeLeaderboardTableProps(courseLeaderboardData);
+  const { profiles: inProgressProfiles } = getBadgeInProgressProps(courseLeaderboardData);
+  const currentUserUid = courseLeaderboardData?.userUid;
 
   const hasCompleted = profiles.length > 0;
   const hasInProgress = inProgressProfiles.length > 0;
@@ -84,7 +82,7 @@ const CourseLeaderboardPage = () => {
           <h2 className="badge-leaderboard-section-title" data-testid="course-leaderboard-completed-title">
             {translations.completedTitle}
           </h2>
-          <LeaderboardTable rank={rank} profiles={profiles} />
+          <LeaderboardTable currentUserUid={currentUserUid} profiles={profiles} />
         </>
       )}
 
@@ -93,12 +91,12 @@ const CourseLeaderboardPage = () => {
           <h2 className="badge-leaderboard-section-title" data-testid="course-leaderboard-in-progress-title">
             {translations.inProgressTitle}
           </h2>
-          <LeaderboardTable rank={inProgressRank} profiles={inProgressProfiles} showProgress />
+          <LeaderboardTable currentUserUid={currentUserUid} profiles={inProgressProfiles} showProgress />
         </>
       )}
 
       {!hasCompleted && !hasInProgress && (
-        <LeaderboardTable rank={0} profiles={[]} />
+        <LeaderboardTable profiles={[]} />
       )}
     </>
   );

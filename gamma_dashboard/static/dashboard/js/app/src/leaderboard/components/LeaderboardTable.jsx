@@ -10,7 +10,7 @@ import LeaderboardCard from './LeaderboardCard';
 import messages from '../../i18n';
 
 const LeaderboardTable = ({
-  rank, profiles = [], delimiter, showProgress,
+  currentUserUid, profiles = [], delimiter, showProgress,
 }) => {
   const intl = useIntl();
 
@@ -48,7 +48,7 @@ const LeaderboardTable = ({
           {profiles.map((profile, index) => (
             <React.Fragment key={profile.userUid}>
               <LeaderboardCard
-                rank={rank || 0}
+                currentUserUid={currentUserUid}
                 profile={profile}
                 showProgress={showProgress}
               />
@@ -67,14 +67,14 @@ const LeaderboardTable = ({
 
 LeaderboardTable.propTypes = {
   profiles: PropTypes.arrayOf(PropTypes.shape(ProfilePropType)),
-  rank: PropTypes.number,
+  currentUserUid: PropTypes.string,
   delimiter: PropTypes.number,
   showProgress: PropTypes.bool,
 };
 
 LeaderboardTable.defaultProps = {
   profiles: [],
-  rank: 0,
+  currentUserUid: null,
   delimiter: null,
   showProgress: false,
 };

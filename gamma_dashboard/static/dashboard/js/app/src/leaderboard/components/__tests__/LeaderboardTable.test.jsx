@@ -22,12 +22,11 @@ describe('<LeaderboardTable>', () => {
   });
 
   it.each(DataLeaderboardTable)('renders with correct number of rows', ({
-    profiles, system_statuses: systemStatuses, delimiter, rank,
+    profiles, system_statuses: systemStatuses, delimiter,
   }) => {
     const { getAllByTestId, getByTestId } = renderWithProviders(
       <LeaderboardTable
         delimiter={delimiter}
-        rank={rank}
         profiles={profiles}
         systemStatuses={systemStatuses}
       />,

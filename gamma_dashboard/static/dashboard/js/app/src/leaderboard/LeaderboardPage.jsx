@@ -56,7 +56,6 @@ const LeaderboardPage = () => {
   }
 
   const {
-    rank,
     profiles,
     delimiter,
     systemStatuses,
@@ -69,7 +68,7 @@ const LeaderboardPage = () => {
         title={translations.alertTitle}
       />
       <LeaderboardTable
-        rank={rank}
+        currentUserUid={leaderboardData?.userUid}
         profiles={profiles}
         delimiter={delimiter}
         systemStatuses={systemStatuses}

@@ -402,7 +402,15 @@ class CourseLeaderboardApiView(APIView):
             rows = [row for row in rows if row[0] not in excluded_user_ids]
 
         rows.sort(key=lambda row: row[1], reverse=True)
-        rank = next((index + 1 for index, (user_id, _) in enumerate(rows) if user_id == current_user_id), None)
+        # Standard competition ranking on the *displayed* grade (the rounded percent),
+        # so learners shown the same percentage share a rank -- matching how the
+        # dashboard numbers the rows and the point-ranked sections rank ties.
+        current_percent = next((percent for user_id, percent in rows if user_id == current_user_id), None)
+        if current_percent is None:
+            rank = None
+        else:
+            current_display = round(current_percent * 100)
+            rank = sum(1 for _, percent in rows if round(percent * 100) > current_display) + 1
 
         top_rows = rows[:self.MEMBERS_LIMIT]
         users_by_id = {

@@ -37,6 +37,20 @@ describe('getBadgeLeaderboardTableProps', () => {
     });
   });
 
+  it('gives earners tied on points the same position', () => {
+    const result = getBadgeLeaderboardTableProps({
+      top10: [
+        { userUid: 'alice', points: 500 },
+        { userUid: 'bob', points: 500 },
+        { userUid: 'carol', points: 100 },
+      ],
+      competitors: [],
+      rank: 1,
+    });
+
+    expect(result.profiles.map((profile) => profile.position)).toEqual([1, 1, 3]);
+  });
+
   it('handles an empty / missing payload without throwing', () => {
     expect(getBadgeLeaderboardTableProps()).toEqual({ rank: 0, delimiter: null, profiles: [] });
     expect(getBadgeLeaderboardTableProps({ top10: [], rank: null })).toEqual({
@@ -69,6 +83,20 @@ describe('getBadgeInProgressProps', () => {
         },
       ],
     });
+  });
+
+  it('gives in-progress members tied on percentage the same position, ignoring points', () => {
+    const result = getBadgeInProgressProps({
+      inProgress: [
+        { userUid: 'mariia', points: 999, progressPercent: 15 },
+        { userUid: 'xeno', points: 1, progressPercent: 15 },
+        { userUid: 'sam', points: 500, progressPercent: 3 },
+      ],
+      inProgressRank: 1,
+    });
+
+    // Same percentage -> same position even though points differ.
+    expect(result.profiles.map((profile) => profile.position)).toEqual([1, 1, 3]);
   });
 
   it('handles an empty / missing payload without throwing', () => {

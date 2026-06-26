@@ -17,9 +17,9 @@ import messages from '../i18n';
  * given profile country. Only learners who make their country public are included
  * (the backend resolves this live from each learner's profile-visibility setting).
  *
- * It reuses the regular leaderboard table — a flat list ranked by points, positions
- * 1..N, with the current user highlighted via the `rank` returned by the backend —
- * so the shape and mapper are shared with the per-badge leaderboard page.
+ * It reuses the regular leaderboard table — a flat list ranked by points (tied
+ * learners share a position), with the current user highlighted by their uid — so
+ * the shape and mapper are shared with the per-badge leaderboard page.
  */
 const CountryLeaderboardPage = () => {
   const intl = useIntl();
@@ -63,7 +63,7 @@ const CountryLeaderboardPage = () => {
     }
   }
 
-  const { rank, profiles, delimiter } = getBadgeLeaderboardTableProps(countryLeaderboardData);
+  const { profiles, delimiter } = getBadgeLeaderboardTableProps(countryLeaderboardData);
   const countryName = countryLeaderboardData?.countryName || country;
   const title = intl.formatMessage(messages.countryLeaderboardHeadingText, { country: countryName });
 
@@ -74,7 +74,7 @@ const CountryLeaderboardPage = () => {
         title={title}
       />
       <LeaderboardTable
-        rank={rank}
+        currentUserUid={countryLeaderboardData?.userUid}
         profiles={profiles}
         delimiter={delimiter}
       />

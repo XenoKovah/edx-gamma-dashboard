@@ -1,13 +1,42 @@
 /**
- * Adds a `position` property to each user in the top 10 list based on their index.
+ * Whether two ranking values represent a genuine tie.
  *
- * @param {Array<Object>} listUsers - The list of user objects.
- * @returns {Array<Object>} The updated list of user objects with a `position` property.
+ * Only real (defined, non-null) values can tie; a missing value is treated as
+ * unique so members without a known score are never collapsed onto one shared
+ * rank.
+ *
+ * @param {number|null|undefined} a
+ * @param {number|null|undefined} b
+ * @returns {boolean}
  */
-export const addPositionInTop10 = (listUsers) => listUsers.map((user, index) => ({
-  ...user,
-  position: index + 1,
-}));
+const isSameRankValue = (a, b) => a !== undefined && a !== null && a === b;
+
+/**
+ * Adds a `position` property to each user in a ranked (best-first) list using
+ * standard competition ranking ("1224"): users sharing the same ranking value
+ * get the same position, and the next distinct value resumes at `index + 1`,
+ * leaving a gap. So a list scored [570, 570, 530] yields positions [1, 1, 3].
+ *
+ * The list must already be ordered best-first (the backend returns it ranked).
+ *
+ * @param {Array<Object>} listUsers - The ranked list of user objects.
+ * @param {function(Object): (number|null|undefined)} [getRankValue] - Reads the
+ *   value the list is ranked by. Defaults to `points`; pass the progress percent
+ *   accessor for the "in progress" lists, which are ranked by percentage.
+ * @returns {Array<Object>} The list with a `position` on each user.
+ */
+export const addPositionInTop10 = (listUsers, getRankValue = (user) => user.points) => {
+  let sharedPosition = 0;
+  let previousValue;
+  return listUsers.map((user, index) => {
+    const value = getRankValue(user);
+    if (index === 0 || !isSameRankValue(value, previousValue)) {
+      sharedPosition = index + 1;
+    }
+    previousValue = value;
+    return { ...user, position: sharedPosition };
+  });
+};
 
 /**
  * Finds the index of a user in the list by their `user_uid`.
@@ -19,19 +48,31 @@ export const addPositionInTop10 = (listUsers) => listUsers.map((user, index) => 
 export const findIndexByUserUid = (listUsers, userUid) => listUsers.findIndex(user => user.userUid === userUid);
 
 /**
- * Adds a `position` property to each user in a competitors list relative to the specified user's rank.
+ * Adds a `position` property to each user in a competitor window relative to the
+ * reference user's rank, using the same standard competition tie handling as
+ * {@link addPositionInTop10} so tied competitors share a number. The reference
+ * user is anchored at `rank` (their backend-computed standard-competition rank),
+ * and every other member is offset by the start of its tie group.
  *
- * @param {Array<Object>} listUsers - The list of user objects.
+ * @param {Array<Object>} listUsers - The competitor window, ordered best-first.
  * @param {string} userUid - The unique identifier of the reference user.
- * @param {number} rank - The starting rank for the reference user.
- * @returns {Array<Object>} The updated list of user objects with a `position` property.
+ * @param {number} rank - The reference user's rank (the window's anchor).
+ * @param {function(Object): (number|null|undefined)} [getRankValue] - Reads the
+ *   value the window is ranked by (defaults to `points`).
+ * @returns {Array<Object>} The window with a `position` on each user.
  */
-export const addPositionInCompetitors = (listUsers, userUid, rank) => {
+export const addPositionInCompetitors = (listUsers, userUid, rank, getRankValue = (user) => user.points) => {
   const startIndex = rank - findIndexByUserUid(listUsers, userUid);
-  return listUsers.map((user, index) => ({
-    ...user,
-    position: startIndex + index,
-  }));
+  let sharedOffset = 0;
+  let previousValue;
+  return listUsers.map((user, index) => {
+    const value = getRankValue(user);
+    if (index === 0 || !isSameRankValue(value, previousValue)) {
+      sharedOffset = index;
+    }
+    previousValue = value;
+    return { ...user, position: startIndex + sharedOffset };
+  });
 };
 
 /**
