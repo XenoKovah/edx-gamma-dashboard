@@ -37,7 +37,7 @@ describe('getBadgeLeaderboardTableProps', () => {
     });
   });
 
-  it('gives earners tied on points the same position', () => {
+  it('gives earners tied on points the same position with no gaps (dense)', () => {
     const result = getBadgeLeaderboardTableProps({
       top10: [
         { userUid: 'alice', points: 500 },
@@ -48,7 +48,7 @@ describe('getBadgeLeaderboardTableProps', () => {
       rank: 1,
     });
 
-    expect(result.profiles.map((profile) => profile.position)).toEqual([1, 1, 3]);
+    expect(result.profiles.map((profile) => profile.position)).toEqual([1, 1, 2]);
   });
 
   it('handles an empty / missing payload without throwing', () => {
@@ -95,8 +95,8 @@ describe('getBadgeInProgressProps', () => {
       inProgressRank: 1,
     });
 
-    // Same percentage -> same position even though points differ.
-    expect(result.profiles.map((profile) => profile.position)).toEqual([1, 1, 3]);
+    // Same percentage -> same position even though points differ; next value is +1 (dense).
+    expect(result.profiles.map((profile) => profile.position)).toEqual([1, 1, 2]);
   });
 
   it('handles an empty / missing payload without throwing', () => {

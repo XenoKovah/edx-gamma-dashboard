@@ -13,9 +13,9 @@ const isSameRankValue = (a, b) => a !== undefined && a !== null && a === b;
 
 /**
  * Adds a `position` property to each user in a ranked (best-first) list using
- * standard competition ranking ("1224"): users sharing the same ranking value
- * get the same position, and the next distinct value resumes at `index + 1`,
- * leaving a gap. So a list scored [570, 570, 530] yields positions [1, 1, 3].
+ * dense ranking ("1223"): users sharing the same ranking value get the same
+ * position, and the next distinct value is the next consecutive number — no gaps.
+ * So a list scored [570, 570, 530, 500, 500] yields positions [1, 1, 2, 3, 3].
  *
  * The list must already be ordered best-first (the backend returns it ranked).
  *
@@ -26,15 +26,15 @@ const isSameRankValue = (a, b) => a !== undefined && a !== null && a === b;
  * @returns {Array<Object>} The list with a `position` on each user.
  */
 export const addPositionInTop10 = (listUsers, getRankValue = (user) => user.points) => {
-  let sharedPosition = 0;
+  let densePosition = 0;
   let previousValue;
   return listUsers.map((user, index) => {
     const value = getRankValue(user);
     if (index === 0 || !isSameRankValue(value, previousValue)) {
-      sharedPosition = index + 1;
+      densePosition += 1;
     }
     previousValue = value;
-    return { ...user, position: sharedPosition };
+    return { ...user, position: densePosition };
   });
 };
 
@@ -48,11 +48,11 @@ export const addPositionInTop10 = (listUsers, getRankValue = (user) => user.poin
 export const findIndexByUserUid = (listUsers, userUid) => listUsers.findIndex(user => user.userUid === userUid);
 
 /**
- * Adds a `position` property to each user in a competitor window relative to the
- * reference user's rank, using the same standard competition tie handling as
- * {@link addPositionInTop10} so tied competitors share a number. The reference
- * user is anchored at `rank` (their backend-computed standard-competition rank),
- * and every other member is offset by the start of its tie group.
+ * Adds a `position` property to each user in a competitor window using the same
+ * dense ranking as {@link addPositionInTop10} so tied competitors share a number
+ * and distinct values stay gap-free. The reference user is anchored at `rank`
+ * (their backend rank) and every other member is offset by how many *distinct*
+ * values separate it from the reference user.
  *
  * @param {Array<Object>} listUsers - The competitor window, ordered best-first.
  * @param {string} userUid - The unique identifier of the reference user.
@@ -62,17 +62,22 @@ export const findIndexByUserUid = (listUsers, userUid) => listUsers.findIndex(us
  * @returns {Array<Object>} The window with a `position` on each user.
  */
 export const addPositionInCompetitors = (listUsers, userUid, rank, getRankValue = (user) => user.points) => {
-  const startIndex = rank - findIndexByUserUid(listUsers, userUid);
-  let sharedOffset = 0;
+  // Dense offset of each row: increment only when the value changes, so ties share
+  // an offset and consecutive distinct values differ by exactly 1.
+  let denseOffset = -1;
   let previousValue;
-  return listUsers.map((user, index) => {
+  const offsets = listUsers.map((user, index) => {
     const value = getRankValue(user);
     if (index === 0 || !isSameRankValue(value, previousValue)) {
-      sharedOffset = index;
+      denseOffset += 1;
     }
     previousValue = value;
-    return { ...user, position: startIndex + sharedOffset };
+    return denseOffset;
   });
+
+  const currentIndex = findIndexByUserUid(listUsers, userUid);
+  const startPosition = rank - offsets[currentIndex];
+  return listUsers.map((user, index) => ({ ...user, position: startPosition + offsets[index] }));
 };
 
 /**

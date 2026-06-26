@@ -26,7 +26,7 @@ describe('addPositionInCompetitors', () => {
     expect(result).toEqual(expectedListUsers);
   });
 
-  it('shares a position for competitors tied with the reference user and gaps the next one', () => {
+  it('shares a position for competitors tied with the reference user, no gaps (dense)', () => {
     // Head competitors are always strictly above the reference user (the backend
     // builds the window that way); ties can only appear at/below the reference user.
     const listUsers = [
@@ -39,8 +39,9 @@ describe('addPositionInCompetitors', () => {
 
     const result = addPositionInCompetitors(listUsers, 'me', 103);
 
-    // me is anchored at its rank (103); d ties me so it shares 103; e is gapped to 105.
-    expect(result.map((user) => user.position)).toEqual([101, 102, 103, 103, 105]);
+    // me is anchored at its rank (103); d ties me so it shares 103; e is the next
+    // distinct value so it is 104 (dense — no gap).
+    expect(result.map((user) => user.position)).toEqual([101, 102, 103, 103, 104]);
   });
 });
 
@@ -94,7 +95,7 @@ describe('addPositionInTop10', () => {
     expect(result).toEqual(expectedListUsers);
   });
 
-  it('gives users tied on points the same position (standard competition ranking)', () => {
+  it('gives users tied on points the same position with no gaps (dense ranking)', () => {
     const listUsers = [
       { userUid: 'a', points: 570 },
       { userUid: 'b', points: 570 },
@@ -105,8 +106,8 @@ describe('addPositionInTop10', () => {
 
     const result = addPositionInTop10(listUsers);
 
-    // Tied scores share a rank, then the next distinct score resumes after the gap.
-    expect(result.map((user) => user.position)).toEqual([1, 1, 3, 4, 4]);
+    // Tied scores share a rank; the next distinct score is the next number (no gap).
+    expect(result.map((user) => user.position)).toEqual([1, 1, 2, 3, 3]);
   });
 
   it('ranks ties by a custom value accessor (e.g. progress percentage)', () => {
@@ -120,7 +121,7 @@ describe('addPositionInTop10', () => {
 
     // a and b share a position because they have the same percentage, despite
     // differing points; the points are ignored by this accessor.
-    expect(result.map((user) => user.position)).toEqual([1, 1, 3]);
+    expect(result.map((user) => user.position)).toEqual([1, 1, 2]);
   });
 });
 
