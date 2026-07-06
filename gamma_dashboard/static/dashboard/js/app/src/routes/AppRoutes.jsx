@@ -12,7 +12,7 @@ import { getCookieByName } from '../utils';
 import {
   LeaderboardPage, BadgeLeaderboardPage, CourseLeaderboardPage, CountryLeaderboardPage,
 } from '../leaderboard';
-import { DashboardPage } from '../dashboard';
+import { DashboardPage, AccomplishmentsPage } from '../dashboard';
 import { URLS, EXTERNAL_URLS } from './constants';
 
 const AppRoutes = () => {
@@ -24,6 +24,7 @@ const AppRoutes = () => {
       <Router>
         <Routes>
           <Route exact path={URLS.dashboardPage} element={<DashboardPage />} />
+          <Route exact path={URLS.accomplishmentsPage} element={<AccomplishmentsPage />} />
           <Route exact path={URLS.leaderboardPage} element={<LeaderboardPage />} />
           <Route exact path={URLS.badgeLeaderboardPage} element={<BadgeLeaderboardPage />} />
           <Route exact path={URLS.countryLeaderboardPage} element={<CountryLeaderboardPage />} />

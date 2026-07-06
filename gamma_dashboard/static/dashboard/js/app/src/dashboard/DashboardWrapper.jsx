@@ -11,10 +11,11 @@ import {
   DashboardSectionAvatar,
   DashboardSectionPointsVault,
 } from './components/sections';
-import { ProgressBadge, ProgressBadgesModal } from './components/progress-badge';
+import { ProgressBadge } from './components/progress-badge';
 import { ProgressAvatar, ProgressAvatarModal } from './components/progress-avatar';
 import { SliderStatusesBlock } from './components/slider-statuses-block';
 import { CORNER_BOTTOM, CORNER_TOP } from './components/constants';
+import { URLS } from '../routes/constants';
 import {
   BadgeItemPropType, ChartDataPropType, ProgressDataPropType,
   StatusPropType, AvatarProcessingStatesPropType, AvatarSetsPropType,
@@ -43,15 +44,11 @@ const DashboardWrapper = ({
   } = avatarHandlers;
 
   const {
-    isModalOpen,
     translations,
-    setIsModalOpen,
     completedAvatar,
     handleOpenModal,
     isAvatarModalOpen,
     previewBadgeItems,
-    getItemDataFunction,
-    filteredActiveBadges,
     selectedAvatarSetId,
     hasSelectedAvatarSet,
     hasCompletedAvatarSet,
@@ -176,7 +173,7 @@ const DashboardWrapper = ({
                 })}
                 buttonData={{
                   title: translations.badgesSectionBtnTitle,
-                  onClick: () => handleOpenModal(WIDGETS.BADGES),
+                  href: URLS.accomplishmentsPage,
                 }}
               />,
             )}
@@ -197,13 +194,6 @@ const DashboardWrapper = ({
           </DashboardSectionContainer>
         </div>
       </div>
-      <ProgressBadgesModal
-        isOpen={isModalOpen}
-        closeCallback={() => setIsModalOpen(false)}
-        title={translations.badgesSectionAllBadgesBtnTitle}
-        filteredActiveBadges={filteredActiveBadges}
-        getItemDataFunction={getItemDataFunction}
-      />
       {SHOW_AVATAR_BLOCK && (
         <ProgressAvatarModal
           isOpen={isAvatarModalOpen}

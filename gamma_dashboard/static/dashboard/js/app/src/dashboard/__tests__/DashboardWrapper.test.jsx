@@ -1,7 +1,6 @@
 import React from 'react';
 import '@testing-library/jest-dom';
 import { cleanup } from '@testing-library/react';
-import userEvent from '@testing-library/user-event';
 
 import { renderWithProviders } from '../../setupTests';
 import {
@@ -136,15 +135,14 @@ describe('<DashboardWrapper>', () => {
     expect(badgesList.children.length).toBeLessThanOrEqual(10);
   });
 
-  it('opens badges modal when clicking badges section button', () => {
+  it('links the badges section button to the accomplishments page', () => {
     const { getByTestId } = renderWithProviders(
       <DashboardWrapper {...defaultProps} />,
     );
 
     const badgesButton = getByTestId('progress-badges-details-btn');
-    userEvent.click(badgesButton);
-
-    expect(getByTestId('modal-backdrop')).toBeInTheDocument();
+    expect(badgesButton.tagName).toBe('A');
+    expect(badgesButton).toHaveAttribute('href', '/gamma_dashboard/accomplishments');
   });
 
   it('renders all dashboard sections in correct order', () => {
@@ -201,20 +199,6 @@ describe('<DashboardWrapper>', () => {
     const chartOptions = JSON.parse(chartInstances[0].dataset.options || 'null');
     const hasData = chartOptions?.series?.some(series => series.name === 'progress' && Object.keys(series.value).length === 0);
     expect(hasData).toBeFalsy();
-  });
-
-  it('closes badges modal when clicking close button', () => {
-    const { getByTestId, queryByTestId, getByRole } = renderWithProviders(
-      <DashboardWrapper {...defaultProps} />,
-    );
-
-    const badgesButton = getByTestId('progress-badges-details-btn');
-    userEvent.click(badgesButton);
-    expect(getByTestId('modal-backdrop')).toBeInTheDocument();
-
-    const closeButton = getByRole('button', { name: 'Close' });
-    userEvent.click(closeButton);
-    expect(queryByTestId('modal-backdrop')).not.toBeInTheDocument();
   });
 
   it('displays correct number of badges in the badges section', () => {

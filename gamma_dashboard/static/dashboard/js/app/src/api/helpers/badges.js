@@ -121,10 +121,20 @@ export const mergeBadges = (
   const badgeMap = createBadgeMap(systemBadges);
   const mergedBadges = { ...completedUserBadges };
 
+  // Earned badges come from the user's achievements, which don't carry the badge's
+  // free-text `category`. Backfill it from the matching system badge so the
+  // "All Accomplishments" page can group earned and un-earned badges alike.
+  Object.entries(mergedBadges).forEach(([badgeSlug, badge]) => {
+    mergedBadges[badgeSlug] = {
+      ...badge,
+      category: badge.category || badgeMap.get(badgeSlug)?.category || '',
+    };
+  });
+
   badgeMap.forEach((systemBadge, badgeSlug) => {
     if (!(badgeSlug in completedUserBadges)) {
       const {
-        image, title, isActive, rules = [], description = '', manualCriteria = '',
+        image, title, isActive, rules = [], description = '', manualCriteria = '', category = '',
       } = systemBadge;
 
       const allActions = {};
@@ -153,6 +163,7 @@ export const mergeBadges = (
         title,
         description,
         manualCriteria,
+        category,
         progress: progressDetails,
         dependencies: resolvedDependencies,
         statusDependency: resolvedStatusDependencies.length ? resolvedStatusDependencies : null,

@@ -2,6 +2,7 @@ import { BASE_ROOT } from '../constants';
 
 export const URLS = {
   dashboardPage: `${BASE_ROOT}/dashboard`, // Dashboard page
+  accomplishmentsPage: `${BASE_ROOT}/accomplishments`, // All Accomplishments page (grouped by category)
   leaderboardPage: `${BASE_ROOT}/leaderboard`, // Leaderboard page
   badgeLeaderboardPage: `${BASE_ROOT}/leaderboard/badge/:badgeSlug`, // Per-badge (filtered) leaderboard page
   countryLeaderboardPage: `${BASE_ROOT}/leaderboard/country/:country`, // Per-country (filtered) leaderboard page

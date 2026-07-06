@@ -39,6 +39,7 @@ describe('mergeBadges', () => {
     const badge1 = result['badge-1'];
     expect(badge1).toEqual({
       done: true,
+      category: '',
       progress: [
         {
           events: {

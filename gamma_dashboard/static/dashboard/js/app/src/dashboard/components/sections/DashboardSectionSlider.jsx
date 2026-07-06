@@ -14,6 +14,7 @@ const DashboardSectionSlider = ({
   buttonData: {
     title: buttonTitle,
     onClick: buttonOnClick,
+    href: buttonHref,
   },
   fullWidth,
 }) => (
@@ -40,7 +41,7 @@ const DashboardSectionSlider = ({
         data-testid="progress-badges-details-btn"
         title={buttonTitle}
         variant="outline-primary"
-        onClick={buttonOnClick}
+        {...(buttonHref ? { href: buttonHref } : { onClick: buttonOnClick })}
       >
         {buttonTitle}
       </Button>
@@ -57,6 +58,7 @@ DashboardSectionSlider.propTypes = {
   buttonData: PropTypes.shape({
     title: PropTypes.string,
     onClick: PropTypes.func,
+    href: PropTypes.string,
   }),
   fullWidth: PropTypes.bool,
 };
@@ -70,6 +72,7 @@ DashboardSectionSlider.defaultProps = {
   buttonData: {
     title: '',
     onClick: () => {},
+    href: null,
   },
   fullWidth: false,
 };

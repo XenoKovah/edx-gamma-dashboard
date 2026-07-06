@@ -76,6 +76,21 @@ const messages = defineMessages({
     defaultMessage: 'Avatar sets',
     description: 'Label text for available avatar sets in the performance section',
   },
+  accomplishmentsPageHeadingText: {
+    id: 'accomplishments.page.heading.text',
+    defaultMessage: 'All Accomplishments',
+    description: 'Heading for the dedicated All Accomplishments page (badges grouped by category)',
+  },
+  accomplishmentsPageOtherCategoryText: {
+    id: 'accomplishments.page.other.category.text',
+    defaultMessage: 'Other',
+    description: 'Section heading for accomplishments that do not have a category assigned',
+  },
+  accomplishmentsPageBackToDashboardText: {
+    id: 'accomplishments.page.back.to.dashboard.text',
+    defaultMessage: '← Back to dashboard',
+    description: 'Link back to the main gamification dashboard from the All Accomplishments page',
+  },
   performanceBadgesSectionAllBadgesButtonText: {
     id: 'performance.badges.section.all.badges.button.text',
     defaultMessage: 'All accomplishments',
