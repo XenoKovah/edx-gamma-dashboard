@@ -373,7 +373,7 @@ class TestCourseLeaderboardApiView:
         settings.PROFILE_MICROFRONTEND_URL = "https://apps.example.com/profile/u/"
         mocker.patch(
             "gamma_dashboard.dashboard.api.v0.views.get_profile_image_urls_for_user",
-            return_value={"medium": "/images/default.png"},
+            return_value={"full": "/images/default.png"},
         )
 
         user = mocker.MagicMock()
@@ -458,7 +458,7 @@ class TestUpdateLeaderboardInfo:
 
         mocker.patch(
             "gamma_dashboard.dashboard.api.v0.views.get_profile_image_urls_for_user",
-            return_value={"medium": "/images/default.png"},
+            return_value={"full": "/images/default.png"},
         )
         mocker.patch(
             "django.contrib.auth.models.User.objects.filter",
@@ -499,7 +499,7 @@ class TestUpdateLeaderboardInfo:
 
         mocker.patch(
             "gamma_dashboard.dashboard.api.v0.views.get_profile_image_urls_for_user",
-            return_value={"medium": "/images/default.png"},
+            return_value={"full": "/images/default.png"},
         )
         mocker.patch(
             "django.contrib.auth.models.User.objects.filter",

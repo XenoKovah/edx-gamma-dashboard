@@ -134,7 +134,7 @@ class LeaderboardApiView(APIView):
             leaderboard_info (dict): Updated leaderboard_info with profile image URLs,
             profile page URLs and new user_uid.
         """
-        leaderboard_info["url_profile_image"] = get_profile_image_urls_for_user(user)["medium"]
+        leaderboard_info["url_profile_image"] = get_profile_image_urls_for_user(user)["full"]
         leaderboard_info["user_uid"] = _public_display_name(user)
         leaderboard_info["profile_url"] = LeaderboardApiView._get_profile_url(user.username)
         leaderboard_info["country"] = _public_country_code(user)
@@ -153,7 +153,7 @@ class LeaderboardApiView(APIView):
                 if user := users_dict.get(item["user_uid"]):
                     item["profile_url"] = LeaderboardApiView._get_profile_url(user.username)
                     item["user_uid"] = _public_display_name(user)
-                    item["url_profile_image"] = get_profile_image_urls_for_user(user)["medium"]
+                    item["url_profile_image"] = get_profile_image_urls_for_user(user)["full"]
                     item["country"] = _public_country_code(user)
                 else:
                     # If the user is not found on the platform, change their Gamma-sourced username
@@ -455,7 +455,7 @@ class CourseLeaderboardApiView(APIView):
         member = {
             "user_uid": _public_display_name(user),
             "signup_source": None,
-            "url_profile_image": get_profile_image_urls_for_user(user)["medium"],
+            "url_profile_image": get_profile_image_urls_for_user(user)["full"],
             "profile_url": LeaderboardApiView._get_profile_url(user.username),  # pylint: disable=protected-access
             "country": _public_country_code(user),
             "badges": {},
