@@ -546,6 +546,13 @@ class UserBadgesApiView(APIView):
             if not badge.get("done"):
                 continue
 
+            # A deleted badge leaves a dangling achievement whose serialized slug is
+            # None (its content object no longer resolves to a Badge). Skip those so
+            # the profile doesn't keep showing a stale snapshot of a badge that was
+            # removed (e.g. a since-deleted "Answerer").
+            if not badge.get("slug"):
+                continue
+
             current = system_badges_by_slug.get(badge.get("slug"), {})
             earned_badges.append({
                 "slug": badge.get("slug"),

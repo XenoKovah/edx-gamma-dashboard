@@ -595,16 +595,67 @@ class TestUserBadgesApiView:
         assert response.status_code == status.HTTP_200_OK
         assert response.data == [
             {
+                "slug": "answerer",
                 "title": "Answerer",  # current config wins over the achievement snapshot
                 "description": "Answered a question in the Discussions section...",
                 "image": "https://gamma.example.com/media/uploads/badges/answerer.png",
+                "points": 0,
             },
             {
-                "title": "Orphan",  # no system badge -> fall back to achievement fields
+                "slug": "orphan",
+                "title": "Orphan",  # slug present but no system badge -> fall back to achievement fields
                 "description": "fallback description",
                 "image": "https://cdn.example.com/orphan.png",  # already absolute -> untouched
+                "points": 0,
             },
         ]
+
+    @pytest.mark.django_db
+    def test_hides_deleted_badge_and_orders_by_points(self, mocker, settings):
+        # A since-deleted badge leaves a dangling achievement with no slug; it must
+        # not show. The rest are returned most-valuable first.
+        settings.FEATURES = {"RG_GAMIFICATION": {"RG_GAMIFICATION_ENDPOINT": "http://rgg:8000"}}
+        User.objects.create(username="target")
+        mocker.patch(
+            "gamma_dashboard.dashboard.api.v0.views.get_account_settings",
+            return_value=[{"account_privacy": "all_users"}],
+        )
+        mocker.patch(
+            "gamma_dashboard.dashboard.api.v0.views.get_user_preference",
+            return_value="all_users",
+        )
+        mocker.patch(
+            "gamma_dashboard.dashboard.api.v0.views.configuration_helpers.get_value",
+            return_value="https://gamma.example.com",
+        )
+        profile = {
+            "badges": [
+                # Dangling achievement from a deleted badge (no slug) -> hidden.
+                {
+                    "title": "Answerer", "slug": None, "description": "stale",
+                    "done": True, "object_uri": "/media/uploads/badges/answerer.png",
+                },
+                {
+                    "title": "Cheap", "slug": "cheap", "description": "d",
+                    "done": True, "object_uri": "/media/cheap.png",
+                },
+                {
+                    "title": "Valuable", "slug": "valuable", "description": "d",
+                    "done": True, "object_uri": "/media/valuable.png",
+                },
+            ],
+            "system_badges": [
+                {"slug": "cheap", "title": "Cheap", "description": "d", "image": "/media/cheap.png", "points": 10},
+                {"slug": "valuable", "title": "Valuable", "description": "d", "image": "/media/valuable.png", "points": 500},
+            ],
+        }
+        mocker.patch.object(GammaApiWrapper, "get_game_profile", return_value=profile)
+
+        response = UserBadgesApiView().get(self._request(mocker), username="target")
+
+        assert response.status_code == status.HTTP_200_OK
+        # "Answerer" (deleted) is gone; the rest are highest-points first.
+        assert [(b["title"], b["points"]) for b in response.data] == [("Valuable", 500), ("Cheap", 10)]
 
     @pytest.mark.django_db
     def test_private_profile_returns_empty_list(self, mocker):
