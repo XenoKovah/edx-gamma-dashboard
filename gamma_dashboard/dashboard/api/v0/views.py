@@ -554,7 +554,15 @@ class UserBadgesApiView(APIView):
                 "image": self._absolute_media_url(
                     current.get("image") or badge.get("object_uri"), gamma_base
                 ),
+                # Live completion points ("Points for completion") from the current
+                # badge config, so the profile can order badges by value.
+                "points": current.get("points", badge.get("points")) or 0,
             })
+
+        # Most valuable badges first, ties broken alphabetically by title. The
+        # profile widget also sorts, so ordering is correct regardless of which
+        # side deploys first.
+        earned_badges.sort(key=lambda b: (-b["points"], (b["title"] or "").lower()))
 
         return Response(earned_badges)
 
