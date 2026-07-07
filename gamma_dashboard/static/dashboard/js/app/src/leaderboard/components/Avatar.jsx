@@ -51,7 +51,7 @@ const Avatar = ({
     >
       {urlProfileImage ? (
         <AvatarImage
-          size="md"
+          size="xl"
           // Flag the placeholder image so the dark theme can recolor only it,
           // leaving real uploaded photos untouched.
           className={classNames('flex-shrink-0', { 'avatar-image_default': isDefaultImage })}

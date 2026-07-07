@@ -6,10 +6,10 @@
 }
 
 // Column headers above the cards (User / Country / Earned points / Accomplishments).
-// Widths mirror the card columns: avatar (~4rem) + username (15.6rem) = 19.6rem for
+// Widths mirror the card columns: avatar (~7rem) + username (15.6rem) = 22.6rem for
 // "User", the 5rem country column, the 11.2rem points column, then badges fill the
 // rest. Hidden below md, where the cards stack vertically and the row can't align.
-// NOTE: alignment assumes the Paragon md avatar (3rem) + .avatar-wrapper margin (1rem);
+// NOTE: alignment assumes the Paragon xl avatar (6rem) + .avatar-wrapper margin (1rem);
 // verify on the deployed page and nudge .lh-user if the avatar block differs.
 .leaderboard-table-header {
   display: flex;
@@ -26,7 +26,7 @@
   }
 
   .lh-user {
-    width: 19.6rem;
+    width: 22.6rem;
   }
 
   .lh-country {

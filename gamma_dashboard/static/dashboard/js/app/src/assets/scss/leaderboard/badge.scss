@@ -8,10 +8,12 @@
 }
 
 .badge-item {
-  max-width: 3rem;
-  max-height: 2.625rem;
+  // Doubled from 3rem / 2.625rem so the badge art is legible on the leaderboard
+  // (same 8:7 aspect ratio). The row height scales with it via the xl avatar.
+  max-width: 6rem;
+  max-height: 5.25rem;
 
   &:not(:last-child) {
-    @extend .mr-2;
+    margin-right: 0.75rem;
   }
 }

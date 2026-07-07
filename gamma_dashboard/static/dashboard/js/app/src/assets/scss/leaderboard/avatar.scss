@@ -12,24 +12,25 @@
 
   .pgn__avatar {
     border-color: $avatar-border-color;
-    border-radius: 10px;
-    min-width: 3rem;
+    border-radius: 14px;
+    // Matches the Paragon xl avatar (6rem) set in LeaderboardCard — 2x the old md (3rem).
+    min-width: 6rem;
   }
 
   .avatar-position {
     position: absolute;
-    left: -0.4375rem;
-    top: -0.4375rem;
-    padding: 0.0625rem 0.25rem;
+    left: -0.5rem;
+    top: -0.5rem;
+    padding: 0.125rem 0.375rem;
     background: $accent-color;
     border: 1px solid $avatar-position-color;
-    border-radius: 10px;
+    border-radius: 12px;
     color: $avatar-position-color;
     font-weight: $font-weight-semi-bold;
-    font-size: 0.75rem;
+    font-size: 1.0625rem;
     line-height: 1;
-    min-width: 1.25rem;
-    min-height: 1.25rem;
+    min-width: 1.875rem;
+    min-height: 1.875rem;
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -37,7 +38,7 @@
 
     .rtl & {
       left: auto;
-      right: -0.4375rem;
+      right: -0.5rem;
     }
   }
 

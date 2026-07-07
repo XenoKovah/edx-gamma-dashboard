@@ -66,7 +66,7 @@ const LeaderboardCard = ({ profile, currentUserUid, showProgress }) => {
     <Card
       orientation={isSmall ? 'vertical' : 'horizontal'}
       className={classNames(
-        'leaderboard-card align-items-center py-3 px-4',
+        'leaderboard-card align-items-center py-4 px-4',
         { highlighted: isCurrentUser },
       )}
       data-testid="leaderboard-card"
