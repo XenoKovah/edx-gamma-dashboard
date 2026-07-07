@@ -33,16 +33,25 @@
         @extend .pl-2;
       }
 
-      width: 15.6rem;
+      // Wide enough that a ~20-character single-word username stays on one line.
+      width: 22rem;
       color: $secondary-text-color;
       overflow: visible;
+
+      // On phones the card stacks vertically; let the name use the available
+      // width instead of a fixed 22rem that could overflow a small screen.
+      @media screen and (max-width: map-get($grid-breakpoints, "md")) {
+        width: 100%;
+      }
     }
 
     [class*="pgn__card-header-title"] {
       font-weight: $font-weight-bold;
       font-size: 1.5rem;
       line-height: 1.3;
-      word-break: break-word;
+      // Only break *within* a word when it genuinely can't fit (very long
+      // single-token usernames). Multi-word names still wrap at their spaces.
+      overflow-wrap: break-word;
       color: inherit;
       text-transform: uppercase;
 
@@ -81,10 +90,14 @@
   line-height: 1.2;
   width: 11.2rem;
   flex-shrink: 0;
+  // Breathing room between the country column and the points, mirrored on the
+  // "Country" / "Total Points" header labels (.lh-points).
+  margin-left: 1.5rem;
 
   @media screen and (max-width: map-get($grid-breakpoints, "md")) {
     text-align: center;
     width: 50%;
+    margin-left: 0;
   }
 }
 

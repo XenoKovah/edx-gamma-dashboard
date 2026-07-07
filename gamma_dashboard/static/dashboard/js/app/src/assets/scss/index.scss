@@ -18,7 +18,9 @@
 
   font-weight: $font-weight-normal;
   margin: 2.625rem auto 0;
-  max-width: 75rem;
+  // Use ~80% of the page on wide screens (so the leaderboard has room and long
+  // usernames don't wrap), but never narrower than the original 75rem on laptops.
+  max-width: max(75rem, 80%);
   box-sizing: border-box;
 }
 
