@@ -90,14 +90,71 @@ describe('mergeBadges', () => {
     expect(badge3.progress).toEqual({
       edx_bookmark_added: {
         count: 1,
-        goal: 3,
+        goal: { count: 3 },
         title: 'Bookmark Added',
       },
       status_badge: {
         count: 0,
-        goal: 1,
+        goal: { count: 1 },
         title: 'Status Badge',
       },
+    });
+  });
+
+  it('sums same-slug rules so a 3-certificate badge shows a goal of 3, not 1', () => {
+    const certRule = {
+      action: { edx_certificate_created: { count: 1 } },
+      eventConfiguration: { eventType: 'edx_certificate_created', title: 'Get a Course Certificate' },
+    };
+    const systemBadges = [{
+      slug: 'intel-l2',
+      image: 'i.png',
+      title: 'Intel Firmware Adept Level 2',
+      isActive: true,
+      // Three cert rules (one per course; the OR-variants are a single list-filter rule).
+      rules: [certRule, certRule, certRule],
+    }];
+
+    const result = mergeBadges(mockStatusTitles, mockEventTitles, [], systemBadges);
+
+    expect(result['intel-l2'].progress).toEqual({
+      edx_certificate_created: {
+        count: 0,
+        goal: { count: 3 },
+        title: 'Get a Course Certificate',
+      },
+    });
+  });
+
+  it('sums same-slug user progress so a partly-earned multi-cert badge counts correctly', () => {
+    const certRule = {
+      action: { edx_certificate_created: { count: 1 } },
+      eventConfiguration: { eventType: 'edx_certificate_created', title: 'Get a Course Certificate' },
+    };
+    const systemBadges = [{
+      slug: 'intel-l2',
+      image: 'i.png',
+      title: 'Intel Firmware Adept Level 2',
+      isActive: true,
+      rules: [certRule, certRule, certRule],
+    }];
+    // Learner earned 1 of the 3 certificates (per-rule progress list, mirroring the API).
+    const userBadges = [{
+      slug: 'intel-l2',
+      done: false,
+      progress: [
+        { events: { edx_certificate_created: { goal: 1, count: 1 } } },
+        { events: { edx_certificate_created: { goal: 1, count: 0 } } },
+        { events: { edx_certificate_created: { goal: 1, count: 0 } } },
+      ],
+    }];
+
+    const result = mergeBadges(mockStatusTitles, mockEventTitles, userBadges, systemBadges);
+
+    expect(result['intel-l2'].progress.edx_certificate_created).toEqual({
+      count: 1,
+      goal: { count: 3 },
+      title: 'Get a Course Certificate',
     });
   });
 

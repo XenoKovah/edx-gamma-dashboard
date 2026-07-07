@@ -32,6 +32,20 @@ const createProgressDetails = (allActions, eventTitles) => Object.fromEntries(
 );
 
 /**
+ * Extract the numeric goal from a rule action value. Gamma stores it as
+ * `{ count: N }` (or occasionally `{ points: N }`); tolerate a bare number too.
+ *
+ * @param {number|{count?: number, points?: number}} goal - The action goal value.
+ * @returns {number} The numeric goal (0 when it can't be read).
+ */
+const getGoalCount = (goal) => {
+  if (goal && typeof goal === 'object') {
+    return goal.count || goal.points || 0;
+  }
+  return Number(goal) || 0;
+};
+
+/**
  * Merges user progress data into a single object with snake_case keys.
  *
  * @param {Array<{
@@ -46,7 +60,15 @@ const createProgressDetails = (allActions, eventTitles) => Object.fromEntries(
 const mergeUserProgress = (userProgress) => convertKeysToSnakeCase(
   userProgress.reduce((acc, entry) => {
     Object.entries(entry.events).forEach(([slug, data]) => {
-      acc[slug] = data;
+      // A badge can carry several rules that share one event slug (e.g. a
+      // multi-course certificate badge with one rule per course). Sum their
+      // counts so the numerator reflects total progress across all of them
+      // rather than overwriting with just the last rule's count.
+      if (!acc[slug]) {
+        acc[slug] = { ...data };
+      } else {
+        acc[slug] = { ...acc[slug], count: (acc[slug].count || 0) + (data.count || 0) };
+      }
     });
     return acc;
   }, {}),
@@ -142,10 +164,19 @@ export const mergeBadges = (
       const allStatusDependencies = new Set();
       const eventTitlesMap = extractEventTitles(rules);
 
+      // Each rule is a distinct requirement. Rules that share an event slug —
+      // e.g. a multi-course certificate badge with one "Get a Course Certificate"
+      // rule per course (OR-variants collapsed into a single list-filter rule) —
+      // accumulate, so the goal reflects the total number of requirements
+      // (3 certificates shows 0/3, not 0/1). The goal is kept as a `{ count }`
+      // object because the popover/ring read `goal.count`.
       for (const { action = {} } of rules) {
         for (const [slug, goal] of Object.entries(action)) {
-          if (!allActions[slug] || allActions[slug] < goal) {
-            allActions[slug] = goal;
+          const goalCount = getGoalCount(goal);
+          if (!allActions[slug]) {
+            allActions[slug] = { count: goalCount };
+          } else {
+            allActions[slug].count += goalCount;
           }
         }
       }
