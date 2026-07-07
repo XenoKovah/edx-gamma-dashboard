@@ -3,7 +3,7 @@ import { useIntl } from 'react-intl';
 import PropTypes from 'prop-types';
 import { Image } from '@openedx/paragon';
 
-import { resolveUrl } from '../../utils';
+import { resolveUrl, sanitizeDescriptionHtml } from '../../utils';
 import { GAMMA_ADMIN_BASE_URL } from '../../constants';
 
 import messages from '../../i18n';
@@ -43,12 +43,14 @@ const BadgeLeaderboardHeader = ({ badge }) => {
         />
       )}
       {description && (
+        // Descriptions are staff-authored and may include a simple link (e.g. a
+        // Course Completion badge linking the course name to its class page), so
+        // render sanitized HTML rather than plain text. See sanitizeDescriptionHtml.
         <p
           className="badge-leaderboard-header-description"
           data-testid="badge-leaderboard-header-description"
-        >
-          {description}
-        </p>
+          dangerouslySetInnerHTML={{ __html: sanitizeDescriptionHtml(description) }}
+        />
       )}
     </header>
   );

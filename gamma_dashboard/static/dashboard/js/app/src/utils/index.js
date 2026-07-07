@@ -8,3 +8,4 @@ export {
 export {
   trimStartSlash, trimTrailingSlash, buildURL, resolveUrl,
 } from './urlTools';
+export { sanitizeDescriptionHtml } from './sanitizeHtml';
