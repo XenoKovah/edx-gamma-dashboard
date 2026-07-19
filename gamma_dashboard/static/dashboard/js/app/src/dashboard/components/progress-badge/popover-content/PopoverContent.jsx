@@ -61,7 +61,7 @@ const PopoverContent = ({ data }) => {
   const criteriaItems = isCompleted ? [] : [
     // Manual-only (rule-less) badges surface their manual assignment criteria here.
     ...(manualCriteria
-      ? [<TextBlock key="manual-criteria" label={translations.manualCriteriaText} text={manualCriteria} />]
+      ? [<TextBlock key="manual-criteria" label={translations.manualCriteriaText} text={manualCriteria} asHtml />]
       : []),
     ...renderProgressItems(),
     ...(badgeDependencies.length > 0
@@ -74,7 +74,7 @@ const PopoverContent = ({ data }) => {
   ];
 
   const bodyItems = [
-    ...(description ? [<TextBlock key="description" text={description} />] : []),
+    ...(description ? [<TextBlock key="description" text={description} asHtml />] : []),
     ...criteriaItems,
     // How many points the badge grants when earned (badges only; 0 = unset).
     ...(completionPoints > 0

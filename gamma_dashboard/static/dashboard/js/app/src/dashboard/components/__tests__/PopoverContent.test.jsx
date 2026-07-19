@@ -15,6 +15,32 @@ const badgeDependencies = ['Test badge 1'];
 const getProgressString = ({ points, statusPoints }) => `${points}/${statusPoints}`;
 
 describe('<PopoverContent>', () => {
+  it('renders a staff-authored description as links, not raw HTML', () => {
+    const data = {
+      description: 'Complete <a href="https://ost2.fyi/Arch4001">Arch4001</a> + '
+        + '<a href="https://ost2.fyi/HW1101">HW1101</a>',
+    };
+
+    const { getByRole, queryByText } = renderWithProviders(<PopoverContent data={data} />);
+
+    const link = getByRole('link', { name: 'Arch4001' });
+    expect(link).toHaveAttribute('href', 'https://ost2.fyi/Arch4001');
+    expect(link).toHaveAttribute('target', '_blank');
+    expect(link.getAttribute('rel')).toContain('noopener');
+    expect(getByRole('link', { name: 'HW1101' })).toBeInTheDocument();
+    // The raw markup must never be shown to the learner.
+    expect(queryByText(/<a href=/)).not.toBeInTheDocument();
+  });
+
+  it('strips unsafe markup from a description', () => {
+    const data = { description: 'Hi<script>alert(1)</script><a href="javascript:alert(1)">x</a>' };
+
+    const { container, queryByText } = renderWithProviders(<PopoverContent data={data} />);
+
+    expect(container.querySelector('script')).toBeNull();
+    expect(queryByText(/alert\(1\)/)).not.toBeInTheDocument();
+  });
+
   it('renders with correct `status` data', () => {
     const data = {
       points: 180,
