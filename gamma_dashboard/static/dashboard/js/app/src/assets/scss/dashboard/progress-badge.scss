@@ -34,6 +34,10 @@
       left: auto;
       top: auto;
       margin-bottom: map-get($spacers, 2);
+      // The badge box is now wider than the figure (so names can wrap), so the
+      // figure centers itself instead of relying on a figure-width box.
+      margin-left: auto;
+      margin-right: auto;
 
       &:before {
         display: none;
@@ -126,10 +130,10 @@
   line-height: normal;
   text-transform: uppercase;
   color: $main-text-color;
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
+  // Show the accomplishment name in full: wrap onto as many lines as it needs
+  // rather than clamping to 2 lines with an ellipsis. A very long single token
+  // breaks instead of overflowing into the neighbouring column.
+  overflow-wrap: break-word;
 }
 
 .total-progress-percent {

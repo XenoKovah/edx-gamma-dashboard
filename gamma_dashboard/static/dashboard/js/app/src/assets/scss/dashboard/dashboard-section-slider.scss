@@ -2,14 +2,21 @@
   display: grid;
   grid-template-columns: repeat(5, 1fr);
   justify-items: center;
-  row-gap: 1.875rem;
+  // Row gutter, plus an explicit column gutter so adjacent accomplishment names
+  // stay clearly separated now that they wrap across the full column.
+  gap: 1.875rem 1.5rem;
   margin-top: map-get($spacers, 6);
 
-  // Keep each badge the width of its figure so the image stays centered above the
-  // title regardless of title length (long titles wrap beneath, like short ones).
-  // The grid otherwise lets a long title widen the badge and push the image left.
+  // Give each badge its whole grid column (capped) so a long name wraps over a
+  // wide box and can be shown in full, rather than being squeezed into the
+  // figure's width. The figure centers itself, so the image still sits centered
+  // above the title. Horizontal margins are zeroed so the column-gap is the only
+  // separation (a badge rendered with `center` otherwise adds its own margins).
   .progress-badge {
-    width: 6.25rem;
+    width: 100%;
+    max-width: 10rem;
+    margin-left: 0;
+    margin-right: 0;
   }
 
   @media screen and (max-width: map-get($grid-breakpoints, "lg")) {
