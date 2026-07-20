@@ -52,7 +52,7 @@ const TOP_MEMBERS_LIMIT = 100;
 
 export const getLeaderboardTableProps = (data) => {
   const {
-    top10, systemStatuses, rank, userUid, urlProfileImage, profileUrl, competitors,
+    top10, systemStatuses, rank, userUid, urlProfileImage, profileUrl, competitors, viewerHidden,
   } = data;
   const profilesTop = addPositionInTop10(top10);
   const propsObj = {
@@ -70,6 +70,12 @@ export const getLeaderboardTableProps = (data) => {
     case top10.length === 0 || !userUid:
       // for the initial render
       propsObj.profiles = [];
+      break;
+    case Boolean(viewerHidden):
+      // The viewer is filtered off this view of the board (an instructor looking at the
+      // instructor-free one). They are unranked here, but not in the "yet to score" sense
+      // the next case handles, so show the board without a row for them.
+      propsObj.profiles = profilesTop;
       break;
     case !rank: {
       // user is not ranked yet: show the full top list, then the current user.

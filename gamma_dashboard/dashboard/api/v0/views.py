@@ -32,6 +32,19 @@ from ..utils import repair_mojibake_text, site_badge_filter, is_main_site
 
 MAIN_SITE_NAME = 'main'
 
+TRUE_VALUES = {'1', 'true', 'yes', 'on'}
+
+
+def _hide_instructors_requested(request):
+    """Whether the caller asked for the instructor-free view of a leaderboard.
+
+    Contributing class material is the platform's largest source of points, so
+    instructors head every board; ``?hide_instructors=1`` serves the same board with
+    them dropped and the ranks closed up, letting a learner see where they place among
+    their peers. Gamma decides who counts as an instructor and does the filtering.
+    """
+    return str(request.GET.get('hide_instructors')).strip().lower() in TRUE_VALUES
+
 
 def _public_display_name(user):
     """Return the learner's real name only when it is shared with everyone.
@@ -89,7 +102,12 @@ class LeaderboardApiView(APIView):
 
         leaderboard_info = GammaApiWrapper(
             version=DEFAULT_API_VERSION
-        ).get_leaderboard_info(request.user.username, user_signup_source, course_id)
+        ).get_leaderboard_info(
+            request.user.username,
+            user_signup_source,
+            course_id,
+            hide_instructors=_hide_instructors_requested(request),
+        )
 
         if leaderboard_info:
             updated_leaderboard_info = self._update_leaderboard_info(request.user, leaderboard_info)
@@ -192,7 +210,13 @@ class BadgeLeaderboardApiView(APIView):
 
         badge_leaderboard_info = GammaApiWrapper(
             version=DEFAULT_API_VERSION
-        ).get_badge_leaderboard_info(request.user.username, user_signup_source, badge_slug, course_id)
+        ).get_badge_leaderboard_info(
+            request.user.username,
+            user_signup_source,
+            badge_slug,
+            course_id,
+            hide_instructors=_hide_instructors_requested(request),
+        )
 
         if badge_leaderboard_info:
             # The member enrichment (profile images, profile links, display names) is identical
@@ -246,7 +270,12 @@ class CountryLeaderboardApiView(APIView):
 
         leaderboard_info = GammaApiWrapper(
             version=DEFAULT_API_VERSION
-        ).get_users_leaderboard_info(request.user.username, user_signup_source, public_usernames)
+        ).get_users_leaderboard_info(
+            request.user.username,
+            user_signup_source,
+            public_usernames,
+            hide_instructors=_hide_instructors_requested(request),
+        )
 
         if leaderboard_info is None:
             return Response(
@@ -334,10 +363,13 @@ class CourseLeaderboardApiView(APIView):
 
         signup_source = request.user.usersignupsource_set.first()
         user_signup_source = signup_source.site if signup_source else MAIN_SITE_NAME
+        hide_instructors = _hide_instructors_requested(request)
 
-        completed = self._build_completed_section(cert_user_ids, request.user, user_signup_source)
+        completed = self._build_completed_section(
+            cert_user_ids, request.user, user_signup_source, hide_instructors
+        )
         in_progress_members, in_progress_rank = self._build_in_progress_section(
-            course_key, set(cert_user_ids), current_user_id
+            course_key, set(cert_user_ids), current_user_id, hide_instructors
         )
 
         return Response({
@@ -349,7 +381,7 @@ class CourseLeaderboardApiView(APIView):
             "user_uid": completed.get("user_uid") or self._display_name(request.user),
         })
 
-    def _build_completed_section(self, cert_user_ids, user, user_signup_source):
+    def _build_completed_section(self, cert_user_ids, user, user_signup_source, hide_instructors=False):
         """
         Certificate earners ranked by their TOTAL (lifetime) points, with badges --
         the same shape as the main and per-country leaderboards, just restricted to
@@ -367,14 +399,14 @@ class CourseLeaderboardApiView(APIView):
             User.objects.filter(id__in=cert_user_ids).values_list("username", flat=True)
         )
         completed_info = GammaApiWrapper(version=DEFAULT_API_VERSION).get_users_leaderboard_info(
-            user.username, user_signup_source, cert_usernames
+            user.username, user_signup_source, cert_usernames, hide_instructors=hide_instructors
         )
         if not completed_info:
             return {"top10": [], "competitors": [], "rank": None}
 
         return LeaderboardApiView._update_leaderboard_info(user, completed_info)  # pylint: disable=protected-access
 
-    def _build_in_progress_section(self, course_key, cert_user_id_set, current_user_id):
+    def _build_in_progress_section(self, course_key, cert_user_id_set, current_user_id, hide_instructors=False):
         """
         Active, not-yet-certified learners with a course grade, ranked by grade %.
         """
@@ -394,12 +426,15 @@ class CourseLeaderboardApiView(APIView):
             if user_id in active_user_ids and user_id not in cert_user_id_set
         ]
 
-        # Drop learners who opted out of leaderboard ranking. This section is ranked by
-        # the dashboard (grade %), so Gamma can't filter it for us; the point-ranked
-        # sections are filtered in Gamma. Done before ranking so there is no rank gap.
-        excluded_user_ids = self._excluded_user_ids()
-        if excluded_user_ids:
-            rows = [row for row in rows if row[0] not in excluded_user_ids]
+        # Drop learners who opted out of leaderboard ranking, and — when the viewer asked
+        # for the instructor-free board — the instructors. This section is ranked by the
+        # dashboard (grade %), so Gamma can't filter it for us; the point-ranked sections
+        # are filtered in Gamma. Done before ranking so there is no rank gap.
+        dropped_user_ids = self._excluded_user_ids()
+        if hide_instructors:
+            dropped_user_ids |= self._instructor_user_ids()
+        if dropped_user_ids:
+            rows = [row for row in rows if row[0] not in dropped_user_ids]
 
         rows.sort(key=lambda row: row[1], reverse=True)
         # Standard competition ranking on the *displayed* grade (the rounded percent),
@@ -433,11 +468,26 @@ class CourseLeaderboardApiView(APIView):
         are filtered by Gamma itself. Empty set on any Gamma error (fail open, never 500).
         """
         info = GammaApiWrapper(version=DEFAULT_API_VERSION).get_excluded_user_uids()
-        excluded_usernames = (info or {}).get("user_uids") or []
-        if not excluded_usernames:
+        return CourseLeaderboardApiView._user_ids_for_uids((info or {}).get("user_uids"))
+
+    @staticmethod
+    def _instructor_user_ids():
+        """
+        edx user-ids of the instructors, for the same reason: this is the one section the
+        dashboard ranks itself, so it has to apply the instructor filter itself too.
+        """
+        info = GammaApiWrapper(version=DEFAULT_API_VERSION).get_instructor_user_uids()
+        return CourseLeaderboardApiView._user_ids_for_uids((info or {}).get("user_uids"))
+
+    @staticmethod
+    def _user_ids_for_uids(user_uids):
+        """
+        Resolve Gamma user_uids (which are platform usernames) to edx user-ids.
+        """
+        if not user_uids:
             return set()
         return set(
-            User.objects.filter(username__in=excluded_usernames).values_list("id", flat=True)
+            User.objects.filter(username__in=list(user_uids)).values_list("id", flat=True)
         )
 
     @staticmethod

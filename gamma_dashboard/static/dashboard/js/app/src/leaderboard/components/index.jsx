@@ -4,3 +4,5 @@ export { default as BadgeList } from './BadgeList';
 export { default as BadgeLeaderboardHeader } from './BadgeLeaderboardHeader';
 export { default as LeaderboardCard } from './LeaderboardCard';
 export { default as LeaderboardTable } from './LeaderboardTable';
+export { default as LeaderboardView } from './LeaderboardView';
+export { default as HideInstructorsToggle } from './HideInstructorsToggle';

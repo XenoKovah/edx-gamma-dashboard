@@ -171,6 +171,7 @@ class TestGammaApiWrapper:
         api_wrapper_spy.assert_called_with(
             leaderboard_absolute_url, params={
                 'username': username, 'signup_source': user_signup_source, 'course_id': None,
+                'hide_instructors': False,
             }
         )
 
@@ -216,7 +217,8 @@ class TestGammaApiWrapper:
 
         api_wrapper_spy.assert_called_with(
             leaderboard_absolute_url, params={
-                'username': username, 'signup_source': user_signup_source, 'course_id': None
+                'username': username, 'signup_source': user_signup_source, 'course_id': None,
+                'hide_instructors': False,
             }
         )
 
@@ -352,3 +354,88 @@ class TestGammaApiWrapper:
 
         api_wrapper_spy.assert_called_with(excluded_url)
         assert result == {'user_uids': ['a', 'b']}
+
+    @pytest.mark.unittests
+    def test_get_leaderboard_info_hiding_instructors(self, gamma_settings, mocker):
+        """
+        Case: Request the instructor-free view of the leaderboard.
+        Expect: The filter is passed on to Gamma, which does the filtering and re-ranking.
+        """
+        username = 'test_username'
+        user_signup_source = 'main-site.com'
+        leaderboard_absolute_url = '{}api/v0/leaderboard'.format(GAMIFICATION_ENDPOINT)
+
+        mocked_get = mocker.patch('requests.get')
+        mocked_get.return_value.ok = True
+        mocked_get.return_value.json = mocker.Mock(return_value={})
+
+        api_wrapper = GammaApiWrapper(settings=gamma_settings)
+        api_wrapper_spy = mocker.spy(api_wrapper, '_send_request')
+        api_wrapper.get_leaderboard_info(username, user_signup_source, hide_instructors=True)
+
+        api_wrapper_spy.assert_called_with(
+            leaderboard_absolute_url, params={
+                'username': username, 'signup_source': user_signup_source, 'course_id': None,
+                'hide_instructors': True,
+            }
+        )
+
+    @pytest.mark.unittests
+    def test_get_users_leaderboard_info_hiding_instructors(self, gamma_settings, mocker):
+        """
+        Case: Rank an explicit set of users (per-country / per-course "Completed") with
+        instructors left out.
+        Expect: The candidate users and the filter are POSTed together.
+        """
+        users_absolute_url = '{}api/v0/leaderboard/users'.format(GAMIFICATION_ENDPOINT)
+
+        mocked_post = mocker.patch('requests.post')
+        mocked_post.return_value.ok = True
+        mocked_post.return_value.json = mocker.Mock(return_value={})
+
+        api_wrapper = GammaApiWrapper(settings=gamma_settings)
+        api_wrapper_spy = mocker.spy(api_wrapper, '_send_request')
+        api_wrapper.get_users_leaderboard_info('viewer', 'main', ['a', 'b'], hide_instructors=True)
+
+        api_wrapper_spy.assert_called_with(
+            users_absolute_url,
+            method='POST',
+            json={
+                'username': 'viewer',
+                'signup_source': 'main',
+                'user_uids': ['a', 'b'],
+                'hide_instructors': True,
+            },
+        )
+
+    @pytest.mark.unittests
+    def test_get_instructor_user_uids(self, gamma_settings, mocker):
+        """
+        Case: List the instructors, for the one section the dashboard ranks itself.
+        Expect: GET is sent to the instructor-uids URL and the data returned.
+        """
+        instructors_url = '{}api/v0/leaderboard/instructor-uids'.format(GAMIFICATION_ENDPOINT)
+        mocked_get = mocker.patch('requests.get')
+        mocked_get.return_value.ok = True
+        mocked_get.return_value.json = mocker.Mock(return_value={'user_uids': ['teacher']})
+
+        api_wrapper = GammaApiWrapper(settings=gamma_settings)
+        api_wrapper_spy = mocker.spy(api_wrapper, '_send_request')
+        result = api_wrapper.get_instructor_user_uids()
+
+        api_wrapper_spy.assert_called_with(instructors_url)
+        assert result == {'user_uids': ['teacher']}
+
+    @pytest.mark.unittests
+    def test_get_instructor_user_uids_falls_back_to_empty(self, gamma_settings, mocker):
+        """
+        Case: Gamma errors while listing instructors.
+        Expect: An empty result rather than an exception -- a leaderboard that shows one
+        instructor too many beats a leaderboard that 500s.
+        """
+        mocked_get = mocker.patch('requests.get')
+        mocked_get.return_value.ok = False
+
+        api_wrapper = GammaApiWrapper(settings=gamma_settings)
+
+        assert api_wrapper.get_instructor_user_uids() == {}

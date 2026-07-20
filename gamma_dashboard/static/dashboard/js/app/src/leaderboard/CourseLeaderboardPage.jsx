@@ -6,7 +6,8 @@ import { Info as InfoIcon } from '@openedx/paragon/icons';
 import { useScrollToContent } from '../generic/hooks';
 import { SubHeader, Alert, Loader } from '../generic';
 import { getBadgeLeaderboardTableProps, getBadgeInProgressProps } from './utils';
-import { LeaderboardTable } from './components';
+import { useHideInstructors } from './hooks';
+import { LeaderboardTable, LeaderboardView, HideInstructorsToggle } from './components';
 
 import { useCourseLeaderboard } from '../api/hooks/useCourseLeaderboard';
 
@@ -21,9 +22,10 @@ import messages from '../i18n';
 const CourseLeaderboardPage = () => {
   const intl = useIntl();
   const { courseId } = useParams();
+  const [hideInstructors, toggleHideInstructors] = useHideInstructors();
   const {
-    data: courseLeaderboardData, isLoading, error, isError,
-  } = useCourseLeaderboard(courseId);
+    data: courseLeaderboardData, isLoading, isFetching, error, isError,
+  } = useCourseLeaderboard(courseId, hideInstructors);
 
   const translations = {
     leaderboardTitle: intl.formatMessage(messages.leaderboardHeadingText),
@@ -75,29 +77,38 @@ const CourseLeaderboardPage = () => {
       <SubHeader
         id="leaderboard-page-title"
         title={translations.leaderboardTitle}
+        actions={(
+          <HideInstructorsToggle
+            hideInstructors={hideInstructors}
+            onToggle={toggleHideInstructors}
+            isBusy={isFetching}
+          />
+        )}
       />
 
-      {hasCompleted && (
-        <>
-          <h2 className="badge-leaderboard-section-title" data-testid="course-leaderboard-completed-title">
-            {translations.completedTitle}
-          </h2>
-          <LeaderboardTable currentUserUid={currentUserUid} profiles={profiles} />
-        </>
-      )}
+      <LeaderboardView instructorsHidden={hideInstructors} isRefreshing={isFetching}>
+        {hasCompleted && (
+          <>
+            <h2 className="badge-leaderboard-section-title" data-testid="course-leaderboard-completed-title">
+              {translations.completedTitle}
+            </h2>
+            <LeaderboardTable currentUserUid={currentUserUid} profiles={profiles} />
+          </>
+        )}
 
-      {hasInProgress && (
-        <>
-          <h2 className="badge-leaderboard-section-title" data-testid="course-leaderboard-in-progress-title">
-            {translations.inProgressTitle}
-          </h2>
-          <LeaderboardTable currentUserUid={currentUserUid} profiles={inProgressProfiles} showProgress />
-        </>
-      )}
+        {hasInProgress && (
+          <>
+            <h2 className="badge-leaderboard-section-title" data-testid="course-leaderboard-in-progress-title">
+              {translations.inProgressTitle}
+            </h2>
+            <LeaderboardTable currentUserUid={currentUserUid} profiles={inProgressProfiles} showProgress />
+          </>
+        )}
 
-      {!hasCompleted && !hasInProgress && (
-        <LeaderboardTable profiles={[]} />
-      )}
+        {!hasCompleted && !hasInProgress && (
+          <LeaderboardTable profiles={[]} />
+        )}
+      </LeaderboardView>
     </>
   );
 };

@@ -6,7 +6,10 @@ import { Info as InfoIcon } from '@openedx/paragon/icons';
 import { useScrollToContent } from '../generic/hooks';
 import { SubHeader, Alert, Loader } from '../generic';
 import { getBadgeLeaderboardTableProps, getBadgeInProgressProps } from './utils';
-import { LeaderboardTable, BadgeLeaderboardHeader } from './components';
+import { useHideInstructors } from './hooks';
+import {
+  LeaderboardTable, LeaderboardView, BadgeLeaderboardHeader, HideInstructorsToggle,
+} from './components';
 
 import { useBadgeLeaderboard } from '../api/hooks/useBadgeLeaderboard';
 
@@ -21,9 +24,10 @@ import messages from '../i18n';
 const BadgeLeaderboardPage = () => {
   const intl = useIntl();
   const { badgeSlug, courseId } = useParams();
+  const [hideInstructors, toggleHideInstructors] = useHideInstructors();
   const {
-    data: badgeLeaderboardData, isLoading, error, isError,
-  } = useBadgeLeaderboard(badgeSlug, courseId);
+    data: badgeLeaderboardData, isLoading, isFetching, error, isError,
+  } = useBadgeLeaderboard(badgeSlug, courseId, hideInstructors);
 
   const translations = {
     leaderboardTitle: intl.formatMessage(messages.leaderboardHeadingText),
@@ -70,45 +74,62 @@ const BadgeLeaderboardPage = () => {
   const hasEarners = profiles.length > 0;
   const hasInProgress = inProgressProfiles.length > 0;
 
+  // An instructor badge's own board is every instructor and nobody else, so filtering it
+  // would just empty the page. The backend serves it unfiltered and says so here, which
+  // is what lets a sticky "hide instructors" preference not follow the learner into a
+  // blank list.
+  const isInstructorBadge = Boolean(badgeLeaderboardData?.badge?.isInstructorBadge);
+  const canHideInstructors = !isInstructorBadge;
+  const instructorsHidden = hideInstructors && canHideInstructors;
+
   return (
     <>
       <SubHeader
         id="leaderboard-page-title"
         title={translations.leaderboardTitle}
+        actions={canHideInstructors && (
+          <HideInstructorsToggle
+            hideInstructors={hideInstructors}
+            onToggle={toggleHideInstructors}
+            isBusy={isFetching}
+          />
+        )}
       />
       <BadgeLeaderboardHeader badge={badgeLeaderboardData?.badge || {}} />
 
-      {hasEarners && (
-        <>
-          {hasInProgress && (
-            <h2 className="badge-leaderboard-section-title" data-testid="badge-leaderboard-earned-title">
-              {translations.earnedTitle}
+      <LeaderboardView instructorsHidden={instructorsHidden} isRefreshing={isFetching}>
+        {hasEarners && (
+          <>
+            {hasInProgress && (
+              <h2 className="badge-leaderboard-section-title" data-testid="badge-leaderboard-earned-title">
+                {translations.earnedTitle}
+              </h2>
+            )}
+            <LeaderboardTable
+              currentUserUid={currentUserUid}
+              profiles={profiles}
+              delimiter={delimiter}
+            />
+          </>
+        )}
+
+        {hasInProgress && (
+          <>
+            <h2 className="badge-leaderboard-section-title" data-testid="badge-leaderboard-in-progress-title">
+              {translations.inProgressTitle}
             </h2>
-          )}
-          <LeaderboardTable
-            currentUserUid={currentUserUid}
-            profiles={profiles}
-            delimiter={delimiter}
-          />
-        </>
-      )}
+            <LeaderboardTable
+              currentUserUid={currentUserUid}
+              profiles={inProgressProfiles}
+              showProgress
+            />
+          </>
+        )}
 
-      {hasInProgress && (
-        <>
-          <h2 className="badge-leaderboard-section-title" data-testid="badge-leaderboard-in-progress-title">
-            {translations.inProgressTitle}
-          </h2>
-          <LeaderboardTable
-            currentUserUid={currentUserUid}
-            profiles={inProgressProfiles}
-            showProgress
-          />
-        </>
-      )}
-
-      {!hasEarners && !hasInProgress && (
-        <LeaderboardTable profiles={[]} />
-      )}
+        {!hasEarners && !hasInProgress && (
+          <LeaderboardTable profiles={[]} />
+        )}
+      </LeaderboardView>
     </>
   );
 };

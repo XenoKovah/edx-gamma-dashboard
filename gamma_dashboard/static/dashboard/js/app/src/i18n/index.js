@@ -231,6 +231,21 @@ const messages = defineMessages({
     defaultMessage: 'Leaderboard',
     description: 'Leaderboard page heading text',
   },
+  leaderboardHideInstructorsText: {
+    id: 'leaderboard.hide.instructors.text',
+    defaultMessage: 'Hide Instructors',
+    description: 'Button that removes instructors from the leaderboard and re-ranks the learners left on it',
+  },
+  leaderboardShowInstructorsText: {
+    id: 'leaderboard.show.instructors.text',
+    defaultMessage: 'Show Instructors',
+    description: 'Button that puts instructors back on the leaderboard',
+  },
+  leaderboardInstructorsHiddenNote: {
+    id: 'leaderboard.instructors.hidden.note',
+    defaultMessage: 'Instructors are hidden. Rankings are among learners only.',
+    description: 'Note shown above the leaderboard explaining that it currently leaves instructors out',
+  },
   leaderboardAvatarAltText: {
     id: 'leaderboard.avatar.alt.text',
     defaultMessage: '{username} profile image',

@@ -6,7 +6,8 @@ import { Info as InfoIcon } from '@openedx/paragon/icons';
 import { useScrollToContent } from '../generic/hooks';
 import { SubHeader, Alert, Loader } from '../generic';
 import { getBadgeLeaderboardTableProps } from './utils';
-import { LeaderboardTable } from './components';
+import { useHideInstructors } from './hooks';
+import { LeaderboardTable, LeaderboardView, HideInstructorsToggle } from './components';
 
 import { useCountryLeaderboard } from '../api/hooks/useCountryLeaderboard';
 
@@ -24,9 +25,10 @@ import messages from '../i18n';
 const CountryLeaderboardPage = () => {
   const intl = useIntl();
   const { country } = useParams();
+  const [hideInstructors, toggleHideInstructors] = useHideInstructors();
   const {
-    data: countryLeaderboardData, isLoading, error, isError,
-  } = useCountryLeaderboard(country);
+    data: countryLeaderboardData, isLoading, isFetching, error, isError,
+  } = useCountryLeaderboard(country, hideInstructors);
 
   const translations = {
     errorTitle: intl.formatMessage(messages.genericErrorFallbackTitle),
@@ -72,12 +74,21 @@ const CountryLeaderboardPage = () => {
       <SubHeader
         id="leaderboard-page-title"
         title={title}
+        actions={(
+          <HideInstructorsToggle
+            hideInstructors={hideInstructors}
+            onToggle={toggleHideInstructors}
+            isBusy={isFetching}
+          />
+        )}
       />
-      <LeaderboardTable
-        currentUserUid={countryLeaderboardData?.userUid}
-        profiles={profiles}
-        delimiter={delimiter}
-      />
+      <LeaderboardView instructorsHidden={hideInstructors} isRefreshing={isFetching}>
+        <LeaderboardTable
+          currentUserUid={countryLeaderboardData?.userUid}
+          profiles={profiles}
+          delimiter={delimiter}
+        />
+      </LeaderboardView>
     </>
   );
 };

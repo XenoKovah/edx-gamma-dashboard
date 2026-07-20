@@ -6,7 +6,8 @@ import { Info as InfoIcon } from '@openedx/paragon/icons';
 import { useScrollToContent } from '../generic/hooks';
 import { SubHeader, Alert, Loader } from '../generic';
 import { getLeaderboardTableProps } from './utils';
-import { LeaderboardTable } from './components';
+import { useHideInstructors } from './hooks';
+import { LeaderboardTable, LeaderboardView, HideInstructorsToggle } from './components';
 
 import { useLeaderboard } from '../api/hooks/useLeaderboard';
 
@@ -15,9 +16,10 @@ import messages from '../i18n';
 const LeaderboardPage = () => {
   const intl = useIntl();
   const { courseId } = useParams();
+  const [hideInstructors, toggleHideInstructors] = useHideInstructors();
   const {
-    data: leaderboardData, isLoading, error, isError,
-  } = useLeaderboard(courseId);
+    data: leaderboardData, isLoading, isFetching, error, isError,
+  } = useLeaderboard(courseId, hideInstructors);
 
   const translations = {
     alertTitle: intl.formatMessage(messages.leaderboardHeadingText),
@@ -66,13 +68,22 @@ const LeaderboardPage = () => {
       <SubHeader
         id="leaderboard-page-title"
         title={translations.alertTitle}
+        actions={(
+          <HideInstructorsToggle
+            hideInstructors={hideInstructors}
+            onToggle={toggleHideInstructors}
+            isBusy={isFetching}
+          />
+        )}
       />
-      <LeaderboardTable
-        currentUserUid={leaderboardData?.userUid}
-        profiles={profiles}
-        delimiter={delimiter}
-        systemStatuses={systemStatuses}
-      />
+      <LeaderboardView instructorsHidden={hideInstructors} isRefreshing={isFetching}>
+        <LeaderboardTable
+          currentUserUid={leaderboardData?.userUid}
+          profiles={profiles}
+          delimiter={delimiter}
+          systemStatuses={systemStatuses}
+        />
+      </LeaderboardView>
     </>
   );
 };

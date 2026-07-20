@@ -80,20 +80,30 @@ class GammaApiWrapper:
 
         return self._send_request(absolute_url, **kwargs)
 
-    def get_leaderboard_info(self, username, user_signup_source, course_id=None, **kwargs):
+    def get_leaderboard_info(self, username, user_signup_source, course_id=None, hide_instructors=False, **kwargs):
         """
         Return leaderboard data for user.
+
+        With ``hide_instructors`` the same board comes back without its instructors and
+        with every rank recomputed over the learners that remain.
 
         Returns:
             dict: parsed leaderboard infromation.
         """
         return self.request_api_endpoint(
             'leaderboard',
-            params={'username': username, 'signup_source': user_signup_source, 'course_id': course_id},
+            params={
+                'username': username,
+                'signup_source': user_signup_source,
+                'course_id': course_id,
+                'hide_instructors': hide_instructors,
+            },
             **kwargs
         )
 
-    def get_badge_leaderboard_info(self, username, user_signup_source, badge_slug, course_id=None, **kwargs):
+    def get_badge_leaderboard_info(
+        self, username, user_signup_source, badge_slug, course_id=None, hide_instructors=False, **kwargs
+    ):
         """
         Return leaderboard data limited to the users who earned a specific badge.
 
@@ -102,7 +112,12 @@ class GammaApiWrapper:
         """
         return self.request_api_endpoint(
             f'leaderboard/badge/{badge_slug}',
-            params={'username': username, 'signup_source': user_signup_source, 'course_id': course_id},
+            params={
+                'username': username,
+                'signup_source': user_signup_source,
+                'course_id': course_id,
+                'hide_instructors': hide_instructors,
+            },
             **kwargs
         )
 
@@ -120,7 +135,9 @@ class GammaApiWrapper:
             **kwargs
         ) or {}
 
-    def get_users_leaderboard_info(self, username, user_signup_source, user_uids, **kwargs):
+    def get_users_leaderboard_info(
+        self, username, user_signup_source, user_uids, hide_instructors=False, **kwargs
+    ):
         """
         Return a leaderboard restricted to an explicit set of ``user_uids``, ranked by
         total points (with badges) -- the regular leaderboard shape.
@@ -141,6 +158,7 @@ class GammaApiWrapper:
                 'username': username,
                 'signup_source': user_signup_source,
                 'user_uids': list(user_uids),
+                'hide_instructors': hide_instructors,
             },
             **kwargs
         )
@@ -243,4 +261,19 @@ class GammaApiWrapper:
         """
         return self.request_api_endpoint(
             'users/leaderboard-excluded-uids/', **kwargs
+        ) or {}
+
+    def get_instructor_user_uids(self, **kwargs):
+        """
+        Return the user_uids of everyone holding an instructor badge.
+
+        Only needed for the leaderboard section this app ranks itself (the per-course
+        "In progress" list, ranked by course grade); Gamma filters the point-ranked
+        sections directly.
+
+        Returns:
+            dict: ``{'user_uids': [...]}`` (empty dict on a Gamma error).
+        """
+        return self.request_api_endpoint(
+            'leaderboard/instructor-uids', **kwargs
         ) or {}

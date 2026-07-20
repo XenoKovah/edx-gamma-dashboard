@@ -1,0 +1,47 @@
+// "Hide Instructors" / "Show Instructors" — the toggle that swaps a leaderboard between
+// everyone and learners-only. Styled to match the Collapse/Expand All button on the All
+// Accomplishments page (Paragon outline-primary, small), and sat at the far end of the
+// heading row by .gamification-title-wrapper's own space-between.
+.leaderboard-hide-instructors-toggle {
+  // The heading wraps on narrow screens; without this the button can end up pressed
+  // against the title.
+  margin-left: map-get($spacers, 3);
+  white-space: nowrap;
+
+  .rtl & {
+    margin-left: map-get($spacers, 0);
+    margin-right: map-get($spacers, 3);
+  }
+}
+
+// Shown inside the button while the other view of the board is being fetched.
+.leaderboard-hide-instructors-spinner {
+  width: 0.875rem;
+  height: 0.875rem;
+  border-width: 0.125rem;
+  margin-right: map-get($spacers, 2);
+  vertical-align: text-bottom;
+
+  .rtl & {
+    margin-left: map-get($spacers, 2);
+    margin-right: map-get($spacers, 0);
+  }
+}
+
+// The preference is sticky across pages and visits, so a learner can arrive at a board
+// that is already filtered. This line is what stops that reading as a broken page.
+.leaderboard-instructors-hidden-note {
+  margin-bottom: map-get($spacers, 3);
+  font-size: 0.875rem;
+  font-style: italic;
+  color: $secondary-text-color;
+}
+
+// While the other view loads, the table keeps showing the rows it already had (see
+// LeaderboardView) — fading them says those numbers are the previous view's, not the
+// one the button now names.
+.leaderboard-view-refreshing {
+  opacity: 0.55;
+  transition: opacity 0.15s ease-in-out;
+  pointer-events: none;
+}
