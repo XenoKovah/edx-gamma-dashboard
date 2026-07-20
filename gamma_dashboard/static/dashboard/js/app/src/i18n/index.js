@@ -91,6 +91,16 @@ const messages = defineMessages({
     defaultMessage: '← Back to dashboard',
     description: 'Link back to the main gamification dashboard from the All Accomplishments page',
   },
+  accomplishmentsPageCollapseAllText: {
+    id: 'accomplishments.page.collapse.all.text',
+    defaultMessage: 'Collapse All',
+    description: 'Button that closes every category section on the All Accomplishments page',
+  },
+  accomplishmentsPageExpandAllText: {
+    id: 'accomplishments.page.expand.all.text',
+    defaultMessage: 'Expand All',
+    description: 'Button that opens every category section on the All Accomplishments page',
+  },
   performanceBadgesSectionAllBadgesButtonText: {
     id: 'performance.badges.section.all.badges.button.text',
     defaultMessage: 'All accomplishments',

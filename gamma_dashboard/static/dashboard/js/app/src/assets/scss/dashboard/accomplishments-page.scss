@@ -1,0 +1,58 @@
+// All Accomplishments page: each category is a collapsible section, the way the
+// badges admin page groups badges. The category header doubles as the toggle, so
+// a learner can shrink the page down to a list of category names and open only
+// the one they care about.
+.accomplishments-page {
+  .accomplishments-page-toolbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: map-get($spacers, 3);
+  }
+
+  // The dashboard's 25rem floor is sized for the two-up cards on the main
+  // dashboard; left alone it would keep a collapsed category full height and
+  // there would be nothing to gain by collapsing it.
+  .dashboard-section {
+    min-height: 0;
+  }
+
+  .accomplishments-category {
+    // Paragon's basic trigger is styled like a link. Strip that back: the header
+    // inside already carries the section's own type styles, and zeroing the
+    // padding keeps it exactly where it sat before it became a trigger — the
+    // section's decorative accent line is positioned against the section, not
+    // the header, so any extra padding here would slide the title under it.
+    .collapsible-trigger {
+      padding: map-get($spacers, 0);
+      text-decoration: none;
+      color: inherit;
+
+      .dashboard-section-header {
+        flex: 1 1 auto;
+        margin-bottom: map-get($spacers, 0);
+      }
+
+      &:hover .dashboard-section-header-title,
+      &:focus .dashboard-section-header-title {
+        text-decoration: underline;
+      }
+    }
+
+    .collapsible-icon {
+      color: $accent-color;
+      margin-right: 0.875rem;
+
+      .rtl & {
+        margin-left: 0.875rem;
+        margin-right: map-get($spacers, 0);
+      }
+    }
+
+    // The badge grid brings its own top margin; Paragon's body padding would
+    // add a second gap under the header and inset the grid from the card.
+    .collapsible-body {
+      padding: map-get($spacers, 0);
+    }
+  }
+}
