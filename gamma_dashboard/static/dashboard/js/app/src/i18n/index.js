@@ -153,8 +153,8 @@ const messages = defineMessages({
   },
   performanceStatusesSectionDescriptionText: {
     id: 'performance.statuses.section.description.text',
-    defaultMessage: 'The more points you have, the higher status you own.',
-    description: 'Text explaining how status is determined based on points',
+    defaultMessage: 'The simple measure of your personal growth.',
+    description: 'Text describing what the status ladder represents',
   },
   performancePointsDistributionSectionHeadingText: {
     id: 'performance.points.distribution.section.heading.text',

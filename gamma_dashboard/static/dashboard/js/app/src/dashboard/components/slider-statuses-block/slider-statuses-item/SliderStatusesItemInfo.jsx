@@ -46,7 +46,11 @@ const SliderStatusesItemInfo = ({
         {title}
       </div>
       <span className="slider-item-info-amount">
-        {isStatusComplete ? statusPoints : points}/{statusPoints}
+        {/* Digit-grouped for the viewer's locale: the upper bands run to eight
+            figures, which is unreadable as an unbroken run (100000000/100000000).
+            Uses the intl instance this component already has rather than a
+            hardcoded separator, so the fr-ca/pt-pt/uk catalogs keep their own. */}
+        {intl.formatNumber(isStatusComplete ? statusPoints : points)} / {intl.formatNumber(statusPoints)}
       </span>
     </div>
   );

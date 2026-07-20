@@ -100,16 +100,19 @@ describe('<SliderStatusesBlock />', () => {
   it('render SliderStatusesBlock component correctly', () => {
     const { getByText, getAllByTestId } = renderComponent();
 
-    expect(getByText('Your Aggregate Accomplishment Level')).toBeInTheDocument();
+    expect(getByText('R0x0r Level')).toBeInTheDocument();
     expect(getByText('3 of 7')).toBeInTheDocument();
-    expect(getByText('The more points you have, the higher status you own.')).toBeInTheDocument();
+    expect(getByText('The simple measure of your personal growth.')).toBeInTheDocument();
 
     const image = getAllByTestId('slider-item-status-image');
 
     statusItemsMock.forEach(({
       title, points, statusPoints, url,
     }, index) => {
-      const pointsTitle = `${points >= statusPoints ? statusPoints : points}/${statusPoints}`;
+      // Digit-grouped for the locale, matching intl.formatNumber in
+      // SliderStatusesItemInfo (1200 renders as "1,200", not "1200").
+      const format = (value) => value.toLocaleString('en');
+      const pointsTitle = `${format(points >= statusPoints ? statusPoints : points)} / ${format(statusPoints)}`;
 
       expect(getByText(title)).toBeInTheDocument();
       expect(getByText(pointsTitle)).toBeInTheDocument();

@@ -118,8 +118,8 @@ const messages = defineMessages({
   },
   performanceStatusesSectionDescriptionText: {
     id: 'performance.statuses.section.description.text',
-    defaultMessage: 'Чим більше у вас балів, тим вищий ваш статус.',
-    description: 'Текст, що пояснює, як статус визначається на основі балів',
+    defaultMessage: 'Простий показник вашого особистого зростання.',
+    description: 'Текст, що описує, що представляє собою шкала статусів',
   },
   performancePointsDistributionSectionHeadingText: {
     id: 'performance.points.distribution.section.heading.text',
