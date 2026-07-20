@@ -18,7 +18,7 @@ const LeaderboardPage = () => {
   const { courseId } = useParams();
   const [hideInstructors, toggleHideInstructors] = useHideInstructors();
   const {
-    data: leaderboardData, isLoading, isFetching, error, isError,
+    data: leaderboardData, isLoading, isPreviousData, error, isError,
   } = useLeaderboard(courseId, hideInstructors);
 
   const translations = {
@@ -72,11 +72,11 @@ const LeaderboardPage = () => {
           <HideInstructorsToggle
             hideInstructors={hideInstructors}
             onToggle={toggleHideInstructors}
-            isBusy={isFetching}
+            isBusy={isPreviousData}
           />
         )}
       />
-      <LeaderboardView instructorsHidden={hideInstructors} isRefreshing={isFetching}>
+      <LeaderboardView instructorsHidden={hideInstructors} isRefreshing={isPreviousData}>
         <LeaderboardTable
           currentUserUid={leaderboardData?.userUid}
           profiles={profiles}

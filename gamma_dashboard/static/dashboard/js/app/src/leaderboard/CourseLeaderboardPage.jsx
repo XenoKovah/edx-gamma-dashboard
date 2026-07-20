@@ -24,7 +24,7 @@ const CourseLeaderboardPage = () => {
   const { courseId } = useParams();
   const [hideInstructors, toggleHideInstructors] = useHideInstructors();
   const {
-    data: courseLeaderboardData, isLoading, isFetching, error, isError,
+    data: courseLeaderboardData, isLoading, isPreviousData, error, isError,
   } = useCourseLeaderboard(courseId, hideInstructors);
 
   const translations = {
@@ -81,12 +81,12 @@ const CourseLeaderboardPage = () => {
           <HideInstructorsToggle
             hideInstructors={hideInstructors}
             onToggle={toggleHideInstructors}
-            isBusy={isFetching}
+            isBusy={isPreviousData}
           />
         )}
       />
 
-      <LeaderboardView instructorsHidden={hideInstructors} isRefreshing={isFetching}>
+      <LeaderboardView instructorsHidden={hideInstructors} isRefreshing={isPreviousData}>
         {hasCompleted && (
           <>
             <h2 className="badge-leaderboard-section-title" data-testid="course-leaderboard-completed-title">

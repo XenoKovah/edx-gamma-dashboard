@@ -26,7 +26,7 @@ const BadgeLeaderboardPage = () => {
   const { badgeSlug, courseId } = useParams();
   const [hideInstructors, toggleHideInstructors] = useHideInstructors();
   const {
-    data: badgeLeaderboardData, isLoading, isFetching, error, isError,
+    data: badgeLeaderboardData, isLoading, isPreviousData, error, isError,
   } = useBadgeLeaderboard(badgeSlug, courseId, hideInstructors);
 
   const translations = {
@@ -91,13 +91,13 @@ const BadgeLeaderboardPage = () => {
           <HideInstructorsToggle
             hideInstructors={hideInstructors}
             onToggle={toggleHideInstructors}
-            isBusy={isFetching}
+            isBusy={isPreviousData}
           />
         )}
       />
       <BadgeLeaderboardHeader badge={badgeLeaderboardData?.badge || {}} />
 
-      <LeaderboardView instructorsHidden={instructorsHidden} isRefreshing={isFetching}>
+      <LeaderboardView instructorsHidden={instructorsHidden} isRefreshing={isPreviousData}>
         {hasEarners && (
           <>
             {hasInProgress && (

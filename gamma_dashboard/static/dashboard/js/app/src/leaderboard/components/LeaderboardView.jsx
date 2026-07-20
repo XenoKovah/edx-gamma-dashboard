@@ -16,14 +16,20 @@ import messages from '../../i18n';
  *   line saying why, a short board with unfamiliar rankings just looks wrong.
  * - it fades the tables while the other view is being fetched. The rows on screen are
  *   the *previous* view's, deliberately kept there instead of blanking the page, so they
- *   need to read as stale rather than current.
+ *   need to read as stale rather than current. Drive this from react-query's
+ *   ``isPreviousData``, not ``isFetching``: the latter is also true during the silent
+ *   revalidation after a cache hit, where the rows on screen are already the right ones
+ *   and fading them would make an instant toggle look slow.
  */
 const LeaderboardView = ({ instructorsHidden, isRefreshing, children }) => {
   const intl = useIntl();
 
   return (
     <>
-      {instructorsHidden && (
+      {/* Held back until the filtered rows are actually on screen: during the fetch the
+          table is still showing the previous view, instructors and all, and a line
+          claiming otherwise would contradict what the learner is looking at. */}
+      {instructorsHidden && !isRefreshing && (
         <p className="leaderboard-instructors-hidden-note" data-testid="leaderboard-instructors-hidden-note">
           {intl.formatMessage(messages.leaderboardInstructorsHiddenNote)}
         </p>

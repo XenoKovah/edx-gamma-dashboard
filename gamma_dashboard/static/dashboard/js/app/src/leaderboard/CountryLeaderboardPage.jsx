@@ -27,7 +27,7 @@ const CountryLeaderboardPage = () => {
   const { country } = useParams();
   const [hideInstructors, toggleHideInstructors] = useHideInstructors();
   const {
-    data: countryLeaderboardData, isLoading, isFetching, error, isError,
+    data: countryLeaderboardData, isLoading, isPreviousData, error, isError,
   } = useCountryLeaderboard(country, hideInstructors);
 
   const translations = {
@@ -78,11 +78,11 @@ const CountryLeaderboardPage = () => {
           <HideInstructorsToggle
             hideInstructors={hideInstructors}
             onToggle={toggleHideInstructors}
-            isBusy={isFetching}
+            isBusy={isPreviousData}
           />
         )}
       />
-      <LeaderboardView instructorsHidden={hideInstructors} isRefreshing={isFetching}>
+      <LeaderboardView instructorsHidden={hideInstructors} isRefreshing={isPreviousData}>
         <LeaderboardTable
           currentUserUid={countryLeaderboardData?.userUid}
           profiles={profiles}
