@@ -552,16 +552,86 @@ class GameProfileApiView(APIView):
         return Response(user_info)
 
 
-class UserBadgesApiView(APIView):
+class ProfileGamificationViewMixin:
+    """
+    Shared plumbing for the read-only endpoints that expose a viewed user's
+    gamification data on their Open edX profile page (earned badges, R0x0r level).
+
+    Every such endpoint answers the same two side questions: may the requester see
+    this profile at all, and how does a relative Gamma media path become a URL the
+    Profile MFE can actually load from another origin.
+    """
+
+    permission_classes = (IsAuthenticated,)
+    # JWT is listed first because these endpoints are called cross-origin from the
+    # Profile MFE (apps.<host>); the other gamma_dashboard views are same-origin only.
+    authentication_classes = (JwtAuthentication, SessionAuthenticationAllowInactiveUser)
+
+    @staticmethod
+    def _is_profile_visible(request, username):
+        """
+        Return whether ``request.user`` may view ``username``'s profile.
+
+        Mirrors Open edX per-field visibility. Staff may always view (like
+        IsOwnerOrPublicCertificates' IsStaff bypass). Everyone else -- INCLUDING the
+        owner, because the profile is read-only and shows exactly what the public
+        sees -- gets the gated view: "private" hides everything; "all_users" shows
+        everything; "custom" shows accomplishments only when the learner explicitly
+        shared them (visibility.accomplishments == all_users), which the
+        account-settings "Who can see your Accomplishments?" control sets.
+        """
+        if request.user.is_staff:
+            return True
+
+        try:
+            account_settings = get_account_settings(request, usernames=[username])[0]
+        except (UserNotFound, IndexError):
+            return False
+
+        privacy = account_settings.get("account_privacy")
+        if privacy == PRIVATE_VISIBILITY:
+            return False
+        if privacy == ALL_USERS_VISIBILITY:
+            return True
+
+        # "custom": honor the per-field accomplishments visibility preference.
+        try:
+            target_user = User.objects.get(username=username)
+        except User.DoesNotExist:
+            return False
+        return get_user_preference(target_user, "visibility.accomplishments") == ALL_USERS_VISIBILITY
+
+    @staticmethod
+    def _gamma_public_base_url():
+        """
+        Public base URL of the Gamma service that serves badge media.
+
+        Uses the same source as the dashboard page's ``window.GAMIFICATION_BASE_URL``.
+        """
+        return configuration_helpers.get_value(
+            "GAMIFICATION_BASE_URL",
+            settings.FEATURES.get("RG_GAMIFICATION", {}).get("RG_GAMIFICATION_ENDPOINT", ""),
+        )
+
+    @staticmethod
+    def _absolute_media_url(uri, base_url):
+        """
+        Resolve a possibly-relative badge image URI to an absolute, browser-reachable URL.
+        """
+        if not uri:
+            return None
+        if uri.startswith(("http://", "https://")):
+            return uri
+        if not base_url:
+            return uri
+        return urljoin(f"{base_url.rstrip('/')}/", uri.lstrip("/"))
+
+
+class UserBadgesApiView(ProfileGamificationViewMixin, APIView):
     """
     Returns the badges a given user has earned (completed), for display on their
     Open edX profile page. Honors the target user's profile-visibility setting.
     """
-
-    permission_classes = (IsAuthenticated,)
-    # JWT is listed first because this endpoint is called cross-origin from the
-    # Profile MFE (apps.<host>); the other gamma_dashboard views are same-origin only.
-    authentication_classes = (JwtAuthentication, SessionAuthenticationAllowInactiveUser)
 
     def get(self, request, username):
         """
@@ -623,64 +693,62 @@ class UserBadgesApiView(APIView):
 
         return Response(earned_badges)
 
-    @staticmethod
-    def _is_profile_visible(request, username):
+
+class UserLevelApiView(ProfileGamificationViewMixin, APIView):
+    """
+    Returns a given user's attained R0x0r level and point total, for the "R0x0r
+    Level" box on their Open edX profile page. Honors the same profile-visibility
+    rules as the earned-badges endpoint.
+
+    Deliberately a separate endpoint rather than extra keys on ``user-badges``:
+    that response is a bare JSON list consumed by the already-deployed profile
+    widget, so reshaping it would break whichever side deploys second.
+    """
+
+    def get(self, request, username):
         """
-        Return whether ``request.user`` may view ``username``'s profile.
-
-        Mirrors Open edX per-field visibility. Staff may always view (like
-        IsOwnerOrPublicCertificates' IsStaff bypass). Everyone else -- INCLUDING the
-        owner, because the profile is read-only and shows exactly what the public
-        sees -- gets the gated view: "private" hides everything; "all_users" shows
-        everything; "custom" shows accomplishments only when the learner explicitly
-        shared them (visibility.accomplishments == all_users), which the
-        account-settings "Who can see your Accomplishments?" control sets.
+        Get ``username``'s points and the highest status they have reached.
         """
-        if request.user.is_staff:
-            return True
+        if not show_student_ui(request):
+            return Response({})
 
-        try:
-            account_settings = get_account_settings(request, usernames=[username])[0]
-        except (UserNotFound, IndexError):
-            return False
+        if not self._is_profile_visible(request, username):
+            return Response({})
 
-        privacy = account_settings.get("account_privacy")
-        if privacy == PRIVATE_VISIBILITY:
-            return False
-        if privacy == ALL_USERS_VISIBILITY:
-            return True
+        profile_info = GammaApiWrapper(version=DEFAULT_API_VERSION).get_game_profile(username)
 
-        # "custom": honor the per-field accomplishments visibility preference.
-        try:
-            target_user = User.objects.get(username=username)
-        except User.DoesNotExist:
-            return False
-        return get_user_preference(target_user, "visibility.accomplishments") == ALL_USERS_VISIBILITY
+        if not profile_info:
+            return Response(
+                {"error": "No data received from Gamma server."},
+                status=status.HTTP_422_UNPROCESSABLE_ENTITY,
+            )
 
-    @staticmethod
-    def _gamma_public_base_url():
-        """
-        Public base URL of the Gamma service that serves badge media.
+        points = profile_info.get("points") or 0
+        gamma_base = self._gamma_public_base_url()
 
-        Uses the same source as the dashboard page's ``window.GAMIFICATION_BASE_URL``.
-        """
-        return configuration_helpers.get_value(
-            "GAMIFICATION_BASE_URL",
-            settings.FEATURES.get("RG_GAMIFICATION", {}).get("RG_GAMIFICATION_ENDPOINT", ""),
+        # The ladder arrives ordered by threshold, but sort defensively rather than
+        # trusting order: picking the wrong element here silently shows the wrong
+        # level. The attained status is the highest one the learner's points reach;
+        # below the first threshold there is no level yet and `level` stays None.
+        statuses = sorted(
+            (s for s in (profile_info.get("system_statuses") or []) if s.get("active", True)),
+            key=lambda s: s.get("status_points") or 0,
         )
+        attained = [s for s in statuses if points >= (s.get("status_points") or 0)]
+        current = attained[-1] if attained else None
 
-    @staticmethod
-    def _absolute_media_url(uri, base_url):
-        """
-        Resolve a possibly-relative badge image URI to an absolute, browser-reachable URL.
-        """
-        if not uri:
-            return None
-        if uri.startswith(("http://", "https://")):
-            return uri
-        if not base_url:
-            return uri
-        return urljoin(f"{base_url.rstrip('/')}/", uri.lstrip("/"))
+        level = None
+        if current:
+            level = {
+                "title": current.get("title"),
+                "slug": current.get("slug") or current.get("status_uid"),
+                # Same art the dashboard ladder shows for this level, absolutised so
+                # the Profile MFE can load it cross-origin from the Gamma host.
+                "image": self._absolute_media_url(current.get("url"), gamma_base),
+                "status_points": current.get("status_points") or 0,
+            }
+
+        return Response({"points": points, "level": level})
 
 
 # Open edX user-preference key for the "badge earned" pop-up opt-out. Written by the

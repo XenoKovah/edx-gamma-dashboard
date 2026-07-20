@@ -11,6 +11,7 @@ from gamma_dashboard.dashboard.api.v0.views import (
     CourseLeaderboardApiView,
     LeaderboardApiView,
     UserBadgesApiView,
+    UserLevelApiView,
 )
 from gamma_dashboard.dashboard.api.utils import repair_mojibake_text
 from gamma_dashboard.dashboard.core.gamma.api.wrapper import GammaApiWrapper
@@ -724,6 +725,114 @@ class TestUserBadgesApiView:
         mocker.patch.object(GammaApiWrapper, "get_game_profile", return_value=None)
 
         response = UserBadgesApiView().get(self._request(mocker), username="target")
+
+        assert response.status_code == status.HTTP_422_UNPROCESSABLE_ENTITY
+
+
+class TestUserLevelApiView:
+    """
+    Test Case for `UserLevelApiView` -- the "R0x0r Level" box on the profile page.
+    """
+
+    # Deliberately NOT in threshold order, so a test failure distinguishes "picked
+    # the highest attained level" from "picked whatever Gamma happened to send last".
+    PROFILE_INFO = {
+        "points": 250_000,
+        "system_statuses": [
+            {
+                "title": "R0x0r Level 1",
+                "slug": "r0x0r-level-1",
+                "status_points": 200_000,
+                "url": "/media/uploads/statuses/r0x0r-band-3.png",
+                "active": True,
+            },
+            {
+                "title": "Beginner Level 1",
+                "slug": "beginner-level-1",
+                "status_points": 2_000,
+                "url": "/media/uploads/statuses/r0x0r-band-1.png",
+                "active": True,
+            },
+            {
+                "title": "R0x0r Level 2",
+                "slug": "r0x0r-level-2",
+                "status_points": 400_000,
+                "url": "/media/uploads/statuses/r0x0r-band-3.png",
+                "active": True,
+            },
+        ],
+    }
+
+    @staticmethod
+    def _request(mocker, *, username="viewer", is_staff=False):
+        request = mocker.MagicMock()
+        request.user.username = username
+        request.user.is_staff = is_staff
+        return request
+
+    @staticmethod
+    def _patch_visible(mocker):
+        mocker.patch(
+            "gamma_dashboard.dashboard.api.v0.views.get_account_settings",
+            return_value=[{"account_privacy": "all_users"}],
+        )
+        mocker.patch(
+            "gamma_dashboard.dashboard.api.v0.views.configuration_helpers.get_value",
+            return_value="https://gamma.example.com",
+        )
+
+    @pytest.mark.django_db
+    def test_returns_highest_attained_level_and_points(self, mocker):
+        self._patch_visible(mocker)
+        mocker.patch.object(GammaApiWrapper, "get_game_profile", return_value=self.PROFILE_INFO)
+
+        response = UserLevelApiView().get(self._request(mocker), username="target")
+
+        assert response.status_code == status.HTTP_200_OK
+        assert response.data == {
+            "points": 250_000,
+            "level": {
+                "title": "R0x0r Level 1",  # 250k clears 200k but not the 400k above it
+                "slug": "r0x0r-level-1",
+                "image": "https://gamma.example.com/media/uploads/statuses/r0x0r-band-3.png",
+                "status_points": 200_000,
+            },
+        }
+
+    @pytest.mark.django_db
+    def test_below_first_threshold_has_no_level(self, mocker):
+        self._patch_visible(mocker)
+        mocker.patch.object(
+            GammaApiWrapper,
+            "get_game_profile",
+            return_value={**self.PROFILE_INFO, "points": 100},
+        )
+
+        response = UserLevelApiView().get(self._request(mocker), username="target")
+
+        assert response.status_code == status.HTTP_200_OK
+        assert response.data == {"points": 100, "level": None}
+
+    @pytest.mark.django_db
+    def test_private_profile_returns_empty_without_calling_gamma(self, mocker):
+        mocker.patch(
+            "gamma_dashboard.dashboard.api.v0.views.get_account_settings",
+            return_value=[{"account_privacy": "private"}],
+        )
+        gamma_mock = mocker.patch.object(GammaApiWrapper, "get_game_profile")
+
+        response = UserLevelApiView().get(self._request(mocker), username="target")
+
+        assert response.status_code == status.HTTP_200_OK
+        assert response.data == {}
+        gamma_mock.assert_not_called()
+
+    @pytest.mark.django_db
+    def test_no_gamma_data_returns_422(self, mocker):
+        self._patch_visible(mocker)
+        mocker.patch.object(GammaApiWrapper, "get_game_profile", return_value=None)
+
+        response = UserLevelApiView().get(self._request(mocker), username="target")
 
         assert response.status_code == status.HTTP_422_UNPROCESSABLE_ENTITY
 
