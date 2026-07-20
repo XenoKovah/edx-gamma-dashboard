@@ -86,10 +86,11 @@ describe('<BadgeLeaderboardPage>', () => {
     );
     // Two tables: earned + in-progress.
     expect(getAllByTestId('leaderboard-table')).toHaveLength(2);
-    // In-progress rows are labelled by their percentage; the earner keeps points.
+    // In-progress rows are labelled by their percentage; the earner keeps points,
+    // digit-grouped for the locale.
     expect(getByText('15%')).toBeInTheDocument();
     expect(getByText('3%')).toBeInTheDocument();
-    expect(getByText('1200')).toBeInTheDocument();
+    expect(getByText('1,200')).toBeInTheDocument();
     expect(getByText('mariia')).toBeInTheDocument();
   });
 

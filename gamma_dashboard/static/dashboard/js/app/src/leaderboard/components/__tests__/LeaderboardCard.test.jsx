@@ -39,7 +39,7 @@ describe('<LeaderboardCard>', () => {
     expect(usernames[0].textContent).toBe(profile.userUid);
   });
 
-  it('renders with correct `points` value', () => {
+  it('renders the `points` value digit-grouped for the locale', () => {
     const { getByTestId } = renderWithProviders(
       <LeaderboardCard
         profile={profile}
@@ -47,7 +47,9 @@ describe('<LeaderboardCard>', () => {
     );
 
     const progressCell = getByTestId('progress-cell');
-    const expectedProgressText = `${profile.points}`;
+    // The mock profile scores 10000; under the test locale (en) the thousands
+    // separator is what distinguishes this from a raw stringified number.
+    const expectedProgressText = '10,000';
 
     expect(progressCell.textContent).toBe(expectedProgressText);
   });

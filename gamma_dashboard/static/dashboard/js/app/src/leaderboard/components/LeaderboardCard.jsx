@@ -25,7 +25,8 @@ const LeaderboardCard = ({ profile, currentUserUid, showProgress }) => {
   } = profile;
 
   // Show the percentage when one is provided (in-progress members, and completed
-  // members who have no course points -> 100%); otherwise show the points score.
+  // members who have no course points -> 100%); otherwise show the points score,
+  // digit-grouped for the viewer's locale so seven-figure totals stay readable.
   const hasProgressPercent = progressPercent !== null && progressPercent !== undefined;
   // Highlight the viewer's own row by identity, not by position: with shared ranks
   // a position number is no longer unique, so matching on it would highlight every
@@ -96,7 +97,7 @@ const LeaderboardCard = ({ profile, currentUserUid, showProgress }) => {
           className="leaderboard-card-progress"
           data-testid="progress-cell"
         >
-          {hasProgressPercent ? `${progressPercent}%` : points}
+          {hasProgressPercent ? `${progressPercent}%` : intl.formatNumber(points)}
         </span>
       </Card.Body>
       <Card.Footer className="p-0 mt-3 mt-md-0 overflow-auto">
