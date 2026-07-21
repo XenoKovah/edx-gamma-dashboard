@@ -81,6 +81,11 @@ const messages = defineMessages({
     defaultMessage: 'All Accomplishments',
     description: 'Heading for the dedicated All Accomplishments page (badges grouped by category)',
   },
+  badgeLeaderboardCategoryLinkTitle: {
+    id: 'badge.leaderboard.category.link.title',
+    defaultMessage: 'See every {category} accomplishment',
+    description: 'Accessible label for the category link above the badge title on a per-badge leaderboard',
+  },
   accomplishmentsPageOtherCategoryText: {
     id: 'accomplishments.page.other.category.text',
     defaultMessage: 'Other',

@@ -1,5 +1,8 @@
-import React, { useCallback, useMemo, useState } from 'react';
+import React, {
+  useCallback, useEffect, useMemo, useRef, useState,
+} from 'react';
 import { useIntl } from 'react-intl';
+import { useSearchParams } from 'react-router-dom';
 import { Button, Collapsible } from '@openedx/paragon';
 import { Error as ErrorIcon, Info as InfoIcon } from '@openedx/paragon/icons';
 
@@ -13,11 +16,14 @@ import {
 import { ProgressBadge } from '../components/progress-badge';
 import { useGameProfile } from '../../api/hooks/useGameProfile';
 import { groupBadgesByCategory } from './utils';
-import { URLS } from '../../routes/constants';
+import { ACCOMPLISHMENTS_CATEGORY_PARAM, URLS } from '../../routes/constants';
 
 import messages from '../../i18n';
 
 const PAGE_TITLE_ID = 'accomplishments-page-title';
+
+// Headroom left above a deep-linked category, matching useScrollToContent's.
+const SCROLL_OFFSET = 100;
 
 const AccomplishmentsPage = () => {
   const intl = useIntl();
@@ -30,6 +36,15 @@ const AccomplishmentsPage = () => {
   // keys rather than the open ones means a category the badge data adds later
   // shows up open, without having to seed state from the async response.
   const [collapsedKeys, setCollapsedKeys] = useState(() => new Set());
+
+  // Deep link from a per-badge leaderboard: ?category=<free-text category> opens
+  // that category alone and scrolls to it. The value is matched against the raw
+  // category, which is also the group key.
+  const [searchParams] = useSearchParams();
+  const focusedCategory = searchParams.get(ACCOMPLISHMENTS_CATEGORY_PARAM);
+  const categoryNodes = useRef(new Map());
+  const [seededFor, setSeededFor] = useState(null);
+  const [scrollToKey, setScrollToKey] = useState(null);
 
   const translations = {
     title: intl.formatMessage(messages.accomplishmentsPageHeadingText),
@@ -47,6 +62,40 @@ const AccomplishmentsPage = () => {
     () => groupBadgesByCategory(data?.badgeItems, translations.otherCategory),
     [data?.badgeItems, translations.otherCategory],
   );
+
+  // Seeded during render rather than from an effect, so the sections mount
+  // already closed: Paragon then plays no collapse animation, the page never
+  // flashes fully-expanded, and — the reason it has to be this way — layout is
+  // final before the scroll below measures it. Scrolling into a page that is
+  // still collapsing aims at an offset the collapse is about to delete, and the
+  // browser clamps the smooth scroll back to the top.
+  // Guarded on the category itself so a react-query refetch cannot re-seed and
+  // snap the learner's own choices shut again.
+  if (focusedCategory && groups.length && seededFor !== focusedCategory) {
+    setSeededFor(focusedCategory);
+    // An unknown category (renamed, deactivated, or hand-typed) leaves the page
+    // in its normal all-expanded state rather than collapsing everything.
+    if (groups.some((group) => group.key === focusedCategory)) {
+      setCollapsedKeys(new Set(
+        groups.filter((group) => group.key !== focusedCategory).map((group) => group.key),
+      ));
+      setScrollToKey(focusedCategory);
+    }
+  }
+
+  // Offset rather than scrollIntoView({ block: 'start' }), for the same reason
+  // useScrollToContent offsets: the LMS chrome is sticky, so a section scrolled
+  // flush to the top sits underneath it.
+  useEffect(() => {
+    const node = scrollToKey && categoryNodes.current.get(scrollToKey);
+    if (!node) {
+      return;
+    }
+    window.scrollTo({
+      top: Math.max(0, node.getBoundingClientRect().top + window.scrollY - SCROLL_OFFSET),
+      behavior: 'smooth',
+    });
+  }, [scrollToKey]);
 
   const handleToggleCategory = useCallback((key, isOpen) => {
     setCollapsedKeys((previous) => {
@@ -105,7 +154,16 @@ const AccomplishmentsPage = () => {
       <div className="dashboard-page-body">
         {groups.length ? (
           groups.map((group) => (
-            <DashboardSectionContainer key={group.key}>
+            <DashboardSectionContainer
+              key={group.key}
+              ref={(node) => {
+                if (node) {
+                  categoryNodes.current.set(group.key, node);
+                } else {
+                  categoryNodes.current.delete(group.key);
+                }
+              }}
+            >
               <DashboardSection fullWidth>
                 <Collapsible
                   className="accomplishments-category"

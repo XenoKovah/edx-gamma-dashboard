@@ -155,4 +155,42 @@ describe('<BadgeLeaderboardPage>', () => {
 
     expect(getByText(messages.genericErrorFallbackTitle.defaultMessage)).toBeInTheDocument();
   });
+
+  describe('category link above the badge title', () => {
+    const renderWithCategory = (category) => {
+      useBadgeLeaderboard.mockReturnValue({
+        isLoading: false,
+        isError: false,
+        data: {
+          badge: { ...badge, category }, top10: [], competitors: [], rank: null,
+        },
+      });
+
+      return renderWithProviders(<BadgeLeaderboardPage />);
+    };
+
+    it("links the badge's category to that category on the All Accomplishments page", () => {
+      const { getByTestId } = renderWithCategory('Valiant Volunteerism!');
+
+      const link = getByTestId('badge-leaderboard-header-category');
+      expect(link).toHaveTextContent('Valiant Volunteerism!');
+      expect(link).toHaveAttribute(
+        'href',
+        '/gamma_dashboard/accomplishments?category=Valiant%20Volunteerism!',
+      );
+    });
+
+    it('renders no link for an uncategorised badge', () => {
+      const { queryByTestId } = renderWithCategory('');
+
+      expect(queryByTestId('badge-leaderboard-header-category')).not.toBeInTheDocument();
+    });
+
+    it('renders no link when Gamma is too old to send the field', () => {
+      const { queryByTestId, getByTestId } = renderWithCategory(undefined);
+
+      expect(queryByTestId('badge-leaderboard-header-category')).not.toBeInTheDocument();
+      expect(getByTestId('badge-leaderboard-header-title')).toBeInTheDocument();
+    });
+  });
 });
