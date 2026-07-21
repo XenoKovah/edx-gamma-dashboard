@@ -174,9 +174,11 @@ describe('<BadgeLeaderboardPage>', () => {
 
       const link = getByTestId('badge-leaderboard-header-category');
       expect(link).toHaveTextContent('Valiant Volunteerism!');
+      // Trailing slash: following this is a full page load, and Django's route
+      // is `^accomplishments/` — without it the link only works via a 301.
       expect(link).toHaveAttribute(
         'href',
-        '/gamma_dashboard/accomplishments?category=Valiant%20Volunteerism!',
+        '/gamma_dashboard/accomplishments/?category=Valiant%20Volunteerism!',
       );
     });
 

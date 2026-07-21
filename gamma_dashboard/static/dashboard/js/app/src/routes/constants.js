@@ -38,9 +38,14 @@ export const ACCOMPLISHMENTS_CATEGORY_PARAM = 'category';
  * Categories are free text (e.g. "Valiant Volunteerism!"), so the value is
  * URL-encoded and matched back against the raw category on arrival.
  *
+ * Trailing slash matters: this is a plain link, so following it is a full page
+ * load that has to match Django's `^accomplishments/` route. Without it the
+ * request only survives via an APPEND_SLASH 301, costing a round-trip on every
+ * click. React Router ignores the trailing slash when it matches the route.
+ *
  * @param {string} category - The badge's free-text category.
  * @returns {string} The All Accomplishments page URL, focused on that category.
  */
 export const buildAccomplishmentsCategoryUrl = (category) => (
-  `${URLS.accomplishmentsPage}?${ACCOMPLISHMENTS_CATEGORY_PARAM}=${encodeURIComponent(category)}`
+  `${URLS.accomplishmentsPage}/?${ACCOMPLISHMENTS_CATEGORY_PARAM}=${encodeURIComponent(category)}`
 );
