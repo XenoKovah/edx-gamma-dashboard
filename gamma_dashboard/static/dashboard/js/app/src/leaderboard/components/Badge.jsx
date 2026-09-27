@@ -19,6 +19,13 @@ const Badge = ({ url, title, slug }) => {
       data-testid="leaderboard-badge"
       src={resolveUrl(url, GAMMA_ADMIN_BASE_URL)}
       alt={altText}
+      // A leaderboard row carries dozens of these and a full board runs to
+      // thousands, nearly all of them below the fold. Defer them to the browser's
+      // lazy loader so a page load fetches the handful that are actually visible
+      // instead of every icon at once, and decode off the main thread so the
+      // ones that do arrive don't jank scrolling.
+      loading="lazy"
+      decoding="async"
     />
   );
 

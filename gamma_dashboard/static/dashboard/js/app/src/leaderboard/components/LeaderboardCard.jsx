@@ -101,7 +101,7 @@ const LeaderboardCard = ({ profile, currentUserUid, showProgress }) => {
         </span>
       </Card.Body>
       <Card.Footer className="p-0 mt-3 mt-md-0 overflow-auto">
-        <BadgeList badges={badges} />
+        <BadgeList badges={badges} profileUrl={profileUrl} />
       </Card.Footer>
     </Card>
   );

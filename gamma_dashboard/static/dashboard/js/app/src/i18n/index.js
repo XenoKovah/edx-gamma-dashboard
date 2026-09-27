@@ -146,6 +146,11 @@ const messages = defineMessages({
     defaultMessage: 'Leaderboard accomplishment',
     description: 'Alternative text for badge image in the performance section',
   },
+  performanceBadgesMoreItemsText: {
+    id: 'performance.badges.more.items.text',
+    defaultMessage: '{count, plural, one {# more accomplishment} other {# more accomplishments}}',
+    description: 'Tooltip on the leaderboard row marker standing in for badges beyond the display cap',
+  },
   performanceStatusesSectionHeadingText: {
     id: 'performance.statuses.section.heading.text',
     defaultMessage: 'R0x0r Level',
