@@ -8,6 +8,8 @@ import { useElementWidth, useIsDarkTheme } from '../hooks';
 import { getConfig } from './config';
 import { prepareEvents } from './utils';
 import { getChartTitleColor } from '../constants';
+import { DashboardSectionHeader, DashboardSectionImage } from '../../components/sections';
+import sectionImage from '../../../assets/images/section-points-distribution.webp';
 
 import messages from '../../../i18n';
 
@@ -39,6 +41,11 @@ const PointsDistributionChart = ({ data }) => {
 
   return (
     <div ref={chartRef}>
+      <DashboardSectionHeader
+        title={translations.headingText}
+        description={translations.descriptionText}
+      />
+      <DashboardSectionImage src={sectionImage} />
       <ReactECharts
         option={getConfig(events, translations, chartWidth, isSmall, titleColor)}
         style={{ height: '470px' }}

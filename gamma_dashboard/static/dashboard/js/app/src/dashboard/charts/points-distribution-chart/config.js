@@ -1,29 +1,17 @@
 import { isRtl } from '../../../constants';
 import {
-  CHART_SIDE_INDENT,
   CHART_COLOR_SCHEME,
   CHART_ICON_STYLES,
   CHART_SERIES_ITEM_STYLES,
-  CHART_SUBTITLE_STYLES,
   CHART_TITLE_STYLES,
   CHART_LABEL_STYLES,
   getChartIconEmphasisColor,
-  getChartSubtitleColor,
 } from '../constants';
 
 // `titleColor` lets the component pass a theme-aware title color (light accent
 // in dark mode); falls back to the standard navy so light mode is unchanged.
 export const getConfig = (events, messages, containerWidth, isSmall, titleColor) => ({
   color: CHART_COLOR_SCHEME,
-  title: {
-    left: isRtl ? 'right' : 'left',
-    text: `{header|${messages.headingText}}`,
-    textStyle: {
-      rich: {
-        header: { ...CHART_TITLE_STYLES, color: titleColor || CHART_TITLE_STYLES.color },
-      },
-    },
-  },
   tooltip: {
     trigger: 'item',
     // {b} = slice name, {a} = series name, {d} = percent, {c} = raw value (points).
@@ -38,7 +26,7 @@ export const getConfig = (events, messages, containerWidth, isSmall, titleColor)
       clockwise: !isRtl,
       name: messages.seriesPointsName,
       type: 'pie',
-      top: 50,
+      top: 30,
       radius: ['40%', '70%'],
       avoidLabelOverlap: false,
       itemStyle: CHART_SERIES_ITEM_STYLES,
@@ -71,20 +59,4 @@ export const getConfig = (events, messages, containerWidth, isSmall, titleColor)
       },
     },
   },
-  graphic: [
-    {
-      type: 'text',
-      top: 5,
-      left: isRtl ? 'auto' : 5,
-      right: isRtl ? 5 : 'auto',
-      align: isRtl ? 'right' : 'left',
-      style: {
-        text: messages.descriptionText,
-        ...CHART_SUBTITLE_STYLES,
-        color: getChartSubtitleColor(),
-        fill: getChartSubtitleColor(),
-        width: Math.max(0, (containerWidth || 0) - CHART_SIDE_INDENT),
-      },
-    },
-  ],
 });

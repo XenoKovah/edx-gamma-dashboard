@@ -4,12 +4,14 @@ import { Button } from '@openedx/paragon';
 
 import DashboardSectionHeader from './DashboardSectionHeader';
 import DashboardSection from './DashboardSection';
+import DashboardSectionImage from './DashboardSectionImage';
 
 const DashboardSectionSlider = ({
   title,
   status,
   description,
   content,
+  image,
   items,
   buttonData: {
     title: buttonTitle,
@@ -30,6 +32,7 @@ const DashboardSectionSlider = ({
     >
       {content}
     </p>
+    {image && <DashboardSectionImage src={image} />}
     <ul
       className="progress-badges-list p-0 mb-0"
       data-testid="progress-badges-list"
@@ -54,6 +57,7 @@ DashboardSectionSlider.propTypes = {
   status: PropTypes.string,
   description: PropTypes.string,
   content: PropTypes.string,
+  image: PropTypes.string,
   items: PropTypes.arrayOf(PropTypes.node),
   buttonData: PropTypes.shape({
     title: PropTypes.string,
@@ -68,6 +72,7 @@ DashboardSectionSlider.defaultProps = {
   status: '',
   description: '',
   content: '',
+  image: null,
   items: null,
   buttonData: {
     title: '',

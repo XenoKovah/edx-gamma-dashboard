@@ -4,7 +4,8 @@ import PropTypes from 'prop-types';
 import Slider from 'react-slick';
 
 import { StatusPropType } from '../../propTypes';
-import { DashboardSectionHeader } from '../sections';
+import { DashboardSectionHeader, DashboardSectionImage } from '../sections';
+import roxorLevelImage from '../../../assets/images/section-roxor-level.webp';
 import { SliderStatusesItem } from './slider-statuses-item';
 import { useSliderStatusesBlock } from './hooks';
 
@@ -27,6 +28,7 @@ const SliderStatusesBlock = ({ status, statusItems }) => {
       <p className="block-description" data-testid="slider-statuses-block-description">
         {intl.formatMessage(messages.performanceStatusesSectionDescriptionText)}
       </p>
+      <DashboardSectionImage src={roxorLevelImage} />
       {statusItems.length ? (
         <div className="slider-statuses-block-item">
           <Slider {...sliderSettings} ref={sliderRef}>

@@ -22,7 +22,7 @@ afterEach(() => {
 
 describe('PointsDistributionChart', () => {
   const data = gameProfileData.chart;
-  const CHART_TITLE = `{header|${ messages.performancePointsDistributionSectionHeadingText.defaultMessage}}`;
+  const CHART_TITLE = messages.performancePointsDistributionSectionHeadingText.defaultMessage;
   const CHART_DESCRIPTION = messages.performancePointsDistributionSectionDescriptionText.defaultMessage;
 
   beforeAll(() => {
@@ -38,8 +38,8 @@ describe('PointsDistributionChart', () => {
     const options = JSON.parse(chartElement.getAttribute('data-options'));
 
     expect(chartElement).toBeInTheDocument();
-    expect(options.title.text).toBe(CHART_TITLE);
-    expect(options.graphic[0].style.text).toBe(CHART_DESCRIPTION);
+    expect(screen.getByText(CHART_TITLE)).toBeInTheDocument();
+    expect(screen.getByText(CHART_DESCRIPTION)).toBeInTheDocument();
     expect(options.series).toBeDefined();
   });
 
@@ -50,8 +50,8 @@ describe('PointsDistributionChart', () => {
     const options = JSON.parse(chartElement.getAttribute('data-options'));
 
     expect(chartElement).toBeInTheDocument();
-    expect(options.title.text).toBe(CHART_TITLE);
-    expect(options.graphic[0].style.text).toBe(CHART_DESCRIPTION);
+    expect(screen.getByText(CHART_TITLE)).toBeInTheDocument();
+    expect(screen.getByText(CHART_DESCRIPTION)).toBeInTheDocument();
     expect(options.series).toBeDefined();
   });
 
@@ -81,7 +81,7 @@ describe('PointsDistributionChart', () => {
 
     const options = JSON.parse(screen.getByTestId('echarts-instance').getAttribute('data-options'));
 
-    expect(options.title.textStyle.rich.header.color).toBe(CHART_TITLE_STYLES.color);
+    expect(options.series[0].label.color).toBe(CHART_TITLE_STYLES.color);
   });
 
   it('uses the light accent title color when dark mode is active', () => {
@@ -90,7 +90,7 @@ describe('PointsDistributionChart', () => {
 
     const options = JSON.parse(screen.getByTestId('echarts-instance').getAttribute('data-options'));
 
-    expect(options.title.textStyle.rich.header.color).toBe(CHART_TITLE_DARK_COLOR);
+    expect(options.series[0].label.color).toBe(CHART_TITLE_DARK_COLOR);
   });
 
   it('updates chartWidth on window resize', () => {

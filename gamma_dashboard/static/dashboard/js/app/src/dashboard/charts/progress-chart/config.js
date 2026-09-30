@@ -1,13 +1,10 @@
 import { isRtl } from '../../../constants';
 import {
-  CHART_SIDE_INDENT,
   CHART_COLOR_SCHEME,
   CHART_ICON_STYLES,
-  CHART_SUBTITLE_STYLES,
   CHART_TITLE_STYLES,
   CHART_LABEL_STYLES,
   getChartIconEmphasisColor,
-  getChartSubtitleColor,
 } from '../constants';
 
 // `titleColor` lets the component pass a theme-aware title color (light accent
@@ -17,15 +14,6 @@ export const getConfig = (dates, points, progress, messages, containerWidth, isS
 
   return {
     color: CHART_COLOR_SCHEME,
-    title: {
-      left: isRtl ? 'right' : 'left',
-      text: `{header|${messages.headingText}}`,
-      textStyle: {
-        rich: {
-          header: { ...CHART_TITLE_STYLES, color: titleColor || CHART_TITLE_STYLES.color },
-        },
-      },
-    },
     legend: {
       data: [messages.legend.progress, messages.legend.points],
       bottom: 10,
@@ -49,7 +37,7 @@ export const getConfig = (dates, points, progress, messages, containerWidth, isS
       nameTextStyle: CHART_LABEL_STYLES,
     },
     grid: {
-      top: isSmall ? 120 : 100,
+      top: isSmall ? 60 : 50,
       left: isSmall ? '20%' : '10%',
       right: '10%',
     },
@@ -106,22 +94,6 @@ export const getConfig = (dates, points, progress, messages, containerWidth, isS
         },
       },
     },
-    graphic: [
-      {
-        type: 'text',
-        top: 5,
-        left: isRtl ? 'auto' : 5,
-        right: isRtl ? 5 : 'auto',
-        align: isRtl ? 'right' : 'left',
-        style: {
-          text: messages.descriptionText,
-          ...CHART_SUBTITLE_STYLES,
-          color: getChartSubtitleColor(),
-          fill: getChartSubtitleColor(),
-          width: Math.max(0, (containerWidth || 0) - CHART_SIDE_INDENT),
-        },
-      },
-    ],
     tooltip: {
       trigger: 'axis',
       textStyle: CHART_LABEL_STYLES,

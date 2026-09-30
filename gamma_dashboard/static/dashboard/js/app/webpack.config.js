@@ -72,6 +72,13 @@ module.exports = (_, argv) => {
           },
         },
         {
+          test: /\.webp$/,
+          type: 'asset/resource',
+          generator: {
+            filename: 'assets/images/[name][ext]',
+          },
+        },
+        {
           test: /\.svg$/,
           type: 'asset/resource',
           generator: {

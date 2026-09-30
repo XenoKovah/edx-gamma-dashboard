@@ -22,7 +22,7 @@ afterEach(() => {
 
 describe('ProgressChart', () => {
   const data = gameProfileData.progress;
-  const CHART_TITLE = `{header|${ messages.performanceProgressTrackerSectionHeadingText.defaultMessage}}`;
+  const CHART_TITLE = messages.performanceProgressTrackerSectionHeadingText.defaultMessage;
   const CHART_DESCRIPTION = messages.performanceProgressTrackerSectionDescriptionText.defaultMessage;
 
   beforeAll(() => {
@@ -38,8 +38,8 @@ describe('ProgressChart', () => {
     const options = JSON.parse(chartElement.getAttribute('data-options'));
 
     expect(chartElement).toBeInTheDocument();
-    expect(options.title.text).toBe(CHART_TITLE);
-    expect(options.graphic[0].style.text).toBe(CHART_DESCRIPTION);
+    expect(screen.getByText(CHART_TITLE)).toBeInTheDocument();
+    expect(screen.getByText(CHART_DESCRIPTION)).toBeInTheDocument();
     expect(options.series).toBeDefined();
   });
 
@@ -50,8 +50,8 @@ describe('ProgressChart', () => {
     const options = JSON.parse(chartElement.getAttribute('data-options'));
 
     expect(chartElement).toBeInTheDocument();
-    expect(options.title.text).toBe(CHART_TITLE);
-    expect(options.graphic[0].style.text).toBe(CHART_DESCRIPTION);
+    expect(screen.getByText(CHART_TITLE)).toBeInTheDocument();
+    expect(screen.getByText(CHART_DESCRIPTION)).toBeInTheDocument();
     expect(options.series).toBeDefined();
   });
 
@@ -60,7 +60,7 @@ describe('ProgressChart', () => {
 
     const options = JSON.parse(screen.getByTestId('echarts-instance').getAttribute('data-options'));
 
-    expect(options.title.textStyle.rich.header.color).toBe(CHART_TITLE_STYLES.color);
+    expect(options.legend.textStyle.color).toBe(CHART_TITLE_STYLES.color);
   });
 
   it('uses the light accent title color when dark mode is active', () => {
@@ -69,7 +69,7 @@ describe('ProgressChart', () => {
 
     const options = JSON.parse(screen.getByTestId('echarts-instance').getAttribute('data-options'));
 
-    expect(options.title.textStyle.rich.header.color).toBe(CHART_TITLE_DARK_COLOR);
+    expect(options.legend.textStyle.color).toBe(CHART_TITLE_DARK_COLOR);
   });
 
   it('updates chartWidth on window resize', () => {

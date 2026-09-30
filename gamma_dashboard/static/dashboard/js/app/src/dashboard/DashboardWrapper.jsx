@@ -14,6 +14,7 @@ import {
 import { ProgressBadge } from './components/progress-badge';
 import { ProgressAvatar, ProgressAvatarModal } from './components/progress-avatar';
 import { SliderStatusesBlock } from './components/slider-statuses-block';
+import accomplishmentsImage from '../assets/images/section-accomplishments.webp';
 import { CORNER_BOTTOM, CORNER_TOP } from './components/constants';
 import { URLS } from '../routes/constants';
 import {
@@ -167,6 +168,7 @@ const DashboardWrapper = ({
                 title={translations.badgesSectionTitle}
                 status={translations.badgeSectionCounter}
                 content={translations.badgesSectionDescription}
+                image={accomplishmentsImage}
                 items={renderItems(WIDGETS.BADGES, {
                   items: previewBadgeItems,
                   emptyTitle: translations.alertBadgesEmptyListTitle,
