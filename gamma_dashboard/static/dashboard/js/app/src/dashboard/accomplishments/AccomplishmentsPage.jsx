@@ -63,6 +63,12 @@ const AccomplishmentsPage = () => {
     [data?.badgeItems, translations.otherCategory],
   );
 
+  // Every collapsible on the page: top-level categories and their sub-categories.
+  const allKeys = useMemo(
+    () => groups.flatMap((group) => [group.key, ...group.children.map((child) => child.key)]),
+    [groups],
+  );
+
   // Seeded during render rather than from an effect, so the sections mount
   // already closed: Paragon then plays no collapse animation, the page never
   // flashes fully-expanded, and — the reason it has to be this way — layout is
@@ -75,9 +81,16 @@ const AccomplishmentsPage = () => {
     setSeededFor(focusedCategory);
     // An unknown category (renamed, deactivated, or hand-typed) leaves the page
     // in its normal all-expanded state rather than collapsing everything.
-    if (groups.some((group) => group.key === focusedCategory)) {
+    // A sub-category is opened along with its parent, which has to be open for
+    // it to be seen; a parent is opened along with all of its sub-categories.
+    const focusedGroup = groups.find((group) => group.key === focusedCategory
+      || group.children.some((child) => child.key === focusedCategory));
+    if (focusedGroup) {
+      const isParent = focusedGroup.key === focusedCategory;
       setCollapsedKeys(new Set(
-        groups.filter((group) => group.key !== focusedCategory).map((group) => group.key),
+        allKeys.filter((key) => key !== focusedCategory
+          && key !== focusedGroup.key
+          && !(isParent && focusedGroup.children.some((child) => child.key === key))),
       ));
       setScrollToKey(focusedCategory);
     }
@@ -112,11 +125,35 @@ const AccomplishmentsPage = () => {
   // One button that flips between the two actions: while anything is still open
   // it offers "Collapse All", and once everything is closed it offers to open
   // them all back up.
-  const hasOpenCategory = groups.some((group) => !collapsedKeys.has(group.key));
+  const hasOpenCategory = allKeys.some((key) => !collapsedKeys.has(key));
 
   const handleToggleAll = useCallback(() => {
-    setCollapsedKeys(hasOpenCategory ? new Set(groups.map((group) => group.key)) : new Set());
-  }, [groups, hasOpenCategory]);
+    setCollapsedKeys(hasOpenCategory ? new Set(allKeys) : new Set());
+  }, [allKeys, hasOpenCategory]);
+
+  const registerNode = (key) => (node) => {
+    if (node) {
+      categoryNodes.current.set(key, node);
+    } else {
+      categoryNodes.current.delete(key);
+    }
+  };
+
+  const renderBadgeList = (items) => (
+    <ul
+      className="progress-badges-list p-0 mb-0"
+      data-testid="accomplishments-badges-list"
+    >
+      {items.map((item) => (
+        <ProgressBadge key={item[0]} slug={item[0]} data={item[1]} center />
+      ))}
+    </ul>
+  );
+
+  const renderCounter = (group) => intl.formatMessage(messages.badgesSectionCounterText, {
+    completedBadgeItemsLength: group.doneCount,
+    badgeItemsLength: group.totalCount,
+  });
 
   if (isLoading) {
     return <Loader className="text-center" />;
@@ -156,13 +193,7 @@ const AccomplishmentsPage = () => {
           groups.map((group) => (
             <DashboardSectionContainer
               key={group.key}
-              ref={(node) => {
-                if (node) {
-                  categoryNodes.current.set(group.key, node);
-                } else {
-                  categoryNodes.current.delete(group.key);
-                }
-              }}
+              ref={registerNode(group.key)}
             >
               <DashboardSection fullWidth>
                 <Collapsible
@@ -176,21 +207,33 @@ const AccomplishmentsPage = () => {
                   title={(
                     <DashboardSectionHeader
                       title={group.label}
-                      status={intl.formatMessage(messages.badgesSectionCounterText, {
-                        completedBadgeItemsLength: group.doneCount,
-                        badgeItemsLength: group.items.length,
-                      })}
+                      status={renderCounter(group)}
                     />
                   )}
                 >
-                  <ul
-                    className="progress-badges-list p-0 mb-0"
-                    data-testid="accomplishments-badges-list"
-                  >
-                    {group.items.map((item) => (
-                      <ProgressBadge key={item[0]} slug={item[0]} data={item[1]} center />
-                    ))}
-                  </ul>
+                  {group.items.length > 0 && renderBadgeList(group.items)}
+                  {group.children.map((child) => (
+                    <div
+                      key={child.key}
+                      ref={registerNode(child.key)}
+                      className="accomplishments-subcategory"
+                    >
+                      <Collapsible
+                        className="accomplishments-category"
+                        styling="basic"
+                        open={!collapsedKeys.has(child.key)}
+                        onToggle={(isOpen) => handleToggleCategory(child.key, isOpen)}
+                        title={(
+                          <DashboardSectionHeader
+                            title={child.label}
+                            status={renderCounter(child)}
+                          />
+                        )}
+                      >
+                        {renderBadgeList(child.items)}
+                      </Collapsible>
+                    </div>
+                  ))}
                 </Collapsible>
               </DashboardSection>
             </DashboardSectionContainer>

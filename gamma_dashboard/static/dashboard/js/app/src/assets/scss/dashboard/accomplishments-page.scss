@@ -55,4 +55,15 @@
       padding: map-get($spacers, 0);
     }
   }
+
+  // A sub-category nested inside a top-level category: indented under its parent
+  // and headed one step smaller, so the two levels read as a hierarchy.
+  .accomplishments-subcategory {
+    margin-top: map-get($spacers, 4);
+    padding-inline-start: map-get($spacers, 4);
+
+    .dashboard-section-header-title {
+      font-size: 1.25rem;
+    }
+  }
 }

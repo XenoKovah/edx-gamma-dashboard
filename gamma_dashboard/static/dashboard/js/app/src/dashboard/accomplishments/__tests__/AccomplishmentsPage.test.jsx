@@ -177,4 +177,42 @@ describe('<AccomplishmentsPage>', () => {
       expect(isOpen('Exploitation')).toBe(true);
     });
   });
+
+  describe('sub-categories', () => {
+    const NESTED = {
+      'badge-1': 'Course Completion / Gold',
+      'badge-2': 'Course Completion / Silver',
+      'badge-3': 'Exploitation',
+    };
+    const nestedData = withCategories(NESTED);
+
+    it('renders sub-categories inside their parent, with a rolled-up counter', async () => {
+      await renderPage(nestedData);
+
+      expect(categorySection('Gold').parentElement.closest('.pgn_collapsible'))
+        .toBe(categorySection('Course Completion'));
+      expect(isOpen('Course Completion')).toBe(true);
+      expect(isOpen('Gold')).toBe(true);
+    });
+
+    it('collapses a sub-category without touching its sibling or parent', async () => {
+      await renderPage(nestedData);
+      await act(async () => { await clickHeader('Gold'); });
+
+      expect(isOpen('Gold')).toBe(false);
+      expect(isOpen('Silver')).toBe(true);
+      expect(isOpen('Course Completion')).toBe(true);
+    });
+
+    it('deep-links to a sub-category, opening it and its parent only', async () => {
+      await renderPage(nestedData, {
+        initialEntries: [buildAccomplishmentsCategoryUrl('Course Completion / Silver')],
+      });
+
+      expect(isOpen('Course Completion')).toBe(true);
+      expect(isOpen('Silver')).toBe(true);
+      expect(isOpen('Gold')).toBe(false);
+      expect(isOpen('Exploitation')).toBe(false);
+    });
+  });
 });
