@@ -31,10 +31,10 @@ const AccomplishmentsPage = () => {
     data, isLoading, isError,
   } = useGameProfile();
 
-  // Categories start expanded (the page reads the same as it always has); the
-  // learner collapses the ones they are done with. Tracking the *collapsed*
-  // keys rather than the open ones means a category the badge data adds later
-  // shows up open, without having to seed state from the async response.
+  // Categories start collapsed unless the learner has earned a badge in them,
+  // so they are not buried in badges they do not have yet. Tracking the
+  // *collapsed* keys rather than the open ones means a category the badge data
+  // adds later shows up open, without having to seed state from the async response.
   const [collapsedKeys, setCollapsedKeys] = useState(() => new Set());
 
   // Deep link from a per-badge leaderboard: ?category=<free-text category> opens
@@ -77,13 +77,12 @@ const AccomplishmentsPage = () => {
   // browser clamps the smooth scroll back to the top.
   // Guarded on the category itself so a react-query refetch cannot re-seed and
   // snap the learner's own choices shut again.
-  if (focusedCategory && groups.length && seededFor !== focusedCategory) {
-    setSeededFor(focusedCategory);
-    // An unknown category (renamed, deactivated, or hand-typed) leaves the page
-    // in its normal all-expanded state rather than collapsing everything.
+  const seedKey = focusedCategory || '';
+  if (groups.length && seededFor !== seedKey) {
+    setSeededFor(seedKey);
     // A sub-category is opened along with its parent, which has to be open for
     // it to be seen; a parent is opened along with all of its sub-categories.
-    const focusedGroup = groups.find((group) => group.key === focusedCategory
+    const focusedGroup = focusedCategory && groups.find((group) => group.key === focusedCategory
       || group.children.some((child) => child.key === focusedCategory));
     if (focusedGroup) {
       const isParent = focusedGroup.key === focusedCategory;
@@ -93,6 +92,12 @@ const AccomplishmentsPage = () => {
           && !(isParent && focusedGroup.children.some((child) => child.key === key))),
       ));
       setScrollToKey(focusedCategory);
+    } else {
+      // No deep link, or an unknown category (renamed, deactivated, or
+      // hand-typed): open only the categories the learner has earned a badge in.
+      setCollapsedKeys(new Set(groups.flatMap((group) => [group, ...group.children])
+        .filter((g) => g.doneCount === 0)
+        .map((g) => g.key)));
     }
   }
 

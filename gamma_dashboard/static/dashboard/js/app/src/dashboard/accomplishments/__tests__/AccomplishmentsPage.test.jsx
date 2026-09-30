@@ -47,13 +47,22 @@ afterEach(() => {
 });
 
 describe('<AccomplishmentsPage>', () => {
-  it('renders one collapsible section per category, all open by default', async () => {
+  it('opens only the categories with an earned badge by default', async () => {
     await renderPage();
 
     expect(screen.getByTestId('accomplishments-page')).toBeInTheDocument();
-    expect(screen.getAllByTestId('accomplishments-badges-list')).toHaveLength(2);
-
+    // Architecture holds the earned badge; Exploitation has none.
+    expect(screen.getAllByTestId('accomplishments-badges-list')).toHaveLength(1);
     expect(isOpen('Architecture')).toBe(true);
+    expect(isOpen('Exploitation')).toBe(false);
+    expect(screen.getByTestId('accomplishments-toggle-all-btn')).toHaveTextContent('Collapse All');
+  });
+
+  it('lets the learner open a category they have nothing in yet', async () => {
+    await renderPage();
+
+    clickHeader('Exploitation');
+
     expect(isOpen('Exploitation')).toBe(true);
   });
 
@@ -64,7 +73,7 @@ describe('<AccomplishmentsPage>', () => {
 
     expect(isOpen('Architecture')).toBe(false);
     // Toggling one category leaves the others alone.
-    expect(isOpen('Exploitation')).toBe(true);
+    expect(isOpen('Exploitation')).toBe(false);
 
     clickHeader('Architecture');
 
@@ -94,6 +103,7 @@ describe('<AccomplishmentsPage>', () => {
   it('keeps offering "Collapse All" while any category is still open', async () => {
     await renderPage();
 
+    clickHeader('Exploitation');
     clickHeader('Architecture');
 
     expect(screen.getByTestId('accomplishments-toggle-all-btn')).toHaveTextContent('Collapse All');
@@ -156,13 +166,13 @@ describe('<AccomplishmentsPage>', () => {
       expect(window.scrollTo).toHaveBeenCalledWith({ top: 0, behavior: 'smooth' });
     });
 
-    it('leaves the page untouched when the category is not on it', async () => {
+    it('falls back to the default when the category is not on the page', async () => {
       await renderPage(categorizedProfileData, {
         initialEntries: [buildAccomplishmentsCategoryUrl('Since Renamed')],
       });
 
       expect(isOpen('Architecture')).toBe(true);
-      expect(isOpen('Exploitation')).toBe(true);
+      expect(isOpen('Exploitation')).toBe(false);
       expect(window.scrollTo).not.toHaveBeenCalled();
     });
 
@@ -192,7 +202,10 @@ describe('<AccomplishmentsPage>', () => {
       expect(categorySection('Gold').parentElement.closest('.pgn_collapsible'))
         .toBe(categorySection('Course Completion'));
       expect(isOpen('Course Completion')).toBe(true);
+      // Badge 1 (Gold) is the earned one.
       expect(isOpen('Gold')).toBe(true);
+      expect(isOpen('Silver')).toBe(false);
+      expect(isOpen('Exploitation')).toBe(false);
     });
 
     it('collapses a sub-category without touching its sibling or parent', async () => {
@@ -200,7 +213,7 @@ describe('<AccomplishmentsPage>', () => {
       await act(async () => { await clickHeader('Gold'); });
 
       expect(isOpen('Gold')).toBe(false);
-      expect(isOpen('Silver')).toBe(true);
+      expect(isOpen('Silver')).toBe(false);
       expect(isOpen('Course Completion')).toBe(true);
     });
 
