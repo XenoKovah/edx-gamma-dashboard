@@ -4,7 +4,6 @@ import '@testing-library/jest-dom';
 
 import { renderWithProviders } from '../../../setupTests';
 import { gameProfileData } from '../../../__mocks__/dashboard';
-import messages from '../../../i18n';
 import { ProgressChart } from '../progress-chart';
 import { CHART_TITLE_STYLES, CHART_TITLE_DARK_COLOR } from '../constants';
 
@@ -22,8 +21,6 @@ afterEach(() => {
 
 describe('ProgressChart', () => {
   const data = gameProfileData.progress;
-  const CHART_TITLE = messages.performanceProgressTrackerSectionHeadingText.defaultMessage;
-  const CHART_DESCRIPTION = messages.performanceProgressTrackerSectionDescriptionText.defaultMessage;
 
   beforeAll(() => {
     Object.defineProperty(HTMLElement.prototype, 'offsetWidth', {
@@ -38,8 +35,6 @@ describe('ProgressChart', () => {
     const options = JSON.parse(chartElement.getAttribute('data-options'));
 
     expect(chartElement).toBeInTheDocument();
-    expect(screen.getByText(CHART_TITLE)).toBeInTheDocument();
-    expect(screen.getByText(CHART_DESCRIPTION)).toBeInTheDocument();
     expect(options.series).toBeDefined();
   });
 
@@ -50,8 +45,6 @@ describe('ProgressChart', () => {
     const options = JSON.parse(chartElement.getAttribute('data-options'));
 
     expect(chartElement).toBeInTheDocument();
-    expect(screen.getByText(CHART_TITLE)).toBeInTheDocument();
-    expect(screen.getByText(CHART_DESCRIPTION)).toBeInTheDocument();
     expect(options.series).toBeDefined();
   });
 

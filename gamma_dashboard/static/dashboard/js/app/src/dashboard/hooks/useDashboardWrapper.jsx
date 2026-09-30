@@ -87,6 +87,10 @@ export const useDashboardWrapper = ({
     }),
     badgesSectionTitle: intl.formatMessage(messages.performanceBadgesSectionHeadingText),
     badgesSectionDescription: intl.formatMessage(messages.performanceBadgesSectionDescriptionText),
+    progressAndPointsSectionTitle: intl.formatMessage(messages.performanceProgressAndPointsSectionHeadingText),
+    progressAndPointsSectionDescription: intl.formatMessage(
+      messages.performanceProgressAndPointsSectionDescriptionText,
+    ),
     badgesSectionBtnTitle: intl.formatMessage(messages.performanceBadgesSectionBadgesButtonText),
     badgesSectionAllBadgesBtnTitle: intl.formatMessage(messages.performanceBadgesSectionAllBadgesButtonText),
     avatarSectionTitle: intl.formatMessage(messages.performanceAvatarSectionTitleText),

@@ -216,6 +216,16 @@ const messages = defineMessages({
     defaultMessage: 'Points',
     description: 'Label for points item in the performance points chart.',
   },
+  performanceProgressAndPointsSectionHeadingText: {
+    id: 'performance.progress.and.points.section.heading.text',
+    defaultMessage: 'PROGRESS TRACKER & POINTS DISTRIBUTION',
+    description: 'Heading text for the combined progress tracker and points distribution section',
+  },
+  performanceProgressAndPointsSectionDescriptionText: {
+    id: 'performance.progress.and.points.section.description.text',
+    defaultMessage: 'See the dynamics of your activities and points acquisition through time. Also here you can see what actions contributed to your current points.',
+    description: 'Description of the combined progress tracker and points distribution section',
+  },
   performanceProgressTrackerSectionHeadingText: {
     id: 'performance.progress.tracker.section.heading.text',
     defaultMessage: 'PROGRESS TRACKER',

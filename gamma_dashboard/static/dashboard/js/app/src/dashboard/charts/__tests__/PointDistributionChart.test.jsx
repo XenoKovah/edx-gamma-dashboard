@@ -22,8 +22,6 @@ afterEach(() => {
 
 describe('PointsDistributionChart', () => {
   const data = gameProfileData.chart;
-  const CHART_TITLE = messages.performancePointsDistributionSectionHeadingText.defaultMessage;
-  const CHART_DESCRIPTION = messages.performancePointsDistributionSectionDescriptionText.defaultMessage;
 
   beforeAll(() => {
     Object.defineProperty(HTMLElement.prototype, 'offsetWidth', {
@@ -38,8 +36,6 @@ describe('PointsDistributionChart', () => {
     const options = JSON.parse(chartElement.getAttribute('data-options'));
 
     expect(chartElement).toBeInTheDocument();
-    expect(screen.getByText(CHART_TITLE)).toBeInTheDocument();
-    expect(screen.getByText(CHART_DESCRIPTION)).toBeInTheDocument();
     expect(options.series).toBeDefined();
   });
 
@@ -50,8 +46,6 @@ describe('PointsDistributionChart', () => {
     const options = JSON.parse(chartElement.getAttribute('data-options'));
 
     expect(chartElement).toBeInTheDocument();
-    expect(screen.getByText(CHART_TITLE)).toBeInTheDocument();
-    expect(screen.getByText(CHART_DESCRIPTION)).toBeInTheDocument();
     expect(options.series).toBeDefined();
   });
 

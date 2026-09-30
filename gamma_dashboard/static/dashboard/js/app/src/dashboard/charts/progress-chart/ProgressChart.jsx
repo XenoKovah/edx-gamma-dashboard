@@ -8,8 +8,6 @@ import { useElementWidth, useIsDarkTheme } from '../hooks';
 import { getConfig } from './config';
 import { processChartData, transformData } from './utils';
 import { getChartTitleColor } from '../constants';
-import { DashboardSectionHeader, DashboardSectionImage } from '../../components/sections';
-import sectionImage from '../../../assets/images/section-progress-tracker.webp';
 
 import messages from '../../../i18n';
 
@@ -32,8 +30,6 @@ const ProgressChart = ({ data }) => {
   const titleColor = getChartTitleColor();
 
   const translations = {
-    headingText: intl.formatMessage(messages.performanceProgressTrackerSectionHeadingText),
-    descriptionText: intl.formatMessage(messages.performanceProgressTrackerSectionDescriptionText),
     legend: {
       progress: intl.formatMessage(messages.performancePointsItemProgressLabel),
       points: intl.formatMessage(messages.performancePointsItemPointsLabel),
@@ -49,11 +45,6 @@ const ProgressChart = ({ data }) => {
 
   return (
     <div ref={chartRef}>
-      <DashboardSectionHeader
-        title={translations.headingText}
-        description={translations.descriptionText}
-      />
-      <DashboardSectionImage src={sectionImage} />
       <ReactECharts
         option={getConfig(dates, points, progress, translations, chartWidth, isSmall, years, titleColor)}
         style={{ height: '400px' }}

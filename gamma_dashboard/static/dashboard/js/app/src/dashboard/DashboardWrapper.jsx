@@ -8,12 +8,15 @@ import {
   DashboardSection,
   DashboardSectionSlider,
   DashboardSectionContainer,
+  DashboardSectionHeader,
+  DashboardSectionImage,
   DashboardSectionAvatar,
   DashboardSectionPointsVault,
 } from './components/sections';
 import { ProgressBadge } from './components/progress-badge';
 import { ProgressAvatar, ProgressAvatarModal } from './components/progress-avatar';
 import { SliderStatusesBlock } from './components/slider-statuses-block';
+import progressTrackerImage from '../assets/images/section-progress-tracker.webp';
 import accomplishmentsImage from '../assets/images/section-accomplishments.webp';
 import { CORNER_BOTTOM, CORNER_TOP } from './components/constants';
 import { URLS } from '../routes/constants';
@@ -182,15 +185,14 @@ const DashboardWrapper = ({
           </DashboardSectionContainer>
           <DashboardSectionContainer>
             {renderErrorBoundary(
-              <DashboardSection fullWidth>
-                <PointsDistributionChart data={chart} />
-              </DashboardSection>,
-            )}
-          </DashboardSectionContainer>
-          <DashboardSectionContainer>
-            {renderErrorBoundary(
               <DashboardSection fullWidth corner={CORNER_BOTTOM}>
+                <DashboardSectionHeader
+                  title={translations.progressAndPointsSectionTitle}
+                  description={translations.progressAndPointsSectionDescription}
+                />
+                <DashboardSectionImage src={progressTrackerImage} />
                 <ProgressChart data={progress} />
+                <PointsDistributionChart data={chart} />
               </DashboardSection>,
             )}
           </DashboardSectionContainer>

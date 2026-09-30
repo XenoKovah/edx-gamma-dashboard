@@ -8,8 +8,6 @@ import { useElementWidth, useIsDarkTheme } from '../hooks';
 import { getConfig } from './config';
 import { prepareEvents } from './utils';
 import { getChartTitleColor } from '../constants';
-import { DashboardSectionHeader, DashboardSectionImage } from '../../components/sections';
-import sectionImage from '../../../assets/images/section-points-distribution.webp';
 
 import messages from '../../../i18n';
 
@@ -30,8 +28,6 @@ const PointsDistributionChart = ({ data }) => {
   const titleColor = getChartTitleColor();
 
   const translations = {
-    headingText: intl.formatMessage(messages.performancePointsDistributionSectionHeadingText),
-    descriptionText: intl.formatMessage(messages.performancePointsDistributionSectionDescriptionText),
     seriesPointsName: intl.formatMessage(messages.performancePointsSeriesName),
     pointsLabel: intl.formatMessage(messages.performancePointsItemPointsLabel),
     controls: {
@@ -41,11 +37,6 @@ const PointsDistributionChart = ({ data }) => {
 
   return (
     <div ref={chartRef}>
-      <DashboardSectionHeader
-        title={translations.headingText}
-        description={translations.descriptionText}
-      />
-      <DashboardSectionImage src={sectionImage} />
       <ReactECharts
         option={getConfig(events, translations, chartWidth, isSmall, titleColor)}
         style={{ height: '470px' }}
