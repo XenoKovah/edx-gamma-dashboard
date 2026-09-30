@@ -11,6 +11,7 @@ const DashboardSectionSlider = ({
   status,
   description,
   content,
+  contentLink,
   image,
   items,
   buttonData: {
@@ -32,6 +33,14 @@ const DashboardSectionSlider = ({
     >
       {content}
     </p>
+    {contentLink && (
+      <p
+        className="block-description small"
+        data-testid="slider-content-link"
+      >
+        <a href={contentLink.href}>{contentLink.text}</a>
+      </p>
+    )}
     {image && <DashboardSectionImage src={image} />}
     <ul
       className="progress-badges-list p-0 mb-0"
@@ -57,6 +66,10 @@ DashboardSectionSlider.propTypes = {
   status: PropTypes.string,
   description: PropTypes.string,
   content: PropTypes.string,
+  contentLink: PropTypes.shape({
+    text: PropTypes.string,
+    href: PropTypes.string,
+  }),
   image: PropTypes.string,
   items: PropTypes.arrayOf(PropTypes.node),
   buttonData: PropTypes.shape({
@@ -72,6 +85,7 @@ DashboardSectionSlider.defaultProps = {
   status: '',
   description: '',
   content: '',
+  contentLink: null,
   image: null,
   items: null,
   buttonData: {

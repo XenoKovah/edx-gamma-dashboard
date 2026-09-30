@@ -61,6 +61,11 @@ const messages = defineMessages({
     defaultMessage: 'Build your accomplishment collection by learning, sharing, or volunteering! Hover over an accomplishment to learn how to add it to your collection.',
     description: 'Text explaining how users can earn badges and how to view instructions by hovering over badges',
   },
+  performanceBadgesSectionReportMissingLinkText: {
+    id: 'performance.badges.section.report.missing.link.text',
+    defaultMessage: '⚠️ Report missing accomplishments',
+    description: 'Small link under the accomplishments description that opens a form for reporting accomplishments the user should already have',
+  },
   performanceBadgesSectionAlertNoBadgesTitle: {
     id: 'performance.badges.section.alert.no-badges.title',
     defaultMessage: 'Complete class material to earn accomplishments!',

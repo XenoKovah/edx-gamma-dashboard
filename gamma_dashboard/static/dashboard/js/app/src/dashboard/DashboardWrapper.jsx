@@ -171,6 +171,10 @@ const DashboardWrapper = ({
                 title={translations.badgesSectionTitle}
                 status={translations.badgeSectionCounter}
                 content={translations.badgesSectionDescription}
+                contentLink={{
+                  text: translations.badgesSectionReportMissingLink,
+                  href: URLS.reportMissingAccomplishments,
+                }}
                 image={accomplishmentsImage}
                 items={renderItems(WIDGETS.BADGES, {
                   items: previewBadgeItems,

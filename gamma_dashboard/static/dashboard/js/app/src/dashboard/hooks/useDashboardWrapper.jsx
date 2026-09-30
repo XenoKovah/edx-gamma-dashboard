@@ -87,6 +87,7 @@ export const useDashboardWrapper = ({
     }),
     badgesSectionTitle: intl.formatMessage(messages.performanceBadgesSectionHeadingText),
     badgesSectionDescription: intl.formatMessage(messages.performanceBadgesSectionDescriptionText),
+    badgesSectionReportMissingLink: intl.formatMessage(messages.performanceBadgesSectionReportMissingLinkText),
     progressAndPointsSectionTitle: intl.formatMessage(messages.performanceProgressAndPointsSectionHeadingText),
     progressAndPointsSectionDescription: intl.formatMessage(
       messages.performanceProgressAndPointsSectionDescriptionText,
