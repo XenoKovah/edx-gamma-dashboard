@@ -4,7 +4,9 @@ import { useParams } from 'react-router-dom';
 import { Info as InfoIcon } from '@openedx/paragon/icons';
 
 import { useScrollToContent } from '../generic/hooks';
-import { SubHeader, Alert, Loader } from '../generic';
+import {
+  SubHeader, Alert, Loader, LeaderboardMascot,
+} from '../generic';
 import { getBadgeLeaderboardTableProps } from './utils';
 import { useHideInstructors } from './hooks';
 import { LeaderboardTable, LeaderboardView, HideInstructorsToggle } from './components';
@@ -71,8 +73,10 @@ const CountryLeaderboardPage = () => {
 
   return (
     <>
+      <LeaderboardMascot />
       <SubHeader
         id="leaderboard-page-title"
+        centered
         title={title}
         actions={(
           <HideInstructorsToggle

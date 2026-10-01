@@ -1,8 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import classNames from 'classnames';
 
-const SubHeader = ({ title, actions, ...props }) => (
-  <div className="gamification-title-wrapper d-flex justify-content-between align-items-center">
+const SubHeader = ({
+  title, actions, centered, ...props
+}) => (
+  <div
+    className={classNames(
+      'gamification-title-wrapper d-flex justify-content-between align-items-center',
+      { 'gamification-title-centered': centered },
+    )}
+  >
     <h1
       data-testid={props.id}
       tabIndex={-1}
@@ -21,11 +29,13 @@ SubHeader.propTypes = {
   id: PropTypes.string,
   title: PropTypes.node.isRequired,
   actions: PropTypes.node,
+  centered: PropTypes.bool,
 };
 
 SubHeader.defaultProps = {
   id: undefined,
   actions: null,
+  centered: false,
 };
 
 export default SubHeader;

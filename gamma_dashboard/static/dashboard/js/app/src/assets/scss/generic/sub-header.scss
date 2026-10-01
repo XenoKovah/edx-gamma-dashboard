@@ -30,3 +30,36 @@
     }
   }
 }
+
+// Leaderboard pages: heading centered under the mascot, controls centered beneath it.
+.gamification-title-centered {
+  flex-direction: column;
+  justify-content: center !important;
+  align-items: center !important;
+
+  h1 {
+    text-align: center;
+
+    .rtl & {
+      text-align: center;
+    }
+  }
+
+  .leaderboard-hide-instructors-toggle {
+    margin-left: map-get($spacers, 0);
+    margin-right: map-get($spacers, 0);
+    margin-top: map-get($spacers, 2);
+  }
+}
+
+.leaderboard-mascot {
+  display: flex;
+  justify-content: center;
+  margin-top: map-get($spacers, 3);
+
+  .leaderboard-mascot-image {
+    max-width: 100%;
+    width: 24rem;
+    height: auto;
+  }
+}
