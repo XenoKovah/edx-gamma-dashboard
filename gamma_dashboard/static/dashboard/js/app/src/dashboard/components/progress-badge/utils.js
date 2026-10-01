@@ -37,7 +37,13 @@ export const calculateBadgeProgress = (progress) => {
  * @param {number} statusPoints - The total points required to complete the status.
  * @returns {number} - The progress as a percentage (0-100).
  */
-export const calculateStatusProgress = (points, statusPoints) => Math.floor((points / statusPoints) * 100);
+export const calculateStatusProgress = (points, statusPoints) => {
+  if (!statusPoints) {
+    return 0;
+  }
+  // A negative total (penalty badges) must read as empty, not as a huge negative percentage.
+  return Math.min(100, Math.max(0, Math.floor((points / statusPoints) * 100)));
+};
 
 /**
  * Determines the popup visibility and total progress percentage for a badge or status.

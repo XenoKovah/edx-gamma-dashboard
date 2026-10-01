@@ -10,5 +10,6 @@ export const prepareEvents = (data) => {
       value: points,
     });
   });
-  return events;
+  // A pie can't draw a negative slice; drop any so the rest still render.
+  return events.filter(({ value }) => !(value < 0));
 };
