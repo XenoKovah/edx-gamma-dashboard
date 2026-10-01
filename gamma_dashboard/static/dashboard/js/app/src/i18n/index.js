@@ -63,8 +63,8 @@ const messages = defineMessages({
   },
   performanceBadgesSectionReportMissingLinkText: {
     id: 'performance.badges.section.report.missing.link.text',
-    defaultMessage: '⚠️ Report missing accomplishments',
-    description: 'Small link under the accomplishments description that opens a form for reporting accomplishments the user should already have',
+    defaultMessage: '⚠️ Report missing or incorrect accomplishments',
+    description: 'Small link under the accomplishments description that opens a form for reporting accomplishments the user should already have, or that are assigned to them incorrectly',
   },
   performanceBadgesSectionAlertNoBadgesTitle: {
     id: 'performance.badges.section.alert.no-badges.title',
