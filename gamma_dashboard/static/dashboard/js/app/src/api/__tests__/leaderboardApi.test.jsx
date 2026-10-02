@@ -49,6 +49,17 @@ describe('Leaderboard API', () => {
   });
 
   describe('useLeaderboard', () => {
+    it('warms the other instructors view once the board has loaded', async () => {
+      axios.get.mockResolvedValue({ data: leaderboardData });
+
+      const { result, waitForNextUpdate, waitFor } = renderLeaderboardHook(courseId);
+      await waitForNextUpdate();
+
+      expect(result.current.isSuccess).toBe(true);
+      await waitFor(() => expect(axios.get).toHaveBeenCalledWith(LEADERBOARD_URLS(courseId, true).getInfo));
+      expect(axios.get).toHaveBeenCalledTimes(2);
+    });
+
     it('should fetch course leaderboard data successfully', async () => {
       const mockResponse = { data: leaderboardData };
       axios.get.mockResolvedValueOnce(mockResponse);
