@@ -10,7 +10,7 @@ import LeaderboardCard from './LeaderboardCard';
 import messages from '../../i18n';
 
 const LeaderboardTable = ({
-  currentUserUid, profiles = [], delimiter, showProgress,
+  currentUserUid, profiles = [], delimiter, showProgress, pointsHeader,
 }) => {
   const intl = useIntl();
 
@@ -20,7 +20,8 @@ const LeaderboardTable = ({
     headerUser: intl.formatMessage(messages.leaderboardHeaderUser),
     headerCountry: intl.formatMessage(messages.leaderboardHeaderCountry),
     // In-progress sections show a grade percentage, not earned points.
-    headerPoints: intl.formatMessage(
+    // A board ranked by something other than points (pointsHeader) names that column itself.
+    headerPoints: pointsHeader || intl.formatMessage(
       showProgress ? messages.leaderboardHeaderProgress : messages.leaderboardHeaderTotalPoints,
     ),
     headerAccomplishments: intl.formatMessage(messages.leaderboardHeaderAccomplishments),
@@ -70,6 +71,7 @@ LeaderboardTable.propTypes = {
   currentUserUid: PropTypes.string,
   delimiter: PropTypes.number,
   showProgress: PropTypes.bool,
+  pointsHeader: PropTypes.string,
 };
 
 LeaderboardTable.defaultProps = {
@@ -77,6 +79,7 @@ LeaderboardTable.defaultProps = {
   currentUserUid: null,
   delimiter: null,
   showProgress: false,
+  pointsHeader: null,
 };
 
 export default LeaderboardTable;

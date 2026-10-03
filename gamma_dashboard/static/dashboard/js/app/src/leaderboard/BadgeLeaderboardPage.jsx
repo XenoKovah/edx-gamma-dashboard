@@ -113,6 +113,7 @@ const BadgeLeaderboardPage = () => {
               currentUserUid={currentUserUid}
               profiles={profiles}
               delimiter={delimiter}
+              pointsHeader={badgeLeaderboardData?.badge?.scoreLabel}
             />
           </>
         )}

@@ -37,4 +37,15 @@ describe('<LeaderboardTable>', () => {
     expect(tableRows.length).toBe(profiles.length);
     expect(getByTestId('leaderboard-table-separator')).toBeInTheDocument();
   });
+
+  it('shows "Total Points" by default and a custom header when the board names its own score', () => {
+    const [{ profiles }] = DataLeaderboardTable;
+    const { getByTestId } = renderWithProviders(<LeaderboardTable profiles={profiles} />);
+    expect(getByTestId('leaderboard-table-header')).toHaveTextContent('Total Points');
+
+    cleanup();
+    const custom = renderWithProviders(<LeaderboardTable profiles={profiles} pointsHeader="Subtitle Lines Changed" />);
+    expect(custom.getByTestId('leaderboard-table-header')).toHaveTextContent('Subtitle Lines Changed');
+    expect(custom.getByTestId('leaderboard-table-header')).not.toHaveTextContent('Total Points');
+  });
 });
