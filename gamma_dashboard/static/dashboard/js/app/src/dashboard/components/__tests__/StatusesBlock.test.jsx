@@ -151,7 +151,8 @@ describe('<SliderStatusesBlock />', () => {
     const statusItem = statusItems[3];
 
     expect(statusItem.querySelector('.slider-item-info-icon')).not.toBeInTheDocument();
-    expect(statusItem.querySelector('.slider-item-status-image')).toHaveStyle('filter: grayscale(0)');
+    // In progress but not reached: still grey, at full opacity (the current goal).
+    expect(statusItem.querySelector('.slider-item-status-image')).toHaveStyle('filter: grayscale(1)');
     expect(statusItem.querySelector('.slider-item-status-image')).toHaveStyle('opacity: 1');
     expect(statusItem.querySelector('.slider-item-progress-track')).toHaveStyle('width: 4%');
     expect(statusItem.querySelector('.slider-item-progress-end')).toHaveStyle('background-color: var(--pgn-rgg-statuses-progress-bg-color, #dfe0e8)');

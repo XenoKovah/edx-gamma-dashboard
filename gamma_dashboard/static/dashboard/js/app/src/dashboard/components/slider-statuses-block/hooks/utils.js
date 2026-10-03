@@ -62,14 +62,17 @@ export const getProgressWidth = (isStatusComplete, index, points, currentItem, p
  *
  * @returns {Object} An object containing styles for the badge.
  * @returns {string} return.filter -
- * A CSS filter value (`grayscale`) indicating whether the badge is highlighted or grayed out.
+ * A CSS filter value (`grayscale`): full colour only once the level is reached.
  * @returns {string} return.opacity - A CSS opacity value indicating the visibility of the badge.
  */
 export const getBadgeStyles = (isFirstItem, isStatusComplete, points, currentItem, prevItem) => {
   const isPartialProgress = points < currentItem.statusPoints && points >= prevItem?.statusPoints;
 
+  // A level stays grey until it is reached, including the one being worked toward
+  // (16.7M of 20M is not yet that level). The current goal and the first level keep
+  // full opacity so they stand out from the faded levels further on.
   return {
-    filter: `grayscale(${isFirstItem || isStatusComplete || (isPartialProgress) ? 0 : 1})`,
+    filter: `grayscale(${isStatusComplete ? 0 : 1})`,
     opacity: isFirstItem || isStatusComplete || (isPartialProgress) ? '1' : '0.3',
   };
 };

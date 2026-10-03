@@ -17,7 +17,7 @@
         ],
         "index": 0,
         "expectResult": {
-            "filter": "grayscale(0)",
+            "filter": "grayscale(1)",
             "opacity": "1",
             "width": "0%",
             "display": "block"
@@ -42,7 +42,7 @@
         ],
         "index": 0,
         "expectResult": {
-            "filter": "grayscale(0)",
+            "filter": "grayscale(1)",
             "opacity": "1",
             "width": "10%",
             "display": "block"
@@ -92,7 +92,7 @@
         ],
         "index": 1,
         "expectResult": {
-            "filter": "grayscale(0)",
+            "filter": "grayscale(1)",
             "opacity": "1",
             "width": "50%",
             "display": "block"
