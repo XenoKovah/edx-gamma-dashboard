@@ -48,7 +48,27 @@
         margin-right: map-get($spacers, 0);
       }
     }
+  }
 
+  // Paragon centres the icon on the header row, which put it straddling the
+  // section's accent line. Pin a top-level category's icon to the section
+  // instead (the box that draws the line), just under the line's right end:
+  // the chevron sits ~0.25rem into its 24px box, so this leaves a 0.25rem gap.
+  // Sub-categories have no line and keep the inline icon.
+  .dashboard-section > .accomplishments-category > .collapsible-trigger > .collapsible-icon {
+    position: absolute;
+    top: calc(2.813rem + 0.125rem - 0.25rem);
+    right: 1.875rem;
+    margin: map-get($spacers, 0);
+
+    .rtl & {
+      right: auto;
+      left: 1.875rem;
+      margin: map-get($spacers, 0);
+    }
+  }
+
+  .accomplishments-category {
     // The badge grid brings its own top margin; Paragon's body padding would
     // add a second gap under the header and inset the grid from the card.
     .collapsible-body {
