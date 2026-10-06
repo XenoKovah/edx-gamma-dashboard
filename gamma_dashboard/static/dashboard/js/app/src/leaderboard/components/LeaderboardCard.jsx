@@ -5,7 +5,7 @@ import { useIntl } from 'react-intl';
 import { breakpoints, Card, useMediaQuery } from '@openedx/paragon';
 
 import { ProfilePropType } from '../propTypes';
-import { countryCodeToFlag } from '../utils';
+import { countryCodeToFlag, countryCodeToName } from '../utils';
 import { buildCountryLeaderboardUrl } from '../../routes/constants';
 import Avatar from './Avatar';
 import BadgeList from './BadgeList';
@@ -51,13 +51,18 @@ const LeaderboardCard = ({ profile, currentUserUid, showProgress }) => {
   // Country flag (only when the learner shares their country publicly): a link to
   // that country's leaderboard. Null when private/unknown so nothing renders.
   const flag = countryCodeToFlag(country);
+  const countryLabel = flag
+    ? intl.formatMessage(messages.leaderboardCountryLinkLabel, {
+      country: countryCodeToName(country, intl.locale),
+    })
+    : '';
   const countryNode = flag ? (
     <a
       className="leaderboard-card-country-link"
       href={buildCountryLeaderboardUrl(country)}
       data-testid="leaderboard-card-country-link"
-      aria-label={intl.formatMessage(messages.leaderboardCountryLinkLabel, { country })}
-      title={intl.formatMessage(messages.leaderboardCountryLinkLabel, { country })}
+      aria-label={countryLabel}
+      title={countryLabel}
     >
       <span role="img" aria-hidden="true">{flag}</span>
     </a>

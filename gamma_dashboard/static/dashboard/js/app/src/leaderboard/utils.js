@@ -128,3 +128,26 @@ export const countryCodeToFlag = (code) => {
   }
   return String.fromCodePoint(...[...cc].map((char) => 0x1F1E6 + char.charCodeAt(0) - 65));
 };
+
+/**
+ * Convert a 2-letter ISO 3166-1 country code to the country's name in the given
+ * locale (e.g. 'PE' -> 'Peru'), via Intl.DisplayNames.
+ *
+ * Falls back to the upper-cased code when Intl.DisplayNames is unavailable or
+ * the code has no name, so callers always get something displayable.
+ *
+ * @param {string} code - e.g. 'PE'
+ * @param {string} [locale='en'] - BCP 47 language tag for the name
+ * @returns {string} the country name, or the code itself as a fallback.
+ */
+export const countryCodeToName = (code, locale = 'en') => {
+  if (typeof code !== 'string') {
+    return '';
+  }
+  const cc = code.trim().toUpperCase();
+  try {
+    return new Intl.DisplayNames([locale, 'en'], { type: 'region' }).of(cc) || cc;
+  } catch (e) {
+    return cc;
+  }
+};

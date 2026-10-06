@@ -145,6 +145,7 @@ describe('<LeaderboardCard>', () => {
     expect(flagLink).toBeInTheDocument();
     expect(flagLink).toHaveAttribute('href', expect.stringContaining('/leaderboard/country/US'));
     expect(flagLink.textContent).toBe('🇺🇸');
+    expect(flagLink).toHaveAttribute('title', 'View the United States leaderboard');
   });
 
   it('renders no country flag when `country` is absent', () => {
